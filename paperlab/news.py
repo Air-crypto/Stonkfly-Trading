@@ -112,13 +112,18 @@ class FinBERT:
     def __init__(self, revision):
         if not re.fullmatch(r"[0-9a-f]{40}", revision):
             raise ValueError("Pin FinBERT to a full Hugging Face commit hash")
-        from transformers import pipeline
-        import torch
-        torch.set_num_threads(2)
         self.name = "ProsusAI/finbert@" + revision
-        self.pipe = pipeline("text-classification", model="ProsusAI/finbert", revision=revision, device=-1, top_k=None)
+        self.revision = revision
+        self.pipe = None
 
     def __call__(self, title):
+        if self.pipe is None:
+            from transformers import pipeline
+            import torch
+            from .telemetry import emit
+            torch.set_num_threads(2)
+            emit("news_encoder_loading", encoder=self.name)
+            self.pipe = pipeline("text-classification", model="ProsusAI/finbert", revision=self.revision, device=-1, top_k=None)
         result = self.pipe(title, truncation=True, max_length=128)
         if result and isinstance(result[0], list):
             result = result[0]

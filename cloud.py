@@ -24,8 +24,8 @@ image = (modal.Image.debian_slim(python_version="3.12")
 
 @app.function(image=image, volumes={"/state": volume}, cpu=2, memory=16384 if FULL_FLY else 4096,
               max_containers=1, min_containers=0, scaledown_window=2, timeout=600,
-              schedule=modal.Cron("*/15 * * * *") if ENABLED else None, retries=0)
-def worker(prepare: bool = False, probe: bool = False):
+              schedule=modal.Cron("*/5 * * * *") if ENABLED else None, retries=0)
+def worker(prepare: bool = False, probe: bool = False, diagnostics: bool = False):
     import os
     import sys
     import time
@@ -33,15 +33,31 @@ def worker(prepare: bool = False, probe: bool = False):
     from paperlab.runtime import cycle
     from paperlab.budget import reserve, settle
     from paperlab.core import atomic_json
+    from paperlab.telemetry import emit
     full = os.environ["PAPERLAB_FLY"] == "1"
-    if prepare and probe:
+    if sum((prepare, probe, diagnostics)) > 1:
         raise ValueError("Prepare and probe are separate bounded invocations")
     volume.reload()
     # Match the explicitly saved provider usage cap; never rely on credits to expand it.
-    reservation = reserve("/state/budget.json", full, limit_override=40)
+    # Measured cold starts were ~3 seconds. Ten seconds plus the unchanged 2x
+    # rate margin accommodates faster scheduling without a 30-second floor per tick.
+    reservation = reserve("/state/budget.json", full, limit_override=40, startup_seconds=10)
     if reservation is None:
+        emit("budget_stopped", action="Disable schedule; reserved compute limit reached")
         return {"status": "budget_stopped", "action": "Remove the schedule and redeploy. Compute estimate reached its reserved limit."}
     volume.commit()  # Persist worst-case reservation before expensive work; crashes retain it.
+    if diagnostics:
+        from paperlab.diagnostics import run
+        try:
+            result = run("/state/fast-5m", "/state/fly-data", full, os.environ["PAPERLAB_PRODUCT"])
+            result["budget"] = settle("/state/budget.json", reservation, time.time() - reservation["started"])
+            atomic_json("/state/fast-5m/diagnostics/last-call.json", result)
+            volume.commit()
+            return result
+        except Exception as exc:
+            emit("diagnostics_failed", error_type=type(exc).__name__, error=str(exc)[:300])
+            volume.commit()  # Retain the reservation and any completed diagnostic artifacts.
+            raise
     if prepare:
         if full:
             from paperlab.fly import prepare as prepare_graph
@@ -89,13 +105,28 @@ def worker(prepare: bool = False, probe: bool = False):
         atomic_json("/state/probe/validation.json", result)
         volume.commit()
         return result
-    result = cycle("/state", os.environ["PAPERLAB_PRODUCT"], full, train_daily=True)
+    started = time.time()
+    try:
+        # New cadence has its own accounts and archive. Original 15-minute state
+        # and policies remain in /state; only immutable full-graph data is shared.
+        result = cycle("/state/fast-5m", os.environ["PAPERLAB_PRODUCT"], full, train_daily=True,
+                       interval_seconds=300, train_every_seconds=21600, news_every_seconds=900,
+                       fly_data="/state/fly-data")
+    except Exception as exc:
+        emit("cycle_failed", error_type=type(exc).__name__, error=str(exc)[:300])
+        volume.commit()
+        raise
+    result["cycle_seconds"] = time.time() - started
     result["budget"] = settle("/state/budget.json", reservation, time.time() - reservation["started"])
     atomic_json("/state/latest.json", result)
+    atomic_json("/state/fast-5m/latest.json", result)
+    emit("worker_completed", status=result["status"], cycle_seconds=result["cycle_seconds"],
+         estimated_compute_usd=result["budget"]["estimated_compute_usd"],
+         monthly_reserved_usd=result["budget"]["monthly_reserved_usd"])
     volume.commit()
     return result
 
 
 @app.local_entrypoint()
-def main(prepare: bool = False, probe: bool = False):
-    print(worker.remote(prepare, probe))
+def main(prepare: bool = False, probe: bool = False, diagnostics: bool = False):
+    print(worker.remote(prepare, probe, diagnostics))

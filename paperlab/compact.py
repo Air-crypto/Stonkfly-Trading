@@ -12,7 +12,8 @@ import torch
 from torch import nn
 from torch.distributions import Categorical
 
-from .core import Costs, Environment, atomic_json, digest
+from .core import Costs, Environment, atomic_json, digest, features
+from .telemetry import emit
 
 
 class Policy(nn.Module):
@@ -28,7 +29,16 @@ class Policy(nn.Module):
 
     @torch.no_grad()
     def action(self, obs):
-        return int(self(torch.tensor(obs).unsqueeze(0))[0].argmax(-1).item())
+        return self.inspect(obs)["action"]
+
+    @torch.no_grad()
+    def inspect(self, obs):
+        logits, value = self(torch.tensor(obs).unsqueeze(0))
+        probabilities = logits.softmax(-1)[0]
+        return {"action": int(logits.argmax(-1).item()), "action_probabilities": probabilities.tolist(),
+                "action_targets": [0, .25, .5], "value_estimate": float(value.item()),
+                "logits": logits[0].tolist(), "features": obs.tolist(),
+                "gradient_update": False}
 
 
 def load_policy(path):
@@ -46,6 +56,9 @@ def evaluate(policy, ticks, news, costs, start, end, baseline=None):
     obs, done = env.reset(), False
     rows, fills = [], 0
     while not done:
+        decision_ts = ticks[env.i].ts
+        observation = obs.copy()
+        detail = {}
         if baseline == "cash":
             action = 0
         elif baseline == "equal_cap_buy_hold":
@@ -55,15 +68,20 @@ def evaluate(policy, ticks, news, costs, start, end, baseline=None):
         elif baseline == "trend":
             action = 2 if obs[8] > 0 else 0
         else:
-            action = policy.action(obs)
+            detail = policy.inspect(obs)
+            action = detail["action"]
         if action is None:
             env.i += 1
             eq = env.broker.equity(ticks[env.i])
             env.peak = max(env.peak, eq)
             info = {"equity": eq, "drawdown": 1 - eq / env.peak, "fill": {"status": "hold"}, "ts": ticks[env.i].ts}
+            obs = features(ticks, env.i, env.broker, news)
             done = env.i >= env.end
         else:
-            obs, _, done, info = env.step(action)
+            obs, reward, done, info = env.step(action)
+            info["reward"] = reward
+        info.update(decision_ts=decision_ts, action=action, detail=detail,
+                    broker=env.broker.state(), observation=observation.tolist())
         fills += info["fill"]["status"] == "filled"
         rows.append(info)
     eq = np.array([costs.capital] + [r["equity"] for r in rows])
@@ -81,6 +99,12 @@ def train(ticks, news, output, costs=Costs(), steps=8192, seed=7, dataset_sha="u
     env = Environment(ticks, news, costs, 63, split1 - 1)
     policy = Policy()
     optimizer = torch.optim.Adam(policy.parameters(), lr=3e-4)
+    output = Path(output)
+    output.mkdir(parents=True, exist_ok=True)
+    rollout_path = output / "rollout.jsonl"
+    rollout_path.write_text("")
+    optimizer_updates = []
+    emit("training_started", source=ticks[0].source, observations=len(ticks), transitions=steps, seed=seed)
     obs = env.reset()
     completed = 0
     started = time.perf_counter()
@@ -88,6 +112,7 @@ def train(ticks, news, output, costs=Costs(), steps=8192, seed=7, dataset_sha="u
     while completed < steps:
         n = min(256, steps - completed)
         observations, actions, logs, rewards, dones, values = [], [], [], [], [], []
+        rollout = []
         for _ in range(n):
             with torch.no_grad():
                 logits, value = policy(torch.from_numpy(obs).unsqueeze(0))
@@ -97,7 +122,13 @@ def train(ticks, news, output, costs=Costs(), steps=8192, seed=7, dataset_sha="u
             actions.append(action.item())
             logs.append(distribution.log_prob(action).item())
             values.append(value.item())
-            obs, reward, done, _ = env.step(action.item())
+            decision_ts = ticks[env.i].ts
+            input_features = obs.tolist()
+            obs, reward, done, info = env.step(action.item())
+            rollout.append({"transition": completed + len(rollout) + 1, "decision_ts": decision_ts,
+                            "action": action.item(), "probabilities": distribution.probs[0].tolist(),
+                            "value": value.item(), "features": input_features, "reward": reward,
+                            "done": done, "broker": env.broker.state(), **info})
             rewards.append(reward)
             dones.append(done)
             if done:
@@ -113,26 +144,61 @@ def train(ticks, news, output, costs=Costs(), steps=8192, seed=7, dataset_sha="u
             carry = delta + .99 * .95 * continuation * carry
             advantages[t] = carry
         returns = torch.tensor(advantages + np.array(values, dtype=np.float32))
+        raw_advantages = advantages.copy()
         advantages = torch.tensor((advantages - advantages.mean()) / (advantages.std() + 1e-8))
+        for row, advantage, normalized, target in zip(rollout, raw_advantages, advantages, returns):
+            row.update(advantage=float(advantage), normalized_advantage=float(normalized), return_target=float(target))
+        with rollout_path.open("a") as handle:
+            handle.write("".join(json.dumps(row, allow_nan=False) + "\n" for row in rollout))
         x, a, old_log = torch.tensor(np.array(observations)), torch.tensor(actions), torch.tensor(logs)
         # Four epochs over only this freshly collected rollout; no off-policy replay buffer.
-        for _ in range(4):
+        for epoch in range(4):
             for idx in torch.randperm(n).split(64):
                 logits, value = policy(x[idx])
                 dist = Categorical(logits=logits)
                 ratio = (dist.log_prob(a[idx]) - old_log[idx]).exp()
-                loss = -torch.minimum(ratio * advantages[idx], ratio.clamp(.8, 1.2) * advantages[idx]).mean()
-                loss = loss + .5 * (value - returns[idx]).square().mean() - .01 * dist.entropy().mean()
+                policy_loss = -torch.minimum(ratio * advantages[idx], ratio.clamp(.8, 1.2) * advantages[idx]).mean()
+                value_loss = (value - returns[idx]).square().mean()
+                entropy = dist.entropy().mean()
+                loss = policy_loss + .5 * value_loss - .01 * entropy
                 if not torch.isfinite(loss):
                     raise RuntimeError("Nonfinite training loss")
                 optimizer.zero_grad()
                 loss.backward()
-                nn.utils.clip_grad_norm_(policy.parameters(), .5)
+                before = {name: p.detach().clone() for name, p in policy.named_parameters()}
+                raw_gradients = {name: p.grad.detach().clone() for name, p in policy.named_parameters()}
+                grad_norm = nn.utils.clip_grad_norm_(policy.parameters(), .5, error_if_nonfinite=True)
                 optimizer.step()
+                layers = {}
+                for name, parameter in policy.named_parameters():
+                    gradient = raw_gradients[name]
+                    change = parameter.detach() - before[name]
+                    layers[name] = {"gradient_l2": float(gradient.norm()), "gradient_max_abs": float(gradient.abs().max()),
+                                    "gradient_mean": float(gradient.mean()), "clipped_gradient_l2": float(parameter.grad.norm()),
+                                    "update_l2": float(change.norm()), "parameter_l2": float(parameter.detach().norm())}
+                optimizer_updates.append({"optimizer_step": len(optimizer_updates) + 1, "rollout_end": completed + n,
+                    "epoch": epoch + 1, "loss": float(loss.detach()), "policy_loss": float(policy_loss.detach()),
+                    "value_loss": float(value_loss.detach()), "entropy": float(entropy.detach()),
+                    "approx_kl": float(((ratio - 1) - ratio.log()).mean().detach()),
+                    "clip_fraction": float(((ratio - 1).abs() > .2).float().mean()),
+                    "gradient_norm_before_clip": float(grad_norm),
+                    "gradient_norm_after_clip": math.sqrt(sum(v["clipped_gradient_l2"]**2 for v in layers.values())),
+                    "update_norm": math.sqrt(sum(v["update_l2"]**2 for v in layers.values())),
+                    "learning_rate": optimizer.param_groups[0]["lr"], "layers": layers})
         completed += n
-        updates.append({"steps": completed, "loss": float(loss.detach()), "mean_reward": float(np.mean(rewards))})
-    output = Path(output)
-    output.mkdir(parents=True, exist_ok=True)
+        update = {"steps": completed, "loss": float(loss.detach()), "mean_reward": float(np.mean(rewards)),
+                  "policy_loss": float(policy_loss.detach()), "value_loss": float(value_loss.detach()),
+                  "entropy": float(entropy.detach()), "gradient_norm": float(grad_norm),
+                  "optimizer_steps": len(optimizer_updates)}
+        updates.append(update)
+        emit("ppo_update", **update)
+    atomic_json(output / "optimizer-updates.json", optimizer_updates)
+    torch.save({"model": policy.state_dict(), "optimizer": optimizer.state_dict(),
+                "last_raw_gradients": raw_gradients,
+                "last_parameter_updates": {name: p.detach() - before[name] for name, p in policy.named_parameters()},
+                "torch_rng_state": torch.get_rng_state(), "seed": seed, "transitions": completed,
+                "note": "Full tensors for FINAL optimizer step; per-layer statistics for EVERY optimizer step are in optimizer-updates.json."},
+               output / "training-state.pt")
     available_news = news.db.execute("SELECT * FROM news ORDER BY id").fetchall()
     news_sha = hashlib.sha256(json.dumps(available_news, separators=(",", ":")).encode()).hexdigest()
     metadata = {"schema": "64-market14-news50-v1", "seed": seed, "steps": completed, "costs": asdict(costs), "dataset_sha256": dataset_sha, "source": ticks[0].source, "product": ticks[0].product, "train_until": ticks[split1 - 1].ts, "validation_until": ticks[split2 - 1].ts, "news_enabled": news.enabled, "news_snapshot_sha256": news_sha, "observations_with_news": sum(bool(news.features(t.ts)[48] > 0) for t in ticks), "parameters": sum(p.numel() for p in policy.parameters())}
@@ -152,6 +218,8 @@ def train(ticks, news, output, costs=Costs(), steps=8192, seed=7, dataset_sha="u
     result["hosting_break_even_monthly_pct"] = {str(cost): cost / costs.capital * 100 for cost in (20, 40, 100)}
     result["limitations"] = ["Research run, not a profitability certificate.", "Single chronological split and one seed; repeat with preregistered windows and seeds.", "Paper fills omit queue position and market impact; historical candle fills are proxies.", "News must have been collected at the time. Zero news in old history is intentional.", "Test is a one-shot audit. Repeatedly optimizing against it invalidates the holdout.", "Returns above are after modeled trading costs, before hosting. Hosting break-even scenarios are in metrics.json; no monthly return is extrapolated from this short sample."]
     atomic_json(output / "metrics.json", result)
+    emit("training_completed", transitions=completed, optimizer_steps=len(optimizer_updates),
+         seconds=result["train_seconds"], test=result["splits"]["test"]["ppo"], model_sha256=result["model_sha256"])
     lines = ["# Paper experiment", "", f"Source: **{ticks[0].source}**. {completed:,} PPO transitions, {metadata['parameters']:,} parameters. Seed {seed}.", "", "| Test policy | Net return | Max drawdown | Fills | Fees |", "|---|---:|---:|---:|---:|"]
     for key, m in result["splits"]["test"].items():
         lines.append(f"| {key} | {m['return_pct']:.3f}% | {m['max_drawdown_pct']:.3f}% | {m['fills']} | ${m['fees']:.2f} |")

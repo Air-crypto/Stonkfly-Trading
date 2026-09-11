@@ -9,6 +9,7 @@ import numpy as np
 from PIL import Image, ImageDraw
 
 from .core import Broker, Costs, atomic_json
+from .telemetry import emit
 
 UPSTREAM_COMMIT = "78ef3e05ab0fa086032098558d893667068944a0"
 
@@ -62,15 +63,41 @@ class Fly:
             self.controller.restore(checkpoint)
             self.controller.brain.weights_frozen = not learning
 
-    def observe(self, ticks, i, news, delta):
+    def observe(self, ticks, i, news, delta, diagnostic_path=None):
         reinforcement = "reward" if delta > .01 else "aversive" if delta < -.01 else "none"
-        return self.controller.observe(frame(ticks, i, news), reinforcement)
+        brain = self.controller.brain
+        edges = brain.circuit["edges"]
+        before = brain.weight[edges].copy()
+        rgb = frame(ticks, i, news)
+        event = self.controller.observe(rgb, reinforcement)
+        after = brain.weight[edges].copy()
+        change = after - before
+        largest = np.argsort(np.abs(change))[-10:][::-1]
+        event["learning_diagnostics"] = {"algorithm": "centered anti-Hebbian plasticity", "loss": None,
+            "backprop_gradient": None, "equity_reward_usd": delta, "learning_enabled": self.learning,
+            "changed_this_step": int(np.count_nonzero(change)), "weight_delta_l2": float(np.linalg.norm(change)),
+            "weight_delta_max_abs": float(np.abs(change).max()), "weight_delta_mean": float(change.mean()),
+            "memory_u_l2": float(np.linalg.norm(brain.memory_u)), "memory_w_l2": float(np.linalg.norm(brain.memory_w)),
+            "kc_trace_mean_hz": float(brain.rate_kc.mean()), "dan_trace_mean_hz": float(brain.rate_dan.mean()),
+            "largest_changes": [{"edge": int(edges[k]), "before": float(before[k]), "after": float(after[k]),
+                                 "delta": float(change[k])} for k in largest if change[k] != 0]}
+        event["news_features"] = news.features(ticks[i].ts).tolist()
+        if diagnostic_path:
+            path = Path(diagnostic_path)
+            path.parent.mkdir(parents=True, exist_ok=True)
+            Image.fromarray(rgb).save(path.with_suffix(".png"))
+            np.savez_compressed(path.with_suffix(".npz"), edges=edges, before=before, after=after, delta=change,
+                                neuron_ids=brain.ids, counts=brain.counts, voltage=brain.v,
+                                eligibility=brain.eligibility, modulation=brain.modulation,
+                                rate_kc=brain.rate_kc, rate_dan=brain.rate_dan,
+                                memory_u=brain.memory_u, memory_w=brain.memory_w)
+        return event
 
     def save(self, path):
         self.controller.save(path)
 
 
-def replay(ticks, news, data, output, steps=8, learning=True, checkpoint=None, costs=Costs(), start=63):
+def replay(ticks, news, data, output, steps=8, learning=True, checkpoint=None, costs=Costs(), start=63, diagnostics=False):
     if steps < 1 or start < 63 or start + steps >= len(ticks):
         raise ValueError("Invalid replay bounds")
     output = Path(output)
@@ -87,10 +114,13 @@ def replay(ticks, news, data, output, steps=8, learning=True, checkpoint=None, c
         fill = broker.execute(pending[0], pending[1], t) if pending else {"status": "hold"}
         equity = broker.equity(t)
         delta = equity - anchor
-        event = fly.observe(ticks, i, news, delta)
+        event = fly.observe(ticks, i, news, delta, output / f"steps/{i-start+1:03d}" if diagnostics else None)
         # HOLD means no new order. Limits never map a rejected neural output to another action.
         pending = (costs.max_exposure if event["side"] == "BUY" else 0, t.ts) if event["side"] != "HOLD" else None
-        rows.append({"ts": t.ts, "equity": equity, "delta": delta, "fill": fill, "neural": event})
+        rows.append({"step": i-start+1, "ts": t.ts, "bid": t.bid, "ask": t.ask, "equity": equity,
+                     "delta": delta, "fill": fill, "neural": event, "broker": broker.state(), "pending": pending})
+        emit("fly_replay_step", step=i-start+1, side=event["side"], equity=equity, fill=fill,
+             stimulus=event["stimulus"], total_spikes=event["total_spikes"], **event["learning_diagnostics"])
         anchor = equity
         atomic_json(output / "ledger.json", rows)
     # Mark the final open position at a new observation without inventing a final model decision.

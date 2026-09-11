@@ -118,6 +118,17 @@ def test_ppo_updates_weights_and_seals_model_before_test(tmp_path, dataset):
     assert meta["train_until"] < dataset[int(.7 * len(dataset))].ts
     assert result["splits"]["test"]["cash"]["return_pct"] == 0
     assert (tmp_path / "run/test-ppo-ledger.json").exists()
+    updates = json.loads((tmp_path / "run/optimizer-updates.json").read_text())
+    assert len(updates) == 16
+    assert all(u["gradient_norm_after_clip"] <= .50001 for u in updates)
+    assert any(u["update_norm"] > 0 for u in updates)
+    state = torch.load(tmp_path / "run/training-state.pt", weights_only=True)
+    raw_norm = sum(float(g.square().sum()) for g in state["last_raw_gradients"].values()) ** .5
+    assert raw_norm == pytest.approx(updates[-1]["gradient_norm_before_clip"], rel=1e-5)
+    rows = [json.loads(s) for s in (tmp_path / "run/rollout.jsonl").read_text().splitlines()]
+    assert len(rows) == 256 and len(rows[0]["features"]) == 64
+    assert all(r["ts"] > r["decision_ts"] for r in rows)
+    assert all(abs(sum(r["probabilities"]) - 1) < 1e-5 for r in rows)
 
 
 def test_runtime_restart_duplicate_and_rollback(tmp_path, monkeypatch):
@@ -209,3 +220,36 @@ def test_budget_override_cannot_expand_authorization(tmp_path):
     for invalid in (101, float("inf"), float("nan"), 0):
         with pytest.raises(ValueError):
             reserve(path, True, now=stamp, limit_override=invalid)
+
+
+def test_fast_cadence_has_independent_state_and_emits_progress(tmp_path, capsys):
+    old = tmp_path / "old"
+    fast = tmp_path / "fast"
+    cycle(old, tick=Tick(1700000000, 100, 100, source="forward_rest_book"), ingest=False)
+    for i in range(64):
+        stamp = 1700000000 + i * 300
+        result = cycle(fast, tick=Tick(stamp, 100, 100, source="forward_rest_book"), ingest=False,
+                       interval_seconds=300, train_every_seconds=21600)
+    assert result["status"] == "paper" and result["warmup_remaining"] == 0
+    assert result["interval_seconds"] == 300
+    with sqlite3.connect(old / "paper.db") as db:
+        assert db.execute("SELECT count(*) FROM ticks").fetchone()[0] == 1
+    events = [json.loads(s) for s in capsys.readouterr().out.splitlines()]
+    assert any(e["event"] == "paper_decision" for e in events)
+    assert any(e["event"] == "market_observation" and e["warmup_remaining"] == 63 for e in events)
+    with pytest.raises(ValueError, match="configuration changed"):
+        cycle(fast, tick=Tick(stamp+900, 100, 100, source="forward_rest_book"), ingest=False)
+
+
+def test_finbert_is_lazy_until_new_headline():
+    from paperlab.news import FinBERT, FINBERT_REVISION
+    encoder = FinBERT(FINBERT_REVISION)
+    assert encoder.pipe is None
+    assert encoder.name.endswith(FINBERT_REVISION)
+
+
+def test_budget_settlement_uses_reserved_startup_allowance(tmp_path):
+    from paperlab.budget import reserve, settle
+    reservation = reserve(tmp_path / "budget.json", True, startup_seconds=10)
+    result = settle(tmp_path / "budget.json", reservation, 2)
+    assert result["estimated_compute_usd"] == pytest.approx(12 * reservation["rate"])
