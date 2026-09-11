@@ -6,13 +6,18 @@ import time
 from .core import atomic_json
 
 
-def reserve(path, full_fly, now=None, seconds=600):
+def reserve(path, full_fly, now=None, seconds=600, limit_override=None):
     import json
     now = time.time() if now is None else now
     path = Path(path)
     month = datetime.fromtimestamp(now, timezone.utc).strftime("%Y-%m")
     state = json.loads(path.read_text()) if path.exists() else {"first_month": "2026-09", "months": {}}
     limit = 100 if month == state["first_month"] else 40
+    if limit_override is not None:
+        import math
+        if not math.isfinite(limit_override) or not 0 < limit_override <= limit:
+            raise ValueError("Override must stay within the authorized monthly budget")
+        limit = limit_override
     # Current public CPU/RAM rates with 2x safety factor and 30s startup allowance.
     rate = 2 * (.0000131 * 2 + .00000222 * (16 if full_fly else 4))
     charge = (seconds + 30) * rate

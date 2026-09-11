@@ -25,7 +25,7 @@ image = (modal.Image.debian_slim(python_version="3.12")
 @app.function(image=image, volumes={"/state": volume}, cpu=2, memory=16384 if FULL_FLY else 4096,
               max_containers=1, min_containers=0, scaledown_window=2, timeout=600,
               schedule=modal.Cron("*/15 * * * *") if ENABLED else None, retries=0)
-def worker(prepare: bool = False):
+def worker(prepare: bool = False, probe: bool = False):
     import os
     import sys
     import time
@@ -33,8 +33,11 @@ def worker(prepare: bool = False):
     from paperlab.runtime import cycle
     from paperlab.budget import reserve, settle
     full = os.environ["PAPERLAB_FLY"] == "1"
+    if prepare and probe:
+        raise ValueError("Prepare and probe are separate bounded invocations")
     volume.reload()
-    reservation = reserve("/state/budget.json", full)
+    # Match the explicitly saved provider usage cap; never rely on credits to expand it.
+    reservation = reserve("/state/budget.json", full, limit_override=40)
     if reservation is None:
         return {"status": "budget_stopped", "action": "Remove the schedule and redeploy. Compute estimate reached its reserved limit."}
     volume.commit()  # Persist worst-case reservation before expensive work; crashes retain it.
@@ -61,6 +64,27 @@ def worker(prepare: bool = False):
         budget = settle("/state/budget.json", reservation, time.time() - reservation["started"])
         volume.commit()
         return {"status": "prepared", "full_fly": full, "budget": budget}
+    if probe:
+        if not full:
+            raise ValueError("The native fly probe requires PAPERLAB_FLY=1")
+        from paperlab.core import load_ticks
+        from paperlab.fly import Fly, replay
+        from paperlab.news import News
+        ticks = load_ticks("/state/bootstrap.jsonl")
+        news = News("/state/news.db")
+        try:
+            result = replay(ticks, news, "/state/fly-data", "/state/probe", steps=8)
+            restored = Fly("/state/fly-data", learning=False, checkpoint="/state/probe/fly.npz")
+            before = restored.controller.brain.memory()["sha256"]
+            observation = restored.observe(ticks, 72, news, .1)
+            assert restored.controller.brain.memory()["sha256"] == before
+            result["frozen_restore_verified"] = True
+            result["restored_observation"] = observation
+        finally:
+            news.db.close()
+        result["budget"] = settle("/state/budget.json", reservation, time.time() - reservation["started"])
+        volume.commit()
+        return result
     result = cycle("/state", os.environ["PAPERLAB_PRODUCT"], full, train_daily=True)
     result["budget"] = settle("/state/budget.json", reservation, time.time() - reservation["started"])
     volume.commit()
@@ -68,5 +92,5 @@ def worker(prepare: bool = False):
 
 
 @app.local_entrypoint()
-def main(prepare: bool = False):
-    print(worker.remote(prepare))
+def main(prepare: bool = False, probe: bool = False):
+    print(worker.remote(prepare, probe))

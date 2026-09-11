@@ -198,3 +198,14 @@ def test_budget_stops_new_work(tmp_path):
     path.write_text(json.dumps({"first_month": "2026-09", "months": {"2026-09": 75}}))
     stamp = datetime(2026, 9, 11, tzinfo=timezone.utc).timestamp()
     assert reserve(path, True, now=stamp) is None
+
+
+def test_budget_override_cannot_expand_authorization(tmp_path):
+    from paperlab.budget import reserve
+    from datetime import datetime, timezone
+    stamp = datetime(2026, 9, 11, tzinfo=timezone.utc).timestamp()
+    path = tmp_path / "budget.json"
+    assert reserve(path, True, now=stamp, limit_override=40)["limit"] == 40
+    for invalid in (101, float("inf"), float("nan"), 0):
+        with pytest.raises(ValueError):
+            reserve(path, True, now=stamp, limit_override=invalid)

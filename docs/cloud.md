@@ -12,6 +12,8 @@ python3.12 -m venv .venv
 .venv/bin/modal setup
 # One bounded cloud bootstrap: prepare verified fly data and an initial compact checkpoint.
 PAPERLAB_FLY=1 .venv/bin/modal run cloud.py --prepare
+# Verify native fly execution and frozen checkpoint restoration on the cloud host.
+PAPERLAB_FLY=1 .venv/bin/modal run cloud.py --probe
 # Inspect that invocation's runtime, memory and bill before starting the schedule.
 PAPERLAB_SCHEDULE=1 PAPERLAB_FLY=1 .venv/bin/modal deploy cloud.py
 ```
@@ -32,7 +34,11 @@ Changing `PAPERLAB_FLY` or product against the existing runtime state is rejecte
 
 User budget: **$100 for September 2026**, then **$20–40/month**. The code uses a $40 steady-state ceiling for planning, reserves a conservative worst-case compute allowance before each invocation, retains the reservation on a crash, and reconciles successful elapsed runtime. Its estimate doubles published CPU/RAM rates and adds 30 seconds per run for overhead. It stops starting substantive work at 75% of the monthly ceiling, leaving headroom.
 
+For the initial deployment, the provider workspace is explicitly capped at **$40 total monthly usage** and **$10 monthly out-of-pocket spend**, below the authorized ceiling. Both settings were saved and verified after reloading the billing page on September 11, 2026. The worker also overrides its local estimate ceiling to $40 in every month. These caps are not automatically raised to spend the entire $100 allowance. Free credits do not expand the total-usage budget.
+
 This is **not a provider-enforced bill cap**. It excludes unknown image-build costs, chargeable network/storage, API subscriptions and unrelated account activity. Configure any available provider billing limit/alerts and check the actual invoice. A `budget_stopped` result requires removing the schedule; even a skipped invocation can have startup costs. No paid news or market-data subscription is enabled.
+
+The preceding limitation applies to the local compute estimator. The separately configured Modal workspace limits provide the provider-side controls. Modal notes that Volume storage can continue accruing after compute stops; retain only the small research state and review actual billed storage. No paid plan upgrade or reservation is enabled. See [Modal budgets](https://modal.com/docs/guide/budgets) for usage-before-credits versus spend-after-credits semantics.
 
 Resources are 2 CPU cores and 16 GiB RAM for the full-fly configuration, with a 600-second invocation timeout and one container. The compact-only configuration uses 4 GiB. Published rates checked September 11, 2026 imply approximately $0.00006172 per second for the full configuration before extra costs. For 2,880 invocations in a 30-day month:
 
