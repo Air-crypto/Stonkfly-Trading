@@ -1,6 +1,6 @@
 # Verification — September 11, 2026
 
-Status: implementation tested locally and deployed on Modal. Native cloud validation and the first forward news/quote collection passed; the 15-minute schedule is enabled. No real trades or sustained forward profitability. See [deployment evidence](cloud/deployment.md).
+Status: implementation tested locally and deployed on Modal. Native cloud validation and the first forward news/quote collection passed; the original 15-minute schedule was validated and has since been replaced by a separate five-minute experiment; see [observability](../docs/observability.md). No real trades or sustained forward profitability. See [deployment evidence](cloud/deployment.md).
 
 Clean remote clone at `23149655abcfe6c26536f84402c8012aa62c4e7a`: `uv sync --locked --python 3.12 --all-extras` succeeded. All 20 lab tests passed; upstream fast checks passed (6 tests, with the full-data test intentionally skipped in that fresh-clone check). The CLI generated a new synthetic fixture and completed a 128-transition PPO smoke run. All 39 vendored upstream files matched the pinned original byte for byte.
 

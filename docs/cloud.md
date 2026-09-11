@@ -1,6 +1,6 @@
 # Cloud operation and economics
 
-Deployment target: Modal, one scheduled worker, no continuously running laptop. The checked-in schedule is disabled until deployed explicitly. The worker starts every 15 minutes, ingests RSS, encodes newly seen titles with pinned FinBERT, samples one BTC-USD book and advances independent fly/compact paper ledgers. It persists data and checkpoints on a Modal Volume, then scales down. ETH-USD is supported as a separate experiment; do not change products inside an existing state directory/volume.
+Deployment target: Modal, one scheduled worker, no continuously running laptop. The checked-in schedule is disabled until deployed explicitly. The worker starts every five minutes, samples one BTC-USD book and advances independent fly/compact paper ledgers. RSS is scanned once per 15-minute period; pinned FinBERT loads only when a new headline needs encoding. It persists data and checkpoints on a Modal Volume, then scales down. ETH-USD is supported as a separate experiment; do not change products inside an existing state directory/volume.
 
 ## Deployment
 
@@ -14,11 +14,12 @@ python3.12 -m venv .venv
 PAPERLAB_FLY=1 .venv/bin/modal run cloud.py --prepare
 # Verify native fly execution and frozen checkpoint restoration on the cloud host.
 PAPERLAB_FLY=1 .venv/bin/modal run cloud.py --probe
-# Inspect that invocation's runtime, memory and bill before starting the schedule.
+# Deploy the single writer, then run its bounded faster-cadence bootstrap/diagnostic.
 PAPERLAB_SCHEDULE=1 PAPERLAB_FLY=1 .venv/bin/modal deploy cloud.py
+.venv/bin/python -c 'import modal; c = modal.Function.from_name("fly-paper-lab", "worker").spawn(diagnostics=True); print(c.object_id)'
 ```
 
-The worker first collects 64 forward snapshots (about 16 hours) for price-feature warm-up. Fly plasticity then updates from its own paper results; the compact bootstrap is used initially. After 400 snapshots, a fresh compact candidate is trained daily on the chronological training partition of the observed archive. No candidate is chosen by test profit. Current news is never backdated into the historical bootstrap.
+The new experiment at `/state/fast-5m` preserves the original `/state` experiment and first collects 64 forward snapshots (about 5 hours 20 minutes) for price-feature warm-up. Fly plasticity then updates from its own paper results; the compact bootstrap is used initially. After 400 snapshots, a fresh compact candidate is trained every six hours on the chronological training partition of the observed archive. No candidate is chosen by test profit. Current news is never backdated into the historical bootstrap.
 
 Use `modal app list` and the Modal console for the deployed app and function logs. `latest.json` and the SQLite ledgers in `fly-paper-lab-state` contain model decisions, fills and budget estimates. Download files through the Modal CLI/console for inspection; don't mount another writer or edit a database while the worker runs. The upstream native checkpoint includes a binary build hash; an incompatible image must fail restoration rather than silently reset its learned state.
 
@@ -32,7 +33,7 @@ Changing `PAPERLAB_FLY` or product against the existing runtime state is rejecte
 
 ## Spending limits
 
-User budget: **$100 for September 2026**, then **$20–40/month**. The code uses a $40 steady-state ceiling for planning, reserves a conservative worst-case compute allowance before each invocation, retains the reservation on a crash, and reconciles successful elapsed runtime. Its estimate doubles published CPU/RAM rates and adds 30 seconds per run for overhead. It stops starting substantive work at 75% of the monthly ceiling, leaving headroom.
+User budget: **$100 for September 2026**, then **$20–40/month**. The code uses a $40 steady-state ceiling for planning, reserves a conservative worst-case compute allowance before each invocation, retains the reservation on a crash, and reconciles successful elapsed runtime. Its estimate doubles published CPU/RAM rates and adds ten seconds per run for startup overhead. It stops starting substantive work at 75% of the monthly ceiling, leaving headroom.
 
 For the initial deployment, the provider workspace is explicitly capped at **$40 total monthly usage** and **$10 monthly out-of-pocket spend**, below the authorized ceiling. Both settings were saved and verified after reloading the billing page on September 11, 2026. The worker also overrides its local estimate ceiling to $40 in every month. These caps are not automatically raised to spend the entire $100 allowance. Free credits do not expand the total-usage budget.
 
@@ -40,16 +41,16 @@ This is **not a provider-enforced bill cap**. It excludes unknown image-build co
 
 The preceding limitation applies to the local compute estimator. The separately configured Modal workspace limits provide the provider-side controls. Modal notes that Volume storage can continue accruing after compute stops; retain only the small research state and review actual billed storage. No paid plan upgrade or reservation is enabled. See [Modal budgets](https://modal.com/docs/guide/budgets) for usage-before-credits versus spend-after-credits semantics.
 
-Resources are 2 CPU cores and 16 GiB RAM for the full-fly configuration, with a 600-second invocation timeout and one container. The compact-only configuration uses 4 GiB. Published rates checked September 11, 2026 imply approximately $0.00006172 per second for the full configuration before extra costs. For 2,880 invocations in a 30-day month:
+Resources are 2 CPU cores and 16 GiB RAM for the full-fly configuration, with a 600-second invocation timeout and one container. The compact-only configuration uses 4 GiB. Published rates checked September 11, 2026 imply approximately $0.00006172 per second for the full configuration before extra costs. For 8,640 invocations in a 30-day month:
 
-| Average billed duration per 15-minute invocation | Approximate CPU + RAM / month |
+| Average billed duration per five-minute invocation | Approximate CPU + RAM / month |
 |---|---:|
-| 10 seconds | $1.78 |
-| 60 seconds | $10.67 |
-| 180 seconds | $32.00 |
-| 300 seconds | $53.33 |
+| 10 seconds | $5.33 |
+| 60 seconds | $32.00 |
+| 180 seconds | $95.99 |
+| 300 seconds | $159.98 |
 
-These are workload scenarios, not measured cloud quotes. Initial local fly observations took roughly 1–2.2 seconds each, excluding some initialization/checkpoint overhead. Local timing cannot predict a different cloud CPU or a long-running neural state's activity. Bootstrap and daily retraining add work. Fit the schedule to measured billed duration; use compact inference and less frequent fly research if the fly exceeds the steady budget. Do not depend on promotional credits to make the strategy profitable.
+These are workload scenarios, not measured cloud quotes. Initial local fly observations took roughly 1–2.2 seconds each, excluding some initialization/checkpoint overhead. Local timing cannot predict a different cloud CPU or a long-running neural state's activity. Bootstrap and six-hourly retraining add work. See [diagnostics and structured logs](observability.md) for exact artifact coverage. Fit the schedule to measured billed duration; use compact inference and less frequent fly research if the fly exceeds the steady budget. Do not depend on promotional credits to make the strategy profitable.
 
 ## Trading must cover operating costs
 

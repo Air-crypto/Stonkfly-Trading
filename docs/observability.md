@@ -31,3 +31,9 @@ The fly uses a centered anti-Hebbian rule driven by neural rates and equity rein
 Forward `latest.json`, `paper.db` ledgers, and six-hourly `candidates/<period>` training directories retain the same decision and optimizer diagnostics. Detailed raw per-neuron snapshot arrays are limited to the bounded diagnostic replay to keep normal collection small. Runtime checkpoint cleanup retains currently referenced state and approximately one day of old checkpoints.
 
 New training or replays must use a separate run directory/protocol when changing source cadence. Never select a policy or hyperparameter because it performs best on the inspected held-out test. All returns use simulated execution costs; no real-order interface is connected.
+
+## Cloud verification
+
+On September 11, 2026, deployed code `b88d9341c2420e5505587ed46eb8f0a60ce5cf4c` completed 8,192 PPO transitions, all 512 optimizer updates, and the paired 32-step native replay. Every saved spike total, plastic-weight delta, and changed-edge count matched the raw native arrays. The final saved gradient tensors matched the logged norm; all gradient norms after clipping were at or below 0.5. The objective components, action probabilities, and transition chronology also passed their consistency checks. The first automatic five-minute cycle persisted a fresh observation and emitted its structured progress events. [Linux CI passed](https://github.com/Air-crypto/Stonkfly-Trading/actions/runs/34650927271); all 24 lab tests passed.
+
+This verifies execution and diagnostics, not useful learning or profitability. Full performance records and account-level operational metadata are retained locally rather than included in this public engineering record.
