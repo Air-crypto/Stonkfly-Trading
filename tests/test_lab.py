@@ -253,3 +253,67 @@ def test_budget_settlement_uses_reserved_startup_allowance(tmp_path):
     reservation = reserve(tmp_path / "budget.json", True, startup_seconds=10)
     result = settle(tmp_path / "budget.json", reservation, 2)
     assert result["estimated_compute_usd"] == pytest.approx(12 * reservation["rate"])
+
+
+def test_historical_context_starts_decisions_without_historical_fills(tmp_path, monkeypatch):
+    from paperlab.core import atomic_json
+    first = 1700000100
+    history = [Tick(first - (63-i)*300, 100+i*.01, 100+i*.01, source="historical_candle_proxy") for i in range(63)]
+    def fake_context(path, product, before, interval):
+        atomic_json(path, {"ticks": [asdict(t) for t in history]})
+        return history
+    monkeypatch.setattr("paperlab.runtime.price_context", fake_context)
+    policy = Policy()
+    with torch.no_grad():
+        policy.actor.weight.zero_()
+        policy.actor.bias.copy_(torch.tensor([-1., -1., 1.]))
+    path = tmp_path / "model.pt"
+    torch.save({"schema": "64-market14-news50-v1", "model": policy.state_dict(), "costs": asdict(Costs()), "product": "BTC-USD", "source": "synthetic"}, path)
+    monkeypatch.setattr("paperlab.runtime.time.time", lambda: first+1)
+    result = cycle(tmp_path, tick=Tick(first, 101, 101, source="forward_rest_book"), ingest=False,
+                   interval_seconds=300, historical_warmup=True, model=path, train_daily=True)
+    assert result["status"] == "paper" and result["ticks"] == 1
+    assert result["historical_context_rows"] == 63 and result["warmup_remaining"] == 0
+    assert result["policies"]["compact"]["equity"] == 1000
+    assert result["policies"]["compact"]["fill"]["status"] == "hold"
+    assert "paper_model_update" not in result
+    monkeypatch.setattr("paperlab.runtime.time.time", lambda: first+301)
+    second = cycle(tmp_path, tick=Tick(first+300, 101, 101, source="forward_rest_book"), ingest=False,
+                   interval_seconds=300, historical_warmup=True, model=path)
+    assert second["historical_context_rows"] == 62
+    assert second["policies"]["compact"]["fill"]["fill_ts"] == first+300
+    with sqlite3.connect(tmp_path / "paper.db") as db:
+        assert db.execute("SELECT count(*) FROM ticks").fetchone()[0] == 2
+        assert db.execute("SELECT count(*) FROM ledger").fetchone()[0] == 2
+        assert not db.execute("SELECT payload FROM state WHERE name='trained_period'").fetchone()
+    with pytest.raises(ValueError, match="silently disabled"):
+        cycle(tmp_path, tick=Tick(first+600, 101, 101, source="forward_rest_book"), ingest=False, interval_seconds=300)
+    (tmp_path / "warmup-context.json").write_text('{}')
+    with pytest.raises(ValueError, match="changed or removed"):
+        cycle(tmp_path, tick=Tick(first+600, 101, 101, source="forward_rest_book"), ingest=False, interval_seconds=300, historical_warmup=True)
+
+
+def test_context_fetch_filters_future_and_open_candles_and_caches(tmp_path, monkeypatch):
+    from paperlab.data import price_context
+    end = 1700000100 // 300 * 300
+    before = end+20
+    rows = [[end-i*300, 99, 101, 100, 100, 999] for i in range(-1,65)]
+    class Response:
+        def raise_for_status(self): pass
+        def json(self): return rows
+    monkeypatch.setattr("paperlab.data.requests.get", lambda *a,**kw: Response())
+    path=tmp_path / "context.json"
+    ticks=price_context(path, "BTC-USD", before)
+    assert len(ticks)==63 and ticks[-1].ts==end
+    assert all(t.ts < before and t.volume==0 for t in ticks)
+    monkeypatch.setattr("paperlab.data.requests.get", lambda *a,**kw: pytest.fail("Cached context must not refetch"))
+    assert ticks==price_context(path,"BTC-USD",before)
+
+
+def test_initial_context_failure_keeps_collecting_forward(tmp_path, monkeypatch):
+    def unavailable(*a,**kw): raise RuntimeError("feed unavailable")
+    monkeypatch.setattr("paperlab.runtime.price_context", unavailable)
+    result=cycle(tmp_path, tick=Tick(1700000100,100,100,source="forward_rest_book"),
+                 ingest=False,interval_seconds=300,historical_warmup=True)
+    assert result["status"]=="collecting" and result["ticks"]==1
+    assert result["historical_context_rows"]==0

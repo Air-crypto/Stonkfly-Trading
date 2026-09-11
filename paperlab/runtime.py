@@ -8,13 +8,14 @@ import sqlite3
 import time
 
 from .core import Broker, Costs, Tick, atomic_json, digest, features
-from .data import quote, write_ticks
+from .data import quote, write_ticks, price_context
 from .news import FinBERT, News
 from .telemetry import emit
 
 
 def cycle(root, product="BTC-USD", use_fly=False, tick=None, ingest=True, train_daily=False, model=None,
-          interval_seconds=900, train_every_seconds=86400, news_every_seconds=900, fly_data=None):
+          interval_seconds=900, train_every_seconds=86400, news_every_seconds=900, fly_data=None,
+          historical_warmup=False):
     root = Path(root)
     root.mkdir(parents=True, exist_ok=True)
     # The deployment also limits the entire function to one container. A shared Modal
@@ -24,11 +25,11 @@ def cycle(root, product="BTC-USD", use_fly=False, tick=None, ingest=True, train_
         if interval_seconds not in (300, 900) or train_every_seconds < 3600 or news_every_seconds < interval_seconds:
             raise ValueError("Unsupported runtime cadence")
         return _cycle(root, product, use_fly, tick, ingest, train_daily, model,
-                      interval_seconds, train_every_seconds, news_every_seconds, fly_data)
+                      interval_seconds, train_every_seconds, news_every_seconds, fly_data, historical_warmup)
 
 
 def _cycle(root, product, use_fly, tick, ingest, train_daily, model,
-           interval_seconds, train_every_seconds, news_every_seconds, fly_data):
+           interval_seconds, train_every_seconds, news_every_seconds, fly_data, historical_warmup):
     costs = Costs()
     db = sqlite3.connect(root / "paper.db")
     db.execute("PRAGMA journal_mode=DELETE")
@@ -44,6 +45,25 @@ def _cycle(root, product, use_fly, tick, ingest, train_daily, model,
         stored = db.execute("SELECT payload FROM state WHERE name='config'").fetchone()
         if stored and json.loads(stored[0]) != config:
             raise ValueError("Runtime configuration changed. Use a separate state directory for a new experiment.")
+        mode = db.execute("SELECT payload FROM state WHERE name='warmup_context'").fetchone()
+        if mode and not historical_warmup:
+            raise ValueError("Historical context mode cannot be silently disabled")
+        context = []
+        context_path = root / "warmup-context.json"
+        count = db.execute("SELECT count(*) FROM ticks").fetchone()[0]
+        if historical_warmup and count < 63:
+            first = db.execute("SELECT payload FROM ticks ORDER BY slot LIMIT 1").fetchone()
+            before = json.loads(first[0])["ts"] if first else (tick.ts if tick else time.time())
+            existed = context_path.exists()
+            if mode and (not existed or digest(context_path) != json.loads(mode[0])["sha256"]):
+                raise ValueError("Persisted historical context was changed or removed")
+            try:
+                context = price_context(context_path, product, before, interval_seconds)
+            except Exception as exc:
+                if existed or mode:
+                    raise
+                # A failed initial fetch leaves normal forward collection available.
+                emit("historical_context_unavailable", error=str(exc)[:300])
         emit("cycle_started", product=product, interval_seconds=interval_seconds, fly=use_fly)
         last_news = db.execute("SELECT payload FROM state WHERE name='news_checked'").fetchone()
         news_due = ingest and (not last_news or int(time.time() // news_every_seconds) > int(float(last_news[0]) // news_every_seconds))
@@ -65,12 +85,26 @@ def _cycle(root, product, use_fly, tick, ingest, train_daily, model,
             db.execute("INSERT OR IGNORE INTO state VALUES ('config',?)", (json.dumps(config),))
             db.execute("INSERT INTO ticks VALUES (?,?)", (slot, json.dumps(asdict(tick))))
             ticks = [Tick(**json.loads(r[0])) for r in db.execute("SELECT payload FROM ticks ORDER BY slot")]
-            result = {"status": "collecting" if len(ticks) < 64 else "paper", "slot": slot, "ticks": len(ticks), "news": news_report, "policies": {}}
+            needed = max(0, 64-len(ticks))
+            prefix = context[-needed:] if needed and context else []
+            inference_ticks = prefix + ticks
+            if prefix and prefix[-1].ts >= ticks[0].ts:
+                raise ValueError("Historical context overlaps forward observations")
+            if prefix and not mode:
+                provenance = {"mode": "historical_price_context_v1", "sha256": digest(context_path),
+                              "enabled_at": time.time(), "first_decision_forward_observations": len(ticks)}
+                db.execute("INSERT INTO state VALUES ('warmup_context',?)", (json.dumps(provenance),))
+                emit("historical_context_enabled", **provenance, context_rows=len(prefix))
+            ready = len(inference_ticks) >= 64
+            result = {"status": "paper" if ready else "collecting", "slot": slot, "ticks": len(ticks), "news": news_report, "policies": {}}
             result.update(interval_seconds=interval_seconds, train_every_seconds=train_every_seconds,
-                          warmup_remaining=max(0, 64-len(ticks)), available_news=len(news.rows(tick.ts)))
+                          warmup_remaining=max(0, 64-len(inference_ticks)), available_news=len(news.rows(tick.ts)),
+                          historical_context_rows=len(prefix), forward_only_warmup_remaining=needed,
+                          historical_context_sha256=digest(context_path) if prefix else None)
             emit("market_observation", slot=slot, observations=len(ticks), bid=tick.bid, ask=tick.ask,
-                 warmup_remaining=result["warmup_remaining"], available_news=result["available_news"])
-            if len(ticks) >= 64:
+                 warmup_remaining=result["warmup_remaining"], available_news=result["available_news"],
+                 historical_context_rows=len(prefix))
+            if ready:
                 from .compact import load_policy
                 for name in (["compact", "fly"] if use_fly else ["compact"]):
                     row = db.execute("SELECT payload FROM state WHERE name=?", (name,)).fetchone()
@@ -88,7 +122,7 @@ def _cycle(root, product, use_fly, tick, ingest, train_daily, model,
                             policy, meta = load_policy(model_path)
                             if meta["costs"] != asdict(costs) or meta["product"] != product:
                                 raise ValueError("Model costs/product differ from forward experiment")
-                            detail = policy.inspect(features(ticks, len(ticks) - 1, broker, news))
+                            detail = policy.inspect(features(inference_ticks, len(inference_ticks) - 1, broker, news))
                             action = detail["action"]
                             pending = {"target": [0, costs.max_exposure / 2, costs.max_exposure][action], "decision_ts": time.time()}
                             detail.update(model_sha256=digest(model_path), training_source=meta["source"])
@@ -97,7 +131,7 @@ def _cycle(root, product, use_fly, tick, ingest, train_daily, model,
                     else:
                         from .fly import Fly
                         fly = Fly(fly_data or root / "fly-data", checkpoint=state.get("checkpoint"))
-                        detail = fly.observe(ticks, len(ticks) - 1, news, delta)
+                        detail = fly.observe(inference_ticks, len(inference_ticks) - 1, news, delta)
                         decision_ts = time.time()
                         if detail["side"] != "HOLD":
                             pending = {"target": costs.max_exposure if detail["side"] == "BUY" else 0, "decision_ts": decision_ts}
@@ -111,11 +145,14 @@ def _cycle(root, product, use_fly, tick, ingest, train_daily, model,
                     first_ts = json.loads(first_event[0])["ts"] if first_event else tick.ts
                     elapsed_months = max(0, tick.ts - first_ts) / (30 * 86400)
                     event = {"ts": tick.ts, "bid": tick.bid, "ask": tick.ask, "equity": equity, "delta": delta, "fill": fill, "decision": pending, "detail": detail, "broker": broker.state(),
+                             "historical_context_rows": len(prefix), "forward_observations": len(ticks),
+                             "historical_context_sha256": result["historical_context_sha256"],
                              "net_after_hosting_scenarios": {str(monthly): equity - costs.capital - elapsed_months * monthly for monthly in (20, 40, 100)}}
                     db.execute("INSERT INTO ledger VALUES (?,?,?)", (slot, name, json.dumps(event)))
                     result["policies"][name] = event
                     emit("paper_decision", trader=name, slot=slot, equity=equity, equity_change=delta,
-                         fill=fill, decision=pending, broker=broker.state(), detail=detail)
+                         fill=fill, decision=pending, broker=broker.state(), detail=detail,
+                         historical_context_rows=len(prefix), forward_observations=len(ticks))
         atomic_json(root / "latest.json", result)
         # SQLite handles are closed before Modal commits the volume. Training is sequential
         # and candidates use only the already-observed chronological training partition.

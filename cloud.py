@@ -111,7 +111,7 @@ def worker(prepare: bool = False, probe: bool = False, diagnostics: bool = False
         # and policies remain in /state; only immutable full-graph data is shared.
         result = cycle("/state/fast-5m", os.environ["PAPERLAB_PRODUCT"], full, train_daily=True,
                        interval_seconds=300, train_every_seconds=21600, news_every_seconds=900,
-                       fly_data="/state/fly-data")
+                       fly_data="/state/fly-data", historical_warmup=True)
     except Exception as exc:
         emit("cycle_failed", error_type=type(exc).__name__, error=str(exc)[:300])
         volume.commit()

@@ -56,3 +56,42 @@ def quote(product="BTC-USD"):
     book = response.json()
     now = time.time()
     return Tick(now, float(book["bids"][0][0]), float(book["asks"][0][0]), 0, product, "forward_rest_book", now)
+
+
+def price_context(path, product, before, interval_seconds=300, count=63):
+    """Immutable closed-candle price context; never inserted into a forward ledger."""
+    if product not in PRODUCTS or interval_seconds not in (300, 900) or count != 63:
+        raise ValueError("Unsupported historical context request")
+    path = Path(path)
+    if not path.exists():
+        end = int((before - 1e-6) // interval_seconds) * interval_seconds
+        start = end - count * interval_seconds
+        iso = lambda s: datetime.fromtimestamp(s, timezone.utc).isoformat()
+        response = requests.get(f"{BASE}/products/{product}/candles",
+                                params={"start": iso(start), "end": iso(end), "granularity": interval_seconds}, timeout=20)
+        response.raise_for_status()
+        received = time.time()
+        candles = {}
+        for ts, low, high, opening, close, volume in response.json():
+            if start <= ts < end and ts + interval_seconds < before:
+                # Match forward REST-book features, which have no volume measurement.
+                candles[ts] = Tick(ts + interval_seconds, close, close, 0, product, "historical_candle_proxy", received)
+        ticks = [candles[k] for k in sorted(candles)]
+        _validate_context(ticks, product, before, interval_seconds, count)
+        atomic_json(path, {"kind": "price_context_only", "interval_seconds": interval_seconds,
+                           "fetched_at": received, "before": before,
+                           "note": "Closed-candle prices only. Zero volume matches forward book snapshots. No historical trades, rewards, news or forward-training samples are created.",
+                           "ticks": [asdict(t) for t in ticks]})
+    record = json.loads(path.read_text())
+    if record["kind"] != "price_context_only" or record["interval_seconds"] != interval_seconds:
+        raise ValueError("Historical context provenance mismatch")
+    ticks = [Tick(**r) for r in record["ticks"]]
+    _validate_context(ticks, product, before, interval_seconds, count)
+    return ticks
+
+
+def _validate_context(ticks, product, before, interval, count):
+    if len(ticks) != count or any(t.product != product or t.source != "historical_candle_proxy" or t.volume != 0 for t in ticks):
+        raise ValueError("Incomplete or incompatible price context")
+    if any(b.ts-a.ts != interval for a,b in zip(ticks,ticks[1:])) or not 0 < before-ticks[-1].ts <= 2*interval:
+        raise ValueError("Price context must be contiguous, recent and strictly before the first forward observation")
