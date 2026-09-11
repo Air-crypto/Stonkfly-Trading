@@ -156,3 +156,45 @@ def test_news_parse_failure_is_visible(monkeypatch):
     monkeypatch.setattr("paperlab.news.requests.get", lambda *a, **k: Response())
     report = News().ingest(["https://example.com/feed"])
     assert report[0]["status"] == "error"
+
+
+def test_runtime_executes_persisted_decision_only_on_next_slot(tmp_path, monkeypatch):
+    for i in range(63):
+        cycle(tmp_path, tick=Tick(1700000000 + i * 900, 100, 100, source="forward_rest_book"), ingest=False)
+    model = Policy()
+    with torch.no_grad():
+        model.actor.weight.zero_()
+        model.actor.bias.copy_(torch.tensor([-1., -1., 1.]))
+    path = tmp_path / "model.pt"
+    torch.save({"schema": "64-market14-news50-v1", "model": model.state_dict(), "costs": asdict(Costs()), "product": "BTC-USD", "source": "synthetic"}, path)
+    now = 1700000000 + 63 * 900
+    monkeypatch.setattr("paperlab.runtime.time.time", lambda: now + 2)
+    first = cycle(tmp_path, tick=Tick(now, 100, 100, source="forward_rest_book"), ingest=False, model=path)
+    assert first["policies"]["compact"]["fill"]["status"] == "hold"
+    now += 900
+    second = cycle(tmp_path, tick=Tick(now, 100, 100, source="forward_rest_book"), ingest=False, model=path)
+    fill = second["policies"]["compact"]["fill"]
+    assert fill["status"] == "filled" and fill["fill_ts"] > fill["decision_ts"]
+
+
+def test_budget_reserves_before_work_and_releases_unused(tmp_path):
+    from paperlab.budget import reserve, settle
+    from datetime import datetime, timezone
+    stamp = datetime(2026, 9, 11, tzinfo=timezone.utc).timestamp()
+    path = tmp_path / "budget.json"
+    reservation = reserve(path, True, now=stamp)
+    assert reservation["limit"] == 100
+    before = json.loads(path.read_text())["months"]["2026-09"]
+    settle(path, reservation, 2)
+    assert json.loads(path.read_text())["months"]["2026-09"] < before
+    stamp = datetime(2026, 10, 1, tzinfo=timezone.utc).timestamp()
+    assert reserve(path, True, now=stamp)["limit"] == 40
+
+
+def test_budget_stops_new_work(tmp_path):
+    from paperlab.budget import reserve
+    from datetime import datetime, timezone
+    path = tmp_path / "budget.json"
+    path.write_text(json.dumps({"first_month": "2026-09", "months": {"2026-09": 75}}))
+    stamp = datetime(2026, 9, 11, tzinfo=timezone.utc).timestamp()
+    assert reserve(path, True, now=stamp) is None

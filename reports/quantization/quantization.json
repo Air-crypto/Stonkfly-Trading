@@ -1,0 +1,10 @@
+{
+  "observations": 129,
+  "action_agreement": 1.0,
+  "max_logit_difference": 0.01887965202331543,
+  "fp32_ms": 0.015968992239470747,
+  "int8_ms": 0.015108852670708484,
+  "fp32_bytes": 992337,
+  "int8_bytes": 255752,
+  "note": "A sampled conversion/latency check, not trajectory equivalence. INT8 is not automatically promoted; validate full sequential replays and target cloud CPU first. Fly native float32 kernel is unchanged."
+}

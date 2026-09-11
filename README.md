@@ -8,6 +8,8 @@ The fly is a sparse spiking network, not a transformer. The compact policy is an
 
 Python 3.12 and a C++ compiler are required. Run from this source checkout so the preserved upstream files are available.
 
+For a locked install, use `uv sync --locked --python 3.12 --all-extras`. The lockfile selects CPU-only PyTorch on Linux. The pip alternative below uses the system platform's default PyTorch wheel; install PyTorch from its CPU index first on a Linux CPU server.
+
 ```sh
 python3.12 -m venv .venv
 .venv/bin/pip install -e '.[dev,cloud,news,export]'

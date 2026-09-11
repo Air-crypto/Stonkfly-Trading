@@ -1,0 +1,404 @@
+[
+  {
+    "ts": 1700056700,
+    "equity": 1000.0,
+    "delta": 0.0,
+    "fill": {
+      "status": "hold"
+    },
+    "neural": {
+      "side": "BUY",
+      "left_hz": 36.0,
+      "right_hz": 40.0,
+      "difference_hz": 4.0,
+      "gate_spikes": 25,
+      "cell_ids": {
+        "left": [
+          "10162"
+        ],
+        "right": [
+          "10059"
+        ],
+        "gate": [
+          "10527",
+          "555871"
+        ]
+      },
+      "brain_ms": 500.0,
+      "compute_seconds": 0.872270665015094,
+      "stimulus": "none",
+      "stimulus_ms": 0.0,
+      "reward_spikes": 0,
+      "aversive_spikes": 11,
+      "KC_spikes": 16,
+      "total_spikes": 368874,
+      "spike_sha256": "80c1b4b42151103b344c006e05b806474a562b9d17a5f48ac384c9933642793b",
+      "input_sha256": "9ec90751b3f37509e3ade9a199bf199528428d18a9279cc68a436ff202329106",
+      "memory": {
+        "plastic_edges": 7835,
+        "changed_edges": 5,
+        "mean_efficacy": 0.9999995231628418,
+        "minimum_efficacy": 0.9970136880874634,
+        "sha256": "959fe77552fb49949a9d5b724db5cb58f2e6917298245d384c77052c52601260",
+        "model": "stonkfly-dual-compartment-v1"
+      }
+    }
+  },
+  {
+    "ts": 1700057600,
+    "equity": 998.5815603055079,
+    "delta": -1.4184396944921218,
+    "fill": {
+      "status": "filled",
+      "side": "BUY",
+      "quantity": "0.001738646219935243533606266923",
+      "price": "57516.013812013196",
+      "fee": "0.5999999999999999999999999999",
+      "decision_ts": 1700056700,
+      "fill_ts": 1700057600,
+      "simulation": true
+    },
+    "neural": {
+      "side": "HOLD",
+      "left_hz": 34.0,
+      "right_hz": 34.0,
+      "difference_hz": 0.0,
+      "gate_spikes": 11,
+      "cell_ids": {
+        "left": [
+          "10162"
+        ],
+        "right": [
+          "10059"
+        ],
+        "gate": [
+          "10527",
+          "555871"
+        ]
+      },
+      "brain_ms": 1000.0,
+      "compute_seconds": 1.0422390820167493,
+      "stimulus": "aversive",
+      "stimulus_ms": 200.0,
+      "reward_spikes": 0,
+      "aversive_spikes": 12,
+      "KC_spikes": 11,
+      "total_spikes": 381893,
+      "spike_sha256": "4063709fe8eeecd8c48493c1b6d4856fb461dfa6b426cd5ece8411f9ea5b8388",
+      "input_sha256": "4c817626aa0f0f8ebc8db776a477135d82243f569bddcd331885de76f2d097cb",
+      "memory": {
+        "plastic_edges": 7835,
+        "changed_edges": 5,
+        "mean_efficacy": 0.9999989867210388,
+        "minimum_efficacy": 0.9968070387840271,
+        "sha256": "bde482b700e0fdb2dcf5f323c82687624ffbc59b60f4c65a3205375732b597d6",
+        "model": "stonkfly-dual-compartment-v1"
+      }
+    }
+  },
+  {
+    "ts": 1700058500,
+    "equity": 998.5232004140311,
+    "delta": -0.058359891476811754,
+    "fill": {
+      "status": "hold"
+    },
+    "neural": {
+      "side": "BUY",
+      "left_hz": 26.0,
+      "right_hz": 40.0,
+      "difference_hz": 14.0,
+      "gate_spikes": 6,
+      "cell_ids": {
+        "left": [
+          "10162"
+        ],
+        "right": [
+          "10059"
+        ],
+        "gate": [
+          "10527",
+          "555871"
+        ]
+      },
+      "brain_ms": 1500.0,
+      "compute_seconds": 1.0078396699391305,
+      "stimulus": "aversive",
+      "stimulus_ms": 200.0,
+      "reward_spikes": 0,
+      "aversive_spikes": 13,
+      "KC_spikes": 10,
+      "total_spikes": 382880,
+      "spike_sha256": "116c1a055b6feceef2ae5b06df4b8c18cf794af6c8b54d6ce214dc56fe60c08c",
+      "input_sha256": "6f1f13a5f7ff04fe4a29ffd8a89d990a9283363b602e867d391d5ca31b2e3f00",
+      "memory": {
+        "plastic_edges": 7835,
+        "changed_edges": 5,
+        "mean_efficacy": 0.9999937415122986,
+        "minimum_efficacy": 0.9870428442955017,
+        "sha256": "644850efbcba59bb5c2369fa42429fa61a0a25d2e19767f187c927e7c6c8e59f",
+        "model": "stonkfly-dual-compartment-v1"
+      }
+    }
+  },
+  {
+    "ts": 1700059400,
+    "equity": 997.3723864101129,
+    "delta": -1.1508140039181853,
+    "fill": {
+      "status": "filled",
+      "side": "BUY",
+      "quantity": "0.001734985528050271517442633713",
+      "price": "57637.368371814155",
+      "fee": "0.5999999999999999999999999999",
+      "decision_ts": 1700058500,
+      "fill_ts": 1700059400,
+      "simulation": true
+    },
+    "neural": {
+      "side": "BUY",
+      "left_hz": 24.0,
+      "right_hz": 36.0,
+      "difference_hz": 12.0,
+      "gate_spikes": 4,
+      "cell_ids": {
+        "left": [
+          "10162"
+        ],
+        "right": [
+          "10059"
+        ],
+        "gate": [
+          "10527",
+          "555871"
+        ]
+      },
+      "brain_ms": 2000.0,
+      "compute_seconds": 1.0146748310216935,
+      "stimulus": "aversive",
+      "stimulus_ms": 200.0,
+      "reward_spikes": 0,
+      "aversive_spikes": 18,
+      "KC_spikes": 10,
+      "total_spikes": 380188,
+      "spike_sha256": "d249ec16e6702928ba5fa3275e66b75ba4946ee17450ac514182bc23ed7cab53",
+      "input_sha256": "9b746d640283f9eca77e46f32f055130500d9fe588e8f1c7dae3233dc86b8b33",
+      "memory": {
+        "plastic_edges": 7835,
+        "changed_edges": 5,
+        "mean_efficacy": 0.9999854564666748,
+        "minimum_efficacy": 0.965885579586029,
+        "sha256": "ae8e164c4751e3ddc79a1ebf23450d3c884da60a61bc568d2dabc40151815b7b",
+        "model": "stonkfly-dual-compartment-v1"
+      }
+    }
+  },
+  {
+    "ts": 1700060300,
+    "equity": 996.6373484143594,
+    "delta": -0.7350379957534869,
+    "fill": {
+      "status": "filled",
+      "side": "BUY",
+      "quantity": "0.001729034925217551162813478465",
+      "price": "57835.73167986631",
+      "fee": "0.5999999999999999999999999998",
+      "decision_ts": 1700059400,
+      "fill_ts": 1700060300,
+      "simulation": true
+    },
+    "neural": {
+      "side": "BUY",
+      "left_hz": 24.0,
+      "right_hz": 36.0,
+      "difference_hz": 12.0,
+      "gate_spikes": 8,
+      "cell_ids": {
+        "left": [
+          "10162"
+        ],
+        "right": [
+          "10059"
+        ],
+        "gate": [
+          "10527",
+          "555871"
+        ]
+      },
+      "brain_ms": 2500.0,
+      "compute_seconds": 0.999056084008771,
+      "stimulus": "aversive",
+      "stimulus_ms": 200.0,
+      "reward_spikes": 0,
+      "aversive_spikes": 18,
+      "KC_spikes": 11,
+      "total_spikes": 381209,
+      "spike_sha256": "bf6493226a71a63c7b3cd626e3d5b7cb0763785d74e7c8309c0e3efe88b2b1d6",
+      "input_sha256": "a7e216e75e8a8fef14a81c5a23090e897bfc34ad4d36b5a474c2845c2962dd6e",
+      "memory": {
+        "plastic_edges": 7835,
+        "changed_edges": 5,
+        "mean_efficacy": 0.9999830722808838,
+        "minimum_efficacy": 0.960350513458252,
+        "sha256": "2efedc33134256392999e7f0cb1f2dcf040f13318ffa345b8c035d4cae95ed7d",
+        "model": "stonkfly-dual-compartment-v1"
+      }
+    }
+  },
+  {
+    "ts": 1700061200,
+    "equity": 994.0362877463523,
+    "delta": -2.601060668007108,
+    "fill": {
+      "status": "filled",
+      "side": "BUY",
+      "quantity": "0.001735913850185731283868085659",
+      "price": "57606.54538777985",
+      "fee": "0.5999999999999999999999999999",
+      "decision_ts": 1700060300,
+      "fill_ts": 1700061200,
+      "simulation": true
+    },
+    "neural": {
+      "side": "BUY",
+      "left_hz": 30.0,
+      "right_hz": 36.0,
+      "difference_hz": 6.0,
+      "gate_spikes": 8,
+      "cell_ids": {
+        "left": [
+          "10162"
+        ],
+        "right": [
+          "10059"
+        ],
+        "gate": [
+          "10527",
+          "555871"
+        ]
+      },
+      "brain_ms": 3000.0,
+      "compute_seconds": 1.009670749946963,
+      "stimulus": "aversive",
+      "stimulus_ms": 200.0,
+      "reward_spikes": 0,
+      "aversive_spikes": 11,
+      "KC_spikes": 10,
+      "total_spikes": 381492,
+      "spike_sha256": "622f65b40e10cf49c26804df239906cfb3cb24683b90f9d83e69a33a6de5caeb",
+      "input_sha256": "7d0f653973841e41098715cd2d88d188e7db2d85da919df7d3a55218c1ed8d43",
+      "memory": {
+        "plastic_edges": 7835,
+        "changed_edges": 5,
+        "mean_efficacy": 0.9999920129776001,
+        "minimum_efficacy": 0.9835184216499329,
+        "sha256": "26bc04bf7d8c337f0c06476dd3a4f2dc1dc9073d805f0745e98381ba787d8486",
+        "model": "stonkfly-dual-compartment-v1"
+      }
+    }
+  },
+  {
+    "ts": 1700062100,
+    "equity": 991.6974941213866,
+    "delta": -2.3387936249656605,
+    "fill": {
+      "status": "filled",
+      "side": "BUY",
+      "quantity": "0.001711111310805045502269535240",
+      "price": "57469.379145332015",
+      "fee": "0.5900190280831272586245708952",
+      "decision_ts": 1700061200,
+      "fill_ts": 1700062100,
+      "simulation": true
+    },
+    "neural": {
+      "side": "BUY",
+      "left_hz": 30.0,
+      "right_hz": 32.0,
+      "difference_hz": 2.0,
+      "gate_spikes": 7,
+      "cell_ids": {
+        "left": [
+          "10162"
+        ],
+        "right": [
+          "10059"
+        ],
+        "gate": [
+          "10527",
+          "555871"
+        ]
+      },
+      "brain_ms": 3500.0,
+      "compute_seconds": 1.0113196250167675,
+      "stimulus": "aversive",
+      "stimulus_ms": 200.0,
+      "reward_spikes": 0,
+      "aversive_spikes": 10,
+      "KC_spikes": 13,
+      "total_spikes": 377455,
+      "spike_sha256": "cac349a11519e252a32e72551c39a20a53b7dc5b6b6215a2823587a7de9adb64",
+      "input_sha256": "9071606d1b30b0949ab6be7fd7e7084bb1db99e7524df294adb45a40cbb4f60d",
+      "memory": {
+        "plastic_edges": 7835,
+        "changed_edges": 5,
+        "mean_efficacy": 0.9999977946281433,
+        "minimum_efficacy": 0.9900103211402893,
+        "sha256": "9e9e37b28e1967df69f2b4c4dd0d6d2b216f28bca97c83dce00788f4c048882a",
+        "model": "stonkfly-dual-compartment-v1"
+      }
+    }
+  },
+  {
+    "ts": 1700063000,
+    "equity": 992.6552399480007,
+    "delta": 0.9577458266140866,
+    "fill": {
+      "status": "filled",
+      "side": "SELL",
+      "quantity": "0.000020569948681098000000000000",
+      "price": "57454.479818757536",
+      "fee": "0.007091014208226139414345489530",
+      "decision_ts": 1700062100,
+      "fill_ts": 1700063000,
+      "simulation": true
+    },
+    "neural": {
+      "side": "BUY",
+      "left_hz": 22.0,
+      "right_hz": 30.0,
+      "difference_hz": 8.0,
+      "gate_spikes": 1,
+      "cell_ids": {
+        "left": [
+          "10162"
+        ],
+        "right": [
+          "10059"
+        ],
+        "gate": [
+          "10527",
+          "555871"
+        ]
+      },
+      "brain_ms": 4000.0,
+      "compute_seconds": 2.1887219150085,
+      "stimulus": "reward",
+      "stimulus_ms": 200.0,
+      "reward_spikes": 275,
+      "aversive_spikes": 88,
+      "KC_spikes": 5854,
+      "total_spikes": 603845,
+      "spike_sha256": "b38bc4488524074e5cc96a6ed9f0baee19f156e0d171b494a9768ba2ece66ab1",
+      "input_sha256": "d56571e4be6cd76f03d4a8ccc5d250668d6d432dc73e9276d5b47242dcc3d4f7",
+      "memory": {
+        "plastic_edges": 7835,
+        "changed_edges": 2990,
+        "mean_efficacy": 1.0064468383789062,
+        "minimum_efficacy": 0.641775906085968,
+        "sha256": "beeb4d3487c48b33de1e80266e29127739ca36111c5fbd59335a547aad412ef0",
+        "model": "stonkfly-dual-compartment-v1"
+      }
+    }
+  }
+]

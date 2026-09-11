@@ -1,0 +1,78 @@
+{
+  "with_news": {
+    "side": "HOLD",
+    "left_hz": 36.0,
+    "right_hz": 48.0,
+    "difference_hz": 12.0,
+    "gate_spikes": 0,
+    "cell_ids": {
+      "left": [
+        "10162"
+      ],
+      "right": [
+        "10059"
+      ],
+      "gate": [
+        "10527",
+        "555871"
+      ]
+    },
+    "brain_ms": 16500.0,
+    "compute_seconds": 2.1265760859969305,
+    "stimulus": "none",
+    "stimulus_ms": 0.0,
+    "reward_spikes": 0,
+    "aversive_spikes": 80,
+    "KC_spikes": 4425,
+    "total_spikes": 601946,
+    "spike_sha256": "08ecfb21e1aa77c5f1b117028a170a492b453877c2a0c42417cea9001fd2fd49",
+    "input_sha256": "ebe923191c4d67cac4b764ee55c32facbdca5ddc0583e018a172110baf11f212",
+    "memory": {
+      "plastic_edges": 7835,
+      "changed_edges": 3524,
+      "mean_efficacy": 1.0093754529953003,
+      "minimum_efficacy": 0.30040213465690613,
+      "sha256": "443dd1ae3750d94e9e3399de874eb55f96fedc311e6af93a22b797e7d53d93fa",
+      "model": "stonkfly-dual-compartment-v1"
+    }
+  },
+  "without_news": {
+    "side": "HOLD",
+    "left_hz": 38.0,
+    "right_hz": 50.0,
+    "difference_hz": 12.0,
+    "gate_spikes": 0,
+    "cell_ids": {
+      "left": [
+        "10162"
+      ],
+      "right": [
+        "10059"
+      ],
+      "gate": [
+        "10527",
+        "555871"
+      ]
+    },
+    "brain_ms": 16500.0,
+    "compute_seconds": 2.1701406690553995,
+    "stimulus": "none",
+    "stimulus_ms": 0.0,
+    "reward_spikes": 0,
+    "aversive_spikes": 73,
+    "KC_spikes": 4518,
+    "total_spikes": 601498,
+    "spike_sha256": "9c6c1ef6aa4ce9586c1752a96afdfac4d4142bc1c7964d0bc59061f6311a8876",
+    "input_sha256": "1b6ac6130e70c44e038cfe408f883ebdf3b66a4e20984e676a3b4d742dd54746",
+    "memory": {
+      "plastic_edges": 7835,
+      "changed_edges": 3524,
+      "mean_efficacy": 1.0093754529953003,
+      "minimum_efficacy": 0.30040213465690613,
+      "sha256": "443dd1ae3750d94e9e3399de874eb55f96fedc311e6af93a22b797e7d53d93fa",
+      "model": "stonkfly-dual-compartment-v1"
+    }
+  },
+  "timestamp": 1789152561.5015721,
+  "note": "One current public-book observation and archived, already-seen news, with identical frozen learned checkpoint. Confirms input path only. No order was placed or paper fill simulated."
+}

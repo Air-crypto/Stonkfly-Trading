@@ -1,0 +1,263 @@
+{
+  "schema": "64-market14-news50-v1",
+  "seed": 7,
+  "steps": 8192,
+  "costs": {
+    "capital": 1000,
+    "fee_bps": 60,
+    "slippage_bps": 10,
+    "max_exposure": 0.5,
+    "max_order": 100,
+    "max_spread_bps": 50,
+    "max_delay": 1800,
+    "loss_stop": 0.2
+  },
+  "dataset_sha256": "68f87aaf01903f9d257948c035619bdc017b39b38158ab65ee8dc05eea23f972",
+  "source": "historical_candle_proxy",
+  "product": "BTC-USD",
+  "train_until": 1788787800,
+  "validation_until": 1788969600,
+  "news_enabled": true,
+  "parameters": 247780,
+  "model_sha256": "2b28e7db995751e73aed16254c81122d66af80707d67f745700e659b353c0569",
+  "train_seconds": 1.7256632920034463,
+  "updates": [
+    {
+      "steps": 256,
+      "loss": 0.06147322058677673,
+      "mean_reward": -0.06811173496612079
+    },
+    {
+      "steps": 512,
+      "loss": 0.291793555021286,
+      "mean_reward": -0.020921819776904042
+    },
+    {
+      "steps": 768,
+      "loss": -0.1133185550570488,
+      "mean_reward": 0.0
+    },
+    {
+      "steps": 1024,
+      "loss": 0.15455615520477295,
+      "mean_reward": -0.03372188339204033
+    },
+    {
+      "steps": 1280,
+      "loss": 0.1065051481127739,
+      "mean_reward": -0.055182699832511034
+    },
+    {
+      "steps": 1536,
+      "loss": -0.1525440812110901,
+      "mean_reward": 4.291901109657782e-07
+    },
+    {
+      "steps": 1792,
+      "loss": 0.024206727743148804,
+      "mean_reward": -0.009333957455124872
+    },
+    {
+      "steps": 2048,
+      "loss": 0.11342138051986694,
+      "mean_reward": -0.06043176135955959
+    },
+    {
+      "steps": 2304,
+      "loss": 0.2937511205673218,
+      "mean_reward": -0.01930099443725059
+    },
+    {
+      "steps": 2560,
+      "loss": -0.026091570034623146,
+      "mean_reward": -1.6636509565592474e-06
+    },
+    {
+      "steps": 2816,
+      "loss": 0.09524089843034744,
+      "mean_reward": -0.03328889353708602
+    },
+    {
+      "steps": 3072,
+      "loss": -0.07351608574390411,
+      "mean_reward": -0.046837884698603116
+    },
+    {
+      "steps": 3328,
+      "loss": 0.1719319075345993,
+      "mean_reward": -0.008734094127770665
+    },
+    {
+      "steps": 3584,
+      "loss": 0.18438497185707092,
+      "mean_reward": -0.007831710335570681
+    },
+    {
+      "steps": 3840,
+      "loss": -0.08459463715553284,
+      "mean_reward": -0.03124196175909659
+    },
+    {
+      "steps": 4096,
+      "loss": 0.1252000778913498,
+      "mean_reward": -0.024828579445618067
+    },
+    {
+      "steps": 4352,
+      "loss": -0.06778574734926224,
+      "mean_reward": -0.013494533054547175
+    },
+    {
+      "steps": 4608,
+      "loss": 0.013734252192080021,
+      "mean_reward": -0.006062142655238719
+    },
+    {
+      "steps": 4864,
+      "loss": -0.014066534116864204,
+      "mean_reward": -0.004250712985719947
+    },
+    {
+      "steps": 5120,
+      "loss": 0.08751066774129868,
+      "mean_reward": -0.0010710671324176283
+    },
+    {
+      "steps": 5376,
+      "loss": -0.001768118585459888,
+      "mean_reward": -0.0011232952786916655
+    },
+    {
+      "steps": 5632,
+      "loss": -0.03205563873052597,
+      "mean_reward": -0.0012656663349158853
+    },
+    {
+      "steps": 5888,
+      "loss": 0.04409719258546829,
+      "mean_reward": -0.001779352534259243
+    },
+    {
+      "steps": 6144,
+      "loss": -0.017246188595891,
+      "mean_reward": -0.0005847548957864312
+    },
+    {
+      "steps": 6400,
+      "loss": -0.04157125949859619,
+      "mean_reward": -0.0006842927388593967
+    },
+    {
+      "steps": 6656,
+      "loss": 0.05730171129107475,
+      "mean_reward": -0.0005222269803526622
+    },
+    {
+      "steps": 6912,
+      "loss": -0.06975479423999786,
+      "mean_reward": 0.0
+    },
+    {
+      "steps": 7168,
+      "loss": 0.0023588661570101976,
+      "mean_reward": -0.0005231381850428204
+    },
+    {
+      "steps": 7424,
+      "loss": -0.12607690691947937,
+      "mean_reward": 0.0
+    },
+    {
+      "steps": 7680,
+      "loss": -0.12390679121017456,
+      "mean_reward": 0.0
+    },
+    {
+      "steps": 7936,
+      "loss": 0.0013851403491571546,
+      "mean_reward": -0.0005571621042258283
+    },
+    {
+      "steps": 8192,
+      "loss": -0.0009461004519835114,
+      "mean_reward": -0.00324734112349273
+    }
+  ],
+  "splits": {
+    "validation": {
+      "ppo": {
+        "return_pct": -0.10679987291577486,
+        "max_drawdown_pct": 0.14184396944920685,
+        "fees": 1.2,
+        "fills": 2,
+        "steps": 201,
+        "end_equity": 998.9320012708423
+      },
+      "cash": {
+        "return_pct": 0.0,
+        "max_drawdown_pct": 0.0,
+        "fees": 0.0,
+        "fills": 0,
+        "steps": 201,
+        "end_equity": 1000.0
+      },
+      "equal_cap_buy_hold": {
+        "return_pct": -1.0624982508337322,
+        "max_drawdown_pct": 1.5467122108217768,
+        "fees": 2.9856901387309853,
+        "fills": 5,
+        "steps": 201,
+        "end_equity": 989.3750174916627
+      },
+      "trend": {
+        "return_pct": -7.721122281071646,
+        "max_drawdown_pct": 7.72682096001639,
+        "fees": 56.93370197912711,
+        "fills": 101,
+        "steps": 201,
+        "end_equity": 922.7887771892836
+      }
+    },
+    "test": {
+      "ppo": {
+        "return_pct": -0.3584399428426921,
+        "max_drawdown_pct": 0.4092324394065816,
+        "fees": 3.6,
+        "fills": 6,
+        "steps": 201,
+        "end_equity": 996.4156005715731
+      },
+      "cash": {
+        "return_pct": 0.0,
+        "max_drawdown_pct": 0.0,
+        "fees": 0.0,
+        "fills": 0,
+        "steps": 201,
+        "end_equity": 1000.0
+      },
+      "equal_cap_buy_hold": {
+        "return_pct": -1.6990454358247975,
+        "max_drawdown_pct": 2.130691881234026,
+        "fees": 2.9850270312432428,
+        "fills": 5,
+        "steps": 201,
+        "end_equity": 983.009545641752
+      },
+      "trend": {
+        "return_pct": -7.1405057084995445,
+        "max_drawdown_pct": 7.193940437268253,
+        "fees": 56.30487600438911,
+        "fills": 101,
+        "steps": 201,
+        "end_equity": 928.5949429150046
+      }
+    }
+  },
+  "limitations": [
+    "Research run, not a profitability certificate.",
+    "Single chronological split and one seed; repeat with preregistered windows and seeds.",
+    "Paper fills omit queue position and market impact; historical candle fills are proxies.",
+    "News must have been collected at the time. Zero news in old history is intentional.",
+    "Test is a one-shot audit. Repeatedly optimizing against it invalidates the holdout."
+  ]
+}

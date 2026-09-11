@@ -15,29 +15,54 @@ app = modal.App("fly-paper-lab")
 volume = modal.Volume.from_name("fly-paper-lab-state", create_if_missing=True)
 image = (modal.Image.debian_slim(python_version="3.12")
          .apt_install("g++")
-         .pip_install("numpy==2.5.3", "torch==2.14.0", "requests==2.34.2", "feedparser==6.0.14", "defusedxml==0.7.1", "pillow==12.3.0", "pandas==3.0.5", "pyarrow==25.0.1")
+         .pip_install("torch==2.14.0", index_url="https://download.pytorch.org/whl/cpu")
+         .pip_install("numpy==2.5.3", "requests==2.34.2", "feedparser==6.0.14", "defusedxml==0.7.1", "pillow==12.3.0", "pandas==3.0.5", "pyarrow==25.0.1", "transformers==5.17.0")
          .add_local_dir(ROOT / "paperlab", "/opt/paperlab/paperlab", copy=True, ignore=["__pycache__/"])
          .add_local_dir(ROOT / "vendor", "/opt/paperlab/vendor", copy=True, ignore=["__pycache__/"])
-         .env({"PYTHONPATH": "/opt/paperlab", "OMP_NUM_THREADS": "2", "PAPERLAB_PRODUCT": PRODUCT, "PAPERLAB_FLY": "1" if FULL_FLY else "0"}))
+         .env({"PYTHONPATH": "/opt/paperlab", "OMP_NUM_THREADS": "2", "HF_HOME": "/state/huggingface", "PAPERLAB_FINBERT_REVISION": "4556d13015211d73dccd3fdd39d39232506f3e43", "PAPERLAB_PRODUCT": PRODUCT, "PAPERLAB_FLY": "1" if FULL_FLY else "0"}))
 
 
 @app.function(image=image, volumes={"/state": volume}, cpu=2, memory=16384 if FULL_FLY else 4096,
-              max_containers=1, min_containers=0, scaledown_window=2, timeout=3300,
+              max_containers=1, min_containers=0, scaledown_window=2, timeout=600,
               schedule=modal.Cron("*/15 * * * *") if ENABLED else None, retries=0)
 def worker(prepare: bool = False):
     import os
     import sys
+    import time
     sys.path.insert(0, "/opt/paperlab")
     from paperlab.runtime import cycle
+    from paperlab.budget import reserve, settle
     full = os.environ["PAPERLAB_FLY"] == "1"
     volume.reload()
+    reservation = reserve("/state/budget.json", full)
+    if reservation is None:
+        return {"status": "budget_stopped", "action": "Remove the schedule and redeploy. Compute estimate reached its reserved limit."}
+    volume.commit()  # Persist worst-case reservation before expensive work; crashes retain it.
     if prepare:
         if full:
             from paperlab.fly import prepare as prepare_graph
             prepare_graph("/state/fly-data")
+        # Bootstrap only the compact policy on closed historical candles. Its news features
+        # remain empty for past dates; daily retraining later uses observed forward data.
+        from paperlab.data import historical
+        from paperlab.core import load_ticks, digest
+        from paperlab.compact import train
+        from paperlab.news import News
+        historical("/state/bootstrap.jsonl", os.environ["PAPERLAB_PRODUCT"])
+        news = News("/state/news.db")
+        try:
+            train(load_ticks("/state/bootstrap.jsonl"), news, "/state/bootstrap", dataset_sha=digest("/state/bootstrap.jsonl"))
+        finally:
+            news.db.close()
+        from pathlib import Path
+        active = Path("/state/active-policy.pt")
+        active.with_suffix(".partial").write_bytes(Path("/state/bootstrap/policy.pt").read_bytes())
+        active.with_suffix(".partial").replace(active)
+        budget = settle("/state/budget.json", reservation, time.time() - reservation["started"])
         volume.commit()
-        return {"status": "prepared", "full_fly": full}
+        return {"status": "prepared", "full_fly": full, "budget": budget}
     result = cycle("/state", os.environ["PAPERLAB_PRODUCT"], full, train_daily=True)
+    result["budget"] = settle("/state/budget.json", reservation, time.time() - reservation["started"])
     volume.commit()
     return result
 

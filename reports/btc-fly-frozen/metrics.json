@@ -1,0 +1,43 @@
+{
+  "upstream_commit": "78ef3e05ab0fa086032098558d893667068944a0",
+  "graph": {
+    "release": "MaleCNS v1.0",
+    "neurons": 166700,
+    "directed_edges": 25582938,
+    "arrays_verified": true
+  },
+  "learning": false,
+  "news_enabled": true,
+  "source": "historical_candle_proxy",
+  "product": "BTC-USD",
+  "steps": 32,
+  "start_ts": 1787999400,
+  "end_ts": 1788028200,
+  "initialization_seconds": 1.2118969580042176,
+  "wall_seconds": 71.31395991699537,
+  "neural_seconds": 68.08601439686026,
+  "end_equity": 994.6231188724745,
+  "fees": 3.6,
+  "final_fill": {
+    "status": "hold"
+  },
+  "memory": {
+    "plastic_edges": 7835,
+    "changed_edges": 0,
+    "mean_efficacy": 1.0,
+    "minimum_efficacy": 1.0,
+    "sha256": "9f9c000fb9819eb99c214cc1da747d44e13f009bc4c3454f6b7dfe4ee669acf7",
+    "model": "stonkfly-dual-compartment-v1"
+  },
+  "costs": {
+    "capital": 1000,
+    "fee_bps": 60,
+    "slippage_bps": 10,
+    "max_exposure": 0.5,
+    "max_order": 100,
+    "max_spread_bps": 50,
+    "max_delay": 1800,
+    "loss_stop": 0.2
+  },
+  "note": "Short mechanics/learning experiment. No evidence of profitable trading. Online fly plasticity is not PPO."
+}

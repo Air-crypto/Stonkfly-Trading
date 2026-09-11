@@ -9,4 +9,5 @@ runs/
 *.pt
 *.npz
 *.onnx
+*.onnx.data
 *.partial

@@ -133,7 +133,9 @@ def train(ticks, news, output, costs=Costs(), steps=8192, seed=7, dataset_sha="u
         updates.append({"steps": completed, "loss": float(loss.detach()), "mean_reward": float(np.mean(rewards))})
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
-    metadata = {"schema": "64-market14-news50-v1", "seed": seed, "steps": completed, "costs": asdict(costs), "dataset_sha256": dataset_sha, "source": ticks[0].source, "product": ticks[0].product, "train_until": ticks[split1 - 1].ts, "validation_until": ticks[split2 - 1].ts, "news_enabled": news.enabled, "parameters": sum(p.numel() for p in policy.parameters())}
+    available_news = news.db.execute("SELECT * FROM news ORDER BY id").fetchall()
+    news_sha = hashlib.sha256(json.dumps(available_news, separators=(",", ":")).encode()).hexdigest()
+    metadata = {"schema": "64-market14-news50-v1", "seed": seed, "steps": completed, "costs": asdict(costs), "dataset_sha256": dataset_sha, "source": ticks[0].source, "product": ticks[0].product, "train_until": ticks[split1 - 1].ts, "validation_until": ticks[split2 - 1].ts, "news_enabled": news.enabled, "news_snapshot_sha256": news_sha, "observations_with_news": sum(bool(news.features(t.ts)[48] > 0) for t in ticks), "parameters": sum(p.numel() for p in policy.parameters())}
     model_path = output / "policy.pt"
     torch.save({**metadata, "model": policy.state_dict()}, model_path.with_suffix(".partial"))
     model_path.with_suffix(".partial").replace(model_path)
@@ -147,7 +149,8 @@ def train(ticks, news, output, costs=Costs(), steps=8192, seed=7, dataset_sha="u
             evaluation = evaluate(policy, ticks, news, costs, start, end, baseline)
             atomic_json(output / f"{name}-{key}-ledger.json", evaluation.pop("ledger"))
             result["splits"][name][key] = evaluation
-    result["limitations"] = ["Research run, not a profitability certificate.", "Single chronological split and one seed; repeat with preregistered windows and seeds.", "Paper fills omit queue position and market impact; historical candle fills are proxies.", "News must have been collected at the time. Zero news in old history is intentional.", "Test is a one-shot audit. Repeatedly optimizing against it invalidates the holdout."]
+    result["hosting_break_even_monthly_pct"] = {str(cost): cost / costs.capital * 100 for cost in (20, 40, 100)}
+    result["limitations"] = ["Research run, not a profitability certificate.", "Single chronological split and one seed; repeat with preregistered windows and seeds.", "Paper fills omit queue position and market impact; historical candle fills are proxies.", "News must have been collected at the time. Zero news in old history is intentional.", "Test is a one-shot audit. Repeatedly optimizing against it invalidates the holdout.", "Returns above are after modeled trading costs, before hosting. Hosting break-even scenarios are in metrics.json; no monthly return is extrapolated from this short sample."]
     atomic_json(output / "metrics.json", result)
     lines = ["# Paper experiment", "", f"Source: **{ticks[0].source}**. {completed:,} PPO transitions, {metadata['parameters']:,} parameters. Seed {seed}.", "", "| Test policy | Net return | Max drawdown | Fills | Fees |", "|---|---:|---:|---:|---:|"]
     for key, m in result["splits"]["test"].items():

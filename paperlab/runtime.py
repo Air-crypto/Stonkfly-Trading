@@ -2,13 +2,14 @@
 from dataclasses import asdict
 import fcntl
 import json
+import os
 from pathlib import Path
 import sqlite3
 import time
 
 from .core import Broker, Costs, Tick, atomic_json, digest, features
 from .data import quote, write_ticks
-from .news import News
+from .news import FinBERT, News
 
 
 def cycle(root, product="BTC-USD", use_fly=False, tick=None, ingest=True, train_daily=False, model=None):
@@ -31,11 +32,12 @@ def _cycle(root, product, use_fly, tick, ingest, train_daily, model):
     db.execute("CREATE TABLE IF NOT EXISTS ledger (slot INTEGER, name TEXT, payload TEXT, PRIMARY KEY(slot,name))")
     news = News(root / "news.db")
     try:
-        config = {"product": product, "costs": asdict(costs), "use_fly": use_fly, "schema": "64-market14-news50-v1"}
+        revision = os.environ.get("PAPERLAB_FINBERT_REVISION", "")
+        config = {"product": product, "costs": asdict(costs), "use_fly": use_fly, "schema": "64-market14-news50-v1", "news_encoder": revision or "lexical-v1"}
         stored = db.execute("SELECT payload FROM state WHERE name='config'").fetchone()
         if stored and json.loads(stored[0]) != config:
             raise ValueError("Runtime configuration changed. Use a separate state directory for a new experiment.")
-        news_report = news.ingest() if ingest else []
+        news_report = news.ingest(encoder=FinBERT(revision) if revision else None) if ingest else []
         tick = tick or quote(product)
         if tick.product != product or tick.source != "forward_rest_book":
             raise ValueError("Forward runner accepts only matching, observed public book ticks")
@@ -85,10 +87,14 @@ def _cycle(root, product, use_fly, tick, ingest, train_daily, model):
                         del fly
                     state.update(broker=broker.state(), anchor=equity, pending=pending)
                     db.execute("INSERT OR REPLACE INTO state VALUES (?,?)", (name, json.dumps(state)))
-                    event = {"ts": tick.ts, "equity": equity, "delta": delta, "fill": fill, "decision": pending, "detail": detail}
+                    first_event = db.execute("SELECT payload FROM ledger WHERE name=? ORDER BY slot LIMIT 1", (name,)).fetchone()
+                    first_ts = json.loads(first_event[0])["ts"] if first_event else tick.ts
+                    elapsed_months = max(0, tick.ts - first_ts) / (30 * 86400)
+                    event = {"ts": tick.ts, "equity": equity, "delta": delta, "fill": fill, "decision": pending, "detail": detail,
+                             "net_after_hosting_scenarios": {str(monthly): equity - costs.capital - elapsed_months * monthly for monthly in (20, 40, 100)}}
                     db.execute("INSERT INTO ledger VALUES (?,?,?)", (slot, name, json.dumps(event)))
                     result["policies"][name] = event
-            atomic_json(root / "latest.json", result)
+        atomic_json(root / "latest.json", result)
         # SQLite handles are closed before Modal commits the volume. Training is sequential
         # and candidates use only the already-observed chronological training partition.
         if train_daily and len(ticks) >= 400:

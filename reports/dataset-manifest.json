@@ -1,0 +1,6 @@
+{
+  "sha256": "68f87aaf01903f9d257948c035619bdc017b39b38158ab65ee8dc05eea23f972",
+  "rows": 1344,
+  "note": "Public closed candles; assumed 2 bps spread. Fills use the NEXT close plus slippage/fees. No historical book, intrabar execution, latency or market impact reconstruction. Current RSS is not backdated.",
+  "created_at": 1789152160.467055
+}
