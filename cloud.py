@@ -32,6 +32,7 @@ def worker(prepare: bool = False, probe: bool = False):
     sys.path.insert(0, "/opt/paperlab")
     from paperlab.runtime import cycle
     from paperlab.budget import reserve, settle
+    from paperlab.core import atomic_json
     full = os.environ["PAPERLAB_FLY"] == "1"
     if prepare and probe:
         raise ValueError("Prepare and probe are separate bounded invocations")
@@ -62,8 +63,10 @@ def worker(prepare: bool = False, probe: bool = False):
         active.with_suffix(".partial").write_bytes(Path("/state/bootstrap/policy.pt").read_bytes())
         active.with_suffix(".partial").replace(active)
         budget = settle("/state/budget.json", reservation, time.time() - reservation["started"])
+        result = {"status": "prepared", "full_fly": full, "budget": budget}
+        atomic_json("/state/bootstrap-status.json", result)
         volume.commit()
-        return {"status": "prepared", "full_fly": full, "budget": budget}
+        return result
     if probe:
         if not full:
             raise ValueError("The native fly probe requires PAPERLAB_FLY=1")
@@ -83,10 +86,12 @@ def worker(prepare: bool = False, probe: bool = False):
         finally:
             news.db.close()
         result["budget"] = settle("/state/budget.json", reservation, time.time() - reservation["started"])
+        atomic_json("/state/probe/validation.json", result)
         volume.commit()
         return result
     result = cycle("/state", os.environ["PAPERLAB_PRODUCT"], full, train_daily=True)
     result["budget"] = settle("/state/budget.json", reservation, time.time() - reservation["started"])
+    atomic_json("/state/latest.json", result)
     volume.commit()
     return result
 
