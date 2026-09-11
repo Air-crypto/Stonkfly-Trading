@@ -2,6 +2,10 @@
 
 Status: implementation tested locally; cloud sign-in/deployment pending. No real trades or sustained forward deployment.
 
+Clean remote clone at `23149655abcfe6c26536f84402c8012aa62c4e7a`: `uv sync --locked --python 3.12 --all-extras` succeeded. All 20 lab tests passed; upstream fast checks passed (6 tests, with the full-data test intentionally skipped in that fresh-clone check). The CLI generated a new synthetic fixture and completed a 128-transition PPO smoke run. All 39 vendored upstream files matched the pinned original byte for byte.
+
+[Linux GitHub Actions passed](https://github.com/Air-crypto/Stonkfly-Trading/actions/runs/34635598427) for the same code commit, including CPU-only dependency installation, lab tests, upstream fast neural tests and the disabled-schedule cloud import. The separate full-data neural run below was performed locally and passed all 7 tests.
+
 ## Mechanical checks
 
 - 20 lab tests passed: timestamp leakage, news revisions, execution delay/fees, invalid targets, inventory, risk rejection, restart/deduplication/rollback, actual PPO weight updates, budget reservation and forward fills.

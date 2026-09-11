@@ -47,7 +47,7 @@ These are workload scenarios, not measured cloud quotes. Initial local fly obser
 
 ## Trading must cover operating costs
 
-At **$1,000 paper capital**, $20 and $40 monthly hosting require **2% and 4% monthly return after trading costs**, respectively, merely to break even. The $100 first-month research budget is 10% of that bankroll and should be evaluated as an experiment expense rather than a promised trading return. At $5,000 deployed capital, $20–40 requires 0.4–0.8%; at $6,000 it requires about 0.33–0.67%. Larger capital can still lose more dollars.
+At **$1,000 paper capital**, $20 and $40 monthly hosting require **2% and 4% monthly return after trading costs**, respectively, merely to break even. The $100 first-month research budget is 10% of that bankroll and should be evaluated as an experiment expense rather than a promised trading return. At $5,000 deployed capital, $20–40 requires 0.4–0.8%. Larger capital can still lose more dollars. Paper cash is simulated and does not add to the proposed later real allocation.
 
 Forward records include net-P&L scenarios subtracting $20/$40/$100 monthly overhead prorated on a 30-day basis. These are scenarios, not actual hosting invoices; replace them with measured costs when assessing profitability. Allocate the total research hosting bill once across a comparison, not once to each policy when summing portfolio results. The initial experiments have not demonstrated an edge and do not cover these overheads.
 
