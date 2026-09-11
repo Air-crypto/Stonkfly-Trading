@@ -33,4 +33,4 @@ Default paper capital is $1,000, with a 50% maximum target allocation and $100 m
 
 `vendor/stonkfly` preserves [nftechie/stonkfly](https://github.com/nftechie/stonkfly) at commit `78ef3e05ab0fa086032098558d893667068944a0`, including its MIT license and third-party notices. This lab imports only its neural/data/display modules; its live trading implementation is not wired into the lab.
 
-**Status:** local experiments run; cloud definition prepared. No cloud deployment or sustained forward profitability has been established.
+**Status:** deployed on Modal with a 15-minute paper-data schedule. Full cloud fly validation, checkpoint restoration and the first FinBERT/news/quote collection passed. The runner is collecting its 64-observation warm-up; sustained forward profitability has not been established. See [cloud deployment verification](reports/cloud/deployment.md).

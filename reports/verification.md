@@ -1,6 +1,6 @@
 # Verification — September 11, 2026
 
-Status: implementation tested locally; cloud sign-in/deployment pending. No real trades or sustained forward deployment.
+Status: implementation tested locally and deployed on Modal. Native cloud validation and the first forward news/quote collection passed; the 15-minute schedule is enabled. No real trades or sustained forward profitability. See [deployment evidence](cloud/deployment.md).
 
 Clean remote clone at `23149655abcfe6c26536f84402c8012aa62c4e7a`: `uv sync --locked --python 3.12 --all-extras` succeeded. All 20 lab tests passed; upstream fast checks passed (6 tests, with the full-data test intentionally skipped in that fresh-clone check). The CLI generated a new synthetic fixture and completed a 128-transition PPO smoke run. All 39 vendored upstream files matched the pinned original byte for byte.
 
@@ -13,7 +13,7 @@ Clean remote clone at `23149655abcfe6c26536f84402c8012aa62c4e7a`: `uv sync --loc
 - Full connectome checksums verified: 166,700 neurons and 25,582,938 directed edges.
 - FinBERT at the pinned revision encoded 45 current RSS headlines (25 CoinDesk, 20 Federal Reserve). Earlier lexical records remain separate revisions.
 - A current-book news-on/news-off observation produced different fly input hashes. Both decoded HOLD. This verifies the input pathway, not predictive value.
-- Modal Python definition imports successfully with its schedule disabled. Cloud image execution, actual invoice, provider budget configuration and restart on the cloud host remain unverified.
+- Modal's native cloud probe, including frozen checkpoint restoration, passed. The first collection encoded 45 headlines and persisted a quote. These are initial deployment checks, not a sustained effectiveness study. Account configuration and complete operational records remain local.
 
 ## Historical BTC smoke runs
 
@@ -47,7 +47,7 @@ INT8 is an optional artifact; the paper runner continues to use float32. Agreeme
 
 ## Remaining evidence
 
-Cloud deployment and billed-duration measurement; long forward collection; news-on/off training comparisons on truly available historical news; larger fixed-seed walk-forward study; robust cost stress and uncertainty analysis; checkpoint portability across cloud image changes. Paper fills still omit depth, queue position and market impact. Profitability is unproven.
+Long forward collection and sustained billed-duration measurement; news-on/off training comparisons on truly available historical news; larger fixed-seed walk-forward study; robust cost stress and uncertainty analysis; checkpoint portability across cloud image changes. Paper fills still omit depth, queue position and market impact. Profitability is unproven.
 
 ## Reproduce the full neural test
 

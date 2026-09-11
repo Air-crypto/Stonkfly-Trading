@@ -1,0 +1,23 @@
+{
+  "upstream_commit": "78ef3e05ab0fa086032098558d893667068944a0",
+  "graph": {
+    "release": "MaleCNS v1.0",
+    "neurons": 166700,
+    "directed_edges": 25582938,
+    "arrays_verified": true
+  },
+  "learning": true,
+  "source": "historical_candle_proxy",
+  "steps": 8,
+  "wall_seconds": 33.903640783,
+  "neural_seconds": 27.612354173000014,
+  "memory": {
+    "plastic_edges": 7835,
+    "changed_edges": 1883,
+    "mean_efficacy": 1.0198091268539429,
+    "minimum_efficacy": 0.29575639963150024,
+    "sha256": "5f0bcd71eefdbb3464d38980cd1f0a7808352483ead538df95a09d0833994d82",
+    "model": "stonkfly-dual-compartment-v1"
+  },
+  "frozen_restore_verified": true
+}

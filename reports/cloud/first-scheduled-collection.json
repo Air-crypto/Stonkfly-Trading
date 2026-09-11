@@ -1,0 +1,18 @@
+{
+  "status": "collecting",
+  "slot": 1987951,
+  "ticks": 2,
+  "news": [
+    {
+      "feed": "https://www.coindesk.com/arc/outboundfeeds/rss/",
+      "entries": 0,
+      "status": "ok"
+    },
+    {
+      "feed": "https://www.federalreserve.gov/feeds/press_all.xml",
+      "entries": 0,
+      "status": "ok"
+    }
+  ],
+  "policies": {}
+}

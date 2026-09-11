@@ -1,0 +1,15 @@
+{
+  "checked_at": "2026-09-11T19:46:54.082229+00:00",
+  "code_commit": "f63a1d1786d647436456a629757c8178f07af629",
+  "mode": "paper_only",
+  "schedule": "every 15 minutes",
+  "native_validation_passed": true,
+  "first_collection_ticks": 1,
+  "first_collection_news_entries": 45,
+  "warmup_observations": 64,
+  "daily_compact_retraining_min_observations": 400,
+  "note": "Engineering validation only. Deployment account details are excluded from this public record.",
+  "first_automatic_run_verified": true,
+  "current_observations": 2,
+  "first_automatic_run_slot": 1987951
+}
