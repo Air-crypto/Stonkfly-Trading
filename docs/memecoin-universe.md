@@ -25,8 +25,16 @@ the simulation. Creation events alone cannot establish liquidity or price.
 
 At most **240 pools** are selected for roughly one-minute refresh. Assigned pools
 take priority; eligible incumbents and a rotating discovery tranche fill the rest.
-HTTP work is capped at 13 requests per cycle and paced below the public limit;
-overflow and provider throttling are visible. Capacity is a ceiling, not a promise
+HTTP work is capped at eight requests per round, at least 7.5 seconds apart.
+Assigned-pool batches precede two rotating discovery requests and other refreshes.
+The current [API reference](https://api.geckoterminal.com/docs/index.html) states
+approximately ten requests per minute, varying with traffic (checked September 12,
+2026); older 30/minute guidance is not used. `provider-rate.json` persists pacing
+and exponential 429 cooldowns across windows. `Retry-After` can extend the pause.
+After a 429, the round ends; recovery starts with assigned pools rather than
+the remaining discovery requests. A window that cannot fit a request records
+that fact without issuing it.
+Overflow and provider throttling remain visible. Capacity is a ceiling, not a promise
 that 240 markets will refresh every minute. A bounded working set avoids unlimited
 memory growth. The durable registry retains rejected and disappearing pools and
 all received launch events. First-seen timestamps never move backwards. A pool
@@ -136,7 +144,9 @@ then deploy the guarded version; record that collection gap.
 
 `multi_paper_decision` logs include pool identity, model output, pending order,
 fill or rejection, quantities, fees, stress equity, and learning diagnostics.
-`universe_collected` logs include coverage counts, API errors, and request overflow.
+`universe_collected` logs include coverage counts, attempted/completed requests,
+API errors, request overflow, cooldown state, and per-assigned-pool quote ages and
+rejection reasons. Fresh-but-inactive pools are distinguished from stale data.
 The launch `health` table records reconnect gaps. Compact rollout and optimizer
 artifacts retain pool identity, probabilities, losses, gradients, and updates.
 The older static BTC visualization does not automatically become a live memecoin
@@ -145,6 +155,6 @@ dashboard. Inspect these new records for this experiment's progress.
 ## Provider references
 
 - [PumpPortal free launch/migration versus metered trade streams](https://pumpportal.fun/data-api/real-time/)
-- [GeckoTerminal public rate limit](https://apiguide.geckoterminal.com/faq)
+- [GeckoTerminal current public API reference and approximate rate limit](https://api.geckoterminal.com/docs/index.html)
 - [GeckoTerminal new pools, trending, and multi-pool endpoints](https://apiguide.geckoterminal.com/changelogs)
 - [Modal resource limits and usage billing](https://modal.com/docs/guide/resources)

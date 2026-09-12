@@ -8,6 +8,7 @@ from __future__ import annotations
 import asyncio
 from dataclasses import asdict, dataclass
 from datetime import datetime
+from email.utils import parsedate_to_datetime
 import hashlib
 import json
 import math
@@ -21,6 +22,8 @@ import requests
 GT = "https://api.geckoterminal.com/api/v2/"
 MAX_TRACKED = 240
 MIN_CONTEXT = 64
+REQUEST_INTERVAL = 7.5  # Eight/minute; public reference currently says approximately ten.
+REQUESTS_PER_ROUND = 8
 SAFE_ID = re.compile(r"^[A-Za-z0-9_.:-]{1,150}$")
 MAJORS = {"bitcoin", "wrapped-bitcoin", "ethereum", "weth", "solana", "wrapped-solana",
           "usd-coin", "tether", "dai", "binancecoin", "wbnb", "wrapped-avax"}
@@ -173,26 +176,79 @@ class Store:
         chosen = pinned + eligible[:max(0, MAX_TRACKED-len(pinned)-40)]
         return (chosen + other[:MAX_TRACKED-len(chosen)])[:MAX_TRACKED]
 
+    def priority_health(self, priorities, now):
+        result=[]
+        for key in sorted(set(priorities)):
+            row=self.db.execute("SELECT payload FROM pools WHERE key=?", (key,)).fetchone()
+            p=Pool(**json.loads(row[0])) if row else None
+            result.append({"pool":key,"observed":p.observed if p else None,
+                           "age_seconds":now-p.observed if p else None,
+                           "rejection":p.rejection(now) if p else "missing_pool"})
+        return result
+
+
+class CollectionDeadline(Exception):
+    """No request can finish inside this bounded collector window."""
+
 
 class PublicAPI:
-    def __init__(self):
-        self.last = 0.
+    def __init__(self, state_path):
+        self.state_path = Path(state_path)
+        self.state = {"schema": 1, "next_request_at": 0., "consecutive_429": 0}
+        if self.state_path.exists():
+            saved = json.loads(self.state_path.read_text())
+            if (saved.get("schema") != 1 or
+                not isinstance(saved.get("next_request_at"), (int, float)) or
+                not math.isfinite(saved["next_request_at"]) or saved["next_request_at"] < 0 or
+                type(saved.get("consecutive_429")) is not int or not 0 <= saved["consecutive_429"] <= 10):
+                raise ValueError("Invalid persisted provider cooldown")
+            self.state = saved
         self.calls = 0
 
-    async def get(self, path, **params):
-        # At most 15 public calls/minute, below the documented 30/minute limit.
-        await asyncio.sleep(max(0, self.last+4-time.monotonic()))
-        self.last = time.monotonic()
+    def save(self):
+        from .core import atomic_json
+        atomic_json(self.state_path, self.state)
+
+    async def get(self, path, *, deadline, **params):
+        delay = max(0., self.state["next_request_at"] - time.time())
+        if time.monotonic() + delay + 13 >= deadline:
+            raise CollectionDeadline()
+        await asyncio.sleep(delay)
+        self.state["next_request_at"] = time.time() + REQUEST_INTERVAL
+        self.save()  # A restart cannot reset the request pace or a provider cooldown.
         self.calls += 1
         def request():
-            r = requests.get(GT+path, params=params, timeout=12, headers={"Accept":"application/json", "User-Agent":"FlyPaperLab/0.2 research"})
-            if r.status_code==429:
-                self.last=time.monotonic()+60
-            r.raise_for_status()
-            if len(r.content) > 4_000_000:
-                raise ValueError("Oversized provider response")
-            return r.json()
-        return await asyncio.to_thread(request)
+            return requests.get(GT+path, params=params, timeout=12,
+                headers={"Accept":"application/json;version=20230203", "User-Agent":"FlyPaperLab/0.3 research"})
+        try:
+            r = await asyncio.wait_for(asyncio.to_thread(request), timeout=13)
+        except TimeoutError:
+            # The HTTP thread may finish later; no new requests while its result is unknown.
+            self.state["next_request_at"] = time.time() + 60
+            self.save()
+            raise
+        if r.status_code == 429:
+            self.state["consecutive_429"] = min(10, self.state["consecutive_429"] + 1)
+            cooldown = min(900, 60 * 2 ** (self.state["consecutive_429"] - 1))
+            retry = r.headers.get("Retry-After", "")
+            try:
+                retry_seconds = float(retry)
+            except ValueError:
+                try:
+                    retry_seconds = parsedate_to_datetime(retry).timestamp() - time.time()
+                except (TypeError, ValueError, OverflowError):
+                    retry_seconds = 0
+            if math.isfinite(retry_seconds):
+                cooldown = max(cooldown, retry_seconds)
+            self.state["next_request_at"] = time.time() + cooldown
+            self.save()
+        r.raise_for_status()
+        if len(r.content) > 4_000_000:
+            raise ValueError("Oversized provider response")
+        payload = r.json()
+        self.state["consecutive_429"] = 0
+        self.save()
+        return payload
 
 
 def refresh_requests(watch, priority, minute):
@@ -211,6 +267,18 @@ def refresh_requests(watch, priority, minute):
         for offset in range(0,len(addresses),30):
             result.append((f"networks/{clean_id(network)}/pools/multi/"+",".join(addresses[offset:offset+30]),{}))
     return result
+
+
+def collection_requests(watch, priority, minute):
+    """Assigned pools first, two rotating discovery calls, then other refreshes."""
+    pinned = [p for p in watch if p.key in priority]
+    other = [p for p in watch if p.key not in priority]
+    discovery = [("networks/new_pools", {"page": 1})]
+    rotating = [("networks/new_pools", {"page": 2 + minute % 4}),
+                ("networks/trending_pools", {"page": 1 + minute % 5}),
+                ("search/pools", {"query": ["PEPE","BONK","WIF","SHIB","DOGE","FLOKI","BRETT","POPCAT","MOG","FARTCOIN"][minute % 10]})]
+    discovery.append(rotating[minute % len(rotating)])
+    return refresh_requests(pinned, priority, minute) + discovery + refresh_requests(other, (), minute)
 
 
 async def launch_stream(store, deadline):
@@ -250,39 +318,56 @@ async def collect_window(root, seconds=240, publish=lambda:None, priorities=lamb
         raise ValueError("Collector window must be bounded")
     root=Path(root)
     store=Store(root/"universe.db")
-    api=PublicAPI()
+    api=PublicAPI(root/"provider-rate.json")
     deadline=time.monotonic()+seconds
     stream=asyncio.create_task(launch_stream(store,deadline))
     last_report={}
+    window_completed=0
+    priority=set()
     try:
         while time.monotonic()<deadline:
             started=time.monotonic()
             errors=[]
             minute=int(time.time()//60)
-            # Indexer discovery spans networks; pages rotate through the free API's accessible range.
-            requests_to_make=[("networks/new_pools",{"page":1}),
-                              ("networks/new_pools",{"page":2+minute%4}),
-                              ("networks/trending_pools",{"page":1+minute%5}),
-                              ("search/pools",{"query":["PEPE","BONK","WIF","SHIB","DOGE","FLOKI","BRETT","POPCAT","MOG","FARTCOIN"][minute%10]})]
             # Retain and refresh every open/assigned pool irrespective of current ranking.
             priority=set(priorities())
             watch=store.tracked(priority,time.time())
-            requests_to_make+=refresh_requests(watch,priority,minute)
+            requests_to_make=collection_requests(watch,priority,minute)
+            attempted_before=api.calls
+            completed=0
+            exhausted=False
             # Limit requests, not incoming launch events. Overflow/gaps are explicitly reported.
-            for path,params in requests_to_make[:13]:
+            for path,params in requests_to_make[:REQUESTS_PER_ROUND]:
                 if time.monotonic()+13>=deadline:
+                    exhausted=True
                     break
                 try:
-                    payload=await asyncio.wait_for(api.get(path,include="base_token,quote_token",**params),max(.1,deadline-time.monotonic()-12))
+                    payload=await api.get(path,deadline=deadline,include="base_token,quote_token",**params)
                     store.add(parse_pools(payload,time.time()))
+                    completed+=1
+                    window_completed+=1
+                except CollectionDeadline:
+                    exhausted=True
+                    break
                 except Exception as exc:
+                    status=getattr(getattr(exc,"response",None),"status_code",None)
                     errors.append({"endpoint":path[:120],"error":type(exc).__name__,
-                                   "http_status":getattr(getattr(exc,"response",None),"status_code",None)})
+                                   "http_status":status})
+                    if status == 429:
+                        # Publish the pause now; the next round resumes with assigned pools.
+                        # Do not spend recovery capacity on the remaining discovery requests.
+                        break
             last_report={"status":"collecting", "as_of":time.time(), "tracked_capacity":MAX_TRACKED,
                 "registered_pools":store.db.execute("SELECT count(*) FROM pools").fetchone()[0],
                 "launch_events":store.db.execute("SELECT count(*) FROM launches").fetchone()[0],
                 "observations":store.db.execute("SELECT count(*) FROM observations").fetchone()[0],
-                "provider_errors":errors,"request_overflow":max(0,len(requests_to_make)-13),
+                "provider_errors":errors,"request_overflow":max(0,len(requests_to_make)-REQUESTS_PER_ROUND),
+                "requests_attempted":api.calls-attempted_before,"requests_completed":completed,
+                "window_requests_attempted":api.calls,"window_requests_completed":window_completed,
+                "request_interval_seconds":REQUEST_INTERVAL,"requests_per_round":REQUESTS_PER_ROUND,
+                "provider_next_request_at":api.state["next_request_at"],
+                "provider_consecutive_429":api.state["consecutive_429"],"window_exhausted":exhausted,
+                "priority_quotes":store.priority_health(priority,time.time()),
                 "coverage":"Sampled all-network indexer discovery plus received Pump.fun launches; not every memecoin.",
                 "prices":"Indicative indexer prices; no executable bid/ask or verified sellability."}
             store.health("collection_snapshot",**last_report)
@@ -298,7 +383,8 @@ async def collect_window(root, seconds=240, publish=lambda:None, priorities=lamb
         stream.cancel()
         await asyncio.gather(stream,return_exceptions=True)
         store.health("collector_window_finished")
-        last_report.update(as_of=time.time(),launch_events=store.db.execute("SELECT count(*) FROM launches").fetchone()[0])
+        last_report.update(as_of=time.time(),launch_events=store.db.execute("SELECT count(*) FROM launches").fetchone()[0],
+                           priority_quotes=store.priority_health(priority,time.time()))
         atomic_json(root/"latest.json",last_report)
         store.snapshot(root/"universe-snapshot.db")
         store.db.close()
