@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "kind": "post_hoc_market_activity_reset",
+  "recorded_at": 1789217453.38322,
+  "market_plan_sha256": "3896dedeacf436b240c3f29e4ebfc656410c868dbeab45ac8c33537b70cbc19a",
+  "reference_report_sha256": "038e6f2c69c00a60ab88d89340cf1f85cc7b75e9a3fc8567e1d284cf90ce01e3",
+  "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+  "arms": {
+    "pristine_carry": {
+      "memory": "pristine",
+      "state_reset": "carry"
+    },
+    "trained_carry": {
+      "memory": "trained",
+      "state_reset": "carry"
+    },
+    "pristine_full": {
+      "memory": "pristine",
+      "state_reset": "full"
+    },
+    "trained_full": {
+      "memory": "trained",
+      "state_reset": "full"
+    },
+    "pristine_visual_filters": {
+      "memory": "pristine",
+      "state_reset": "visual_filters"
+    },
+    "trained_visual_filters": {
+      "memory": "trained",
+      "state_reset": "visual_filters"
+    },
+    "pristine_adaptation": {
+      "memory": "pristine",
+      "state_reset": "adaptation"
+    },
+    "trained_adaptation": {
+      "memory": "trained",
+      "state_reset": "adaptation"
+    }
+  },
+  "training_source": "trained_frozen",
+  "test_source": "trained_frozen",
+  "inference": {
+    "learning": false,
+    "reinforcement": "none",
+    "extra_current": 0,
+    "steps": 3
+  },
+  "reset_fields": {
+    "visual_filters": [
+      "luminance",
+      "r8_light"
+    ],
+    "adaptation": [
+      "adaptation"
+    ]
+  },
+  "reset_timing": "Between observations only; first observation starts from the same fresh dynamics in every arm.",
+  "hypothesis": "Gate dropout may depend on carried neural dynamics rather than learned synaptic memory. Compare full dynamics reset, visual-filter reset and intrinsic-adaptation reset against both exact carried-state controls using the same three historical images.",
+  "interpretation": "Post hoc mechanism experiment. Full retained graph and fixed decoder. All eight conditions reported; no account, P&L, policy selection, or live deployment. Resetting dynamics is a controlled intervention, not a claim of biological recovery or profitable learning."
+}

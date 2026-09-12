@@ -1726,3 +1726,54 @@ from learned memory. In the prior nine-condition replay the gate declined from
 31 spikes to zero or one even with pristine memory. A controlled carryover/reset
 comparison can test that explanation without selecting a replacement trading
 policy from these test returns. It has not yet been run.
+
+## Isolate carried activity
+
+The activity-reset diagnostic compares the same three fully observed market06
+images with **pristine or trained memory**, crossed with four state treatments:
+carry everything forward; reset all recorded dynamics; reset only the visual
+filters (`luminance`, `r8_light`); or reset only intrinsic `adaptation`.
+
+All eight conditions start their first observation with the same fresh dynamics.
+Interventions happen only before observations two and three. The full reset also
+restarts the native neural clock; the two partial resets preserve the clock and
+every other recorded dynamic field. All synaptic weights and stored `u/w` remain
+fixed throughout inference. This isolates a mechanism without changing the fixed
+decoder or inventing fills or returns.
+
+The [protocol](../reports/fly-market-activity-protocol-01.json) pins the reference
+report and market plan. Both original carry controls and the reconstructed
+training memory must reproduce before the changed conditions run. Every boundary
+saves the actual before/after arrays; the offline audit compares each target
+against pristine state and every other field against its prior value. It also
+checks memory checkpoints, clock continuity, and the preceding observation's
+whole-network spike counts.
+
+```sh
+uv run python -m paperlab.fly_market_activity pack \
+  --protocol reports/fly-market-activity-protocol-01.json \
+  --reference reports/fly-market-study-06.json \
+  --plan reports/fly-market-study-06-plan.json \
+  --out runs/activity-payload.json
+uv run python -m paperlab.fly_market_activity cloud \
+  --payload runs/activity-payload.json --out runs/activity-study
+```
+
+The cloud observer persists its call ID. If it times out while the job continues,
+repeat the same command and output directory to observe that call. It never
+submits a second job on an observation timeout. The diagnostic uses the existing
+worker lease, a 420-second internal deadline, and the unchanged compute budget.
+An uncertain submission is not retried automatically.
+
+For a local prepared graph, use `run` instead of `cloud` and add
+`--fly-data path/to/prepared/fly-data`. Audit downloaded boundary artifacts with:
+
+```sh
+uv run python -m paperlab.fly_market_activity_audit \
+  --study runs/activity-study/summary.json --payload runs/activity-payload.json \
+  --artifacts runs/activity-study/artifacts --out runs/activity-audit.json
+```
+
+The viewer's **Activity boundary before this observation** panel identifies the
+reset, target fields, fields whose values changed, and the before/after neural
+clock. This appears only on recordings that contain boundary metadata.

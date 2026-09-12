@@ -116,7 +116,12 @@ function decoderPath(f){
  chart('decoder-direction-chart',xs,[{name:'Left contribution (blue)',values:series.left,color:'#8fbcff'},{name:'Right contribution (pink)',values:series.right,color:'#e6a8e8'},{name:'Right − left (green)',values:difference,color:'#67e8cf'}],'Accumulated contribution (Hz)',bin,'Time in observation (ms)');
  chart('decoder-gate-chart',xs,[{name:'Accumulated gate spikes',values:series.gate,color:'#ffbf69'}],'Gate spikes',bin,'Time in observation (ms)');
 }
-function draw(){if(!data)return;externalNeuron=false;document.querySelector('.legend .changed').parentElement.lastChild.textContent=$('pristine').checked?'Plastic edge differs from pristine state':'Plastic edge changed since observation start';const f=data.frames[step],n=data.nodes[node];bin=Math.min(bin,f.times_ms.length-1);$('bin').max=f.times_ms.length-1;$('bin').value=bin;$('time').textContent=num(f.times_ms[bin])+' ms';network(f);decoderPath(f);
+function activityBoundary(f){
+ const boundary=f.event.activity_boundary,panel=$('activity-boundary');panel.hidden=!boundary;$('activity-boundary-note').textContent='';if(!boundary)return;
+ const label={initial:'Fresh dynamics; no between-observation intervention yet',carry:'Carry all activity forward',full:'Reset every recorded dynamic field',visual_filters:'Reset visual filters only',adaptation:'Reset intrinsic adaptation only'};
+ $('activity-boundary-note').textContent=`${label[boundary.mode]||boundary.mode}. Neural clock: ${num(boundary.before_clock.sim_ms)} → ${num(boundary.after_clock.sim_ms)} ms before this image. Target fields: ${boundary.target_fields.join(', ')||'none'}. Fields whose values changed: ${boundary.changed_fields.join(', ')||'none'}. Synaptic memory fingerprint: ${boundary.memory_sha256.slice(0,16)}.`;
+}
+function draw(){if(!data)return;externalNeuron=false;document.querySelector('.legend .changed').parentElement.lastChild.textContent=$('pristine').checked?'Plastic edge differs from pristine state':'Plastic edge changed since observation start';const f=data.frames[step],n=data.nodes[node];bin=Math.min(bin,f.times_ms.length-1);$('bin').max=f.times_ms.length-1;$('bin').value=bin;$('time').textContent=num(f.times_ms[bin])+' ms';network(f);decoderPath(f);activityBoundary(f);
  document.querySelector('.legend .restored').parentElement.lastChild.textContent=data.report.restoration?'Restored before replay':'Restored before probe';
  $('previous-spike').disabled=spikeBin(-1)<0;$('next-spike').disabled=spikeBin(1)<0;momentLink();
  $('neuron-detail').textContent=`${n.type||'Unannotated'} · ${n.id} · ${f.counts[bin][node]} spikes in this bin · ${num(f.voltage[bin][node])} mV`;

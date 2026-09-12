@@ -7,10 +7,14 @@ from .fly_trace import Assay, TraceLab
 
 
 def validate_request(request):
-    if not isinstance(request, dict) or set(request) not in ({"run_id", "config"}, {"run_id", "market_plan"}, {"run_id", "pulse_plan"}, {"run_id", "restoration_plan"}):
+    if not isinstance(request, dict) or set(request) not in ({"run_id", "config"}, {"run_id", "market_plan"}, {"run_id", "pulse_plan"}, {"run_id", "restoration_plan"}, {"run_id", "activity_plan"}):
         raise ValueError("Expected run_id and assay config")
     if not isinstance(request["run_id"], str) or not re.fullmatch(r"assay-[a-z0-9-]{1,80}", request["run_id"]):
         raise ValueError("Invalid diagnostic run ID")
+    if "activity_plan" in request:
+        from .fly_market_activity import validate
+        validate(request["activity_plan"])
+        return request["activity_plan"]
     if "restoration_plan" in request:
         from paperlab.fly_market_restoration import validate
         validate(request["restoration_plan"])
@@ -36,6 +40,10 @@ def validate_request(request):
 def run(request, root, data):
     config = validate_request(request)
     output = Path(root) / request["run_id"]
+    if "activity_plan" in request:
+        from .fly_market_activity import run as activity_run
+        report=activity_run(config,data,output)
+        return {"status":"market_activity_study_completed","run_id":request["run_id"],"remote_path":str(output),"report":report}
     if "restoration_plan" in request:
         from paperlab.fly_market_restoration import run as restoration_run
         report = restoration_run(config, data, output)
