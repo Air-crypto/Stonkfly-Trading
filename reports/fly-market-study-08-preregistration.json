@@ -1,0 +1,60 @@
+{
+  "schema": 6,
+  "recorded_at": 1789224162.517348,
+  "start": 1789224300,
+  "phase_steps": 3,
+  "end": 1789227000,
+  "previous_test_end": 1789216500,
+  "parent_plan_sha256": "6eb5b4b42f5160e7445547bcc44a2c5f2868c99d8bf916e2d03e85af26860f5a",
+  "parent_report_sha256": "0e0b9846a78fa49d22bc1ee1153050efe6613abfd0eb694167f74ef3c0011f34",
+  "mechanism_report_sha256": "7ba9ce0485a701f3ed81251e3198a9371e2d41ebc985888aeae86a1693a63a03",
+  "cohort": [
+    "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+    "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu"
+  ],
+  "arms": {
+    "pristine_frozen": {
+      "eta": 0.001,
+      "train": false,
+      "online": false,
+      "view": "original",
+      "activity_reset": "carry"
+    },
+    "trained_frozen": {
+      "eta": 0.001,
+      "train": true,
+      "online": false,
+      "view": "original",
+      "activity_reset": "carry"
+    },
+    "pristine_input_reset": {
+      "eta": 0.001,
+      "train": false,
+      "online": false,
+      "view": "original",
+      "activity_reset": "conductance"
+    },
+    "trained_input_reset": {
+      "eta": 0.001,
+      "train": true,
+      "online": false,
+      "view": "original",
+      "activity_reset": "conductance"
+    }
+  },
+  "costs": {
+    "capital": 250.0,
+    "fee_bps": 125,
+    "slippage_bps": 100,
+    "max_exposure": 0.5,
+    "max_order": 25,
+    "max_spread_bps": 150,
+    "max_delay": 420,
+    "loss_stop": 0.2
+  },
+  "activity_reset_timing": "Training carries all activity normally and shares identical training recipes. Development and test start separately from fresh dynamics and the saved training memory. Immediately before each eligible observation after the first, restore only native synaptic-input state g to its initial values in the reset arms. Carry controls preserve all activity. Missing decision slots do not advance or reset the brain. All inference weights/u/w remain frozen; no reinforcement or extra current. Preserve every other field and the neural clock at each partial reset.",
+  "promotion_rule": "Only trained_input_reset can qualify. Its development total equity must strictly exceed cash and each of pristine_frozen, trained_frozen, and pristine_input_reset. Fix selection before test simulation. Report all test arms without reselection or automatic deployment.",
+  "hypothesis": "Test whether clearing synaptic input between eligible market observations improves trained paper performance beyond all three controls. The mechanism replay recovered gate spikes while retaining a firing difference; it did not compute trading outcomes.",
+  "selection": "Keep both original pools regardless of later eligibility or survival; use a future registered window after the parent test, without examining intervening returns.",
+  "limitations": "Small fixed cohort and short pilot; indicative fees and slippage, no news, no monthly-return estimate or live trading. Registration precedes every phase."
+}
