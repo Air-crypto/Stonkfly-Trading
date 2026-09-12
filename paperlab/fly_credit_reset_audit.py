@@ -23,6 +23,22 @@ def require(condition, message):
     if not condition: raise ValueError(message)
 
 
+def audit_update(delta, diagnostics):
+    """Check a float32 reduction without requiring platform-specific BLAS bits.
+
+    Every underlying weight is separately required to match exactly. Only this
+    derived scalar gets a four-float32-ULP allowance against a float64 norm.
+    """
+    expected=float(np.linalg.norm(delta.astype(np.float64)))
+    reported=diagnostics['weight_delta_l2']
+    tolerance=4*float(np.spacing(np.float32(expected))) if expected else 0.
+    require(isinstance(reported,(int,float)) and np.isfinite(reported) and reported>=0
+        and abs(reported-expected)<=tolerance
+        and diagnostics['changed_edges']==int(np.count_nonzero(delta)), 'Reported updates differ')
+    return {'reported':reported,'float64_reconstruction':expected,
+            'absolute_error':abs(reported-expected),'tolerance':tolerance}
+
+
 def audit(study, payload, artifacts, reference_root, data):
     p, reference, market, plan = validate(payload); root = Path(artifacts); reference_root = Path(reference_root)
     verify_reference(p, reference_root)
@@ -96,8 +112,7 @@ def audit(study, payload, artifacts, reference_root, data):
             require(event['cell_ids']==original['events'][i-1]['cell_ids'], 'Decoder identities differ')
             require(event['diagnostics']['plasticity_enabled']==arm['learning'], 'Learning flag differs')
             delta=a['weights'][-1]-a['initial_weights']
-            require(event['diagnostics']['weight_delta_l2']==float(np.linalg.norm(delta)) and
-                    event['diagnostics']['changed_edges']==int(np.count_nonzero(delta)), 'Reported updates differ')
+            norm_check=audit_update(delta,event['diagnostics'])
             require(event['memory']['sha256']==array_hash(a['weights'][-1]), 'Event memory differs')
             full_weight[circuit['edges']]=a['weights'][-1]
             require(event['all_weight_sha256']==array_hash(full_weight), 'Observation changed nonplastic weights')
@@ -117,7 +132,8 @@ def audit(study, payload, artifacts, reference_root, data):
                     require(np.array_equal(previous[key],expected), 'End state does not match native trace: '+key)
                 hashes[str(end.relative_to(root))]=digest(end)
             outcomes[name].append({'observation':i,'side':side,'gate_spikes':gate,'difference_hz':difference,
-                'weight_update_l2':float(np.linalg.norm(delta)), 'spike_sha256':event['spike_sha256'],
+                'weight_update_l2':norm_check['reported'], 'weight_norm_audit':norm_check,
+                'spike_sha256':event['spike_sha256'],
                 'changed_boundary_fields':boundary['changed_fields'], 'rule':metrics})
             expanded['frames'][i-1]['plastic_credit']=credit
             for file in (path,boundary_path,folder/f'input-{i:02}.png'):
@@ -142,12 +158,14 @@ def audit(study, payload, artifacts, reference_root, data):
                     'different_weight_edges':int(np.count_nonzero(a['weights'][-1]!=b['weights'][-1]))})
         comparisons.append({'control':control,'reset':name,'observations':rows})
     result={'status':'credit_reset_audited','protocol':p,'arms':outcomes,'comparisons':comparisons,
-        'artifact_sha256':hashes,'code_sha256':study['code_sha256'],
+        'artifact_sha256':hashes,'code_sha256':study['code_sha256'],'audit_source_sha256':digest(__file__),
         'verification':{'observations':18,'bins':900,'plastic_edges_per_bin':7835,'all_weights_exact':True,
             'all_original_controls_reproduced':True,'all_boundaries_verified':True,'frozen_reset_counts_unchanged':True,
-            'all_decoders_reconstructed':True,'rule_rtol':1e-11,'rule_atol':1e-12},'interpretation':p['interpretation']}
+            'all_decoders_reconstructed':True,'rule_rtol':1e-11,'rule_atol':1e-12,
+            'reported_norm_tolerance_float32_ulps':4},'interpretation':p['interpretation']}
     for name,view in views.items():
-        view['credit_audit']={'schema':1,'source_sha256':study['code_sha256'], 'verification':result['verification'],
+        view['credit_audit']={'schema':1,'source_sha256':study['code_sha256'],
+            'audit_source_sha256':result['audit_source_sha256'],'verification':result['verification'],
             'artifact_sha256':{k:v for k,v in hashes.items() if k.startswith(name+'/')},
             'interpretation':'Learning drive reconstructed after verified carry/reset boundaries. Components are algebraic; compare declared interventions separately.'}
     return result, views

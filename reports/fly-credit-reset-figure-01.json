@@ -1,0 +1,8 @@
+{
+  "audit_sha256": "1cf91421490195a817aa91dcfa8afc0039e1185a03de23a9d687ed3d6176f5ae",
+  "source_sha256": "4072924dfd7a22e2055e8aa055eb7ad085521edffa11afd5d9d67f3adc2d250d",
+  "figure_sha256": {
+    ".png": "2c419d6fb8079436278514d2aa21c77cc4e0fb744318f5bcd5b4dfc3ab14e496",
+    ".svg": "edf36187e3f4ac433d4929ae57e217789088450c71da4a8b064a967db92605f1"
+  }
+}

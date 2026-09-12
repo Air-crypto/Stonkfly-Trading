@@ -167,6 +167,14 @@ also affects the update; these are model dynamics, not backprop gradients.
 
 ![Recorded learning drive split by earlier and current image traces](docs/assets/fly-credit-origin-01.png)
 
+The [learning-trace intervention](docs/fly-debugger.md#learning-trace-reset-result)
+then removed the extra historical BUY by clearing only KC/DAN rate traces
+between images. All controls reproduced; the frozen reset preserved every spike
+count. The 18-observation audit identifies a mechanism worth testing on a fresh
+market interval, not a profitable policy. Normal paper traders are unchanged.
+
+![Audited learning-trace reset with all six controls and interventions](docs/assets/fly-credit-reset-01.png)
+
 The [decoder count view](docs/fly-debugger.md#inspect-accumulated-decoder-counts)
 shows how output spikes accumulate. In the examined BUY/SELL reversal, one net
 spike equals the fixed 2 Hz threshold; a count-edit audit separates direction

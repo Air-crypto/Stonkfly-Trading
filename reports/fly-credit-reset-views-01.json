@@ -1,0 +1,35 @@
+{
+  "audit_sha256": "1cf91421490195a817aa91dcfa8afc0039e1185a03de23a9d687ed3d6176f5ae",
+  "run_id": "assay-credit-d4cef30fe9bc46be8d13da36a12135b9",
+  "views": {
+    "creditreset01-trained_online_recorded_carry": {
+      "sha256": "f1d28fc142ab97b529ddc8491e28336f564d373c49c9f42e05f2417af03bf1d3",
+      "original_raw_view_sha256": "36857c31389e325942dc518f9120d0a728263f0cdf6d41a2f2d73967280c13d7"
+    },
+    "creditreset01-trained_online_none_carry": {
+      "sha256": "14938ae3a0f00b37baea3d8035245fff8b16f1b25b292969ec239a1a7c2d0ea2",
+      "original_raw_view_sha256": "1a04c8d60d1eb82c5a01215e3c6ab4e8ef840b03634d36db8dda41a6ed91e5cd"
+    },
+    "creditreset01-trained_frozen_recorded_carry": {
+      "sha256": "795c8fcd242fc0bb79f6f0b60d23328d5f4328ae45e76bd9aaa7564917941341",
+      "original_raw_view_sha256": "92f0c56e38f7266007410c6b508df583282bc8d7b81600ec11df0ffef8e7e59c"
+    },
+    "creditreset01-trained_online_recorded_reset_rates": {
+      "sha256": "08a573604824f85c704942396d13257db8dc5d4270c5b16cb39b88e12ed9fc71",
+      "original_raw_view_sha256": "b2a08a266fb9010ab44ec92137adf2cbacc67cadf4fda9f63465328cdecd6e3e"
+    },
+    "creditreset01-trained_online_none_reset_rates": {
+      "sha256": "5f0e5f1aca975dd6a7baadf4826b22f8ab409b1cea317bc733e377882bca83f2",
+      "original_raw_view_sha256": "c5149e148f8586d649034826eddf1d82d056ff00539e0ae90689260a088d6ec7"
+    },
+    "creditreset01-trained_frozen_recorded_reset_rates": {
+      "sha256": "d26e371854e795f7f06fdb65064c378c1efafd4b094b3f0725381e81568d0ae2",
+      "original_raw_view_sha256": "085d771089ac53418f6db877d568836fc767aff35db97b2befab67cc6290a721"
+    }
+  },
+  "figures": {
+    "fly-credit-reset-01.png": "2c419d6fb8079436278514d2aa21c77cc4e0fb744318f5bcd5b4dfc3ab14e496",
+    "fly-credit-reset-01.svg": "edf36187e3f4ac433d4929ae57e217789088450c71da4a8b064a967db92605f1",
+    "fly-credit-reset-paired-01.png": "dfbf0da3edffbed8b4b19861180dc173d0322ad5737fdb45a479c87e9ba5dec2"
+  }
+}

@@ -3209,8 +3209,8 @@ The browser check defaults to port 8766 and public recordings under
 `examples/fly-debugger`; set `FLY_VIEW_URL` to use another local port. Set
 `FLY_CREDIT_SCREENSHOT` to save the illustrated connection panel.
 
-The [next six-condition protocol](../reports/fly-credit-reset-protocol-01.json)
-is registered but **not submitted**. It preserves these three carry controls
+The [six-condition protocol](../reports/fly-credit-reset-protocol-01.json)
+has now completed in one bounded call; audited results follow below. It preserves these three carry controls
 and adds a matching condition that clears only `rate_kc` and `rate_dan` before
 images 2 and 3. Weights, stored `u/w`, other dynamic arrays, clock, images,
 reinforcement and decoder remain unchanged at the intervention boundary. All
@@ -3250,3 +3250,101 @@ owner, running input, runner or backlog is present. An uncertain submission stay
 unresolved; it does not automatically retry. Portable views are exposed only
 after the independent audit passes. Implementation checks passed 71 tests,
 including a full-network frozen-control test and corruption/timeout cases.
+
+## Learning-trace reset result
+
+![All six audited learning-trace conditions](assets/fly-credit-reset-01.png)
+
+The [complete result](../reports/fly-credit-reset-study-01.json) and
+[independent audit](../reports/fly-credit-reset-audit-01.json) cover all six
+conditions, 18 observations and 900 ten-millisecond bins. All three original
+controls reproduced every full-neuron count bin, plastic weight, `u/w` state and
+rate trace before the reset conditions ran. Every first observation also
+reproduced before any reset occurred. The three historical images and their
+fixed reinforcement schedule are unchanged; this is not a new market test.
+
+| Updates / pulses | Rate history | Actions | Final gate spikes | Final weight-update L2 |
+|---|---|---|---:|---:|
+| Online / recorded | Carry | BUY → HOLD → BUY | 1 | 8.4765 |
+| Online / recorded | Reset | BUY → HOLD → HOLD | 0 | 3.3418 |
+| Online / none | Carry | BUY → HOLD → HOLD | 0 | 4.3675 |
+| Online / none | Reset | BUY → HOLD → HOLD | 0 | 2.7731 |
+| Frozen / recorded | Carry | BUY → HOLD → HOLD | 0 | 0 |
+| Frozen / recorded | Reset | BUY → HOLD → HOLD | 0 | 0 |
+
+Resetting only the KC/DAN rate traces removed the extra BUY in this historical
+case. The final direction remains positive: **12 Hz with carry versus 8 Hz with
+reset**. The action changes because the gate has zero spikes with reset, compared
+with one in the carry control. This identifies an effect of the trace-boundary
+intervention within this model. It does not establish that the learned connection
+highlighted in the viewer caused the gate change or that suppressing trades is
+generally useful.
+
+The frozen reset condition has identical full-neuron spike counts in all 150
+bins and preserves all synaptic memory, despite changed rate history. This
+supports the intended intervention scope: the rate arrays influence the active
+plasticity rule; clearing them does not directly change neural propagation when
+weights are frozen. Without injected pulses, resetting traces changes neural
+activity and memory but leaves all three action labels unchanged. Its final
+direction changes from 0 to +8 Hz with no gate spikes in either condition.
+
+With recorded pulses, the first different full-neuron count bin is **130–140 ms
+into image 2**. With no injected pulses it is **90–100 ms into image 2**. Both
+online pairs already differ in the first bin of image 3 after their intervening
+histories diverged. Their final weight differences from their respective carry
+controls are L2 **11.6097 across 3,214 edges** and **8.6748 across 3,038 edges**.
+These describe different learned states, not better states.
+
+### Inspect the changed gate and memory
+
+Open `creditreset01-trained_online_recorded_reset_rates`, compare
+`creditreset01-trained_online_recorded_carry`, select observation 3 and neuron
+**10527**, then use **First count difference**. At **370–380 ms**, reset has no
+gate spike while carry has one. Select shared connection **10516644**
+(`55850 → 11402`) to inspect memory alongside that output. At the end of image 3,
+its weight is **7.767987 with reset versus 7.238957 with carry**. The neuron and
+connection selections are independent; this is not an isolated causal-edge test.
+
+[Open the paired recording](http://127.0.0.1:8765/?run=creditreset01-trained_online_recorded_reset_rates&step=2&bin=37&neuron=10527&edge=10516644&compare=creditreset01-trained_online_recorded_carry).
+
+![Gate counts and a shared connection after the trace intervention](assets/fly-credit-reset-paired-01.png)
+
+All six portable recordings include verified before/after boundary values,
+per-connection `u/w`, and the learning-drive decomposition. Reset conditions
+have zero earlier-image trace contribution at the start of each new image;
+their preserved `u/w` can still influence subsequent weight movement. The
+recording panel exposes the exact reset fields and unchanged clock.
+The [portable-view manifest](../reports/fly-credit-reset-views-01.json) pins
+these enriched views separately from the original raw views in the artifact audit.
+
+The local audit reconstructs every float32 weight exactly and verifies all
+targeted and untouched boundary arrays, full graph-weight fingerprints,
+end-state continuity, images, pulse timing and fixed decoder outputs. The
+derived L2 summary uses a four-float32-ULP tolerance against a float64
+reconstruction: the original Linux and local macOS reductions differed by up to
+two float32 rounding units. This correction affects only a summary scalar;
+the per-connection checks remain exact. The report records the executed source
+hashes and the corrected offline auditor's separate hash. No cloud experiment
+was repeated after that audit correction.
+
+The single call used **$0.01783 estimated compute**, with the worker's monthly
+reservation at **$1.96039 / $25** when it settled. These are workload estimates,
+not provider invoices; the separate collector cap remains $15. The
+[execution receipt](../reports/fly-credit-reset-submission-01.json) identifies
+the original call and completed audit. Normal paper traders retain their prior
+learning behavior. A fresh chronological, cost-aware market comparison is
+needed before considering this candidate for paper-policy adoption.
+
+Regenerate the overview without model compute:
+
+```sh
+uv run python -m paperlab.fly_credit_reset_figure \
+  --audit reports/fly-credit-reset-audit-01.json --out runs/credit-reset-figure
+node scripts/check-fly-credit-reset-view.cjs
+```
+
+The browser check uses the completed private run under `runs/credit-reset-01/cloud`
+and published names beginning `creditreset01-` on port 8766. It checks all six
+recordings, 18 observations, boundary labels, drive curves, paired gate counts,
+mobile layout, and blocks every model-submission request. Set `FLY_RESET_ROOT`,
+`FLY_RESET_PREFIX` and `FLY_VIEW_URL` for another served copy.

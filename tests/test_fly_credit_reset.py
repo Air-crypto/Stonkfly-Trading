@@ -11,6 +11,7 @@ from paperlab.cloud_debug import validate_request
 from paperlab.core import digest
 from paperlab.fly_credit_reset import compare_trace, validate
 from paperlab.fly_credit_reset_cloud import cloud_run
+from paperlab.fly_credit_reset_audit import audit_update
 from paperlab.fly_market_activity import apply_boundary, array_hash, dynamic_state
 from paperlab.fly_market_activity_audit import audit_boundary
 from paperlab.fly_market_study import learned_state
@@ -118,6 +119,15 @@ def test_full_bin_control_cannot_hide_retimed_spikes_in_equal_totals(tmp_path):
     values['counts'][0,0]=1;np.savez(tmp_path/'a.npz',**values)
     values['counts'][0,0]=0;values['counts'][1,0]=1;np.savez(tmp_path/'b.npz',**values)
     with pytest.raises(ValueError,match='counts'):compare_trace(tmp_path/'a.npz',tmp_path/'b.npz')
+
+
+def test_norm_allows_float32_reduction_rounding_but_not_wrong_results():
+    delta=np.array([1.,2.,3.],dtype=np.float32);expected=np.float32(np.linalg.norm(delta.astype(float)))
+    rounded=float(np.nextafter(np.nextafter(expected,np.float32(0)),np.float32(0)))
+    audit_update(delta,{'weight_delta_l2':rounded,'changed_edges':3})
+    for reported,count in ((float(expected)*1.001,3),(float(expected),2),(float('nan'),3),(-1,3)):
+        with pytest.raises(ValueError):audit_update(delta,{'weight_delta_l2':reported,'changed_edges':count})
+    with pytest.raises(ValueError):audit_update(np.zeros(2,dtype=np.float32),{'weight_delta_l2':1e-20,'changed_edges':0})
 
 
 @pytest.mark.skipif(not os.environ.get('FLY_TRACE_DATA'),reason='requires full prepared graph')
