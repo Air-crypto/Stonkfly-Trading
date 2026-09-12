@@ -846,7 +846,7 @@ reinforcement stimulation. It does not yet identify weight changes as the cause
 of that extra trade. The next diagnostic should hold the recorded images and
 pulse schedule fixed while independently toggling retained memory and updates.
 The [eight-arm mechanism protocol](../reports/fly-market-pulse-protocol-01.json)
-is registered for that next diagnostic; it has not been executed yet.
+has now been executed; see the factorial results below.
 
 Open `market04-online_original`, compare `market04-pristine_frozen`, and select
 observation 3 to inspect the 10:15 disagreement. All four pool-0 recordings are
@@ -864,3 +864,100 @@ uv run python -m paperlab.fly_market_figure reports/fly-market-study-04.json \
 Each chart panel reconciles its last ledger value to the published phase total.
 Red points mark an unavailable pool quote, including cases where that sleeve
 holds only cash. All panels share the same dollar scale; hosting is excluded.
+
+## Separate market memory, updates, and reinforcement
+
+The registered eight-arm diagnostic uses the exact three test images from study
+04's first pool. It crosses pristine versus retained training memory, frozen
+versus ongoing plasticity, and no pulses versus the recorded `none`, `aversive`,
+`reward` sequence. The pulse sequence is held fixed even when a counterfactual
+arm produces a different action. No account, fill, or return is recomputed.
+
+Before comparison, the worker reproduces the original training observations and
+verifies their image and spike-count hashes. It resets neural dynamics between
+arms. Both original reference controls must reproduce on the same native build:
+pristine/frozen/no-pulses matches the market frozen baseline, and
+trained/online/recorded-pulses matches the original online trader. Every frozen
+arm must preserve weights and efficacy memory throughout its three observations.
+The full retained graph and fixed decoder are unchanged.
+
+Pack the registered inputs, then run or resume one cloud call:
+
+```sh
+uv run python -m paperlab.fly_market_pulse pack \
+  --protocol reports/fly-market-pulse-protocol-01.json \
+  --reference reports/fly-market-study-04.json \
+  --plan reports/fly-market-study-04-plan.json \
+  --out runs/pulse-payload.json
+uv run python -m paperlab.fly_market_pulse cloud \
+  --payload runs/pulse-payload.json --out runs/pulse-new
+```
+
+The second command waits briefly and may report that the call is still pending.
+Repeat the same command and output directory to observe that same call; its saved
+receipt prevents resubmission. An uncertain submission requires inspection, not
+another new output directory. The cloud worker continues if the laptop sleeps.
+A different payload cannot reuse an existing receipt. The diagnostic shares the
+existing worker budget and may delay a scheduled paper cycle.
+
+After completion, inspect the downloaded views with:
+
+```sh
+uv run python -m paperlab.debugger serve --backend modal --out runs/pulse-new
+```
+
+The viewer labels them **Historical inputs · neural diagnostic**, shows which
+memory, update, and pulse conditions were used, and pairs comparisons by market
+decision timestamp. Full neuron lookup downloads the larger NPZ recordings only
+when requested. `trained-memory.npz` and each arm's `initial-memory.npz` are also
+retained remotely for subsequent connection interventions. This is a post hoc
+mechanism study on already examined data, not another held-out trading score.
+
+### Market pulse factorial results
+
+The [complete study](../reports/fly-market-pulse-study-01.json) and
+[offline audit](../reports/fly-market-pulse-audit-01.json) include all eight arms
+and all twelve comparisons that change exactly one factor. Both original
+reference controls and the original training spike counts reproduced on the same
+Linux native build. The cloud diagnostic used about $0.0136 in estimated compute.
+
+![All eight controlled conditions](assets/fly-market-pulse-01.png)
+
+All four conditions with frozen weights emitted BUY, HOLD, HOLD. The two online
+conditions without pulses also emitted BUY, HOLD, HOLD. Only the two conditions
+with **both ongoing updates and recorded pulses** emitted BUY, HOLD, BUY; their
+final gate had one spike instead of zero. Removing either factor eliminated this
+extra action under the recorded images and pulse schedule.
+
+Changing pristine to retained training memory changed neither whole-observation
+spike counts nor actions in any of the four paired conditions. Pulses alone with
+frozen weights did alter whole-network spike counts in two observations, but did
+not change the decoder output. Thus this particular extra BUY depends on the
+interaction of ongoing plasticity and reinforcement, rather than the prior
+training memory or pulse-only action effects. This is not a statement about all
+market conditions or all forms of learned memory.
+
+Open `pulse01-trained_online_recorded`, compare
+`pulse01-trained_frozen_recorded`, and select **replay 3**. The images, initial
+memory, and recorded pulses match; the update condition differs. The viewer can
+also compare either diagnostic directly with the original market recording by
+its decision timestamps. `run`, `step` (zero-based), and `compare` URL parameters
+open a specific recorded comparison; invalid selections are ignored.
+
+![Matched historical inputs and pulses with plasticity toggled](assets/fly-market-pulse-comparison.png)
+
+Audit and regenerate the matrix without native model compute:
+
+```sh
+uv run python -m paperlab.fly_pulse_audit \
+  --study reports/fly-market-pulse-study-01.json \
+  --reference reports/fly-market-study-04.json \
+  --out runs/pulse-audit.json --figure runs/pulse-matrix.svg
+```
+
+A [new market comparison](../reports/fly-market-study-05-preregistration.json)
+is registered to test trained-but-frozen inference against pristine frozen and
+original online behavior. It retains the prior cohort and costs, uses training
+10:20–10:35, development 10:35–10:50, and test 10:50–11:05 UTC on September 12.
+The test interval had not begun at registration. No outcome or promotion is
+claimed for that pending experiment.

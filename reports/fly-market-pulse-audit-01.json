@@ -1,0 +1,95 @@
+{
+  "comparisons": [
+    {
+      "factor": "pulses",
+      "first": "pristine_frozen_none",
+      "second": "pristine_frozen_recorded",
+      "different_actions": 0,
+      "different_spike_counts": 2
+    },
+    {
+      "factor": "learning",
+      "first": "pristine_frozen_none",
+      "second": "pristine_online_none",
+      "different_actions": 0,
+      "different_spike_counts": 2
+    },
+    {
+      "factor": "memory",
+      "first": "pristine_frozen_none",
+      "second": "trained_frozen_none",
+      "different_actions": 0,
+      "different_spike_counts": 0
+    },
+    {
+      "factor": "learning",
+      "first": "pristine_frozen_recorded",
+      "second": "pristine_online_recorded",
+      "different_actions": 1,
+      "different_spike_counts": 2
+    },
+    {
+      "factor": "memory",
+      "first": "pristine_frozen_recorded",
+      "second": "trained_frozen_recorded",
+      "different_actions": 0,
+      "different_spike_counts": 0
+    },
+    {
+      "factor": "pulses",
+      "first": "pristine_online_none",
+      "second": "pristine_online_recorded",
+      "different_actions": 1,
+      "different_spike_counts": 2
+    },
+    {
+      "factor": "memory",
+      "first": "pristine_online_none",
+      "second": "trained_online_none",
+      "different_actions": 0,
+      "different_spike_counts": 0
+    },
+    {
+      "factor": "memory",
+      "first": "pristine_online_recorded",
+      "second": "trained_online_recorded",
+      "different_actions": 0,
+      "different_spike_counts": 0
+    },
+    {
+      "factor": "pulses",
+      "first": "trained_frozen_none",
+      "second": "trained_frozen_recorded",
+      "different_actions": 0,
+      "different_spike_counts": 2
+    },
+    {
+      "factor": "learning",
+      "first": "trained_frozen_none",
+      "second": "trained_online_none",
+      "different_actions": 0,
+      "different_spike_counts": 2
+    },
+    {
+      "factor": "learning",
+      "first": "trained_frozen_recorded",
+      "second": "trained_online_recorded",
+      "different_actions": 1,
+      "different_spike_counts": 2
+    },
+    {
+      "factor": "pulses",
+      "first": "trained_online_none",
+      "second": "trained_online_recorded",
+      "different_actions": 1,
+      "different_spike_counts": 2
+    }
+  ],
+  "verification": {
+    "all_eight_arms": true,
+    "reference_controls_reproduced": true,
+    "same_images_and_native_build": true,
+    "frozen_reported_weights_stable": true
+  },
+  "interpretation": "Post hoc neural intervention on three already examined market images. No new trading return or policy-selection result."
+}

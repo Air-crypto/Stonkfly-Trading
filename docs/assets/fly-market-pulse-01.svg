@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="690" viewBox="0 0 1100 690">
+<rect width="1100" height="690" rx="14" fill="#101a2b"/>
+<style>text{font-family:Arial,sans-serif;fill:#e8edf6}.small{fill:#b2bfd1;font-size:13px}</style>
+<text x="28" y="40" font-size="26" class="">What produced the extra BUY?</text>
+<text x="28" y="67" font-size="13" class="small">Same recorded market images. Independent controls for starting memory, updates, and stimulation.</text>
+<text x="28" y="110" font-size="14" class="">Starting memory</text>
+<text x="200" y="110" font-size="14" class="">Plasticity</text>
+<text x="350" y="110" font-size="14" class="">Pulses</text>
+<text x="490" y="110" font-size="14" class="">10:05</text>
+<text x="620" y="110" font-size="14" class="">10:10</text>
+<text x="750" y="110" font-size="14" class="">10:15</text>
+<text x="880" y="110" font-size="14" class="">Final gate</text>
+<text x="990" y="110" font-size="14" class="">Final Δ L2</text>
+<path d="M28,171H1070" stroke="#35445c"/>
+<text x="28" y="153" font-size="16" class="">Pristine</text>
+<text x="200" y="153" font-size="16" class="">Frozen</text>
+<text x="350" y="153" font-size="16" class="">None</text>
+<text x="490" y="153" font-size="16" class="">BUY</text>
+<text x="620" y="153" font-size="16" class="">HOLD</text>
+<text x="750" y="153" font-size="16" class="">HOLD</text>
+<text x="880" y="153" font-size="16" class="">0</text>
+<text x="990" y="153" font-size="16" class="">0.0000</text>
+<path d="M28,226H1070" stroke="#35445c"/>
+<text x="28" y="208" font-size="16" class="">Pristine</text>
+<text x="200" y="208" font-size="16" class="">Frozen</text>
+<text x="350" y="208" font-size="16" class="">Recorded</text>
+<text x="490" y="208" font-size="16" class="">BUY</text>
+<text x="620" y="208" font-size="16" class="">HOLD</text>
+<text x="750" y="208" font-size="16" class="">HOLD</text>
+<text x="880" y="208" font-size="16" class="">0</text>
+<text x="990" y="208" font-size="16" class="">0.0000</text>
+<path d="M28,281H1070" stroke="#35445c"/>
+<text x="28" y="263" font-size="16" class="">Pristine</text>
+<text x="200" y="263" font-size="16" class="">Online</text>
+<text x="350" y="263" font-size="16" class="">None</text>
+<text x="490" y="263" font-size="16" class="">BUY</text>
+<text x="620" y="263" font-size="16" class="">HOLD</text>
+<text x="750" y="263" font-size="16" class="">HOLD</text>
+<text x="880" y="263" font-size="16" class="">0</text>
+<text x="990" y="263" font-size="16" class="">4.3674</text>
+<path d="M28,336H1070" stroke="#35445c"/>
+<text x="28" y="318" font-size="16" class="">Pristine</text>
+<text x="200" y="318" font-size="16" class="">Online</text>
+<text x="350" y="318" font-size="16" class="">Recorded</text>
+<text x="490" y="318" font-size="16" class="">BUY</text>
+<text x="620" y="318" font-size="16" class="">HOLD</text>
+<text x="750" y="318" font-size="16" class="">BUY</text>
+<text x="880" y="318" font-size="16" class="">1</text>
+<text x="990" y="318" font-size="16" class="">8.4765</text>
+<path d="M28,391H1070" stroke="#35445c"/>
+<text x="28" y="373" font-size="16" class="">Trained</text>
+<text x="200" y="373" font-size="16" class="">Frozen</text>
+<text x="350" y="373" font-size="16" class="">None</text>
+<text x="490" y="373" font-size="16" class="">BUY</text>
+<text x="620" y="373" font-size="16" class="">HOLD</text>
+<text x="750" y="373" font-size="16" class="">HOLD</text>
+<text x="880" y="373" font-size="16" class="">0</text>
+<text x="990" y="373" font-size="16" class="">0.0000</text>
+<path d="M28,446H1070" stroke="#35445c"/>
+<text x="28" y="428" font-size="16" class="">Trained</text>
+<text x="200" y="428" font-size="16" class="">Frozen</text>
+<text x="350" y="428" font-size="16" class="">Recorded</text>
+<text x="490" y="428" font-size="16" class="">BUY</text>
+<text x="620" y="428" font-size="16" class="">HOLD</text>
+<text x="750" y="428" font-size="16" class="">HOLD</text>
+<text x="880" y="428" font-size="16" class="">0</text>
+<text x="990" y="428" font-size="16" class="">0.0000</text>
+<path d="M28,501H1070" stroke="#35445c"/>
+<text x="28" y="483" font-size="16" class="">Trained</text>
+<text x="200" y="483" font-size="16" class="">Online</text>
+<text x="350" y="483" font-size="16" class="">None</text>
+<text x="490" y="483" font-size="16" class="">BUY</text>
+<text x="620" y="483" font-size="16" class="">HOLD</text>
+<text x="750" y="483" font-size="16" class="">HOLD</text>
+<text x="880" y="483" font-size="16" class="">0</text>
+<text x="990" y="483" font-size="16" class="">4.3675</text>
+<path d="M28,556H1070" stroke="#35445c"/>
+<text x="28" y="538" font-size="16" class="">Trained</text>
+<text x="200" y="538" font-size="16" class="">Online</text>
+<text x="350" y="538" font-size="16" class="">Recorded</text>
+<text x="490" y="538" font-size="16" class="">BUY</text>
+<text x="620" y="538" font-size="16" class="">HOLD</text>
+<text x="750" y="538" font-size="16" class="">BUY</text>
+<text x="880" y="538" font-size="16" class="">1</text>
+<text x="990" y="538" font-size="16" class="">8.4765</text>
+<text x="28" y="622" font-size="13" class="small">Both original reference controls reproduced. All frozen arms preserved synaptic memory during execution.</text>
+<text x="28" y="648" font-size="13" class="small">Gate = DNpe017 spikes in the final 500 ms observation. Δ L2 = final-observation weight update.</text>
+<text x="28" y="671" font-size="13" class="small">Mechanism diagnostic on previously examined inputs; no fills or returns were recomputed.</text>
+</svg>

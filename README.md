@@ -12,84 +12,46 @@ The fly is a sparse spiking network, not a transformer. The compact policy is an
 
 ## Inspect the fly
 
-The [interactive circuit debugger](docs/fly-debugger.md) shows recorded neuron
-spikes, voltages, connection updates, fixed decoder outputs, and paired learning
-comparisons. Test synthetic prices, news, reinforcement, and neuron stimulation
-without touching a paper account. The simulation retains the full graph; the
-display is a labeled subset with full-neuron lookup in generated recordings.
+The [interactive circuit debugger](docs/fly-debugger.md) shows recorded spikes,
+voltages, connection updates, and fixed decoder outputs. Test synthetic prices,
+news, neuron stimulation, and selected connection restoration. The simulation
+retains the full graph; the display is a labeled subset with full-neuron lookup
+in generated recordings. Paper accounts remain separate from diagnostic assays.
 
 ![Fly circuit debugger](docs/assets/fly-debugger.png)
 
-After installing below, open the included real-network synthetic recordings:
+After installing below, open the included recordings without model compute:
 
 ```sh
 uv run python -m paperlab.debugger serve --out examples/fly-debugger
 ```
 
-Visit <http://127.0.0.1:8765>. See the debugger guide for input tests, the eight-arm
-study, and its limitations. These visualizations are diagnostic evidence, not
-evidence of profitable trading.
+Visit <http://127.0.0.1:8765>. With Modal deployed and authenticated, use
+`uv run python -m paperlab.debugger serve --backend modal --out runs/cloud-debugger`
+to run new synthetic assays and inspect full cloud traces. See the guide for
+[controlled market replays](docs/fly-debugger.md#separate-market-memory-updates-and-reinforcement),
+source verification, saved-call recovery, and run steps.
 
-With Modal already deployed and authenticated, run tests in the cloud with
-`uv run python -m paperlab.debugger serve --backend modal --out runs/cloud-debugger`.
-The guide also covers sealed, cost-aware market replays and saved call recovery.
-The [first sealed market comparison](docs/fly-debugger.md#first-market-replay-result)
-rejected all proposed changes under its development gate. The
-[reinforcement-gated follow-up](docs/fly-debugger.md#second-market-replay-result)
-stopped neutral weight drift but had no development/test fills and showed no
-trading advantage. No policy was promoted. The included `market02-*` recordings
-show the skipped quote slots, simulated fill outcomes, and neutral weight freeze.
+The diagnostics have identified concrete limitations:
 
-![Reinforcement gate and market execution timeline](docs/assets/fly-market-gated.png)
+- The original chart can render small and large percentage moves identically.
+  An experimental fixed return encoding preserves the distinction but failed
+  the [fourth market comparison](docs/fly-debugger.md#fourth-market-replay-result).
+- In that study, original training mode produced an extra BUY that cost $1.35
+  relative to frozen on the pool with fresh quotes. The
+  [eight-arm replay](docs/fly-debugger.md#market-pulse-factorial-results) reproduced
+  both reference controls and isolated the extra BUY to the combination of
+  ongoing plasticity and recorded reinforcement. Starting with earlier trained
+  memory did not change those three observations' spike counts or actions.
+- Freezing weights removed that extra BUY in this diagnostic. Whether trained,
+  frozen inference improves fresh market results remains a separate test;
+  no model change has been promoted to the regular paper trader.
 
-The first paired falling-price assay found one action disagreement in four
-observations. Both arms received identical images:
+![All eight memory, update, and pulse conditions on identical inputs](docs/assets/fly-market-pulse-01.png)
 
-![Learning versus frozen decoder comparison](docs/assets/fly-learning-comparison.png)
-
-The [memory-output intervention study](docs/fly-debugger.md#memory-output-intervention-study)
-confirms that stimulating the plastic-memory output groups can change the fixed
-decoder with weights frozen. All five controls and runnable recordings are included;
-this demonstrates model sensitivity, not profitable learning.
-
-The [retained-learning experiment](docs/fly-debugger.md#retained-learning-results)
-adds frozen probes after resetting neural activity. Reward training changed three
-of eight probe actions versus frozen controls; neutral training also changed one.
-The debugger separates updates happening now from weights retained from training.
-Select `retention01-reward_rise`, compare `retention01-neutral_rise`, and inspect
-**probe 4**. Both probes have learning disabled.
-
-The [counterbalanced follow-up](docs/fly-debugger.md#counterbalanced-training-cues)
-shows that changing the training cue changes the reward-trained response. Larger
-weight changes still do not establish better decisions; both complete studies
-and an offline comparison audit are included.
-
-The [third market replay](docs/fly-debugger.md#third-market-replay-result) had five
-simulated fills per arm, but every variant ended at $996.36 and failed selection.
-The [input audit](docs/fly-debugger.md#price-magnitude-lost-in-the-visual-adapter)
-found that automatic scaling can render 1% and 20% rises identically. The debugger
-now offers an [experimental fixed return scale](docs/fly-debugger.md#experimental-fixed-return-input)
-and price-movement controls. It separates the audited inputs, but the
-[fourth market replay](docs/fly-debugger.md#fourth-market-replay-result) rejected it:
-no arm passed development, and the fixed encoding performed worse in test. The
-paper trader continues using the original adapter.
-
-![Original and fixed return encodings of the same prices](docs/assets/fly-fixed-return-input.png)
-
-![Retained reward versus neutral training after a neural reset](docs/assets/fly-retention-comparison.png)
-
-The [connection-restoration controls](docs/fly-debugger.md#restore-learned-connections-before-a-probe)
-can undo selected learned memory before a frozen probe. In the included falling-cue
-experiment, restoring MBON11 inputs recovered pristine outputs; restoring MBON07
-inputs did not. This localizes one synthetic effect, without proving better trading.
-
-![Purple edges were restored to pristine memory before the frozen probe](docs/assets/fly-memory-restoration.png)
-
-The latest market trace exposes an extra BUY in the original training mode,
-with identical chart inputs but a reward pulse and changed neural activity.
-The guide distinguishes this from proof that weight changes caused the trade.
-
-![Four-arm market equity, quote gaps, fills, and fees](docs/assets/fly-market-study-04.png)
+After starting the included viewer, [open the controlled comparison](http://127.0.0.1:8765/?run=pulse01-trained_online_recorded&step=2&compare=pulse01-trained_frozen_recorded).
+The guide retains earlier experiments, all outcomes, and their limitations.
+These visualizations diagnose the model; they do not demonstrate profitable trading.
 
 ## Run
 
