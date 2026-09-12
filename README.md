@@ -181,6 +181,9 @@ same retained recordings. Five connections into MBON11 differ first; the new
 paired views expose one of them with its own spikes, weights, `u/w`, and learning
 drive. A later missing gate spike changes BUY to HOLD. This traces an observed
 mechanism without identifying a single causal connection or claiming a return.
+The [state-difference controls](docs/fly-debugger.md#navigate-recorded-state-differences)
+jump to the first or next unequal voltage, weight, or `u/w` sample for the
+selected neuron and connection, with signed differences at the current cursor.
 
 ![Recorded weight, voltage, spike-count and gate divergence](docs/assets/fly-credit-divergence-01.png)
 

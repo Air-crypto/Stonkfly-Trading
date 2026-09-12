@@ -3469,3 +3469,49 @@ private recordings, the three retained-data checks explicitly skip. Browser
 validation compares both served views to their portable JSON, visits six
 observations and 30 selected bins, checks displayed counts and weights, and
 verifies the final gate change and mobile layout with model submissions blocked.
+
+## Navigate recorded state differences
+
+![State-difference navigation in the actual paired recordings](assets/fly-state-navigation-01.png)
+
+The paired-trace panel now includes **Jump to a recorded state difference**.
+Each row compares the selected neuron or connection, matched by its identity
+and endpoints rather than its position in either recording's arrays:
+
+- **Voltage** compares the selected neuron's saved membrane voltages.
+- **Weight** compares the selected connection's recorded synaptic weight.
+- **u / w** compare its two stored efficacy states, separately from gradients.
+
+**First different bin** searches the whole selected observation. **Next after
+cursor** searches only later bins. Clicking either pauses playback, moves all
+linked plots to that bin, and updates **Link to this moment**. A time on a
+disabled button means the cursor is already there. **None** means no difference
+in the search interval; **Not recorded** means the necessary paired values or
+connection identity are unavailable. Missing memory is never displayed as zero.
+The final column shows current minus comparison at the selected bin; reversing
+the comparison reverses this sign.
+
+For the included recorded-pulse carry/reset pair, choose neuron **11402**, edge
+**4110156**, and observation **2**. The weight and `u/w` first differ at the
+10 ms bin end; the saved voltage first differs at 50 ms. Observation 1 has no
+differences in those values. The [direct link](http://127.0.0.1:8765/?run=creditdivergence01-trained_online_recorded_reset_rates&step=1&bin=49&neuron=11402&edge=4110156&compare=creditdivergence01-trained_online_recorded_carry)
+starts at the end of observation 2 so both first-difference jumps are available.
+
+These controls inspect only the selected entities and saved values. Portable
+voltages are rounded to three decimal places; an earlier difference below that
+resolution may be absent. The full-array diagnostic report above uses native
+recorded voltages and all retained neurons to locate global first differences.
+Neither navigation mode establishes a causal path by itself.
+
+With the portable viewer running, reproduce the browser checks:
+
+```sh
+FLY_VIEW_URL=http://127.0.0.1:8765 node scripts/check-fly-state-navigation.cjs
+```
+
+This requires Playwright and Chromium, as with the other browser checks. The
+[validation record](../reports/fly-state-navigation-validation-01.json) covers
+real retained examples plus explicit reordered, missing-memory, conflicting-edge,
+unmatched-timestamp and mismatched-bin fixtures. It also checks signed deltas,
+cursor links, playback pause, comparison clearing and mobile overflow. No model
+job or paper-policy change is submitted by these checks.

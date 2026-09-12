@@ -104,10 +104,42 @@ function edgeCredit(f,pi,e){
   {name:'Total drive (white)',values:c.total.map(v=>v[pi]),color:'#e8edf6'}],'Learning drive (u / s)',bin,'Time in observation (ms)');
  $('credit-interpretation').textContent='Current run only. Earlier-image traces are the rate history present at this image boundary; current-image traces accumulate afterward. They sum before memory filtering and clipping. This is an algebraic split of recorded activity, not a gradient or proof of which image or trade caused learning. Weight steps also depend on stored u/w.';
 }
+function jumpPairedBin(target){
+ if(!paired||!Number.isInteger(target)||target<0||target>=data.frames[step].times_ms.length)return;
+ clearInterval(timer);timer=null;$('play').textContent='Play bins';bin=target;draw();
+}
+function pairedDifferenceTable(xs,f,o,n,ni,e,pi,oi,sameEnds){
+ const target=$('paired-state-differences');
+ const column=(rows,index,width)=>index>=0&&Array.isArray(rows)&&rows.length===xs.length
+  &&rows.every(row=>Array.isArray(row)&&row.length===width&&Number.isFinite(row[index]))?rows.map(row=>row[index]):null;
+ const currentVoltage=column(f.voltage,node,data.nodes.length),otherVoltage=column(o.voltage,ni,paired.data.nodes.length);
+ const memory=(frame,index,width,field)=>sameEnds?column(frame[field],index,width):null;
+ const rows=[['voltage',`Body ${n.id}: voltage (mV)`,currentVoltage,otherVoltage],
+  ...[['weight','plastic_weights'],['u','plastic_u'],['w','plastic_w']].map(([label,field])=>[
+   label,`Edge ${e?.id??'unselected'}: ${label}`,
+   memory(f,pi,data.plastic_selection.length,field),memory(o,oi,paired.data.plastic_selection.length,field)])];
+ const body=document.createElement('tbody'),table=document.createElement('table'),head=document.createElement('thead'),tr=document.createElement('tr');
+ for(const title of ['Recorded quantity','First different bin','Next after cursor','Current − comparison']){const th=document.createElement('th');th.scope='col';th.textContent=title;tr.append(th);}head.append(tr);table.append(head,body);
+ const precise=x=>x===0?'0':Math.abs(x)<.00001?x.toExponential(3):num(x,6);
+ for(const [key,label,left,right] of rows){
+  const row=document.createElement('tr');row.dataset.field=key;
+  const name=document.createElement('th');name.scope='row';name.textContent=label;row.append(name);
+  const differences=left&&right?left.flatMap((v,i)=>v!==right[i]?[i]:[]):null;
+  for(const [kind,index] of [['first',differences?.[0]],['next',differences?.find(i=>i>bin)]]){
+   const cell=document.createElement('td'),button=document.createElement('button');button.type='button';button.dataset.jump=kind;
+   button.textContent=differences===null?'Not recorded':index===undefined?'None':`${num(xs[index])} ms`;
+   button.disabled=index===undefined||index===bin;button.setAttribute('aria-label',`${kind==='first'?'First difference':'Next difference'} for ${label}: ${button.textContent}`);
+   if(index!==undefined){button.dataset.bin=index;button.onclick=()=>jumpPairedBin(index);}cell.append(button);row.append(cell);
+  }
+  const delta=document.createElement('td');delta.dataset.delta=key;delta.textContent=left&&right?precise(left[bin]-right[bin]):'Not recorded';row.append(delta);body.append(row);
+ }
+ target.append(table);
+}
 function pairedTraces(){
  const panel=$('paired-traces');panel.hidden=!paired;
  for(const id of ['first-difference','next-difference']){$(id).disabled=true;delete $(id).dataset.bin;}
  $('paired-difference-note').textContent='';
+ $('paired-state-differences').replaceChildren();
  for(const id of ['paired-voltage','paired-spikes','paired-weight','paired-u','paired-w'])$(id).replaceChildren();
  $('paired-memory-note').textContent='';if(!paired)return;
  const f=data.frames[step],o=paired.frames.get(step),note=$('paired-note');
@@ -141,9 +173,10 @@ function pairedTraces(){
  }else $('paired-voltage').textContent=`Body ${n.id} is absent from the comparison's displayed subset.`;
  const e=data.edges.filter(v=>v.plastic_index!==null)[edge];
  const oe=e&&paired.data.edges.find(v=>String(v.id)===String(e.id)&&v.plastic_index!==null);
+ const pi=e?data.plastic_selection.indexOf(e.plastic_index):-1,oi=oe?paired.data.plastic_selection.indexOf(oe.plastic_index):-1;
+ const sameEnds=!!oe&&String(data.nodes[e.source].id)===String(paired.data.nodes[oe.source].id)&&String(data.nodes[e.target].id)===String(paired.data.nodes[oe.target].id);
+ pairedDifferenceTable(xs,f,o,n,ni,e,pi,oi,sameEnds);
  if(!oe){$('paired-weight').textContent='Selected connection is absent from the comparison subset.';return;}
- const sameEnds=String(data.nodes[e.source].id)===String(paired.data.nodes[oe.source].id)&&String(data.nodes[e.target].id)===String(paired.data.nodes[oe.target].id);
- const pi=data.plastic_selection.indexOf(e.plastic_index),oi=paired.data.plastic_selection.indexOf(oe.plastic_index);
  if(!sameEnds||pi<0||oi<0){$('paired-weight').textContent='Connection identity does not reconcile between recordings.';return;}
  chart('paired-weight',xs,series(f.plastic_weights.map(v=>v[pi]),o.plastic_weights.map(v=>v[oi])),`Edge ${e.id}: weight`,bin,'Time in observation (ms)');
  if(hasMemory(f,pi)&&hasMemory(o,oi)){
@@ -249,7 +282,7 @@ $('runs').onchange=e=>loadRun(e.target.value).catch(error);$('refresh').onclick=
 $('play').onclick=()=>{if(timer){clearInterval(timer);timer=null;$('play').textContent='Play bins';return;}if(!data)return;$('play').textContent='Pause';timer=setInterval(()=>{bin++;if(bin>=data.frames[step].times_ms.length){bin=0;step=(step+1)%data.frames.length;$('step').value=step;}draw();},150);};
 $('pristine').onchange=()=>draw();
 $('previous-spike').onclick=()=>jumpSpike(-1);$('next-spike').onclick=()=>jumpSpike(1);
-for(const id of ['first-difference','next-difference'])$(id).onclick=()=>{const target=Number($(id).dataset.bin);if(!paired||!Number.isInteger(target)||target<0||target>=data.frames[step].times_ms.length)return;clearInterval(timer);timer=null;$('play').textContent='Play bins';bin=target;draw();};
+for(const id of ['first-difference','next-difference'])$(id).onclick=()=>jumpPairedBin(Number($(id).dataset.bin));
 $('network').onclick=e=>{const r=$('network').getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;let best=22;positions.forEach(([nx,ny],i)=>{const d=Math.hypot(x-nx,y-ny);if(d<best){best=d;node=i;}});$('node').value=node;draw();};
 $('lookup-button').onclick=async()=>{try{if(imported)throw new Error('Full-neuron lookup needs the recording server and its NPZ files.');const id=$('lookup').value.trim(),d=await api('/api/neuron?run='+encodeURIComponent(runName)+'&id='+encodeURIComponent(id)),f=d.frames[step];$('neuron-detail').textContent=`Full recording: ${d.id} · ${num(f.counts.reduce((a,b)=>a+b,0))} spikes in observation · ${f.plastic_edges.length} adjacent plastic edges`;chart('neuron-chart',f.times_ms,[{name:'Queried neuron voltage',values:f.voltage,color:'#8fbcff'}],'Voltage (mV)',bin);$('lookup-button').title=JSON.stringify(f.plastic_edges);externalNeuron=true;activityBoundary(data.frames[step],data.nodes.findIndex(n=>String(n.id)===String(d.id)));$('previous-spike').disabled=$('next-spike').disabled=true;momentLink();}catch(e){error(e);}};
 $('import').onchange=async e=>{try{const file=e.target.files[0];if(!file)return;if(file.size>64*1024*1024)throw new Error('Trace JSON must be under 64 MiB');runName=file.name;imported=true;load(JSON.parse(await file.text()));}catch(e){error(e);}};

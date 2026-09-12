@@ -1,0 +1,54 @@
+{
+  "status": "recorded_state_navigation_verified",
+  "observed_at": "2026-09-12T21:09:08.371569+00:00",
+  "changes": [
+    "First/next jumps for selected voltage, connection weight and u/w",
+    "Signed selected-bin differences",
+    "Playback pause and moment-link update",
+    "None distinguished from unavailable data"
+  ],
+  "recording_evidence": "reports/fly-credit-divergence-validation-01.json",
+  "recording_evidence_sha256": "04b254a56193c05917a7609b4cf2a451f1fd9ceee597e023fadca3e26d19f49d",
+  "browser": {
+    "server_backend": "recordings",
+    "source_directory": "examples/fly-debugger",
+    "primary_script": "scripts/check-fly-state-navigation.cjs",
+    "regression_scripts": [
+      "scripts/check-fly-paired-view.cjs",
+      "scripts/check-fly-memory-view.cjs",
+      "scripts/check-fly-credit-divergence-view.cjs"
+    ],
+    "all_four_scripts_passed": true,
+    "page_errors": [],
+    "model_submission_requests": 0,
+    "checks": [
+      "Actual first weight/u/w differences at 10 ms and displayed voltage difference at 50 ms",
+      "First and next navigation",
+      "Playback pause and cursor link",
+      "Identical first observations show no differences",
+      "Reversing comparison reverses signed delta",
+      "Reordered neuron and plastic indices preserve values",
+      "Missing memory is not zero",
+      "Conflicting edge endpoints disable memory comparisons",
+      "Unmatched timestamps and mismatched bins clear controls",
+      "Comparison clearing",
+      "Mobile page has no horizontal overflow"
+    ],
+    "screenshot_visually_inspected": true
+  },
+  "study_11": {
+    "pinned_execution_sources_unchanged": true,
+    "registration_sha256": "078553e736a666d576337f895133409c5ccc18cda8c1edf1cb60d735fc6dfb25",
+    "deployment_performed": false
+  },
+  "artifact_sha256": {
+    "paperlab/debugger_web/app.js": "7e318f4b41a8b25d7ffaa0ba35a4191270467d57f62e78d5a1bc4c89f3b0a5cc",
+    "paperlab/debugger_web/index.html": "2810dee47297466e13c92c8333ca11f21487fb9dcd13134d403153829be5bad2",
+    "paperlab/debugger_web/style.css": "f3f85b7b6758366adf04d9f5f8cde954e2ca2ba0075d6dc4691f38b0c2502894",
+    "scripts/check-fly-state-navigation.cjs": "adcce9f81ba92b67a72071ab705ee3de1f24f94b471fe20aa45a3869802f1199",
+    "docs/assets/fly-state-navigation-01.png": "92820aca6612e2a20b6fbb684562ba175f523a71cc7459daf8c360e8d3287db1",
+    "examples/fly-debugger/creditdivergence01-trained_online_recorded_carry/view.json": "ff86493112f9572e15d37bfab8319e2ad59986e38a27b88523e44b4ce033a4bb",
+    "examples/fly-debugger/creditdivergence01-trained_online_recorded_reset_rates/view.json": "4dda65f861fa15f96a1e71614502d6d0346976a5e677d8abca13170b67048d65"
+  },
+  "interpretation": "Browser navigation over selected recorded entities; no full-brain first-difference claim. Portable voltage precision can hide smaller differences. Native recordings, paper policy, and the registered evaluation are unchanged. No new model run or return claim."
+}

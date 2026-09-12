@@ -6,3 +6,5 @@
 
 .legend i.source-spike{width:18px;height:0;background:none;border-top:2px dashed var(--text)}
 .legend i.selected-edge{width:18px;height:4px;background:var(--line);outline:1px solid var(--text)}
+
+#paired-state-differences button:disabled{cursor:default}
