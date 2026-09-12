@@ -1,0 +1,77 @@
+{
+  "plan_sha256": "6eb5b4b42f5160e7445547bcc44a2c5f2868c99d8bf916e2d03e85af26860f5a",
+  "snapshot_sha256": "5c8f8e5365094c387748a8c5ba2f875872b3d38e63ecdefefa8da3300f68df7d",
+  "report_sha256": "0e0b9846a78fa49d22bc1ee1153050efe6613abfd0eb694167f74ef3c0011f34",
+  "eligibility_source_sha256": "d495650516e7ef03376c1c83d965b659f76c809c8931b34e160b2c265b426d0d",
+  "excluded_decisions": [
+    {
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "phase": "test",
+      "decision_ts": 1789216200,
+      "quote_ts": 1789216123.625199,
+      "stored_rejection": "insufficient_two_sided_activity",
+      "volume5_usd": 378.5282846022,
+      "buys5": 3,
+      "sells5": 5,
+      "liquidity_usd": 182627.6778
+    },
+    {
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "phase": "test",
+      "decision_ts": 1789216200,
+      "quote_ts": 1789216123.625199,
+      "stored_rejection": "insufficient_two_sided_activity",
+      "volume5_usd": 193.285222824,
+      "buys5": 1,
+      "sells5": 4,
+      "liquidity_usd": 377707.3841
+    }
+  ],
+  "test_whole_spike_count_matches_pristine": {
+    "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ": {
+      "pristine_frozen": [
+        true,
+        true
+      ],
+      "trained_frozen": [
+        true,
+        true
+      ],
+      "restore_10704": [
+        true,
+        true
+      ],
+      "restore_11402": [
+        true,
+        true
+      ],
+      "restore_both": [
+        true,
+        true
+      ]
+    },
+    "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu": {
+      "pristine_frozen": [
+        true,
+        true
+      ],
+      "trained_frozen": [
+        true,
+        true
+      ],
+      "restore_10704": [
+        true,
+        true
+      ],
+      "restore_11402": [
+        true,
+        true
+      ],
+      "restore_both": [
+        true,
+        true
+      ]
+    }
+  },
+  "interpretation": "Exclusions match stored snapshot rejection reasons and current eligibility code. Quote data existed but failed activity eligibility. All compared spike hashes cover whole-neuron observation counts, not exact spike timing. No skipped slot is replaced or rescored."
+}

@@ -1,0 +1,15 @@
+/* Run from the repository root against a recording server. This check submits no model jobs. */
+const assert=require('node:assert/strict'),{chromium}=require('playwright'),fs=require('fs');
+(async()=>{const b=await chromium.launch({headless:true,...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{})});try{
+const base=process.env.FLY_VIEW_URL||'http://127.0.0.1:8765';
+const p=await b.newPage({viewport:{width:1440,height:1050}}),errors=[];let writes=0;p.on('pageerror',e=>errors.push(String(e)));await p.route('**/api/run',r=>{writes++;return r.abort();});
+const names=fs.readdirSync('examples/fly-debugger').filter(n=>n.startsWith('market07-'));
+assert.equal(names.length,10);
+for(const name of names){const v=JSON.parse(fs.readFileSync(`examples/fly-debugger/${name}/view.json`));assert.equal(v.frames.length,2);await p.goto(`${base}/?run=${name}&step=1&bin=49`);await p.waitForFunction(()=>document.querySelector('#time').textContent==='1,000 ms');assert.equal(await p.locator('#decision').innerText(),v.frames[1].event.side);assert((await p.locator('#market-coverage').innerText()).includes('2 / 3'));assert.equal(await p.locator('#decoder-path svg').count(),2);assert((await p.locator('#market-timeline').innerText()).includes('unavailable_market'));}
+const current='market07-pool1-trained_frozen',other='market07-pool1-pristine_frozen';
+await p.goto(`${base}/?run=${current}&step=1&bin=49&neuron=11402&compare=${other}`);await p.waitForFunction(()=>document.querySelectorAll('#paired-traces svg').length===5);
+const selection=await p.evaluate(async({current,other})=>{const [a,b]=await Promise.all([current,other].map(async n=>await(await fetch('/api/view?run='+n)).json()));const edges=a.edges.filter(e=>e.plastic_index!==null);let best={delta:-1};for(let i=0;i<edges.length;i++){const e=edges[i],o=b.edges.find(x=>x.id===e.id);if(!o||a.nodes[e.target].id!=='11402')continue;const pi=a.plastic_selection.indexOf(e.plastic_index),oi=b.plastic_selection.indexOf(o.plastic_index),delta=Math.abs(a.frames[1].plastic_weights[49][pi]-b.frames[1].plastic_weights[49][oi]);if(delta>best.delta)best={index:i,edge:e.id,delta};}return best;},{current,other});assert(selection.delta>0);await p.selectOption('#edge',String(selection.index));assert.equal(await p.locator('#decision').innerText(),'SELL');assert((await p.locator('#paired-note').innerText()).includes('Input identical: yes'));
+const spikePaths=await p.locator('#paired-spikes svg path').evaluateAll(ns=>ns.map(n=>n.getAttribute('d')));assert.equal(spikePaths[0],spikePaths[1]);
+if(process.env.FLY_MARKET07_SCREENSHOT)await p.locator('#paired-traces').screenshot({path:process.env.FLY_MARKET07_SCREENSHOT});
+await p.setViewportSize({width:390,height:844});assert(!(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth)));assert.deepEqual(errors,[]);assert.equal(writes,0);console.log(JSON.stringify({names,selection,errors,writes}));
+}finally{await b.close();}})().catch(e=>{console.error(e);process.exitCode=1;});

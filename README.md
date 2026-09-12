@@ -64,7 +64,9 @@ The diagnostics have identified concrete limitations:
   mechanism results. The [sixth market test](docs/fly-debugger.md#sixth-market-replay-result)
   found a test-only benefit from restoring 11402: **$1,000.46** versus **$994.18**
   for the other variants. Every variant failed development, so none was promoted.
-  The same five-way comparison is registered on the following window.
+  The [seventh comparison](docs/fly-debugger.md#seventh-market-replay-result)
+  ended at **$996.86 for all five variants**; none passed development. Four of
+  six test slots were observed, and all their full spike-count records matched.
 - The [nine-condition memory replay](docs/fly-debugger.md#three-group-restoration-results)
   found that this SELL depends on retaining learned MBON07 and 10704 inputs.
   Resetting more memory can reverse it or introduce an extra gate-driven BUY.
@@ -77,7 +79,7 @@ and gate sensitivity without claiming a profitable fix.
 
 ![Recorded direction and gate counts](docs/assets/fly-decoder-counts.png)
 
-![Memory-restoration comparison across training, development, and test](docs/assets/fly-market-study-06.png)
+![Memory-restoration comparison across training, development, and test](docs/assets/fly-market-study-07.png)
 
 [Inspect the restored connections](http://127.0.0.1:8765/?run=marketrestore01-restore_10704&step=1&neuron=10704&compare=marketrestore01-trained_frozen).
 These are indicative DEX marks with fees/slippage, not realized or monthly returns.

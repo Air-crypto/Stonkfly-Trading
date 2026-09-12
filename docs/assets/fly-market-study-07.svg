@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="1045" viewBox="0 0 1120 1045">
+<rect width="100%" height="100%" rx="14" fill="#0e1728"/>
+<style>text{font-family:Arial,sans-serif;fill:#e8edf6}.small{font-size:12px;fill:#aebcd0}</style>
+<text x="28" y="40" font-size="25" class="">Seventh market replay: registered memory restoration</text>
+<text x="28" y="65" font-size="13" class="small">Each phase starts with $1,000. Inference uses training memory with declared restorations; development never enters test.</text>
+<text x="28" y="87" font-size="13" class="small">All panels share one dollar scale. Red points include an unavailable pool quote; cash may still be fully priced.</text>
+<text x="260" y="123" font-size="15" class="">Training  11:50–12:05 UTC</text>
+<text x="540" y="123" font-size="15" class="">Development  12:05–12:20 UTC</text>
+<text x="820" y="123" font-size="15" class="">Test  12:20–12:35 UTC</text>
+<text x="28" y="175" font-size="15" class="">Original / frozen</text>
+<text x="28" y="197" font-size="12" class="small">$942.99–$1008.98</text>
+<rect x="260" y="145" width="238" height="86" fill="#172237" stroke="#35445c"/>
+<path d="M260,156.70189779461765H498" stroke="#75859c" stroke-dasharray="4 4"/>
+<polyline points="260.0,156.70189779461765 339.3333333333333,158.46729700816445 418.66666666666663,157.63104713526593 498.0,153.32258064516134" fill="none" stroke="#67e8cf" stroke-width="2"/>
+<circle cx="260.0" cy="156.70189779461765" r="3.5" fill="#67e8cf"/>
+<circle cx="339.3333333333333" cy="158.46729700816445" r="3.5" fill="#67e8cf"/>
+<circle cx="418.66666666666663" cy="157.63104713526593" r="3.5" fill="#67e8cf"/>
+<circle cx="498.0" cy="153.32258064516134" r="3.5" fill="#67e8cf"/>
+<text x="260" y="253" font-size="13" class="">$1002.59 · 3 fills · $0.938 fees</text>
+<text x="260" y="271" font-size="12" class="small">6/6 decisions observed</text>
+<rect x="540" y="145" width="238" height="86" fill="#172237" stroke="#35445c"/>
+<path d="M540,156.70189779461765H778" stroke="#75859c" stroke-dasharray="4 4"/>
+<polyline points="540.0,156.70189779461765 619.3333333333334,160.23269622171125 698.6666666666666,164.30332731377274 778.0,163.79379366754523" fill="none" stroke="#67e8cf" stroke-width="2"/>
+<circle cx="540.0" cy="156.70189779461765" r="3.5" fill="#67e8cf"/>
+<circle cx="619.3333333333334" cy="160.23269622171125" r="3.5" fill="#67e8cf"/>
+<circle cx="698.6666666666666" cy="164.30332731377274" r="3.5" fill="#67e8cf"/>
+<circle cx="778.0" cy="163.79379366754523" r="3.5" fill="#67e8cf"/>
+<text x="540" y="253" font-size="13" class="">$994.56 · 5 fills · $1.562 fees</text>
+<text x="540" y="271" font-size="12" class="small">6/6 decisions observed</text>
+<rect x="820" y="145" width="238" height="86" fill="#172237" stroke="#35445c"/>
+<path d="M820,156.70189779461765H1058" stroke="#75859c" stroke-dasharray="4 4"/>
+<polyline points="820.0,156.70189779461765 899.3333333333334,160.23269622171125 978.6666666666666,222.67741935483866 1058.0,160.79673778933847" fill="none" stroke="#67e8cf" stroke-width="2"/>
+<circle cx="820.0" cy="156.70189779461765" r="3.5" fill="#67e8cf"/>
+<circle cx="899.3333333333334" cy="160.23269622171125" r="3.5" fill="#67e8cf"/>
+<circle cx="978.6666666666666" cy="222.67741935483866" r="3.5" fill="#ff8e8e"/>
+<circle cx="1058.0" cy="160.79673778933847" r="3.5" fill="#67e8cf"/>
+<text x="820" y="253" font-size="13" class="">$996.86 · 2 fills · $0.625 fees</text>
+<text x="820" y="271" font-size="12" class="small">4/6 decisions observed</text>
+<text x="28" y="330" font-size="15" class="">Trained / frozen inference</text>
+<text x="28" y="352" font-size="12" class="small">$942.99–$1008.98</text>
+<rect x="260" y="300" width="238" height="86" fill="#172237" stroke="#35445c"/>
+<path d="M260,311.70189779461765H498" stroke="#75859c" stroke-dasharray="4 4"/>
+<polyline points="260.0,311.70189779461765 339.3333333333333,313.46729700816445 418.66666666666663,312.63104713526593 498.0,308.32258064516134" fill="none" stroke="#67e8cf" stroke-width="2"/>
+<circle cx="260.0" cy="311.70189779461765" r="3.5" fill="#67e8cf"/>
+<circle cx="339.3333333333333" cy="313.46729700816445" r="3.5" fill="#67e8cf"/>
+<circle cx="418.66666666666663" cy="312.63104713526593" r="3.5" fill="#67e8cf"/>
+<circle cx="498.0" cy="308.32258064516134" r="3.5" fill="#67e8cf"/>
+<text x="260" y="408" font-size="13" class="">$1002.59 · 3 fills · $0.938 fees</text>
+<text x="260" y="426" font-size="12" class="small">6/6 decisions observed</text>
+<rect x="540" y="300" width="238" height="86" fill="#172237" stroke="#35445c"/>
+<path d="M540,311.70189779461765H778" stroke="#75859c" stroke-dasharray="4 4"/>
+<polyline points="540.0,311.70189779461765 619.3333333333334,315.23269622171125 698.6666666666666,321.06872652731965 778.0,319.1266669135616" fill="none" stroke="#67e8cf" stroke-width="2"/>
+<circle cx="540.0" cy="311.70189779461765" r="3.5" fill="#67e8cf"/>
+<circle cx="619.3333333333334" cy="315.23269622171125" r="3.5" fill="#67e8cf"/>
+<circle cx="698.6666666666666" cy="321.06872652731965" r="3.5" fill="#67e8cf"/>
+<circle cx="778.0" cy="319.1266669135616" r="3.5" fill="#67e8cf"/>
+<text x="540" y="408" font-size="13" class="">$994.30 · 5 fills · $1.562 fees</text>
+<text x="540" y="426" font-size="12" class="small">6/6 decisions observed</text>
+<rect x="820" y="300" width="238" height="86" fill="#172237" stroke="#35445c"/>
+<path d="M820,311.70189779461765H1058" stroke="#75859c" stroke-dasharray="4 4"/>
+<polyline points="820.0,311.70189779461765 899.3333333333334,315.23269622171125 978.6666666666666,377.67741935483866 1058.0,315.79673778933847" fill="none" stroke="#67e8cf" stroke-width="2"/>
+<circle cx="820.0" cy="311.70189779461765" r="3.5" fill="#67e8cf"/>
+<circle cx="899.3333333333334" cy="315.23269622171125" r="3.5" fill="#67e8cf"/>
+<circle cx="978.6666666666666" cy="377.67741935483866" r="3.5" fill="#ff8e8e"/>
+<circle cx="1058.0" cy="315.79673778933847" r="3.5" fill="#67e8cf"/>
+<text x="820" y="408" font-size="13" class="">$996.86 · 2 fills · $0.625 fees</text>
+<text x="820" y="426" font-size="12" class="small">4/6 decisions observed</text>
+<text x="28" y="485" font-size="15" class="">Restore inputs to 10704</text>
+<text x="28" y="507" font-size="12" class="small">$942.99–$1008.98</text>
+<rect x="260" y="455" width="238" height="86" fill="#172237" stroke="#35445c"/>
+<path d="M260,466.70189779461765H498" stroke="#75859c" stroke-dasharray="4 4"/>
+<polyline points="260.0,466.70189779461765 339.3333333333333,468.46729700816445 418.66666666666663,467.63104713526593 498.0,463.32258064516134" fill="none" stroke="#67e8cf" stroke-width="2"/>
+<circle cx="260.0" cy="466.70189779461765" r="3.5" fill="#67e8cf"/>
+<circle cx="339.3333333333333" cy="468.46729700816445" r="3.5" fill="#67e8cf"/>
+<circle cx="418.66666666666663" cy="467.63104713526593" r="3.5" fill="#67e8cf"/>
+<circle cx="498.0" cy="463.32258064516134" r="3.5" fill="#67e8cf"/>
+<text x="260" y="563" font-size="13" class="">$1002.59 · 3 fills · $0.938 fees</text>
+<text x="260" y="581" font-size="12" class="small">6/6 decisions observed</text>
+<rect x="540" y="455" width="238" height="86" fill="#172237" stroke="#35445c"/>
+<path d="M540,466.70189779461765H778" stroke="#75859c" stroke-dasharray="4 4"/>
+<polyline points="540.0,466.70189779461765 619.3333333333334,470.23269622171125 698.6666666666666,474.30332731377274 778.0,471.70748558474264" fill="none" stroke="#67e8cf" stroke-width="2"/>
+<circle cx="540.0" cy="466.70189779461765" r="3.5" fill="#67e8cf"/>
+<circle cx="619.3333333333334" cy="470.23269622171125" r="3.5" fill="#67e8cf"/>
+<circle cx="698.6666666666666" cy="474.30332731377274" r="3.5" fill="#67e8cf"/>
+<circle cx="778.0" cy="471.70748558474264" r="3.5" fill="#67e8cf"/>
+<text x="540" y="563" font-size="13" class="">$996.16 · 5 fills · $1.542 fees</text>
+<text x="540" y="581" font-size="12" class="small">6/6 decisions observed</text>
+<rect x="820" y="455" width="238" height="86" fill="#172237" stroke="#35445c"/>
+<path d="M820,466.70189779461765H1058" stroke="#75859c" stroke-dasharray="4 4"/>
+<polyline points="820.0,466.70189779461765 899.3333333333334,470.23269622171125 978.6666666666666,532.6774193548387 1058.0,470.79673778933847" fill="none" stroke="#67e8cf" stroke-width="2"/>
+<circle cx="820.0" cy="466.70189779461765" r="3.5" fill="#67e8cf"/>
+<circle cx="899.3333333333334" cy="470.23269622171125" r="3.5" fill="#67e8cf"/>
+<circle cx="978.6666666666666" cy="532.6774193548387" r="3.5" fill="#ff8e8e"/>
+<circle cx="1058.0" cy="470.79673778933847" r="3.5" fill="#67e8cf"/>
+<text x="820" y="563" font-size="13" class="">$996.86 · 2 fills · $0.625 fees</text>
+<text x="820" y="581" font-size="12" class="small">4/6 decisions observed</text>
+<text x="28" y="640" font-size="15" class="">Restore inputs to 11402</text>
+<text x="28" y="662" font-size="12" class="small">$942.99–$1008.98</text>
+<rect x="260" y="610" width="238" height="86" fill="#172237" stroke="#35445c"/>
+<path d="M260,621.7018977946177H498" stroke="#75859c" stroke-dasharray="4 4"/>
+<polyline points="260.0,621.7018977946177 339.3333333333333,623.4672970081645 418.66666666666663,622.6310471352659 498.0,618.3225806451613" fill="none" stroke="#67e8cf" stroke-width="2"/>
+<circle cx="260.0" cy="621.7018977946177" r="3.5" fill="#67e8cf"/>
+<circle cx="339.3333333333333" cy="623.4672970081645" r="3.5" fill="#67e8cf"/>
+<circle cx="418.66666666666663" cy="622.6310471352659" r="3.5" fill="#67e8cf"/>
+<circle cx="498.0" cy="618.3225806451613" r="3.5" fill="#67e8cf"/>
+<text x="260" y="718" font-size="13" class="">$1002.59 · 3 fills · $0.938 fees</text>
+<text x="260" y="736" font-size="12" class="small">6/6 decisions observed</text>
+<rect x="540" y="610" width="238" height="86" fill="#172237" stroke="#35445c"/>
+<path d="M540,621.7018977946177H778" stroke="#75859c" stroke-dasharray="4 4"/>
+<polyline points="540.0,621.7018977946177 619.3333333333334,625.2326962217112 698.6666666666666,629.3033273137727 778.0,627.0283944539984" fill="none" stroke="#67e8cf" stroke-width="2"/>
+<circle cx="540.0" cy="621.7018977946177" r="3.5" fill="#67e8cf"/>
+<circle cx="619.3333333333334" cy="625.2326962217112" r="3.5" fill="#67e8cf"/>
+<circle cx="698.6666666666666" cy="629.3033273137727" r="3.5" fill="#67e8cf"/>
+<circle cx="778.0" cy="627.0283944539984" r="3.5" fill="#67e8cf"/>
+<text x="540" y="718" font-size="13" class="">$995.91 · 5 fills · $1.539 fees</text>
+<text x="540" y="736" font-size="12" class="small">6/6 decisions observed</text>
+<rect x="820" y="610" width="238" height="86" fill="#172237" stroke="#35445c"/>
+<path d="M820,621.7018977946177H1058" stroke="#75859c" stroke-dasharray="4 4"/>
+<polyline points="820.0,621.7018977946177 899.3333333333334,625.2326962217112 978.6666666666666,687.6774193548387 1058.0,625.7967377893384" fill="none" stroke="#67e8cf" stroke-width="2"/>
+<circle cx="820.0" cy="621.7018977946177" r="3.5" fill="#67e8cf"/>
+<circle cx="899.3333333333334" cy="625.2326962217112" r="3.5" fill="#67e8cf"/>
+<circle cx="978.6666666666666" cy="687.6774193548387" r="3.5" fill="#ff8e8e"/>
+<circle cx="1058.0" cy="625.7967377893384" r="3.5" fill="#67e8cf"/>
+<text x="820" y="718" font-size="13" class="">$996.86 · 2 fills · $0.625 fees</text>
+<text x="820" y="736" font-size="12" class="small">4/6 decisions observed</text>
+<text x="28" y="795" font-size="15" class="">Restore both MBON11</text>
+<text x="28" y="817" font-size="12" class="small">$942.99–$1008.98</text>
+<rect x="260" y="765" width="238" height="86" fill="#172237" stroke="#35445c"/>
+<path d="M260,776.7018977946177H498" stroke="#75859c" stroke-dasharray="4 4"/>
+<polyline points="260.0,776.7018977946177 339.3333333333333,778.4672970081645 418.66666666666663,777.6310471352659 498.0,773.3225806451613" fill="none" stroke="#67e8cf" stroke-width="2"/>
+<circle cx="260.0" cy="776.7018977946177" r="3.5" fill="#67e8cf"/>
+<circle cx="339.3333333333333" cy="778.4672970081645" r="3.5" fill="#67e8cf"/>
+<circle cx="418.66666666666663" cy="777.6310471352659" r="3.5" fill="#67e8cf"/>
+<circle cx="498.0" cy="773.3225806451613" r="3.5" fill="#67e8cf"/>
+<text x="260" y="873" font-size="13" class="">$1002.59 · 3 fills · $0.938 fees</text>
+<text x="260" y="891" font-size="12" class="small">6/6 decisions observed</text>
+<rect x="540" y="765" width="238" height="86" fill="#172237" stroke="#35445c"/>
+<path d="M540,776.7018977946177H778" stroke="#75859c" stroke-dasharray="4 4"/>
+<polyline points="540.0,776.7018977946177 619.3333333333334,780.2326962217112 698.6666666666666,784.3033273137727 778.0,782.0283944539984" fill="none" stroke="#67e8cf" stroke-width="2"/>
+<circle cx="540.0" cy="776.7018977946177" r="3.5" fill="#67e8cf"/>
+<circle cx="619.3333333333334" cy="780.2326962217112" r="3.5" fill="#67e8cf"/>
+<circle cx="698.6666666666666" cy="784.3033273137727" r="3.5" fill="#67e8cf"/>
+<circle cx="778.0" cy="782.0283944539984" r="3.5" fill="#67e8cf"/>
+<text x="540" y="873" font-size="13" class="">$995.91 · 4 fills · $1.250 fees</text>
+<text x="540" y="891" font-size="12" class="small">6/6 decisions observed</text>
+<rect x="820" y="765" width="238" height="86" fill="#172237" stroke="#35445c"/>
+<path d="M820,776.7018977946177H1058" stroke="#75859c" stroke-dasharray="4 4"/>
+<polyline points="820.0,776.7018977946177 899.3333333333334,780.2326962217112 978.6666666666666,842.6774193548387 1058.0,780.7967377893384" fill="none" stroke="#67e8cf" stroke-width="2"/>
+<circle cx="820.0" cy="776.7018977946177" r="3.5" fill="#67e8cf"/>
+<circle cx="899.3333333333334" cy="780.2326962217112" r="3.5" fill="#67e8cf"/>
+<circle cx="978.6666666666666" cy="842.6774193548387" r="3.5" fill="#ff8e8e"/>
+<circle cx="1058.0" cy="780.7967377893384" r="3.5" fill="#67e8cf"/>
+<text x="820" y="873" font-size="13" class="">$996.86 · 2 fills · $0.625 fees</text>
+<text x="820" y="891" font-size="12" class="small">4/6 decisions observed</text>
+<text x="28" y="945" font-size="15" class="">Development selection: No arm passed the cash and frozen-baseline gate.</text>
+<text x="28" y="969" font-size="13" class="small">Simulated DEX fees/slippage included; hosting excluded. Unavailable inventory uses stress valuation. News disabled.</text>
+<text x="28" y="990" font-size="13" class="small">Short retrospective experiment; this is not a monthly return estimate or evidence of executable live profit.</text>
+<text x="28" y="1012" font-size="13" class="small">Equivalent training recipes share one checkpoint per pool; development and test remain separate.</text>
+</svg>

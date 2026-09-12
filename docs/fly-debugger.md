@@ -1649,3 +1649,80 @@ FLY_VIEW_URL=http://127.0.0.1:8765 node scripts/check-fly-decoder-view.cjs
 It verifies end rates, intermediate counts, neuron identity remapping, missing
 outputs, inconsistent rates, unsupported time grids, clearing stale charts, and
 mobile layout. It blocks model-job submissions.
+
+## Seventh market replay result
+
+The unchanged five-arm restoration experiment was registered before its new
+11:50–12:35 UTC window finished. The collector snapshot contained observations
+through 12:35:46 UTC before the plan was sealed. Training used 11:50–12:05,
+development 12:05–12:20, and test 12:20–12:35. Each phase began with its own
+$1,000 simulated account and the same two admitted pools.
+
+| Variant | Training | Development | Test |
+| --- | ---: | ---: | ---: |
+| Pristine / frozen | $1,002.59 | $994.56 | $996.86 |
+| Trained / frozen | $1,002.59 | $994.30 | $996.86 |
+| Restore inputs to 10704 | $1,002.59 | $996.16 | $996.86 |
+| Restore inputs to 11402 | $1,002.59 | $995.91 | $996.86 |
+| Restore both MBON11 cells | $1,002.59 | $995.91 | $996.86 |
+
+**No development gate passed, and no policy was promoted.** The sixth study's
+unselected test advantage from restoring 11402 did not repeat. In development,
+restoring 10704 reduced the loss relative to trained/frozen, but remained below
+cash. These few observations do not validate or universally disprove restoration.
+
+![Registered seventh comparison, including excluded decision slots](assets/fly-market-study-07.png)
+
+Training and development each had six observed decision slots; test had four
+of six. At 12:30 both pools had quote records but failed the existing
+`insufficient_two_sided_activity` rule: their five-minute volumes were $378.53
+and $193.29, below the $1,000 minimum; the second also had only one buy versus
+the minimum three on each side. The [coverage audit](../reports/fly-market-study-07-coverage.json)
+reconciles the exclusions against the sealed SQLite snapshot, stored rejection
+reasons, and eligibility code. No missing slot was replaced with a later quote.
+
+The test ledger's drop to **$949.375** at 12:30 is the conservative zero valuation
+of unavailable inventory. It is not an executed sale or realized loss. The next
+eligible terminal marks restore valuation to **$996.857906**. Each variant has
+two BUY fills, $0.625 total fees, and open inventory in both pools. The second
+pool's observed SELL at 12:25 is rejected at the following unavailable slot;
+it is not silently retried at the terminal quote. Hosting is excluded.
+
+All five variants matched the pristine **whole-neuron spike-count hashes** on
+all four observed test decisions: BUY then BUY for pool 0; BUY then SELL for
+pool 1. This does not establish equality of precise spike timing, voltage, or
+memory. Checkpoints still differ: training changed five weights for pool 0 and
+3,022 for pool 1. Restoring both MBON11 cells restores pool 0's entire changed
+memory, while learned MBON07 memory remains in pool 1. All inference checkpoints
+passed the frozen-memory and target-restoration audit.
+
+![Different retained connection memory with matched output spike counts](assets/fly-market-study-07-memory.png)
+
+Open [the trained/pristine comparison](http://127.0.0.1:8765/?run=market07-pool1-trained_frozen&step=1&bin=49&neuron=11402&edge=4110156&compare=market07-pool1-pristine_frozen)
+to see the retained weight and `u/w` differences. The selected edge differs by
+6.670967 weight units while the displayed neuron's spike bins match. The
+renderer distinguishes recorded memory from output activity; neither alone
+establishes improved decisions. All ten included `market07-*` recordings were
+checked in the browser, including excluded slots, output-count reconciliation,
+paired memory, mobile layout, and disabled job submission during the check.
+
+Repeat the recording browser check with
+`FLY_VIEW_URL=http://127.0.0.1:8765 node scripts/check-fly-market07-view.cjs`
+(Playwright required; `CHROMIUM_PATH` can select an installed browser).
+
+Artifacts: [preregistration](../reports/fly-market-study-07-preregistration.json),
+[sealed plan](../reports/fly-market-study-07-plan.json),
+[decision ledger and selection](../reports/fly-market-study-07.json),
+[checkpoint audit](../reports/fly-market-study-07-memory-audit.json), and
+[changes by postsynaptic target](../reports/fly-market-study-07-memory-targets.json).
+The executed source hashes, phase accounting, fills, fees, selection, and
+memory were reconciled before publication. Estimated Modal compute for this
+call was **$0.01750**, with worker monthly reserved compute **$1.32143 / $25**;
+these are application estimates rather than the provider bill. Budget caps and
+the scheduled paper policy were unchanged.
+
+The next mechanism to isolate is activity carryover and gate dropout, separately
+from learned memory. In the prior nine-condition replay the gate declined from
+31 spikes to zero or one even with pristine memory. A controlled carryover/reset
+comparison can test that explanation without selecting a replacement trading
+policy from these test returns. It has not yet been run.
