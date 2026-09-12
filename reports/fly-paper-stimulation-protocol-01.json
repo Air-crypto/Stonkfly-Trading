@@ -1,0 +1,88 @@
+{
+  "schema": 1,
+  "kind": "paper_memory_recipient_stimulation",
+  "reference_report_sha256": "090c24107447aea170a9a9c764217f7486025377558f253843d352d444ddd00b",
+  "plan_sha256": "ecb89e2cb48cab07080e5c3437dd1ec3b86bdd71feb4f892190b8ad3603c136b",
+  "target_ids": [
+    "10704",
+    "11402"
+  ],
+  "currents": [
+    0,
+    5,
+    10
+  ],
+  "inference": {
+    "learning": false,
+    "reinforcement": "none",
+    "steps": 3,
+    "duration_ms": 500,
+    "state_reset": "carry",
+    "eta": 0.001
+  },
+  "arms": {
+    "pool0-pristine-current0": {
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "memory": "pristine",
+      "current": 0
+    },
+    "pool0-trained-current0": {
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "memory": "trained",
+      "current": 0
+    },
+    "pool1-pristine-current0": {
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "memory": "pristine",
+      "current": 0
+    },
+    "pool1-trained-current0": {
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "memory": "trained",
+      "current": 0
+    },
+    "pool0-pristine-current5": {
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "memory": "pristine",
+      "current": 5
+    },
+    "pool0-trained-current5": {
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "memory": "trained",
+      "current": 5
+    },
+    "pool1-pristine-current5": {
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "memory": "pristine",
+      "current": 5
+    },
+    "pool1-trained-current5": {
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "memory": "trained",
+      "current": 5
+    },
+    "pool0-pristine-current10": {
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "memory": "pristine",
+      "current": 10
+    },
+    "pool0-trained-current10": {
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "memory": "trained",
+      "current": 10
+    },
+    "pool1-pristine-current10": {
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "memory": "pristine",
+      "current": 10
+    },
+    "pool1-trained-current10": {
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "memory": "trained",
+      "current": 10
+    }
+  },
+  "timing": "Same current to both targets throughout each observation; fresh dynamics per arm; carry between observations.",
+  "control_gate": "All four zero-current controls must reproduce the original full-neuron counts and decoder before stimulation.",
+  "interpretation": "Post-hoc mechanism test on the already examined study 09 test inputs. No account, fills, returns, training, or policy promotion. Applied current is an explicit diagnostic intervention, not a biologically calibrated input."
+}

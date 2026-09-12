@@ -2579,3 +2579,41 @@ hashes. The current figure specifically requires complete test coverage, silent
 recipients and matching trained/pristine full counts; it refuses to apply that
 interpretation to a different outcome. Seven focused tests cover shared-neuron
 counting, active inputs with silent recipients, and invalid count/mapping data.
+
+## Probe silent recipients with recorded paper inputs
+
+The [fixed recipient-stimulation protocol](../reports/fly-paper-stimulation-protocol-01.json)
+uses the completed ninth study's six test images and its original imported paper
+memories. It holds weights and efficacy memory frozen, retains the full graph and
+fixed decoder, starts each condition with fresh activity, and carries activity
+between its three observations. It runs all four unstimulated controls first and
+requires their full-neuron spike counts and decoded actions to reproduce the
+original recordings before applying current.
+
+The twelve conditions cross both original pools, pristine versus trained memory,
+and current 0, 5, or 10 applied to MBON11 cells 10704 and 11402 throughout each
+500 ms observation. These are post-hoc mechanism diagnostics on previously
+examined images; there is no trading account, P&L calculation, learning, or policy
+promotion. Stimulation is an explicit intervention, not a calibrated biological
+input. More spikes alone do not establish a better trading strategy.
+
+Package and execute through the existing bounded cloud worker:
+
+```sh
+python -m paperlab.fly_paper_stimulation_cloud pack \
+  --reference reports/fly-market-study-09.json \
+  --plan reports/fly-market-study-09-plan.json \
+  --out runs/recipient-stimulation-01/payload.json
+python -m paperlab.fly_paper_stimulation_cloud cloud \
+  --payload runs/recipient-stimulation-01/payload.json \
+  --out runs/recipient-stimulation-01/cloud
+```
+
+The deployment needs the already-authorized `PAPERLAB_PAPER_STUDY=1` private
+memory package and the original sealed news snapshot in the cloud volume.
+An observation timeout means repeat the **same** cloud command: the saved call ID
+is reattached, never resubmitted. Missing/uncertain submission handles require
+inspection. All native traces, stimulation arguments, input images, boundaries,
+weights, and decoded outputs are audited before portable views become available.
+The private input/checkpoint archive stays outside Git; an ordinary clone can
+inspect the public reports and recordings without cloud credentials.
