@@ -1,0 +1,1718 @@
+{
+  "resolution_ms": 10,
+  "arms": {
+    "pristine_frozen_none": [
+      {
+        "market_decision_ts": 1789207500,
+        "side": "BUY",
+        "gate_spikes": 31,
+        "neurons": {
+          "10527": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 15,
+              "start_ms": 150.0,
+              "end_ms": 160.0,
+              "spikes": 1
+            },
+            {
+              "bin": 18,
+              "start_ms": 180.0,
+              "end_ms": 190.0,
+              "spikes": 1
+            },
+            {
+              "bin": 22,
+              "start_ms": 220.0,
+              "end_ms": 230.0,
+              "spikes": 1
+            },
+            {
+              "bin": 26,
+              "start_ms": 260.0,
+              "end_ms": 270.0,
+              "spikes": 1
+            },
+            {
+              "bin": 29,
+              "start_ms": 290.0,
+              "end_ms": 300.0,
+              "spikes": 1
+            },
+            {
+              "bin": 34,
+              "start_ms": 340.0,
+              "end_ms": 350.0,
+              "spikes": 1
+            },
+            {
+              "bin": 38,
+              "start_ms": 380.0,
+              "end_ms": 390.0,
+              "spikes": 1
+            },
+            {
+              "bin": 41,
+              "start_ms": 410.0,
+              "end_ms": 420.0,
+              "spikes": 1
+            },
+            {
+              "bin": 44,
+              "start_ms": 440.0,
+              "end_ms": 450.0,
+              "spikes": 1
+            },
+            {
+              "bin": 46,
+              "start_ms": 460.0,
+              "end_ms": 470.0,
+              "spikes": 1
+            },
+            {
+              "bin": 49,
+              "start_ms": 490.0,
+              "end_ms": 500.0,
+              "spikes": 2
+            }
+          ],
+          "555871": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 3,
+              "start_ms": 30.0,
+              "end_ms": 40.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 15,
+              "start_ms": 150.0,
+              "end_ms": 160.0,
+              "spikes": 1
+            },
+            {
+              "bin": 17,
+              "start_ms": 170.0,
+              "end_ms": 180.0,
+              "spikes": 1
+            },
+            {
+              "bin": 20,
+              "start_ms": 200.0,
+              "end_ms": 210.0,
+              "spikes": 1
+            },
+            {
+              "bin": 22,
+              "start_ms": 220.0,
+              "end_ms": 230.0,
+              "spikes": 1
+            },
+            {
+              "bin": 26,
+              "start_ms": 260.0,
+              "end_ms": 270.0,
+              "spikes": 1
+            },
+            {
+              "bin": 30,
+              "start_ms": 300.0,
+              "end_ms": 310.0,
+              "spikes": 1
+            },
+            {
+              "bin": 32,
+              "start_ms": 320.0,
+              "end_ms": 330.0,
+              "spikes": 1
+            },
+            {
+              "bin": 36,
+              "start_ms": 360.0,
+              "end_ms": 370.0,
+              "spikes": 1
+            },
+            {
+              "bin": 38,
+              "start_ms": 380.0,
+              "end_ms": 390.0,
+              "spikes": 1
+            },
+            {
+              "bin": 41,
+              "start_ms": 410.0,
+              "end_ms": 420.0,
+              "spikes": 1
+            },
+            {
+              "bin": 43,
+              "start_ms": 430.0,
+              "end_ms": 440.0,
+              "spikes": 1
+            },
+            {
+              "bin": 49,
+              "start_ms": 490.0,
+              "end_ms": 500.0,
+              "spikes": 1
+            }
+          ]
+        }
+      },
+      {
+        "market_decision_ts": 1789207800,
+        "side": "HOLD",
+        "gate_spikes": 0,
+        "neurons": {
+          "10527": [],
+          "555871": []
+        }
+      },
+      {
+        "market_decision_ts": 1789208100,
+        "side": "HOLD",
+        "gate_spikes": 0,
+        "neurons": {
+          "10527": [],
+          "555871": []
+        }
+      }
+    ],
+    "pristine_frozen_recorded": [
+      {
+        "market_decision_ts": 1789207500,
+        "side": "BUY",
+        "gate_spikes": 31,
+        "neurons": {
+          "10527": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 15,
+              "start_ms": 150.0,
+              "end_ms": 160.0,
+              "spikes": 1
+            },
+            {
+              "bin": 18,
+              "start_ms": 180.0,
+              "end_ms": 190.0,
+              "spikes": 1
+            },
+            {
+              "bin": 22,
+              "start_ms": 220.0,
+              "end_ms": 230.0,
+              "spikes": 1
+            },
+            {
+              "bin": 26,
+              "start_ms": 260.0,
+              "end_ms": 270.0,
+              "spikes": 1
+            },
+            {
+              "bin": 29,
+              "start_ms": 290.0,
+              "end_ms": 300.0,
+              "spikes": 1
+            },
+            {
+              "bin": 34,
+              "start_ms": 340.0,
+              "end_ms": 350.0,
+              "spikes": 1
+            },
+            {
+              "bin": 38,
+              "start_ms": 380.0,
+              "end_ms": 390.0,
+              "spikes": 1
+            },
+            {
+              "bin": 41,
+              "start_ms": 410.0,
+              "end_ms": 420.0,
+              "spikes": 1
+            },
+            {
+              "bin": 44,
+              "start_ms": 440.0,
+              "end_ms": 450.0,
+              "spikes": 1
+            },
+            {
+              "bin": 46,
+              "start_ms": 460.0,
+              "end_ms": 470.0,
+              "spikes": 1
+            },
+            {
+              "bin": 49,
+              "start_ms": 490.0,
+              "end_ms": 500.0,
+              "spikes": 2
+            }
+          ],
+          "555871": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 3,
+              "start_ms": 30.0,
+              "end_ms": 40.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 15,
+              "start_ms": 150.0,
+              "end_ms": 160.0,
+              "spikes": 1
+            },
+            {
+              "bin": 17,
+              "start_ms": 170.0,
+              "end_ms": 180.0,
+              "spikes": 1
+            },
+            {
+              "bin": 20,
+              "start_ms": 200.0,
+              "end_ms": 210.0,
+              "spikes": 1
+            },
+            {
+              "bin": 22,
+              "start_ms": 220.0,
+              "end_ms": 230.0,
+              "spikes": 1
+            },
+            {
+              "bin": 26,
+              "start_ms": 260.0,
+              "end_ms": 270.0,
+              "spikes": 1
+            },
+            {
+              "bin": 30,
+              "start_ms": 300.0,
+              "end_ms": 310.0,
+              "spikes": 1
+            },
+            {
+              "bin": 32,
+              "start_ms": 320.0,
+              "end_ms": 330.0,
+              "spikes": 1
+            },
+            {
+              "bin": 36,
+              "start_ms": 360.0,
+              "end_ms": 370.0,
+              "spikes": 1
+            },
+            {
+              "bin": 38,
+              "start_ms": 380.0,
+              "end_ms": 390.0,
+              "spikes": 1
+            },
+            {
+              "bin": 41,
+              "start_ms": 410.0,
+              "end_ms": 420.0,
+              "spikes": 1
+            },
+            {
+              "bin": 43,
+              "start_ms": 430.0,
+              "end_ms": 440.0,
+              "spikes": 1
+            },
+            {
+              "bin": 49,
+              "start_ms": 490.0,
+              "end_ms": 500.0,
+              "spikes": 1
+            }
+          ]
+        }
+      },
+      {
+        "market_decision_ts": 1789207800,
+        "side": "HOLD",
+        "gate_spikes": 0,
+        "neurons": {
+          "10527": [],
+          "555871": []
+        }
+      },
+      {
+        "market_decision_ts": 1789208100,
+        "side": "HOLD",
+        "gate_spikes": 0,
+        "neurons": {
+          "10527": [],
+          "555871": []
+        }
+      }
+    ],
+    "pristine_online_none": [
+      {
+        "market_decision_ts": 1789207500,
+        "side": "BUY",
+        "gate_spikes": 31,
+        "neurons": {
+          "10527": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 15,
+              "start_ms": 150.0,
+              "end_ms": 160.0,
+              "spikes": 1
+            },
+            {
+              "bin": 18,
+              "start_ms": 180.0,
+              "end_ms": 190.0,
+              "spikes": 1
+            },
+            {
+              "bin": 22,
+              "start_ms": 220.0,
+              "end_ms": 230.0,
+              "spikes": 1
+            },
+            {
+              "bin": 26,
+              "start_ms": 260.0,
+              "end_ms": 270.0,
+              "spikes": 1
+            },
+            {
+              "bin": 29,
+              "start_ms": 290.0,
+              "end_ms": 300.0,
+              "spikes": 1
+            },
+            {
+              "bin": 34,
+              "start_ms": 340.0,
+              "end_ms": 350.0,
+              "spikes": 1
+            },
+            {
+              "bin": 38,
+              "start_ms": 380.0,
+              "end_ms": 390.0,
+              "spikes": 1
+            },
+            {
+              "bin": 41,
+              "start_ms": 410.0,
+              "end_ms": 420.0,
+              "spikes": 1
+            },
+            {
+              "bin": 44,
+              "start_ms": 440.0,
+              "end_ms": 450.0,
+              "spikes": 1
+            },
+            {
+              "bin": 46,
+              "start_ms": 460.0,
+              "end_ms": 470.0,
+              "spikes": 1
+            },
+            {
+              "bin": 49,
+              "start_ms": 490.0,
+              "end_ms": 500.0,
+              "spikes": 2
+            }
+          ],
+          "555871": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 3,
+              "start_ms": 30.0,
+              "end_ms": 40.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 15,
+              "start_ms": 150.0,
+              "end_ms": 160.0,
+              "spikes": 1
+            },
+            {
+              "bin": 17,
+              "start_ms": 170.0,
+              "end_ms": 180.0,
+              "spikes": 1
+            },
+            {
+              "bin": 20,
+              "start_ms": 200.0,
+              "end_ms": 210.0,
+              "spikes": 1
+            },
+            {
+              "bin": 22,
+              "start_ms": 220.0,
+              "end_ms": 230.0,
+              "spikes": 1
+            },
+            {
+              "bin": 26,
+              "start_ms": 260.0,
+              "end_ms": 270.0,
+              "spikes": 1
+            },
+            {
+              "bin": 30,
+              "start_ms": 300.0,
+              "end_ms": 310.0,
+              "spikes": 1
+            },
+            {
+              "bin": 32,
+              "start_ms": 320.0,
+              "end_ms": 330.0,
+              "spikes": 1
+            },
+            {
+              "bin": 36,
+              "start_ms": 360.0,
+              "end_ms": 370.0,
+              "spikes": 1
+            },
+            {
+              "bin": 38,
+              "start_ms": 380.0,
+              "end_ms": 390.0,
+              "spikes": 1
+            },
+            {
+              "bin": 41,
+              "start_ms": 410.0,
+              "end_ms": 420.0,
+              "spikes": 1
+            },
+            {
+              "bin": 43,
+              "start_ms": 430.0,
+              "end_ms": 440.0,
+              "spikes": 1
+            },
+            {
+              "bin": 49,
+              "start_ms": 490.0,
+              "end_ms": 500.0,
+              "spikes": 1
+            }
+          ]
+        }
+      },
+      {
+        "market_decision_ts": 1789207800,
+        "side": "HOLD",
+        "gate_spikes": 0,
+        "neurons": {
+          "10527": [],
+          "555871": []
+        }
+      },
+      {
+        "market_decision_ts": 1789208100,
+        "side": "HOLD",
+        "gate_spikes": 0,
+        "neurons": {
+          "10527": [],
+          "555871": []
+        }
+      }
+    ],
+    "pristine_online_recorded": [
+      {
+        "market_decision_ts": 1789207500,
+        "side": "BUY",
+        "gate_spikes": 31,
+        "neurons": {
+          "10527": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 15,
+              "start_ms": 150.0,
+              "end_ms": 160.0,
+              "spikes": 1
+            },
+            {
+              "bin": 18,
+              "start_ms": 180.0,
+              "end_ms": 190.0,
+              "spikes": 1
+            },
+            {
+              "bin": 22,
+              "start_ms": 220.0,
+              "end_ms": 230.0,
+              "spikes": 1
+            },
+            {
+              "bin": 26,
+              "start_ms": 260.0,
+              "end_ms": 270.0,
+              "spikes": 1
+            },
+            {
+              "bin": 29,
+              "start_ms": 290.0,
+              "end_ms": 300.0,
+              "spikes": 1
+            },
+            {
+              "bin": 34,
+              "start_ms": 340.0,
+              "end_ms": 350.0,
+              "spikes": 1
+            },
+            {
+              "bin": 38,
+              "start_ms": 380.0,
+              "end_ms": 390.0,
+              "spikes": 1
+            },
+            {
+              "bin": 41,
+              "start_ms": 410.0,
+              "end_ms": 420.0,
+              "spikes": 1
+            },
+            {
+              "bin": 44,
+              "start_ms": 440.0,
+              "end_ms": 450.0,
+              "spikes": 1
+            },
+            {
+              "bin": 46,
+              "start_ms": 460.0,
+              "end_ms": 470.0,
+              "spikes": 1
+            },
+            {
+              "bin": 49,
+              "start_ms": 490.0,
+              "end_ms": 500.0,
+              "spikes": 2
+            }
+          ],
+          "555871": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 3,
+              "start_ms": 30.0,
+              "end_ms": 40.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 15,
+              "start_ms": 150.0,
+              "end_ms": 160.0,
+              "spikes": 1
+            },
+            {
+              "bin": 17,
+              "start_ms": 170.0,
+              "end_ms": 180.0,
+              "spikes": 1
+            },
+            {
+              "bin": 20,
+              "start_ms": 200.0,
+              "end_ms": 210.0,
+              "spikes": 1
+            },
+            {
+              "bin": 22,
+              "start_ms": 220.0,
+              "end_ms": 230.0,
+              "spikes": 1
+            },
+            {
+              "bin": 26,
+              "start_ms": 260.0,
+              "end_ms": 270.0,
+              "spikes": 1
+            },
+            {
+              "bin": 30,
+              "start_ms": 300.0,
+              "end_ms": 310.0,
+              "spikes": 1
+            },
+            {
+              "bin": 32,
+              "start_ms": 320.0,
+              "end_ms": 330.0,
+              "spikes": 1
+            },
+            {
+              "bin": 36,
+              "start_ms": 360.0,
+              "end_ms": 370.0,
+              "spikes": 1
+            },
+            {
+              "bin": 38,
+              "start_ms": 380.0,
+              "end_ms": 390.0,
+              "spikes": 1
+            },
+            {
+              "bin": 41,
+              "start_ms": 410.0,
+              "end_ms": 420.0,
+              "spikes": 1
+            },
+            {
+              "bin": 43,
+              "start_ms": 430.0,
+              "end_ms": 440.0,
+              "spikes": 1
+            },
+            {
+              "bin": 49,
+              "start_ms": 490.0,
+              "end_ms": 500.0,
+              "spikes": 1
+            }
+          ]
+        }
+      },
+      {
+        "market_decision_ts": 1789207800,
+        "side": "HOLD",
+        "gate_spikes": 0,
+        "neurons": {
+          "10527": [],
+          "555871": []
+        }
+      },
+      {
+        "market_decision_ts": 1789208100,
+        "side": "BUY",
+        "gate_spikes": 1,
+        "neurons": {
+          "10527": [
+            {
+              "bin": 37,
+              "start_ms": 1370.0,
+              "end_ms": 1380.0,
+              "spikes": 1
+            }
+          ],
+          "555871": []
+        }
+      }
+    ],
+    "trained_frozen_none": [
+      {
+        "market_decision_ts": 1789207500,
+        "side": "BUY",
+        "gate_spikes": 31,
+        "neurons": {
+          "10527": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 15,
+              "start_ms": 150.0,
+              "end_ms": 160.0,
+              "spikes": 1
+            },
+            {
+              "bin": 18,
+              "start_ms": 180.0,
+              "end_ms": 190.0,
+              "spikes": 1
+            },
+            {
+              "bin": 22,
+              "start_ms": 220.0,
+              "end_ms": 230.0,
+              "spikes": 1
+            },
+            {
+              "bin": 26,
+              "start_ms": 260.0,
+              "end_ms": 270.0,
+              "spikes": 1
+            },
+            {
+              "bin": 29,
+              "start_ms": 290.0,
+              "end_ms": 300.0,
+              "spikes": 1
+            },
+            {
+              "bin": 34,
+              "start_ms": 340.0,
+              "end_ms": 350.0,
+              "spikes": 1
+            },
+            {
+              "bin": 38,
+              "start_ms": 380.0,
+              "end_ms": 390.0,
+              "spikes": 1
+            },
+            {
+              "bin": 41,
+              "start_ms": 410.0,
+              "end_ms": 420.0,
+              "spikes": 1
+            },
+            {
+              "bin": 44,
+              "start_ms": 440.0,
+              "end_ms": 450.0,
+              "spikes": 1
+            },
+            {
+              "bin": 46,
+              "start_ms": 460.0,
+              "end_ms": 470.0,
+              "spikes": 1
+            },
+            {
+              "bin": 49,
+              "start_ms": 490.0,
+              "end_ms": 500.0,
+              "spikes": 2
+            }
+          ],
+          "555871": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 3,
+              "start_ms": 30.0,
+              "end_ms": 40.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 15,
+              "start_ms": 150.0,
+              "end_ms": 160.0,
+              "spikes": 1
+            },
+            {
+              "bin": 17,
+              "start_ms": 170.0,
+              "end_ms": 180.0,
+              "spikes": 1
+            },
+            {
+              "bin": 20,
+              "start_ms": 200.0,
+              "end_ms": 210.0,
+              "spikes": 1
+            },
+            {
+              "bin": 22,
+              "start_ms": 220.0,
+              "end_ms": 230.0,
+              "spikes": 1
+            },
+            {
+              "bin": 26,
+              "start_ms": 260.0,
+              "end_ms": 270.0,
+              "spikes": 1
+            },
+            {
+              "bin": 30,
+              "start_ms": 300.0,
+              "end_ms": 310.0,
+              "spikes": 1
+            },
+            {
+              "bin": 32,
+              "start_ms": 320.0,
+              "end_ms": 330.0,
+              "spikes": 1
+            },
+            {
+              "bin": 36,
+              "start_ms": 360.0,
+              "end_ms": 370.0,
+              "spikes": 1
+            },
+            {
+              "bin": 38,
+              "start_ms": 380.0,
+              "end_ms": 390.0,
+              "spikes": 1
+            },
+            {
+              "bin": 41,
+              "start_ms": 410.0,
+              "end_ms": 420.0,
+              "spikes": 1
+            },
+            {
+              "bin": 43,
+              "start_ms": 430.0,
+              "end_ms": 440.0,
+              "spikes": 1
+            },
+            {
+              "bin": 49,
+              "start_ms": 490.0,
+              "end_ms": 500.0,
+              "spikes": 1
+            }
+          ]
+        }
+      },
+      {
+        "market_decision_ts": 1789207800,
+        "side": "HOLD",
+        "gate_spikes": 0,
+        "neurons": {
+          "10527": [],
+          "555871": []
+        }
+      },
+      {
+        "market_decision_ts": 1789208100,
+        "side": "HOLD",
+        "gate_spikes": 0,
+        "neurons": {
+          "10527": [],
+          "555871": []
+        }
+      }
+    ],
+    "trained_frozen_recorded": [
+      {
+        "market_decision_ts": 1789207500,
+        "side": "BUY",
+        "gate_spikes": 31,
+        "neurons": {
+          "10527": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 15,
+              "start_ms": 150.0,
+              "end_ms": 160.0,
+              "spikes": 1
+            },
+            {
+              "bin": 18,
+              "start_ms": 180.0,
+              "end_ms": 190.0,
+              "spikes": 1
+            },
+            {
+              "bin": 22,
+              "start_ms": 220.0,
+              "end_ms": 230.0,
+              "spikes": 1
+            },
+            {
+              "bin": 26,
+              "start_ms": 260.0,
+              "end_ms": 270.0,
+              "spikes": 1
+            },
+            {
+              "bin": 29,
+              "start_ms": 290.0,
+              "end_ms": 300.0,
+              "spikes": 1
+            },
+            {
+              "bin": 34,
+              "start_ms": 340.0,
+              "end_ms": 350.0,
+              "spikes": 1
+            },
+            {
+              "bin": 38,
+              "start_ms": 380.0,
+              "end_ms": 390.0,
+              "spikes": 1
+            },
+            {
+              "bin": 41,
+              "start_ms": 410.0,
+              "end_ms": 420.0,
+              "spikes": 1
+            },
+            {
+              "bin": 44,
+              "start_ms": 440.0,
+              "end_ms": 450.0,
+              "spikes": 1
+            },
+            {
+              "bin": 46,
+              "start_ms": 460.0,
+              "end_ms": 470.0,
+              "spikes": 1
+            },
+            {
+              "bin": 49,
+              "start_ms": 490.0,
+              "end_ms": 500.0,
+              "spikes": 2
+            }
+          ],
+          "555871": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 3,
+              "start_ms": 30.0,
+              "end_ms": 40.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 15,
+              "start_ms": 150.0,
+              "end_ms": 160.0,
+              "spikes": 1
+            },
+            {
+              "bin": 17,
+              "start_ms": 170.0,
+              "end_ms": 180.0,
+              "spikes": 1
+            },
+            {
+              "bin": 20,
+              "start_ms": 200.0,
+              "end_ms": 210.0,
+              "spikes": 1
+            },
+            {
+              "bin": 22,
+              "start_ms": 220.0,
+              "end_ms": 230.0,
+              "spikes": 1
+            },
+            {
+              "bin": 26,
+              "start_ms": 260.0,
+              "end_ms": 270.0,
+              "spikes": 1
+            },
+            {
+              "bin": 30,
+              "start_ms": 300.0,
+              "end_ms": 310.0,
+              "spikes": 1
+            },
+            {
+              "bin": 32,
+              "start_ms": 320.0,
+              "end_ms": 330.0,
+              "spikes": 1
+            },
+            {
+              "bin": 36,
+              "start_ms": 360.0,
+              "end_ms": 370.0,
+              "spikes": 1
+            },
+            {
+              "bin": 38,
+              "start_ms": 380.0,
+              "end_ms": 390.0,
+              "spikes": 1
+            },
+            {
+              "bin": 41,
+              "start_ms": 410.0,
+              "end_ms": 420.0,
+              "spikes": 1
+            },
+            {
+              "bin": 43,
+              "start_ms": 430.0,
+              "end_ms": 440.0,
+              "spikes": 1
+            },
+            {
+              "bin": 49,
+              "start_ms": 490.0,
+              "end_ms": 500.0,
+              "spikes": 1
+            }
+          ]
+        }
+      },
+      {
+        "market_decision_ts": 1789207800,
+        "side": "HOLD",
+        "gate_spikes": 0,
+        "neurons": {
+          "10527": [],
+          "555871": []
+        }
+      },
+      {
+        "market_decision_ts": 1789208100,
+        "side": "HOLD",
+        "gate_spikes": 0,
+        "neurons": {
+          "10527": [],
+          "555871": []
+        }
+      }
+    ],
+    "trained_online_none": [
+      {
+        "market_decision_ts": 1789207500,
+        "side": "BUY",
+        "gate_spikes": 31,
+        "neurons": {
+          "10527": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 15,
+              "start_ms": 150.0,
+              "end_ms": 160.0,
+              "spikes": 1
+            },
+            {
+              "bin": 18,
+              "start_ms": 180.0,
+              "end_ms": 190.0,
+              "spikes": 1
+            },
+            {
+              "bin": 22,
+              "start_ms": 220.0,
+              "end_ms": 230.0,
+              "spikes": 1
+            },
+            {
+              "bin": 26,
+              "start_ms": 260.0,
+              "end_ms": 270.0,
+              "spikes": 1
+            },
+            {
+              "bin": 29,
+              "start_ms": 290.0,
+              "end_ms": 300.0,
+              "spikes": 1
+            },
+            {
+              "bin": 34,
+              "start_ms": 340.0,
+              "end_ms": 350.0,
+              "spikes": 1
+            },
+            {
+              "bin": 38,
+              "start_ms": 380.0,
+              "end_ms": 390.0,
+              "spikes": 1
+            },
+            {
+              "bin": 41,
+              "start_ms": 410.0,
+              "end_ms": 420.0,
+              "spikes": 1
+            },
+            {
+              "bin": 44,
+              "start_ms": 440.0,
+              "end_ms": 450.0,
+              "spikes": 1
+            },
+            {
+              "bin": 46,
+              "start_ms": 460.0,
+              "end_ms": 470.0,
+              "spikes": 1
+            },
+            {
+              "bin": 49,
+              "start_ms": 490.0,
+              "end_ms": 500.0,
+              "spikes": 2
+            }
+          ],
+          "555871": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 3,
+              "start_ms": 30.0,
+              "end_ms": 40.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 15,
+              "start_ms": 150.0,
+              "end_ms": 160.0,
+              "spikes": 1
+            },
+            {
+              "bin": 17,
+              "start_ms": 170.0,
+              "end_ms": 180.0,
+              "spikes": 1
+            },
+            {
+              "bin": 20,
+              "start_ms": 200.0,
+              "end_ms": 210.0,
+              "spikes": 1
+            },
+            {
+              "bin": 22,
+              "start_ms": 220.0,
+              "end_ms": 230.0,
+              "spikes": 1
+            },
+            {
+              "bin": 26,
+              "start_ms": 260.0,
+              "end_ms": 270.0,
+              "spikes": 1
+            },
+            {
+              "bin": 30,
+              "start_ms": 300.0,
+              "end_ms": 310.0,
+              "spikes": 1
+            },
+            {
+              "bin": 32,
+              "start_ms": 320.0,
+              "end_ms": 330.0,
+              "spikes": 1
+            },
+            {
+              "bin": 36,
+              "start_ms": 360.0,
+              "end_ms": 370.0,
+              "spikes": 1
+            },
+            {
+              "bin": 38,
+              "start_ms": 380.0,
+              "end_ms": 390.0,
+              "spikes": 1
+            },
+            {
+              "bin": 41,
+              "start_ms": 410.0,
+              "end_ms": 420.0,
+              "spikes": 1
+            },
+            {
+              "bin": 43,
+              "start_ms": 430.0,
+              "end_ms": 440.0,
+              "spikes": 1
+            },
+            {
+              "bin": 49,
+              "start_ms": 490.0,
+              "end_ms": 500.0,
+              "spikes": 1
+            }
+          ]
+        }
+      },
+      {
+        "market_decision_ts": 1789207800,
+        "side": "HOLD",
+        "gate_spikes": 0,
+        "neurons": {
+          "10527": [],
+          "555871": []
+        }
+      },
+      {
+        "market_decision_ts": 1789208100,
+        "side": "HOLD",
+        "gate_spikes": 0,
+        "neurons": {
+          "10527": [],
+          "555871": []
+        }
+      }
+    ],
+    "trained_online_recorded": [
+      {
+        "market_decision_ts": 1789207500,
+        "side": "BUY",
+        "gate_spikes": 31,
+        "neurons": {
+          "10527": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 15,
+              "start_ms": 150.0,
+              "end_ms": 160.0,
+              "spikes": 1
+            },
+            {
+              "bin": 18,
+              "start_ms": 180.0,
+              "end_ms": 190.0,
+              "spikes": 1
+            },
+            {
+              "bin": 22,
+              "start_ms": 220.0,
+              "end_ms": 230.0,
+              "spikes": 1
+            },
+            {
+              "bin": 26,
+              "start_ms": 260.0,
+              "end_ms": 270.0,
+              "spikes": 1
+            },
+            {
+              "bin": 29,
+              "start_ms": 290.0,
+              "end_ms": 300.0,
+              "spikes": 1
+            },
+            {
+              "bin": 34,
+              "start_ms": 340.0,
+              "end_ms": 350.0,
+              "spikes": 1
+            },
+            {
+              "bin": 38,
+              "start_ms": 380.0,
+              "end_ms": 390.0,
+              "spikes": 1
+            },
+            {
+              "bin": 41,
+              "start_ms": 410.0,
+              "end_ms": 420.0,
+              "spikes": 1
+            },
+            {
+              "bin": 44,
+              "start_ms": 440.0,
+              "end_ms": 450.0,
+              "spikes": 1
+            },
+            {
+              "bin": 46,
+              "start_ms": 460.0,
+              "end_ms": 470.0,
+              "spikes": 1
+            },
+            {
+              "bin": 49,
+              "start_ms": 490.0,
+              "end_ms": 500.0,
+              "spikes": 2
+            }
+          ],
+          "555871": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 3,
+              "start_ms": 30.0,
+              "end_ms": 40.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 15,
+              "start_ms": 150.0,
+              "end_ms": 160.0,
+              "spikes": 1
+            },
+            {
+              "bin": 17,
+              "start_ms": 170.0,
+              "end_ms": 180.0,
+              "spikes": 1
+            },
+            {
+              "bin": 20,
+              "start_ms": 200.0,
+              "end_ms": 210.0,
+              "spikes": 1
+            },
+            {
+              "bin": 22,
+              "start_ms": 220.0,
+              "end_ms": 230.0,
+              "spikes": 1
+            },
+            {
+              "bin": 26,
+              "start_ms": 260.0,
+              "end_ms": 270.0,
+              "spikes": 1
+            },
+            {
+              "bin": 30,
+              "start_ms": 300.0,
+              "end_ms": 310.0,
+              "spikes": 1
+            },
+            {
+              "bin": 32,
+              "start_ms": 320.0,
+              "end_ms": 330.0,
+              "spikes": 1
+            },
+            {
+              "bin": 36,
+              "start_ms": 360.0,
+              "end_ms": 370.0,
+              "spikes": 1
+            },
+            {
+              "bin": 38,
+              "start_ms": 380.0,
+              "end_ms": 390.0,
+              "spikes": 1
+            },
+            {
+              "bin": 41,
+              "start_ms": 410.0,
+              "end_ms": 420.0,
+              "spikes": 1
+            },
+            {
+              "bin": 43,
+              "start_ms": 430.0,
+              "end_ms": 440.0,
+              "spikes": 1
+            },
+            {
+              "bin": 49,
+              "start_ms": 490.0,
+              "end_ms": 500.0,
+              "spikes": 1
+            }
+          ]
+        }
+      },
+      {
+        "market_decision_ts": 1789207800,
+        "side": "HOLD",
+        "gate_spikes": 0,
+        "neurons": {
+          "10527": [],
+          "555871": []
+        }
+      },
+      {
+        "market_decision_ts": 1789208100,
+        "side": "BUY",
+        "gate_spikes": 1,
+        "neurons": {
+          "10527": [
+            {
+              "bin": 37,
+              "start_ms": 1370.0,
+              "end_ms": 1380.0,
+              "spikes": 1
+            }
+          ],
+          "555871": []
+        }
+      }
+    ]
+  },
+  "interpretation": "Recorded gate-spike bins, not exact spike times or evidence of which upstream connection caused a spike. No trading returns recomputed.",
+  "view_sha256": {
+    "pristine_frozen_none": "78d9f795db388c493d5fd6e4b9066b0cffca7dc0406749100a588ea57e6fa53e",
+    "pristine_frozen_recorded": "b662454319cd1928f60e07eac113aa94d3bdd37e1ed2ad396e06d8efdbe36fe3",
+    "pristine_online_none": "b0931ea2d865b56b6295a848a47df18d6517a7e16817fc90c3f6bc1c277a81ba",
+    "pristine_online_recorded": "513b853dcc19da8b2799f72ff04ea6f29ccf12d59087acf851b18b77a391b936",
+    "trained_frozen_none": "24d30be980f14df218922d41539037351c205e98b9be42839f9d6e221b247662",
+    "trained_frozen_recorded": "fa0011549bbb7b0771453aa69849d898bb240c8db3663e046048f2089a35021a",
+    "trained_online_none": "0220e4ac040ed50ce4ea57b3f2670f5b320d8a194e28314742182fecde8e6ff6",
+    "trained_online_recorded": "306d58c0e3fceead58f829ba209a71ac0b454f333564f0f60d08cab0c13134bd"
+  }
+}

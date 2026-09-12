@@ -48,6 +48,48 @@ def audit(study, reference_text):
             'interpretation':'Post hoc neural intervention on three already examined market images. No new trading return or policy-selection result.'}
 
 
+
+def gate_timing(study, recordings):
+    """Locate decoder gate spikes in the published 10 ms recordings.
+
+    These are bin boundaries, not exact spike timestamps or a causal path.
+    Match each compact recording to its original study report before use.
+    """
+    result={}
+    if set(recordings)!=set(ARMS):raise ValueError('Missing timing controls')
+    for name,view in recordings.items():
+        if view['report']!=study['reports'][name]:
+            raise ValueError('Timing recording differs from study report')
+        frames=view['frames'];events=view['report']['events']
+        if len(frames)!=len(events):raise ValueError('Missing timing observations')
+        ids=[str(n['id']) for n in view['nodes']]
+        if len(set(ids))!=len(ids):raise ValueError('Duplicate displayed neuron')
+        observations=[]
+        for frame,event in zip(frames,events):
+            if frame['event']!=event:raise ValueError('Timing event differs')
+            times=frame['times_ms'];counts=frame['counts']
+            if len(times)!=50 or times[-1]!=event['brain_ms'] or any(b-a!=10 for a,b in zip(times,times[1:])):
+                raise ValueError('Expected 50 consecutive 10 ms bins')
+            if len(counts)!=len(times) or any(len(row)!=len(ids) for row in counts):
+                raise ValueError('Timing count dimensions differ')
+            gates={}
+            for neuron in event['cell_ids']['gate']:
+                if neuron not in ids:raise ValueError('Decoder gate absent from displayed subset')
+                column=ids.index(neuron);bins=[]
+                for i,(end,row) in enumerate(zip(times,counts)):
+                    count=row[column]
+                    if not isinstance(count,int) or count<0:raise ValueError('Invalid spike count')
+                    if count:bins.append({'bin':i,'start_ms':end-10,'end_ms':end,'spikes':count})
+                gates[neuron]=bins
+            total=sum(b['spikes'] for bins in gates.values() for b in bins)
+            if total!=event['gate_spikes']:raise ValueError('Binned gate count differs from decoder total')
+            observations.append({'market_decision_ts':event['market_decision_ts'],
+                'side':event['side'],'gate_spikes':total,'neurons':gates})
+        result[name]=observations
+    return {'resolution_ms':10,'arms':result,
+            'interpretation':'Recorded gate-spike bins, not exact spike times or evidence of which upstream connection caused a spike. No trading returns recomputed.'}
+
+
 def figure(study):
     rows=study['reports'];out=['<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="690" viewBox="0 0 1100 690">',
         '<rect width="1100" height="690" rx="14" fill="#101a2b"/>',
@@ -74,9 +116,18 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--study',type=Path,required=True);p.add_argument('--reference',type=Path,required=True)
     p.add_argument('--out',type=Path,required=True);p.add_argument('--figure',type=Path)
-    a=p.parse_args();study=json.loads(a.study.read_text());result=audit(study,a.reference.read_text())
+    p.add_argument('--recordings',type=Path,help='Directory containing pulse01-{arm}/view.json')
+    p.add_argument('--timing-out',type=Path,help='Optional gate spike-bin report; requires --recordings')
+    a=p.parse_args()
+    if bool(a.recordings)!=bool(a.timing_out):p.error('--recordings and --timing-out must be used together')
+    study=json.loads(a.study.read_text());result=audit(study,a.reference.read_text())
     a.out.write_text(json.dumps(result,indent=2)+'\n')
     if a.figure:a.figure.write_text(figure(study))
+    if a.recordings:
+        files={name:(a.recordings/f'pulse01-{name}'/'view.json').read_bytes() for name in ARMS}
+        timing=gate_timing(study,{name:json.loads(raw) for name,raw in files.items()})
+        timing['view_sha256']={name:hashlib.sha256(raw).hexdigest() for name,raw in files.items()}
+        a.timing_out.write_text(json.dumps(timing,indent=2)+'\n')
     print(json.dumps(result['comparisons'],indent=2))
 
 

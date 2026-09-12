@@ -1,7 +1,7 @@
 'use strict';
 const $=id=>document.getElementById(id);
 const historical=report=>['sealed_retrospective_market_replay','matched_market_stimulus_assay'].includes(report.source);
-let data=null, step=0, bin=0, node=0, edge=0, timer=null, runName='', positions=[], imported=false, viewRequest=0;
+let data=null, step=0, bin=0, node=0, edge=0, timer=null, runName='', positions=[], imported=false, viewRequest=0, externalNeuron=false;
 const colors={visual:'#8fbcff',KC:'#b2bfd1',DAN:'#e6a8e8',MBON:'#ffbf69',output:'#67e8cf',other:'#b2bfd1'};
 const num=(x,d=3)=>Number(x).toLocaleString(undefined,{maximumFractionDigits:d});
 const fmt=x=>x===null?'Not defined':typeof x==='number'?num(x):String(x);
@@ -34,7 +34,21 @@ function network(f){
  add('path',{d:`M${x},${y} Q${(x+tx)/2+12},${(y+ty)/2-8} ${tx},${ty}`,fill:'none',stroke:restored.has(String(e.id))?'#c4a1ff':changed?'#ffbf69':active?'#67e8cf':'#35445c',opacity:restored.has(String(e.id))?.85:changed?.65:active?.3:.2,'stroke-width':restored.has(String(e.id))?1.4:changed?1.1:.6});}
  data.nodes.forEach((n,i)=>{const[x,y]=positions[i],active=f.counts[bin][i]>0;const circle=add('circle',{cx:x,cy:y,r:active?4.5:2.5,fill:active?'#67e8cf':colors[n.group],opacity:active?1:.6});const title=document.createElementNS(ns,'title');title.textContent=`${n.type} ${n.id}: ${f.counts[bin][i]} spikes`;circle.append(title);if(i===node)add('circle',{cx:x,cy:y,r:7,fill:'none',stroke:'#fff','stroke-width':1.5});});
 }
-function draw(){if(!data)return;document.querySelector('.legend .changed').parentElement.lastChild.textContent=$('pristine').checked?'Plastic edge differs from pristine state':'Plastic edge changed since observation start';const f=data.frames[step],n=data.nodes[node];bin=Math.min(bin,f.times_ms.length-1);$('bin').max=f.times_ms.length-1;$('bin').value=bin;$('time').textContent=num(f.times_ms[bin])+' ms';network(f);
+function spikeBin(direction){
+ if(!data)return -1;
+ const counts=data.frames[step].counts;
+ for(let i=bin+direction;i>=0&&i<counts.length;i+=direction)if(counts[i][node]>0)return i;
+ return -1;
+}
+function jumpSpike(direction){const target=spikeBin(direction);if(target<0)return;clearInterval(timer);timer=null;$('play').textContent='Play bins';bin=target;draw();}
+function momentLink(){
+ const link=$('moment-link');link.hidden=imported||externalNeuron||!runName;if(link.hidden)return;
+ const url=new URL(location.href);url.search='';url.searchParams.set('run',runName);url.searchParams.set('step',step);url.searchParams.set('bin',bin);url.searchParams.set('neuron',data.nodes[node].id);
+ const selectedEdge=data.edges.filter(e=>e.plastic_index!==null)[edge];if(selectedEdge)url.searchParams.set('edge',selectedEdge.id);
+ if($('compare').value)url.searchParams.set('compare',$('compare').value);link.href=url.href;
+}
+function draw(){if(!data)return;externalNeuron=false;document.querySelector('.legend .changed').parentElement.lastChild.textContent=$('pristine').checked?'Plastic edge differs from pristine state':'Plastic edge changed since observation start';const f=data.frames[step],n=data.nodes[node];bin=Math.min(bin,f.times_ms.length-1);$('bin').max=f.times_ms.length-1;$('bin').value=bin;$('time').textContent=num(f.times_ms[bin])+' ms';network(f);
+ $('previous-spike').disabled=spikeBin(-1)<0;$('next-spike').disabled=spikeBin(1)<0;momentLink();
  $('neuron-detail').textContent=`${n.type||'Unannotated'} · ${n.id} · ${f.counts[bin][node]} spikes in this bin · ${num(f.voltage[bin][node])} mV`;
  chart('neuron-chart',f.times_ms,[{name:'Selected neuron voltage',values:f.voltage.map(v=>v[node]),color:'#8fbcff'}],'Voltage (mV)',bin);
  $('input').src='data:image/png;base64,'+f.input_png;$('input-info').textContent=`${f.event.phase||'assay'} · ${f.event.input_preset||data.report.config.preset} · ${data.report.config.view} ${f.event.input_amplitude===undefined?"":"· movement ×"+num(f.event.input_amplitude)} · ${f.event.input_news||data.report.config.news} news`;$('encoding-note').textContent=data.report.config.view==='fixed_returns'?'Fixed return scale, referenced to the first price in the window. Bounds: 0.01×–100× that price; amber points mark clipping. See provenance for the exact transform.':'';
@@ -62,11 +76,12 @@ $('assay').onsubmit=async e=>{e.preventDefault();$('error').textContent='';const
 $('runs').onchange=e=>loadRun(e.target.value).catch(error);$('refresh').onclick=()=>refresh().catch(error);$('step').onchange=e=>{step=Number(e.target.value);bin=0;draw();};$('bin').oninput=e=>{bin=Number(e.target.value);draw();};$('node').onchange=e=>{node=Number(e.target.value);draw();};$('edge').onchange=e=>{edge=Number(e.target.value);draw();};
 $('play').onclick=()=>{if(timer){clearInterval(timer);timer=null;$('play').textContent='Play bins';return;}if(!data)return;$('play').textContent='Pause';timer=setInterval(()=>{bin++;if(bin>=data.frames[step].times_ms.length){bin=0;step=(step+1)%data.frames.length;$('step').value=step;}draw();},150);};
 $('pristine').onchange=()=>draw();
+$('previous-spike').onclick=()=>jumpSpike(-1);$('next-spike').onclick=()=>jumpSpike(1);
 $('network').onclick=e=>{const r=$('network').getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;let best=22;positions.forEach(([nx,ny],i)=>{const d=Math.hypot(x-nx,y-ny);if(d<best){best=d;node=i;}});$('node').value=node;draw();};
-$('lookup-button').onclick=async()=>{try{if(imported)throw new Error('Full-neuron lookup needs the recording server and its NPZ files.');const id=$('lookup').value.trim(),d=await api('/api/neuron?run='+encodeURIComponent(runName)+'&id='+encodeURIComponent(id)),f=d.frames[step];$('neuron-detail').textContent=`Full recording: ${d.id} · ${num(f.counts.reduce((a,b)=>a+b,0))} spikes in observation · ${f.plastic_edges.length} adjacent plastic edges`;chart('neuron-chart',f.times_ms,[{name:'Queried neuron voltage',values:f.voltage,color:'#8fbcff'}],'Voltage (mV)',bin);$('lookup-button').title=JSON.stringify(f.plastic_edges);}catch(e){error(e);}};
+$('lookup-button').onclick=async()=>{try{if(imported)throw new Error('Full-neuron lookup needs the recording server and its NPZ files.');const id=$('lookup').value.trim(),d=await api('/api/neuron?run='+encodeURIComponent(runName)+'&id='+encodeURIComponent(id)),f=d.frames[step];$('neuron-detail').textContent=`Full recording: ${d.id} · ${num(f.counts.reduce((a,b)=>a+b,0))} spikes in observation · ${f.plastic_edges.length} adjacent plastic edges`;chart('neuron-chart',f.times_ms,[{name:'Queried neuron voltage',values:f.voltage,color:'#8fbcff'}],'Voltage (mV)',bin);$('lookup-button').title=JSON.stringify(f.plastic_edges);externalNeuron=true;$('previous-spike').disabled=$('next-spike').disabled=true;momentLink();}catch(e){error(e);}};
 $('import').onchange=async e=>{try{const file=e.target.files[0];if(!file)return;if(file.size>15000000)throw new Error('Trace JSON must be under 15 MB');runName=file.name;imported=true;load(JSON.parse(await file.text()));}catch(e){error(e);}};
 $('compare').onchange=async e=>{try{
- if(!data||!e.target.value)return;
+ if(!data)return;momentLink();if(!e.target.value){++viewRequest;$('comparison').replaceChildren();return;}
  const current=data,currentName=runName,otherName=e.target.value,request=++viewRequest,other=await api('/api/view?run='+encodeURIComponent(otherName));
  if(request!==viewRequest||current!==data)return;
  const market=historical(current.report),otherMarket=historical(other.report);
@@ -79,6 +94,16 @@ $('compare').onchange=async e=>{try{
  if([current,other].some(d=>d.report.source==='matched_market_stimulus_assay'))note.textContent+=' Neural responses only: the diagnostic does not recompute fills or returns.';
  const currentBuild=current.report.native_build?.binary_sha256,otherBuild=other.report.native_build?.binary_sha256;if(!currentBuild||!otherBuild)note.textContent+=' Native build provenance is missing; controlled pairing is unverified.';else if(currentBuild!==otherBuild)note.textContent+=' Native binaries differ; this comparison includes build/platform effects.';const config=document.createElement('pre');config.textContent=JSON.stringify({current:current.report.config,comparison:other.report.config},null,2);const details=document.createElement('details'),heading=document.createElement('summary');heading.textContent='Compared configurations';details.append(heading,config);$('comparison').replaceChildren(names,note,wrap,details);
  }catch(e){error(e);}};
-window.addEventListener('resize',()=>draw());refresh().then(async()=>{const q=new URLSearchParams(location.search),selected=Number(q.get('step'));if(data&&q.has('step')&&Number.isInteger(selected)&&selected>=0&&selected<data.frames.length){step=selected;bin=0;$('step').value=step;draw();}const comparison=q.get('compare');if(comparison&&[...$('compare').options].some(o=>o.value===comparison)){$('compare').value=comparison;await $('compare').onchange({target:$('compare')});}await status(true);}).catch(error);
+window.addEventListener('resize',()=>draw());refresh().then(async()=>{
+ const q=new URLSearchParams(location.search);
+ const index=(name,length)=>{const value=q.get(name);if(!value||!/^\d+$/.test(value))return -1;const n=Number(value);return Number.isSafeInteger(n)&&n<length?n:-1;};
+ if(data){
+  const selected=index('step',data.frames.length);if(selected>=0){step=selected;$('step').value=step;}
+  const selectedBin=index('bin',data.frames[step].times_ms.length);if(selectedBin>=0)bin=selectedBin;
+  const selectedNode=data.nodes.findIndex(n=>String(n.id)===q.get('neuron'));if(selectedNode>=0){node=selectedNode;$('node').value=node;}
+  const selectedEdge=data.edges.filter(e=>e.plastic_index!==null).findIndex(e=>String(e.id)===q.get('edge'));if(selectedEdge>=0){edge=selectedEdge;$('edge').value=edge;}
+  draw();
+ }
+ const comparison=q.get('compare');if(comparison&&[...$('compare').options].some(o=>o.value===comparison)){$('compare').value=comparison;await $('compare').onchange({target:$('compare')});}await status(true);}).catch(error);
 
 $('restore-edge').onclick=()=>{if(!data)return;const e=data.edges.filter(e=>e.plastic_index!==null)[edge];if(!e)return;const form=$('assay').elements,ids=form.probe_edges.value.split(',').map(s=>s.trim()).filter(Boolean);if(!ids.includes(String(e.id)))ids.push(String(e.id));if(ids.length>64){error('At most 64 restoration edges');return;}form.probe_edges.value=ids.join(', ');form.probe_restore.value='selected';if(Number(form.probe_steps.value)===0)form.probe_steps.value='1';form.probe_restore.closest('details').open=true;form.probe_restore.focus();};

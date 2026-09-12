@@ -49,7 +49,9 @@ The diagnostics have identified concrete limitations:
 
 ![All eight memory, update, and pulse conditions on identical inputs](docs/assets/fly-market-pulse-01.png)
 
-After starting the included viewer, [open the controlled comparison](http://127.0.0.1:8765/?run=pulse01-trained_online_recorded&step=2&compare=pulse01-trained_frozen_recorded).
+After starting the included viewer, [jump to the extra gate spike](http://127.0.0.1:8765/?run=pulse01-trained_online_recorded&step=2&bin=37&neuron=10527&compare=pulse01-trained_frozen_recorded).
+The link selects neuron 10527 at the 1,380 ms bin boundary. Use previous/next
+spike buttons and the moment link to inspect and share any displayed neuron.
 The guide retains earlier experiments, all outcomes, and their limitations.
 These visualizations diagnose the model; they do not demonstrate profitable trading.
 

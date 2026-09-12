@@ -941,8 +941,10 @@ Open `pulse01-trained_online_recorded`, compare
 `pulse01-trained_frozen_recorded`, and select **replay 3**. The images, initial
 memory, and recorded pulses match; the update condition differs. The viewer can
 also compare either diagnostic directly with the original market recording by
-its decision timestamps. `run`, `step` (zero-based), and `compare` URL parameters
-open a specific recorded comparison; invalid selections are ignored.
+its decision timestamps. `run`, `step` and `bin` (zero-based), `neuron` (body ID),
+`edge` (plastic edge ID), and `compare` URL parameters open a specific recorded
+comparison; invalid selections are ignored. Neuron and edge links select from
+the displayed subset. Use the separate lookup for other retained neurons.
 
 ![Matched historical inputs and pulses with plasticity toggled](assets/fly-market-pulse-comparison.png)
 
@@ -961,6 +963,44 @@ original online behavior. It retains the prior cohort and costs, uses training
 10:20–10:35, development 10:35–10:50, and test 10:50–11:05 UTC on September 12.
 The test interval had not begun at registration. No outcome or promotion is
 claimed for that pending experiment.
+
+### Locate the extra gate spike
+
+The [timing audit](../reports/fly-market-gate-timing-01.json) reconciles both gate
+neurons in all 24 observations of the eight-arm experiment against the decoder
+reports. In the final observation, the two online/recorded-pulse arms each show
+one spike in DNpe017 body **10527**, in bin **37**: **1,370–1,380 ms** of neural
+time (370–380 ms into this observation). The other gate neuron, 555871, does not
+spike in that observation. The six other conditions have zero final gate spikes.
+These are 10 ms recording bins, not exact spike timestamps. The spike occurs
+after the 200 ms reward-current window; its timing alone does not identify the
+upstream causal connection or distinguish current effects from accumulated
+activity and plasticity.
+
+![Gate neuron selected at its sole spike bin in the third observation](assets/fly-gate-moment.png)
+
+With the included recordings server running, [open that moment](http://127.0.0.1:8765/?run=pulse01-trained_online_recorded&step=2&bin=37&neuron=10527&compare=pulse01-trained_frozen_recorded).
+**Previous spike bin** and **Next spike bin** navigate the selected displayed
+neuron within the current observation; disabled buttons mean no further spike
+in that direction. **Link to this moment** includes the recording, observation,
+bin, neuron, displayed plastic edge, and comparison. Import-only recordings have
+no server-backed moment link. Changing the selected neuron or connection updates
+the link; no model computation is needed.
+
+Rebuild the timing report from the public compact recordings:
+
+```sh
+uv run python -m paperlab.fly_pulse_audit \
+  --study reports/fly-market-pulse-study-01.json \
+  --reference reports/fly-market-study-04.json \
+  --out runs/pulse-audit.json --recordings examples/fly-debugger \
+  --timing-out runs/gate-timing.json
+```
+
+The report stores each source recording's SHA256. Missing gate cells, changed
+study metadata, incomplete bins, or counts that disagree with the fixed decoder
+are rejected. This extends the post hoc mechanism diagnosis; it adds no fresh
+market performance evidence.
 
 ### Trained, frozen inference protocol
 

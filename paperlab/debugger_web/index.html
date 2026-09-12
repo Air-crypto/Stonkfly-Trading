@@ -29,7 +29,10 @@
 <label class="check"><input id="pristine" type="checkbox"> Highlight weight changes from pristine state (including retained learning)</label>
 <p class="small">Edge activity marks presynaptic spikes. It does not establish transmission or causal influence on a target. Positions are functional groups, not anatomical coordinates.</p>
 <div class="pair"><label>Inspect a displayed neuron <select id="node"></select></label><label>Inspect any retained neuron ID <span class="inline"><input id="lookup" inputmode="numeric" placeholder="Exact body ID"><button id="lookup-button">Inspect</button></span></label></div>
-<p id="neuron-detail" class="readout"></p><div id="neuron-chart"></div>
+<p id="neuron-detail" class="readout"></p>
+<div class="playback"><button id="previous-spike" type="button">Previous spike bin</button><button id="next-spike" type="button">Next spike bin</button><a id="moment-link">Link to this moment</a></div>
+<p class="small">Spike navigation uses the displayed neuron in this observation. Times mark the end of each 10 ms bin, not an exact spike timestamp. Copy the moment link to share this selection.</p>
+<div id="neuron-chart"></div>
 </section>
 </div>
 <div class="results">
