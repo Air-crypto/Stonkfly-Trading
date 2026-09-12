@@ -37,7 +37,10 @@ The [first sealed market comparison](docs/fly-debugger.md#first-market-replay-re
 rejected all proposed changes under its development gate. The
 [reinforcement-gated follow-up](docs/fly-debugger.md#second-market-replay-result)
 stopped neutral weight drift but had no development/test fills and showed no
-trading advantage. No policy was promoted.
+trading advantage. No policy was promoted. The included `market02-*` recordings
+show the skipped quote slots, simulated fill outcomes, and neutral weight freeze.
+
+![Reinforcement gate and market execution timeline](docs/assets/fly-market-gated.png)
 
 The first paired falling-price assay found one action disagreement in four
 observations. Both arms received identical images:

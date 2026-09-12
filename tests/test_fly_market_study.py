@@ -69,6 +69,12 @@ def test_phase_uses_next_receipt_fills_and_holds_missing_inventory(monkeypatch):
     assert result["rows"][2]["fill"]["reason"]=="unavailable_market"
     assert float(result["rows"][-1]["broker"]["qty"])>0
     assert result["equity"]==float(result["rows"][-1]["broker"]["cash"])
+    timeline=study.decision_timeline(result["rows"])
+    assert len(timeline)==3  # The missing terminal quote has no neural capture.
+    assert timeline[1]["fill_status"]=="filled"
+    assert timeline[2]["observation"]=="terminal_mark"
+    assert timeline[2]["fill_reason"]=="unavailable_market"
+    assert timeline[2]["action"] is None
 
 
 def test_reinforcement_gate_obeys_closed_loop_reward_without_substituting_actions(monkeypatch):

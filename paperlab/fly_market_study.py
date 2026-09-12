@@ -157,6 +157,18 @@ def quote_at(ticks, stamp):
     return index,quote
 
 
+def decision_timeline(rows):
+    """Expose every decision slot, including gaps with no neural capture."""
+    return [{"decision_ts": r["decision_ts"], "quote_ts": r["quote_ts"],
+             "available": r["available"], "terminal": r["terminal"],
+             "action": r["event"]["side"] if r["event"] else None,
+             "observation": ("terminal_mark" if r["terminal"] else
+                             "observed" if r["event"] else
+                             "unavailable_quote" if not r["available"] else "no_new_quote"),
+             "fill_status": r["fill"]["status"], "fill_reason": r["fill"].get("reason"),
+             "equity": r["equity"]} for r in rows]
+
+
 def phase(lab, ticks, start, steps, arm, learning, deadline, trace_output=None):
     b=lab.brain
     b.weights_frozen=not learning
@@ -209,6 +221,7 @@ def phase(lab, ticks, start, steps, arm, learning, deadline, trace_output=None):
                               "reinforcement_only":arm.get("reinforcement_only",False)},
                     "upstream_commit":UPSTREAM_COMMIT,"graph":{"neurons":b.n,"edges":len(b.post),"plastic_edges":len(b.circuit["edges"])},
                     "native_build":b.build,"seconds":time.monotonic()-wall_start,"events":trace_events,
+                    "market_timeline":decision_timeline(rows),
                     "interpretation":"Recorded market replay, isolated paper account. No executable DEX or monthly-return claim."}
             atomic_json(trace_output/"report.json",report)
             atomic_json(trace_output/"view.json",lab.export_view(trace_output,report))
