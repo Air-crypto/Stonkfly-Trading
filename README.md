@@ -79,6 +79,13 @@ only the two gate cells failed for the trained model; global voltage resets made
 all three trained/pristine spike-count records identical. These are mechanism
 results, with no fills or P&L; no reset policy has been promoted.
 
+The [eighth market comparison](docs/fly-debugger.md#eighth-market-replay-result)
+then rejected input reset: trained/reset failed development and tied pristine/reset
+at **$1,000.98** in test, below trained/carry at **$1,001.14**. Clearing input
+recovered a gate spike and extra BUY, without an advantage from training. An
+earlier collector outage left one training observation per pool and **zero P&L
+reinforcement**, so this does not evaluate learning from trading rewards.
+
 ![All twelve audited activity reset conditions](docs/assets/fly-market-activity-02.png)
 
 The [decoder count view](docs/fly-debugger.md#inspect-accumulated-decoder-counts)
@@ -88,7 +95,7 @@ and gate sensitivity without claiming a profitable fix.
 
 ![Recorded direction and gate counts](docs/assets/fly-decoder-counts.png)
 
-![Memory-restoration comparison across training, development, and test](docs/assets/fly-market-study-07.png)
+![Input-reset comparison with all four conditions and missing training observations](docs/assets/fly-market-study-08.png)
 
 [Inspect the restored connections](http://127.0.0.1:8765/?run=marketrestore01-restore_10704&step=1&neuron=10704&compare=marketrestore01-trained_frozen).
 These are indicative DEX marks with fees/slippage, not realized or monthly returns.

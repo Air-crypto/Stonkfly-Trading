@@ -1,0 +1,10 @@
+{
+  "executed_plan_sha256": "eb35c5eb53acba51e8c5b0282fa994a63c6d0e575ed992c0a60620cab95fd6e0",
+  "earliest_snapshot_plan_sha256": "49af30bdbcc1f758839f82c87b9157fe2283391a60c3a4a726cb768901ad3dd2",
+  "earliest_snapshot_sha256": "3cc99ab4276dbff6878743e716aa4c70330cc862c9952456ee1aaf925587b908",
+  "metadata_differences": [
+    "snapshot_end",
+    "snapshot_sha256"
+  ],
+  "all_registered_inputs_identical": true
+}

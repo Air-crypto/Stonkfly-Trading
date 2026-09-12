@@ -1,0 +1,1367 @@
+{
+  "plan_sha256": "eb35c5eb53acba51e8c5b0282fa994a63c6d0e575ed992c0a60620cab95fd6e0",
+  "report_sha256": "7ff600fa0fe5bf5aa7fbd20eb2a82f24ea75355f548f21e596f654e95d577ddd",
+  "pools": {
+    "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ": {
+      "training": {
+        "pristine_frozen": {
+          "observed": 1,
+          "slots": [
+            {
+              "decision_ts": 1789224300,
+              "quote_ts": 1789223008.458449,
+              "available": false,
+              "terminal": false,
+              "observed": false
+            },
+            {
+              "decision_ts": 1789224600,
+              "quote_ts": 1789223008.458449,
+              "available": false,
+              "terminal": false,
+              "observed": false
+            },
+            {
+              "decision_ts": 1789224900,
+              "quote_ts": 1789224818.780974,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789225200,
+              "quote_ts": 1789225193.2416604,
+              "available": true,
+              "terminal": true,
+              "observed": false
+            }
+          ],
+          "comparison_to_trained_carry": [
+            {
+              "decision_ts": 1789224900,
+              "same_input": true,
+              "same_full_spike_counts": false,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 12,
+              "trained_carry_gate_spikes": 12
+            }
+          ]
+        },
+        "trained_frozen": {
+          "observed": 1,
+          "slots": [
+            {
+              "decision_ts": 1789224300,
+              "quote_ts": 1789223008.458449,
+              "available": false,
+              "terminal": false,
+              "observed": false
+            },
+            {
+              "decision_ts": 1789224600,
+              "quote_ts": 1789223008.458449,
+              "available": false,
+              "terminal": false,
+              "observed": false
+            },
+            {
+              "decision_ts": 1789224900,
+              "quote_ts": 1789224818.780974,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789225200,
+              "quote_ts": 1789225193.2416604,
+              "available": true,
+              "terminal": true,
+              "observed": false
+            }
+          ],
+          "comparison_to_trained_carry": [
+            {
+              "decision_ts": 1789224900,
+              "same_input": true,
+              "same_full_spike_counts": true,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 12,
+              "trained_carry_gate_spikes": 12
+            }
+          ]
+        },
+        "pristine_input_reset": {
+          "observed": 1,
+          "slots": [
+            {
+              "decision_ts": 1789224300,
+              "quote_ts": 1789223008.458449,
+              "available": false,
+              "terminal": false,
+              "observed": false
+            },
+            {
+              "decision_ts": 1789224600,
+              "quote_ts": 1789223008.458449,
+              "available": false,
+              "terminal": false,
+              "observed": false
+            },
+            {
+              "decision_ts": 1789224900,
+              "quote_ts": 1789224818.780974,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789225200,
+              "quote_ts": 1789225193.2416604,
+              "available": true,
+              "terminal": true,
+              "observed": false
+            }
+          ],
+          "comparison_to_trained_carry": [
+            {
+              "decision_ts": 1789224900,
+              "same_input": true,
+              "same_full_spike_counts": false,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 12,
+              "trained_carry_gate_spikes": 12
+            }
+          ]
+        },
+        "trained_input_reset": {
+          "observed": 1,
+          "slots": [
+            {
+              "decision_ts": 1789224300,
+              "quote_ts": 1789223008.458449,
+              "available": false,
+              "terminal": false,
+              "observed": false
+            },
+            {
+              "decision_ts": 1789224600,
+              "quote_ts": 1789223008.458449,
+              "available": false,
+              "terminal": false,
+              "observed": false
+            },
+            {
+              "decision_ts": 1789224900,
+              "quote_ts": 1789224818.780974,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789225200,
+              "quote_ts": 1789225193.2416604,
+              "available": true,
+              "terminal": true,
+              "observed": false
+            }
+          ],
+          "comparison_to_trained_carry": [
+            {
+              "decision_ts": 1789224900,
+              "same_input": true,
+              "same_full_spike_counts": true,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 12,
+              "trained_carry_gate_spikes": 12
+            }
+          ]
+        }
+      },
+      "development": {
+        "pristine_frozen": {
+          "observed": 3,
+          "slots": [
+            {
+              "decision_ts": 1789225200,
+              "quote_ts": 1789225193.2416604,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789225500,
+              "quote_ts": 1789225482.8075373,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789225800,
+              "quote_ts": 1789225775.7759893,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789226100,
+              "quote_ts": 1789225951.3178043,
+              "available": true,
+              "terminal": true,
+              "observed": false
+            }
+          ],
+          "comparison_to_trained_carry": [
+            {
+              "decision_ts": 1789225200,
+              "same_input": true,
+              "same_full_spike_counts": true,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 38,
+              "trained_carry_gate_spikes": 38
+            },
+            {
+              "decision_ts": 1789225500,
+              "same_input": true,
+              "same_full_spike_counts": true,
+              "side": "SELL",
+              "trained_carry_side": "SELL",
+              "gate_spikes": 8,
+              "trained_carry_gate_spikes": 8
+            },
+            {
+              "decision_ts": 1789225800,
+              "same_input": true,
+              "same_full_spike_counts": false,
+              "side": "HOLD",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 2,
+              "trained_carry_gate_spikes": 2
+            }
+          ]
+        },
+        "trained_frozen": {
+          "observed": 3,
+          "slots": [
+            {
+              "decision_ts": 1789225200,
+              "quote_ts": 1789225193.2416604,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789225500,
+              "quote_ts": 1789225482.8075373,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789225800,
+              "quote_ts": 1789225775.7759893,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789226100,
+              "quote_ts": 1789225951.3178043,
+              "available": true,
+              "terminal": true,
+              "observed": false
+            }
+          ],
+          "comparison_to_trained_carry": [
+            {
+              "decision_ts": 1789225200,
+              "same_input": true,
+              "same_full_spike_counts": true,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 38,
+              "trained_carry_gate_spikes": 38
+            },
+            {
+              "decision_ts": 1789225500,
+              "same_input": true,
+              "same_full_spike_counts": true,
+              "side": "SELL",
+              "trained_carry_side": "SELL",
+              "gate_spikes": 8,
+              "trained_carry_gate_spikes": 8
+            },
+            {
+              "decision_ts": 1789225800,
+              "same_input": true,
+              "same_full_spike_counts": true,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 2,
+              "trained_carry_gate_spikes": 2
+            }
+          ]
+        },
+        "pristine_input_reset": {
+          "observed": 3,
+          "slots": [
+            {
+              "decision_ts": 1789225200,
+              "quote_ts": 1789225193.2416604,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789225500,
+              "quote_ts": 1789225482.8075373,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789225800,
+              "quote_ts": 1789225775.7759893,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789226100,
+              "quote_ts": 1789225951.3178043,
+              "available": true,
+              "terminal": true,
+              "observed": false
+            }
+          ],
+          "comparison_to_trained_carry": [
+            {
+              "decision_ts": 1789225200,
+              "same_input": true,
+              "same_full_spike_counts": true,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 38,
+              "trained_carry_gate_spikes": 38
+            },
+            {
+              "decision_ts": 1789225500,
+              "same_input": true,
+              "same_full_spike_counts": false,
+              "side": "BUY",
+              "trained_carry_side": "SELL",
+              "gate_spikes": 8,
+              "trained_carry_gate_spikes": 8
+            },
+            {
+              "decision_ts": 1789225800,
+              "same_input": true,
+              "same_full_spike_counts": false,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 5,
+              "trained_carry_gate_spikes": 2
+            }
+          ]
+        },
+        "trained_input_reset": {
+          "observed": 3,
+          "slots": [
+            {
+              "decision_ts": 1789225200,
+              "quote_ts": 1789225193.2416604,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789225500,
+              "quote_ts": 1789225482.8075373,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789225800,
+              "quote_ts": 1789225775.7759893,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789226100,
+              "quote_ts": 1789225951.3178043,
+              "available": true,
+              "terminal": true,
+              "observed": false
+            }
+          ],
+          "comparison_to_trained_carry": [
+            {
+              "decision_ts": 1789225200,
+              "same_input": true,
+              "same_full_spike_counts": true,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 38,
+              "trained_carry_gate_spikes": 38
+            },
+            {
+              "decision_ts": 1789225500,
+              "same_input": true,
+              "same_full_spike_counts": false,
+              "side": "BUY",
+              "trained_carry_side": "SELL",
+              "gate_spikes": 8,
+              "trained_carry_gate_spikes": 8
+            },
+            {
+              "decision_ts": 1789225800,
+              "same_input": true,
+              "same_full_spike_counts": false,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 5,
+              "trained_carry_gate_spikes": 2
+            }
+          ]
+        }
+      },
+      "test": {
+        "pristine_frozen": {
+          "observed": 3,
+          "slots": [
+            {
+              "decision_ts": 1789226100,
+              "quote_ts": 1789225951.3178043,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789226400,
+              "quote_ts": 1789226322.5889392,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789226700,
+              "quote_ts": 1789226622.7252238,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789227000,
+              "quote_ts": 1789226920.7928784,
+              "available": true,
+              "terminal": true,
+              "observed": false
+            }
+          ],
+          "comparison_to_trained_carry": [
+            {
+              "decision_ts": 1789226100,
+              "same_input": true,
+              "same_full_spike_counts": false,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 18,
+              "trained_carry_gate_spikes": 17
+            },
+            {
+              "decision_ts": 1789226400,
+              "same_input": true,
+              "same_full_spike_counts": false,
+              "side": "HOLD",
+              "trained_carry_side": "HOLD",
+              "gate_spikes": 0,
+              "trained_carry_gate_spikes": 0
+            },
+            {
+              "decision_ts": 1789226700,
+              "same_input": true,
+              "same_full_spike_counts": false,
+              "side": "BUY",
+              "trained_carry_side": "HOLD",
+              "gate_spikes": 2,
+              "trained_carry_gate_spikes": 0
+            }
+          ]
+        },
+        "trained_frozen": {
+          "observed": 3,
+          "slots": [
+            {
+              "decision_ts": 1789226100,
+              "quote_ts": 1789225951.3178043,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789226400,
+              "quote_ts": 1789226322.5889392,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789226700,
+              "quote_ts": 1789226622.7252238,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789227000,
+              "quote_ts": 1789226920.7928784,
+              "available": true,
+              "terminal": true,
+              "observed": false
+            }
+          ],
+          "comparison_to_trained_carry": [
+            {
+              "decision_ts": 1789226100,
+              "same_input": true,
+              "same_full_spike_counts": true,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 17,
+              "trained_carry_gate_spikes": 17
+            },
+            {
+              "decision_ts": 1789226400,
+              "same_input": true,
+              "same_full_spike_counts": true,
+              "side": "HOLD",
+              "trained_carry_side": "HOLD",
+              "gate_spikes": 0,
+              "trained_carry_gate_spikes": 0
+            },
+            {
+              "decision_ts": 1789226700,
+              "same_input": true,
+              "same_full_spike_counts": true,
+              "side": "HOLD",
+              "trained_carry_side": "HOLD",
+              "gate_spikes": 0,
+              "trained_carry_gate_spikes": 0
+            }
+          ]
+        },
+        "pristine_input_reset": {
+          "observed": 3,
+          "slots": [
+            {
+              "decision_ts": 1789226100,
+              "quote_ts": 1789225951.3178043,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789226400,
+              "quote_ts": 1789226322.5889392,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789226700,
+              "quote_ts": 1789226622.7252238,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789227000,
+              "quote_ts": 1789226920.7928784,
+              "available": true,
+              "terminal": true,
+              "observed": false
+            }
+          ],
+          "comparison_to_trained_carry": [
+            {
+              "decision_ts": 1789226100,
+              "same_input": true,
+              "same_full_spike_counts": false,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 18,
+              "trained_carry_gate_spikes": 17
+            },
+            {
+              "decision_ts": 1789226400,
+              "same_input": true,
+              "same_full_spike_counts": false,
+              "side": "BUY",
+              "trained_carry_side": "HOLD",
+              "gate_spikes": 2,
+              "trained_carry_gate_spikes": 0
+            },
+            {
+              "decision_ts": 1789226700,
+              "same_input": true,
+              "same_full_spike_counts": false,
+              "side": "BUY",
+              "trained_carry_side": "HOLD",
+              "gate_spikes": 2,
+              "trained_carry_gate_spikes": 0
+            }
+          ]
+        },
+        "trained_input_reset": {
+          "observed": 3,
+          "slots": [
+            {
+              "decision_ts": 1789226100,
+              "quote_ts": 1789225951.3178043,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789226400,
+              "quote_ts": 1789226322.5889392,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789226700,
+              "quote_ts": 1789226622.7252238,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789227000,
+              "quote_ts": 1789226920.7928784,
+              "available": true,
+              "terminal": true,
+              "observed": false
+            }
+          ],
+          "comparison_to_trained_carry": [
+            {
+              "decision_ts": 1789226100,
+              "same_input": true,
+              "same_full_spike_counts": true,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 17,
+              "trained_carry_gate_spikes": 17
+            },
+            {
+              "decision_ts": 1789226400,
+              "same_input": true,
+              "same_full_spike_counts": false,
+              "side": "BUY",
+              "trained_carry_side": "HOLD",
+              "gate_spikes": 1,
+              "trained_carry_gate_spikes": 0
+            },
+            {
+              "decision_ts": 1789226700,
+              "same_input": true,
+              "same_full_spike_counts": false,
+              "side": "BUY",
+              "trained_carry_side": "HOLD",
+              "gate_spikes": 1,
+              "trained_carry_gate_spikes": 0
+            }
+          ]
+        }
+      }
+    },
+    "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu": {
+      "training": {
+        "pristine_frozen": {
+          "observed": 1,
+          "slots": [
+            {
+              "decision_ts": 1789224300,
+              "quote_ts": 1789223008.458449,
+              "available": false,
+              "terminal": false,
+              "observed": false
+            },
+            {
+              "decision_ts": 1789224600,
+              "quote_ts": 1789223008.458449,
+              "available": false,
+              "terminal": false,
+              "observed": false
+            },
+            {
+              "decision_ts": 1789224900,
+              "quote_ts": 1789224818.780974,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789225200,
+              "quote_ts": 1789225193.2416604,
+              "available": true,
+              "terminal": true,
+              "observed": false
+            }
+          ],
+          "comparison_to_trained_carry": [
+            {
+              "decision_ts": 1789224900,
+              "same_input": true,
+              "same_full_spike_counts": true,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 14,
+              "trained_carry_gate_spikes": 14
+            }
+          ]
+        },
+        "trained_frozen": {
+          "observed": 1,
+          "slots": [
+            {
+              "decision_ts": 1789224300,
+              "quote_ts": 1789223008.458449,
+              "available": false,
+              "terminal": false,
+              "observed": false
+            },
+            {
+              "decision_ts": 1789224600,
+              "quote_ts": 1789223008.458449,
+              "available": false,
+              "terminal": false,
+              "observed": false
+            },
+            {
+              "decision_ts": 1789224900,
+              "quote_ts": 1789224818.780974,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789225200,
+              "quote_ts": 1789225193.2416604,
+              "available": true,
+              "terminal": true,
+              "observed": false
+            }
+          ],
+          "comparison_to_trained_carry": [
+            {
+              "decision_ts": 1789224900,
+              "same_input": true,
+              "same_full_spike_counts": true,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 14,
+              "trained_carry_gate_spikes": 14
+            }
+          ]
+        },
+        "pristine_input_reset": {
+          "observed": 1,
+          "slots": [
+            {
+              "decision_ts": 1789224300,
+              "quote_ts": 1789223008.458449,
+              "available": false,
+              "terminal": false,
+              "observed": false
+            },
+            {
+              "decision_ts": 1789224600,
+              "quote_ts": 1789223008.458449,
+              "available": false,
+              "terminal": false,
+              "observed": false
+            },
+            {
+              "decision_ts": 1789224900,
+              "quote_ts": 1789224818.780974,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789225200,
+              "quote_ts": 1789225193.2416604,
+              "available": true,
+              "terminal": true,
+              "observed": false
+            }
+          ],
+          "comparison_to_trained_carry": [
+            {
+              "decision_ts": 1789224900,
+              "same_input": true,
+              "same_full_spike_counts": true,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 14,
+              "trained_carry_gate_spikes": 14
+            }
+          ]
+        },
+        "trained_input_reset": {
+          "observed": 1,
+          "slots": [
+            {
+              "decision_ts": 1789224300,
+              "quote_ts": 1789223008.458449,
+              "available": false,
+              "terminal": false,
+              "observed": false
+            },
+            {
+              "decision_ts": 1789224600,
+              "quote_ts": 1789223008.458449,
+              "available": false,
+              "terminal": false,
+              "observed": false
+            },
+            {
+              "decision_ts": 1789224900,
+              "quote_ts": 1789224818.780974,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789225200,
+              "quote_ts": 1789225193.2416604,
+              "available": true,
+              "terminal": true,
+              "observed": false
+            }
+          ],
+          "comparison_to_trained_carry": [
+            {
+              "decision_ts": 1789224900,
+              "same_input": true,
+              "same_full_spike_counts": true,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 14,
+              "trained_carry_gate_spikes": 14
+            }
+          ]
+        }
+      },
+      "development": {
+        "pristine_frozen": {
+          "observed": 3,
+          "slots": [
+            {
+              "decision_ts": 1789225200,
+              "quote_ts": 1789225193.2416604,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789225500,
+              "quote_ts": 1789225482.8075373,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789225800,
+              "quote_ts": 1789225775.7759893,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789226100,
+              "quote_ts": 1789225951.3178043,
+              "available": true,
+              "terminal": true,
+              "observed": false
+            }
+          ],
+          "comparison_to_trained_carry": [
+            {
+              "decision_ts": 1789225200,
+              "same_input": true,
+              "same_full_spike_counts": true,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 28,
+              "trained_carry_gate_spikes": 28
+            },
+            {
+              "decision_ts": 1789225500,
+              "same_input": true,
+              "same_full_spike_counts": true,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 5,
+              "trained_carry_gate_spikes": 5
+            },
+            {
+              "decision_ts": 1789225800,
+              "same_input": true,
+              "same_full_spike_counts": true,
+              "side": "HOLD",
+              "trained_carry_side": "HOLD",
+              "gate_spikes": 0,
+              "trained_carry_gate_spikes": 0
+            }
+          ]
+        },
+        "trained_frozen": {
+          "observed": 3,
+          "slots": [
+            {
+              "decision_ts": 1789225200,
+              "quote_ts": 1789225193.2416604,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789225500,
+              "quote_ts": 1789225482.8075373,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789225800,
+              "quote_ts": 1789225775.7759893,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789226100,
+              "quote_ts": 1789225951.3178043,
+              "available": true,
+              "terminal": true,
+              "observed": false
+            }
+          ],
+          "comparison_to_trained_carry": [
+            {
+              "decision_ts": 1789225200,
+              "same_input": true,
+              "same_full_spike_counts": true,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 28,
+              "trained_carry_gate_spikes": 28
+            },
+            {
+              "decision_ts": 1789225500,
+              "same_input": true,
+              "same_full_spike_counts": true,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 5,
+              "trained_carry_gate_spikes": 5
+            },
+            {
+              "decision_ts": 1789225800,
+              "same_input": true,
+              "same_full_spike_counts": true,
+              "side": "HOLD",
+              "trained_carry_side": "HOLD",
+              "gate_spikes": 0,
+              "trained_carry_gate_spikes": 0
+            }
+          ]
+        },
+        "pristine_input_reset": {
+          "observed": 3,
+          "slots": [
+            {
+              "decision_ts": 1789225200,
+              "quote_ts": 1789225193.2416604,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789225500,
+              "quote_ts": 1789225482.8075373,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789225800,
+              "quote_ts": 1789225775.7759893,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789226100,
+              "quote_ts": 1789225951.3178043,
+              "available": true,
+              "terminal": true,
+              "observed": false
+            }
+          ],
+          "comparison_to_trained_carry": [
+            {
+              "decision_ts": 1789225200,
+              "same_input": true,
+              "same_full_spike_counts": true,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 28,
+              "trained_carry_gate_spikes": 28
+            },
+            {
+              "decision_ts": 1789225500,
+              "same_input": true,
+              "same_full_spike_counts": false,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 8,
+              "trained_carry_gate_spikes": 5
+            },
+            {
+              "decision_ts": 1789225800,
+              "same_input": true,
+              "same_full_spike_counts": false,
+              "side": "HOLD",
+              "trained_carry_side": "HOLD",
+              "gate_spikes": 0,
+              "trained_carry_gate_spikes": 0
+            }
+          ]
+        },
+        "trained_input_reset": {
+          "observed": 3,
+          "slots": [
+            {
+              "decision_ts": 1789225200,
+              "quote_ts": 1789225193.2416604,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789225500,
+              "quote_ts": 1789225482.8075373,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789225800,
+              "quote_ts": 1789225775.7759893,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789226100,
+              "quote_ts": 1789225951.3178043,
+              "available": true,
+              "terminal": true,
+              "observed": false
+            }
+          ],
+          "comparison_to_trained_carry": [
+            {
+              "decision_ts": 1789225200,
+              "same_input": true,
+              "same_full_spike_counts": true,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 28,
+              "trained_carry_gate_spikes": 28
+            },
+            {
+              "decision_ts": 1789225500,
+              "same_input": true,
+              "same_full_spike_counts": false,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 8,
+              "trained_carry_gate_spikes": 5
+            },
+            {
+              "decision_ts": 1789225800,
+              "same_input": true,
+              "same_full_spike_counts": false,
+              "side": "HOLD",
+              "trained_carry_side": "HOLD",
+              "gate_spikes": 0,
+              "trained_carry_gate_spikes": 0
+            }
+          ]
+        }
+      },
+      "test": {
+        "pristine_frozen": {
+          "observed": 3,
+          "slots": [
+            {
+              "decision_ts": 1789226100,
+              "quote_ts": 1789225951.3178043,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789226400,
+              "quote_ts": 1789226322.5889392,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789226700,
+              "quote_ts": 1789226622.7252238,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789227000,
+              "quote_ts": 1789226920.7928784,
+              "available": true,
+              "terminal": true,
+              "observed": false
+            }
+          ],
+          "comparison_to_trained_carry": [
+            {
+              "decision_ts": 1789226100,
+              "same_input": true,
+              "same_full_spike_counts": true,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 22,
+              "trained_carry_gate_spikes": 22
+            },
+            {
+              "decision_ts": 1789226400,
+              "same_input": true,
+              "same_full_spike_counts": true,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 8,
+              "trained_carry_gate_spikes": 8
+            },
+            {
+              "decision_ts": 1789226700,
+              "same_input": true,
+              "same_full_spike_counts": true,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 4,
+              "trained_carry_gate_spikes": 4
+            }
+          ]
+        },
+        "trained_frozen": {
+          "observed": 3,
+          "slots": [
+            {
+              "decision_ts": 1789226100,
+              "quote_ts": 1789225951.3178043,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789226400,
+              "quote_ts": 1789226322.5889392,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789226700,
+              "quote_ts": 1789226622.7252238,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789227000,
+              "quote_ts": 1789226920.7928784,
+              "available": true,
+              "terminal": true,
+              "observed": false
+            }
+          ],
+          "comparison_to_trained_carry": [
+            {
+              "decision_ts": 1789226100,
+              "same_input": true,
+              "same_full_spike_counts": true,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 22,
+              "trained_carry_gate_spikes": 22
+            },
+            {
+              "decision_ts": 1789226400,
+              "same_input": true,
+              "same_full_spike_counts": true,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 8,
+              "trained_carry_gate_spikes": 8
+            },
+            {
+              "decision_ts": 1789226700,
+              "same_input": true,
+              "same_full_spike_counts": true,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 4,
+              "trained_carry_gate_spikes": 4
+            }
+          ]
+        },
+        "pristine_input_reset": {
+          "observed": 3,
+          "slots": [
+            {
+              "decision_ts": 1789226100,
+              "quote_ts": 1789225951.3178043,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789226400,
+              "quote_ts": 1789226322.5889392,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789226700,
+              "quote_ts": 1789226622.7252238,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789227000,
+              "quote_ts": 1789226920.7928784,
+              "available": true,
+              "terminal": true,
+              "observed": false
+            }
+          ],
+          "comparison_to_trained_carry": [
+            {
+              "decision_ts": 1789226100,
+              "same_input": true,
+              "same_full_spike_counts": true,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 22,
+              "trained_carry_gate_spikes": 22
+            },
+            {
+              "decision_ts": 1789226400,
+              "same_input": true,
+              "same_full_spike_counts": false,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 10,
+              "trained_carry_gate_spikes": 8
+            },
+            {
+              "decision_ts": 1789226700,
+              "same_input": true,
+              "same_full_spike_counts": false,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 8,
+              "trained_carry_gate_spikes": 4
+            }
+          ]
+        },
+        "trained_input_reset": {
+          "observed": 3,
+          "slots": [
+            {
+              "decision_ts": 1789226100,
+              "quote_ts": 1789225951.3178043,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789226400,
+              "quote_ts": 1789226322.5889392,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789226700,
+              "quote_ts": 1789226622.7252238,
+              "available": true,
+              "terminal": false,
+              "observed": true
+            },
+            {
+              "decision_ts": 1789227000,
+              "quote_ts": 1789226920.7928784,
+              "available": true,
+              "terminal": true,
+              "observed": false
+            }
+          ],
+          "comparison_to_trained_carry": [
+            {
+              "decision_ts": 1789226100,
+              "same_input": true,
+              "same_full_spike_counts": true,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 22,
+              "trained_carry_gate_spikes": 22
+            },
+            {
+              "decision_ts": 1789226400,
+              "same_input": true,
+              "same_full_spike_counts": false,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 10,
+              "trained_carry_gate_spikes": 8
+            },
+            {
+              "decision_ts": 1789226700,
+              "same_input": true,
+              "same_full_spike_counts": false,
+              "side": "BUY",
+              "trained_carry_side": "BUY",
+              "gate_spikes": 8,
+              "trained_carry_gate_spikes": 4
+            }
+          ]
+        }
+      }
+    }
+  },
+  "interpretation": "Every registered condition and slot is retained. Missing quotes are not observations. Pairwise firing differences and recovered gate activity do not establish profitable learning."
+}

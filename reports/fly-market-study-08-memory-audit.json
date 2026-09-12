@@ -1,0 +1,228 @@
+{
+  "plan_sha256": "eb35c5eb53acba51e8c5b0282fa994a63c6d0e575ed992c0a60620cab95fd6e0",
+  "checkpoint_sha256": {
+    "pool0-pristine_frozen-training-memory.npz": "5b1fac5bd0e8cdcabdfccf0ecc17204bf21161d9193c27c54636181a71318e21",
+    "pool0-pristine_frozen/initial-memory.npz": "5b1fac5bd0e8cdcabdfccf0ecc17204bf21161d9193c27c54636181a71318e21",
+    "pool0-trained_frozen-training-memory.npz": "8c081d61c3cb07907dd7cd8cb9b8343c0f6cbfbcba793dae52fb54bcbff27a84",
+    "pool0-trained_frozen/initial-memory.npz": "8c081d61c3cb07907dd7cd8cb9b8343c0f6cbfbcba793dae52fb54bcbff27a84",
+    "pool0-pristine_input_reset-training-memory.npz": "5b1fac5bd0e8cdcabdfccf0ecc17204bf21161d9193c27c54636181a71318e21",
+    "pool0-pristine_input_reset/initial-memory.npz": "5b1fac5bd0e8cdcabdfccf0ecc17204bf21161d9193c27c54636181a71318e21",
+    "pool0-trained_input_reset-training-memory.npz": "8c081d61c3cb07907dd7cd8cb9b8343c0f6cbfbcba793dae52fb54bcbff27a84",
+    "pool0-trained_input_reset/initial-memory.npz": "8c081d61c3cb07907dd7cd8cb9b8343c0f6cbfbcba793dae52fb54bcbff27a84",
+    "pool1-pristine_frozen-training-memory.npz": "5b1fac5bd0e8cdcabdfccf0ecc17204bf21161d9193c27c54636181a71318e21",
+    "pool1-pristine_frozen/initial-memory.npz": "5b1fac5bd0e8cdcabdfccf0ecc17204bf21161d9193c27c54636181a71318e21",
+    "pool1-trained_frozen-training-memory.npz": "d080b700564bc1bfa96adbd2c3dca4690b9bac29a7acbccaa5ef4f164889285c",
+    "pool1-trained_frozen/initial-memory.npz": "d080b700564bc1bfa96adbd2c3dca4690b9bac29a7acbccaa5ef4f164889285c",
+    "pool1-pristine_input_reset-training-memory.npz": "5b1fac5bd0e8cdcabdfccf0ecc17204bf21161d9193c27c54636181a71318e21",
+    "pool1-pristine_input_reset/initial-memory.npz": "5b1fac5bd0e8cdcabdfccf0ecc17204bf21161d9193c27c54636181a71318e21",
+    "pool1-trained_input_reset-training-memory.npz": "d080b700564bc1bfa96adbd2c3dca4690b9bac29a7acbccaa5ef4f164889285c",
+    "pool1-trained_input_reset/initial-memory.npz": "d080b700564bc1bfa96adbd2c3dca4690b9bac29a7acbccaa5ef4f164889285c"
+  },
+  "pools": {
+    "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ": {
+      "pristine_frozen": {
+        "training_memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+        "training_compute_source": "pristine_frozen",
+        "training_compute_reused": false,
+        "inference_memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+        "restored_post_ids": [],
+        "restored_edge_count": 0,
+        "inference_delta_from_training_l2": {
+          "weights": 0.0,
+          "u": 0.0,
+          "w": 0.0
+        },
+        "training_changed_memory": false,
+        "training_delta_l2": {
+          "weights": 0.0,
+          "u": 0.0,
+          "w": 0.0
+        },
+        "training_changed_weights": 0,
+        "development_initial_hash_matches_training": true,
+        "test_checkpoint_matches_training": true,
+        "development_initial_hash_matches_inference": true,
+        "test_checkpoint_matches_inference": true,
+        "frozen_inference_reported_memory_unchanged": true
+      },
+      "trained_frozen": {
+        "training_memory_sha256": "f3cdc1a599475fd56cc0a00e016d6fa8f284e6576aee8006225b0ece40f9d8e5",
+        "training_compute_source": "trained_frozen",
+        "training_compute_reused": false,
+        "inference_memory_sha256": "f3cdc1a599475fd56cc0a00e016d6fa8f284e6576aee8006225b0ece40f9d8e5",
+        "restored_post_ids": [],
+        "restored_edge_count": 0,
+        "inference_delta_from_training_l2": {
+          "weights": 0.0,
+          "u": 0.0,
+          "w": 0.0
+        },
+        "training_changed_memory": true,
+        "training_delta_l2": {
+          "weights": 3.0139247655438814,
+          "u": 0.6534984366578401,
+          "w": 0.5253047301325281
+        },
+        "training_changed_weights": 3050,
+        "development_initial_hash_matches_training": true,
+        "test_checkpoint_matches_training": true,
+        "development_initial_hash_matches_inference": true,
+        "test_checkpoint_matches_inference": true,
+        "frozen_inference_reported_memory_unchanged": true
+      },
+      "pristine_input_reset": {
+        "training_memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+        "training_compute_source": "pristine_frozen",
+        "training_compute_reused": true,
+        "inference_memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+        "restored_post_ids": [],
+        "restored_edge_count": 0,
+        "inference_delta_from_training_l2": {
+          "weights": 0.0,
+          "u": 0.0,
+          "w": 0.0
+        },
+        "training_changed_memory": false,
+        "training_delta_l2": {
+          "weights": 0.0,
+          "u": 0.0,
+          "w": 0.0
+        },
+        "training_changed_weights": 0,
+        "development_initial_hash_matches_training": true,
+        "test_checkpoint_matches_training": true,
+        "development_initial_hash_matches_inference": true,
+        "test_checkpoint_matches_inference": true,
+        "frozen_inference_reported_memory_unchanged": true
+      },
+      "trained_input_reset": {
+        "training_memory_sha256": "f3cdc1a599475fd56cc0a00e016d6fa8f284e6576aee8006225b0ece40f9d8e5",
+        "training_compute_source": "trained_frozen",
+        "training_compute_reused": true,
+        "inference_memory_sha256": "f3cdc1a599475fd56cc0a00e016d6fa8f284e6576aee8006225b0ece40f9d8e5",
+        "restored_post_ids": [],
+        "restored_edge_count": 0,
+        "inference_delta_from_training_l2": {
+          "weights": 0.0,
+          "u": 0.0,
+          "w": 0.0
+        },
+        "training_changed_memory": true,
+        "training_delta_l2": {
+          "weights": 3.0139247655438814,
+          "u": 0.6534984366578401,
+          "w": 0.5253047301325281
+        },
+        "training_changed_weights": 3050,
+        "development_initial_hash_matches_training": true,
+        "test_checkpoint_matches_training": true,
+        "development_initial_hash_matches_inference": true,
+        "test_checkpoint_matches_inference": true,
+        "frozen_inference_reported_memory_unchanged": true
+      }
+    },
+    "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu": {
+      "pristine_frozen": {
+        "training_memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+        "training_compute_source": "pristine_frozen",
+        "training_compute_reused": false,
+        "inference_memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+        "restored_post_ids": [],
+        "restored_edge_count": 0,
+        "inference_delta_from_training_l2": {
+          "weights": 0.0,
+          "u": 0.0,
+          "w": 0.0
+        },
+        "training_changed_memory": false,
+        "training_delta_l2": {
+          "weights": 0.0,
+          "u": 0.0,
+          "w": 0.0
+        },
+        "training_changed_weights": 0,
+        "development_initial_hash_matches_training": true,
+        "test_checkpoint_matches_training": true,
+        "development_initial_hash_matches_inference": true,
+        "test_checkpoint_matches_inference": true,
+        "frozen_inference_reported_memory_unchanged": true
+      },
+      "trained_frozen": {
+        "training_memory_sha256": "2818a2679ac45ed3bc3e68e2ab09eddfa445faba54ef19f962e33fb30cddcd0c",
+        "training_compute_source": "trained_frozen",
+        "training_compute_reused": false,
+        "inference_memory_sha256": "2818a2679ac45ed3bc3e68e2ab09eddfa445faba54ef19f962e33fb30cddcd0c",
+        "restored_post_ids": [],
+        "restored_edge_count": 0,
+        "inference_delta_from_training_l2": {
+          "weights": 0.0,
+          "u": 0.0,
+          "w": 0.0
+        },
+        "training_changed_memory": true,
+        "training_delta_l2": {
+          "weights": 0.4554371097983703,
+          "u": 0.032805956953912176,
+          "w": 0.029802316301676995
+        },
+        "training_changed_weights": 5,
+        "development_initial_hash_matches_training": true,
+        "test_checkpoint_matches_training": true,
+        "development_initial_hash_matches_inference": true,
+        "test_checkpoint_matches_inference": true,
+        "frozen_inference_reported_memory_unchanged": true
+      },
+      "pristine_input_reset": {
+        "training_memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+        "training_compute_source": "pristine_frozen",
+        "training_compute_reused": true,
+        "inference_memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+        "restored_post_ids": [],
+        "restored_edge_count": 0,
+        "inference_delta_from_training_l2": {
+          "weights": 0.0,
+          "u": 0.0,
+          "w": 0.0
+        },
+        "training_changed_memory": false,
+        "training_delta_l2": {
+          "weights": 0.0,
+          "u": 0.0,
+          "w": 0.0
+        },
+        "training_changed_weights": 0,
+        "development_initial_hash_matches_training": true,
+        "test_checkpoint_matches_training": true,
+        "development_initial_hash_matches_inference": true,
+        "test_checkpoint_matches_inference": true,
+        "frozen_inference_reported_memory_unchanged": true
+      },
+      "trained_input_reset": {
+        "training_memory_sha256": "2818a2679ac45ed3bc3e68e2ab09eddfa445faba54ef19f962e33fb30cddcd0c",
+        "training_compute_source": "trained_frozen",
+        "training_compute_reused": true,
+        "inference_memory_sha256": "2818a2679ac45ed3bc3e68e2ab09eddfa445faba54ef19f962e33fb30cddcd0c",
+        "restored_post_ids": [],
+        "restored_edge_count": 0,
+        "inference_delta_from_training_l2": {
+          "weights": 0.0,
+          "u": 0.0,
+          "w": 0.0
+        },
+        "training_changed_memory": true,
+        "training_delta_l2": {
+          "weights": 0.4554371097983703,
+          "u": 0.032805956953912176,
+          "w": 0.029802316301676995
+        },
+        "training_changed_weights": 5,
+        "development_initial_hash_matches_training": true,
+        "test_checkpoint_matches_training": true,
+        "development_initial_hash_matches_inference": true,
+        "test_checkpoint_matches_inference": true,
+        "frozen_inference_reported_memory_unchanged": true
+      }
+    }
+  },
+  "interpretation": "Checkpoint equality verifies saved weights and efficacy memory; it does not prove useful learning or profitable trading."
+}

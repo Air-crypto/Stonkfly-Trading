@@ -1,0 +1,456 @@
+{
+  "schema": 1,
+  "source": "sealed_retrospective_market_replay",
+  "config": {
+    "preset": "market_replay",
+    "view": "original",
+    "news": "none",
+    "eta": 0.001,
+    "learning": false,
+    "reinforcement_only": false,
+    "restore_post_ids": [],
+    "activity_reset": "conductance"
+  },
+  "upstream_commit": "78ef3e05ab0fa086032098558d893667068944a0",
+  "graph": {
+    "neurons": 166700,
+    "edges": 25582938,
+    "plastic_edges": 7835
+  },
+  "native_build": {
+    "model": "stonkfly-dual-compartment-v1",
+    "source_sha256": "e2d4d584f4633613277bb1bf6ea7ba20855c01a332ae2e9344ed7782604c8509",
+    "binary_sha256": "9c0768fc4f8e34ba730a31ef04a5de958e7d4276c1552f30ec6f2c2eddbfa1b1",
+    "flags": [
+      "-O3",
+      "-std=c++17",
+      "-shared",
+      "-fPIC"
+    ]
+  },
+  "seconds": 16.78362397799998,
+  "events": [
+    {
+      "side": "BUY",
+      "left_hz": 30.0,
+      "right_hz": 36.0,
+      "difference_hz": 6.0,
+      "gate_spikes": 22,
+      "cell_ids": {
+        "left": [
+          "10162"
+        ],
+        "right": [
+          "10059"
+        ],
+        "gate": [
+          "10527",
+          "555871"
+        ]
+      },
+      "brain_ms": 500.0,
+      "compute_seconds": 1.4525611630000412,
+      "stimulus": "none",
+      "stimulus_ms": 0.0,
+      "reward_spikes": 0,
+      "aversive_spikes": 18,
+      "KC_spikes": 16,
+      "total_spikes": 365132,
+      "spike_sha256": "113a631144b32dc9b0eff4e144c7e3c4658b7a05eaeeba17aa116b3f3f9a25be",
+      "input_sha256": "59cbbaf132dfe67e12995960c8209c37bd61215856c85e238e5900586b1fd841",
+      "memory": {
+        "plastic_edges": 7835,
+        "changed_edges": 0,
+        "mean_efficacy": 1.0,
+        "minimum_efficacy": 1.0,
+        "sha256": "9f9c000fb9819eb99c214cc1da747d44e13f009bc4c3454f6b7dfe4ee669acf7",
+        "model": "stonkfly-dual-compartment-v1"
+      },
+      "diagnostics": {
+        "loss": null,
+        "backprop_gradient": null,
+        "plasticity_enabled": false,
+        "changed_edges": 0,
+        "weight_delta_l2": 0.0,
+        "max_abs_delta": 0.0,
+        "efficacy_min": 1.0,
+        "efficacy_max": 1.0,
+        "clipped_edges": 0
+      },
+      "activity_boundary": {
+        "mode": "initial",
+        "requested_mode": "conductance",
+        "observation": 1,
+        "target_fields": [],
+        "before_clock": {
+          "cursor": 0,
+          "sim_ms": 0.0,
+          "total_spikes": 0
+        },
+        "after_clock": {
+          "cursor": 0,
+          "sim_ms": 0.0,
+          "total_spikes": 0
+        },
+        "artifact_sha256": "141a5a129c0cf4c7733f1fb61d5962bdc941c021cfddda2316b6570c65e9dfc3",
+        "target_ids": [],
+        "target_indices": [],
+        "all_weight_sha256": "40a2e78d7299197d24ba03a24c94a8e1cd0eb45a653d69f001fc3acee2fdc779",
+        "memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+        "changed_fields": [],
+        "before_sha256": {
+          "v": "275bd935e4f1a56cbc2ca22b8f258f1cef511894f42f531e9a52476dd7b02946",
+          "g": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+          "refractory": "fe721ce07571ce5e6d09fc093440dfdbca4d3e360d5ddf903e3641aa4c6d0977",
+          "drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+          "previous_drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+          "queue": "56185bbe1f2586ea5668c759f2396dc7693f8b3b21d7015d24db8f37c2958453",
+          "queue_count": "f2c0d5456a983ecd12e314fcfa19879179fc8424343baeb1325457472ae85601",
+          "counts": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+          "luminance": "c411c207fb379b3beccac216c633ae620c51f23c78971c7d028d0266aee0cdc7",
+          "active": "bd5ad58a15d4ad9db612f07addacd70bf96d075969aa35f0c4a9e159124b5c26",
+          "active_flag": "557e5066485a8948d9ba5408da8359bdea92f316cc4574af08427bb77dd3a23e",
+          "nactive": "bc1b961d22c114f540586ed92bd23822a05caa6b98e73413f41f13e2b0deac6d",
+          "last": "543e44862a6bae300a72f840ceff3f11ac91905d58b046fb6ffbd4653c0b052c",
+          "eligibility": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+          "eligibility_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+          "modulation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+          "modulation_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+          "adaptation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+          "rate_kc": "9cf5a5bbc54b97f49e0c591d653fd61cadc8b2d88dbc2fde77c0035b7c42055d",
+          "rate_dan": "b707241545a346265aab1ffb32ff64b55bf8f8dc1b56a46ef33ce3d15db11d33",
+          "r8_light": "ac0a4091bbd9d73854a2d4a2944b5f8bb40cd7039d89d5575cb2629710c8c160"
+        },
+        "after_sha256": {
+          "v": "275bd935e4f1a56cbc2ca22b8f258f1cef511894f42f531e9a52476dd7b02946",
+          "g": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+          "refractory": "fe721ce07571ce5e6d09fc093440dfdbca4d3e360d5ddf903e3641aa4c6d0977",
+          "drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+          "previous_drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+          "queue": "56185bbe1f2586ea5668c759f2396dc7693f8b3b21d7015d24db8f37c2958453",
+          "queue_count": "f2c0d5456a983ecd12e314fcfa19879179fc8424343baeb1325457472ae85601",
+          "counts": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+          "luminance": "c411c207fb379b3beccac216c633ae620c51f23c78971c7d028d0266aee0cdc7",
+          "active": "bd5ad58a15d4ad9db612f07addacd70bf96d075969aa35f0c4a9e159124b5c26",
+          "active_flag": "557e5066485a8948d9ba5408da8359bdea92f316cc4574af08427bb77dd3a23e",
+          "nactive": "bc1b961d22c114f540586ed92bd23822a05caa6b98e73413f41f13e2b0deac6d",
+          "last": "543e44862a6bae300a72f840ceff3f11ac91905d58b046fb6ffbd4653c0b052c",
+          "eligibility": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+          "eligibility_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+          "modulation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+          "modulation_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+          "adaptation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+          "rate_kc": "9cf5a5bbc54b97f49e0c591d653fd61cadc8b2d88dbc2fde77c0035b7c42055d",
+          "rate_dan": "b707241545a346265aab1ffb32ff64b55bf8f8dc1b56a46ef33ce3d15db11d33",
+          "r8_light": "ac0a4091bbd9d73854a2d4a2944b5f8bb40cd7039d89d5575cb2629710c8c160"
+        }
+      },
+      "market_decision_ts": 1789226100,
+      "equity_reward_usd": 0,
+      "plasticity_enabled": false,
+      "weight_delta_l2": 0.0
+    },
+    {
+      "side": "BUY",
+      "left_hz": 26.0,
+      "right_hz": 36.0,
+      "difference_hz": 10.0,
+      "gate_spikes": 10,
+      "cell_ids": {
+        "left": [
+          "10162"
+        ],
+        "right": [
+          "10059"
+        ],
+        "gate": [
+          "10527",
+          "555871"
+        ]
+      },
+      "brain_ms": 1000.0,
+      "compute_seconds": 1.6763331530000016,
+      "stimulus": "none",
+      "stimulus_ms": 0.0,
+      "reward_spikes": 0,
+      "aversive_spikes": 12,
+      "KC_spikes": 11,
+      "total_spikes": 382299,
+      "spike_sha256": "74003ffd544ef8dfc45229ee4a81ef3c48da8b0c0ba258f187f07adec3bfdfd3",
+      "input_sha256": "c98e3ddcb32ba5e70731f77415dd23863d617ecbd3ef424a5177882061e44cc5",
+      "memory": {
+        "plastic_edges": 7835,
+        "changed_edges": 0,
+        "mean_efficacy": 1.0,
+        "minimum_efficacy": 1.0,
+        "sha256": "9f9c000fb9819eb99c214cc1da747d44e13f009bc4c3454f6b7dfe4ee669acf7",
+        "model": "stonkfly-dual-compartment-v1"
+      },
+      "diagnostics": {
+        "loss": null,
+        "backprop_gradient": null,
+        "plasticity_enabled": false,
+        "changed_edges": 0,
+        "weight_delta_l2": 0.0,
+        "max_abs_delta": 0.0,
+        "efficacy_min": 1.0,
+        "efficacy_max": 1.0,
+        "clipped_edges": 0
+      },
+      "activity_boundary": {
+        "mode": "conductance",
+        "requested_mode": "conductance",
+        "observation": 2,
+        "target_fields": [
+          "g"
+        ],
+        "before_clock": {
+          "cursor": 5000,
+          "sim_ms": 500.0,
+          "total_spikes": 365132
+        },
+        "after_clock": {
+          "cursor": 5000,
+          "sim_ms": 500.0,
+          "total_spikes": 365132
+        },
+        "artifact_sha256": "9e6efb14b3c8e6213d4792216b2113c69efa43b0f5f63e726772fe89659004a0",
+        "target_ids": [],
+        "target_indices": [],
+        "all_weight_sha256": "40a2e78d7299197d24ba03a24c94a8e1cd0eb45a653d69f001fc3acee2fdc779",
+        "memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+        "changed_fields": [
+          "g"
+        ],
+        "before_sha256": {
+          "v": "cedb3ff9da9fc2c57a4fbff9a3cfe6ac413f72d72f8cf27f213dcb80b118efb4",
+          "g": "3102cb590857671cddc6aa5461195ad66044bc7e7fa45bc7ac44a8a3c1f49fe5",
+          "refractory": "781eb040f073d8886216ea56015ec77460591c7adb8aedba9478ed2f274bdd28",
+          "drive": "d41cc8569faa11c869dc4412980309109c8cf7269a72563c5acedcdfac6eb9ba",
+          "previous_drive": "d41cc8569faa11c869dc4412980309109c8cf7269a72563c5acedcdfac6eb9ba",
+          "queue": "665dada8af0ab9ca799d6a25f41fe33cd0e0de561da8125c5d6089e361898e30",
+          "queue_count": "ea4d30f84ddde4f38e70dd7c5a1f848a21aeee948d191af8ee9aa90708df84c9",
+          "counts": "113a631144b32dc9b0eff4e144c7e3c4658b7a05eaeeba17aa116b3f3f9a25be",
+          "luminance": "1a9e3fb5c0543fa2b8379c3ec221a82a0d86c11d1b9c93ddf960ad818eb88744",
+          "active": "6f8fe4e1450e88616701e4057324b809f18dce38d938a16b966bd5a3d36d6c61",
+          "active_flag": "981f8a6b7e920ae8158cbdbaefba0bb8058523614267c7aaafa8e2a13b537759",
+          "nactive": "02602f2b9443374298567543700a9f991e9d06d0490850bbd20672a2f983b4dd",
+          "last": "4112e44a3a9c24b3c8165aea46f24334d137182659f38a2c313bb1b414e653c2",
+          "eligibility": "f601280250a959792e40a7264f38c0bd29a7e457c4024141decba9b086168a41",
+          "eligibility_last": "17b4abd182e75223c404c6cc6f5aac418607832ee994dfc3ddc2143d507df7e7",
+          "modulation": "2d949854d9fe53e5f2908519a98805316518abc8b03111199e1a06b5907e0e42",
+          "modulation_last": "8c867e55ba371f584ec47128be6fb47ce8a1285af8f625de329f2f01c0c98135",
+          "adaptation": "7b8d716733a464010f41c32bdd4626a5950a63da15f6a08f21510fab5be7e3c9",
+          "rate_kc": "60a1a2359683eeb16ff78b10a444d6795e03dc19aedae776fb36b146e4d8abf3",
+          "rate_dan": "2ce150f08da67ca34b1b3845d7d56005fb9e760f9e3eb37f6db22a8d5dcb99ea",
+          "r8_light": "4cb4a326f54190d567591f9385aefb0d55bb010d292bc88b83c495cee8bde144"
+        },
+        "after_sha256": {
+          "v": "cedb3ff9da9fc2c57a4fbff9a3cfe6ac413f72d72f8cf27f213dcb80b118efb4",
+          "g": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+          "refractory": "781eb040f073d8886216ea56015ec77460591c7adb8aedba9478ed2f274bdd28",
+          "drive": "d41cc8569faa11c869dc4412980309109c8cf7269a72563c5acedcdfac6eb9ba",
+          "previous_drive": "d41cc8569faa11c869dc4412980309109c8cf7269a72563c5acedcdfac6eb9ba",
+          "queue": "665dada8af0ab9ca799d6a25f41fe33cd0e0de561da8125c5d6089e361898e30",
+          "queue_count": "ea4d30f84ddde4f38e70dd7c5a1f848a21aeee948d191af8ee9aa90708df84c9",
+          "counts": "113a631144b32dc9b0eff4e144c7e3c4658b7a05eaeeba17aa116b3f3f9a25be",
+          "luminance": "1a9e3fb5c0543fa2b8379c3ec221a82a0d86c11d1b9c93ddf960ad818eb88744",
+          "active": "6f8fe4e1450e88616701e4057324b809f18dce38d938a16b966bd5a3d36d6c61",
+          "active_flag": "981f8a6b7e920ae8158cbdbaefba0bb8058523614267c7aaafa8e2a13b537759",
+          "nactive": "02602f2b9443374298567543700a9f991e9d06d0490850bbd20672a2f983b4dd",
+          "last": "4112e44a3a9c24b3c8165aea46f24334d137182659f38a2c313bb1b414e653c2",
+          "eligibility": "f601280250a959792e40a7264f38c0bd29a7e457c4024141decba9b086168a41",
+          "eligibility_last": "17b4abd182e75223c404c6cc6f5aac418607832ee994dfc3ddc2143d507df7e7",
+          "modulation": "2d949854d9fe53e5f2908519a98805316518abc8b03111199e1a06b5907e0e42",
+          "modulation_last": "8c867e55ba371f584ec47128be6fb47ce8a1285af8f625de329f2f01c0c98135",
+          "adaptation": "7b8d716733a464010f41c32bdd4626a5950a63da15f6a08f21510fab5be7e3c9",
+          "rate_kc": "60a1a2359683eeb16ff78b10a444d6795e03dc19aedae776fb36b146e4d8abf3",
+          "rate_dan": "2ce150f08da67ca34b1b3845d7d56005fb9e760f9e3eb37f6db22a8d5dcb99ea",
+          "r8_light": "4cb4a326f54190d567591f9385aefb0d55bb010d292bc88b83c495cee8bde144"
+        }
+      },
+      "market_decision_ts": 1789226400,
+      "equity_reward_usd": 0,
+      "plasticity_enabled": false,
+      "weight_delta_l2": 0.0
+    },
+    {
+      "side": "BUY",
+      "left_hz": 30.0,
+      "right_hz": 34.0,
+      "difference_hz": 4.0,
+      "gate_spikes": 8,
+      "cell_ids": {
+        "left": [
+          "10162"
+        ],
+        "right": [
+          "10059"
+        ],
+        "gate": [
+          "10527",
+          "555871"
+        ]
+      },
+      "brain_ms": 1500.0,
+      "compute_seconds": 2.9166751720000548,
+      "stimulus": "none",
+      "stimulus_ms": 0.0,
+      "reward_spikes": 0,
+      "aversive_spikes": 57,
+      "KC_spikes": 3996,
+      "total_spikes": 501005,
+      "spike_sha256": "5ab340b53a38648cbdb43c0b14842cb3a0210e8403ce4d6f090cbec9b8803472",
+      "input_sha256": "eed4708825f94a658917c097eb88868328e8be99e28622e3a6d622a8670f62ed",
+      "memory": {
+        "plastic_edges": 7835,
+        "changed_edges": 0,
+        "mean_efficacy": 1.0,
+        "minimum_efficacy": 1.0,
+        "sha256": "9f9c000fb9819eb99c214cc1da747d44e13f009bc4c3454f6b7dfe4ee669acf7",
+        "model": "stonkfly-dual-compartment-v1"
+      },
+      "diagnostics": {
+        "loss": null,
+        "backprop_gradient": null,
+        "plasticity_enabled": false,
+        "changed_edges": 0,
+        "weight_delta_l2": 0.0,
+        "max_abs_delta": 0.0,
+        "efficacy_min": 1.0,
+        "efficacy_max": 1.0,
+        "clipped_edges": 0
+      },
+      "activity_boundary": {
+        "mode": "conductance",
+        "requested_mode": "conductance",
+        "observation": 3,
+        "target_fields": [
+          "g"
+        ],
+        "before_clock": {
+          "cursor": 10000,
+          "sim_ms": 1000.0,
+          "total_spikes": 747431
+        },
+        "after_clock": {
+          "cursor": 10000,
+          "sim_ms": 1000.0,
+          "total_spikes": 747431
+        },
+        "artifact_sha256": "2e2fa5391444f1d681dbefb1fda1f45760369515304108a1d16f4e255d731516",
+        "target_ids": [],
+        "target_indices": [],
+        "all_weight_sha256": "40a2e78d7299197d24ba03a24c94a8e1cd0eb45a653d69f001fc3acee2fdc779",
+        "memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+        "changed_fields": [
+          "g"
+        ],
+        "before_sha256": {
+          "v": "5071a98fd5609ce5c471671f04d4501d232776a51e781528fc5219c200ba085a",
+          "g": "3d89efb4cb43c22f4e90cd68d94d6301fec67460bbf895ba087f03a43a6130c1",
+          "refractory": "5cff7a7da6a010cd1025fb3abd7742ddaf031d957f78033840596e907476138e",
+          "drive": "19a6909c0966e8b1ce7accc03b01c9d45e9808217c8985d31e1044f26fa815bb",
+          "previous_drive": "19a6909c0966e8b1ce7accc03b01c9d45e9808217c8985d31e1044f26fa815bb",
+          "queue": "9447761aef9e9aac47219b55acac0878c82c7bc67a053343fb393b03881920d5",
+          "queue_count": "3af7298e78e0170978ec05cd83ed6419646741f6a341fbfea43aecc8bd82e9f2",
+          "counts": "74003ffd544ef8dfc45229ee4a81ef3c48da8b0c0ba258f187f07adec3bfdfd3",
+          "luminance": "e229b09c176efaddb31c1dd4b46671b6029b6118ba106f823bd6a3b632e7532d",
+          "active": "681a4bf6dbc6a12138b4991c03879e57f75933a523459bf0be836ea1dd152270",
+          "active_flag": "7055e946cf7bdfea961da7c7342f60ac55423efa4b493c717ca1ca333109aae1",
+          "nactive": "9508f52f23a03fabd45a1877783ce0548edeeb8a50615ba37110301edc1833ba",
+          "last": "dbfad5d1c62988f9cf78e1ecfe5b174ff59e90f51542567368ef5d24e310197b",
+          "eligibility": "0b9ac55c3b4df7a14b08a54bab8d44e98293f69aa512b871b34fb4c06e9e625a",
+          "eligibility_last": "c3830275ed6e8065adeb66e22caa5118c9b86f31451c340d363d603fabb7fb91",
+          "modulation": "90ea7889cef964130d82f4cd7c74b272d7a4ac6adab469d4319d705b498968d8",
+          "modulation_last": "8cd1c4c58a257bb9ecec9f03a3e295382b5b7893e9a3d11a247fbd49f411e687",
+          "adaptation": "2546687fbbeea179e1b5ee19fa9f9fa6d1ce49cec4268f88681528de2a60dad5",
+          "rate_kc": "c34c505932bed84551a573b168409d8cb6470fc6708ed93e87ec088471469215",
+          "rate_dan": "c947098f3baf8a1deafb67c4b4319cc7cb8b60c7cb3699f14308f9a569fb4172",
+          "r8_light": "19d065abddcee9d007754c002b12e3636453db5ea46fe9cc5d8dbcc4500e59f3"
+        },
+        "after_sha256": {
+          "v": "5071a98fd5609ce5c471671f04d4501d232776a51e781528fc5219c200ba085a",
+          "g": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+          "refractory": "5cff7a7da6a010cd1025fb3abd7742ddaf031d957f78033840596e907476138e",
+          "drive": "19a6909c0966e8b1ce7accc03b01c9d45e9808217c8985d31e1044f26fa815bb",
+          "previous_drive": "19a6909c0966e8b1ce7accc03b01c9d45e9808217c8985d31e1044f26fa815bb",
+          "queue": "9447761aef9e9aac47219b55acac0878c82c7bc67a053343fb393b03881920d5",
+          "queue_count": "3af7298e78e0170978ec05cd83ed6419646741f6a341fbfea43aecc8bd82e9f2",
+          "counts": "74003ffd544ef8dfc45229ee4a81ef3c48da8b0c0ba258f187f07adec3bfdfd3",
+          "luminance": "e229b09c176efaddb31c1dd4b46671b6029b6118ba106f823bd6a3b632e7532d",
+          "active": "681a4bf6dbc6a12138b4991c03879e57f75933a523459bf0be836ea1dd152270",
+          "active_flag": "7055e946cf7bdfea961da7c7342f60ac55423efa4b493c717ca1ca333109aae1",
+          "nactive": "9508f52f23a03fabd45a1877783ce0548edeeb8a50615ba37110301edc1833ba",
+          "last": "dbfad5d1c62988f9cf78e1ecfe5b174ff59e90f51542567368ef5d24e310197b",
+          "eligibility": "0b9ac55c3b4df7a14b08a54bab8d44e98293f69aa512b871b34fb4c06e9e625a",
+          "eligibility_last": "c3830275ed6e8065adeb66e22caa5118c9b86f31451c340d363d603fabb7fb91",
+          "modulation": "90ea7889cef964130d82f4cd7c74b272d7a4ac6adab469d4319d705b498968d8",
+          "modulation_last": "8cd1c4c58a257bb9ecec9f03a3e295382b5b7893e9a3d11a247fbd49f411e687",
+          "adaptation": "2546687fbbeea179e1b5ee19fa9f9fa6d1ce49cec4268f88681528de2a60dad5",
+          "rate_kc": "c34c505932bed84551a573b168409d8cb6470fc6708ed93e87ec088471469215",
+          "rate_dan": "c947098f3baf8a1deafb67c4b4319cc7cb8b60c7cb3699f14308f9a569fb4172",
+          "r8_light": "19d065abddcee9d007754c002b12e3636453db5ea46fe9cc5d8dbcc4500e59f3"
+        }
+      },
+      "market_decision_ts": 1789226700,
+      "equity_reward_usd": 0,
+      "plasticity_enabled": false,
+      "weight_delta_l2": 0.0
+    }
+  ],
+  "market_timeline": [
+    {
+      "decision_ts": 1789226100,
+      "quote_ts": 1789225951.3178043,
+      "available": true,
+      "terminal": false,
+      "action": "BUY",
+      "observation": "observed",
+      "fill_status": "hold",
+      "fill_reason": null,
+      "equity": 250.0
+    },
+    {
+      "decision_ts": 1789226400,
+      "quote_ts": 1789226322.5889392,
+      "available": true,
+      "terminal": false,
+      "action": "BUY",
+      "observation": "observed",
+      "fill_status": "filled",
+      "fill_reason": null,
+      "equity": 248.64535614009162
+    },
+    {
+      "decision_ts": 1789226700,
+      "quote_ts": 1789226622.7252238,
+      "available": true,
+      "terminal": false,
+      "action": "BUY",
+      "observation": "observed",
+      "fill_status": "filled",
+      "fill_reason": null,
+      "equity": 248.25334072155087
+    },
+    {
+      "decision_ts": 1789227000,
+      "quote_ts": 1789226920.7928784,
+      "available": true,
+      "terminal": true,
+      "action": null,
+      "observation": "terminal_mark",
+      "fill_status": "filled",
+      "fill_reason": null,
+      "equity": 247.43688402210702
+    }
+  ],
+  "visual_encoding": {
+    "view": "original",
+    "price_scale": "upstream_window_range"
+  },
+  "restoration": null,
+  "initial_memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+  "final_memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+  "interpretation": "Recorded market replay, isolated paper account. No executable DEX or monthly-return claim."
+}

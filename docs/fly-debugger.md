@@ -2044,3 +2044,72 @@ all model submissions. Before market08 results were available, it passed against
 a full-network synthetic integration fixture containing unavailable quote slots:
 four recordings, sixteen timeline slots and eight observed reset boundaries.
 Synthetic regression outcomes are not market evidence.
+
+## Eighth market replay result
+
+The [registered plan](../reports/fly-market-study-08-plan.json) ran once in the
+scheduled cloud worker after a complete snapshot arrived. The
+[report](../reports/fly-market-study-08.json) retains every condition; no variant
+passed development and no policy was promoted. Each phase starts with $1,000
+across two $250 active sleeves and $500 idle cash. DEX costs are included;
+hosting is excluded from these balances.
+
+| Condition | Development | Test | Test fills | Test fees |
+|---|---:|---:|---:|---:|
+| Pristine, carried activity | $999.798546 | $999.788715 | 5 | $1.5625 |
+| Trained, carried activity | $998.443902 | $1,001.143359 | 4 | $1.2500 |
+| Pristine, input reset | $998.356712 | $1,000.979972 | 6 | $1.8750 |
+| Trained, input reset | $998.356712 | $1,000.979972 | 6 | $1.8750 |
+
+Only trained/input-reset was eligible for selection, and it had to beat cash and
+all three controls on development. It failed that rule. Its test result tied
+pristine/input-reset and trailed trained/carry by $0.163386. The small positive
+test balances do not establish learned or monthly profitability.
+
+![All four market08 conditions](assets/fly-market-study-08.png)
+
+The collector outage left the 14:45 and 14:50 training slots unavailable in both
+pools. Training therefore contained **one observed input per pool**, at the
+14:55 decision, and neither received a reward or aversive stimulus. The terminal
+mark/fill at 15:00 is not another neural observation. Training changed 3,050
+weights in pool 0 and five in pool 1, but those were activity-dependent changes
+without P&L reinforcement. This experiment cannot establish whether reward-based
+training improves the strategy. Development and test each observed all six slots
+per condition. See [coverage and paired counts](../reports/fly-market-study-08-coverage.json).
+
+Pool 0 exposes the mechanism. Trained/carry decoded BUY–HOLD–HOLD in test;
+trained/input-reset decoded BUY–BUY–BUY. At the second observation (15:20 UTC),
+both had the same +8 Hz direction difference. The reset produced one gate spike
+in cell **555871**, changing HOLD to BUY. It appeared in the 10–20 ms bin after
+the observation began. Immediately before that image, the global intervention
+changed this cell's input state from `g=61.413399` to zero and preserved its
+`v=-50.992752`; all other cells' input state was reset too. This is not an
+isolated intervention on cell 555871.
+
+![The one recorded gate spike with and without global input reset](assets/fly-market08-gate.png)
+
+![Actual before and after state at the observation boundary](assets/fly-market08-boundary.png)
+
+After starting the included viewer, [inspect that exact comparison](http://127.0.0.1:8765/?run=market08-pool0-trained_input_reset&step=1&bin=1&neuron=555871&edge=8022240&compare=market08-pool0-trained_frozen).
+The unchanged selected weight and stored memory remain visible alongside the
+different activity. Both reset variants made the same trades despite different
+full spike-count records on pool 0's three test observations. Pool 1's reset
+variants had identical full counts. Recovering activity did not produce a
+decision advantage from trained memory.
+
+The [memory audit](../reports/fly-market-study-08-memory-audit.json) verifies
+shared training checkpoints and unchanged inference memory. The
+[state audit](../reports/fly-market-study-08-activity-audit.json) verifies all
+48 development/test boundaries against actual arrays and reconstructs the
+sensory inputs. An [independent snapshot check](../reports/fly-market-study-08-snapshot-audit.json)
+compares the earliest complete local snapshot with the later cloud snapshot:
+all registered data and rules match exactly; only snapshot metadata differs.
+Browser checks passed on eight recordings, 32 timeline slots and 24 displayed
+test boundaries, with no JavaScript errors or model submissions. Raw arrays
+stay in the cloud/private output; the eight portable views are included under
+`examples/fly-debugger/market08-*`.
+
+The worker's conservative compute estimate for this study was $0.023914, not a
+provider invoice. The next useful training comparison needs recorded trading
+reward exposure; another single-observation plasticity replay would leave that
+question unanswered.
