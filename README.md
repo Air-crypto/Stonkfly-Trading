@@ -222,6 +222,9 @@ evidence that the intervention earns money.
 The guide includes a [dated registration clarification](docs/fly-online-comparison.md#registration-description-clarification)
 and a [provisional quote-coverage check](docs/fly-online-comparison.md#check-coverage-before-the-window-closes).
 The original registration and executed comparison remain unchanged.
+The [September 12, 22:39 UTC coverage snapshot](reports/fly-online-development-coverage-11.json)
+meets the development-data minimum: ALL has 24 usable slots and baton 23 of 24.
+Test collection has begun; neural evaluations and trading results remain pending.
 
 The [full-window diagnostic figures](docs/fly-online-comparison.md#compare-the-full-financial-and-neural-timelines)
 align decisions, later fills, gate spikes, weight movement and learning history,

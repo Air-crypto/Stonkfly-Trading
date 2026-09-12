@@ -159,6 +159,24 @@ replace the final sealed-input, news, native-state, and ledger audits.
 The coverage check does not create a neural run, seal an experiment, audit news,
 calculate a return, or select a policy.
 
+The [development-window coverage record](../reports/fly-online-development-coverage-11.json)
+uses a closed snapshot assessed through **22:39 UTC / 5:39 p.m. CDT on September
+12**. The complete development time grid now meets the quote-observation
+minimum for both pools:
+
+| Pool | Usable development decisions | Missing decisions | Pending development decisions | Coverage minimum |
+|---|---:|---:|---:|---|
+| ALL | 24 of 24 | 0 | 0 | Met: at least 18 |
+| baton | 23 of 24 | 1 | 0 | Met: at least 18 |
+
+All 38 rows assessed in the earlier snapshot are unchanged, including baton's
+21:40 UTC activity rejection. Both 22:35 UTC terminal marks have eligible quotes
+and are excluded from the neural-observation counts. The same snapshot contains
+one usable test decision for each pool; their other 23 test decisions remain
+future or unknown at its endpoint. The observer confirms `test_collection`, with
+zero of 16 chunks captured or audited. The four-hour window must still finish
+before sealing, native evaluation, news/price auditing and model selection.
+
 ## Complete recordings and audit
 
 There are 16 complete chunks: two pools × four conditions × two phases.

@@ -1,0 +1,110 @@
+{
+  "status": "development_quote_coverage_met",
+  "recorded_at": 1789252896.81097,
+  "coverage_report_sha256": "033cbda56d1a8f1211d17200e70f63159d7f7ed522eb3d8ee971c8a97ebfe630",
+  "snapshot_download": {
+    "started_at": 1789252837.4249642,
+    "finished_at": 1789252841.207926,
+    "bytes": 60301312,
+    "sha256": "fc9306042b4522e8f0d04997877b6f9f1d9ca9fb61fdf23e149a9271af87df8c"
+  },
+  "snapshot_end": 1789252742.2271638,
+  "assessed_through": 1789252740,
+  "registration_sha256": "078553e736a666d576337f895133409c5ccc18cda8c1edf1cb60d735fc6dfb25",
+  "arming_evidence_sha256": "e508c087f61c403ff0849c79d9177476358f58c10ddd595b547f9c57c4970217",
+  "coverage_source_sha256": "6f986a11d6a2869739c3af523d41ce660449be9f40766d28ed0ddb12ede82ca9",
+  "execution_sources_match_arming": true,
+  "earlier_coverage_sha256": "33ee3e409b88ae7b08432f553c63549db18cf6681fb0c34b6f2139c2d558639b",
+  "earlier_assessed_rows_checked": 38,
+  "earlier_assessed_rows_unchanged": true,
+  "pools": {
+    "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ": {
+      "symbol": "ALL",
+      "context_ready": true,
+      "development": {
+        "observed": 24,
+        "missing": 0,
+        "pending": 0,
+        "minimum_observations": 18,
+        "maximum_possible_observations": 24,
+        "coverage_gate": "met"
+      },
+      "development_terminal": {
+        "index": 24,
+        "decision_ts": 1789252500,
+        "terminal": true,
+        "quote_ts": 1789252438.7736533,
+        "quote_available": true,
+        "raw_receipt_ts": 1789252438.7736533,
+        "raw_receipt_age_seconds": 61.22634673118591,
+        "raw_rejection": null,
+        "neural_observation_expected": false,
+        "status": "terminal_mark"
+      },
+      "test": {
+        "observed": 1,
+        "missing": 0,
+        "pending": 23,
+        "minimum_observations": 18,
+        "maximum_possible_observations": 24,
+        "coverage_gate": "pending"
+      },
+      "retained_missing_development_rows": []
+    },
+    "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu": {
+      "symbol": "baton",
+      "context_ready": true,
+      "development": {
+        "observed": 23,
+        "missing": 1,
+        "pending": 0,
+        "minimum_observations": 18,
+        "maximum_possible_observations": 23,
+        "coverage_gate": "met"
+      },
+      "development_terminal": {
+        "index": 24,
+        "decision_ts": 1789252500,
+        "terminal": true,
+        "quote_ts": 1789252438.7736533,
+        "quote_available": true,
+        "raw_receipt_ts": 1789252438.7736533,
+        "raw_receipt_age_seconds": 61.22634673118591,
+        "raw_rejection": null,
+        "neural_observation_expected": false,
+        "status": "terminal_mark"
+      },
+      "test": {
+        "observed": 1,
+        "missing": 0,
+        "pending": 23,
+        "minimum_observations": 18,
+        "maximum_possible_observations": 24,
+        "coverage_gate": "pending"
+      },
+      "retained_missing_development_rows": [
+        {
+          "index": 13,
+          "decision_ts": 1789249200,
+          "terminal": false,
+          "quote_ts": 1789249126.6382518,
+          "quote_available": false,
+          "raw_receipt_ts": 1789249126.6382518,
+          "raw_receipt_age_seconds": 73.36174821853638,
+          "raw_rejection": "insufficient_two_sided_activity",
+          "neural_observation_expected": false,
+          "status": "ineligible_quote"
+        }
+      ]
+    }
+  },
+  "study_observer": {
+    "status": "test_collection",
+    "observed_at": 1789252856.3695612,
+    "completed_chunks": 0,
+    "audited_chunks": 0,
+    "total_chunks": 16
+  },
+  "neural_observations_computed": 0,
+  "interpretation": "The development time window has elapsed and both fixed pools meet the expected quote-observation minimum in this closed snapshot. ALL has 24 usable decision slots and baton 23; the earlier activity rejection is retained. Terminal marks do not count as neural observations. Each pool has one assessed test slot and 23 future/unknown test slots. This is not a sealed plan, news or raw-neural audit, model evaluation, return, or selection. Full-window sealing and all 16 independently audited chunks remain pending."
+}
