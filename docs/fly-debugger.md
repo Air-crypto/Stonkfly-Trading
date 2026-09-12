@@ -2206,3 +2206,33 @@ optional tests skipped. A separate full-network regression passed with 32
 observations, including partial and completely missing phases. Its browser check
 covered 12 recordings and 48 timeline slots with no page errors or model
 submissions. These are synthetic regression fixtures, not study 09 results.
+
+
+### Plot the two-phase paper-memory result
+
+After the study observer has written its audited `report.json`, generate a PNG,
+SVG or PDF using the optional plotting dependency:
+
+```sh
+uv run --locked --extra plots python -m paperlab.fly_paper_figure \
+  runs/research-market-09/report.json \
+  --out runs/research-market-09/equity-and-memory.png
+```
+
+The figure shows separate development/test equity curves on the same dollar
+scale, actual fills and fees, observed-slot coverage, pinned training exposure,
+and the saved development choice. Red crosses identify unavailable pool quotes.
+The lower panel subtracts pristine equity from trained equity **within the same
+reset setting**, so an input-reset effect cannot be mislabeled as a training
+benefit. Overlapping curves remain separate rows in the numerical table.
+A positive difference applies only to that short interval; test results do not
+change selection. Hosting is excluded and unavailable inventory retains the
+experiment's conservative stress valuation.
+
+The plotting command performs no model inference or cloud calls. It checks the
+auditor's required verification fields and reconciles totals, fees, timestamps
+and selection against the report's ledgers. These checks supplement, rather
+than replace, the observer's raw-array, price/news and execution audits. It
+rejects a three-phase report instead of inventing a training-account trajectory
+for imported memory. For synthetic regression inputs, pass `--fixture` to mark
+the output prominently; those previews must not be published as market results.

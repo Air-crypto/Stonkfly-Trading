@@ -14,7 +14,10 @@ The next [registered comparison of paper-trained memory](docs/fly-debugger.md#ru
 uses audited reward-exposed checkpoints, identical timestamped news, and separate
 development/test windows. Its observer checks full-neuron decoder counts, fills,
 and input-state resets before exposing recordings. No improvement is established
-until the registered evaluation is completed and assessed.
+until the registered evaluation is completed and assessed. An optional
+[two-phase figure](docs/fly-debugger.md#plot-the-two-phase-paper-memory-result)
+shows matched training effects, fees and missing observations from the audited
+report.
 
 ## Inspect the fly
 
