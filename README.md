@@ -34,6 +34,12 @@ source verification, saved-call recovery, and run steps.
 The [registered market runner](docs/fly-debugger.md#evaluate-restoration-on-a-new-market-window)
 shares equivalent training checkpoints and audits each separate inference run.
 
+The comparison now overlays the selected neuron’s voltage and spike bins, plus
+the same connection’s weight. It matches identities and observation times so
+retained memory differences remain visible even when inference is frozen.
+
+![Restored versus trained memory: paired voltage, spikes, and connection weight](docs/assets/fly-paired-traces.png)
+
 The diagnostics have identified concrete limitations:
 
 - The original chart can render small and large percentage moves identically.

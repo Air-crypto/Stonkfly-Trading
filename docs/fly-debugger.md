@@ -1293,3 +1293,43 @@ The model's full graph, fixed decoder, costs, and promotion gate remain in force
 Restoration changes neural memory; it never substitutes a chosen trade for the
 network's output. The scheduled paper policy is unchanged while these variants
 are evaluated in isolated accounts.
+
+
+### Compare activity inside an observation
+
+Choose a comparison run, a displayed neuron, and a plastic connection. The
+**Selected neuron & connection across runs** plots overlay voltage, spike counts
+per 10 ms bin, and synaptic weight. Blue is the current run; pink is the comparison.
+Scrubbing time updates both cursors and their numeric differences. Observation
+changes, neuron selection, and connection selection update the plots together.
+
+![Actual paired MBON11 activity and connection weights](assets/fly-paired-traces.png)
+
+This example compares `marketrestore01-restore_10704` with
+`marketrestore01-trained_frozen`, replay 2, body 10704 and edge 9976879. The
+restored weight is 4.675 versus 5.125137 in the trained control; both stay frozen
+throughout inference, while the neuron's voltage and spike bins diverge. The
+intervention restored 2,048 inputs together, so this picture does not isolate
+edge 9976879 as the cause of the output change.
+
+Frames pair by market decision timestamp or synthetic phase/observation index.
+Neurons pair by body ID; connections require the same ID and both endpoint IDs.
+Different displayed subsets may omit a selected cell or connection. Missing
+observations and differing bin grids show an explicit message instead of an
+interpolated overlay. Time is relative to the start of each 500 ms observation,
+not absolute neural time or an exact spike timestamp. The view reports input
+equality and missing/different native builds; a visual difference alone does
+not establish a controlled causal comparison.
+
+For browser regression checks, install Playwright in your Node environment,
+start the included recording server, then run:
+
+```sh
+node scripts/check-fly-paired-view.cjs
+```
+
+Set `FLY_VIEW_URL` for another local port and `CHROMIUM_PATH` for an existing
+Chromium executable. The check verifies identity mapping even when the
+comparison's displayed indices are reordered, cursor updates, missing time
+matches, incompatible bins, clearing stale plots, and mobile layout. It blocks
+`/api/run` and submits no model jobs.
