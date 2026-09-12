@@ -177,6 +177,23 @@ future or unknown at its endpoint. The observer confirms `test_collection`, with
 zero of 16 chunks captured or audited. The four-hour window must still finish
 before sealing, native evaluation, news/price auditing and model selection.
 
+The [test-window coverage note](../reports/fly-online-test-coverage-note-11-01.json)
+checks a later closed snapshot through **23:34 UTC / 6:34 p.m. CDT on September
+12**. Each pool has eleven usable test decisions, one missing decision and twelve
+pending slots. All 60 previously assessed rows remain unchanged. The shared
+missing slot is 23:25 UTC: both selected receipts were fresh (82.24 seconds old),
+but ALL reported only two sells and $424.30 five-minute volume, while baton
+reported two buys and one sell. The unchanged filter requires at least three
+buys, three sells and $1,000 five-minute volume.
+
+Both next eligible receipts arrived at 23:25:15.53 UTC, after the decision. They
+cannot replace the missed slot retroactively. This explains the recorded
+activity rejection; it does not establish on-chain activity or attribute the
+provider's reported values to the observed rate limits. Each pool can still
+reach the eighteen-observation minimum with seven of its twelve pending slots,
+but final test coverage, native evaluation and financial results remain pending.
+The cohort, eligibility rules and deployed source remain unchanged.
+
 ## Complete recordings and audit
 
 There are 16 complete chunks: two pools × four conditions × two phases.

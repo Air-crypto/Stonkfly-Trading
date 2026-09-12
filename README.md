@@ -229,6 +229,9 @@ The original registration and executed comparison remain unchanged.
 The [September 12, 22:39 UTC coverage snapshot](reports/fly-online-development-coverage-11.json)
 meets the development-data minimum: ALL has 24 usable slots and baton 23 of 24.
 Test collection has begun; neural evaluations and trading results remain pending.
+The [23:34 UTC test-coverage check](reports/fly-online-test-coverage-note-11-01.json)
+records eleven usable decisions, one activity rejection and twelve pending slots
+per pool. The gap is preserved; final coverage and model results remain pending.
 
 The [full-window diagnostic figures](docs/fly-online-comparison.md#compare-the-full-financial-and-neural-timelines)
 align decisions, later fills, gate spikes, weight movement and learning history,

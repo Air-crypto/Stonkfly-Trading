@@ -1,0 +1,157 @@
+{
+  "status": "provisional_test_coverage_gap_explained",
+  "recorded_at": 1789256272.2625868,
+  "coverage_report_sha256": "ef7c3193226e17f468e26aaa08199e74ef347cdbfb264560911e348fa0cf6756",
+  "snapshot_download": {
+    "started_at": 1789256146.282441,
+    "finished_at": 1789256149.76574,
+    "bytes": 62853120,
+    "sha256": "aa13dd515768414c11fbc0b90583431e57fa4a3be01d331836b8badf362477e6"
+  },
+  "snapshot_end": 1789256047.4366844,
+  "assessed_through": 1789256040,
+  "registration_sha256": "078553e736a666d576337f895133409c5ccc18cda8c1edf1cb60d735fc6dfb25",
+  "arming_evidence_sha256": "e508c087f61c403ff0849c79d9177476358f58c10ddd595b547f9c57c4970217",
+  "source_sha256": {
+    "paperlab/fly_online_coverage.py": "6f986a11d6a2869739c3af523d41ce660449be9f40766d28ed0ddb12ede82ca9",
+    "paperlab/universe.py": "d495650516e7ef03376c1c83d965b659f76c809c8931b34e160b2c265b426d0d",
+    "paperlab/multi.py": "5ea7ad4f7522475707f4a15eefe094750007a2814f72caad9bea0a9c8076d475",
+    "paperlab/fly_market_study.py": "3432a2db341f99d5ced2d03db5f4812d39067022ea8f2f28be99227bf1f70bb9"
+  },
+  "execution_sources_sha256": "5862a6aebfe9db84c39d94564a230eb8f7bf8e5703bbf19ddaf64d246f529dc0",
+  "execution_sources_match_arming": true,
+  "previous_assessed_rows_checked": 60,
+  "previous_assessed_rows_unchanged": true,
+  "findings": [
+    {
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "symbol": "ALL",
+      "phase": "test",
+      "row": {
+        "index": 10,
+        "decision_ts": 1789255500,
+        "terminal": false,
+        "quote_ts": 1789255417.764548,
+        "quote_available": false,
+        "raw_receipt_ts": 1789255417.764548,
+        "raw_receipt_age_seconds": 82.2354519367218,
+        "raw_rejection": "insufficient_two_sided_activity",
+        "neural_observation_expected": false,
+        "status": "ineligible_quote"
+      },
+      "selected_receipt": {
+        "slot": 29820923,
+        "utc": "2026-09-12T23:23:37.764548+00:00",
+        "reason": "insufficient_two_sided_activity",
+        "observed": 1789255417.764548,
+        "price": 0.0011516014692890739,
+        "liquidity": 113491.691,
+        "volume5": 424.2991840869,
+        "buys5": 10,
+        "sells5": 2,
+        "source": "geckoterminal_indicative"
+      },
+      "next_eligible_receipt": {
+        "slot": 29820925,
+        "utc": "2026-09-12T23:25:15.531759+00:00",
+        "reason": null,
+        "observed": 1789255515.5317593,
+        "price": 0.0010691349150663604,
+        "liquidity": 110024.1939,
+        "volume5": 9529.6406629132,
+        "buys5": 65,
+        "sells5": 38,
+        "source": "geckoterminal_indicative"
+      },
+      "next_eligible_after_decision_seconds": 15.531759262084961,
+      "test_coverage": {
+        "observed": 11,
+        "missing": 1,
+        "pending": 12,
+        "minimum_observations": 18,
+        "maximum_possible_observations": 23,
+        "coverage_gate": "pending"
+      },
+      "additional_usable_observations_needed": 7
+    },
+    {
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "symbol": "baton",
+      "phase": "test",
+      "row": {
+        "index": 10,
+        "decision_ts": 1789255500,
+        "terminal": false,
+        "quote_ts": 1789255417.764548,
+        "quote_available": false,
+        "raw_receipt_ts": 1789255417.764548,
+        "raw_receipt_age_seconds": 82.2354519367218,
+        "raw_rejection": "insufficient_two_sided_activity",
+        "neural_observation_expected": false,
+        "status": "ineligible_quote"
+      },
+      "selected_receipt": {
+        "slot": 29820923,
+        "utc": "2026-09-12T23:23:37.764548+00:00",
+        "reason": "insufficient_two_sided_activity",
+        "observed": 1789255417.764548,
+        "price": 0.011194948077573614,
+        "liquidity": 468382.3827,
+        "volume5": 1130.3442850592,
+        "buys5": 2,
+        "sells5": 1,
+        "source": "geckoterminal_indicative"
+      },
+      "next_eligible_receipt": {
+        "slot": 29820925,
+        "utc": "2026-09-12T23:25:15.531759+00:00",
+        "reason": null,
+        "observed": 1789255515.5317593,
+        "price": 0.011638123773153933,
+        "liquidity": 479188.9701,
+        "volume5": 15671.6909331134,
+        "buys5": 27,
+        "sells5": 23,
+        "source": "geckoterminal_indicative"
+      },
+      "next_eligible_after_decision_seconds": 15.531759262084961,
+      "test_coverage": {
+        "observed": 11,
+        "missing": 1,
+        "pending": 12,
+        "minimum_observations": 18,
+        "maximum_possible_observations": 23,
+        "coverage_gate": "pending"
+      },
+      "additional_usable_observations_needed": 7
+    }
+  ],
+  "development_coverage": {
+    "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ": {
+      "observed": 24,
+      "missing": 0,
+      "pending": 0,
+      "minimum_observations": 18,
+      "maximum_possible_observations": 24,
+      "coverage_gate": "met"
+    },
+    "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu": {
+      "observed": 23,
+      "missing": 1,
+      "pending": 0,
+      "minimum_observations": 18,
+      "maximum_possible_observations": 23,
+      "coverage_gate": "met"
+    }
+  },
+  "study_observer": {
+    "status": "test_collection",
+    "observed_at": 1789256234.614717,
+    "completed_chunks": 0,
+    "audited_chunks": 0,
+    "total_chunks": 16
+  },
+  "neural_observations_computed": 0,
+  "cloud_submissions": 0,
+  "interpretation": "Through the closed 23:34 UTC snapshot, each pool has eleven usable test decisions, one ineligible decision and twelve pending slots. At 23:25 UTC the selected receipts were 82.235 seconds old, below the 180-second stale threshold. ALL reported only two sells and less than $1,000 five-minute volume; baton reported two buys and one sell. Both fail the unchanged activity predicate. The next eligible receipts arrived 15.532 seconds after that decision and cannot retroactively replace it. The observed rejection is activity eligibility, not a stale-quote failure; these indexer fields do not establish on-chain activity or the cause of provider fluctuations. Preserve the gap and original cohort. Each pool still needs seven of its remaining twelve slots to reach the eighteen-observation minimum; its final gate remains pending. This is no neural evaluation, news audit, trading result, model selection or promotion."
+}
