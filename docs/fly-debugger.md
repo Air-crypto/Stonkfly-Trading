@@ -1119,7 +1119,7 @@ memory frame matches the saved training checkpoint. This identifies where
 memory changed, not which individual connection caused the output change.
 
 A [five-arm restoration protocol](../reports/fly-market-restoration-protocol-01.json)
-is registered but has not run: pristine/frozen, trained/frozen, restore inputs
+has completed: pristine/frozen, trained/frozen, restore inputs
 to 10704, restore inputs to 11402, and restore both. All use the same three market
 images, frozen inference, and no reinforcement. Both original reference controls
 must reproduce before interpreting the intervention. This is a post hoc neural
@@ -1167,3 +1167,71 @@ The viewer highlights restored connections in purple before the replay, names
 the exact target body IDs and restored connection count, and keeps neuron-spike
 and weight-update highlights distinct. Compact recordings contain displayed
 connections; full cloud traces remain available through neuron lookup.
+
+
+### Market restoration results
+
+The [complete five-arm study](../reports/fly-market-restoration-study-01.json) and
+[offline audit](../reports/fly-market-restoration-audit-01.json) reproduced the
+original training, saved learned memory, native build, and both reference
+controls. Each arm preserved its own incoming synaptic memory throughout frozen
+inference. The estimated cloud compute was **$0.0106**, under the unchanged
+worker cap. No paper account or fills were recomputed.
+
+![Five controlled memory-restoration outcomes](assets/fly-market-restoration-01.png)
+
+At the previously examined **10:55 UTC** input:
+
+| Memory condition | R−L firing rate | Gate spikes | Output |
+| --- | ---: | ---: | --- |
+| Pristine | 4 Hz | 1 | BUY |
+| Trained | 0 Hz | 1 | HOLD |
+| Restore inputs to 10704 | 8 Hz | 1 | BUY |
+| Restore inputs to 11402 | 2 Hz | 1 | BUY |
+| Restore both | 4 Hz | 1 | BUY |
+
+Restoring either cell's incoming memory was sufficient to recover the BUY on
+this input. Both individual restorations recovered the full three-action
+sequence, but matched pristine whole-observation spike counts in only one of
+three observations. Restoring both matched the pristine initial memory and all
+three whole-observation spike-count hashes. Action recovery therefore does not
+mean the individual restorations reproduce the original neural activity.
+
+The four memory combinations also expose a joint effect on the directional
+readout: trained minus restore-10704 minus restore-11402 plus restore-both is
+**−6 Hz** at the second observation (zero at the first and third). The two learned
+input sets interact in this replay; neither is uniquely identified as the sole
+cause. This contrast describes these recorded inputs, not a population effect
+or a trading return.
+
+![Purple connections identify the restored inputs to body 10704](assets/fly-market-restoration-circuit.png)
+
+Open `marketrestore01-restore_10704`, compare `marketrestore01-trained_frozen`,
+and select **replay 2**, or [open the paired restoration view](http://127.0.0.1:8765/?run=marketrestore01-restore_10704&step=1&neuron=10704&compare=marketrestore01-trained_frozen).
+The displayed subset highlights 18 restored edges for that recording; the
+underlying intervention restores all **2,048** incoming plastic connections to
+10704. The other individual arm restores **2,136** inputs to 11402; together they
+restore **4,184**. No edge is removed. All five compact recordings are included.
+
+![Recovered output paired with the retained-memory control](assets/fly-market-restoration-comparison.png)
+
+Re-audit the published results and regenerate the comparison without model
+compute:
+
+```sh
+uv run python -m paperlab.fly_market_restoration_audit \
+  --study reports/fly-market-restoration-study-01.json \
+  --reference reports/fly-market-study-05.json \
+  --plan reports/fly-market-study-05-plan.json \
+  --out runs/restoration-audit.json --figure runs/restoration.svg
+```
+
+A [new market protocol](../reports/fly-market-study-06-preregistration.json) is
+registered for September 12: training **11:05–11:20**, development
+**11:20–11:35**, and test **11:35–11:50 UTC**, retaining the same cohort and costs.
+It compares pristine, trained/frozen, each individual restoration, and both.
+Both inference phases restore their own copy of training memory, apply the
+specified reset to incoming connections, and freeze all updates. Selection uses
+development only and must beat cash and pristine; test cannot trigger reselection
+or automatic deployment. The test had not started when the protocol was
+registered. That fresh comparison has not yet run.

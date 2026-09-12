@@ -1,0 +1,68 @@
+{
+  "recorded_at": 1789212341.385463,
+  "parent_plan_sha256": "ab9f6fde557e5199ccd888d8d80c12313de4ae070ab126b37a7efe875818f78c",
+  "mechanism_report_sha256": "94c517bcbcd1ea8031ef722e72d98f6be291f21a9214d69b6525242f2a3c76c4",
+  "start": 1789211100,
+  "phase_steps": 3,
+  "end": 1789213800,
+  "cohort": [
+    "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+    "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu"
+  ],
+  "arms": {
+    "pristine_frozen": {
+      "eta": 0.001,
+      "train": false,
+      "online": false,
+      "view": "original"
+    },
+    "trained_frozen": {
+      "eta": 0.001,
+      "train": true,
+      "online": false,
+      "view": "original"
+    },
+    "restore_10704": {
+      "eta": 0.001,
+      "train": true,
+      "online": false,
+      "view": "original",
+      "restore_post_ids": [
+        "10704"
+      ]
+    },
+    "restore_11402": {
+      "eta": 0.001,
+      "train": true,
+      "online": false,
+      "view": "original",
+      "restore_post_ids": [
+        "11402"
+      ]
+    },
+    "restore_both": {
+      "eta": 0.001,
+      "train": true,
+      "online": false,
+      "view": "original",
+      "restore_post_ids": [
+        "10704",
+        "11402"
+      ]
+    }
+  },
+  "restoration_timing": "Train normally from pristine. For development and test separately, reset neural activity and restore the saved training memory, then reset incoming weights/u/w of the declared target cells to pristine. Freeze all plasticity and omit reinforcement throughout each inference phase. Development state is never carried into test.",
+  "hypothesis": "Partial or combined restoration may reverse a harmful directional readout while retaining other useful learned memory. Both individual variants recovered the reference action but changed spike counts differently; compare all variants without choosing one from that post hoc result.",
+  "selection": "Choose by development equity only, requiring improvement over both cash and pristine frozen. Evaluate the selected variant once on the subsequent test; show all arms for audit, with no test-based reselection or automatic deployment.",
+  "costs": {
+    "capital": 250.0,
+    "fee_bps": 125,
+    "slippage_bps": 100,
+    "max_exposure": 0.5,
+    "max_order": 25,
+    "max_spread_bps": 150,
+    "max_delay": 420,
+    "loss_stop": 0.2
+  },
+  "limitations": "Same small fixed cohort and indicative DEX costs; unavailable inventory retains the declared stress valuation. No monthly or live-profit claim."
+}

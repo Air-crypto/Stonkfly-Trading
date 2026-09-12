@@ -1,0 +1,206 @@
+{
+  "schema": 1,
+  "source": "matched_market_stimulus_assay",
+  "config": {
+    "preset": "recorded_market",
+    "view": "original",
+    "news": "none",
+    "eta": 0.001,
+    "learning": false,
+    "pulses": "none",
+    "memory": "trained",
+    "restore_post_ids": []
+  },
+  "restoration": {
+    "post_ids": [],
+    "edge_ids": [],
+    "edge_count": 0,
+    "changed_weights_from_trained": 0
+  },
+  "graph": {
+    "neurons": 166700,
+    "edges": 25582938,
+    "plastic_edges": 7835
+  },
+  "native_build": {
+    "model": "stonkfly-dual-compartment-v1",
+    "source_sha256": "e2d4d584f4633613277bb1bf6ea7ba20855c01a332ae2e9344ed7782604c8509",
+    "binary_sha256": "9c0768fc4f8e34ba730a31ef04a5de958e7d4276c1552f30ec6f2c2eddbfa1b1",
+    "flags": [
+      "-O3",
+      "-std=c++17",
+      "-shared",
+      "-fPIC"
+    ]
+  },
+  "upstream_commit": "78ef3e05ab0fa086032098558d893667068944a0",
+  "seconds": 17.721447612,
+  "events": [
+    {
+      "side": "BUY",
+      "left_hz": 30.0,
+      "right_hz": 36.0,
+      "difference_hz": 6.0,
+      "gate_spikes": 23,
+      "cell_ids": {
+        "left": [
+          "10162"
+        ],
+        "right": [
+          "10059"
+        ],
+        "gate": [
+          "10527",
+          "555871"
+        ]
+      },
+      "brain_ms": 500.0,
+      "compute_seconds": 1.571789773000006,
+      "stimulus": "none",
+      "stimulus_ms": 0.0,
+      "reward_spikes": 0,
+      "aversive_spikes": 20,
+      "KC_spikes": 15,
+      "total_spikes": 372744,
+      "spike_sha256": "1b04791ed9b408fac865de4a8869ff5764d86bfe207930b4bb4a26686c1791d1",
+      "input_sha256": "4ae68001987d9ad818f8c43ec7309f742de6f824e3d656a70b6aa3ea31cdea95",
+      "memory": {
+        "plastic_edges": 7835,
+        "changed_edges": 1766,
+        "mean_efficacy": 1.003456950187683,
+        "minimum_efficacy": 0.7450054287910461,
+        "sha256": "c98bd5e4e584ddfff4a9de29a4b11126a9e6c9d835e9f23222ac7dba8e63dc55",
+        "model": "stonkfly-dual-compartment-v1"
+      },
+      "diagnostics": {
+        "loss": null,
+        "backprop_gradient": null,
+        "plasticity_enabled": false,
+        "changed_edges": 0,
+        "weight_delta_l2": 0.0,
+        "max_abs_delta": 0.0,
+        "efficacy_min": 0.7450054364327561,
+        "efficacy_max": 1.0962858894459477,
+        "clipped_edges": 0
+      },
+      "phase": "replay",
+      "phase_step": 1,
+      "market_decision_ts": 1789210200,
+      "input_preset": "recorded_market",
+      "input_news": "none"
+    },
+    {
+      "side": "HOLD",
+      "left_hz": 34.0,
+      "right_hz": 34.0,
+      "difference_hz": 0.0,
+      "gate_spikes": 1,
+      "cell_ids": {
+        "left": [
+          "10162"
+        ],
+        "right": [
+          "10059"
+        ],
+        "gate": [
+          "10527",
+          "555871"
+        ]
+      },
+      "brain_ms": 1000.0,
+      "compute_seconds": 3.9575735229999935,
+      "stimulus": "none",
+      "stimulus_ms": 0.0,
+      "reward_spikes": 0,
+      "aversive_spikes": 89,
+      "KC_spikes": 5617,
+      "total_spikes": 588800,
+      "spike_sha256": "8a6d913a07d94694ccf52618a037f1ac33fe8084ae16c5b4bbdaca921849ec03",
+      "input_sha256": "e0b7a9391c01184d738c89cf57d41f8d47f03c008dd83eb9ccc8e9d9788c138b",
+      "memory": {
+        "plastic_edges": 7835,
+        "changed_edges": 1766,
+        "mean_efficacy": 1.003456950187683,
+        "minimum_efficacy": 0.7450054287910461,
+        "sha256": "c98bd5e4e584ddfff4a9de29a4b11126a9e6c9d835e9f23222ac7dba8e63dc55",
+        "model": "stonkfly-dual-compartment-v1"
+      },
+      "diagnostics": {
+        "loss": null,
+        "backprop_gradient": null,
+        "plasticity_enabled": false,
+        "changed_edges": 0,
+        "weight_delta_l2": 0.0,
+        "max_abs_delta": 0.0,
+        "efficacy_min": 0.7450054364327561,
+        "efficacy_max": 1.0962858894459477,
+        "clipped_edges": 0
+      },
+      "phase": "replay",
+      "phase_step": 2,
+      "market_decision_ts": 1789210500,
+      "input_preset": "recorded_market",
+      "input_news": "none"
+    },
+    {
+      "side": "HOLD",
+      "left_hz": 34.0,
+      "right_hz": 38.0,
+      "difference_hz": 4.0,
+      "gate_spikes": 0,
+      "cell_ids": {
+        "left": [
+          "10162"
+        ],
+        "right": [
+          "10059"
+        ],
+        "gate": [
+          "10527",
+          "555871"
+        ]
+      },
+      "brain_ms": 1500.0,
+      "compute_seconds": 4.094265659000008,
+      "stimulus": "none",
+      "stimulus_ms": 0.0,
+      "reward_spikes": 0,
+      "aversive_spikes": 82,
+      "KC_spikes": 4471,
+      "total_spikes": 604970,
+      "spike_sha256": "8713464a1327374e293f53915f3fa3d4153bc5cd33618a6051580453f390c9fc",
+      "input_sha256": "cfe742d02c12932e87bd69702acecf44c067108d54ed3cc8e6005acba4dd2b07",
+      "memory": {
+        "plastic_edges": 7835,
+        "changed_edges": 1766,
+        "mean_efficacy": 1.003456950187683,
+        "minimum_efficacy": 0.7450054287910461,
+        "sha256": "c98bd5e4e584ddfff4a9de29a4b11126a9e6c9d835e9f23222ac7dba8e63dc55",
+        "model": "stonkfly-dual-compartment-v1"
+      },
+      "diagnostics": {
+        "loss": null,
+        "backprop_gradient": null,
+        "plasticity_enabled": false,
+        "changed_edges": 0,
+        "weight_delta_l2": 0.0,
+        "max_abs_delta": 0.0,
+        "efficacy_min": 0.7450054364327561,
+        "efficacy_max": 1.0962858894459477,
+        "clipped_edges": 0
+      },
+      "phase": "replay",
+      "phase_step": 3,
+      "market_decision_ts": 1789210800,
+      "input_preset": "recorded_market",
+      "input_news": "none"
+    }
+  ],
+  "initial_memory_sha256": "4d0027b960796c702dcffe576b0488eebf477d7a2c9b8de0f56a38e9cfa60240",
+  "final_memory_sha256": "4d0027b960796c702dcffe576b0488eebf477d7a2c9b8de0f56a38e9cfa60240",
+  "training_memory_sha256": "4d0027b960796c702dcffe576b0488eebf477d7a2c9b8de0f56a38e9cfa60240",
+  "reference_report_sha256": "91f57c2e6825363134603359887cfa8d17af5463915db5b5cf565df9e19a3105",
+  "plan_sha256": "ab9f6fde557e5199ccd888d8d80c12313de4ae070ab126b37a7efe875818f78c",
+  "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+  "interpretation": "Post hoc causal localization on already examined market inputs. Outputs only: no recomputed account or claimed fresh returns. No automatic policy promotion. A later market evaluation is required for any proposed improvement."
+}

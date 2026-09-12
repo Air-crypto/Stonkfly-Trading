@@ -18,7 +18,7 @@ news, neuron stimulation, and selected connection restoration. The simulation
 retains the full graph; the display is a labeled subset with full-neuron lookup
 in generated recordings. Paper accounts remain separate from diagnostic assays.
 
-![Fly circuit debugger](docs/assets/fly-debugger.png)
+![Fly circuit debugger highlighting restored incoming connections](docs/assets/fly-market-restoration-circuit.png)
 
 After installing below, open the included recordings without model compute:
 
@@ -48,10 +48,14 @@ The diagnostics have identified concrete limitations:
   **$1,008.38** for pristine/frozen and online, from separate $1,000 accounts.
   Saved checkpoints confirmed retained memory; it changed a BUY to HOLD.
   No arm passed the development gate, and no policy was promoted.
+- A [controlled restoration replay](docs/fly-debugger.md#market-restoration-results)
+  recovered the missing BUY by restoring either MBON11 cell's incoming memory.
+  Restoring both reproduced all three pristine spike-count records. These are
+  mechanism results; a new market test is registered before any promotion.
 
 ![Frozen-inference comparison across training, development, and test](docs/assets/fly-market-study-05.png)
 
-[Inspect the changed market decision](http://127.0.0.1:8765/?run=market05-pool0-trained_frozen&step=1&compare=market05-pool0-pristine_frozen).
+[Inspect the restored connections](http://127.0.0.1:8765/?run=marketrestore01-restore_10704&step=1&neuron=10704&compare=marketrestore01-trained_frozen).
 These are indicative DEX marks with fees/slippage, not realized or monthly returns.
 
 After starting the included viewer, [jump to the extra gate spike](http://127.0.0.1:8765/?run=pulse01-trained_online_recorded&step=2&bin=37&neuron=10527&compare=pulse01-trained_frozen_recorded).

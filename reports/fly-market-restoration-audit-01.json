@@ -1,0 +1,118 @@
+{
+  "comparisons": {
+    "pristine_frozen": {
+      "actions": [
+        "BUY",
+        "BUY",
+        "HOLD"
+      ],
+      "difference_hz": [
+        6.0,
+        4.0,
+        12.0
+      ],
+      "gate_spikes": [
+        23,
+        1,
+        0
+      ],
+      "matching_pristine_spike_counts": 3,
+      "matching_pristine_actions": 3,
+      "restored_edges": 0
+    },
+    "trained_frozen": {
+      "actions": [
+        "BUY",
+        "HOLD",
+        "HOLD"
+      ],
+      "difference_hz": [
+        6.0,
+        0.0,
+        4.0
+      ],
+      "gate_spikes": [
+        23,
+        1,
+        0
+      ],
+      "matching_pristine_spike_counts": 1,
+      "matching_pristine_actions": 2,
+      "restored_edges": 0
+    },
+    "restore_10704": {
+      "actions": [
+        "BUY",
+        "BUY",
+        "HOLD"
+      ],
+      "difference_hz": [
+        6.0,
+        8.0,
+        10.0
+      ],
+      "gate_spikes": [
+        23,
+        1,
+        0
+      ],
+      "matching_pristine_spike_counts": 1,
+      "matching_pristine_actions": 3,
+      "restored_edges": 2048
+    },
+    "restore_11402": {
+      "actions": [
+        "BUY",
+        "BUY",
+        "HOLD"
+      ],
+      "difference_hz": [
+        6.0,
+        2.0,
+        6.0
+      ],
+      "gate_spikes": [
+        23,
+        1,
+        0
+      ],
+      "matching_pristine_spike_counts": 1,
+      "matching_pristine_actions": 3,
+      "restored_edges": 2136
+    },
+    "restore_both": {
+      "actions": [
+        "BUY",
+        "BUY",
+        "HOLD"
+      ],
+      "difference_hz": [
+        6.0,
+        4.0,
+        12.0
+      ],
+      "gate_spikes": [
+        23,
+        1,
+        0
+      ],
+      "matching_pristine_spike_counts": 3,
+      "matching_pristine_actions": 3,
+      "restored_edges": 4184
+    }
+  },
+  "joint_readout_contrast_hz": [
+    0.0,
+    -6.0,
+    0.0
+  ],
+  "contrast_definition": "trained minus restore_10704 minus restore_11402 plus restore_both, separately for each observation",
+  "both_restoration_matches_pristine_memory": true,
+  "verification": {
+    "reference_controls_reproduced": true,
+    "frozen_reported_memory_preserved": true,
+    "restoration_masks_disjoint_and_complete": true
+  },
+  "interpretation": "Post hoc mechanism study on previously examined inputs. Restoring a neural output does not establish a trading improvement.",
+  "study_sha256": "94c517bcbcd1ea8031ef722e72d98f6be291f21a9214d69b6525242f2a3c76c4"
+}
