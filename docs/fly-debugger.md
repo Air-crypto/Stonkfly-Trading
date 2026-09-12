@@ -2712,6 +2712,34 @@ exact recorded current/targets/durations. Native regression fixtures also corrup
 a current value while updating its checksum and verify rejection against the
 registered intervention. Public results and traces are exposed only after audits.
 
+The cloud witnessed the unchanged registration at **18:00:27 UTC**, before the
+18:10 start, in call `fc-01M2BCDRVZ2P4DRXER38R2ZZQD`. This receipt establishes the
+timing of the protocol, not a completed experiment or a positive result.
+
+Once the observer produces its audited `report.json`, render the paper-equity
+curves and compare the recorded decisions without running another neural model:
+
+```sh
+uv run --locked --extra plots python -m paperlab.fly_paper_figure \
+  runs/research-market-10/report.json \
+  --out runs/research-market-10/equity.png
+python -m paperlab.fly_paper_decisions \
+  runs/research-market-10/report.json \
+  --out runs/research-market-10/decision-comparison
+```
+
+The chart labels current 0 and 10 explicitly and subtracts pristine equity from
+trained equity **at the same current**. The decision report also compares current
+10 with 0 within each memory condition. Its interaction is the trained activation
+gain minus the pristine activation gain: if both brains improve equally, it is
+zero, so stimulation alone is not mislabeled as a benefit of learning. These are
+descriptive effects in the registered interval, not significance tests. The
+report retains missing slots, the original decision timestamp for each delayed
+fill, and the saved development choice. It requires the cloud registration and
+native-current audit, and rejects mismatched target cells, current or duration.
+Browser links in the decision report assume that the downloaded study directory
+is served on port 8765 as described above.
+
 The normal worker writes each invocation to `last-call.json`. A duplicate/old-slot
 skip leaves `latest.json` at the last full portfolio result, preserving its actual
 observation timestamp instead of replacing the portfolio with a skip status.

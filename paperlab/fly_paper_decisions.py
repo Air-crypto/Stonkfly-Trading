@@ -15,6 +15,12 @@ PAIRS = {
     'reset_pristine': ('pristine_frozen', 'pristine_input_reset'),
     'reset_trained': ('trained_frozen', 'trained_input_reset'),
 }
+ACTIVATION_PAIRS = {
+    'memory_current_0': ('pristine_frozen', 'trained_frozen'),
+    'memory_current_10': ('pristine_stimulated', 'trained_stimulated'),
+    'activation_pristine': ('pristine_frozen', 'pristine_stimulated'),
+    'activation_trained': ('trained_frozen', 'trained_stimulated'),
+}
 
 
 def neural_summary(event):
@@ -28,16 +34,21 @@ def neural_summary(event):
     side = 'HOLD' if gate == 0 or abs(right-left) < 2 else 'BUY' if right > left else 'SELL'
     if event['side'] != side or event['plasticity_enabled'] or event['weight_delta_l2'] != 0:
         raise ValueError('Expected frozen, fixed-decoder inference')
-    return {k: event[k] for k in ('side', 'left_hz', 'right_hz', 'difference_hz', 'gate_spikes',
-                                 'total_spikes', 'spike_sha256', 'input_sha256')}
+    result = {k: event[k] for k in ('side', 'left_hz', 'right_hz', 'difference_hz', 'gate_spikes',
+                                   'total_spikes', 'spike_sha256', 'input_sha256')}
+    if 'stimulation' in event:
+        result['stimulation'] = dict(event['stimulation'])
+    return result
 
 
 def compare(report):
     evidence(report)
     r = report['registration']; comparisons = []
+    activation = r.get('study') == '10'
+    pairs = ACTIVATION_PAIRS if activation else PAIRS
     for i, key in enumerate(r['cohort']):
         for phase in PHASES:
-            for label, (baseline, variant) in PAIRS.items():
+            for label, (baseline, variant) in pairs.items():
                 a = report['phase_diagnostics'][key][baseline][phase]['decisions']
                 b = report['phase_diagnostics'][key][variant][phase]['decisions']
                 if len(a) != len(b):
@@ -62,7 +73,7 @@ def compare(report):
                         if (x['terminal'] or not x['available']
                                 or ex['input_sha256'] != ey['input_sha256']
                                 or ex['news_features'] != ey['news_features']):
-                            raise ValueError('Cannot attribute comparison to memory/reset with different inputs')
+                            raise ValueError('Cannot compare memory, activity or stimulation with different market inputs')
                         row.update(observation_index=observed, input_match=True,
                                    full_counts_equal=ex['spike_sha256'] == ey['spike_sha256'],
                                    decoder_equal=all(ex[k] == ey[k] for k in ('left_hz', 'right_hz', 'gate_spikes')),
@@ -80,9 +91,26 @@ def compare(report):
                                     'first_decoder_difference': first('decoder_equal'),
                                     'first_side_difference': first('side_equal'),
                                     'first_fill_difference': first('fills_equal'), 'rows': rows})
-    return {'kind': 'paper_checkpoint_decision_comparison', 'plan_sha256': report['plan_sha256'],
+    result = {'kind': 'paper_checkpoint_decision_comparison', 'plan_sha256': report['plan_sha256'],
             'selection': report['selection'], 'comparisons': comparisons,
             'interpretation': 'Derived from an audited report. Full-count differences refer to whole observations, not the first spike in time. Current fills can execute an earlier decision. Identical sides can coexist with different neural counts. This comparison neither reruns nor selects a policy.'}
+    if activation:
+        effects = {}
+        for phase in PHASES:
+            e = {a: report['total_equity'][a][phase] for a in r['arms']}
+            pristine = e['pristine_stimulated'] - e['pristine_frozen']
+            trained = e['trained_stimulated'] - e['trained_frozen']
+            effects[phase] = {'activation_pristine_usd': pristine,
+                              'activation_trained_usd': trained,
+                              'memory_current_0_usd': e['trained_frozen'] - e['pristine_frozen'],
+                              'memory_current_10_usd': e['trained_stimulated'] - e['pristine_stimulated'],
+                              'memory_activation_interaction_usd': trained - pristine}
+        result['activation_effects'] = effects
+        result['interpretation'] += (' Applied current is explicitly recorded for both conditions. '
+            'Activation effects compare current 10 with 0 within the same memory. The interaction subtracts '
+            'the pristine activation effect from the trained activation effect; a gain shared by both brains '
+            'is not a learned-memory advantage. These are descriptive interval effects, not statistical significance.')
+    return result
 
 
 def markdown(result):
@@ -91,10 +119,20 @@ def markdown(result):
              'Times are UTC. Equity differences are variant minus baseline, per $250 pool sleeve. '
              'Open viewer links after serving the downloaded study directory on port 8765.', '']
     def decision(e):
-        return '—' if e is None else f"{e['side']} · Δ {e['difference_hz']:+g} Hz · gates {e['gate_spikes']}"
+        if e is None:return '—'
+        current = f" · current {e['stimulation']['current']}" if 'stimulation' in e else ''
+        return f"{e['side']} · Δ {e['difference_hz']:+g} Hz · gates {e['gate_spikes']}" + current
     def fill(f):
         if f['status'] != 'filled':return f['status']
         return f"{f['side']} from {stamp(f['decision_ts'])} · fee ${float(f['fee']):.3f}"
+    if 'activation_effects' in result:
+        lines += ['Current is applied to cells 10704 and 11402 for each 500 ms observation. All weights remain frozen.', '',
+                  '| Phase | Activation, pristine | Activation, trained | Memory at current 0 | Memory at current 10 | Interaction |',
+                  '|---|---:|---:|---:|---:|---:|']
+        for phase, effects in result['activation_effects'].items():
+            values = ' | '.join(f'${value:+.4f}' for value in effects.values())
+            lines.append(f'| {phase} | {values} |')
+        lines.append('')
     for c in result['comparisons']:
         lines += [f"## Pool {c['pool_index']} · {c['phase']} · {c['comparison']}", '',
                   f"Baseline: `{c['baseline_arm']}`. Variant: `{c['variant_arm']}`.", '',

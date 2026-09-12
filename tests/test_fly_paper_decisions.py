@@ -7,15 +7,15 @@ from paperlab.fly_paper_decisions import compare, markdown
 from test_fly_paper_figure import report_fixture
 
 
-def fixture():
-    r = report_fixture()
+def fixture(study='09'):
+    r = report_fixture(study)
     for pool in r['phase_diagnostics'].values():
         for phases in pool.values():
             for lane in phases.values():
                 for row in lane['decisions']:
                     row['quote_ts'] = row['decision_ts']
                     if row['neural'] is not None:
-                        row['neural'] = {'left_hz': 2, 'right_hz': 4, 'difference_hz': 2,
+                        row['neural'] = {**row['neural'], 'left_hz': 2, 'right_hz': 4, 'difference_hz': 2,
                                          'gate_spikes': 1, 'side': 'BUY', 'plasticity_enabled': False,
                                          'weight_delta_l2': 0, 'input_sha256': 'b'*64,
                                          'spike_sha256': 'c'*64, 'total_spikes': 20,
@@ -61,3 +61,21 @@ def test_refuse_ambiguous_input_or_nonfrozen_decision_comparisons(field):
     if field=='decoder':row['neural']['side']='SELL'
     if field=='learning':row['neural']['plasticity_enabled']=True
     with pytest.raises(ValueError):compare(report)
+
+
+def test_activation_gain_shared_by_both_memories_is_not_reported_as_learning():
+    report = fixture('10');original = copy.deepcopy(report);result = compare(report)
+    assert result['activation_effects']['development'] == {
+        'activation_pristine_usd': 2, 'activation_trained_usd': 2,
+        'memory_current_0_usd': 1, 'memory_current_10_usd': 1,
+        'memory_activation_interaction_usd': 0}
+    assert result['activation_effects']['test']['memory_activation_interaction_usd'] == 0
+    assert len(result['comparisons']) == 16
+    assert {c['comparison'] for c in result['comparisons']} == {
+        'memory_current_0', 'memory_current_10', 'activation_pristine', 'activation_trained'}
+    c = next(c for c in result['comparisons'] if c['comparison'] == 'activation_trained')
+    assert c['rows'][0]['baseline']['stimulation']['current'] == 0
+    assert c['rows'][0]['variant']['stimulation']['current'] == 10
+    text = markdown(result)
+    assert 'current 10' in text and 'current 0' in text and 'Interaction' in text
+    assert report == original
