@@ -228,7 +228,11 @@ def test_cloud_writer_guard_blocks_overlap_and_releases_on_error(monkeypatch):
         def pop(self,key): return self.keys.pop(key)
     owners=Owners()
     monkeypatch.setattr(cloud,"writers",owners)
+    monkeypatch.setattr(cloud.modal,"current_function_call_id",lambda:"fc-test-owner")
+    monkeypatch.setattr(cloud.modal,"current_input_id",lambda:"in-test-owner")
     def nested():
+        assert owners.keys["worker"]["call_id"]=="fc-test-owner"
+        assert owners.keys["worker"]["input_id"]=="in-test-owner"
         assert cloud.exclusive("worker",lambda:pytest.fail("Second writer ran"))["status"]=="writer_busy"
         return "done"
     assert cloud.exclusive("worker",nested)=="done"

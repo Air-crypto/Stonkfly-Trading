@@ -1969,3 +1969,54 @@ uv run python -m paperlab.fly_activity_figure \
   --out runs/activity-results-02.svg
 FLY_VIEW_URL=http://127.0.0.1:8765 node scripts/check-fly-activity02-view.cjs
 ```
+
+## Test input resets on a future market window
+
+[Market study 08](../reports/fly-market-study-08-preregistration.json) was
+registered before its 14:45–15:30 UTC window on September 12. Training,
+development and test each cover fifteen minutes. The same two original pools
+remain in the cohort, including missing or ineligible observations.
+
+Four conditions cross pristine/trained frozen memory with carry/input-reset
+inference. Training uses the unchanged activity behavior; identical recipes
+share their saved training checkpoint. In reset inference, only `g` returns to
+its initial values immediately before each eligible observation after the first.
+Missing decision slots cause neither an observation nor a reset. Development and
+test each start with fresh dynamics and the saved training memory.
+
+Only `trained_input_reset` can qualify, and its development equity must strictly
+beat cash and **all three controls**. Selection is written before test simulation.
+The observer verifies the registered window, executed source, fees, fills,
+training checkpoints, exact before/after state arrays and every displayed
+boundary value. It also reconstructs each inference image from the sealed quotes
+to verify that the recorded input matches. No automatic strategy deployment.
+
+Once the collector's completed snapshot covers the registered endpoint:
+
+```sh
+uv run python -m paperlab.fly_market_input \
+  --archive runs/universe.db \
+  --previous reports/fly-market-study-07-plan.json \
+  --registration reports/fly-market-study-08-preregistration.json \
+  --out runs/market08-plan.json
+uv run python -m paperlab.fly_market_cloud \
+  --plan runs/market08-plan.json \
+  --registration reports/fly-market-study-08-preregistration.json \
+  --out runs/market08
+```
+
+Repeat the observer with the same output directory after a timeout; it observes
+the saved call. A late collector snapshot never substitutes future prices into
+the sealed window. The sealer retains up to 512 chronological receipts per pool,
+including at least the unchanged visual adapter's preceding 100 observations.
+Unavailable inventory and indicative DEX costs retain the existing treatment.
+
+The collector stalled during the beginning of this registered window: its
+14:16:39 UTC lease survived a provider-confirmed timeout at 14:21:39, and later
+calls skipped the occupied writer. Recovery checked for zero running inputs,
+zero runners and zero backlog before removing that exact lease. Those missing
+observations remain missing in study 08. New leases record the owning call and
+input IDs. Collector containers are single-use, with a 360-second timeout and
+matching worst-case reservation for the unchanged 240-second collection window;
+the $15 collector cap and $25 worker cap remain unchanged. A hard timeout still
+requires verified recovery; locks never expire merely because they are old.

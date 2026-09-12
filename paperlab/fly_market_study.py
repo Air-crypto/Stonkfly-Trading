@@ -19,6 +19,7 @@ from .fly_visual import apply_view, encoding
 from .multi import DEX_COSTS, read_archive
 from .news import News
 from .universe import MIN_CONTEXT, Pool
+from .fly_market_input import INPUT_ARMS, validate_input, development_choice, source_files
 
 ARMS = {
     "pristine_frozen": {"eta": .001, "train": False, "online": False, "view": "original"},
@@ -97,7 +98,7 @@ def seal(archive, output, phase_steps=3):
 
 
 def validate(plan):
-    protocols = {1: ARMS, 2: REINFORCEMENT_ARMS, 3: VISUAL_ARMS, 4: INFERENCE_ARMS, 5: RESTORATION_ARMS}
+    protocols = {1: ARMS, 2: REINFORCEMENT_ARMS, 3: VISUAL_ARMS, 4: INFERENCE_ARMS, 5: RESTORATION_ARMS, 6: INPUT_ARMS}
     if not isinstance(plan,dict) or plan.get("schema") not in protocols or plan.get("arms")!=protocols[plan["schema"]]:
         raise ValueError("Unknown study protocol")
     n=plan.get("phase_steps")
@@ -113,6 +114,8 @@ def validate(plan):
         raise ValueError("Restoration timing must match the registered inference boundary")
     if plan["schema"]!=5 and "restoration_timing" in plan:
         raise ValueError("Unexpected restoration timing metadata")
+    if plan["schema"]==6:validate_input(plan)
+    elif "activity_reset_timing" in plan:raise ValueError("Unexpected activity reset timing")
     if not 1<=len(plan.get("cohort",[]))<=2 or len(set(plan["cohort"]))!=len(plan["cohort"]):
         raise ValueError("Use one or two unique admitted pools")
     if set(plan["series"])!=set(plan["cohort"]):
@@ -120,7 +123,7 @@ def validate(plan):
     start=plan["start"]
     if not math.isfinite(start) or start<=0 or start%300 or plan["snapshot_end"]<start+3*n*300:
         raise ValueError("Insufficient chronological horizon")
-    if plan["schema"]>=2 and (plan.get("previous_test_end")!=start or
+    if plan["schema"]>=2 and ((plan.get("previous_test_end")!=start if plan["schema"]!=6 else plan.get("previous_test_end",start+1)>start) or
                               not isinstance(plan.get("parent_plan_sha256"),str) or len(plan["parent_plan_sha256"])!=64):
         raise ValueError("A follow-up must start after the recorded prior test interval")
     for key,raw in plan["series"].items():
@@ -208,7 +211,7 @@ def decision_timeline(rows):
              "equity": r["equity"]} for r in rows]
 
 
-def phase(lab, ticks, start, steps, arm, learning, deadline, trace_output=None, restoration=None):
+def phase(lab, ticks, start, steps, arm, learning, deadline, trace_output=None, restoration=None, activity_output=None):
     b=lab.brain
     b.weights_frozen=not learning
     b.eta=arm["eta"]
@@ -217,7 +220,11 @@ def phase(lab, ticks, start, steps, arm, learning, deadline, trace_output=None, 
     broker=Broker(DEX_COSTS)
     news=News(enabled=False)
     pending=None; anchor=DEX_COSTS.capital; unpriced=False; last_quote=0; rows=[]
-    trace_events=[]; wall_start=time.monotonic()
+    trace_events=[]; observations=0; wall_start=time.monotonic()
+    if activity_output is not None:
+        activity_output.mkdir(parents=True,exist_ok=False)
+        if learning:raise ValueError("Activity reset is an inference-only intervention")
+        from .fly_market_activity import apply_boundary, attach_boundary_state
     if trace_output is not None:
         trace_output.mkdir(parents=True,exist_ok=False)
         np.savez_compressed(trace_output/"initial-memory.npz",**initial_memory)
@@ -238,10 +245,15 @@ def phase(lab, ticks, start, steps, arm, learning, deadline, trace_output=None, 
                 enabled=learning and (not arm.get("reinforcement_only",False) or stimulus!="none")
                 b.weights_frozen=not enabled
                 lab.fly.controller.s=replace(lab.fly.controller.s,learning=enabled)
+                boundary=None
+                if activity_output is not None:
+                    boundary=apply_boundary(b,arm["activity_reset"],observations+1,activity_output/f"boundary-{observations+1:02}.npz")
                 before=b.weight[b.circuit["edges"]].copy()
                 frozen_memory=learned_state(b) if not enabled else None
                 event=(lab.capture(rgb,stimulus,trace_output,len(trace_events)+1)
                        if trace_output is not None else lab.fly.controller.observe(rgb,stimulus))
+                observations+=1
+                if boundary is not None:event["activity_boundary"]=boundary
                 if frozen_memory is not None:
                     after_memory=learned_state(b)
                     if not all(np.array_equal(v,after_memory[k]) for k,v in frozen_memory.items()):
@@ -269,7 +281,12 @@ def phase(lab, ticks, start, steps, arm, learning, deadline, trace_output=None, 
                     "initial_memory_sha256":memory_signature(initial_memory),"final_memory_sha256":memory_signature(learned_state(b)),
                     "interpretation":"Recorded market replay, isolated paper account. No executable DEX or monthly-return claim."}
             atomic_json(trace_output/"report.json",report)
-            atomic_json(trace_output/"view.json",lab.export_view(trace_output,report))
+            view=lab.export_view(trace_output,report)
+            if activity_output is not None:
+                report["config"]["activity_reset"]=arm["activity_reset"]
+                atomic_json(trace_output/"report.json",report)
+                attach_boundary_state(view,activity_output)
+            atomic_json(trace_output/"view.json",view)
         return {"start":start,"end":start+steps*300,"equity":rows[-1]["equity"],
                 "return_pct":100*(rows[-1]["equity"]/DEX_COSTS.capital-1),"fees":float(broker.fees),
                 "fills":sum(r["fill"]["status"]=="filled" for r in rows),
@@ -314,6 +331,10 @@ def run(envelope, data, output):
     deadline=time.monotonic()+480
     lab=TraceLab(data); n=plan["phase_steps"]; arms=plan["arms"]
     results={}; states={}; restorations={}
+    if plan["schema"]==6:
+        from .fly_market_activity import dynamic_state
+        np.savez_compressed(root/"initial-dynamics.npz",**dynamic_state(lab.brain))
+        np.savez_compressed(root/"neuron-ids.npz",neuron_ids=lab.brain.ids)
     if plan["schema"]==5:
         np.savez_compressed(root/"plastic-map.npz",edge_ids=lab.brain.circuit["edges"],
                             post_ids=lab.brain.ids[lab.brain.post[lab.brain.circuit["edges"]]])
@@ -324,14 +345,14 @@ def run(envelope, data, output):
             lab.brain.reset()
             pristine=learned_state(lab.brain)
             recipe=(arm["eta"],arm["train"],arm["view"],arm.get("reinforcement_only",False))
-            if plan["schema"]==5 and recipe in training_cache:
+            if plan["schema"] in (5,6) and recipe in training_cache:
                 source,recorded,cached=training_cache[recipe]
                 training=copy.deepcopy(recorded);trained={k:v.copy() for k,v in cached.items()}
                 training["training_compute_source"]=source;training["training_compute_reused"]=True
             else:
                 training=phase(lab,ticks,plan["start"],n,arm,arm["train"],deadline)
                 trained=learned_state(lab.brain)
-                if plan["schema"]==5:
+                if plan["schema"] in (5,6):
                     training["training_compute_source"]=name;training["training_compute_reused"]=False
                     training_cache[recipe]=(name,copy.deepcopy(training),{k:v.copy() for k,v in trained.items()})
             state=trained;restoration=None
@@ -341,14 +362,13 @@ def run(envelope, data, output):
             states[key,name]=state;restorations[key,name]=restoration
             np.savez_compressed(root/f"pool{plan['cohort'].index(key)}-{name}-training-memory.npz",**trained)
             restore_learned(lab.brain,state)
-            development=phase(lab,ticks,plan["start"]+n*300,n,arm,arm["online"],deadline,restoration=restoration)
+            development=phase(lab,ticks,plan["start"]+n*300,n,arm,arm["online"],deadline,restoration=restoration,**({"activity_output":root/f"boundaries/pool{plan['cohort'].index(key)}-{name}-development"} if plan["schema"]==6 else {}))
             results[key][name]={"training":training,"development":development}
             print(f"market_study development pool={plan['cohort'].index(key)} arm={name} return={development['return_pct']:.4f}%",flush=True)
             atomic_json(root/"development.json",results)
     idle=(4-len(plan["cohort"]))*DEX_COSTS.capital
     dev_equity={name:idle+sum(results[k][name]["development"]["equity"] for k in results) for name in arms}
-    candidate=max(arms,key=lambda name:(dev_equity[name],name))
-    selected=candidate if dev_equity[candidate]>max(1000,dev_equity["pristine_frozen"])+1e-9 else None
+    selected=development_choice(plan,dev_equity)
     selection={"selected":selected,"development_equity":dev_equity,"cash_equity":1000,
                "plan_sha256":envelope["sha256"],"test_simulated_before_selection":False,
                "note":"No deployment. Selection fixed from development outcomes before test simulation."}
@@ -359,15 +379,15 @@ def run(envelope, data, output):
         for name,arm in arms.items():
             # Restore the separately prepared inference state; development never enters test.
             restore_learned(lab.brain,states[key,name])
-            traces=(root/f"pool{plan['cohort'].index(key)}-{name}") if plan["schema"]==5 or name in ("pristine_frozen","trained_frozen","online_original","reinforcement_gated","fixed_returns_frozen","fixed_returns_online") else None
-            results[key][name]["test"]=phase(lab,ticks,plan["start"]+2*n*300,n,arm,arm["online"],deadline,traces,restoration=restorations[key,name])
+            traces=(root/f"pool{plan['cohort'].index(key)}-{name}") if plan["schema"] in (5,6) or name in ("pristine_frozen","trained_frozen","online_original","reinforcement_gated","fixed_returns_frozen","fixed_returns_online") else None
+            results[key][name]["test"]=phase(lab,ticks,plan["start"]+2*n*300,n,arm,arm["online"],deadline,traces,restoration=restorations[key,name],**({"activity_output":root/f"boundaries/pool{plan['cohort'].index(key)}-{name}-test"} if plan["schema"]==6 else {}))
             print(f"market_study test pool={plan['cohort'].index(key)} arm={name} return={results[key][name]['test']['return_pct']:.4f}%",flush=True)
             atomic_json(root/"results.json",results)
     totals={name:{phase_name:idle+sum(results[k][name][phase_name]["equity"] for k in results)
                   for phase_name in ("training","development","test")} for name in arms}
     elapsed=n*300
     summary={"status":"market_study_completed","plan_sha256":envelope["sha256"],"selection":selection,
-             "code_sha256":{name:digest(Path(__file__).with_name(name)) for name in ("fly_market_study.py","fly_trace.py","fly.py","fly_visual.py","fly_market_restoration.py")},
+             "code_sha256":{name:digest(Path(__file__).with_name(name)) for name in source_files(plan["schema"])},
              "restoration_timing":plan.get("restoration_timing"),"total_equity":totals,"initial_capital":1000,"active_sleeves":len(plan["cohort"]),
              "test_net_after_monthly_hosting":{str(cost):{name:totals[name]["test"]-1000-cost*elapsed/(30*86400)
                  for name in arms} for cost in (20,40)},"costs":asdict(DEX_COSTS),"phase_steps":n,
@@ -375,6 +395,8 @@ def run(envelope, data, output):
              "limitation":"Short sealed retrospective replay, not an estimate of monthly returns or executable DEX performance."
              " Cash resets at each phase; neural dynamics reset while training weights are restored. News disabled."
              " Test results must not be reused to choose another variant. No policy automatically promoted."}
+    if plan["schema"]==6:
+        summary.update(activity_reset_timing=plan["activity_reset_timing"],initial_dynamics_sha256=digest(root/"initial-dynamics.npz"),neuron_ids_sha256=digest(root/"neuron-ids.npz"))
     atomic_json(root/"summary.json",summary)
     return summary
 

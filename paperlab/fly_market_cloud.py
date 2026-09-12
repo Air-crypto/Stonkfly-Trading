@@ -7,6 +7,7 @@ from pathlib import Path
 from .core import atomic_json,digest
 from .fly_market_study import signature,validate
 from .fly_market_memory_audit import audit as memory_audit
+from .fly_market_input import source_files, development_choice
 
 FILES=('fly_market_study.py','fly_trace.py','fly.py','fly_visual.py','fly_market_restoration.py')
 PHASES=('training','development','test')
@@ -14,9 +15,10 @@ PHASES=('training','development','test')
 
 def validate_registration(envelope,registration):
     plan=validate(envelope['plan'])
-    if plan['schema'] not in (4,5) or signature(plan)!=envelope['sha256']:raise ValueError('Expected a sealed inference comparison')
+    if plan['schema'] not in (4,5,6) or signature(plan)!=envelope['sha256']:raise ValueError('Expected a sealed inference comparison')
     fields=['start','phase_steps','cohort','arms','parent_plan_sha256']
     if plan['schema']==5:fields+=['costs','restoration_timing']
+    if plan['schema']==6:fields+=['schema','costs','activity_reset_timing','promotion_rule','recorded_at','previous_test_end','mechanism_report_sha256','parent_report_sha256']
     if any(plan[k]!=registration.get(k) for k in fields):raise ValueError('Plan differs from registration')
     if registration.get('end')!=plan['start']+plan['phase_steps']*900:raise ValueError('Registered endpoint differs')
     if not 0<registration.get('recorded_at',0)<plan['start']+plan['phase_steps']*600:raise ValueError('Registration must precede the test interval')
@@ -42,8 +44,7 @@ def build_report(envelope,summary,raw,selection):
             expected=idle+sum(raw[k][arm][phase]['equity'] for k in raw)
             if abs(expected-summary['total_equity'][arm][phase])>1e-8:raise ValueError('Aggregate equity does not reconcile')
     development={arm:summary['total_equity'][arm]['development'] for arm in plan['arms']}
-    candidate=max(plan['arms'],key=lambda name:(development[name],name))
-    selected=candidate if development[candidate]>max(1000,development['pristine_frozen'])+1e-9 else None
+    selected=development_choice(plan,development)
     if selection!=summary['selection'] or selection['selected']!=selected or selection['development_equity']!=development or selection['test_simulated_before_selection']:
         raise ValueError('Selection differs from the development gate')
     summary['phase_diagnostics']={key:{arm:{phase:{**{k:v for k,v in p.items() if k!='rows'},'decisions':[
@@ -68,7 +69,7 @@ def cloud_run(envelope,registration,output):
         if path.exists() and json.loads(path.read_text())!=value:raise ValueError('Existing output metadata belongs to a different request')
     if not receipt_path.exists():
         receipt={'run_id':'assay-market-'+uuid.uuid4().hex,'status':'submitting','request_sha256':request_hash,'plan_sha256':envelope['sha256']}
-        atomic_json(receipt_path,receipt);atomic_json(root/'source-hashes.json',{name:digest(Path(__file__).with_name(name)) for name in FILES})
+        atomic_json(receipt_path,receipt);atomic_json(root/'source-hashes.json',{name:digest(Path(__file__).with_name(name)) for name in source_files(plan['schema'])})
         if not (root/'plan.json').exists():atomic_json(root/'plan.json',envelope)
         if not (root/'preregistration.json').exists():atomic_json(root/'preregistration.json',registration)
         call=modal.Function.from_name('fly-paper-lab','worker',environment_name='main').spawn(debug={'run_id':receipt['run_id'],'market_plan':envelope})
@@ -98,10 +99,16 @@ def cloud_run(envelope,registration,output):
     raw=json.loads((artifacts/'results.json').read_text());selection=json.loads((artifacts/'selection.json').read_text())
     summary=build_report(envelope,result['report'],raw,selection)
     if plan['schema']==5:download('plastic-map.npz')
+    if plan['schema']==6:
+        download('initial-dynamics.npz');download('neuron-ids.npz')
     for i,key in enumerate(plan['cohort']):
         for arm in plan['arms']:
             download(f'pool{i}-{arm}-training-memory.npz');download(f'pool{i}-{arm}/initial-memory.npz')
             if plan['schema']==5:download(f'pool{i}-{arm}-inference-memory.npz')
+            if plan['schema']==6:
+                for phase in ('development','test'):
+                    events=[r['event'] for r in raw[key][arm][phase]['rows'] if r['event'] is not None]
+                    for j in range(1,len(events)+1):download(f'boundaries/pool{i}-{arm}-{phase}/boundary-{j:02}.npz')
             if any(r['event'] is not None for r in raw[key][arm]['test']['rows']):
                 view=download(f'pool{i}-{arm}/view.json');data=json.loads(view.read_text())
                 if data['report']['native_build']!=summary['native_build'] or data['report']['initial_memory_sha256']!=raw[key][arm]['test']['initial_memory_sha256']:
@@ -110,6 +117,10 @@ def cloud_run(envelope,registration,output):
                 atomic_json(folder/'view.json',data);atomic_json(folder/'report.json',data['report'])
                 atomic_json(folder/'remote.json',{'remote_path':base+f'/pool{i}-{arm}','call_id':receipt['call_id']})
     audited=memory_audit(envelope,summary,artifacts)
+    if plan['schema']==6:
+        from .fly_market_input import audit_market_boundaries
+        atomic_json(root/'activity-audit.json',audit_market_boundaries(envelope,summary,artifacts))
+        summary['verification']['activity_boundaries_audited']=True
     summary['verification'].update(plan_matches_preregistration=True,code_hashes_match_submission=True,memory_checkpoints_audited=True)
     atomic_json(root/'report.json',summary);atomic_json(root/'memory-audit.json',audited)
     receipt.update(status='completed',budget=result['budget']);atomic_json(receipt_path,receipt)

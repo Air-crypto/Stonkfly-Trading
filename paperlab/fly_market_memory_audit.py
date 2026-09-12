@@ -51,7 +51,7 @@ def audit(envelope, report, artifacts):
             trained_hash=memory_signature(trained)
             source=rows['training'].get('training_compute_source',name)
             reused=rows['training'].get('training_compute_reused',False)
-            if mapping is not None:
+            if plan['schema'] in (5,6):
                 if source not in plan['arms'] or reused!=(source!=name):raise ValueError('Invalid shared training source')
                 other=plan['arms'][source]
                 if any(arm.get(k,False)!=other.get(k,False) for k in ('eta','train','view','reinforcement_only')):

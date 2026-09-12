@@ -32,7 +32,8 @@ def exclusive(name, call, *args):
     that its Modal input has ended; never expire a possibly live SQLite writer.
     """
     import time
-    if not writers.put(name,{"started":time.time()},skip_if_exists=True):
+    owner={"started":time.time(),"call_id":modal.current_function_call_id(),"input_id":modal.current_input_id()}
+    if not writers.put(name,owner,skip_if_exists=True):
         print(f"Writer {name} already owned; skipped overlapping invocation",flush=True)
         return {"status":"writer_busy","writer":name}
     try:
@@ -196,7 +197,7 @@ collector_image=(modal.Image.debian_slim(python_version="3.12")
 
 @app.function(image=collector_image,volumes={"/discovery":discovery_volume,"/state":volume},
               cpu=(.125,.125),memory=(256,256),max_containers=1,min_containers=0,
-              scaledown_window=2,timeout=300,retries=0,
+              scaledown_window=2,timeout=360,retries=0,single_use_containers=True,
               schedule=modal.Cron("*/5 * * * *") if ENABLED and UNIVERSE else None)
 def universe_collector():
     return exclusive("collector",_universe_collector)
@@ -213,7 +214,7 @@ def _universe_collector():
     from paperlab.core import atomic_json
     discovery_volume.reload()
     volume.reload()
-    reservation=reserve("/discovery/budget.json",False,seconds=300,limit_override=15,
+    reservation=reserve("/discovery/budget.json",False,seconds=360,limit_override=15,
                         startup_seconds=10,cpu=.125,memory_gib=.25)
     if reservation is None:
         return {"status":"collector_budget_stopped"}

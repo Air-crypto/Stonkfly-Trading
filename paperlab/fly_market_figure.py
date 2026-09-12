@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 
 PHASES = ("training", "development", "test")
-LABELS = {"restore_10704":"Restore inputs to 10704", "restore_11402":"Restore inputs to 11402", "restore_both":"Restore both MBON11", "trained_frozen":"Trained / frozen inference", "pristine_frozen":"Original / frozen", "online_original":"Original / learning",
+LABELS = {"pristine_input_reset":"Pristine / clear synaptic input", "trained_input_reset":"Trained / clear synaptic input", "restore_10704":"Restore inputs to 10704", "restore_11402":"Restore inputs to 11402", "restore_both":"Restore both MBON11", "trained_frozen":"Trained / frozen inference", "pristine_frozen":"Original / frozen", "online_original":"Original / learning",
           "fixed_returns_frozen":"Fixed returns / frozen", "fixed_returns_online":"Fixed returns / learning",
           "reinforcement_gated":"Reinforcement gated"}
 
