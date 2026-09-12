@@ -1235,3 +1235,61 @@ specified reset to incoming connections, and freeze all updates. Selection uses
 development only and must beat cash and pristine; test cannot trigger reselection
 or automatic deployment. The test had not started when the protocol was
 registered. That fresh comparison has not yet run.
+
+
+### Evaluate restoration on a new market window
+
+The `memory-restoration` market protocol compares pristine/frozen,
+trained/frozen, each single-cell restoration, and both restored cells. It applies
+restoration only before development and test. Every phase has a separate broker
+and reset neural activity; inference begins from the independently prepared
+checkpoint rather than development's terminal state.
+
+Within one pool, equivalent training recipes share their computed checkpoint.
+The four learned variants have identical training settings, so each pool needs
+two training simulations (pristine and learned) instead of five. All development
+and test trials still execute separately. Reports record `training_compute_source`
+and `training_compute_reused`; these shared results are not independent training
+replicates. Pools never share trained memory.
+
+After a closed collector database covers the **actual observation timestamps**
+through the registered endpoint, seal and submit the comparison:
+
+```sh
+uv run python -m paperlab.fly_market_study followup \
+  --archive runs/fresh-universe-snapshot.db \
+  --previous reports/fly-market-study-05-plan.json \
+  --phase-steps 3 --protocol memory-restoration --out runs/market06-plan.json
+uv run python -m paperlab.fly_market_cloud \
+  --plan runs/market06-plan.json \
+  --registration reports/fly-market-study-06-preregistration.json \
+  --out runs/market06
+```
+
+Deploy the updated full-fly/universe worker before submission. The cloud command
+requires the plan to match its registration and the recorded registration time
+to precede test. Repeat the **same command and output directory** to resume a
+pending call; it saves the call ID before waiting and refuses a changed request
+or an uncertain submission. It verifies executed source hashes and reconciles
+the decision timestamps, terminal/aggregate equity, fill counts, fees, and the
+development-only selection rule before publishing local results.
+
+Completed output includes `report.json`, `memory-audit.json`, all available test
+views, and private `artifacts/` checkpoints. The model saves a `plastic-map.npz`
+plus distinct training and prepared-inference memory for each arm. The audit
+uses the actual target mapping to check every restored and untargeted value,
+then compares both inference start hashes and the saved test-start arrays with
+that verified preparation. Intentional restoration is reported explicitly;
+it is not mislabeled as retaining the entire trained state unchanged.
+
+```sh
+uv run python -m paperlab.debugger serve --backend modal --out runs/market06
+uv run python -m paperlab.fly_market_memory_audit \
+  --plan runs/market06/plan.json --report runs/market06/report.json \
+  --artifacts runs/market06/artifacts --out runs/market06/rechecked-memory.json
+```
+
+The model's full graph, fixed decoder, costs, and promotion gate remain in force.
+Restoration changes neural memory; it never substitutes a chosen trade for the
+network's output. The scheduled paper policy is unchanged while these variants
+are evaluated in isolated accounts.

@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 
 PHASES = ("training", "development", "test")
-LABELS = {"trained_frozen":"Trained / frozen inference", "pristine_frozen":"Original / frozen", "online_original":"Original / learning",
+LABELS = {"restore_10704":"Restore inputs to 10704", "restore_11402":"Restore inputs to 11402", "restore_both":"Restore both MBON11", "trained_frozen":"Trained / frozen inference", "pristine_frozen":"Original / frozen", "online_original":"Original / learning",
           "fixed_returns_frozen":"Fixed returns / frozen", "fixed_returns_online":"Fixed returns / learning",
           "reinforcement_gated":"Reinforcement gated"}
 
@@ -38,7 +38,7 @@ def render(report, title="Sealed market replay"):
     def text(x,y,value,size=15,css=""):
         svg.append(f'<text x="{x}" y="{y}" font-size="{size}" class="{css}">{escape(str(value))}</text>')
     text(28,40,title,25)
-    text(28,65,'Each phase starts with $1,000. Learned state comes from training; development is not carried into test.',13,'small')
+    text(28,65,'Each phase starts with $1,000. Inference uses training memory with declared restorations; development never enters test.' if report.get('restoration_timing') else 'Each phase starts with $1,000. Learned state comes from training; development is not carried into test.',13,'small')
     text(28,87,'All panels share one dollar scale. Red points include an unavailable pool quote; cash may still be fully priced.',13,'small')
     for j,phase in enumerate(PHASES):
         times=series[arms[0],phase][0]
@@ -70,6 +70,7 @@ def render(report, title="Sealed market replay"):
     text(28,y,'Development selection: '+(LABELS.get(selected,selected) if selected else 'No arm passed the cash and frozen-baseline gate.'),15)
     text(28,y+24,'Simulated DEX fees/slippage included; hosting excluded. Unavailable inventory uses stress valuation. News disabled.',13,'small')
     text(28,y+45,'Short retrospective experiment; this is not a monthly return estimate or evidence of executable live profit.',13,'small')
+    if report.get('restoration_timing'):text(28,y+67,'Equivalent training recipes share one checkpoint per pool; development and test remain separate.',13,'small')
     svg.append('</svg>')
     return '\n'.join(svg)+'\n'
 

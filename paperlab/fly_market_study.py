@@ -1,5 +1,6 @@
 """Sealed, chronological fly comparisons on a discovery snapshot. Paper only."""
 import argparse
+import copy
 from bisect import bisect_right
 from dataclasses import asdict, replace
 import hashlib
@@ -42,6 +43,11 @@ VISUAL_ARMS = {
 
 
 INFERENCE_ARMS = {name: ARMS[name] for name in ("pristine_frozen", "trained_frozen", "online_original")}
+
+RESTORATION_ARMS = {"pristine_frozen": ARMS["pristine_frozen"], "trained_frozen": ARMS["trained_frozen"],
+                   **{name: {**ARMS["trained_frozen"], "restore_post_ids": ids} for name, ids in
+                      (("restore_10704", ["10704"]), ("restore_11402", ["11402"]), ("restore_both", ["10704", "11402"]))}}
+RESTORATION_TIMING = "Train normally from pristine. For development and test separately, reset neural activity and restore the saved training memory, then reset incoming weights/u/w of the declared target cells to pristine. Freeze all plasticity and omit reinforcement throughout each inference phase. Development state is never carried into test."
 
 
 def signature(value):
@@ -91,7 +97,7 @@ def seal(archive, output, phase_steps=3):
 
 
 def validate(plan):
-    protocols = {1: ARMS, 2: REINFORCEMENT_ARMS, 3: VISUAL_ARMS, 4: INFERENCE_ARMS}
+    protocols = {1: ARMS, 2: REINFORCEMENT_ARMS, 3: VISUAL_ARMS, 4: INFERENCE_ARMS, 5: RESTORATION_ARMS}
     if not isinstance(plan,dict) or plan.get("schema") not in protocols or plan.get("arms")!=protocols[plan["schema"]]:
         raise ValueError("Unknown study protocol")
     n=plan.get("phase_steps")
@@ -101,8 +107,12 @@ def validate(plan):
         raise ValueError("Study must retain the declared adverse DEX costs")
     if plan["schema"]==3 and plan.get("visual_encoding")!=encoding("fixed_returns"):
         raise ValueError("Visual protocol must pin the executed sensory transform")
-    if plan["schema"]==4 and "visual_encoding" in plan:
+    if plan["schema"]>=4 and "visual_encoding" in plan:
         raise ValueError("Frozen inference uses the original visual adapter")
+    if plan["schema"]==5 and plan.get("restoration_timing")!=RESTORATION_TIMING:
+        raise ValueError("Restoration timing must match the registered inference boundary")
+    if plan["schema"]!=5 and "restoration_timing" in plan:
+        raise ValueError("Unexpected restoration timing metadata")
     if not 1<=len(plan.get("cohort",[]))<=2 or len(set(plan["cohort"]))!=len(plan["cohort"]):
         raise ValueError("Use one or two unique admitted pools")
     if set(plan["series"])!=set(plan["cohort"]):
@@ -137,7 +147,7 @@ def seal_followup(archive, previous, output, phase_steps=2, protocol="reinforcem
         raise ValueError("Refuse to overwrite a sealed plan")
     if type(phase_steps) is not int or not 2<=phase_steps<=4:
         raise ValueError("Use 2–4 decisions per phase")
-    if protocol not in ("reinforcement", "visual", "frozen-inference"):
+    if protocol not in ("reinforcement", "visual", "frozen-inference", "memory-restoration"):
         raise ValueError("Unknown follow-up protocol")
     start=old["start"]+3*old["phase_steps"]*300
     end=start+3*phase_steps*300
@@ -152,13 +162,17 @@ def seal_followup(archive, previous, output, phase_steps=2, protocol="reinforcem
     _,series=read_archive(archive,last)
     if not all(key in series for key in old["cohort"]):
         raise ValueError("Prior cohort fell outside the bounded archive; do not replace it with survivors")
-    schema,arms={"reinforcement":(2,REINFORCEMENT_ARMS),"visual":(3,VISUAL_ARMS),"frozen-inference":(4,INFERENCE_ARMS)}[protocol]
+    schema,arms={"reinforcement":(2,REINFORCEMENT_ARMS),"visual":(3,VISUAL_ARMS),"frozen-inference":(4,INFERENCE_ARMS),"memory-restoration":(5,RESTORATION_ARMS)}[protocol]
     plan={**old,"schema":schema,"start":start,"previous_test_end":start,"parent_plan_sha256":previous["sha256"],
           "phase_steps":phase_steps,"snapshot_sha256":digest(archive),"snapshot_end":last,
           "arms":arms,
           "series":{key:[asdict(t) for t in series[key] if t.ts<=end] for key in old["cohort"]},
           "selection":"Same cohort as parent study, regardless of later eligibility or survival. New decision windows start at parent test end.",
           "hypothesis":"Freeze efficacy and weight updates when reinforcement is none; retain neural propagation and rate traces. No decoder or risk-limit change."}
+    plan.pop("restoration_timing",None)
+    if protocol=="memory-restoration":
+        plan["restoration_timing"]=RESTORATION_TIMING
+        plan["hypothesis"]="Compare partial and combined restoration of incoming MBON11 memory with trained and pristine frozen controls on a subsequent market window."
     if protocol=="visual":
         plan["hypothesis"]="Compare fixed return encoding with the unchanged visual adapter, crossed with frozen versus online plasticity. No decoder or risk-limit change."
         plan["visual_encoding"]=encoding("fixed_returns")
@@ -194,7 +208,7 @@ def decision_timeline(rows):
              "equity": r["equity"]} for r in rows]
 
 
-def phase(lab, ticks, start, steps, arm, learning, deadline, trace_output=None):
+def phase(lab, ticks, start, steps, arm, learning, deadline, trace_output=None, restoration=None):
     b=lab.brain
     b.weights_frozen=not learning
     b.eta=arm["eta"]
@@ -248,10 +262,10 @@ def phase(lab, ticks, start, steps, arm, learning, deadline, trace_output=None):
         if trace_events:
             report={"schema":1,"source":"sealed_retrospective_market_replay",
                     "config":{"preset":"market_replay","view":arm["view"],"news":"none","eta":arm["eta"],"learning":learning,
-                              "reinforcement_only":arm.get("reinforcement_only",False)},
+                              "reinforcement_only":arm.get("reinforcement_only",False),"restore_post_ids":(restoration or {}).get("post_ids",[])},
                     "upstream_commit":UPSTREAM_COMMIT,"graph":{"neurons":b.n,"edges":len(b.post),"plastic_edges":len(b.circuit["edges"])},
                     "native_build":b.build,"seconds":time.monotonic()-wall_start,"events":trace_events,
-                    "market_timeline":decision_timeline(rows),"visual_encoding":encoding(arm["view"]),
+                    "market_timeline":decision_timeline(rows),"visual_encoding":encoding(arm["view"]),"restoration":restoration,
                     "initial_memory_sha256":memory_signature(initial_memory),"final_memory_sha256":memory_signature(learned_state(b)),
                     "interpretation":"Recorded market replay, isolated paper account. No executable DEX or monthly-return claim."}
             atomic_json(trace_output/"report.json",report)
@@ -259,7 +273,7 @@ def phase(lab, ticks, start, steps, arm, learning, deadline, trace_output=None):
         return {"start":start,"end":start+steps*300,"equity":rows[-1]["equity"],
                 "return_pct":100*(rows[-1]["equity"]/DEX_COSTS.capital-1),"fees":float(broker.fees),
                 "fills":sum(r["fill"]["status"]=="filled" for r in rows),
-                "unavailable_marks":sum(not r["available"] for r in rows),"rows":rows,
+                "unavailable_marks":sum(not r["available"] for r in rows),"rows":rows,"restoration":restoration,
                 "initial_memory_sha256":memory_signature(initial_memory),"final_memory_sha256":memory_signature(learned_state(b))}
     finally:
         news.db.close()
@@ -279,6 +293,18 @@ def restore_learned(brain, state):
     brain.memory_u[:]=state["u"];brain.memory_w[:]=state["w"]
 
 
+
+def inference_memory(brain, trained, pristine, arm):
+    """Derive a new immutable inference checkpoint without altering training memory."""
+    from .fly_market_restoration import restore_posts
+    targets=arm.get("restore_post_ids",[])
+    post_ids=np.array([str(brain.ids[i]) for i in brain.post[brain.circuit["edges"]]])
+    initial,mask=restore_posts(pristine,trained,post_ids,targets)
+    return initial,{"post_ids":targets,"edge_ids":[str(e) for e in brain.circuit["edges"][mask]],
+                   "edge_count":int(mask.sum()),"training_memory_sha256":memory_signature(trained),
+                   "inference_memory_sha256":memory_signature(initial)}
+
+
 def run(envelope, data, output):
     plan=validate(envelope["plan"])
     if envelope.get("sha256")!=signature(plan):
@@ -287,17 +313,35 @@ def run(envelope, data, output):
     atomic_json(root/"protocol.json",envelope)
     deadline=time.monotonic()+480
     lab=TraceLab(data); n=plan["phase_steps"]; arms=plan["arms"]
-    results={}; states={}
+    results={}; states={}; restorations={}
+    if plan["schema"]==5:
+        np.savez_compressed(root/"plastic-map.npz",edge_ids=lab.brain.circuit["edges"],
+                            post_ids=lab.brain.ids[lab.brain.post[lab.brain.circuit["edges"]]])
     for key in plan["cohort"]:
         ticks=[Tick(**r) for r in plan["series"][key]]
-        results[key]={}
+        results[key]={};training_cache={}
         for name,arm in arms.items():
             lab.brain.reset()
-            training=phase(lab,ticks,plan["start"],n,arm,arm["train"],deadline)
-            state=learned_state(lab.brain);states[key,name]=state
-            np.savez_compressed(root/f"pool{plan['cohort'].index(key)}-{name}-training-memory.npz",**state)
+            pristine=learned_state(lab.brain)
+            recipe=(arm["eta"],arm["train"],arm["view"],arm.get("reinforcement_only",False))
+            if plan["schema"]==5 and recipe in training_cache:
+                source,recorded,cached=training_cache[recipe]
+                training=copy.deepcopy(recorded);trained={k:v.copy() for k,v in cached.items()}
+                training["training_compute_source"]=source;training["training_compute_reused"]=True
+            else:
+                training=phase(lab,ticks,plan["start"],n,arm,arm["train"],deadline)
+                trained=learned_state(lab.brain)
+                if plan["schema"]==5:
+                    training["training_compute_source"]=name;training["training_compute_reused"]=False
+                    training_cache[recipe]=(name,copy.deepcopy(training),{k:v.copy() for k,v in trained.items()})
+            state=trained;restoration=None
+            if plan["schema"]==5:
+                state,restoration=inference_memory(lab.brain,trained,pristine,arm)
+                np.savez_compressed(root/f"pool{plan['cohort'].index(key)}-{name}-inference-memory.npz",**state)
+            states[key,name]=state;restorations[key,name]=restoration
+            np.savez_compressed(root/f"pool{plan['cohort'].index(key)}-{name}-training-memory.npz",**trained)
             restore_learned(lab.brain,state)
-            development=phase(lab,ticks,plan["start"]+n*300,n,arm,arm["online"],deadline)
+            development=phase(lab,ticks,plan["start"]+n*300,n,arm,arm["online"],deadline,restoration=restoration)
             results[key][name]={"training":training,"development":development}
             print(f"market_study development pool={plan['cohort'].index(key)} arm={name} return={development['return_pct']:.4f}%",flush=True)
             atomic_json(root/"development.json",results)
@@ -313,18 +357,18 @@ def run(envelope, data, output):
     for key in plan["cohort"]:
         ticks=[Tick(**r) for r in plan["series"][key]]
         for name,arm in arms.items():
-            # Learned weights always come from training, not a test-tuned or development-updated state.
+            # Restore the separately prepared inference state; development never enters test.
             restore_learned(lab.brain,states[key,name])
-            traces=(root/f"pool{plan['cohort'].index(key)}-{name}") if name in ("pristine_frozen","trained_frozen","online_original","reinforcement_gated","fixed_returns_frozen","fixed_returns_online") else None
-            results[key][name]["test"]=phase(lab,ticks,plan["start"]+2*n*300,n,arm,arm["online"],deadline,traces)
+            traces=(root/f"pool{plan['cohort'].index(key)}-{name}") if plan["schema"]==5 or name in ("pristine_frozen","trained_frozen","online_original","reinforcement_gated","fixed_returns_frozen","fixed_returns_online") else None
+            results[key][name]["test"]=phase(lab,ticks,plan["start"]+2*n*300,n,arm,arm["online"],deadline,traces,restoration=restorations[key,name])
             print(f"market_study test pool={plan['cohort'].index(key)} arm={name} return={results[key][name]['test']['return_pct']:.4f}%",flush=True)
             atomic_json(root/"results.json",results)
     totals={name:{phase_name:idle+sum(results[k][name][phase_name]["equity"] for k in results)
                   for phase_name in ("training","development","test")} for name in arms}
     elapsed=n*300
     summary={"status":"market_study_completed","plan_sha256":envelope["sha256"],"selection":selection,
-             "code_sha256":{name:digest(Path(__file__).with_name(name)) for name in ("fly_market_study.py","fly_trace.py","fly.py","fly_visual.py")},
-             "total_equity":totals,"initial_capital":1000,"active_sleeves":len(plan["cohort"]),
+             "code_sha256":{name:digest(Path(__file__).with_name(name)) for name in ("fly_market_study.py","fly_trace.py","fly.py","fly_visual.py","fly_market_restoration.py")},
+             "restoration_timing":plan.get("restoration_timing"),"total_equity":totals,"initial_capital":1000,"active_sleeves":len(plan["cohort"]),
              "test_net_after_monthly_hosting":{str(cost):{name:totals[name]["test"]-1000-cost*elapsed/(30*86400)
                  for name in arms} for cost in (20,40)},"costs":asdict(DEX_COSTS),"phase_steps":n,
              "graph":{"neurons":lab.brain.n,"edges":len(lab.brain.post)},"native_build":lab.brain.build,
@@ -340,7 +384,7 @@ def main():
     sub=parser.add_subparsers(dest="command",required=True)
     s=sub.add_parser("seal");s.add_argument("--archive",required=True);s.add_argument("--out",required=True);s.add_argument("--phase-steps",type=int,default=3)
     f=sub.add_parser("followup");f.add_argument("--archive",required=True);f.add_argument("--previous",required=True);f.add_argument("--out",required=True);f.add_argument("--phase-steps",type=int,default=2)
-    f.add_argument("--protocol",choices=("reinforcement","visual","frozen-inference"),default="reinforcement")
+    f.add_argument("--protocol",choices=("reinforcement","visual","frozen-inference","memory-restoration"),default="reinforcement")
     r=sub.add_parser("run");r.add_argument("--plan",required=True);r.add_argument("--fly-data",required=True);r.add_argument("--out",required=True)
     a=parser.parse_args()
     if a.command=="seal":

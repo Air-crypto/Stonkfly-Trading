@@ -31,6 +31,8 @@ Visit <http://127.0.0.1:8765>. With Modal deployed and authenticated, use
 to run new synthetic assays and inspect full cloud traces. See the guide for
 [controlled market replays](docs/fly-debugger.md#separate-market-memory-updates-and-reinforcement),
 source verification, saved-call recovery, and run steps.
+The [registered market runner](docs/fly-debugger.md#evaluate-restoration-on-a-new-market-window)
+shares equivalent training checkpoints and audits each separate inference run.
 
 The diagnostics have identified concrete limitations:
 

@@ -1,6 +1,7 @@
 from dataclasses import asdict, replace
 import json
 import os
+from pathlib import Path
 from types import SimpleNamespace
 import time
 
@@ -38,6 +39,16 @@ def test_sealed_cohort_does_not_select_on_future_returns(tmp_path):
     frozen=seal_followup(tmp_path/"archive.db",visual,tmp_path/"frozen-inference.json",phase_steps=2,protocol="frozen-inference")
     assert frozen["plan"]["arms"]==INFERENCE_ARMS and frozen["plan"]["schema"]==4
     assert "visual_encoding" not in frozen["plan"]
+    from paperlab.fly_market_study import RESTORATION_ARMS,RESTORATION_TIMING
+    restored=seal_followup(tmp_path/"archive.db",first,tmp_path/"restoration.json",phase_steps=2,protocol="memory-restoration")
+    assert restored["plan"]["arms"]==RESTORATION_ARMS and restored["plan"]["schema"]==5
+    assert restored["plan"]["restoration_timing"]==RESTORATION_TIMING
+    restored_back=seal_followup(tmp_path/"archive.db",restored,tmp_path/"back-frozen.json",phase_steps=2,protocol="frozen-inference")
+    assert "restoration_timing" not in restored_back["plan"]
+    invalid=json.loads(json.dumps(restored["plan"]));invalid["restoration_timing"]="restore after test"
+    with pytest.raises(ValueError):validate(invalid)
+    registration=json.loads(Path("reports/fly-market-study-06-preregistration.json").read_text())
+    assert RESTORATION_ARMS==registration["arms"] and RESTORATION_TIMING==registration["restoration_timing"]
     bad=json.loads(json.dumps(frozen["plan"]));bad["visual_encoding"]={"view":"fixed_returns"}
     with pytest.raises(ValueError):validate(bad)
     assert frozen["plan"]["start"]==visual["plan"]["start"]+1800
@@ -155,3 +166,63 @@ def test_native_market_training_state_survives_frozen_inference(tmp_path):
     assert all(r['event']['stimulus']=='none' and not r['event']['plasticity_enabled'] for r in inference['rows'] if r['event'])
     with np.load(tmp_path/'trace/initial-memory.npz') as saved:
         assert all(np.array_equal(saved[k],v) for k,v in state.items())
+
+
+@pytest.mark.skipif(not os.environ.get('FLY_TRACE_DATA'),reason='requires prepared full retained graph')
+def test_native_inference_restores_only_declared_inputs(tmp_path):
+    from paperlab.fly_trace import TraceLab,synthetic_ticks
+    from paperlab.fly_market_study import RESTORATION_ARMS,inference_memory,learned_state,restore_learned,memory_signature
+    lab=TraceLab(Path(os.environ['FLY_TRACE_DATA']));b=lab.brain
+    pristine=learned_state(b);ticks=synthetic_ticks('fall',5);arm=RESTORATION_ARMS['restore_10704']
+    training=phase(lab,ticks,ticks[99].ts,2,arm,True,time.monotonic()+90)
+    trained=learned_state(b);saved={k:v.copy() for k,v in trained.items()}
+    initial,restoration=inference_memory(b,trained,pristine,arm)
+    mask=b.ids[b.post[b.circuit['edges']]]==10704
+    assert mask.sum()==restoration['edge_count']==2048
+    for k in initial:
+        np.testing.assert_array_equal(initial[k][mask],pristine[k][mask])
+        np.testing.assert_array_equal(initial[k][~mask],trained[k][~mask])
+        np.testing.assert_array_equal(trained[k],saved[k])
+    assert memory_signature(trained)==training['final_memory_sha256']
+    restore_learned(b,initial)
+    result=phase(lab,ticks,ticks[101].ts,2,arm,False,time.monotonic()+90,tmp_path/'inference',restoration=restoration)
+    assert result['initial_memory_sha256']==result['final_memory_sha256']==memory_signature(initial)
+    view=json.loads((tmp_path/'inference/view.json').read_text())
+    assert view['report']['restoration']==restoration
+    assert view['report']['config']['restore_post_ids']==['10704']
+    assert all(row['event']['stimulus']=='none' and not row['event']['plasticity_enabled'] for row in result['rows'] if row['event'])
+
+
+def test_market_runner_uses_prepared_memory_and_never_development_state(tmp_path,monkeypatch):
+    import paperlab.fly_market_study as study
+    class Brain:
+        n=3;ids=np.array([10704,11402,12859]);post=np.arange(3);circuit={'edges':np.arange(3)};build={'binary_sha256':'fixture'}
+        def reset(self):self.weight=np.ones(3,dtype=np.float32);self.memory_u=np.zeros(3,dtype=np.float32);self.memory_w=np.zeros(3,dtype=np.float32)
+    b=Brain();b.reset();lab=SimpleNamespace(brain=b)
+    plan=json.loads(Path('reports/fly-market-study-05-plan.json').read_text())['plan']
+    plan.update(schema=5,arms=study.RESTORATION_ARMS,restoration_timing=study.RESTORATION_TIMING)
+    observed=[]
+    def fake_phase(lab,ticks,start,steps,arm,learning,deadline,trace_output=None,restoration=None):
+        observed.append((start,arm,study.learned_state(b)))
+        if learning:b.weight+=1;b.memory_u+=2;b.memory_w+=3
+        if start==plan['start']+900:
+            # If the runner accidentally carries development into test, this marker leaks.
+            b.weight[:]=999;b.memory_u[:]=888;b.memory_w[:]=777
+        return {'equity':250,'return_pct':0,'rows':[],'restoration':restoration}
+    monkeypatch.setattr(study,'TraceLab',lambda data:lab);monkeypatch.setattr(study,'phase',fake_phase)
+    result=study.run({'plan':plan,'sha256':signature(plan)},tmp_path/'unused',tmp_path/'run')
+    assert result['selection']['selected'] is None
+    assert sum(start==plan['start'] for start,_,_ in observed)==2*len(plan['cohort'])
+    records=json.loads((tmp_path/'run/results.json').read_text())
+    for pool in records.values():
+        assert pool['restore_10704']['training']['training_compute_source']=='trained_frozen'
+        assert pool['restore_10704']['training']['training_compute_reused'] is True
+        assert pool['trained_frozen']['training']['training_compute_reused'] is False
+    for start,arm,state in observed:
+        if start!=plan['start']+1800:continue
+        mask=np.isin(b.ids.astype(str),arm.get('restore_post_ids',[]))
+        expected=np.where(mask,1,2 if arm['train'] else 1)
+        np.testing.assert_array_equal(state['weights'],expected)
+        np.testing.assert_array_equal(state['u'],np.where(mask,0,2 if arm['train'] else 0))
+        np.testing.assert_array_equal(state['w'],np.where(mask,0,3 if arm['train'] else 0))
+    with np.load(tmp_path/'run/plastic-map.npz') as saved:np.testing.assert_array_equal(saved['post_ids'],b.ids)
