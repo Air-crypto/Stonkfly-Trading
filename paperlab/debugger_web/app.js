@@ -155,6 +155,32 @@ function decoderPath(f){
  chart('decoder-direction-chart',xs,[{name:'Left contribution (blue)',values:series.left,color:'#8fbcff'},{name:'Right contribution (pink)',values:series.right,color:'#e6a8e8'},{name:'Right − left (green)',values:difference,color:'#67e8cf'}],'Accumulated contribution (Hz)',bin,'Time in observation (ms)');
  chart('decoder-gate-chart',xs,[{name:'Accumulated gate spikes',values:series.gate,color:'#ffbf69'}],'Gate spikes',bin,'Time in observation (ms)');
 }
+function inputTiming(f){
+ const e=f.event,elapsed=f.times_ms.map(t=>t-(e.brain_ms-500));
+ const validGrid=Number.isFinite(e.brain_ms)&&elapsed.length===50&&elapsed.every((t,i)=>Math.abs(t-(i+1)*10)<1e-6);
+ const start=bin*10,end=start+10;
+ for(const kind of ['pulse','current']){$(kind+'-timing-track').replaceChildren();$(kind+'-timing-note').textContent=`${kind==='pulse'?'Reinforcement':'Diagnostic current'} timing unavailable${validGrid?' in this recording.':': unsupported observation time grid.'}`;}
+ if(!validGrid)return;
+ const drawTrack=(kind,duration,enabled,label,color)=>{
+  const active=enabled&&start<duration;
+  $(kind+'-timing-note').textContent=`${label}. Selected bin ${start}–${end} ms: ${active?'input applied':'input off'}.`;
+  const el=$(kind+'-timing-track'),w=Math.max(250,el.clientWidth),left=12,right=w-12,X=t=>left+t/500*(right-left);
+  const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox',`0 0 ${w} 52`);svg.setAttribute('role','img');svg.setAttribute('aria-label',$(kind+'-timing-note').textContent);
+  const add=(tag,attrs,text)=>{const n=document.createElementNS(ns,tag);for(const[k,v]of Object.entries(attrs))n.setAttribute(k,v);if(text!==undefined)n.textContent=text;svg.append(n);};
+  add('rect',{x:left,y:5,width:right-left,height:20,fill:'#202e44'});
+  if(enabled&&duration>0)add('rect',{x:left,y:5,width:X(duration)-left,height:20,fill:color,'data-input-duration':duration});
+  add('rect',{x:X(start),y:4,width:X(end)-X(start),height:22,fill:'none',stroke:'#e8edf6','stroke-width':2,'data-input-active':String(active),'data-bin-start':start});
+  for(const t of [0,250,500])add('text',{x:X(t),y:44,fill:'#b2bfd1','font-size':11,'text-anchor':t===0?'start':t===500?'end':'middle'},`${t} ms`);
+  el.append(svg);
+ };
+ if(['none','reward','aversive'].includes(e.stimulus)&&Number.isFinite(e.stimulus_ms)&&e.stimulus_ms>=0&&e.stimulus_ms<=500&&e.stimulus_ms%10===0&&((e.stimulus==='none')===(e.stimulus_ms===0))){
+  drawTrack('pulse',e.stimulus_ms,e.stimulus!=='none',e.stimulus==='none'?'No reinforcement pulse':`${e.stimulus==='reward'?'Reward':'Aversive'} pulse · 0–${e.stimulus_ms} ms`,'#e6a8e8');
+ }
+ const s=e.stimulation;
+ if(s&&Number.isFinite(s.current)&&s.duration_ms===500&&Array.isArray(s.target_ids)&&s.target_ids.length&&s.target_ids.every(id=>typeof id==='string'&&/^\d+$/.test(id))){
+  drawTrack('current',s.duration_ms,s.current!==0,`Diagnostic current ${num(s.current)} · cells ${s.target_ids.join(', ')} · 0–500 ms`,'#ffbf69');
+ }
+}
 function activityBoundary(f, selectedIndex=node){
  const boundary=f.event.activity_boundary,panel=$('activity-boundary');panel.hidden=!boundary;$('activity-boundary-note').textContent='';$('activity-neuron-state').textContent='';if(!boundary)return;
  const label={initial:'Fresh dynamics; no between-observation intervention yet',carry:'Carry all activity forward',full:'Reset every recorded dynamic field',visual_filters:'Reset visual filters only',adaptation:'Reset intrinsic adaptation only',voltage:'Reset membrane voltage',conductance:'Reset synaptic input state',voltage_conductance:'Reset voltage and synaptic input',gate_voltage_conductance:'Reset voltage and synaptic input only at gate neurons'};
@@ -164,7 +190,7 @@ function activityBoundary(f, selectedIndex=node){
   $('activity-neuron-state').textContent=`Body ${data.nodes[selectedIndex].id} at this boundary, before the image: voltage ${num(state.before_v[selectedIndex],5)} → ${num(state.after_v[selectedIndex],5)} mV; synaptic input state g ${num(state.before_g[selectedIndex],5)} → ${num(state.after_g[selectedIndex],5)} (model units). These boundary values do not move with the within-image time cursor.`;
  }else $('activity-neuron-state').textContent='Per-neuron boundary values are unavailable in this recording; no values are inferred.';
 }
-function draw(){if(!data)return;externalNeuron=false;document.querySelector('.legend .changed').parentElement.lastChild.textContent=$('pristine').checked?'Plastic edge differs from pristine state':'Plastic edge changed since observation start';const f=data.frames[step],n=data.nodes[node];bin=Math.min(bin,f.times_ms.length-1);$('bin').max=f.times_ms.length-1;$('bin').value=bin;$('time').textContent=num(f.times_ms[bin])+' ms';network(f);decoderPath(f);activityBoundary(f);
+function draw(){if(!data)return;externalNeuron=false;document.querySelector('.legend .changed').parentElement.lastChild.textContent=$('pristine').checked?'Plastic edge differs from pristine state':'Plastic edge changed since observation start';const f=data.frames[step],n=data.nodes[node];bin=Math.min(bin,f.times_ms.length-1);$('bin').max=f.times_ms.length-1;$('bin').value=bin;$('time').textContent=num(f.times_ms[bin])+' ms';network(f);decoderPath(f);activityBoundary(f);inputTiming(f);
  document.querySelector('.legend .restored').parentElement.lastChild.textContent=data.report.restoration?'Restored before replay':'Restored before probe';
  $('previous-spike').disabled=spikeBin(-1)<0;$('next-spike').disabled=spikeBin(1)<0;momentLink();
  $('neuron-detail').textContent=`${n.type||'Unannotated'} · ${n.id} · ${f.counts[bin][node]} spikes in this bin · ${num(f.voltage[bin][node])} mV`;

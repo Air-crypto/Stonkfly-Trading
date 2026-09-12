@@ -2872,3 +2872,38 @@ node scripts/check-fly-stimulation-view.cjs
 It checks the actual per-observation target list, both recipients, paired count
 navigation, and mobile layout while blocking model submissions. Use
 `FLY_STIMULATION_PREFIX` if the published recording prefix differs.
+
+## Inspect when current is applied
+
+The **Applied inputs within this image** panel follows the selected 10 ms bin.
+It displays reinforcement and diagnostic current separately, using each event's
+recorded stimulus category, delivered duration and explicit diagnostic targets.
+The controller applies these inputs from image onset. The viewer requires the
+recorded 50-bin, 500 ms time grid; missing or inconsistent metadata produces an
+unavailable label rather than an inferred zero.
+
+![Recorded reinforcement pulse and cursor](assets/fly-input-timing-01.png)
+
+After serving the included examples, inspect the
+[last bin of an aversive pulse](http://127.0.0.1:8765/?run=pulse01-trained_online_recorded&step=1&bin=19).
+The 190–200 ms bin still receives the pulse; moving to 200–210 ms shows it off.
+The same control follows later observations despite their larger cumulative
+neural clocks. A recorded current-zero control shows no added current, while an
+older recording without diagnostic-current metadata remains unavailable.
+
+These bands describe applied inputs, not measured dopamine spikes or a causal
+effect on a connection. Neural activity and plasticity may continue after a
+pulse. In the running paper adapter, the pulse reflects the preceding portfolio
+equity change and arrives during the next image; it is not an action-specific
+credit signal. The existing reward audit separates its inventory and cost terms.
+
+Repeat the browser check without model compute:
+
+```sh
+FLY_VIEW_URL=http://127.0.0.1:8765 node scripts/check-fly-input-timing.cjs
+```
+
+The script checks 20 saved recordings at 240 selected bins, including reward,
+aversive, neutral and zero/nonzero diagnostic current. It also rejects missing,
+overlong or inconsistent pulse timing and an altered time grid, checks mobile
+layout, and blocks model submissions.

@@ -141,6 +141,12 @@ not exact spike times or proof of a causal connection.
 
 ![Jump between recorded neuron count differences](docs/assets/fly-paper-stimulation-navigation-01.png)
 
+The [input timing strip](docs/fly-debugger.md#inspect-when-current-is-applied)
+shows whether the selected bin falls inside a recorded reinforcement pulse or
+diagnostic-current interval, separately from neuron firing and weight changes.
+
+![Recorded reinforcement pulse and selected 10 ms bin](docs/assets/fly-input-timing-01.png)
+
 The [decoder count view](docs/fly-debugger.md#inspect-accumulated-decoder-counts)
 shows how output spikes accumulate. In the examined BUY/SELL reversal, one net
 spike equals the fixed 2 Hz threshold; a count-edit audit separates direction
