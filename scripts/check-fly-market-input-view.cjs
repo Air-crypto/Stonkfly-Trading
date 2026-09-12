@@ -38,6 +38,7 @@ const assert=require('node:assert/strict'),fs=require('fs'),path=require('path')
    for(let i=0;i<v.frames.length;i++){
     await page.selectOption('#step',String(i));const f=v.frames[i],e=f.event,b=e.activity_boundary;
     assert.equal(e.market_decision_ts,observed[i].decision_ts);assert.equal(await page.locator('#decision').innerText(),e.side);
+    if(e.stimulation)assert((await page.locator('#phase-note').innerText()).includes(`Applied diagnostic current ${e.stimulation.current} to cells 10704, 11402 throughout each 500 ms image`));
     assert.equal(b.observation,i+1);assert.equal(b.mode,i===0?'initial':v.report.config.activity_reset);
     const note=await page.locator('#activity-boundary-note').innerText();assert(note.includes(`${num(b.before_clock.sim_ms)} → ${num(b.after_clock.sim_ms)} ms`));
     const n=v.nodes.findIndex(n=>n.id==='10527');assert(n>=0);await page.selectOption('#node',String(n));
