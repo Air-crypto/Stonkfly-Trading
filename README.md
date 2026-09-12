@@ -195,6 +195,12 @@ effect; they do not establish the outcome of a full alternative training run.
 
 ![Recorded contributors to the earliest connection updates](docs/assets/fly-first-drive-01.png)
 
+The [separate KC/DAN reset follow-up](docs/fly-selective-traces.md) specifies
+12 full-network conditions to test the later effects of those histories. Its
+24 boundary checks passed against saved native arrays, preserving all other
+state and weights. Native runs and their results are pending; the running cloud
+comparison is unchanged. The guide includes the preflight command and evidence.
+
 The [longer online comparison runner](docs/fly-online-comparison.md) now records
 24 decision slots per condition, with full native-bin audits, independent paper
 feedback, and preserved missing-data gaps. A synthetic full-graph check verified

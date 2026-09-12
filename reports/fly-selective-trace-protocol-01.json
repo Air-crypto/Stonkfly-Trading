@@ -1,0 +1,139 @@
+{
+  "schema": 1,
+  "kind": "post_hoc_selective_learning_trace_reset",
+  "recorded_at": 1789248784.5376902,
+  "status": "specified_not_submitted",
+  "purpose": "Test the full-network effect of clearing KC or DAN rate history separately after the first-drive algebra located a KC-history contribution. Previously inspected historical inputs; no held-out financial claim.",
+  "parent_payload_signature": "cc13abc311c303daf981ff203a1ae578aefc3571e5ec8e3b10094b94802ad1ea",
+  "parent_audit_sha256": "1cf91421490195a817aa91dcfa8afc0039e1185a03de23a9d687ed3d6176f5ae",
+  "first_drive_sha256": "27eca87085d08664ac7290d4b1da151a286a79b7551c21cbbf355807e4ae5001",
+  "arms": {
+    "trained_online_recorded_carry": {
+      "reference_arm": "trained_online_recorded",
+      "learning": true,
+      "pulses": "recorded",
+      "boundary": "carry"
+    },
+    "trained_online_none_carry": {
+      "reference_arm": "trained_online_none",
+      "learning": true,
+      "pulses": "none",
+      "boundary": "carry"
+    },
+    "trained_frozen_recorded_carry": {
+      "reference_arm": "trained_frozen_recorded",
+      "learning": false,
+      "pulses": "recorded",
+      "boundary": "carry"
+    },
+    "trained_online_recorded_reset_rates": {
+      "reference_arm": "trained_online_recorded",
+      "learning": true,
+      "pulses": "recorded",
+      "boundary": "reset_rates"
+    },
+    "trained_online_none_reset_rates": {
+      "reference_arm": "trained_online_none",
+      "learning": true,
+      "pulses": "none",
+      "boundary": "reset_rates"
+    },
+    "trained_frozen_recorded_reset_rates": {
+      "reference_arm": "trained_frozen_recorded",
+      "learning": false,
+      "pulses": "recorded",
+      "boundary": "reset_rates"
+    },
+    "trained_online_recorded_reset_kc": {
+      "reference_arm": "trained_online_recorded",
+      "learning": true,
+      "pulses": "recorded",
+      "boundary": "reset_kc"
+    },
+    "trained_online_none_reset_kc": {
+      "reference_arm": "trained_online_none",
+      "learning": true,
+      "pulses": "none",
+      "boundary": "reset_kc"
+    },
+    "trained_frozen_recorded_reset_kc": {
+      "reference_arm": "trained_frozen_recorded",
+      "learning": false,
+      "pulses": "recorded",
+      "boundary": "reset_kc"
+    },
+    "trained_online_recorded_reset_dan": {
+      "reference_arm": "trained_online_recorded",
+      "learning": true,
+      "pulses": "recorded",
+      "boundary": "reset_dan"
+    },
+    "trained_online_none_reset_dan": {
+      "reference_arm": "trained_online_none",
+      "learning": true,
+      "pulses": "none",
+      "boundary": "reset_dan"
+    },
+    "trained_frozen_recorded_reset_dan": {
+      "reference_arm": "trained_frozen_recorded",
+      "learning": false,
+      "pulses": "recorded",
+      "boundary": "reset_dan"
+    }
+  },
+  "reset_fields": {
+    "carry": [],
+    "reset_rates": [
+      "rate_kc",
+      "rate_dan"
+    ],
+    "reset_kc": [
+      "rate_kc"
+    ],
+    "reset_dan": [
+      "rate_dan"
+    ]
+  },
+  "execution_order": [
+    "trained_online_recorded_carry",
+    "trained_online_none_carry",
+    "trained_frozen_recorded_carry",
+    "trained_online_recorded_reset_rates",
+    "trained_online_none_reset_rates",
+    "trained_frozen_recorded_reset_rates",
+    "trained_online_recorded_reset_kc",
+    "trained_online_none_reset_kc",
+    "trained_frozen_recorded_reset_kc",
+    "trained_online_recorded_reset_dan",
+    "trained_online_none_reset_dan",
+    "trained_frozen_recorded_reset_dan"
+  ],
+  "inference": {
+    "eta": 0.001,
+    "observations_per_arm": 3,
+    "native_ms_per_observation": 500,
+    "bins_per_observation": 50,
+    "pulse_ms": 200,
+    "extra_current": 0
+  },
+  "preserve": "The complete native graph, all non-target dynamic arrays, synaptic weights/u/w, clock, three sealed images, fixed decoder and recorded pulse schedule. Only designated rate arrays reset to their initial zero values before observations 2 and 3.",
+  "control_requirements": "Reproduce all six prior carry/both-reset controls including full per-bin counts, sampled voltage, weights/u/w, KC/DAN rates, identities and time. Complete those controls before either selective intervention. Every first observation must reproduce its carry control; frozen selective arms must reproduce all counts, sampled voltage and synaptic memory.",
+  "outcomes": [
+    "all per-bin neuron counts and sampled voltages",
+    "all plastic weights/u/w and learning traces",
+    "fixed decoder action, gate and direction counts",
+    "first divergent bin against carry and both-reset for all three observations"
+  ],
+  "interpretation": "Historical mechanism assay, not a new account replay or a profitable policy. The one-bin substitution result is not assumed to predict full-network selective resets. No account-dependent feedback is recomputed, no result is selected or promoted, and every condition must be reported.",
+  "limits": {
+    "cloud_calls": 1,
+    "neural_observations": 36,
+    "inner_timeout_seconds": 420,
+    "worker_timeout_seconds": 600,
+    "worker_monthly_cap_usd": 25,
+    "collector_monthly_cap_usd": 15,
+    "live_orders": false,
+    "automatic_promotion": false
+  },
+  "deployment_gate": "Prepare and validate offline while study 11 collects. No change to pinned study 11 sources or cloud deployment, and no native submission of this assay until study 11 capture and independent audits finish. Future submission must use the existing worker budget reservation and once-only ownership receipt."
+}
