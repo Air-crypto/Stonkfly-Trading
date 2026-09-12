@@ -3219,3 +3219,34 @@ reset condition must also preserve full spike counts; it tests whether the
 intervention affects anything beyond the learning rule. All 18 observations
 must be published, including a null or unfavorable result. No market policy
 has been changed or selected by this registration.
+
+The runner and independent auditor now implement that protocol. The experiment
+adds no field to the normal paper trader. It verifies the pinned original
+recordings, refuses changed protocol documents, and records complete boundary
+and end-state arrays. The auditor checks full-state continuity, all graph-weight
+fingerprints, every decoder result and every recorded plastic update.
+
+Prepare the payload from the existing pulse payload and public evidence:
+
+```sh
+uv run python -m paperlab.fly_credit_reset_cloud pack \
+  --protocol reports/fly-credit-reset-protocol-01.json \
+  --pulse-payload runs/market-pulse-payload-01.json \
+  --reference reports/fly-market-pulse-study-01.json \
+  --audit reports/fly-credit-origin-audit-01.json \
+  --out runs/credit-reset-01/payload.json
+uv run python -m paperlab.fly_credit_reset_cloud cloud \
+  --payload runs/credit-reset-01/payload.json \
+  --reference-recordings runs/market-pulse-01 \
+  --fly-data data/fly --out runs/credit-reset-01/cloud
+```
+
+The reference directory must contain the original full NPZ recordings and
+initial memories checked by the credit-origin audit. With a prepared graph,
+authenticated Modal and the updated worker deployed, the second command submits
+at most one call for that output directory. Repeat it with the **same output**
+after an observation timeout to reattach. It refuses submission while a worker
+owner, running input, runner or backlog is present. An uncertain submission stays
+unresolved; it does not automatically retry. Portable views are exposed only
+after the independent audit passes. Implementation checks passed 71 tests,
+including a full-network frozen-control test and corruption/timeout cases.

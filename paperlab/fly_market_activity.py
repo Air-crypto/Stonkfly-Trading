@@ -24,7 +24,7 @@ GATE_IDS=['10527','555871']
 REFINEMENT_FIELDS={'voltage':('v',),'conductance':('g',),'voltage_conductance':('v','g'),'gate_voltage_conductance':('v','g')}
 REFINEMENT_ARMS={**{m+'_'+mode:{'memory':m,'state_reset':mode} for mode in ('carry','full') for m in ('pristine','trained')},
     **{m+'_'+mode:{'memory':m,'state_reset':mode} for mode in REFINEMENT_FIELDS for m in ('pristine','trained')}}
-ALL_RESET_FIELDS={**RESET_FIELDS,**REFINEMENT_FIELDS}
+ALL_RESET_FIELDS={**RESET_FIELDS,**REFINEMENT_FIELDS,'reset_rates':('rate_kc','rate_dan')}
 
 
 def catalog(protocol):
@@ -99,7 +99,7 @@ def dynamic_state(brain):
 
 def apply_boundary(brain, mode, observation, path):
     """Save actual before/after arrays, checking target and non-target state separately."""
-    if mode not in (*MODES,*REFINEMENT_FIELDS) or observation not in (1,2,3):raise ValueError('Invalid boundary mode or observation')
+    if mode not in (*MODES,*ALL_RESET_FIELDS) or observation not in (1,2,3):raise ValueError('Invalid boundary mode or observation')
     before=dynamic_state(brain);memory_before=learned_state(brain)
     clock_before={k:getattr(brain,k) for k in SCALARS};all_weights_before=array_hash(brain.weight)
     indices=[]

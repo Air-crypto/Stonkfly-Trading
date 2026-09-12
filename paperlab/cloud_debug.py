@@ -7,10 +7,14 @@ from .fly_trace import Assay, TraceLab
 
 
 def validate_request(request):
-    if not isinstance(request, dict) or set(request) not in ({"run_id", "config"}, {"run_id", "market_plan"}, {"run_id", "pulse_plan"}, {"run_id", "restoration_plan"}, {"run_id", "activity_plan"}, {"run_id", "stimulation_plan"}, {"run_id", "isolation_plan"}):
+    if not isinstance(request, dict) or set(request) not in ({"run_id", "config"}, {"run_id", "market_plan"}, {"run_id", "pulse_plan"}, {"run_id", "restoration_plan"}, {"run_id", "activity_plan"}, {"run_id", "stimulation_plan"}, {"run_id", "isolation_plan"}, {"run_id", "credit_plan"}):
         raise ValueError("Expected run_id and assay config")
     if not isinstance(request["run_id"], str) or not re.fullmatch(r"assay-[a-z0-9-]{1,80}", request["run_id"]):
         raise ValueError("Invalid diagnostic run ID")
+    if 'credit_plan' in request:
+        from .fly_credit_reset import validate
+        validate(request['credit_plan'])
+        return request['credit_plan']
     if "isolation_plan" in request:
         from .fly_recipient_isolation import validate
         validate(request['isolation_plan'])
@@ -48,6 +52,12 @@ def validate_request(request):
 def run(request, root, data):
     config = validate_request(request)
     output = Path(root) / request["run_id"]
+    if 'credit_plan' in request:
+        from .fly_credit_reset import run as credit_run, validate
+        p, _, _, _ = validate(config)
+        report = credit_run(config, Path(root)/p['reference_run_id'], data, output)
+        return {'status':'credit_reset_completed','run_id':request['run_id'],
+                'remote_path':str(output),'report':report}
     if 'isolation_plan' in request:
         receipt_path = Path(root).parent/'registered-paper-10/cloud-call.json'
         if not receipt_path.exists() or json.loads(receipt_path.read_text()).get('status') != 'completed':
