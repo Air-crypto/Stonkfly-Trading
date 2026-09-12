@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fly circuit debugger</title><link rel="stylesheet" href="/style.css"><script defer src="/app.js"></script></head>
+<body>
+<header><div><span class="eyebrow">STONKFLY / RESEARCH INSTRUMENT</span><h1>Fly circuit debugger</h1><p>Follow inputs through actual spikes, plasticity, and the fixed decision decoder.</p></div><span class="badge">Synthetic assay · paper only</span></header>
+<main>
+<div class="toolbar"><label>Recorded run <select id="runs"></select></label><button id="refresh">Refresh runs</button><label>Import trace <input id="import" type="file" accept="application/json,.json"></label></div>
+<p id="status" role="status">Loading recordings…</p><p id="error" role="alert"></p>
+<div class="layout">
+<aside class="panel"><h2>Test an input</h2><p>Each run resets to pristine state. Existing paper accounts are untouched.</p>
+<form id="assay">
+<label>Price sequence <select name="preset"><option value="rise">Steady rise</option><option value="fall">Steady fall</option><option value="flat">Flat</option><option value="reversal">Trend reversal</option><option value="shock">Sudden drop</option></select></label>
+<div class="pair"><label>Observations <input name="steps" type="number" min="1" max="8" value="4" required></label><label>Learning rate η <input name="eta" type="number" min="0" max="0.002" step="0.0001" value="0.001" required></label></div>
+<label class="check"><input name="learning" type="checkbox" checked> Enable plasticity</label>
+<label>Engineered reinforcement <select name="reinforcement"><option value="none">None</option><option value="reward">Reward cells</option><option value="aversive">Aversive cells</option><option value="alternating">Alternate reward / aversive</option></select></label>
+<label>Visual input <select name="view"><option value="original">Original chart + news strip</option><option value="price_only">Remove header + news strip</option><option value="blank">Uniform gray</option></select></label>
+<label>Synthetic news <select name="news"><option value="none">No headlines</option><option value="positive">Positive headline</option><option value="negative">Negative headline</option></select></label>
+<details><summary>Stimulate specific neurons</summary><label>Neuron IDs (comma separated, ≤16)<textarea name="neurons" rows="2" placeholder="Select a neuron to copy its ID"></textarea></label><label>Current (model units, −20 to 20)<input name="current" type="number" min="-20" max="20" value="0" step="1"></label><p>Extra current is applied throughout each observation. This is an intervention, not market data.</p></details>
+<button id="run" type="submit" class="primary">Run full-network assay</button>
+</form><details><summary>Worker log</summary><pre id="log">No assay launched in this session.</pre></details>
+</aside>
+<section class="panel circuit"><div class="heading"><h2>Signal & connection activity</h2><span id="graph-size"></span></div><p id="selection"></p>
+<div class="playback"><label>Observation <select id="step"></select></label><button id="play">Play bins</button><label class="scrub">Neural time <output id="time"></output><input id="bin" type="range" min="0" max="49" value="0"></label></div>
+<svg id="network" role="img" aria-label="Grouped view of recorded neurons and their actual directed connections. Use the neuron selector below for keyboard inspection."></svg>
+<div class="legend"><span><i class="active"></i>Neuron spiked / edge source spiked</span><span><i class="changed"></i>Plastic edge changed since observation start</span><span><i></i>Inactive connection</span></div>
+<p class="small">Edge activity marks presynaptic spikes. It does not establish transmission or causal influence on a target. Positions are functional groups, not anatomical coordinates.</p>
+<div class="pair"><label>Inspect a displayed neuron <select id="node"></select></label><label>Inspect any retained neuron ID <span class="inline"><input id="lookup" inputmode="numeric" placeholder="Exact body ID"><button id="lookup-button">Inspect</button></span></label></div>
+<p id="neuron-detail" class="readout"></p><div id="neuron-chart"></div>
+</section>
+</div>
+<div class="results">
+<section class="panel"><h2>What the brain saw</h2><img id="input" width="320" height="180" alt="Exact RGB input to the fly"><p id="input-info"></p></section>
+<section class="panel"><h2>Fixed decoder output</h2><p id="decision" class="decision">—</p><dl id="decoder"></dl><p class="small">Whole-observation result (500 ms). BUY/SELL are engineered mappings of downstream firing rates; this assay executes no trades.</p></section>
+<section class="panel"><h2>Learning diagnostics</h2><dl id="metrics"></dl><p class="small">The fly has no optimizer loss or backprop gradient. Weight change and trace activity do not establish useful learning.</p></section>
+</div>
+<div class="plots"><section class="panel"><h2>Network spikes</h2><div id="spike-chart"></div></section><section class="panel"><h2>Plastic weight movement</h2><div id="weight-chart"></div></section><section class="panel"><h2>KC & DAN traces</h2><div id="trace-chart"></div></section></div>
+<section class="panel"><div class="heading"><h2>Displayed plastic connections</h2><label>Connection <select id="edge"></select></label></div><p id="edge-detail" class="readout"></p><div id="edge-chart"></div><p class="small">All 7,835 plastic connections are recorded in the NPZ files. This selector includes connections whose endpoints are in the displayed subset.</p></section>
+<section class="panel"><h2>Compare a recorded run</h2><label>Comparison run <select id="compare"><option value="">Choose a run</option></select></label><div id="comparison"></div><p class="small">Only identical inputs with one changed experimental factor support a paired causal comparison. Synthetic assays measure mechanics, not profitability.</p></section>
+<details class="panel"><summary>Provenance & configuration</summary><pre id="provenance"></pre></details>
+</main><footer>Full retained connectome · unchanged native integrator · isolated diagnostic outputs</footer>
+</body></html>

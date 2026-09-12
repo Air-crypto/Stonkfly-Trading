@@ -1,0 +1,94 @@
+{
+  "arms": {
+    "rise_learning": {
+      "preset": "rise",
+      "steps": 4,
+      "learning": true,
+      "eta": 0.001,
+      "reinforcement": "none",
+      "view": "original",
+      "news": "none",
+      "neurons": [],
+      "current": 0
+    },
+    "rise_frozen": {
+      "preset": "rise",
+      "steps": 4,
+      "learning": false,
+      "eta": 0.001,
+      "reinforcement": "none",
+      "view": "original",
+      "news": "none",
+      "neurons": [],
+      "current": 0
+    },
+    "fall_learning": {
+      "preset": "fall",
+      "steps": 4,
+      "learning": true,
+      "eta": 0.001,
+      "reinforcement": "none",
+      "view": "original",
+      "news": "none",
+      "neurons": [],
+      "current": 0
+    },
+    "fall_frozen": {
+      "preset": "fall",
+      "steps": 4,
+      "learning": false,
+      "eta": 0.001,
+      "reinforcement": "none",
+      "view": "original",
+      "news": "none",
+      "neurons": [],
+      "current": 0
+    },
+    "rise_reward": {
+      "preset": "rise",
+      "steps": 4,
+      "learning": true,
+      "eta": 0.001,
+      "reinforcement": "reward",
+      "view": "original",
+      "news": "none",
+      "neurons": [],
+      "current": 0
+    },
+    "rise_aversive": {
+      "preset": "rise",
+      "steps": 4,
+      "learning": true,
+      "eta": 0.001,
+      "reinforcement": "aversive",
+      "view": "original",
+      "news": "none",
+      "neurons": [],
+      "current": 0
+    },
+    "rise_lower_eta": {
+      "preset": "rise",
+      "steps": 4,
+      "learning": true,
+      "eta": 0.0001,
+      "reinforcement": "none",
+      "view": "original",
+      "news": "none",
+      "neurons": [],
+      "current": 0
+    },
+    "rise_price_only": {
+      "preset": "rise",
+      "steps": 4,
+      "learning": true,
+      "eta": 0.001,
+      "reinforcement": "none",
+      "view": "price_only",
+      "news": "none",
+      "neurons": [],
+      "current": 0
+    }
+  },
+  "purpose": "Input/learning/decoder sensitivity, not a trading backtest",
+  "comparison": "Identical pristine native state per arm; fixed synthetic inputs; report every arm."
+}

@@ -1,0 +1,1882 @@
+{
+  "results": {
+    "rise_learning": {
+      "schema": 1,
+      "source": "synthetic_full_network_assay",
+      "config": {
+        "preset": "rise",
+        "steps": 4,
+        "learning": true,
+        "eta": 0.001,
+        "reinforcement": "none",
+        "view": "original",
+        "news": "none",
+        "neurons": [],
+        "current": 0
+      },
+      "upstream_commit": "78ef3e05ab0fa086032098558d893667068944a0",
+      "graph": {
+        "neurons": 166700,
+        "edges": 25582938,
+        "plastic_edges": 7835
+      },
+      "native_build": {
+        "model": "stonkfly-dual-compartment-v1",
+        "source_sha256": "e2d4d584f4633613277bb1bf6ea7ba20855c01a332ae2e9344ed7782604c8509",
+        "binary_sha256": "417138088291e46d05410d6a37c1566926c3fa40aa7cdfb1dcf2eeb803a5abe1",
+        "flags": [
+          "-O3",
+          "-std=c++17",
+          "-shared",
+          "-fPIC"
+        ]
+      },
+      "seconds": 13.339669000008143,
+      "events": [
+        {
+          "side": "BUY",
+          "left_hz": 32.0,
+          "right_hz": 34.0,
+          "difference_hz": 2.0,
+          "gate_spikes": 19,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 500.0,
+          "compute_seconds": 1.130899586045416,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 44,
+          "KC_spikes": 2386,
+          "total_spikes": 411355,
+          "spike_sha256": "a3e83e9af06046c810280cbbbcee70f3b17ac29df5f2989cb853d3d0f7102114",
+          "input_sha256": "d8b0901afbe0c896a3a18197a17fdab6f3b1f149a37764d4ed7a833141df9a68",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 1585,
+            "mean_efficacy": 1.0012249946594238,
+            "minimum_efficacy": 0.9519410133361816,
+            "sha256": "8a61415d5f5a7c76ef5aed7c0f38004eb00db6e112f133b23fedc4af672f475c",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "changed_edges": 1585,
+            "weight_delta_l2": 1.660253643989563,
+            "max_abs_delta": 1.0511207580566406,
+            "efficacy_min": 0.9519409541019147,
+            "efficacy_max": 1.0195551033340953,
+            "clipped_edges": 0
+          }
+        },
+        {
+          "side": "HOLD",
+          "left_hz": 34.0,
+          "right_hz": 30.0,
+          "difference_hz": -4.0,
+          "gate_spikes": 0,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 1000.0,
+          "compute_seconds": 2.1340112940233666,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 71,
+          "KC_spikes": 4253,
+          "total_spikes": 597120,
+          "spike_sha256": "730d1014a6a7513990aa7e1b745c880ddeba202a3ce592c9dbef4322ef7babb6",
+          "input_sha256": "d8b0901afbe0c896a3a18197a17fdab6f3b1f149a37764d4ed7a833141df9a68",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 1702,
+            "mean_efficacy": 1.0025074481964111,
+            "minimum_efficacy": 0.8090282678604126,
+            "sha256": "184b8c5167b26e85ed8362d1c6c4590d1345f4b32c5d53bd75b34163564287c5",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "changed_edges": 1702,
+            "weight_delta_l2": 4.399936676025391,
+            "max_abs_delta": 3.150257110595703,
+            "efficacy_min": 0.809028273704312,
+            "efficacy_max": 1.0791543360407256,
+            "clipped_edges": 0
+          }
+        },
+        {
+          "side": "HOLD",
+          "left_hz": 34.0,
+          "right_hz": 46.0,
+          "difference_hz": 12.0,
+          "gate_spikes": 0,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 1500.0,
+          "compute_seconds": 2.2181563380290754,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 86,
+          "KC_spikes": 4699,
+          "total_spikes": 603415,
+          "spike_sha256": "3e4514e3ff530dd6a89456795900a4dbaf9df95b64d1af5c75364f2a82ae45cd",
+          "input_sha256": "d8b0901afbe0c896a3a18197a17fdab6f3b1f149a37764d4ed7a833141df9a68",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 1758,
+            "mean_efficacy": 1.0011948347091675,
+            "minimum_efficacy": 0.7158476114273071,
+            "sha256": "a2fcb7f04815e0e91719a3dd618eb80713e5fabc96171037ef00cc7f51c761d4",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "changed_edges": 1758,
+            "weight_delta_l2": 3.82437801361084,
+            "max_abs_delta": 2.0499744415283203,
+            "efficacy_min": 0.715847613296775,
+            "efficacy_max": 1.0463607244934114,
+            "clipped_edges": 0
+          }
+        },
+        {
+          "side": "HOLD",
+          "left_hz": 34.0,
+          "right_hz": 46.0,
+          "difference_hz": 12.0,
+          "gate_spikes": 0,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 2000.0,
+          "compute_seconds": 2.232537209056318,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 78,
+          "KC_spikes": 4376,
+          "total_spikes": 600494,
+          "spike_sha256": "c34e8acb45994f120f8fd8c9bf0199aafafe5a44a6887edc39e89ec23e22dc4a",
+          "input_sha256": "d8b0901afbe0c896a3a18197a17fdab6f3b1f149a37764d4ed7a833141df9a68",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 1778,
+            "mean_efficacy": 1.001038908958435,
+            "minimum_efficacy": 0.6657503247261047,
+            "sha256": "9b4d92f9b63ed181fe011c1e4227c620b017a8231f1cc60cf1f8b265b8261fa6",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "changed_edges": 1778,
+            "weight_delta_l2": 2.65630841255188,
+            "max_abs_delta": 1.1021404266357422,
+            "efficacy_min": 0.6657503233192108,
+            "efficacy_max": 1.056333951453173,
+            "clipped_edges": 0
+          }
+        }
+      ],
+      "interpretation": "Synthetic mechanics assay, no trading return. No optimizer loss or backprop gradient. Source spike highlights are not a measurement of transmission or causality."
+    },
+    "rise_frozen": {
+      "schema": 1,
+      "source": "synthetic_full_network_assay",
+      "config": {
+        "preset": "rise",
+        "steps": 4,
+        "learning": false,
+        "eta": 0.001,
+        "reinforcement": "none",
+        "view": "original",
+        "news": "none",
+        "neurons": [],
+        "current": 0
+      },
+      "upstream_commit": "78ef3e05ab0fa086032098558d893667068944a0",
+      "graph": {
+        "neurons": 166700,
+        "edges": 25582938,
+        "plastic_edges": 7835
+      },
+      "native_build": {
+        "model": "stonkfly-dual-compartment-v1",
+        "source_sha256": "e2d4d584f4633613277bb1bf6ea7ba20855c01a332ae2e9344ed7782604c8509",
+        "binary_sha256": "417138088291e46d05410d6a37c1566926c3fa40aa7cdfb1dcf2eeb803a5abe1",
+        "flags": [
+          "-O3",
+          "-std=c++17",
+          "-shared",
+          "-fPIC"
+        ]
+      },
+      "seconds": 13.061567124997964,
+      "events": [
+        {
+          "side": "BUY",
+          "left_hz": 32.0,
+          "right_hz": 34.0,
+          "difference_hz": 2.0,
+          "gate_spikes": 19,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 500.0,
+          "compute_seconds": 1.1493148709123489,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 44,
+          "KC_spikes": 2352,
+          "total_spikes": 411407,
+          "spike_sha256": "b559521698f0a8e78eb7a62fc0599182524622f1f5dd8a70e0c0e4ff241c8472",
+          "input_sha256": "d8b0901afbe0c896a3a18197a17fdab6f3b1f149a37764d4ed7a833141df9a68",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 0,
+            "mean_efficacy": 1.0,
+            "minimum_efficacy": 1.0,
+            "sha256": "9f9c000fb9819eb99c214cc1da747d44e13f009bc4c3454f6b7dfe4ee669acf7",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "changed_edges": 0,
+            "weight_delta_l2": 0.0,
+            "max_abs_delta": 0.0,
+            "efficacy_min": 1.0,
+            "efficacy_max": 1.0,
+            "clipped_edges": 0
+          }
+        },
+        {
+          "side": "HOLD",
+          "left_hz": 40.0,
+          "right_hz": 42.0,
+          "difference_hz": 2.0,
+          "gate_spikes": 0,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 1000.0,
+          "compute_seconds": 2.182644000859,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 89,
+          "KC_spikes": 4376,
+          "total_spikes": 598657,
+          "spike_sha256": "39d4eab3fbb038d6df6dcfe15b233fdd5cdf95db47a198567a35e73ffd3b1b39",
+          "input_sha256": "d8b0901afbe0c896a3a18197a17fdab6f3b1f149a37764d4ed7a833141df9a68",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 0,
+            "mean_efficacy": 1.0,
+            "minimum_efficacy": 1.0,
+            "sha256": "9f9c000fb9819eb99c214cc1da747d44e13f009bc4c3454f6b7dfe4ee669acf7",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "changed_edges": 0,
+            "weight_delta_l2": 0.0,
+            "max_abs_delta": 0.0,
+            "efficacy_min": 1.0,
+            "efficacy_max": 1.0,
+            "clipped_edges": 0
+          }
+        },
+        {
+          "side": "HOLD",
+          "left_hz": 42.0,
+          "right_hz": 42.0,
+          "difference_hz": 0.0,
+          "gate_spikes": 0,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 1500.0,
+          "compute_seconds": 2.1387965019093826,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 78,
+          "KC_spikes": 4508,
+          "total_spikes": 601095,
+          "spike_sha256": "a79472bbc9113367d4e2cd523b1b22a20705852516b8b764ee21172131fb441a",
+          "input_sha256": "d8b0901afbe0c896a3a18197a17fdab6f3b1f149a37764d4ed7a833141df9a68",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 0,
+            "mean_efficacy": 1.0,
+            "minimum_efficacy": 1.0,
+            "sha256": "9f9c000fb9819eb99c214cc1da747d44e13f009bc4c3454f6b7dfe4ee669acf7",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "changed_edges": 0,
+            "weight_delta_l2": 0.0,
+            "max_abs_delta": 0.0,
+            "efficacy_min": 1.0,
+            "efficacy_max": 1.0,
+            "clipped_edges": 0
+          }
+        },
+        {
+          "side": "HOLD",
+          "left_hz": 36.0,
+          "right_hz": 40.0,
+          "difference_hz": 4.0,
+          "gate_spikes": 0,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 2000.0,
+          "compute_seconds": 2.2468582470028196,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 77,
+          "KC_spikes": 4268,
+          "total_spikes": 601407,
+          "spike_sha256": "c72c484d8d68e6536a5b10e3145bfba5ce5bc0c7910aa95b65f6e464e62374b5",
+          "input_sha256": "d8b0901afbe0c896a3a18197a17fdab6f3b1f149a37764d4ed7a833141df9a68",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 0,
+            "mean_efficacy": 1.0,
+            "minimum_efficacy": 1.0,
+            "sha256": "9f9c000fb9819eb99c214cc1da747d44e13f009bc4c3454f6b7dfe4ee669acf7",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "changed_edges": 0,
+            "weight_delta_l2": 0.0,
+            "max_abs_delta": 0.0,
+            "efficacy_min": 1.0,
+            "efficacy_max": 1.0,
+            "clipped_edges": 0
+          }
+        }
+      ],
+      "interpretation": "Synthetic mechanics assay, no trading return. No optimizer loss or backprop gradient. Source spike highlights are not a measurement of transmission or causality."
+    },
+    "fall_learning": {
+      "schema": 1,
+      "source": "synthetic_full_network_assay",
+      "config": {
+        "preset": "fall",
+        "steps": 4,
+        "learning": true,
+        "eta": 0.001,
+        "reinforcement": "none",
+        "view": "original",
+        "news": "none",
+        "neurons": [],
+        "current": 0
+      },
+      "upstream_commit": "78ef3e05ab0fa086032098558d893667068944a0",
+      "graph": {
+        "neurons": 166700,
+        "edges": 25582938,
+        "plastic_edges": 7835
+      },
+      "native_build": {
+        "model": "stonkfly-dual-compartment-v1",
+        "source_sha256": "e2d4d584f4633613277bb1bf6ea7ba20855c01a332ae2e9344ed7782604c8509",
+        "binary_sha256": "417138088291e46d05410d6a37c1566926c3fa40aa7cdfb1dcf2eeb803a5abe1",
+        "flags": [
+          "-O3",
+          "-std=c++17",
+          "-shared",
+          "-fPIC"
+        ]
+      },
+      "seconds": 12.44853279198287,
+      "events": [
+        {
+          "side": "BUY",
+          "left_hz": 30.0,
+          "right_hz": 34.0,
+          "difference_hz": 4.0,
+          "gate_spikes": 28,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 500.0,
+          "compute_seconds": 0.9386246230860706,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 20,
+          "KC_spikes": 15,
+          "total_spikes": 368715,
+          "spike_sha256": "f9d891206fca8c5a0debb21f4b7954c6780a096633470ad9e98cbcdf686b0ca3",
+          "input_sha256": "5b86970eea650e1c1b4ae5cc8bc6b345915f5caa3536f6bd7081cc6460c10e6b",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 5,
+            "mean_efficacy": 0.9999935626983643,
+            "minimum_efficacy": 0.985278844833374,
+            "sha256": "ea1a36f178191c4669457e5214eb0d51b7915d3108cd1f2d4a572468baca4057",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "changed_edges": 5,
+            "weight_delta_l2": 0.3820028007030487,
+            "max_abs_delta": 0.31569480895996094,
+            "efficacy_min": 0.9852788121001935,
+            "efficacy_max": 1.0,
+            "clipped_edges": 0
+          }
+        },
+        {
+          "side": "BUY",
+          "left_hz": 28.0,
+          "right_hz": 38.0,
+          "difference_hz": 10.0,
+          "gate_spikes": 2,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 1000.0,
+          "compute_seconds": 1.6639931251993403,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 1,
+          "aversive_spikes": 62,
+          "KC_spikes": 3963,
+          "total_spikes": 500477,
+          "spike_sha256": "024680465a5292fa793989e16a5b0778c5919f360173060eddc8ef7bd7ca8dd6",
+          "input_sha256": "5b86970eea650e1c1b4ae5cc8bc6b345915f5caa3536f6bd7081cc6460c10e6b",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 2817,
+            "mean_efficacy": 1.0022368431091309,
+            "minimum_efficacy": 0.852948009967804,
+            "sha256": "ff2ba857b3e2c24538bb52af64b93dff4137d6db600e7d6a0bd322c2340c90a6",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "changed_edges": 2817,
+            "weight_delta_l2": 4.424251556396484,
+            "max_abs_delta": 2.9194488525390625,
+            "efficacy_min": 0.8529480551934296,
+            "efficacy_max": 1.0568517336578687,
+            "clipped_edges": 0
+          }
+        },
+        {
+          "side": "BUY",
+          "left_hz": 32.0,
+          "right_hz": 34.0,
+          "difference_hz": 2.0,
+          "gate_spikes": 1,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 1500.0,
+          "compute_seconds": 2.202283706050366,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 76,
+          "KC_spikes": 4293,
+          "total_spikes": 603694,
+          "spike_sha256": "581ba927e2b4434b756b6bb8b659ac521f6973cc7b9be0cad5d6eef067522785",
+          "input_sha256": "5b86970eea650e1c1b4ae5cc8bc6b345915f5caa3536f6bd7081cc6460c10e6b",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 3054,
+            "mean_efficacy": 1.0022484064102173,
+            "minimum_efficacy": 0.6784476041793823,
+            "sha256": "c87d87452459056f6726164398161c0dbbc32e8f4d747b67ba5cafd9d8eb584e",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "changed_edges": 3054,
+            "weight_delta_l2": 4.924622058868408,
+            "max_abs_delta": 3.8390092849731445,
+            "efficacy_min": 0.6784475809236739,
+            "efficacy_max": 1.0761219631131334,
+            "clipped_edges": 0
+          }
+        },
+        {
+          "side": "HOLD",
+          "left_hz": 36.0,
+          "right_hz": 48.0,
+          "difference_hz": 12.0,
+          "gate_spikes": 0,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 2000.0,
+          "compute_seconds": 2.08897283198894,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 80,
+          "KC_spikes": 4507,
+          "total_spikes": 597865,
+          "spike_sha256": "a9d5ba3d36311bf33d64c4a75caaa5831b791e8e12d70471d5e1bfce5b95db03",
+          "input_sha256": "5b86970eea650e1c1b4ae5cc8bc6b345915f5caa3536f6bd7081cc6460c10e6b",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 3142,
+            "mean_efficacy": 1.0025198459625244,
+            "minimum_efficacy": 0.572174608707428,
+            "sha256": "847aa0c69a7e1d3ef01a1eb5cf07b460f934a57556601114910869cf44d93e72",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "changed_edges": 3114,
+            "weight_delta_l2": 3.729429244995117,
+            "max_abs_delta": 2.338006019592285,
+            "efficacy_min": 0.5721746044347462,
+            "efficacy_max": 1.0942729926222112,
+            "clipped_edges": 0
+          }
+        }
+      ],
+      "interpretation": "Synthetic mechanics assay, no trading return. No optimizer loss or backprop gradient. Source spike highlights are not a measurement of transmission or causality."
+    },
+    "fall_frozen": {
+      "schema": 1,
+      "source": "synthetic_full_network_assay",
+      "config": {
+        "preset": "fall",
+        "steps": 4,
+        "learning": false,
+        "eta": 0.001,
+        "reinforcement": "none",
+        "view": "original",
+        "news": "none",
+        "neurons": [],
+        "current": 0
+      },
+      "upstream_commit": "78ef3e05ab0fa086032098558d893667068944a0",
+      "graph": {
+        "neurons": 166700,
+        "edges": 25582938,
+        "plastic_edges": 7835
+      },
+      "native_build": {
+        "model": "stonkfly-dual-compartment-v1",
+        "source_sha256": "e2d4d584f4633613277bb1bf6ea7ba20855c01a332ae2e9344ed7782604c8509",
+        "binary_sha256": "417138088291e46d05410d6a37c1566926c3fa40aa7cdfb1dcf2eeb803a5abe1",
+        "flags": [
+          "-O3",
+          "-std=c++17",
+          "-shared",
+          "-fPIC"
+        ]
+      },
+      "seconds": 12.357262500008801,
+      "events": [
+        {
+          "side": "BUY",
+          "left_hz": 30.0,
+          "right_hz": 34.0,
+          "difference_hz": 4.0,
+          "gate_spikes": 28,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 500.0,
+          "compute_seconds": 0.9276050819898956,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 20,
+          "KC_spikes": 15,
+          "total_spikes": 368715,
+          "spike_sha256": "f9d891206fca8c5a0debb21f4b7954c6780a096633470ad9e98cbcdf686b0ca3",
+          "input_sha256": "5b86970eea650e1c1b4ae5cc8bc6b345915f5caa3536f6bd7081cc6460c10e6b",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 0,
+            "mean_efficacy": 1.0,
+            "minimum_efficacy": 1.0,
+            "sha256": "9f9c000fb9819eb99c214cc1da747d44e13f009bc4c3454f6b7dfe4ee669acf7",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "changed_edges": 0,
+            "weight_delta_l2": 0.0,
+            "max_abs_delta": 0.0,
+            "efficacy_min": 1.0,
+            "efficacy_max": 1.0,
+            "clipped_edges": 0
+          }
+        },
+        {
+          "side": "BUY",
+          "left_hz": 38.0,
+          "right_hz": 46.0,
+          "difference_hz": 8.0,
+          "gate_spikes": 2,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 1000.0,
+          "compute_seconds": 1.6499449139810167,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 1,
+          "aversive_spikes": 56,
+          "KC_spikes": 3745,
+          "total_spikes": 498269,
+          "spike_sha256": "da5843cade3a73c2c5650e7ed6d288749dccff546bd065974788c53f276c5715",
+          "input_sha256": "5b86970eea650e1c1b4ae5cc8bc6b345915f5caa3536f6bd7081cc6460c10e6b",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 0,
+            "mean_efficacy": 1.0,
+            "minimum_efficacy": 1.0,
+            "sha256": "9f9c000fb9819eb99c214cc1da747d44e13f009bc4c3454f6b7dfe4ee669acf7",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "changed_edges": 0,
+            "weight_delta_l2": 0.0,
+            "max_abs_delta": 0.0,
+            "efficacy_min": 1.0,
+            "efficacy_max": 1.0,
+            "clipped_edges": 0
+          }
+        },
+        {
+          "side": "HOLD",
+          "left_hz": 36.0,
+          "right_hz": 40.0,
+          "difference_hz": 4.0,
+          "gate_spikes": 0,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 1500.0,
+          "compute_seconds": 2.168523582047783,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 78,
+          "KC_spikes": 4474,
+          "total_spikes": 602615,
+          "spike_sha256": "a4c12a6f8ec15dc86f9fff30a351b41411cd30afa031f0dee661fc330dd69ed1",
+          "input_sha256": "5b86970eea650e1c1b4ae5cc8bc6b345915f5caa3536f6bd7081cc6460c10e6b",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 0,
+            "mean_efficacy": 1.0,
+            "minimum_efficacy": 1.0,
+            "sha256": "9f9c000fb9819eb99c214cc1da747d44e13f009bc4c3454f6b7dfe4ee669acf7",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "changed_edges": 0,
+            "weight_delta_l2": 0.0,
+            "max_abs_delta": 0.0,
+            "efficacy_min": 1.0,
+            "efficacy_max": 1.0,
+            "clipped_edges": 0
+          }
+        },
+        {
+          "side": "HOLD",
+          "left_hz": 32.0,
+          "right_hz": 44.0,
+          "difference_hz": 12.0,
+          "gate_spikes": 0,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 2000.0,
+          "compute_seconds": 2.188530874089338,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 83,
+          "KC_spikes": 4718,
+          "total_spikes": 601042,
+          "spike_sha256": "edf11ee970b36ccb688795050db5c30569351211f76d4f81efe13aaf3c89376b",
+          "input_sha256": "5b86970eea650e1c1b4ae5cc8bc6b345915f5caa3536f6bd7081cc6460c10e6b",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 0,
+            "mean_efficacy": 1.0,
+            "minimum_efficacy": 1.0,
+            "sha256": "9f9c000fb9819eb99c214cc1da747d44e13f009bc4c3454f6b7dfe4ee669acf7",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "changed_edges": 0,
+            "weight_delta_l2": 0.0,
+            "max_abs_delta": 0.0,
+            "efficacy_min": 1.0,
+            "efficacy_max": 1.0,
+            "clipped_edges": 0
+          }
+        }
+      ],
+      "interpretation": "Synthetic mechanics assay, no trading return. No optimizer loss or backprop gradient. Source spike highlights are not a measurement of transmission or causality."
+    },
+    "rise_reward": {
+      "schema": 1,
+      "source": "synthetic_full_network_assay",
+      "config": {
+        "preset": "rise",
+        "steps": 4,
+        "learning": true,
+        "eta": 0.001,
+        "reinforcement": "reward",
+        "view": "original",
+        "news": "none",
+        "neurons": [],
+        "current": 0
+      },
+      "upstream_commit": "78ef3e05ab0fa086032098558d893667068944a0",
+      "graph": {
+        "neurons": 166700,
+        "edges": 25582938,
+        "plastic_edges": 7835
+      },
+      "native_build": {
+        "model": "stonkfly-dual-compartment-v1",
+        "source_sha256": "e2d4d584f4633613277bb1bf6ea7ba20855c01a332ae2e9344ed7782604c8509",
+        "binary_sha256": "417138088291e46d05410d6a37c1566926c3fa40aa7cdfb1dcf2eeb803a5abe1",
+        "flags": [
+          "-O3",
+          "-std=c++17",
+          "-shared",
+          "-fPIC"
+        ]
+      },
+      "seconds": 13.23511370801134,
+      "events": [
+        {
+          "side": "BUY",
+          "left_hz": 32.0,
+          "right_hz": 34.0,
+          "difference_hz": 2.0,
+          "gate_spikes": 19,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 500.0,
+          "compute_seconds": 1.1115083350159694,
+          "stimulus": "reward",
+          "stimulus_ms": 200.0,
+          "reward_spikes": 270,
+          "aversive_spikes": 42,
+          "KC_spikes": 2205,
+          "total_spikes": 411354,
+          "spike_sha256": "8216a70143a2eba92e5ad780ec394b1462677ab11620687eeb8672e1badeb8c0",
+          "input_sha256": "d8b0901afbe0c896a3a18197a17fdab6f3b1f149a37764d4ed7a833141df9a68",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 2611,
+            "mean_efficacy": 1.002882957458496,
+            "minimum_efficacy": 0.9523505568504333,
+            "sha256": "f3296c38ce00c0ad32e7c6f53b27d35461864d071a6552b313ed8ecd49019d74",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "changed_edges": 2611,
+            "weight_delta_l2": 1.8568814992904663,
+            "max_abs_delta": 1.0421104431152344,
+            "efficacy_min": 0.9523505037925948,
+            "efficacy_max": 1.0331158293097273,
+            "clipped_edges": 0
+          }
+        },
+        {
+          "side": "HOLD",
+          "left_hz": 30.0,
+          "right_hz": 42.0,
+          "difference_hz": 12.0,
+          "gate_spikes": 0,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 1000.0,
+          "compute_seconds": 2.120241792057641,
+          "stimulus": "reward",
+          "stimulus_ms": 200.0,
+          "reward_spikes": 265,
+          "aversive_spikes": 121,
+          "KC_spikes": 4559,
+          "total_spikes": 606271,
+          "spike_sha256": "9208765eb95418645adcd5877ec56a55a36b419f4905ed70e93f54bbddf72122",
+          "input_sha256": "d8b0901afbe0c896a3a18197a17fdab6f3b1f149a37764d4ed7a833141df9a68",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 3039,
+            "mean_efficacy": 1.0013213157653809,
+            "minimum_efficacy": 0.7375665903091431,
+            "sha256": "bf1f9302c4bda894fdba0eac8b13b340d5ea48fb5d3ce2fbe266a1df26cf251b",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "changed_edges": 3039,
+            "weight_delta_l2": 8.096272468566895,
+            "max_abs_delta": 4.703636169433594,
+            "efficacy_min": 0.7375666238791265,
+            "efficacy_max": 1.1192811765472788,
+            "clipped_edges": 0
+          }
+        },
+        {
+          "side": "HOLD",
+          "left_hz": 24.0,
+          "right_hz": 30.0,
+          "difference_hz": 6.0,
+          "gate_spikes": 0,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 1500.0,
+          "compute_seconds": 2.1743632920261007,
+          "stimulus": "reward",
+          "stimulus_ms": 200.0,
+          "reward_spikes": 263,
+          "aversive_spikes": 126,
+          "KC_spikes": 4444,
+          "total_spikes": 612739,
+          "spike_sha256": "d1d6af682e71c8ef91baa5706383f5b31899dcf752bfc0cea7a155c5b62ddeb0",
+          "input_sha256": "d8b0901afbe0c896a3a18197a17fdab6f3b1f149a37764d4ed7a833141df9a68",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 3085,
+            "mean_efficacy": 0.998577356338501,
+            "minimum_efficacy": 0.602719247341156,
+            "sha256": "6d0066d2d5ecec29661db2b8729e732b15c0e1f236ca2b47f9055ead56d94b02",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "changed_edges": 3085,
+            "weight_delta_l2": 6.683155536651611,
+            "max_abs_delta": 2.9445981979370117,
+            "efficacy_min": 0.6027192042936267,
+            "efficacy_max": 1.1661769119659997,
+            "clipped_edges": 0
+          }
+        },
+        {
+          "side": "HOLD",
+          "left_hz": 34.0,
+          "right_hz": 42.0,
+          "difference_hz": 8.0,
+          "gate_spikes": 0,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 2000.0,
+          "compute_seconds": 2.2479675400536507,
+          "stimulus": "reward",
+          "stimulus_ms": 200.0,
+          "reward_spikes": 262,
+          "aversive_spikes": 130,
+          "KC_spikes": 4097,
+          "total_spikes": 613662,
+          "spike_sha256": "d67d0001e332fb79337cd037f63e90ff6755ae60033c06425074e0056115dded",
+          "input_sha256": "d8b0901afbe0c896a3a18197a17fdab6f3b1f149a37764d4ed7a833141df9a68",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 3095,
+            "mean_efficacy": 0.9914119839668274,
+            "minimum_efficacy": 0.5165390968322754,
+            "sha256": "1608b9f38126f8b949565447a274c8ce958062f4ca6c98e556d4e14adacbaefc",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "changed_edges": 3095,
+            "weight_delta_l2": 8.702101707458496,
+            "max_abs_delta": 1.8843746185302734,
+            "efficacy_min": 0.5165391233705189,
+            "efficacy_max": 1.1893245666330121,
+            "clipped_edges": 0
+          }
+        }
+      ],
+      "interpretation": "Synthetic mechanics assay, no trading return. No optimizer loss or backprop gradient. Source spike highlights are not a measurement of transmission or causality."
+    },
+    "rise_aversive": {
+      "schema": 1,
+      "source": "synthetic_full_network_assay",
+      "config": {
+        "preset": "rise",
+        "steps": 4,
+        "learning": true,
+        "eta": 0.001,
+        "reinforcement": "aversive",
+        "view": "original",
+        "news": "none",
+        "neurons": [],
+        "current": 0
+      },
+      "upstream_commit": "78ef3e05ab0fa086032098558d893667068944a0",
+      "graph": {
+        "neurons": 166700,
+        "edges": 25582938,
+        "plastic_edges": 7835
+      },
+      "native_build": {
+        "model": "stonkfly-dual-compartment-v1",
+        "source_sha256": "e2d4d584f4633613277bb1bf6ea7ba20855c01a332ae2e9344ed7782604c8509",
+        "binary_sha256": "417138088291e46d05410d6a37c1566926c3fa40aa7cdfb1dcf2eeb803a5abe1",
+        "flags": [
+          "-O3",
+          "-std=c++17",
+          "-shared",
+          "-fPIC"
+        ]
+      },
+      "seconds": 13.142076999996789,
+      "events": [
+        {
+          "side": "BUY",
+          "left_hz": 32.0,
+          "right_hz": 34.0,
+          "difference_hz": 2.0,
+          "gate_spikes": 19,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 500.0,
+          "compute_seconds": 1.1238510430266615,
+          "stimulus": "aversive",
+          "stimulus_ms": 200.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 77,
+          "KC_spikes": 2186,
+          "total_spikes": 411124,
+          "spike_sha256": "07465bdfad246c592670ab07628e8a5098e16c18cbfe25b54a1521536d02a7f6",
+          "input_sha256": "d8b0901afbe0c896a3a18197a17fdab6f3b1f149a37764d4ed7a833141df9a68",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 1503,
+            "mean_efficacy": 1.0036977529525757,
+            "minimum_efficacy": 0.9690603613853455,
+            "sha256": "5363915217239188d4a6ee9321409f212b556f63b5f43034f919269737f8b2c6",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "changed_edges": 1503,
+            "weight_delta_l2": 3.772006034851074,
+            "max_abs_delta": 0.5246906280517578,
+            "efficacy_min": 0.969060356223903,
+            "efficacy_max": 1.0593510131406416,
+            "clipped_edges": 0
+          }
+        },
+        {
+          "side": "HOLD",
+          "left_hz": 38.0,
+          "right_hz": 42.0,
+          "difference_hz": 4.0,
+          "gate_spikes": 0,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 1000.0,
+          "compute_seconds": 2.2111430830555037,
+          "stimulus": "aversive",
+          "stimulus_ms": 200.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 105,
+          "KC_spikes": 4830,
+          "total_spikes": 602016,
+          "spike_sha256": "bbcbeaa707cabbcfd7df5c281c1fcf222cdb680569775b58b3604b1ffd06b79a",
+          "input_sha256": "d8b0901afbe0c896a3a18197a17fdab6f3b1f149a37764d4ed7a833141df9a68",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 1768,
+            "mean_efficacy": 1.0113104581832886,
+            "minimum_efficacy": 0.7752864360809326,
+            "sha256": "13cd58708e67d9114bd2d5b6f46b43586297bb80f881fa7aa4c5c511ae2e1aef",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "changed_edges": 1768,
+            "weight_delta_l2": 9.630658149719238,
+            "max_abs_delta": 4.409879684448242,
+            "efficacy_min": 0.7752864140521925,
+            "efficacy_max": 1.2126908085686574,
+            "clipped_edges": 0
+          }
+        },
+        {
+          "side": "HOLD",
+          "left_hz": 40.0,
+          "right_hz": 46.0,
+          "difference_hz": 6.0,
+          "gate_spikes": 0,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 1500.0,
+          "compute_seconds": 2.1850307069835253,
+          "stimulus": "aversive",
+          "stimulus_ms": 200.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 95,
+          "KC_spikes": 4409,
+          "total_spikes": 602506,
+          "spike_sha256": "01bad7a4d25bb3c51a38195157c29365ca0d4c094ff325893c72b5b865b87f45",
+          "input_sha256": "d8b0901afbe0c896a3a18197a17fdab6f3b1f149a37764d4ed7a833141df9a68",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 1790,
+            "mean_efficacy": 1.0169529914855957,
+            "minimum_efficacy": 0.6660403609275818,
+            "sha256": "fea321edd1b33c2a0622fcd23879f9a5a3fe7edf22c898b0f2e9b9c299f8c150",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "changed_edges": 1790,
+            "weight_delta_l2": 7.024276256561279,
+            "max_abs_delta": 2.4125423431396484,
+            "efficacy_min": 0.6660403417233909,
+            "efficacy_max": 1.3231435503569529,
+            "clipped_edges": 0
+          }
+        },
+        {
+          "side": "HOLD",
+          "left_hz": 44.0,
+          "right_hz": 38.0,
+          "difference_hz": -6.0,
+          "gate_spikes": 0,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 2000.0,
+          "compute_seconds": 2.1002039598242845,
+          "stimulus": "aversive",
+          "stimulus_ms": 200.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 102,
+          "KC_spikes": 4344,
+          "total_spikes": 601074,
+          "spike_sha256": "c23fab07cc43d17de943c98d36d7878343b4c49a6af65387cde99cab021b21ca",
+          "input_sha256": "d8b0901afbe0c896a3a18197a17fdab6f3b1f149a37764d4ed7a833141df9a68",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 1798,
+            "mean_efficacy": 1.0162948369979858,
+            "minimum_efficacy": 0.5986610651016235,
+            "sha256": "fd0ea6485686701482509a5c4616c4db55a9253270e3370f4263c7788e98a51b",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "changed_edges": 1798,
+            "weight_delta_l2": 3.848940372467041,
+            "max_abs_delta": 1.4823436737060547,
+            "efficacy_min": 0.5986610971159977,
+            "efficacy_max": 1.3582894062827646,
+            "clipped_edges": 0
+          }
+        }
+      ],
+      "interpretation": "Synthetic mechanics assay, no trading return. No optimizer loss or backprop gradient. Source spike highlights are not a measurement of transmission or causality."
+    },
+    "rise_lower_eta": {
+      "schema": 1,
+      "source": "synthetic_full_network_assay",
+      "config": {
+        "preset": "rise",
+        "steps": 4,
+        "learning": true,
+        "eta": 0.0001,
+        "reinforcement": "none",
+        "view": "original",
+        "news": "none",
+        "neurons": [],
+        "current": 0
+      },
+      "upstream_commit": "78ef3e05ab0fa086032098558d893667068944a0",
+      "graph": {
+        "neurons": 166700,
+        "edges": 25582938,
+        "plastic_edges": 7835
+      },
+      "native_build": {
+        "model": "stonkfly-dual-compartment-v1",
+        "source_sha256": "e2d4d584f4633613277bb1bf6ea7ba20855c01a332ae2e9344ed7782604c8509",
+        "binary_sha256": "417138088291e46d05410d6a37c1566926c3fa40aa7cdfb1dcf2eeb803a5abe1",
+        "flags": [
+          "-O3",
+          "-std=c++17",
+          "-shared",
+          "-fPIC"
+        ]
+      },
+      "seconds": 13.36172375001479,
+      "events": [
+        {
+          "side": "BUY",
+          "left_hz": 32.0,
+          "right_hz": 34.0,
+          "difference_hz": 2.0,
+          "gate_spikes": 19,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 500.0,
+          "compute_seconds": 1.1405684569908772,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 44,
+          "KC_spikes": 2352,
+          "total_spikes": 411407,
+          "spike_sha256": "b559521698f0a8e78eb7a62fc0599182524622f1f5dd8a70e0c0e4ff241c8472",
+          "input_sha256": "d8b0901afbe0c896a3a18197a17fdab6f3b1f149a37764d4ed7a833141df9a68",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 1553,
+            "mean_efficacy": 1.0001219511032104,
+            "minimum_efficacy": 0.995194137096405,
+            "sha256": "8a71153301111fb764013fafadcf78821ac271cee3d51340e1576749cd10220c",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "changed_edges": 1553,
+            "weight_delta_l2": 0.16682298481464386,
+            "max_abs_delta": 0.10511207580566406,
+            "efficacy_min": 0.9951940954101914,
+            "efficacy_max": 1.0019555103334095,
+            "clipped_edges": 0
+          }
+        },
+        {
+          "side": "HOLD",
+          "left_hz": 40.0,
+          "right_hz": 42.0,
+          "difference_hz": 2.0,
+          "gate_spikes": 0,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 1000.0,
+          "compute_seconds": 2.198444373032544,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 89,
+          "KC_spikes": 4376,
+          "total_spikes": 598657,
+          "spike_sha256": "39d4eab3fbb038d6df6dcfe15b233fdd5cdf95db47a198567a35e73ffd3b1b39",
+          "input_sha256": "d8b0901afbe0c896a3a18197a17fdab6f3b1f149a37764d4ed7a833141df9a68",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 1714,
+            "mean_efficacy": 1.0000617504119873,
+            "minimum_efficacy": 0.9783411622047424,
+            "sha256": "f9b5aa0cc5e45490eca4c36b4aaef2e17f672f5071331041c3ed7994a3595e6f",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "changed_edges": 1715,
+            "weight_delta_l2": 0.4675508141517639,
+            "max_abs_delta": 0.36997222900390625,
+            "efficacy_min": 0.9783411772209891,
+            "efficacy_max": 1.0036904457620184,
+            "clipped_edges": 0
+          }
+        },
+        {
+          "side": "HOLD",
+          "left_hz": 36.0,
+          "right_hz": 38.0,
+          "difference_hz": 2.0,
+          "gate_spikes": 0,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 1500.0,
+          "compute_seconds": 2.167227915022522,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 77,
+          "KC_spikes": 4323,
+          "total_spikes": 600706,
+          "spike_sha256": "a097cc5dc9059029d5ad21a08c1298df5b6bd237ad9fcd914a5e861d0b3615e0",
+          "input_sha256": "d8b0901afbe0c896a3a18197a17fdab6f3b1f149a37764d4ed7a833141df9a68",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 1757,
+            "mean_efficacy": 1.0002070665359497,
+            "minimum_efficacy": 0.9697269797325134,
+            "sha256": "b1396eb165e73c2c727f7f98176f10f573c3ea09c1445469c290d286e11d1c49",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "changed_edges": 1757,
+            "weight_delta_l2": 0.4005447030067444,
+            "max_abs_delta": 0.19092178344726562,
+            "efficacy_min": 0.9697269723276838,
+            "efficacy_max": 1.0086015609993235,
+            "clipped_edges": 0
+          }
+        },
+        {
+          "side": "HOLD",
+          "left_hz": 50.0,
+          "right_hz": 44.0,
+          "difference_hz": -6.0,
+          "gate_spikes": 0,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 2000.0,
+          "compute_seconds": 2.1933049639337696,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 82,
+          "KC_spikes": 4611,
+          "total_spikes": 602881,
+          "spike_sha256": "25a5ec5ef2a91321a8e53fcbde2680891dc0fec328ec548c0946a2228e6deda6",
+          "input_sha256": "d8b0901afbe0c896a3a18197a17fdab6f3b1f149a37764d4ed7a833141df9a68",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 1783,
+            "mean_efficacy": 1.000357747077942,
+            "minimum_efficacy": 0.9643085598945618,
+            "sha256": "b495820297964f4cf11d84f548250f4e05ceedac290a5e4f0358865aa41bb2c0",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "changed_edges": 1783,
+            "weight_delta_l2": 0.2982925772666931,
+            "max_abs_delta": 0.11920547485351562,
+            "efficacy_min": 0.9643085784778613,
+            "efficacy_max": 1.0109186390416152,
+            "clipped_edges": 0
+          }
+        }
+      ],
+      "interpretation": "Synthetic mechanics assay, no trading return. No optimizer loss or backprop gradient. Source spike highlights are not a measurement of transmission or causality."
+    },
+    "rise_price_only": {
+      "schema": 1,
+      "source": "synthetic_full_network_assay",
+      "config": {
+        "preset": "rise",
+        "steps": 4,
+        "learning": true,
+        "eta": 0.001,
+        "reinforcement": "none",
+        "view": "price_only",
+        "news": "none",
+        "neurons": [],
+        "current": 0
+      },
+      "upstream_commit": "78ef3e05ab0fa086032098558d893667068944a0",
+      "graph": {
+        "neurons": 166700,
+        "edges": 25582938,
+        "plastic_edges": 7835
+      },
+      "native_build": {
+        "model": "stonkfly-dual-compartment-v1",
+        "source_sha256": "e2d4d584f4633613277bb1bf6ea7ba20855c01a332ae2e9344ed7782604c8509",
+        "binary_sha256": "417138088291e46d05410d6a37c1566926c3fa40aa7cdfb1dcf2eeb803a5abe1",
+        "flags": [
+          "-O3",
+          "-std=c++17",
+          "-shared",
+          "-fPIC"
+        ]
+      },
+      "seconds": 11.773162165976828,
+      "events": [
+        {
+          "side": "BUY",
+          "left_hz": 32.0,
+          "right_hz": 34.0,
+          "difference_hz": 2.0,
+          "gate_spikes": 26,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 500.0,
+          "compute_seconds": 0.8225492070196196,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 22,
+          "KC_spikes": 16,
+          "total_spikes": 391679,
+          "spike_sha256": "9453d305fe9ac82533b56870e1404ac5a014716655a7a0ab037a62820571016f",
+          "input_sha256": "56e2fe46431f9ad187ce5ccaf77b9f9c06c721d4e2ba672d45405a8d924d565c",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 5,
+            "mean_efficacy": 0.9999967813491821,
+            "minimum_efficacy": 0.9906922578811646,
+            "sha256": "1f6ce7be8022a238c8f7a1c0201ba9c5042f04a48089902eeb24ca14d0b5d0b9",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "changed_edges": 5,
+            "weight_delta_l2": 0.24063211679458618,
+            "max_abs_delta": 0.19093704223632812,
+            "efficacy_min": 0.9906922517823467,
+            "efficacy_max": 1.0009400898956504,
+            "clipped_edges": 0
+          }
+        },
+        {
+          "side": "BUY",
+          "left_hz": 30.0,
+          "right_hz": 32.0,
+          "difference_hz": 2.0,
+          "gate_spikes": 10,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 1000.0,
+          "compute_seconds": 1.0992667031823657,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 1,
+          "aversive_spikes": 23,
+          "KC_spikes": 1698,
+          "total_spikes": 435417,
+          "spike_sha256": "ae7f68e987c76815a3188e32d0322cc806bcec38e5d3231d128629e61cfcbab8",
+          "input_sha256": "56e2fe46431f9ad187ce5ccaf77b9f9c06c721d4e2ba672d45405a8d924d565c",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 2326,
+            "mean_efficacy": 1.0007283687591553,
+            "minimum_efficacy": 0.9891939163208008,
+            "sha256": "23b954436158b714730e788787b9283fa0827f295fba29e2ec0c86c64530eb00",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "changed_edges": 2326,
+            "weight_delta_l2": 0.6856737732887268,
+            "max_abs_delta": 0.06808948516845703,
+            "efficacy_min": 0.9891939593777322,
+            "efficacy_max": 1.0097376033456518,
+            "clipped_edges": 0
+          }
+        },
+        {
+          "side": "HOLD",
+          "left_hz": 40.0,
+          "right_hz": 38.0,
+          "difference_hz": -2.0,
+          "gate_spikes": 0,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 1500.0,
+          "compute_seconds": 2.1152786639286205,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 80,
+          "KC_spikes": 4708,
+          "total_spikes": 632508,
+          "spike_sha256": "a0336d78a9eb16dc5a2666ce11c4a26088f455974a89c228046258979a948d92",
+          "input_sha256": "56e2fe46431f9ad187ce5ccaf77b9f9c06c721d4e2ba672d45405a8d924d565c",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 2959,
+            "mean_efficacy": 1.001975178718567,
+            "minimum_efficacy": 0.7279004454612732,
+            "sha256": "30b545e07bde716173e1ab6eec38586bdeedecf33ec084e8eb1ef19249ff6601",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "changed_edges": 2959,
+            "weight_delta_l2": 7.088088035583496,
+            "max_abs_delta": 5.233037948608398,
+            "efficacy_min": 0.7279004282532785,
+            "efficacy_max": 1.0704124528314558,
+            "clipped_edges": 0
+          }
+        },
+        {
+          "side": "HOLD",
+          "left_hz": 42.0,
+          "right_hz": 42.0,
+          "difference_hz": 0.0,
+          "gate_spikes": 0,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 2000.0,
+          "compute_seconds": 2.1807155419082846,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 73,
+          "KC_spikes": 4315,
+          "total_spikes": 631227,
+          "spike_sha256": "46342b6d824b3d3fa54d1439ac27c3f3178258f12debfd68b163583a78145435",
+          "input_sha256": "56e2fe46431f9ad187ce5ccaf77b9f9c06c721d4e2ba672d45405a8d924d565c",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 3032,
+            "mean_efficacy": 1.0021804571151733,
+            "minimum_efficacy": 0.5838127136230469,
+            "sha256": "47c26ddf16146089756bf3082b6bbf9e524068627b5d237cc067a02f5c83bc48",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "changed_edges": 3009,
+            "weight_delta_l2": 4.111935138702393,
+            "max_abs_delta": 2.836026191711426,
+            "efficacy_min": 0.5838127292219876,
+            "efficacy_max": 1.082499302107037,
+            "clipped_edges": 0
+          }
+        }
+      ],
+      "interpretation": "Synthetic mechanics assay, no trading return. No optimizer loss or backprop gradient. Source spike highlights are not a measurement of transmission or causality."
+    }
+  },
+  "comparisons": [
+    {
+      "arms": [
+        "rise_learning",
+        "rise_frozen"
+      ],
+      "different_actions": 0,
+      "different_spike_hashes": 4,
+      "decoder_difference_delta_hz": [
+        0.0,
+        -6.0,
+        12.0,
+        8.0
+      ]
+    },
+    {
+      "arms": [
+        "fall_learning",
+        "fall_frozen"
+      ],
+      "different_actions": 1,
+      "different_spike_hashes": 3,
+      "decoder_difference_delta_hz": [
+        0.0,
+        2.0,
+        -2.0,
+        0.0
+      ]
+    },
+    {
+      "arms": [
+        "rise_learning",
+        "fall_learning"
+      ],
+      "different_actions": 2,
+      "different_spike_hashes": 4,
+      "decoder_difference_delta_hz": [
+        -2.0,
+        -14.0,
+        10.0,
+        0.0
+      ]
+    },
+    {
+      "arms": [
+        "rise_reward",
+        "rise_aversive"
+      ],
+      "different_actions": 0,
+      "different_spike_hashes": 4,
+      "decoder_difference_delta_hz": [
+        0.0,
+        8.0,
+        0.0,
+        14.0
+      ]
+    },
+    {
+      "arms": [
+        "rise_learning",
+        "rise_lower_eta"
+      ],
+      "different_actions": 0,
+      "different_spike_hashes": 4,
+      "decoder_difference_delta_hz": [
+        0.0,
+        -6.0,
+        10.0,
+        18.0
+      ]
+    },
+    {
+      "arms": [
+        "rise_learning",
+        "rise_price_only"
+      ],
+      "different_actions": 1,
+      "different_spike_hashes": 4,
+      "decoder_difference_delta_hz": [
+        0.0,
+        -6.0,
+        14.0,
+        12.0
+      ]
+    }
+  ]
+}

@@ -21,6 +21,9 @@ paperlab = "paperlab.cli:main"
 [tool.setuptools.packages.find]
 include = ["paperlab*"]
 
+[tool.setuptools.package-data]
+paperlab = ["debugger_web/*.html", "debugger_web/*.css", "debugger_web/*.js"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 

@@ -10,6 +10,31 @@ the original BTC archive remains available.
 
 The fly is a sparse spiking network, not a transformer. The compact policy is an MLP actor/critic, not an SLM. An optional, separately pinned FinBERT transformer encodes headline sentiment. News features enter the compact policy numerically and the fly through an explicit visual adapter.
 
+## Inspect the fly
+
+The [interactive circuit debugger](docs/fly-debugger.md) shows recorded neuron
+spikes, voltages, connection updates, fixed decoder outputs, and paired learning
+comparisons. Test synthetic prices, news, reinforcement, and neuron stimulation
+without touching a paper account. The simulation retains the full graph; the
+display is a labeled subset with full-neuron lookup in generated recordings.
+
+![Fly circuit debugger](docs/assets/fly-debugger.png)
+
+After installing below, open the included real-network synthetic recordings:
+
+```sh
+uv run python -m paperlab.debugger serve --out examples/fly-debugger
+```
+
+Visit <http://127.0.0.1:8765>. See the debugger guide for input tests, the eight-arm
+study, and its limitations. These visualizations are diagnostic evidence, not
+evidence of profitable trading.
+
+The first paired falling-price assay found one action disagreement in four
+observations. Both arms received identical images:
+
+![Learning versus frozen decoder comparison](docs/assets/fly-learning-comparison.png)
+
 ## Run
 
 Python 3.12 and a C++ compiler are required. Run from this source checkout so the preserved upstream files are available.
