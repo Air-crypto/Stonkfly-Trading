@@ -112,13 +112,21 @@ native checkpoints, and candidate PPO artifacts). The collector only reads the
 trader's watch file. Each function has exactly one writer; no shared writable
 SQLite database or shared budget file exists between them.
 
-Resource ceilings are 0.125 CPU/256 MiB for collection and 2 CPU/16 GiB for the
+Resource ceilings are 0.125 CPU/256 MiB for collection and 2 CPU/8 GiB for the
 full-fly worker. Separate monthly reservation caps sum to the existing $40 planning
 ceiling: $15 collector and $25 worker. Existing worker spend stays in its original
 budget ledger. Reservations double CPU/RAM rates, include startup time, and stop
 substantive work at 75% of their cap. This can stop research early; it does not
 guarantee full-month uptime. Provider billing limits remain authoritative, and
 no provider spending limit is raised by this change.
+
+An atomic Modal Dict ownership guard also prevents overlapping deployment
+versions from opening a second writer. Normal completion or handled exceptions
+release ownership; a hard kill can leave `writer_busy`. Verify the previous
+input has actually ended before removing that writer's key in
+`fly-paper-lab-writers`. Do not reset the budget or delete market/account data.
+When migrating from a version without the guard, stop its scheduled app first,
+then deploy the guarded version; record that collection gap.
 
 `multi_paper_decision` logs include pool identity, model output, pending order,
 fill or rejection, quantities, fees, stress equity, and learning diagnostics.

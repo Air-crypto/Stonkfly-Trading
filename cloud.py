@@ -15,6 +15,7 @@ if PRODUCT not in ("BTC-USD", "ETH-USD"):
 app = modal.App("fly-paper-lab")
 volume = modal.Volume.from_name("fly-paper-lab-state", create_if_missing=True)
 discovery_volume = modal.Volume.from_name("fly-paper-lab-universe", create_if_missing=True)
+writers = modal.Dict.from_name("fly-paper-lab-writers", create_if_missing=True)
 image = (modal.Image.debian_slim(python_version="3.12")
          .apt_install("g++")
          .pip_install("torch==2.14.0", index_url="https://download.pytorch.org/whl/cpu")
@@ -24,10 +25,33 @@ image = (modal.Image.debian_slim(python_version="3.12")
          .env({"PYTHONPATH": "/opt/paperlab", "OMP_NUM_THREADS": "2", "HF_HOME": "/state/huggingface", "PAPERLAB_FINBERT_REVISION": "4556d13015211d73dccd3fdd39d39232506f3e43", "PAPERLAB_PRODUCT": PRODUCT, "PAPERLAB_FLY": "1" if FULL_FLY else "0", "PAPERLAB_UNIVERSE":"1" if UNIVERSE else "0"}))
 
 
-@app.function(image=image, volumes={"/state": volume,"/discovery":discovery_volume}, cpu=(2,2), memory=(16384,16384) if FULL_FLY else (4096,4096),
+def exclusive(name, call, *args):
+    """Atomic cloud ownership also covers overlapping deployment versions.
+
+    A hard-killed owner leaves a fail-closed lock. Reclaim only after verifying
+    that its Modal input has ended; never expire a possibly live SQLite writer.
+    """
+    import time
+    if not writers.put(name,{"started":time.time()},skip_if_exists=True):
+        print(f"Writer {name} already owned; skipped overlapping invocation",flush=True)
+        return {"status":"writer_busy","writer":name}
+    try:
+        return call(*args)
+    finally:
+        writers.pop(name)
+
+
+WORKER_MEMORY=8192 if FULL_FLY and UNIVERSE else 16384 if FULL_FLY else 4096
+
+
+@app.function(image=image, volumes={"/state": volume,"/discovery":discovery_volume}, cpu=(2,2), memory=(WORKER_MEMORY,WORKER_MEMORY),
               max_containers=1, min_containers=0, scaledown_window=2, timeout=600,
               schedule=modal.Cron("*/5 * * * *") if ENABLED else None, retries=0)
 def worker(prepare: bool = False, probe: bool = False, diagnostics: bool = False):
+    return exclusive("worker",_worker,prepare,probe,diagnostics)
+
+
+def _worker(prepare=False,probe=False,diagnostics=False):
     import os
     import sys
     import time
@@ -44,7 +68,8 @@ def worker(prepare: bool = False, probe: bool = False, diagnostics: bool = False
     # Measured cold starts were ~3 seconds. Ten seconds plus the unchanged 2x
     # rate margin accommodates faster scheduling without a 30-second floor per tick.
     universe = os.environ.get("PAPERLAB_UNIVERSE") == "1"
-    reservation = reserve("/state/budget.json", full, limit_override=25 if universe else 40, startup_seconds=10)
+    reservation = reserve("/state/budget.json", full, limit_override=25 if universe else 40, startup_seconds=10,
+                          memory_gib=8 if universe and full else 16 if full else 4)
     if reservation is None:
         emit("budget_stopped", action="Disable schedule; reserved compute limit reached")
         return {"status": "budget_stopped", "action": "Remove the schedule and redeploy. Compute estimate reached its reserved limit."}
@@ -156,6 +181,10 @@ collector_image=(modal.Image.debian_slim(python_version="3.12")
               scaledown_window=2,timeout=300,retries=0,
               schedule=modal.Cron("*/5 * * * *") if ENABLED and UNIVERSE else None)
 def universe_collector():
+    return exclusive("collector",_universe_collector)
+
+
+def _universe_collector():
     import asyncio
     import json
     import sys

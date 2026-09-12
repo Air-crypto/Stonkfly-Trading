@@ -151,14 +151,29 @@ def test_pooled_ppo_keeps_asset_boundaries_and_global_time_cutoffs(tmp_path):
     _,series=read_archive(path,now)
     cutoff,_=pooled_split(series)
     out=tmp_path/"train"
-    result=train(next(iter(series.values())),News(),out,DEX_COSTS,steps=128,series=series)
+    result=train(next(iter(series.values())),News(),out,DEX_COSTS,steps=128,series=series,decision_stride=5)
     rows=[json.loads(r) for r in (out/"rollout.jsonl").read_text().splitlines()]
     assert result["product"]=="MULTI-DEX" and result["training_assets"]==4
     assert {r["product"] for r in rows}==set(series)
     assert all(r["ts"]<cutoff and r["decision_ts"]<r["ts"] for r in rows)
+    assert result["decision_stride"]==5
+    assert max(r["ts"]-r["decision_ts"] for r in rows)==300
     assert result["splits"]["test"]["cash"]["return_pct"]==0
     updates=json.loads((out/"optimizer-updates.json").read_text())
     assert any(u["update_norm"]>0 for u in updates)
+
+
+def test_archive_excludes_future_and_keeps_disappearance_state(tmp_path):
+    path=tmp_path/"u.db"
+    now=archive(path,n=64,assets=1)
+    s=Store(path)
+    s.add([pool(1,now+600)])
+    s.db.close()
+    latest,series=read_archive(path,now+200)
+    assert "solana:pool1" not in latest and "solana:pool1" not in series
+    last=series["solana:pool0"][-1]
+    assert not last.available and last.ts==now+180
+    assert all(t.ts<=now+200 for seq in series.values() for t in seq)
 
 
 def test_collector_and_trader_budget_cannot_exceed_total_cap(tmp_path):
@@ -168,3 +183,23 @@ def test_collector_and_trader_budget_cannot_exceed_total_cap(tmp_path):
     assert main["limit"]+collect["limit"]==40
     assert collect["rate"]==pytest.approx(2*(.0000131*.125+.00000222*.25))
     with pytest.raises(ValueError): reserve(tmp_path/"bad.json",False,cpu=float("nan"))
+
+
+def test_cloud_writer_guard_blocks_overlap_and_releases_on_error(monkeypatch):
+    import cloud
+    class Owners:
+        def __init__(self): self.keys={}
+        def put(self,key,value,skip_if_exists=False):
+            if key in self.keys: return False
+            self.keys[key]=value; return True
+        def pop(self,key): return self.keys.pop(key)
+    owners=Owners()
+    monkeypatch.setattr(cloud,"writers",owners)
+    def nested():
+        assert cloud.exclusive("worker",lambda:pytest.fail("Second writer ran"))["status"]=="writer_busy"
+        return "done"
+    assert cloud.exclusive("worker",nested)=="done"
+    assert owners.keys=={}
+    def fail(): raise RuntimeError("failed input")
+    with pytest.raises(RuntimeError): cloud.exclusive("worker",fail)
+    assert owners.keys=={}

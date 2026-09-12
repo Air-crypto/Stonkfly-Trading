@@ -251,7 +251,8 @@ async def collect_window(root, seconds=285, publish=lambda:None, priorities=lamb
                     payload=await asyncio.wait_for(api.get(path,include="base_token,quote_token",**params),max(.1,deadline-time.monotonic()-12))
                     store.add(parse_pools(payload,time.time()))
                 except Exception as exc:
-                    errors.append({"endpoint":path[:120],"error":type(exc).__name__})
+                    errors.append({"endpoint":path[:120],"error":type(exc).__name__,
+                                   "http_status":getattr(getattr(exc,"response",None),"status_code",None)})
             last_report={"status":"collecting", "as_of":time.time(), "tracked_capacity":MAX_TRACKED,
                 "registered_pools":store.db.execute("SELECT count(*) FROM pools").fetchone()[0],
                 "launch_events":store.db.execute("SELECT count(*) FROM launches").fetchone()[0],

@@ -199,11 +199,14 @@ def _cycle(root,archive,fly_data,use_fly,ingest,now,fly_factory):
             put("last_slot",slot)
         result={"status":"paper_research", "experiment":"meme-pools-v1","as_of":now,"slot":slot,
                 "registered_pools":len(latest),"eligible_now":sum(not p.rejection(now) for p in latest.values()),
-                "ready_pools":sum(len(seq)>=MIN_CONTEXT for seq in series.values()),"policies":policies,
+                "ready_pools":sum(not p.rejection(now) and sum(t.available for t in series.get(k,[]))>=MIN_CONTEXT
+                                  and all(t.available for t in series[k][-3:]) for k,p in latest.items()),"policies":policies,
                 "execution":"Adverse indicative-price simulation; not executable DEX quotes.","config":config}
         # Rotate a bounded sample of all archived series, including disappeared/rejected
         # pools. No sorting by realized returns or test performance.
         trainable={k:v for k,v in series.items() if sum(t.available for t in v)>=100}
+        result["pooled_training_eligible_assets"]=len(trainable)
+        result["training_gate"]="At least four pools with 100 eligible observations each; then fixed six-hour cadence."
         if len(trainable)>=4 and now-get("trained_at",0)>=21600:
             from .compact import train
             selected=dict(sorted(trainable.items())[:240])
