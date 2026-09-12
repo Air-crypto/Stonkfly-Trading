@@ -31,7 +31,7 @@ TARGETS = {'carry': (), 'reset_rates': ('rate_kc', 'rate_dan'),
 NEW_FILES = ('paperlab/fly_selective_trace.py', 'paperlab/fly_selective_trace_audit.py',
              'paperlab/fly_online_cloud.py', 'paperlab/fly_online_figure.py',
              'paperlab/fly_credit_divergence.py','paperlab/fly_view_projection.py',
-             'paperlab/fly_study_evidence_bundle.py')
+             'paperlab/fly_study_evidence_bundle.py', 'paperlab/fly_selective_trace_cloud.py')
 
 
 def source_hashes():

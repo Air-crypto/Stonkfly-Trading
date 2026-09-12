@@ -203,6 +203,10 @@ comparison is unchanged. The guide includes the preflight command and evidence.
 The [completed-study evidence handoff](docs/fly-selective-traces.md#carry-the-completed-study-evidence)
 preserves all 51 audit and receipt files for the later cloud assay; it refuses
 incomplete or synthetic evidence. Study 11 has not yet produced that bundle.
+The [prepared cloud bridge](docs/fly-selective-traces.md#prepared-cloud-bridge)
+adds saved-call recovery, verified recording downloads and audited comparison
+views. Its worker activation is pending the current study's completion and audits;
+preparing it has not launched a new native experiment.
 An [additional display audit](docs/fly-selective-traces.md#check-what-the-debugger-draws)
 verified every displayed connection and plotted series in the six existing
 carry/both-reset views against the full recordings and graph data.

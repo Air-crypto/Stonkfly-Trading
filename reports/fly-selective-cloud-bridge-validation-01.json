@@ -1,0 +1,50 @@
+{
+  "status": "selective_cloud_bridge_prepared_not_deployed",
+  "recorded_at": 1789255278.152888,
+  "validation_runs": [
+    {
+      "command": "python -m pytest -q tests/test_fly_selective_trace_cloud.py tests/test_fly_selective_trace.py tests/test_fly_study_evidence_bundle.py",
+      "tests": 82,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1,
+      "junit_sha256": "f3b1797315925172602c2c052aed5ca32475e609da285194afe51b32553ea687",
+      "skip_reasons": [
+        "Requires retained cloud arrays; no neural propagation"
+      ]
+    },
+    {
+      "command": "python -m pytest -q tests/test_fly_selective_trace_cloud.py::test_failed_independent_audit_installs_no_comparison_views tests/test_fly_selective_trace_cloud.py::test_worker_production_release_gate_rejects_synthetic_evidence",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "junit_sha256": "860288f6d0af64f0b62932fff1a852b6e9fffdd529181ec500fab3b5a7ad315f",
+      "skip_reasons": []
+    }
+  ],
+  "passed": 83,
+  "skipped": 1,
+  "test_scope": "Transport, release gates, source/ownership binding and failure recovery. Positive bridge cases use labeled synthetic completed-study evidence with its release decision mocked; actual study evidence consistency checks still run. Parent artifact verification, neural capture, Modal responses and the final neural audit are mocked in transport-specific tests; their production gates and underlying modules are tested separately. No native model or real cloud call was started.",
+  "expected_native_output_files": 175,
+  "comparison_views": 12,
+  "pinned_execution_files": 56,
+  "pinned_execution_sha256": "5862a6aebfe9db84c39d94564a230eb8f7bf8e5703bbf19ddaf64d246f529dc0",
+  "pinned_execution_sources_unchanged": true,
+  "source_sha256": {
+    "paperlab/fly_selective_trace_cloud.py": "70081a0498b638942b34fc92ef56e1dc9f3fac7fdc388ec5d0203c7c899d87b7",
+    "paperlab/fly_selective_trace.py": "591e9d5eb62bd4901627de5da8d7634b2fa08fd0d5180fe5a1729cf07c40a79b",
+    "tests/test_fly_selective_trace_cloud.py": "22503e7098bd8641cd31a286d52af6f5e7e8cb5e9b1b522a1f941b9da0601d00",
+    "README.md": "a0745cebd1cf4b0004a7cf1f160b057bc244270c310ab24180defde1acea373e",
+    "docs/fly-selective-traces.md": "93693b309a95217b03e98871787cda9cddef7b63be976cf90acd26de96dd1fdf"
+  },
+  "remaining": [
+    "Study 11 capture and independent audits",
+    "Activate and test the selective_plan route in the existing budgeted worker; package two validation reports",
+    "One native capture, independently audited full recordings and browser checks of the resulting paired views",
+    "Prospective financial testing of any promising mechanism"
+  ],
+  "native_observations": 0,
+  "cloud_submissions": 0,
+  "interpretation": "Prepared transport and recovery implementation only. The currently deployed worker does not accept selective_plan. No new selective trajectories, improved trading results or policy promotion."
+}

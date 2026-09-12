@@ -162,15 +162,76 @@ cannot be packed or unpacked. No native model is constructed.
 uv run --extra dev python -m pytest -q tests/test_fly_study_evidence_bundle.py
 ```
 
+## Prepared cloud bridge
+
+`paperlab.fly_selective_trace_cloud` now prepares the completed-study bundle,
+submits through the existing worker, resumes its saved call, downloads the full
+recordings, runs the independent auditor and writes all twelve comparison views.
+**This bridge is not connected to the deployed worker yet.** Its activation must
+wait for study 11 capture and independent audits; none of that study's 56 pinned
+execution files or the cloud deployment changed while preparing this bridge.
+
+The local receipt distinguishes preparation from paid submission. An interrupted
+bundle upload can resume using the same content hash. Before submitting, the
+client checks the worker lease, running inputs and backlog, and the assay's
+existing remote claim. It records `submitting` before the RPC; a lost response
+at that point cannot cause a second submission. Later invocations with a saved
+call ID only observe that call. A 50-second observation timeout leaves the call
+pending, rather than restarting it.
+
+The future worker adapter validates the same bundle and request source hashes,
+checks the original 84 parent artifacts, and commits a persistent claim before
+constructing the native model. That claim is shared across output run IDs and
+remains after a failure or timeout. All 175 output files, including twelve sets
+of three full recordings, are hashed before transport. Downloads resume at the
+file level and check both existing and newly downloaded bytes. Expanded views
+are installed only after the independent recording audit passes. These checks
+do not replace the audit or prove improved trading performance.
+
+The transport tests use a labeled synthetic study fixture, with only its release
+decision mocked while the actual study evidence consistency checks still run.
+Neural capture and transport responses are simulated in bridge tests; separate
+tests retain the production release gate and reject incomplete and synthetic
+studies before native execution or submission. No test starts a cloud call.
+The [validation record](../reports/fly-selective-cloud-bridge-validation-01.json)
+records 83 passing checks across the bridge and related modules, with one optional
+retained-recording check skipped; native execution and browser checks of its new
+recordings remain pending.
+
+```sh
+uv run --extra dev python -m pytest -q \
+  tests/test_fly_selective_trace_cloud.py \
+  tests/test_fly_selective_trace.py tests/test_fly_study_evidence_bundle.py
+```
+
 ## Next execution step
 
-The native runner currently has no CLI or cloud-dispatch route. Its internal
-entrypoint requires the completed, audited, non-synthetic study 11 evidence. After
-that study finishes, transfer and verify its evidence bundle, integrate this
-assay with the existing budgeted worker and
-one-submission receipt, run it once, and independently audit every condition before
-opening the new paired views. Retain the $25 worker and $15 collector monthly
-reservation caps and the 420-second inner bound; a partial run is incomplete and
+After the actual study 11 finishes and passes its independent audits, connect
+the `selective_plan` request in `cloud_debug.validate_request` to the new bridge's
+validator and route execution to `run_request`. Supply the actual Modal call ID,
+input ID and volume commit callback from within the existing worker lease and
+budget reservation. Package `fly-first-drive-01.json` and the unchanged study 11
+registration under `/opt/paperlab/reports/`, where the native runner's validation
+expects them. Test this route and deployment before submission. Retain the $25
+worker and $15 collector monthly reservation caps and the 420-second inner bound.
+These activation edits are deliberately pending; the current deployed worker
+does not accept `selective_plan`.
+
+Once that activation is verified, use a new output directory for the single
+submission and the same directory for every subsequent observation:
+
+```sh
+uv run python -m paperlab.fly_selective_trace_cloud \
+  --payload runs/selective-trace-preflight-01/payload.json \
+  --reference-recordings runs/credit-reset-01/cloud/artifacts \
+  --completed-study runs/online-cloud-11 \
+  --fly-data data/fly --out runs/selective-trace-01/cloud
+```
+
+The command packs and verifies the study evidence itself; no manual bundle
+upload is needed. Successful downloads remain in `artifacts/`, the independent
+audit in `audit.json`, and each named condition receives `view.json`, `report.json`
+and `remote.json` for the debugger. A partial native run remains incomplete and
 must not silently restart.
 
 This remains a historical mechanism test. It does not recompute account feedback,
