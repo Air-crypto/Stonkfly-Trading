@@ -1,0 +1,51 @@
+{
+  "status": "online_projection_validation_passed",
+  "recorded_at": 1789253514.1921668,
+  "projection_report_sha256": "9a650f4162aae07e4672c958273b4d4c02d7c17a51c9dba7285a36aca44e1133",
+  "unit_regressions": {
+    "command": "python -m pytest -q tests/test_fly_online_projection.py tests/test_fly_view_projection.py tests/test_fly_selective_trace.py",
+    "passed": 89,
+    "skipped": 3,
+    "skips": "Optional retained-recording checks; the full-phase check was then run separately with data."
+  },
+  "retained_full_phase": {
+    "command": "FLY_ONLINE_RECORDINGS=<retained synthetic chunk> FLY_TRACE_DATA=<prepared graph> python -m pytest -q tests/test_fly_online_projection.py::test_retained_full_phase_without_constructing_a_brain",
+    "passed": 1,
+    "skipped": 0,
+    "junit_sha256": "22aa738d2351dccd40e19d414b6ca033d6f78a0004103e349644c0af40a2b1fe",
+    "native_model_constructor_forbidden": true,
+    "observations_checked": 21,
+    "bins_checked": 1050
+  },
+  "browser": {
+    "command": "FLY_ONLINE_VIEW=runs/online-view-projection-01/view.json node scripts/check-fly-online-view.cjs",
+    "observations": 21,
+    "selected_bins": 84,
+    "decision_slots": 24,
+    "terminal_marks": 1,
+    "large_import": true,
+    "frozen_regression": true,
+    "mobile_overflow": false,
+    "page_errors": [],
+    "model_submission_requests": 0,
+    "screenshot_sha256": "21044353741c9a5cf6d4b6e68e390a57b0236e25108a8a63e727eb6f51a1e784",
+    "initial_failure": "The earlier check waited for dropdown options already present from the server-loaded run. During the asynchronous import the final selection could be reset; actual BUY differed from expected last-frame HOLD.",
+    "correction": "Wait for the loaded imported filename and observation count before selecting its final frame."
+  },
+  "source_sha256": {
+    "paperlab/fly_online_projection.py": "010e998c795681876c8017e1368de7233d9886718001a6b27fe523b07024e49e",
+    "paperlab/fly_view_projection.py": "d574cc802b98481b066b59fc6375a1042ee056aa4022a00038366fada55cf1ec",
+    "tests/test_fly_online_projection.py": "98c89768b2bd1faf5b4ca5ba32ac572d8554301dade8a7d6271d3ab26438c63e",
+    "tests/test_fly_view_projection.py": "12f689982a50ce6debd4c75d0a884a96a3ab09a39e910c88ac946dda2f8513af",
+    "tests/test_fly_selective_trace.py": "fc288fb90854d5f4e6b2aaf52d37716a847499714f523c938d32bf0c7b1296ab",
+    "scripts/check-fly-online-view.cjs": "438ae06b3cd265220db976d13c74ed37c5fe0dd8ec3c4b7a0bb5077a149d7e2e",
+    "paperlab/debugger_web/app.js": "7e318f4b41a8b25d7ffaa0ba35a4191270467d57f62e78d5a1bc4c89f3b0a5cc",
+    "paperlab/debugger_web/index.html": "2810dee47297466e13c92c8333ca11f21487fb9dcd13134d403153829be5bad2",
+    "paperlab/debugger_web/style.css": "f3f85b7b6758366adf04d9f5f8cde954e2ca2ba0075d6dc4691f38b0c2502894"
+  },
+  "pinned_execution_files": 56,
+  "execution_sources_unchanged": true,
+  "neural_observations_computed": 0,
+  "cloud_submissions": 0,
+  "interpretation": "Tests and offline reconstruction of retained synthetic-input native recordings only. The browser wait correction changes the test synchronization, not model decisions. No newly propagated trajectories, financial improvement or completed study 11 evaluation is claimed."
+}

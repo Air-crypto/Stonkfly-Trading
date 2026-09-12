@@ -236,6 +236,66 @@ badge; the screenshot below contains no real market performance claim.
 
 ![Long recording checked with synthetic prices](assets/fly-online-validation-01.png)
 
+## Check full-phase plots against the recordings
+
+The [additional projection check](../reports/fly-online-view-projection-01.json)
+re-audits the retained 21-observation synthetic validation run, then verifies
+every original displayed connection and base chart against the graph and full
+arrays. It checked **93 selected neurons, 967 connections and 1,050 bins**.
+No incorrect plotted values were found. The earlier topology/chart checker
+accepted only three-image mechanism views; its observation count is now explicit
+and bounded to 1–24, while existing mechanism callers still default to three.
+
+`paperlab.fly_online_projection` first repeats the independent ledger, news,
+image, boundary, fixed-decoder and full plasticity audit. It then checks neuron
+identity/group labels, every selected-subgraph edge including nonplastic ones,
+all spike/voltage samples, population and whole-brain curves, weight and memory
+curves, and cumulative neuron totals across the entire phase. Missing market
+decisions do not become fabricated frames. An empty phase has no neural view
+and is reported explicitly rather than marked as a verified plot.
+
+The command writes a fresh `audit.json`, `report.json` and, when observations
+exist, the expanded `view.json`. An optional `--view` must match the original
+expanded view reconstructed by the fresh independent audit, including credit
+and boundary panels. This entrypoint does not accept a manually reselected
+subgraph. Earlier evidence is preserved; use a new output directory each time.
+
+After the cloud observer has downloaded a complete chunk, run:
+
+```sh
+uv run --extra dev python -m paperlab.fly_online_projection \
+  --root runs/online-cloud-11/chunks/development-pool0-trained_online_reset_rates \
+  --fly-data data/fly \
+  --out runs/online-projection-development-pool0-reset
+```
+
+This only reads retained recordings and reconstructs their results. It does not
+construct a native brain, propagate new activity, submit a cloud call or select
+a policy. The validation used synthetic prices and remains explicitly labeled;
+it is not a study 11 market result. The live study's 56 pinned source files are
+unchanged, and this additional check is a separate post-capture command.
+
+The [regressions](../reports/fly-online-view-projection-validation-01.json) cover
+1, 3, 21 and 24 observations, corruptions after the first three frames, wrong
+cumulative totals and time grids, missing frames, inconsistent expanded panels,
+and unobserved phases. The retained-data integration forbids construction of
+`MemoryBrain` while checking all 21 observations. The browser check also passed
+on the newly audited view, including all 84 selected bins, the large-file import
+and mobile layout. Its import wait now checks the loaded filename: the previous
+wait could accept dropdown options left over from the server-loaded recording
+before the asynchronous file read finished. This corrected a test race; no
+recorded action or application behavior was changed.
+
+To reproduce the retained-data integration,
+set the first path to the retained synthetic native-check chunk:
+
+```sh
+FLY_ONLINE_RECORDINGS="$PWD/runs/online-native-check-01/test_native_long_online_chunk_0/online" \
+FLY_TRACE_DATA="$PWD/data/fly" \
+  uv run --extra dev python -m pytest -q \
+  tests/test_fly_online_projection.py::test_retained_full_phase_without_constructing_a_brain
+```
+
 ## Run the implementation checks
 
 From the repository root, with the full graph prepared using the

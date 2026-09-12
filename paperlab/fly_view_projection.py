@@ -152,15 +152,16 @@ def array_digest(a):
     return hashlib.sha256(np.ascontiguousarray(a).tobytes()).hexdigest()
 
 
-def audit_view(view, root, graph):
+def audit_view(view, root, graph, *, observations=3):
     columns=topology(view,graph);root=Path(root);total=np.zeros(len(graph.ids),dtype=np.int64);errors=[]
-    require(len(view['frames'])==len(view['report']['events'])==3, 'Expected the three-image mechanism view')
+    require(type(observations) is int and 1<=observations<=24, 'Expected 1 to 24 declared observations')
+    require(len(view['frames'])==len(view['report']['events'])==observations, 'View differs from the declared observation count')
     for i,f in enumerate(view['frames'],1):
         require(f['event']==view['report']['events'][i-1], 'Frame event differs from report')
         a=read_arrays(root/f'step-{i:02}.npz');count,checked=frame(view,f,a,graph,columns,i)
         total+=count;errors.append(checked)
     finite_equal([n['total_spikes'] for n in view['nodes']],total[columns], 'Displayed neuron totals differ')
-    return {'observations':3,'bins':150,'selected_neurons':len(columns),'displayed_connections':len(view['edges']),
+    return {'observations':observations,'bins':50*observations,'selected_neurons':len(columns),'displayed_connections':len(view['edges']),
         'plastic_connections':len(view['plastic_selection']),'all_topology_verified':True,
         'all_plotted_series_verified':True,'norm_reduction_errors':errors}
 

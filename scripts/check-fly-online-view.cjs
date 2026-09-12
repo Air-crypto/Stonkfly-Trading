@@ -34,7 +34,10 @@ const assert=require('node:assert/strict'),fs=require('fs'),path=require('path')
   }
   // The file input previously rejected this >15 MB recording.
   await page.locator('#import').setInputFiles(file);
-  await page.waitForFunction(()=>document.querySelector('#step').options.length>=18);
+  // Existing options still belong to the server-loaded recording while file.text()
+  // is pending. Wait for this import's identity before selecting its final frame.
+  await page.waitForFunction(({name,count})=>document.querySelector('#status').textContent
+   .startsWith(`Loaded ${name} · ${count} observations`),{name:path.basename(file),count:v.frames.length});
   await page.selectOption('#step',String(v.frames.length-1));
   assert.equal(await page.locator('#error').innerText(),'');
   assert.equal(await page.locator('#decision').innerText(),v.frames.at(-1).event.side);

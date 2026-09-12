@@ -230,6 +230,9 @@ The [full-window diagnostic figures](docs/fly-online-comparison.md#compare-the-f
 align decisions, later fills, gate spikes, weight movement and learning history,
 with links back to matched circuit recordings. This preview is explicitly
 synthetic; the cloud comparison still needs its complete data and audits.
+The [full-phase display check](docs/fly-online-comparison.md#check-full-phase-plots-against-the-recordings)
+verified all 1,050 bins and 967 displayed connections in the retained synthetic
+run against its full recordings, with no new neural computation.
 
 ![Synthetic validation of longer trading and learning timelines](docs/assets/fly-online-diagnostics-validation-01.png)
 
