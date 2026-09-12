@@ -1125,3 +1125,45 @@ images, frozen inference, and no reinforcement. Both original reference controls
 must reproduce before interpreting the intervention. This is a post hoc neural
 diagnostic; any proposed trading improvement still needs a subsequent market
 evaluation.
+
+### Run the matched market restoration diagnostic
+
+The five-arm runner reconstructs the reference training sequence and restores
+incoming plastic memory by exact postsynaptic body ID. Each selected connection
+receives its pristine weight, `u`, and `w`; every other learned connection is
+retained. It changes neither the graph nor the fixed decoder. All test arms have
+frozen plasticity, no reinforcement, and no extra current. The two unmodified
+reference controls must match all three recorded spike-count hashes and decoder
+outputs before the individual-cell interventions are interpreted.
+
+```sh
+uv run python -m paperlab.fly_market_restoration pack \
+  --protocol reports/fly-market-restoration-protocol-01.json \
+  --reference reports/fly-market-study-05.json \
+  --plan reports/fly-market-study-05-plan.json \
+  --out runs/market-restoration-payload.json
+uv run python -m paperlab.fly_market_restoration cloud \
+  --payload runs/market-restoration-payload.json --out runs/market-restoration
+```
+
+Deploy the updated worker first using the existing full-fly/universe deployment
+instructions. The original reference was captured on Modal; the runner requires
+its exact native build. A local `run --fly-data ...` command is also available
+for references captured on the same local build. It rejects cross-build
+comparisons instead of labeling them controlled experiments.
+
+The cloud observer records the call ID before waiting, resumes that same call
+after timeouts, and refuses to reuse an output directory for a different payload.
+If a submission response is lost, inspect the existing call before doing any
+further work; it never blindly submits again. The model run is bounded to 420
+seconds within the existing worker budget and lease. No trading account or fills
+are recomputed by this diagnostic.
+
+```sh
+uv run python -m paperlab.debugger serve --backend modal --out runs/market-restoration
+```
+
+The viewer highlights restored connections in purple before the replay, names
+the exact target body IDs and restored connection count, and keeps neuron-spike
+and weight-update highlights distinct. Compact recordings contain displayed
+connections; full cloud traces remain available through neuron lookup.
