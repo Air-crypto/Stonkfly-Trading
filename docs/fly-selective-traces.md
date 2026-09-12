@@ -112,11 +112,62 @@ FLY_CREDIT_RESET_RECORDINGS="$PWD/runs/credit-reset-01/cloud" \
   uv run --extra dev python -m pytest -q tests/test_fly_selective_trace.py
 ```
 
+## Carry the completed study evidence
+
+The local observer produces the study 11 audits, while the next native assay will
+run in Modal. `paperlab.fly_study_evidence_bundle` provides that handoff. It copies
+exactly 51 JSON files: the report, sealed plan and price audit, plus all 16 chunk
+summaries, independent audits and completed-call receipts. The original bytes
+and their SHA-256 hashes are preserved. Full recordings and the market database
+stay with the original audit evidence; this package does not replace their audit.
+
+Packing validates a private copy through the existing study completion gate.
+Unpacking requires the bundle hash recorded at packing, validates that same gate
+before creating the destination, and checks the installed evidence again. The
+gate requires the actual study 11 registration, all completed audits and an ended
+window; synthetic fixtures cannot pass. A completed negative result can pass
+this handoff, since it authorizes a later mechanism test, not a policy promotion.
+
+**No real completion bundle exists yet.** Study 11 is still collecting. These
+commands become usable only after the observer has produced its final audited
+report. They perform local file operations and do not upload, deploy or submit a
+Modal job:
+
+```sh
+uv run --extra dev python -m paperlab.fly_study_evidence_bundle pack \
+  --study runs/online-cloud-11 \
+  --out runs/study-11-completed-evidence.json
+
+# Retain the bundle_sha256 printed above as the expected transfer identity.
+uv run --extra dev python -m paperlab.fly_study_evidence_bundle unpack \
+  --bundle runs/study-11-completed-evidence.json \
+  --sha256 '<bundle_sha256 printed by pack>' \
+  --out runs/study-11-restored-evidence
+```
+
+Both commands refuse existing outputs. The file allowlist rejects extra paths,
+missing files and duplicate JSON keys; source files and directories cannot be
+symlinks. Limits are 32 MiB per decoded file, 128 MiB total decoded evidence and
+192 MiB for the bundle. If final evidence exceeds a limit, transport stops; it
+does not omit or truncate any audit.
+
+The transport regression uses explicitly synthetic study fixtures with only the
+release decision mocked. It still checks all 16 chunk ledgers and audit/receipt
+relationships, compares all 51 restored files byte for byte, and rejects altered
+hashes, rehashed incomplete reports, path injection and existing destinations.
+Separate tests retain the production gate and confirm that synthetic evidence
+cannot be packed or unpacked. No native model is constructed.
+
+```sh
+uv run --extra dev python -m pytest -q tests/test_fly_study_evidence_bundle.py
+```
+
 ## Next execution step
 
 The native runner currently has no CLI or cloud-dispatch route. Its internal
 entrypoint requires the completed, audited, non-synthetic study 11 evidence. After
-that study finishes, integrate this assay with the existing budgeted worker and
+that study finishes, transfer and verify its evidence bundle, integrate this
+assay with the existing budgeted worker and
 one-submission receipt, run it once, and independently audit every condition before
 opening the new paired views. Retain the $25 worker and $15 collector monthly
 reservation caps and the 420-second inner bound; a partial run is incomplete and

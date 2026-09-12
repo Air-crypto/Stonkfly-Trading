@@ -200,6 +200,9 @@ The [separate KC/DAN reset follow-up](docs/fly-selective-traces.md) specifies
 24 boundary checks passed against saved native arrays, preserving all other
 state and weights. Native runs and their results are pending; the running cloud
 comparison is unchanged. The guide includes the preflight command and evidence.
+The [completed-study evidence handoff](docs/fly-selective-traces.md#carry-the-completed-study-evidence)
+preserves all 51 audit and receipt files for the later cloud assay; it refuses
+incomplete or synthetic evidence. Study 11 has not yet produced that bundle.
 An [additional display audit](docs/fly-selective-traces.md#check-what-the-debugger-draws)
 verified every displayed connection and plotted series in the six existing
 carry/both-reset views against the full recordings and graph data.
