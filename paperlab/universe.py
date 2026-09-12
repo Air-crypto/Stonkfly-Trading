@@ -182,6 +182,24 @@ class PublicAPI:
         return await asyncio.to_thread(request)
 
 
+def refresh_requests(watch, priority, minute):
+    grouped={}
+    for p in watch:
+        grouped.setdefault(p.network,[]).append(p.address)
+    pinned={p.network for p in watch if p.key in priority}
+    regular=sorted(set(grouped)-pinned)
+    if regular:
+        offset=minute%len(regular)
+        regular=regular[offset:]+regular[:offset]
+    # The public request cap must not permanently starve alphabetically later chains.
+    result=[]
+    for network in sorted(pinned)+regular:
+        addresses=grouped[network]
+        for offset in range(0,len(addresses),30):
+            result.append((f"networks/{clean_id(network)}/pools/multi/"+",".join(addresses[offset:offset+30]),{}))
+    return result
+
+
 async def launch_stream(store, deadline):
     import websockets
     backoff = 2
@@ -236,13 +254,7 @@ async def collect_window(root, seconds=285, publish=lambda:None, priorities=lamb
             # Retain and refresh every open/assigned pool irrespective of current ranking.
             priority=set(priorities())
             watch=store.tracked(priority,time.time())
-            grouped={}
-            for p in watch:
-                grouped.setdefault(p.network,[]).append(p.address)
-            priority_networks={p.network for p in watch if p.key in priority}
-            for network, addresses in sorted(grouped.items(),key=lambda item:(item[0] not in priority_networks,item[0])):
-                for offset in range(0,len(addresses),30):
-                    requests_to_make.append((f"networks/{clean_id(network)}/pools/multi/"+",".join(addresses[offset:offset+30]),{}))
+            requests_to_make+=refresh_requests(watch,priority,minute)
             # Limit requests, not incoming launch events. Overflow/gaps are explicitly reported.
             for path,params in requests_to_make[:13]:
                 if time.monotonic()+13>=deadline:

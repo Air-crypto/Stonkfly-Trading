@@ -68,6 +68,18 @@ def test_registry_keeps_first_seen_rejections_and_deduplicates(tmp_path):
     s.db.close()
 
 
+def test_request_budget_rotates_chains_and_keeps_holdings_first():
+    from paperlab.universe import refresh_requests
+    watch=[replace(pool(i),network=f"chain{i:02d}",key=f"chain{i:02d}:pool{i}") for i in range(20)]
+    priority={watch[-1].key}
+    observed=set()
+    for minute in range(20):
+        requests=refresh_requests(watch,priority,minute)[:9]
+        assert requests[0][0].startswith("networks/chain19/")
+        observed.update(path.split("/")[1] for path,_ in requests)
+    assert observed=={p.network for p in watch}
+
+
 def test_unavailable_inventory_is_not_filled_or_marked_at_stale_price():
     p=pool()
     b=Broker(DEX_COSTS)
