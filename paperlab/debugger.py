@@ -137,6 +137,8 @@ def serve(root, data, port, backend="local"):
                     return self.send(404, {"error": "Not found"})
                 name, mime = names[url.path]
                 self.send(200, (WEB / name).read_bytes(), mime)
+            except (BrokenPipeError, ConnectionResetError):
+                pass  # Navigating away can close a response while a trace is streaming.
             except (ValueError, FileNotFoundError, OverflowError) as exc:
                 self.send(400, {"error": str(exc)})
             except Exception as exc:
@@ -153,6 +155,8 @@ def serve(root, data, port, backend="local"):
                     raise ValueError("Expected a small JSON assay configuration")
                 config = Assay(**json.loads(self.rfile.read(length)))
                 self.send(202, {"run": jobs.launch(config)})
+            except (BrokenPipeError, ConnectionResetError):
+                pass
             except (ValueError, TypeError) as exc:
                 self.send(400, {"error": str(exc)})
             except Exception as exc:
@@ -162,7 +166,7 @@ def serve(root, data, port, backend="local"):
             pass
 
     server = ThreadingHTTPServer(("127.0.0.1", port), Handler)
-    print(f"Fly debugger: http://127.0.0.1:{port} (isolated synthetic assays)", flush=True)
+    print(f"Fly debugger: http://127.0.0.1:{port} (backend={jobs.backend}; isolated research)", flush=True)
     try:
         server.serve_forever()
     finally:

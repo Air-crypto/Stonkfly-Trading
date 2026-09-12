@@ -1,0 +1,31 @@
+{
+  "parent_plan_sha256": "64c91ec56a03a63aab0fa91124e94a0928c02fb13f1db8403f5f2bd07a1be829",
+  "arms": {
+    "pristine_frozen": {
+      "eta": 0.001,
+      "train": false,
+      "online": false,
+      "view": "original"
+    },
+    "online_original": {
+      "eta": 0.001,
+      "train": true,
+      "online": true,
+      "view": "original"
+    },
+    "reinforcement_gated": {
+      "eta": 0.001,
+      "train": true,
+      "online": true,
+      "view": "original",
+      "reinforcement_only": true
+    }
+  },
+  "cohort": [
+    "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+    "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu"
+  ],
+  "start": 1789200300,
+  "phase_steps": 2,
+  "selection": "Same gate as parent: development must beat both cash and pristine frozen. No test-based promotion."
+}

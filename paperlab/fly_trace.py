@@ -22,6 +22,7 @@ class Assay:
     preset: str = "rise"
     steps: int = 4
     learning: bool = True
+    reinforcement_only: bool = False
     eta: float = .001
     reinforcement: str = "none"
     view: str = "original"
@@ -36,6 +37,8 @@ class Assay:
             raise ValueError("Use 1–8 observations per assay")
         if type(self.learning) is not bool:
             raise ValueError("learning must be a boolean")
+        if type(self.reinforcement_only) is not bool:
+            raise ValueError("reinforcement_only must be a boolean")
         if not math.isfinite(self.eta) or not 0 <= self.eta <= .002:
             raise ValueError("eta must be between 0 and .002")
         if self.reinforcement not in ("none", "reward", "aversive", "alternating"):
@@ -158,6 +161,9 @@ class TraceLab:
             reinforcement = config.reinforcement
             if reinforcement == "alternating":
                 reinforcement = "reward" if i % 2 == 0 else "aversive"
+            enabled = config.learning and (not config.reinforcement_only or reinforcement != "none")
+            b.weights_frozen = not enabled
+            self.fly.controller.s = replace(self.fly.controller.s, learning=enabled)
             event = self.capture(rgb, reinforcement, output, i+1, extra, config.current)
             events.append(event)
             print(f"assay step={i+1}/{config.steps} side={event['side']} "
@@ -185,6 +191,7 @@ class TraceLab:
         delta = arrays["weights"][-1] - trace.initial_weights
         event["diagnostics"] = {
             "loss": None, "backprop_gradient": None,
+            "plasticity_enabled": bool(self.fly.controller.s.learning and not b.weights_frozen),
             "changed_edges": int(np.count_nonzero(delta)),
             "weight_delta_l2": float(np.linalg.norm(delta)),
             "max_abs_delta": float(np.max(np.abs(delta))),

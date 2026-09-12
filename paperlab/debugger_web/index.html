@@ -12,6 +12,7 @@
 <label>Price sequence <select name="preset"><option value="rise">Steady rise</option><option value="fall">Steady fall</option><option value="flat">Flat</option><option value="reversal">Trend reversal</option><option value="shock">Sudden drop</option></select></label>
 <div class="pair"><label>Observations <input name="steps" type="number" min="1" max="8" value="4" required></label><label>Learning rate η <input name="eta" type="number" min="0" max="0.002" step="0.0001" value="0.001" required></label></div>
 <label class="check"><input name="learning" type="checkbox" checked> Enable plasticity</label>
+<label class="check"><input name="reinforcement_only" type="checkbox"> Require reinforcement for updates</label>
 <label>Engineered reinforcement <select name="reinforcement"><option value="none">None</option><option value="reward">Reward cells</option><option value="aversive">Aversive cells</option><option value="alternating">Alternate reward / aversive</option></select></label>
 <label>Visual input <select name="view"><option value="original">Original chart + news strip</option><option value="price_only">Remove header + news strip</option><option value="blank">Uniform gray</option></select></label>
 <label>Synthetic news <select name="news"><option value="none">No headlines</option><option value="positive">Positive headline</option><option value="negative">Negative headline</option></select></label>

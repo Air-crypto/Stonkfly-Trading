@@ -7,7 +7,7 @@ import numpy as np
 import pytest
 
 from paperlab.core import Tick
-from paperlab.fly_market_study import ARMS, phase, quote_at, seal, signature, validate
+from paperlab.fly_market_study import ARMS, REINFORCEMENT_ARMS, phase, quote_at, seal, seal_followup, signature, validate
 from paperlab.universe import Pool, Store
 
 
@@ -25,6 +25,13 @@ def test_sealed_cohort_does_not_select_on_future_returns(tmp_path):
     assert all(t["ts"]<=first["plan"]["start"]+2700 for seq in first["plan"]["series"].values() for t in seq)
     with pytest.raises(ValueError): seal(tmp_path/"archive.db",tmp_path/"plan.json")
     bad=json.loads(json.dumps(first["plan"]));bad["costs"]["fee_bps"]=0
+    with pytest.raises(ValueError):validate(bad)
+    follow=seal_followup(tmp_path/"archive.db",first,tmp_path/"next.json",phase_steps=2)
+    assert follow["plan"]["cohort"]==first["plan"]["cohort"]
+    assert follow["plan"]["arms"]==REINFORCEMENT_ARMS
+    assert follow["plan"]["start"]==first["plan"]["start"]+2700
+    assert follow["plan"]["parent_plan_sha256"]==first["sha256"]
+    bad=json.loads(json.dumps(follow["plan"]));bad["start"]-=300
     with pytest.raises(ValueError):validate(bad)
     bad=json.loads(json.dumps(first["plan"]));bad["series"][bad["cohort"][0]][0]["ts"]=bad["start"]+999999
     with pytest.raises(ValueError):validate(bad)
@@ -62,3 +69,26 @@ def test_phase_uses_next_receipt_fills_and_holds_missing_inventory(monkeypatch):
     assert result["rows"][2]["fill"]["reason"]=="unavailable_market"
     assert float(result["rows"][-1]["broker"]["qty"])>0
     assert result["equity"]==float(result["rows"][-1]["broker"]["cash"])
+
+
+def test_reinforcement_gate_obeys_closed_loop_reward_without_substituting_actions(monkeypatch):
+    import paperlab.fly_market_study as study
+    from dataclasses import dataclass
+    @dataclass
+    class Settings:
+        learning: bool=True
+    monkeypatch.setattr(study,"frame",lambda *a:np.zeros((180,320,3),dtype=np.uint8))
+    b=SimpleNamespace(weight=np.array([1.]),circuit={"edges":np.array([0])},weights_frozen=False,eta=.001)
+    states=[]
+    def observe(rgb,stimulus):
+        states.append((controller.s.learning,b.weights_frozen,stimulus))
+        if controller.s.learning: b.weight[0]+=.1
+        return {"side":"BUY"}
+    controller=SimpleNamespace(s=Settings(),observe=observe)
+    lab=SimpleNamespace(brain=b,fly=SimpleNamespace(controller=controller))
+    ticks=[Tick(1000+i*300,1,1.01) for i in range(3)]
+    result=phase(lab,ticks,1000,2,REINFORCEMENT_ARMS["reinforcement_gated"],True,time.monotonic()+30)
+    assert states==[(False,True,"none"),(True,False,"aversive")]
+    assert result["rows"][0]["event"]["side"]==result["rows"][1]["event"]["side"]=="BUY"
+    assert result["rows"][0]["event"]["weight_delta_l2"]==0
+    assert result["rows"][1]["event"]["weight_delta_l2"]>0

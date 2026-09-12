@@ -34,7 +34,10 @@ With Modal already deployed and authenticated, run tests in the cloud with
 `uv run python -m paperlab.debugger serve --backend modal --out runs/cloud-debugger`.
 The guide also covers sealed, cost-aware market replays and saved call recovery.
 The [first sealed market comparison](docs/fly-debugger.md#first-market-replay-result)
-rejected all proposed changes under its development gate; no policy was promoted.
+rejected all proposed changes under its development gate. The
+[reinforcement-gated follow-up](docs/fly-debugger.md#second-market-replay-result)
+stopped neutral weight drift but had no development/test fills and showed no
+trading advantage. No policy was promoted.
 
 The first paired falling-price assay found one action disagreement in four
 observations. Both arms received identical images:

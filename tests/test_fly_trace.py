@@ -70,3 +70,17 @@ def test_full_native_trace_is_observational_and_reset_is_reproducible(tmp_path):
     frozen=lab.run(replace(config,learning=False),tmp_path/"frozen")["events"][0]
     assert frozen["diagnostics"]["changed_edges"]==0
     assert frozen["diagnostics"]["weight_delta_l2"]==0
+
+
+@pytest.mark.skipif(not os.environ.get("FLY_TRACE_DATA"), reason="requires prepared full retained graph")
+def test_reinforcement_gate_freezes_neutral_updates_but_keeps_spikes(tmp_path):
+    lab=TraceLab(Path(os.environ["FLY_TRACE_DATA"]))
+    cfg=Assay(steps=2,reinforcement_only=True)
+    gated=lab.run(cfg,tmp_path/"gated")
+    frozen=lab.run(replace(cfg,learning=False),tmp_path/"frozen")
+    assert [e["spike_sha256"] for e in gated["events"]]==[e["spike_sha256"] for e in frozen["events"]]
+    assert all(e["total_spikes"]>0 and e["diagnostics"]["weight_delta_l2"]==0 for e in gated["events"])
+    assert not any(e["diagnostics"]["plasticity_enabled"] for e in gated["events"])
+    reward=lab.run(replace(cfg,steps=1,reinforcement="reward"),tmp_path/"reward")
+    assert reward["events"][0]["diagnostics"]["plasticity_enabled"]
+    assert reward["events"][0]["diagnostics"]["changed_edges"]>0

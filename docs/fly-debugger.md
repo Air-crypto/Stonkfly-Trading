@@ -83,7 +83,8 @@ uv run python -m paperlab.debugger serve --out runs/custom
 ```json
 {
   "preset": "rise", "steps": 4, "learning": true, "eta": 0.001,
-  "reinforcement": "none", "view": "original", "news": "none",
+  "reinforcement": "none", "reinforcement_only": false,
+  "view": "original", "news": "none",
   "neurons": [], "current": 0
 }
 ```
@@ -94,6 +95,13 @@ identified reward or aversive cells for the unchanged first 200 ms. These are
 engineered interventions, not proof that the network recognizes market outcomes.
 The `price_only` ablation removes the header and lower strip; it still retains
 the original chart grid, scaling, colors, and the same cropped price region.
+
+The **Require reinforcement for updates** checkbox freezes plastic weights and
+efficacy memory whenever the observation has no engineered reinforcement. Neural
+propagation and KC/DAN rate traces continue. A reward or aversive pulse enables
+the original plasticity rule for that observation. This is an experimental credit
+assignment gate, not a replacement decoder or a validated biological claim. The
+learning panel reports whether plasticity was enabled for each observation.
 
 ## What the views mean
 
@@ -264,6 +272,58 @@ but the portfolio was already exposed before the unavailable quote.
 
 ![Cloud market replay and frozen comparison](assets/fly-market-debugger.png)
 
-The next hypothesis is to gate weight updates on actual nonzero reinforcement,
-while retaining neural propagation and the fixed decoder. It must be tested on
-a later untouched interval; the current study supports no deployed policy change.
+### Reinforcement-gated follow-up
+
+The follow-up compares pristine frozen, original ongoing plasticity, and ongoing
+plasticity gated by nonzero equity reinforcement. It keeps the first study's
+cohort, including unavailable pools, and starts at that study's test endpoint.
+It uses two decisions per phase. Register the hypothesis and arms before reading
+new outcomes; preserve both plans and use a new output directory:
+
+```sh
+mkdir -p runs/market-02
+uv run modal volume get fly-paper-lab-universe universe-snapshot.db runs/market-02/universe.db
+uv run python -m paperlab.fly_market_study followup --archive runs/market-02/universe.db --previous runs/market/plan.json --out runs/market-02/plan.json --phase-steps 2
+```
+
+Run the sealed envelope using the same local command or cloud submission above,
+with the new directory. The runner records source hashes and per-observation
+`plasticity_enabled`, equity reward, and weight displacement. All three test arms
+emit traces. A neutral observation must retain zero weight displacement in the
+gated arm; a nonzero reinforcement can enable updates without changing the fixed
+BUY/SELL/HOLD decoder. Keep the original training and test intervals immutable.
+
+
+#### Second market replay result
+
+The [registered hypothesis](../reports/fly-market-study-02-preregistration.json),
+[sealed inputs](../reports/fly-market-study-02-plan.json), and
+[all-arm diagnostics](../reports/fly-market-study-02.json) preserve the follow-up.
+Training, development, and test start at 08:05, 08:15, and 08:25 UTC on September
+12, 2026, with ten minutes per phase. The cohort is unchanged.
+
+| Variant | Training equity | Development equity | Test equity |
+| --- | ---: | ---: | ---: |
+| Pristine frozen | $996.17 | $1,000.00 | $1,000.00 |
+| Original ongoing plasticity | $996.17 | $1,000.00 | $1,000.00 |
+| Reinforcement-gated plasticity | $996.17 | $1,000.00 | $1,000.00 |
+
+**No variant passed selection.** Development and test produced no fills; missing
+or stale quotes prevented execution. All arms emitted BUY whenever an observation
+was usable. Each pool had only one usable neural observation during test, so the
+$1,000 endpoints reflect cash remaining unspent, not a learned profitable policy.
+Hosting still subtracts about $0.0046/$0.0093 at the prorated $20/$40 rates.
+
+The gate's mechanics did work. For the first pool, original training changed
+weights by L2 0.19146 on its neutral observation; the gated version changed zero.
+After a filled purchase generated aversive reinforcement, the gated version
+updated by L2 0.21449. All later neutral gated observations stayed at zero weight
+displacement. Native synthetic tests also verified identical neutral spike hashes
+between gated and frozen controls, plus resumed updates under a reward pulse.
+This prevents unreinforced drift; it has not demonstrated better decisions.
+
+The next diagnostic priority is observation coverage and execution availability.
+Collecting a broader universe alone does not provide continuous usable quotes for
+each held pool. Keep unavailable pools in evaluation and report decision coverage
+alongside P&L before attributing a cash tie to model quality. Do not tune another
+variant on either published test interval. The deployed paper policy is unchanged.
