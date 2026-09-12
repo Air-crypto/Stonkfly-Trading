@@ -1,0 +1,35 @@
+{
+  "recorded_at": 1789205697.148275,
+  "parent_plan_sha256": "9a74433794537af3db0078a968a406d6e34dc688b799a89c0573056559bbe961",
+  "arms": {
+    "pristine_frozen": {
+      "eta": 0.001,
+      "train": false,
+      "online": false,
+      "view": "original"
+    },
+    "online_original": {
+      "eta": 0.001,
+      "train": true,
+      "online": true,
+      "view": "original"
+    },
+    "reinforcement_gated": {
+      "eta": 0.001,
+      "train": true,
+      "online": true,
+      "view": "original",
+      "reinforcement_only": true
+    }
+  },
+  "cohort": [
+    "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+    "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu"
+  ],
+  "start": 1789202100,
+  "phase_steps": 4,
+  "end": 1789205700,
+  "selection": "Same development gate: must beat both cash and pristine frozen; no test-based promotion.",
+  "hypothesis": "Re-evaluate the unchanged reinforcement gate on a fresh chronological interval after collecting more data. Preserve the prior cohort including unavailable pools; use four decisions per phase. Report coverage and fills alongside all arm outcomes.",
+  "reason": "Previous comparison had no development or test fills. Collector pacing and priority refresh were repaired afterward; this interval spans that operational transition, which must be reported as a limitation."
+}

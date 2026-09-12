@@ -103,14 +103,78 @@ def summarize(root):
     }
 
 
+def counterbalance(first, second):
+    """Compare audited rise/fall training batches without treating actions as returns."""
+    if first["executed_source_sha256"] != second["executed_source_sha256"]:
+        raise ValueError("Counterbalanced batches used different execution sources")
+    batches = {}
+    for study in (first, second):
+        cue = study["reports"]["frozen_rise"]["config"]["preset"]
+        if cue in batches:
+            raise ValueError("Counterbalance requires both training cues")
+        batches[cue] = study
+    if set(batches) != {"rise", "fall"}:
+        raise ValueError("Counterbalance requires rise and fall training")
+    rise, fall = batches["rise"], batches["fall"]
+    result = {}
+    for arm, a in rise["reports"].items():
+        b = fall["reports"][arm]
+        if a["native_build"] != b["native_build"] or a["graph"] != b["graph"]:
+            raise ValueError("Counterbalanced native build or graph differs")
+        ac, bc = (dict(r["config"]) for r in (a, b))
+        ac.pop("preset"); bc.pop("preset")
+        if ac != bc:
+            raise ValueError(f"{arm}: another experimental factor changed")
+        ap, bp = a["events"][4:], b["events"][4:]
+        if [e["input_sha256"] for e in ap] != [e["input_sha256"] for e in bp]:
+            raise ValueError(f"{arm}: counterbalanced probe images differ")
+        if arm.startswith("frozen_") and [e["spike_sha256"] for e in ap] != [
+                e["spike_sha256"] for e in bp]:
+            raise ValueError(f"{arm}: counterbalanced frozen controls do not reproduce")
+        result[arm] = {
+            "rise_training_actions": [e["side"] for e in ap],
+            "fall_training_actions": [e["side"] for e in bp],
+            "different_actions": sum(x["side"] != y["side"] for x, y in zip(ap, bp)),
+            "different_spike_hashes": sum(x["spike_sha256"] != y["spike_sha256"] for x, y in zip(ap, bp)),
+            "rise_minus_fall_training_hz": [x["difference_hz"]-y["difference_hz"] for x, y in zip(ap, bp)],
+            "rise_minus_fall_training_gate_spikes": [x["gate_spikes"]-y["gate_spikes"] for x, y in zip(ap, bp)],
+        }
+    interaction = {}
+    for group in ("reward", "aversive"):
+        interaction[group] = {}
+        for metric in ("difference_hz", "gate_spikes"):
+            effects = {}
+            for train, study in batches.items():
+                effects[train] = {}
+                for probe in ("rise", "fall"):
+                    treated = study["reports"][f"{group}_{probe}"]["events"][4:]
+                    neutral = study["reports"][f"neutral_{probe}"]["events"][4:]
+                    effects[train][probe] = [a[metric]-b[metric] for a, b in zip(treated, neutral)]
+            interaction[group][metric] = {
+                "reinforcement_minus_neutral_by_training_and_probe_cue": effects,
+                "training_cue_by_probe_cue_interaction": [
+                    (a-b)-(c-d) for a, b, c, d in zip(effects["rise"]["rise"], effects["rise"]["fall"],
+                                                     effects["fall"]["rise"], effects["fall"]["fall"])],
+            }
+    return {"source_protocol_sha256": {cue: study["protocol_sha256"] for cue, study in batches.items()},
+            "comparison": result, "descriptive_interactions": interaction,
+            "verification": {"only_training_cue_changed": True, "same_probe_images": True,
+                             "frozen_controls_reproduce_across_batches": True},
+            "interpretation": "Deterministic synthetic mechanics. Per-observation interactions are descriptive, "
+                              "not independent trials, returns, a significance test, or a policy-selection score."}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("root", type=Path)
+    parser.add_argument("--compare-root", type=Path, help="Audit and compare a second training-cue batch")
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
     result = summarize(args.root)
+    if args.compare_root:
+        result = counterbalance(result, summarize(args.compare_root))
     args.out.write_text(json.dumps(result, indent=2) + "\n")
-    print(json.dumps(result["summary"], indent=2))
+    print(json.dumps(result.get("summary", result.get("comparison")), indent=2))
 
 
 if __name__ == "__main__":

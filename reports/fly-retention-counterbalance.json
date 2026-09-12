@@ -1,0 +1,396 @@
+{
+  "source_protocol_sha256": {
+    "rise": "f3bf33806912ad29383088de1ece90c1674e46c870464b2deedb8377f7c3d411",
+    "fall": "f06297864a03a270e443408d6596c991c363a982f946b3662a544848a066ba25"
+  },
+  "comparison": {
+    "frozen_rise": {
+      "rise_training_actions": [
+        "BUY",
+        "HOLD",
+        "HOLD",
+        "HOLD"
+      ],
+      "fall_training_actions": [
+        "BUY",
+        "HOLD",
+        "HOLD",
+        "HOLD"
+      ],
+      "different_actions": 0,
+      "different_spike_hashes": 0,
+      "rise_minus_fall_training_hz": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rise_minus_fall_training_gate_spikes": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "frozen_fall": {
+      "rise_training_actions": [
+        "BUY",
+        "SELL",
+        "BUY",
+        "HOLD"
+      ],
+      "fall_training_actions": [
+        "BUY",
+        "SELL",
+        "BUY",
+        "HOLD"
+      ],
+      "different_actions": 0,
+      "different_spike_hashes": 0,
+      "rise_minus_fall_training_hz": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rise_minus_fall_training_gate_spikes": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "neutral_rise": {
+      "rise_training_actions": [
+        "BUY",
+        "HOLD",
+        "BUY",
+        "HOLD"
+      ],
+      "fall_training_actions": [
+        "BUY",
+        "HOLD",
+        "HOLD",
+        "SELL"
+      ],
+      "different_actions": 2,
+      "different_spike_hashes": 3,
+      "rise_minus_fall_training_hz": [
+        0.0,
+        4.0,
+        10.0,
+        16.0
+      ],
+      "rise_minus_fall_training_gate_spikes": [
+        0,
+        0,
+        1,
+        -1
+      ]
+    },
+    "neutral_fall": {
+      "rise_training_actions": [
+        "BUY",
+        "SELL",
+        "BUY",
+        "HOLD"
+      ],
+      "fall_training_actions": [
+        "BUY",
+        "SELL",
+        "SELL",
+        "HOLD"
+      ],
+      "different_actions": 1,
+      "different_spike_hashes": 2,
+      "rise_minus_fall_training_hz": [
+        0.0,
+        0.0,
+        6.0,
+        -8.0
+      ],
+      "rise_minus_fall_training_gate_spikes": [
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    "reward_rise": {
+      "rise_training_actions": [
+        "BUY",
+        "HOLD",
+        "BUY",
+        "BUY"
+      ],
+      "fall_training_actions": [
+        "BUY",
+        "HOLD",
+        "HOLD",
+        "HOLD"
+      ],
+      "different_actions": 2,
+      "different_spike_hashes": 3,
+      "rise_minus_fall_training_hz": [
+        0.0,
+        0.0,
+        12.0,
+        4.0
+      ],
+      "rise_minus_fall_training_gate_spikes": [
+        0,
+        0,
+        1,
+        4
+      ]
+    },
+    "reward_fall": {
+      "rise_training_actions": [
+        "BUY",
+        "SELL",
+        "SELL",
+        "HOLD"
+      ],
+      "fall_training_actions": [
+        "BUY",
+        "SELL",
+        "BUY",
+        "HOLD"
+      ],
+      "different_actions": 1,
+      "different_spike_hashes": 2,
+      "rise_minus_fall_training_hz": [
+        0.0,
+        0.0,
+        -8.0,
+        8.0
+      ],
+      "rise_minus_fall_training_gate_spikes": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "aversive_rise": {
+      "rise_training_actions": [
+        "BUY",
+        "HOLD",
+        "HOLD",
+        "HOLD"
+      ],
+      "fall_training_actions": [
+        "BUY",
+        "HOLD",
+        "HOLD",
+        "HOLD"
+      ],
+      "different_actions": 0,
+      "different_spike_hashes": 3,
+      "rise_minus_fall_training_hz": [
+        0.0,
+        -2.0,
+        -6.0,
+        4.0
+      ],
+      "rise_minus_fall_training_gate_spikes": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "aversive_fall": {
+      "rise_training_actions": [
+        "BUY",
+        "SELL",
+        "BUY",
+        "HOLD"
+      ],
+      "fall_training_actions": [
+        "BUY",
+        "SELL",
+        "BUY",
+        "HOLD"
+      ],
+      "different_actions": 0,
+      "different_spike_hashes": 2,
+      "rise_minus_fall_training_hz": [
+        0.0,
+        0.0,
+        -2.0,
+        -6.0
+      ],
+      "rise_minus_fall_training_gate_spikes": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "descriptive_interactions": {
+    "reward": {
+      "difference_hz": {
+        "reinforcement_minus_neutral_by_training_and_probe_cue": {
+          "rise": {
+            "rise": [
+              0.0,
+              8.0,
+              -12.0,
+              -2.0
+            ],
+            "fall": [
+              0.0,
+              0.0,
+              -4.0,
+              -4.0
+            ]
+          },
+          "fall": {
+            "rise": [
+              0.0,
+              12.0,
+              -14.0,
+              10.0
+            ],
+            "fall": [
+              0.0,
+              0.0,
+              10.0,
+              -20.0
+            ]
+          }
+        },
+        "training_cue_by_probe_cue_interaction": [
+          0.0,
+          -4.0,
+          16.0,
+          -28.0
+        ]
+      },
+      "gate_spikes": {
+        "reinforcement_minus_neutral_by_training_and_probe_cue": {
+          "rise": {
+            "rise": [
+              0,
+              0,
+              0,
+              4
+            ],
+            "fall": [
+              0,
+              0,
+              -1,
+              0
+            ]
+          },
+          "fall": {
+            "rise": [
+              0,
+              0,
+              0,
+              -1
+            ],
+            "fall": [
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "training_cue_by_probe_cue_interaction": [
+          0,
+          0,
+          1,
+          5
+        ]
+      }
+    },
+    "aversive": {
+      "difference_hz": {
+        "reinforcement_minus_neutral_by_training_and_probe_cue": {
+          "rise": {
+            "rise": [
+              0.0,
+              6.0,
+              -12.0,
+              0.0
+            ],
+            "fall": [
+              0.0,
+              0.0,
+              0.0,
+              -8.0
+            ]
+          },
+          "fall": {
+            "rise": [
+              0.0,
+              12.0,
+              4.0,
+              12.0
+            ],
+            "fall": [
+              0.0,
+              0.0,
+              8.0,
+              -10.0
+            ]
+          }
+        },
+        "training_cue_by_probe_cue_interaction": [
+          0.0,
+          -6.0,
+          -8.0,
+          -14.0
+        ]
+      },
+      "gate_spikes": {
+        "reinforcement_minus_neutral_by_training_and_probe_cue": {
+          "rise": {
+            "rise": [
+              0,
+              0,
+              -1,
+              0
+            ],
+            "fall": [
+              0,
+              0,
+              -1,
+              0
+            ]
+          },
+          "fall": {
+            "rise": [
+              0,
+              0,
+              0,
+              -1
+            ],
+            "fall": [
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "training_cue_by_probe_cue_interaction": [
+          0,
+          0,
+          0,
+          1
+        ]
+      }
+    }
+  },
+  "verification": {
+    "only_training_cue_changed": true,
+    "same_probe_images": true,
+    "frozen_controls_reproduce_across_batches": true
+  },
+  "interpretation": "Deterministic synthetic mechanics. Per-observation interactions are descriptive, not independent trials, returns, a significance test, or a policy-selection score."
+}

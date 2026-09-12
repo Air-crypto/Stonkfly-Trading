@@ -59,6 +59,17 @@ The debugger separates updates happening now from weights retained from training
 Select `retention01-reward_rise`, compare `retention01-neutral_rise`, and inspect
 **probe 4**. Both probes have learning disabled.
 
+The [counterbalanced follow-up](docs/fly-debugger.md#counterbalanced-training-cues)
+shows that changing the training cue changes the reward-trained response. Larger
+weight changes still do not establish better decisions; both complete studies
+and an offline comparison audit are included.
+
+The [third market replay](docs/fly-debugger.md#third-market-replay-result) had five
+simulated fills per arm, but every variant ended at $996.36 and failed selection.
+The [input audit](docs/fly-debugger.md#price-magnitude-lost-in-the-visual-adapter)
+found that automatic scaling can render 1% and 20% rises identically. An explicit
+return scale is the next sensory change to test; the deployed policy is unchanged.
+
 ![Retained reward versus neutral training after a neural reset](docs/assets/fly-retention-comparison.png)
 
 ## Run

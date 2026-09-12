@@ -510,3 +510,132 @@ training memory, or updates during probing. The test suite also re-audits the
 committed reports without private downloads or cloud access. To reproduce new
 recordings, use the complete configs in the protocol with `capture --config` or
 the Modal form described above; keep all paired controls on the same native build.
+
+## Counterbalanced training cues
+
+The [second registered protocol](../reports/fly-retention-protocol-02.json) repeats
+all eight arms with falling-chart training. [Complete results](../reports/fly-retention-study-02.json)
+and the [cross-study audit](../reports/fly-retention-counterbalance.json) retain
+every outcome. All other configurations and executed source hashes match the
+first batch. Both frozen probe cues reproduce exactly across batches; trained
+weights and memory reproduce within each batch; all 64 probes across the two
+studies have frozen weights. No failed or unfavorable arm was replaced.
+
+| Falling-chart training | Probe | Retained weight L2 | Probe actions | Different from frozen / neutral |
+| --- | --- | ---: | --- | ---: |
+| Frozen | Rise | 0 | BUY, HOLD, HOLD, HOLD | 0 / 1 |
+| Frozen | Fall | 0 | BUY, SELL, BUY, HOLD | 0 / 1 |
+| Neutral plasticity | Rise | 15.877 | BUY, HOLD, HOLD, SELL | 1 / 0 |
+| Neutral plasticity | Fall | 15.877 | BUY, SELL, SELL, HOLD | 1 / 0 |
+| Reward | Rise | 16.001 | BUY, HOLD, HOLD, HOLD | 0 / 1 |
+| Reward | Fall | 16.001 | BUY, SELL, BUY, HOLD | 0 / 1 |
+| Aversive | Rise | 30.557 | BUY, HOLD, HOLD, HOLD | 0 / 1 |
+| Aversive | Fall | 30.557 | BUY, SELL, BUY, HOLD | 0 / 1 |
+
+Changing the training cue changes three of eight neutral probe actions and three
+of eight reward probe actions. Aversive probe actions stay equal to frozen controls
+under both training cues, although their underlying spike hashes and weights
+differ. Reward after rise training adds late BUY outputs on the rising probe;
+reward after fall training leaves that probe at the frozen BUY/HOLD pattern.
+Relative to neutral training, both reward and aversive stimulation remove the
+fourth rising-probe SELL after fall training. This is not evidence that either
+reinforcement signal has learned the meaning of a profitable BUY or SELL.
+
+The audit reports reinforcement-minus-neutral rate and gate differences for each
+training/probe combination. It then subtracts the rise/fall probe contrast across
+training cues. For example, the fourth-probe reward gate interaction is five
+spikes: the rising probe's effect is +4 after rise training and −1 after fall
+training, while both falling-probe effects are zero. These are deterministic
+model responses, not independent samples or a significance test.
+
+Select `retention02-reward_rise` and compare `retention01-reward_rise` in the
+included viewer. Training images correctly show **No** in the identical-input
+column; probe images show **Yes**. Probe 4 is HOLD after fall training and BUY
+after rise training. The evidence supports persistent input-dependent effects,
+but does not select a trading policy. The next market replay retains the
+reinforcement gate and unchanged baselines on a fresh chronological interval,
+with quote coverage and simulated fills reported alongside equity.
+
+![Same probe images after different training cues](assets/fly-retention-counterbalance.png)
+
+Reproduce the two-batch audit from downloaded cloud results:
+
+```sh
+uv run python -m paperlab.fly_retention_study runs/retention-02 --out reports/fly-retention-study-02.json
+uv run python -m paperlab.fly_retention_study runs/retention-01 --compare-root runs/retention-02 --out reports/fly-retention-counterbalance.json
+```
+
+The comparison rejects changed execution sources, extra configuration changes,
+mismatched probe images, and non-reproducing frozen controls. Both committed
+studies and the cross-study report are re-audited by the test suite offline.
+
+## Third market replay result
+
+The [preregistration](../reports/fly-market-study-03-preregistration.json),
+[sealed plan](../reports/fly-market-study-03-plan.json), and
+[complete phase diagnostics](../reports/fly-market-study-03.json) repeat the
+unchanged reinforcement-gate hypothesis with four decisions per phase. The prior
+two pools remain in the cohort. Training spans 08:35–08:55 UTC, development
+08:55–09:15, and test 09:15–09:35 on September 12, 2026. Each phase starts with
+$1,000: two $250 sleeves and $500 idle cash. Training overlaps the collector
+repair, so this is not an isolated estimate of that repair's effect.
+
+| Arm | Development equity | Test equity | Test fills | Test fees |
+| --- | ---: | ---: | ---: | ---: |
+| Pristine frozen | $993.35 | $996.36 | 5 | $1.5625 |
+| Original online plasticity | $993.35 | $996.36 | 5 | $1.5625 |
+| Reinforcement-gated plasticity | $993.35 | $996.36 | 5 | $1.5625 |
+
+There were four observed decision slots out of eight during training, six during
+development, and all eight during test, for each arm. Unlike the previous cash
+tie, this test includes fills and losses. Test action sequences and input hashes
+match the frozen control for both pools. Gating keeps neutral weight updates at
+zero, while reward/aversive observations still update memory. These internal
+differences produce no test trading advantage here. Every arm fails the declared
+development gate against $1,000 cash; none is selected or deployed.
+
+The $3.64 test decline includes simulated execution costs and inventory marking;
+it is not necessarily a realized cash loss. One training sleeve also had an
+unavailable-inventory stress mark, so its training equity is not a realized loss.
+The test has no unavailable marks. Monthly hosting allocations are reported in
+the JSON, but this 20-minute test does not estimate monthly returns. News remains
+disabled and DEX quotes remain indicative.
+
+Select `market03-reinforcement_gated`, compare `market03-online_original`, and
+inspect the timeline and first observation. Both issue BUY; the gated arm has
+zero neutral weight change. The included pool-0 view shows three of the five
+simulated test fills; the report includes pool 1's remaining two.
+
+![Fresh test interval with all decision slots observed and simulated fills](assets/fly-market-third-replay.png)
+
+## Price magnitude lost in the visual adapter
+
+The [deterministic input audit](../reports/fly-input-scale-audit.json) found a
+specific information loss before the neural simulation. With the same product,
+100 evenly spaced observations, and news disabled, a 1% rise and a 20% rise
+produce exactly the same 320×180 input bytes. A 0.2% fall and a 20% fall also
+match exactly. The audit retains six fixtures and four comparisons, including a
+non-matching pair: the 0.2% rising image differs from the 20% rising image by 29
+pixels because the upstream renderer enforces a minimum chart span.
+
+The renderer scales prices by each window's range. It draws bid/ask text at
+y=165, but our adapter then covers y=140–179 with the news strip. Thus the original
+numeric quote text cannot recover magnitude in these fixtures. From the same
+neural state, identical RGB inputs cannot identify which of the paired histories
+occurred. This is a verified sensory limitation; it does not by itself prove
+which trades would improve.
+
+![Different return magnitudes produce identical inputs](assets/fly-input-scale-audit.png)
+
+The next candidate is an explicit, fixed return scale or magnitude channel,
+derived only from prices available at the observation time. It must first separate
+these fixtures without introducing a suggested action, then be compared against
+the unchanged adapter on a fresh sealed interval. The completed market test
+must not be reused to select it. Keep the full graph, fixed decoder, execution
+costs, and original recordings available as controls. No sensory or paper-policy
+change has been deployed from this audit.
+
+The audit JSON records the exact price formula, bid/ask factors, frame index,
+render-library versions, source hashes, input hashes, and differing-pixel counts.
+The accompanying SVG contains the original rendered PNGs at their native size;
+the PNG is a browser-rendered documentation figure.

@@ -1,0 +1,83 @@
+{
+  "purpose": "Deterministic visual-adapter information-loss audit; no neural simulation or trades",
+  "fixture": {
+    "samples": 100,
+    "seconds_per_sample": 300,
+    "initial_mid": 1,
+    "mid_formula": "1 + total_return * i / 99",
+    "bid_factor": 0.995,
+    "ask_factor": 1.005,
+    "product": "SYNTHETIC",
+    "news_enabled": false,
+    "frame_index": 99
+  },
+  "inputs": [
+    {
+      "input": "tiny_rise",
+      "total_return_pct": 0.2,
+      "input_sha256": "a7d24e92c13933eb766aa18068aaff5f0bf133f24572129b668488b342741da7"
+    },
+    {
+      "input": "small_rise",
+      "total_return_pct": 1.0,
+      "input_sha256": "d8b0901afbe0c896a3a18197a17fdab6f3b1f149a37764d4ed7a833141df9a68"
+    },
+    {
+      "input": "large_rise",
+      "total_return_pct": 20.0,
+      "input_sha256": "d8b0901afbe0c896a3a18197a17fdab6f3b1f149a37764d4ed7a833141df9a68"
+    },
+    {
+      "input": "tiny_fall",
+      "total_return_pct": -0.2,
+      "input_sha256": "5b86970eea650e1c1b4ae5cc8bc6b345915f5caa3536f6bd7081cc6460c10e6b"
+    },
+    {
+      "input": "small_fall",
+      "total_return_pct": -1.0,
+      "input_sha256": "5b86970eea650e1c1b4ae5cc8bc6b345915f5caa3536f6bd7081cc6460c10e6b"
+    },
+    {
+      "input": "large_fall",
+      "total_return_pct": -20.0,
+      "input_sha256": "5b86970eea650e1c1b4ae5cc8bc6b345915f5caa3536f6bd7081cc6460c10e6b"
+    }
+  ],
+  "pairs": [
+    {
+      "first": "tiny_rise",
+      "second": "large_rise",
+      "identical": false,
+      "different_pixels": 29
+    },
+    {
+      "first": "small_rise",
+      "second": "large_rise",
+      "identical": true,
+      "different_pixels": 0
+    },
+    {
+      "first": "tiny_fall",
+      "second": "large_fall",
+      "identical": true,
+      "different_pixels": 0
+    },
+    {
+      "first": "small_fall",
+      "second": "large_fall",
+      "identical": true,
+      "different_pixels": 0
+    }
+  ],
+  "source_sha256": {
+    "paperlab/fly.py": "4935f43219ab63d19fa2cc04b36a5612307a4cf44a016b0af2c8f0d69e4a5fea",
+    "vendor/stonkfly/stonkfly/display.py": "58507e7404d79ffc84a81010515268a969c636916ef2fd0c73f0aa55f6d959df"
+  },
+  "render_environment": {
+    "platform": "Darwin",
+    "pillow": "12.3.0",
+    "numpy": "2.5.3"
+  },
+  "finding": "Autoscaling removes return magnitude for these fixtures. The adapter overwrites the upstream bid/ask text at y=165 with its news strip at y=140..179. Identical rendered inputs cannot distinguish these histories from the same neural state. A fixed return scale is a candidate sensory change to test; no change to the deployed policy is implied.",
+  "limitations": "Specific deterministic fixtures, not a universal pixel-collision claim. The 0.2 percent rising pair has a small difference due to the minimum chart span; no profitability effect was measured."
+}
