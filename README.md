@@ -18,7 +18,7 @@ news, neuron stimulation, and selected connection restoration. The simulation
 retains the full graph; the display is a labeled subset with full-neuron lookup
 in generated recordings. Paper accounts remain separate from diagnostic assays.
 
-![Fly circuit debugger highlighting restored incoming connections](docs/assets/fly-market-study-06-circuit.png)
+![Fly circuit debugger highlighting the first gate spike after a dynamics reset](docs/assets/fly-activity-circuit.png)
 
 After installing below, open the included recordings without model compute:
 
@@ -71,6 +71,12 @@ The diagnostics have identified concrete limitations:
   found that this SELL depends on retaining learned MBON07 and 10704 inputs.
   Resetting more memory can reverse it or introduce an extra gate-driven BUY.
   All reference controls reproduced; blanket restoration is not a demonstrated fix.
+
+An [eight-condition activity replay](docs/fly-debugger.md#activity-reset-results)
+restored the final gate from **0 to 18 spikes** by resetting dynamics while
+keeping learned memory. Resetting visual filters or adaptation alone did not.
+Full resets also made pristine and trained spike-count records identical on these
+three inputs, so recovered activity is not yet a demonstrated trading fix.
 
 The [decoder count view](docs/fly-debugger.md#inspect-accumulated-decoder-counts)
 shows how output spikes accumulate. In the examined BUY/SELL reversal, one net

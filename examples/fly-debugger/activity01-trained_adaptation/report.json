@@ -1,0 +1,406 @@
+{
+  "schema": 1,
+  "source": "matched_market_stimulus_assay",
+  "config": {
+    "preset": "recorded_market",
+    "view": "original",
+    "news": "none",
+    "eta": 0.001,
+    "learning": false,
+    "pulses": "none",
+    "memory": "trained",
+    "state_reset": "adaptation"
+  },
+  "graph": {
+    "neurons": 166700,
+    "edges": 25582938,
+    "plastic_edges": 7835
+  },
+  "native_build": {
+    "model": "stonkfly-dual-compartment-v1",
+    "source_sha256": "e2d4d584f4633613277bb1bf6ea7ba20855c01a332ae2e9344ed7782604c8509",
+    "binary_sha256": "9c0768fc4f8e34ba730a31ef04a5de958e7d4276c1552f30ec6f2c2eddbfa1b1",
+    "flags": [
+      "-O3",
+      "-std=c++17",
+      "-shared",
+      "-fPIC"
+    ]
+  },
+  "upstream_commit": "78ef3e05ab0fa086032098558d893667068944a0",
+  "seconds": 20.41368157300002,
+  "events": [
+    {
+      "side": "BUY",
+      "left_hz": 30.0,
+      "right_hz": 38.0,
+      "difference_hz": 8.0,
+      "gate_spikes": 31,
+      "cell_ids": {
+        "left": [
+          "10162"
+        ],
+        "right": [
+          "10059"
+        ],
+        "gate": [
+          "10527",
+          "555871"
+        ]
+      },
+      "brain_ms": 500.0,
+      "compute_seconds": 1.4940440979999323,
+      "stimulus": "none",
+      "stimulus_ms": 0.0,
+      "reward_spikes": 0,
+      "aversive_spikes": 16,
+      "KC_spikes": 14,
+      "total_spikes": 362898,
+      "spike_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+      "input_sha256": "77bc6b7f69ed101fed1672833465d77c483e36fdbcf80b0281b44f36e1fa9aa7",
+      "memory": {
+        "plastic_edges": 7835,
+        "changed_edges": 3066,
+        "mean_efficacy": 1.0002872943878174,
+        "minimum_efficacy": 0.6515528559684753,
+        "sha256": "7ab38ccccb0396c7cc1939e0ad9a2db1dc3cdf82e1f495aa902c55501c369675",
+        "model": "stonkfly-dual-compartment-v1"
+      },
+      "diagnostics": {
+        "loss": null,
+        "backprop_gradient": null,
+        "plasticity_enabled": false,
+        "changed_edges": 0,
+        "weight_delta_l2": 0.0,
+        "max_abs_delta": 0.0,
+        "efficacy_min": 0.6515528495489835,
+        "efficacy_max": 1.1017670896185976,
+        "clipped_edges": 0
+      },
+      "phase": "replay",
+      "phase_step": 1,
+      "market_decision_ts": 1789212900,
+      "input_preset": "recorded_market",
+      "input_news": "none",
+      "activity_boundary": {
+        "mode": "initial",
+        "requested_mode": "adaptation",
+        "observation": 1,
+        "target_fields": [],
+        "before_clock": {
+          "cursor": 0,
+          "sim_ms": 0.0,
+          "total_spikes": 0
+        },
+        "after_clock": {
+          "cursor": 0,
+          "sim_ms": 0.0,
+          "total_spikes": 0
+        },
+        "artifact_sha256": "cd133555b7eca8a200afe9d1614b838ea340b8774a127e7454c48be78063f834",
+        "all_weight_sha256": "04b44b1fc2f88f3576c7c95c7d75a414e204a2b6fdfe1dfbb51f46a73206efc6",
+        "memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+        "changed_fields": [],
+        "before_sha256": {
+          "v": "275bd935e4f1a56cbc2ca22b8f258f1cef511894f42f531e9a52476dd7b02946",
+          "g": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+          "refractory": "fe721ce07571ce5e6d09fc093440dfdbca4d3e360d5ddf903e3641aa4c6d0977",
+          "drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+          "previous_drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+          "queue": "56185bbe1f2586ea5668c759f2396dc7693f8b3b21d7015d24db8f37c2958453",
+          "queue_count": "f2c0d5456a983ecd12e314fcfa19879179fc8424343baeb1325457472ae85601",
+          "counts": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+          "luminance": "c411c207fb379b3beccac216c633ae620c51f23c78971c7d028d0266aee0cdc7",
+          "active": "bd5ad58a15d4ad9db612f07addacd70bf96d075969aa35f0c4a9e159124b5c26",
+          "active_flag": "557e5066485a8948d9ba5408da8359bdea92f316cc4574af08427bb77dd3a23e",
+          "nactive": "bc1b961d22c114f540586ed92bd23822a05caa6b98e73413f41f13e2b0deac6d",
+          "last": "543e44862a6bae300a72f840ceff3f11ac91905d58b046fb6ffbd4653c0b052c",
+          "eligibility": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+          "eligibility_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+          "modulation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+          "modulation_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+          "adaptation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+          "rate_kc": "9cf5a5bbc54b97f49e0c591d653fd61cadc8b2d88dbc2fde77c0035b7c42055d",
+          "rate_dan": "b707241545a346265aab1ffb32ff64b55bf8f8dc1b56a46ef33ce3d15db11d33",
+          "r8_light": "ac0a4091bbd9d73854a2d4a2944b5f8bb40cd7039d89d5575cb2629710c8c160"
+        },
+        "after_sha256": {
+          "v": "275bd935e4f1a56cbc2ca22b8f258f1cef511894f42f531e9a52476dd7b02946",
+          "g": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+          "refractory": "fe721ce07571ce5e6d09fc093440dfdbca4d3e360d5ddf903e3641aa4c6d0977",
+          "drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+          "previous_drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+          "queue": "56185bbe1f2586ea5668c759f2396dc7693f8b3b21d7015d24db8f37c2958453",
+          "queue_count": "f2c0d5456a983ecd12e314fcfa19879179fc8424343baeb1325457472ae85601",
+          "counts": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+          "luminance": "c411c207fb379b3beccac216c633ae620c51f23c78971c7d028d0266aee0cdc7",
+          "active": "bd5ad58a15d4ad9db612f07addacd70bf96d075969aa35f0c4a9e159124b5c26",
+          "active_flag": "557e5066485a8948d9ba5408da8359bdea92f316cc4574af08427bb77dd3a23e",
+          "nactive": "bc1b961d22c114f540586ed92bd23822a05caa6b98e73413f41f13e2b0deac6d",
+          "last": "543e44862a6bae300a72f840ceff3f11ac91905d58b046fb6ffbd4653c0b052c",
+          "eligibility": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+          "eligibility_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+          "modulation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+          "modulation_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+          "adaptation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+          "rate_kc": "9cf5a5bbc54b97f49e0c591d653fd61cadc8b2d88dbc2fde77c0035b7c42055d",
+          "rate_dan": "b707241545a346265aab1ffb32ff64b55bf8f8dc1b56a46ef33ce3d15db11d33",
+          "r8_light": "ac0a4091bbd9d73854a2d4a2944b5f8bb40cd7039d89d5575cb2629710c8c160"
+        }
+      }
+    },
+    {
+      "side": "BUY",
+      "left_hz": 32.0,
+      "right_hz": 38.0,
+      "difference_hz": 6.0,
+      "gate_spikes": 3,
+      "cell_ids": {
+        "left": [
+          "10162"
+        ],
+        "right": [
+          "10059"
+        ],
+        "gate": [
+          "10527",
+          "555871"
+        ]
+      },
+      "brain_ms": 1000.0,
+      "compute_seconds": 3.7208705699998745,
+      "stimulus": "none",
+      "stimulus_ms": 0.0,
+      "reward_spikes": 1,
+      "aversive_spikes": 99,
+      "KC_spikes": 4853,
+      "total_spikes": 555953,
+      "spike_sha256": "a52ede38ffe316bfd94a23c115f2f309065959d953260bd2dc391a92c1294ed2",
+      "input_sha256": "0758728838cf369025d4ffbff13f8c1c826722a6a42f9391bc3ea10b98b6a4f2",
+      "memory": {
+        "plastic_edges": 7835,
+        "changed_edges": 3066,
+        "mean_efficacy": 1.0002872943878174,
+        "minimum_efficacy": 0.6515528559684753,
+        "sha256": "7ab38ccccb0396c7cc1939e0ad9a2db1dc3cdf82e1f495aa902c55501c369675",
+        "model": "stonkfly-dual-compartment-v1"
+      },
+      "diagnostics": {
+        "loss": null,
+        "backprop_gradient": null,
+        "plasticity_enabled": false,
+        "changed_edges": 0,
+        "weight_delta_l2": 0.0,
+        "max_abs_delta": 0.0,
+        "efficacy_min": 0.6515528495489835,
+        "efficacy_max": 1.1017670896185976,
+        "clipped_edges": 0
+      },
+      "phase": "replay",
+      "phase_step": 2,
+      "market_decision_ts": 1789213200,
+      "input_preset": "recorded_market",
+      "input_news": "none",
+      "activity_boundary": {
+        "mode": "adaptation",
+        "requested_mode": "adaptation",
+        "observation": 2,
+        "target_fields": [
+          "adaptation"
+        ],
+        "before_clock": {
+          "cursor": 5000,
+          "sim_ms": 500.0,
+          "total_spikes": 362898
+        },
+        "after_clock": {
+          "cursor": 5000,
+          "sim_ms": 500.0,
+          "total_spikes": 362898
+        },
+        "artifact_sha256": "f0eef3d0a3505eea22b3476b464ee0e846065c44ecdb89e3ba4196c7062fe3a9",
+        "all_weight_sha256": "04b44b1fc2f88f3576c7c95c7d75a414e204a2b6fdfe1dfbb51f46a73206efc6",
+        "memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+        "changed_fields": [
+          "adaptation"
+        ],
+        "before_sha256": {
+          "v": "f25df441181ff4d8fbba3642874fb0fd710fa06737c62f8fdfe897c72fff93bd",
+          "g": "bf864f006c3bcee326b11d56f95e4c4f2a43f2222540fb665b43aac34e0fe1f4",
+          "refractory": "21d0b999e95b0d4e583550086b2d2282e71471ebf34eeaa9ed00152d0bc00892",
+          "drive": "178d1ea6b19908a717fa6bfe6b560853ddf48ec60e11c03dda8d950ac45bf7e8",
+          "previous_drive": "178d1ea6b19908a717fa6bfe6b560853ddf48ec60e11c03dda8d950ac45bf7e8",
+          "queue": "86471c78f9e7186ab3842a6291202eb189d20d5499a64deeaaa76dabf4716993",
+          "queue_count": "b78efe9218059da48a9427a6f476e20684ddf92b50285f8144f596be2d7b8c20",
+          "counts": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+          "luminance": "e8841fa6b7c62be68b105512f345feab708d7fa973421fb45f6fc46a40c9e1ae",
+          "active": "4f8edfeffbecf6adb1c95f12c18e2a8d8dc36ea97fdd9cd220deb6f3e2041908",
+          "active_flag": "0dc3e4c0418c1a15908285a33503916835930fe9d779510b573edb636f23f71a",
+          "nactive": "515329d3e7d99208c83d8c2631c64d92d6f396bb5a3d8573df0bde7bb07154e8",
+          "last": "4112e44a3a9c24b3c8165aea46f24334d137182659f38a2c313bb1b414e653c2",
+          "eligibility": "6cd34b5af05f1a664d2284ee58e1f5525e59c0015b3f1540b6f23a9a18e9f34c",
+          "eligibility_last": "708b0bfdbcecf03572772a07f27b703011ef67d0b30db5c1b05859cbcd05f0a5",
+          "modulation": "64b0ea847764f83d482b274d639c6e24fbe992c87e2021d3ff0cc54d0743a18c",
+          "modulation_last": "579dda9bb98d55d969a1f126a0262ceb0bc0888996d6698de09f0d13844b2e89",
+          "adaptation": "f89b8c6cc06a58e2fe71c4b1414e5a66793c12c2f128e0e4012ab45a25d506b1",
+          "rate_kc": "0e71ecdab90ec8a8ed1ab336704c91a93dc8efc55540e207e1cc7c4a38bb2e38",
+          "rate_dan": "938c302244e1010dbb54305baee88b1d3ca88f1f1ff7b8524fde6fdc74f7f32b",
+          "r8_light": "5c293d9874a4e8cb789d4d3c01e414bff98d9a6326a34270c09ce50900cb368f"
+        },
+        "after_sha256": {
+          "v": "f25df441181ff4d8fbba3642874fb0fd710fa06737c62f8fdfe897c72fff93bd",
+          "g": "bf864f006c3bcee326b11d56f95e4c4f2a43f2222540fb665b43aac34e0fe1f4",
+          "refractory": "21d0b999e95b0d4e583550086b2d2282e71471ebf34eeaa9ed00152d0bc00892",
+          "drive": "178d1ea6b19908a717fa6bfe6b560853ddf48ec60e11c03dda8d950ac45bf7e8",
+          "previous_drive": "178d1ea6b19908a717fa6bfe6b560853ddf48ec60e11c03dda8d950ac45bf7e8",
+          "queue": "86471c78f9e7186ab3842a6291202eb189d20d5499a64deeaaa76dabf4716993",
+          "queue_count": "b78efe9218059da48a9427a6f476e20684ddf92b50285f8144f596be2d7b8c20",
+          "counts": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+          "luminance": "e8841fa6b7c62be68b105512f345feab708d7fa973421fb45f6fc46a40c9e1ae",
+          "active": "4f8edfeffbecf6adb1c95f12c18e2a8d8dc36ea97fdd9cd220deb6f3e2041908",
+          "active_flag": "0dc3e4c0418c1a15908285a33503916835930fe9d779510b573edb636f23f71a",
+          "nactive": "515329d3e7d99208c83d8c2631c64d92d6f396bb5a3d8573df0bde7bb07154e8",
+          "last": "4112e44a3a9c24b3c8165aea46f24334d137182659f38a2c313bb1b414e653c2",
+          "eligibility": "6cd34b5af05f1a664d2284ee58e1f5525e59c0015b3f1540b6f23a9a18e9f34c",
+          "eligibility_last": "708b0bfdbcecf03572772a07f27b703011ef67d0b30db5c1b05859cbcd05f0a5",
+          "modulation": "64b0ea847764f83d482b274d639c6e24fbe992c87e2021d3ff0cc54d0743a18c",
+          "modulation_last": "579dda9bb98d55d969a1f126a0262ceb0bc0888996d6698de09f0d13844b2e89",
+          "adaptation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+          "rate_kc": "0e71ecdab90ec8a8ed1ab336704c91a93dc8efc55540e207e1cc7c4a38bb2e38",
+          "rate_dan": "938c302244e1010dbb54305baee88b1d3ca88f1f1ff7b8524fde6fdc74f7f32b",
+          "r8_light": "5c293d9874a4e8cb789d4d3c01e414bff98d9a6326a34270c09ce50900cb368f"
+        }
+      }
+    },
+    {
+      "side": "HOLD",
+      "left_hz": 34.0,
+      "right_hz": 44.0,
+      "difference_hz": 10.0,
+      "gate_spikes": 0,
+      "cell_ids": {
+        "left": [
+          "10162"
+        ],
+        "right": [
+          "10059"
+        ],
+        "gate": [
+          "10527",
+          "555871"
+        ]
+      },
+      "brain_ms": 1500.0,
+      "compute_seconds": 4.658209889000119,
+      "stimulus": "none",
+      "stimulus_ms": 0.0,
+      "reward_spikes": 5,
+      "aversive_spikes": 130,
+      "KC_spikes": 6209,
+      "total_spikes": 618054,
+      "spike_sha256": "205c972463b1bdcc1f72c0b5fca8bd81fd62516770b6dda29e822fd2b74ae6c1",
+      "input_sha256": "c9c6c5e50d923ce6c302246c96b984528b5af0f116894c6b787ca6bf376aadf1",
+      "memory": {
+        "plastic_edges": 7835,
+        "changed_edges": 3066,
+        "mean_efficacy": 1.0002872943878174,
+        "minimum_efficacy": 0.6515528559684753,
+        "sha256": "7ab38ccccb0396c7cc1939e0ad9a2db1dc3cdf82e1f495aa902c55501c369675",
+        "model": "stonkfly-dual-compartment-v1"
+      },
+      "diagnostics": {
+        "loss": null,
+        "backprop_gradient": null,
+        "plasticity_enabled": false,
+        "changed_edges": 0,
+        "weight_delta_l2": 0.0,
+        "max_abs_delta": 0.0,
+        "efficacy_min": 0.6515528495489835,
+        "efficacy_max": 1.1017670896185976,
+        "clipped_edges": 0
+      },
+      "phase": "replay",
+      "phase_step": 3,
+      "market_decision_ts": 1789213500,
+      "input_preset": "recorded_market",
+      "input_news": "none",
+      "activity_boundary": {
+        "mode": "adaptation",
+        "requested_mode": "adaptation",
+        "observation": 3,
+        "target_fields": [
+          "adaptation"
+        ],
+        "before_clock": {
+          "cursor": 10000,
+          "sim_ms": 1000.0,
+          "total_spikes": 918851
+        },
+        "after_clock": {
+          "cursor": 10000,
+          "sim_ms": 1000.0,
+          "total_spikes": 918851
+        },
+        "artifact_sha256": "8bc4e8e21218badec1f24dff4691bde1337ce17509e9755aaadbcf28f83fde9a",
+        "all_weight_sha256": "04b44b1fc2f88f3576c7c95c7d75a414e204a2b6fdfe1dfbb51f46a73206efc6",
+        "memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+        "changed_fields": [
+          "adaptation"
+        ],
+        "before_sha256": {
+          "v": "37013602e4ca5bfecd61bbaf6e8ab0e63ae9b012fa8ecd5d1bbd763ca3fcf3d2",
+          "g": "468e7b3f9117666c293b43ec919a33557b085dd93949109df4f1dc94c9d9f76b",
+          "refractory": "ac2f835e723bd6b738967083a060a0e604bb46d36e3cdae5553236a2f01c0e29",
+          "drive": "0af84f5a1bd9a26c86fe5e79c40bcd63a405f71bdfd1bf0a3af810339fb4ece3",
+          "previous_drive": "0af84f5a1bd9a26c86fe5e79c40bcd63a405f71bdfd1bf0a3af810339fb4ece3",
+          "queue": "ace1bfae52b922313b2815f398f82a4f36a750bb11adeb4ad7f41e733790f3db",
+          "queue_count": "0aa882f4240e1a8a0ca7133ab4b2c0e2332ef46dab9638913ad51ec4e82a3255",
+          "counts": "a52ede38ffe316bfd94a23c115f2f309065959d953260bd2dc391a92c1294ed2",
+          "luminance": "e5cb1b7bfcf795e4fe959402e5ec63fe9ba9cbea88c1171eeda8696380720c95",
+          "active": "b4fdd2b6d799457b93dc6ca48856d4e0712f4f64ccd4198ac316df5d19b40903",
+          "active_flag": "e7a36fdad6212473de81fd5ca9434f40b7f1673bab5c030cfc32795e3050bae0",
+          "nactive": "daa4243b5cae56f34d793e42987fed3052ebed8af4fc3bd76424aee1d7858e03",
+          "last": "dbfad5d1c62988f9cf78e1ecfe5b174ff59e90f51542567368ef5d24e310197b",
+          "eligibility": "4eb448337d20dc93aaf9135e31e56647214122b5c79fee826a8db90d650ae3f7",
+          "eligibility_last": "6cda8b85e6e8fbeb1301510bccac98d3ce92e5f7e6525c3e775b44c08207855e",
+          "modulation": "c8903c986bac825ba9605afd41da18cdc883b8a269b9cfc4231f720519d651f4",
+          "modulation_last": "ff2ca94ee281beac0ed6385f384dbc3efab0579c26738338001d4ebbd566c76d",
+          "adaptation": "84eb07840922ef0587c555a9856d37d4326a3cb3769b6a53044d4e56e1aabe44",
+          "rate_kc": "e7528bb6be5dc65a4641c615b06b9c88aa48410e888d5662d400d00bcb623af9",
+          "rate_dan": "216c119e8f3fb89d650f24b0818e76a001dd6a123bc389ab141d38e2d825976c",
+          "r8_light": "1f6c2c33fb2a74c6508e2adf4485d2cf2ec91332afde63137a055771b4cf7e83"
+        },
+        "after_sha256": {
+          "v": "37013602e4ca5bfecd61bbaf6e8ab0e63ae9b012fa8ecd5d1bbd763ca3fcf3d2",
+          "g": "468e7b3f9117666c293b43ec919a33557b085dd93949109df4f1dc94c9d9f76b",
+          "refractory": "ac2f835e723bd6b738967083a060a0e604bb46d36e3cdae5553236a2f01c0e29",
+          "drive": "0af84f5a1bd9a26c86fe5e79c40bcd63a405f71bdfd1bf0a3af810339fb4ece3",
+          "previous_drive": "0af84f5a1bd9a26c86fe5e79c40bcd63a405f71bdfd1bf0a3af810339fb4ece3",
+          "queue": "ace1bfae52b922313b2815f398f82a4f36a750bb11adeb4ad7f41e733790f3db",
+          "queue_count": "0aa882f4240e1a8a0ca7133ab4b2c0e2332ef46dab9638913ad51ec4e82a3255",
+          "counts": "a52ede38ffe316bfd94a23c115f2f309065959d953260bd2dc391a92c1294ed2",
+          "luminance": "e5cb1b7bfcf795e4fe959402e5ec63fe9ba9cbea88c1171eeda8696380720c95",
+          "active": "b4fdd2b6d799457b93dc6ca48856d4e0712f4f64ccd4198ac316df5d19b40903",
+          "active_flag": "e7a36fdad6212473de81fd5ca9434f40b7f1673bab5c030cfc32795e3050bae0",
+          "nactive": "daa4243b5cae56f34d793e42987fed3052ebed8af4fc3bd76424aee1d7858e03",
+          "last": "dbfad5d1c62988f9cf78e1ecfe5b174ff59e90f51542567368ef5d24e310197b",
+          "eligibility": "4eb448337d20dc93aaf9135e31e56647214122b5c79fee826a8db90d650ae3f7",
+          "eligibility_last": "6cda8b85e6e8fbeb1301510bccac98d3ce92e5f7e6525c3e775b44c08207855e",
+          "modulation": "c8903c986bac825ba9605afd41da18cdc883b8a269b9cfc4231f720519d651f4",
+          "modulation_last": "ff2ca94ee281beac0ed6385f384dbc3efab0579c26738338001d4ebbd566c76d",
+          "adaptation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+          "rate_kc": "e7528bb6be5dc65a4641c615b06b9c88aa48410e888d5662d400d00bcb623af9",
+          "rate_dan": "216c119e8f3fb89d650f24b0818e76a001dd6a123bc389ab141d38e2d825976c",
+          "r8_light": "1f6c2c33fb2a74c6508e2adf4485d2cf2ec91332afde63137a055771b4cf7e83"
+        }
+      }
+    }
+  ],
+  "initial_memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+  "final_memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+  "training_memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+  "reference_report_sha256": "038e6f2c69c00a60ab88d89340cf1f85cc7b75e9a3fc8567e1d284cf90ce01e3",
+  "plan_sha256": "3896dedeacf436b240c3f29e4ebfc656410c868dbeab45ac8c33537b70cbc19a",
+  "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+  "interpretation": "Post hoc mechanism experiment. Full retained graph and fixed decoder. All eight conditions reported; no account, P&L, policy selection, or live deployment. Resetting dynamics is a controlled intervention, not a claim of biological recovery or profitable learning."
+}

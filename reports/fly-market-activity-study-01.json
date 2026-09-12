@@ -1,0 +1,3729 @@
+{
+  "status": "market_activity_study_completed",
+  "protocol": {
+    "schema": 1,
+    "kind": "post_hoc_market_activity_reset",
+    "recorded_at": 1789217453.38322,
+    "market_plan_sha256": "3896dedeacf436b240c3f29e4ebfc656410c868dbeab45ac8c33537b70cbc19a",
+    "reference_report_sha256": "038e6f2c69c00a60ab88d89340cf1f85cc7b75e9a3fc8567e1d284cf90ce01e3",
+    "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+    "arms": {
+      "pristine_carry": {
+        "memory": "pristine",
+        "state_reset": "carry"
+      },
+      "trained_carry": {
+        "memory": "trained",
+        "state_reset": "carry"
+      },
+      "pristine_full": {
+        "memory": "pristine",
+        "state_reset": "full"
+      },
+      "trained_full": {
+        "memory": "trained",
+        "state_reset": "full"
+      },
+      "pristine_visual_filters": {
+        "memory": "pristine",
+        "state_reset": "visual_filters"
+      },
+      "trained_visual_filters": {
+        "memory": "trained",
+        "state_reset": "visual_filters"
+      },
+      "pristine_adaptation": {
+        "memory": "pristine",
+        "state_reset": "adaptation"
+      },
+      "trained_adaptation": {
+        "memory": "trained",
+        "state_reset": "adaptation"
+      }
+    },
+    "training_source": "trained_frozen",
+    "test_source": "trained_frozen",
+    "inference": {
+      "learning": false,
+      "reinforcement": "none",
+      "extra_current": 0,
+      "steps": 3
+    },
+    "reset_fields": {
+      "visual_filters": [
+        "luminance",
+        "r8_light"
+      ],
+      "adaptation": [
+        "adaptation"
+      ]
+    },
+    "reset_timing": "Between observations only; first observation starts from the same fresh dynamics in every arm.",
+    "hypothesis": "Gate dropout may depend on carried neural dynamics rather than learned synaptic memory. Compare full dynamics reset, visual-filter reset and intrinsic-adaptation reset against both exact carried-state controls using the same three historical images.",
+    "interpretation": "Post hoc mechanism experiment. Full retained graph and fixed decoder. All eight conditions reported; no account, P&L, policy selection, or live deployment. Resetting dynamics is a controlled intervention, not a claim of biological recovery or profitable learning."
+  },
+  "training_events": [
+    {
+      "side": "BUY",
+      "left_hz": 30.0,
+      "right_hz": 40.0,
+      "difference_hz": 10.0,
+      "gate_spikes": 23,
+      "cell_ids": {
+        "left": [
+          "10162"
+        ],
+        "right": [
+          "10059"
+        ],
+        "gate": [
+          "10527",
+          "555871"
+        ]
+      },
+      "brain_ms": 500.0,
+      "compute_seconds": 1.6383564509999982,
+      "stimulus": "none",
+      "stimulus_ms": 0.0,
+      "reward_spikes": 0,
+      "aversive_spikes": 17,
+      "KC_spikes": 520,
+      "total_spikes": 377637,
+      "spike_sha256": "f3d33e6291d5c308dbd66f82761542a493d3d7789e21847047c8118ae31dcc8f",
+      "input_sha256": "13c1e0c4b41f4320b6696a99fc31205d469b20676e658b1d5df546e2c7fe88dd",
+      "memory": {
+        "plastic_edges": 7835,
+        "changed_edges": 537,
+        "mean_efficacy": 1.0000438690185547,
+        "minimum_efficacy": 0.9958464503288269,
+        "sha256": "eb3d4f6bc13eb859029a8ad97c88a5de43d8478e0333d82cf4f403a0026cf22d",
+        "model": "stonkfly-dual-compartment-v1"
+      }
+    },
+    {
+      "side": "HOLD",
+      "left_hz": 36.0,
+      "right_hz": 40.0,
+      "difference_hz": 4.0,
+      "gate_spikes": 0,
+      "cell_ids": {
+        "left": [
+          "10162"
+        ],
+        "right": [
+          "10059"
+        ],
+        "gate": [
+          "10527",
+          "555871"
+        ]
+      },
+      "brain_ms": 1000.0,
+      "compute_seconds": 4.095616837000003,
+      "stimulus": "aversive",
+      "stimulus_ms": 200.0,
+      "reward_spikes": 1,
+      "aversive_spikes": 112,
+      "KC_spikes": 5551,
+      "total_spikes": 603525,
+      "spike_sha256": "5cabe0789123b1841aea1c2e2a5bbf0f504e8d662350014fba6ef8c1ba3200f9",
+      "input_sha256": "f606279ad0df2997aad28fd87495e61c9c8b6ee41a748a72a111eac0e491c2f1",
+      "memory": {
+        "plastic_edges": 7835,
+        "changed_edges": 2960,
+        "mean_efficacy": 0.9993211030960083,
+        "minimum_efficacy": 0.7555996179580688,
+        "sha256": "c870be444caab8bd5d36932f86d971fc4619564bd11728c652dda99f32eab2c3",
+        "model": "stonkfly-dual-compartment-v1"
+      }
+    },
+    {
+      "side": "HOLD",
+      "left_hz": 28.0,
+      "right_hz": 38.0,
+      "difference_hz": 10.0,
+      "gate_spikes": 0,
+      "cell_ids": {
+        "left": [
+          "10162"
+        ],
+        "right": [
+          "10059"
+        ],
+        "gate": [
+          "10527",
+          "555871"
+        ]
+      },
+      "brain_ms": 1500.0,
+      "compute_seconds": 3.9784182230000127,
+      "stimulus": "reward",
+      "stimulus_ms": 200.0,
+      "reward_spikes": 264,
+      "aversive_spikes": 73,
+      "KC_spikes": 4395,
+      "total_spikes": 606278,
+      "spike_sha256": "2c085445e9fa01b7f70ad14d298cb5d82f642d79f9a055e43ff5020462b3c47d",
+      "input_sha256": "56f1c552f5823e6d0d07a7e79359f7e6f261e062e5b1708548585881b489a064",
+      "memory": {
+        "plastic_edges": 7835,
+        "changed_edges": 3066,
+        "mean_efficacy": 1.0002872943878174,
+        "minimum_efficacy": 0.6515528559684753,
+        "sha256": "7ab38ccccb0396c7cc1939e0ad9a2db1dc3cdf82e1f495aa902c55501c369675",
+        "model": "stonkfly-dual-compartment-v1"
+      }
+    }
+  ],
+  "reports": {
+    "pristine_carry": {
+      "schema": 1,
+      "source": "matched_market_stimulus_assay",
+      "config": {
+        "preset": "recorded_market",
+        "view": "original",
+        "news": "none",
+        "eta": 0.001,
+        "learning": false,
+        "pulses": "none",
+        "memory": "pristine",
+        "state_reset": "carry"
+      },
+      "graph": {
+        "neurons": 166700,
+        "edges": 25582938,
+        "plastic_edges": 7835
+      },
+      "native_build": {
+        "model": "stonkfly-dual-compartment-v1",
+        "source_sha256": "e2d4d584f4633613277bb1bf6ea7ba20855c01a332ae2e9344ed7782604c8509",
+        "binary_sha256": "9c0768fc4f8e34ba730a31ef04a5de958e7d4276c1552f30ec6f2c2eddbfa1b1",
+        "flags": [
+          "-O3",
+          "-std=c++17",
+          "-shared",
+          "-fPIC"
+        ]
+      },
+      "upstream_commit": "78ef3e05ab0fa086032098558d893667068944a0",
+      "seconds": 19.850853465,
+      "events": [
+        {
+          "side": "BUY",
+          "left_hz": 30.0,
+          "right_hz": 38.0,
+          "difference_hz": 8.0,
+          "gate_spikes": 31,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 500.0,
+          "compute_seconds": 1.5978343609999932,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 16,
+          "KC_spikes": 14,
+          "total_spikes": 362898,
+          "spike_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+          "input_sha256": "77bc6b7f69ed101fed1672833465d77c483e36fdbcf80b0281b44f36e1fa9aa7",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 0,
+            "mean_efficacy": 1.0,
+            "minimum_efficacy": 1.0,
+            "sha256": "9f9c000fb9819eb99c214cc1da747d44e13f009bc4c3454f6b7dfe4ee669acf7",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "plasticity_enabled": false,
+            "changed_edges": 0,
+            "weight_delta_l2": 0.0,
+            "max_abs_delta": 0.0,
+            "efficacy_min": 1.0,
+            "efficacy_max": 1.0,
+            "clipped_edges": 0
+          },
+          "phase": "replay",
+          "phase_step": 1,
+          "market_decision_ts": 1789212900,
+          "input_preset": "recorded_market",
+          "input_news": "none",
+          "activity_boundary": {
+            "mode": "initial",
+            "requested_mode": "carry",
+            "observation": 1,
+            "target_fields": [],
+            "before_clock": {
+              "cursor": 0,
+              "sim_ms": 0.0,
+              "total_spikes": 0
+            },
+            "after_clock": {
+              "cursor": 0,
+              "sim_ms": 0.0,
+              "total_spikes": 0
+            },
+            "artifact_sha256": "141a5a129c0cf4c7733f1fb61d5962bdc941c021cfddda2316b6570c65e9dfc3",
+            "all_weight_sha256": "40a2e78d7299197d24ba03a24c94a8e1cd0eb45a653d69f001fc3acee2fdc779",
+            "memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+            "changed_fields": [],
+            "before_sha256": {
+              "v": "275bd935e4f1a56cbc2ca22b8f258f1cef511894f42f531e9a52476dd7b02946",
+              "g": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "refractory": "fe721ce07571ce5e6d09fc093440dfdbca4d3e360d5ddf903e3641aa4c6d0977",
+              "drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "previous_drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "queue": "56185bbe1f2586ea5668c759f2396dc7693f8b3b21d7015d24db8f37c2958453",
+              "queue_count": "f2c0d5456a983ecd12e314fcfa19879179fc8424343baeb1325457472ae85601",
+              "counts": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "luminance": "c411c207fb379b3beccac216c633ae620c51f23c78971c7d028d0266aee0cdc7",
+              "active": "bd5ad58a15d4ad9db612f07addacd70bf96d075969aa35f0c4a9e159124b5c26",
+              "active_flag": "557e5066485a8948d9ba5408da8359bdea92f316cc4574af08427bb77dd3a23e",
+              "nactive": "bc1b961d22c114f540586ed92bd23822a05caa6b98e73413f41f13e2b0deac6d",
+              "last": "543e44862a6bae300a72f840ceff3f11ac91905d58b046fb6ffbd4653c0b052c",
+              "eligibility": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "eligibility_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "modulation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "modulation_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "adaptation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "rate_kc": "9cf5a5bbc54b97f49e0c591d653fd61cadc8b2d88dbc2fde77c0035b7c42055d",
+              "rate_dan": "b707241545a346265aab1ffb32ff64b55bf8f8dc1b56a46ef33ce3d15db11d33",
+              "r8_light": "ac0a4091bbd9d73854a2d4a2944b5f8bb40cd7039d89d5575cb2629710c8c160"
+            },
+            "after_sha256": {
+              "v": "275bd935e4f1a56cbc2ca22b8f258f1cef511894f42f531e9a52476dd7b02946",
+              "g": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "refractory": "fe721ce07571ce5e6d09fc093440dfdbca4d3e360d5ddf903e3641aa4c6d0977",
+              "drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "previous_drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "queue": "56185bbe1f2586ea5668c759f2396dc7693f8b3b21d7015d24db8f37c2958453",
+              "queue_count": "f2c0d5456a983ecd12e314fcfa19879179fc8424343baeb1325457472ae85601",
+              "counts": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "luminance": "c411c207fb379b3beccac216c633ae620c51f23c78971c7d028d0266aee0cdc7",
+              "active": "bd5ad58a15d4ad9db612f07addacd70bf96d075969aa35f0c4a9e159124b5c26",
+              "active_flag": "557e5066485a8948d9ba5408da8359bdea92f316cc4574af08427bb77dd3a23e",
+              "nactive": "bc1b961d22c114f540586ed92bd23822a05caa6b98e73413f41f13e2b0deac6d",
+              "last": "543e44862a6bae300a72f840ceff3f11ac91905d58b046fb6ffbd4653c0b052c",
+              "eligibility": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "eligibility_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "modulation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "modulation_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "adaptation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "rate_kc": "9cf5a5bbc54b97f49e0c591d653fd61cadc8b2d88dbc2fde77c0035b7c42055d",
+              "rate_dan": "b707241545a346265aab1ffb32ff64b55bf8f8dc1b56a46ef33ce3d15db11d33",
+              "r8_light": "ac0a4091bbd9d73854a2d4a2944b5f8bb40cd7039d89d5575cb2629710c8c160"
+            }
+          }
+        },
+        {
+          "side": "BUY",
+          "left_hz": 32.0,
+          "right_hz": 38.0,
+          "difference_hz": 6.0,
+          "gate_spikes": 4,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 1000.0,
+          "compute_seconds": 3.6532551130000073,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 1,
+          "aversive_spikes": 91,
+          "KC_spikes": 4811,
+          "total_spikes": 548850,
+          "spike_sha256": "0416e2063de8ab906de0a0d3ba73380a5ad803723c3cb77e77a16539b59fb066",
+          "input_sha256": "0758728838cf369025d4ffbff13f8c1c826722a6a42f9391bc3ea10b98b6a4f2",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 0,
+            "mean_efficacy": 1.0,
+            "minimum_efficacy": 1.0,
+            "sha256": "9f9c000fb9819eb99c214cc1da747d44e13f009bc4c3454f6b7dfe4ee669acf7",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "plasticity_enabled": false,
+            "changed_edges": 0,
+            "weight_delta_l2": 0.0,
+            "max_abs_delta": 0.0,
+            "efficacy_min": 1.0,
+            "efficacy_max": 1.0,
+            "clipped_edges": 0
+          },
+          "phase": "replay",
+          "phase_step": 2,
+          "market_decision_ts": 1789213200,
+          "input_preset": "recorded_market",
+          "input_news": "none",
+          "activity_boundary": {
+            "mode": "carry",
+            "requested_mode": "carry",
+            "observation": 2,
+            "target_fields": [],
+            "before_clock": {
+              "cursor": 5000,
+              "sim_ms": 500.0,
+              "total_spikes": 362898
+            },
+            "after_clock": {
+              "cursor": 5000,
+              "sim_ms": 500.0,
+              "total_spikes": 362898
+            },
+            "artifact_sha256": "fa36aaf62d68f8eba96ab913c72f5667ee6e3a9fa378149b333db126f61dd0a8",
+            "all_weight_sha256": "40a2e78d7299197d24ba03a24c94a8e1cd0eb45a653d69f001fc3acee2fdc779",
+            "memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+            "changed_fields": [],
+            "before_sha256": {
+              "v": "ad0f89a6bdd1b74e7e08b10e44351d3eb9f95844a4e4a555e1af052f1f22d07b",
+              "g": "edab5bcbed53745eeb0e765101584be5552dcc6b98d17271e16d42b50eee8b26",
+              "refractory": "21d0b999e95b0d4e583550086b2d2282e71471ebf34eeaa9ed00152d0bc00892",
+              "drive": "178d1ea6b19908a717fa6bfe6b560853ddf48ec60e11c03dda8d950ac45bf7e8",
+              "previous_drive": "178d1ea6b19908a717fa6bfe6b560853ddf48ec60e11c03dda8d950ac45bf7e8",
+              "queue": "86471c78f9e7186ab3842a6291202eb189d20d5499a64deeaaa76dabf4716993",
+              "queue_count": "b78efe9218059da48a9427a6f476e20684ddf92b50285f8144f596be2d7b8c20",
+              "counts": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+              "luminance": "e8841fa6b7c62be68b105512f345feab708d7fa973421fb45f6fc46a40c9e1ae",
+              "active": "4f8edfeffbecf6adb1c95f12c18e2a8d8dc36ea97fdd9cd220deb6f3e2041908",
+              "active_flag": "0dc3e4c0418c1a15908285a33503916835930fe9d779510b573edb636f23f71a",
+              "nactive": "515329d3e7d99208c83d8c2631c64d92d6f396bb5a3d8573df0bde7bb07154e8",
+              "last": "4112e44a3a9c24b3c8165aea46f24334d137182659f38a2c313bb1b414e653c2",
+              "eligibility": "6cd34b5af05f1a664d2284ee58e1f5525e59c0015b3f1540b6f23a9a18e9f34c",
+              "eligibility_last": "708b0bfdbcecf03572772a07f27b703011ef67d0b30db5c1b05859cbcd05f0a5",
+              "modulation": "64b0ea847764f83d482b274d639c6e24fbe992c87e2021d3ff0cc54d0743a18c",
+              "modulation_last": "579dda9bb98d55d969a1f126a0262ceb0bc0888996d6698de09f0d13844b2e89",
+              "adaptation": "f89b8c6cc06a58e2fe71c4b1414e5a66793c12c2f128e0e4012ab45a25d506b1",
+              "rate_kc": "0e71ecdab90ec8a8ed1ab336704c91a93dc8efc55540e207e1cc7c4a38bb2e38",
+              "rate_dan": "938c302244e1010dbb54305baee88b1d3ca88f1f1ff7b8524fde6fdc74f7f32b",
+              "r8_light": "5c293d9874a4e8cb789d4d3c01e414bff98d9a6326a34270c09ce50900cb368f"
+            },
+            "after_sha256": {
+              "v": "ad0f89a6bdd1b74e7e08b10e44351d3eb9f95844a4e4a555e1af052f1f22d07b",
+              "g": "edab5bcbed53745eeb0e765101584be5552dcc6b98d17271e16d42b50eee8b26",
+              "refractory": "21d0b999e95b0d4e583550086b2d2282e71471ebf34eeaa9ed00152d0bc00892",
+              "drive": "178d1ea6b19908a717fa6bfe6b560853ddf48ec60e11c03dda8d950ac45bf7e8",
+              "previous_drive": "178d1ea6b19908a717fa6bfe6b560853ddf48ec60e11c03dda8d950ac45bf7e8",
+              "queue": "86471c78f9e7186ab3842a6291202eb189d20d5499a64deeaaa76dabf4716993",
+              "queue_count": "b78efe9218059da48a9427a6f476e20684ddf92b50285f8144f596be2d7b8c20",
+              "counts": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+              "luminance": "e8841fa6b7c62be68b105512f345feab708d7fa973421fb45f6fc46a40c9e1ae",
+              "active": "4f8edfeffbecf6adb1c95f12c18e2a8d8dc36ea97fdd9cd220deb6f3e2041908",
+              "active_flag": "0dc3e4c0418c1a15908285a33503916835930fe9d779510b573edb636f23f71a",
+              "nactive": "515329d3e7d99208c83d8c2631c64d92d6f396bb5a3d8573df0bde7bb07154e8",
+              "last": "4112e44a3a9c24b3c8165aea46f24334d137182659f38a2c313bb1b414e653c2",
+              "eligibility": "6cd34b5af05f1a664d2284ee58e1f5525e59c0015b3f1540b6f23a9a18e9f34c",
+              "eligibility_last": "708b0bfdbcecf03572772a07f27b703011ef67d0b30db5c1b05859cbcd05f0a5",
+              "modulation": "64b0ea847764f83d482b274d639c6e24fbe992c87e2021d3ff0cc54d0743a18c",
+              "modulation_last": "579dda9bb98d55d969a1f126a0262ceb0bc0888996d6698de09f0d13844b2e89",
+              "adaptation": "f89b8c6cc06a58e2fe71c4b1414e5a66793c12c2f128e0e4012ab45a25d506b1",
+              "rate_kc": "0e71ecdab90ec8a8ed1ab336704c91a93dc8efc55540e207e1cc7c4a38bb2e38",
+              "rate_dan": "938c302244e1010dbb54305baee88b1d3ca88f1f1ff7b8524fde6fdc74f7f32b",
+              "r8_light": "5c293d9874a4e8cb789d4d3c01e414bff98d9a6326a34270c09ce50900cb368f"
+            }
+          }
+        },
+        {
+          "side": "HOLD",
+          "left_hz": 34.0,
+          "right_hz": 44.0,
+          "difference_hz": 10.0,
+          "gate_spikes": 0,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 1500.0,
+          "compute_seconds": 4.303707772999978,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 127,
+          "KC_spikes": 4362,
+          "total_spikes": 616276,
+          "spike_sha256": "fa079f5d09d6310605a1373a51997124858c9414817330b2b2e823316b521122",
+          "input_sha256": "c9c6c5e50d923ce6c302246c96b984528b5af0f116894c6b787ca6bf376aadf1",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 0,
+            "mean_efficacy": 1.0,
+            "minimum_efficacy": 1.0,
+            "sha256": "9f9c000fb9819eb99c214cc1da747d44e13f009bc4c3454f6b7dfe4ee669acf7",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "plasticity_enabled": false,
+            "changed_edges": 0,
+            "weight_delta_l2": 0.0,
+            "max_abs_delta": 0.0,
+            "efficacy_min": 1.0,
+            "efficacy_max": 1.0,
+            "clipped_edges": 0
+          },
+          "phase": "replay",
+          "phase_step": 3,
+          "market_decision_ts": 1789213500,
+          "input_preset": "recorded_market",
+          "input_news": "none",
+          "activity_boundary": {
+            "mode": "carry",
+            "requested_mode": "carry",
+            "observation": 3,
+            "target_fields": [],
+            "before_clock": {
+              "cursor": 10000,
+              "sim_ms": 1000.0,
+              "total_spikes": 911748
+            },
+            "after_clock": {
+              "cursor": 10000,
+              "sim_ms": 1000.0,
+              "total_spikes": 911748
+            },
+            "artifact_sha256": "bcd1fbcf71da990257c8f99ea598707b7e2286748e80f2da1bb6c9a0e16abf3c",
+            "all_weight_sha256": "40a2e78d7299197d24ba03a24c94a8e1cd0eb45a653d69f001fc3acee2fdc779",
+            "memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+            "changed_fields": [],
+            "before_sha256": {
+              "v": "739e75cf53573665158f23da84d9fdfc261b9ce5bf721192e47632b87a676ee3",
+              "g": "e359995ca86eedb4697d8cdfe1bd543495d4d69991848c400d3d4c7963f24cc3",
+              "refractory": "1a0eab33f6e46b5a78fc049bcbee5bfb866f030632156c083db131f1974182e9",
+              "drive": "0af84f5a1bd9a26c86fe5e79c40bcd63a405f71bdfd1bf0a3af810339fb4ece3",
+              "previous_drive": "0af84f5a1bd9a26c86fe5e79c40bcd63a405f71bdfd1bf0a3af810339fb4ece3",
+              "queue": "ce35d1a3cfe11ab254b2b6650029d8110db4e6b5bcb5c9769e9970043916eed4",
+              "queue_count": "649381afe2e0776ff491ae8c2c3063bebc82dd2471fc3606f90c0644f3695a18",
+              "counts": "0416e2063de8ab906de0a0d3ba73380a5ad803723c3cb77e77a16539b59fb066",
+              "luminance": "e5cb1b7bfcf795e4fe959402e5ec63fe9ba9cbea88c1171eeda8696380720c95",
+              "active": "f9f79d0005df64b15e76747d6b98256307c43046aa755f21c697076b3e8b6212",
+              "active_flag": "4cc0c6d4443ca4cf461f784701cc1992f2f4a30038252e5956cb3944f3f575e8",
+              "nactive": "50a1ea9a7e69d8422d83232f5b73b75d049706f56ce4bbd11415bd1d4fb9eeba",
+              "last": "dbfad5d1c62988f9cf78e1ecfe5b174ff59e90f51542567368ef5d24e310197b",
+              "eligibility": "db8ed649d51e8293bfa73b126320bcb7b02dffa495b5ae129aab3bcbb956a686",
+              "eligibility_last": "d00594c0d1c8efa724174efc8422ecd4b61d4f764c4716c38a40b94d1899be5f",
+              "modulation": "ee7ebb959bed4f7dac1db89987c89275cc8233af4799c9d51b5ad92cdbdf6cdf",
+              "modulation_last": "9d0a5d50fdec6246a7a69b5b3264f9ff4d17dc639d3fa7118eb61ebce2a66640",
+              "adaptation": "482754d4f5b2d459b7e4eef515fe4c2779e6d0d949fdc67db3f83c459bc12471",
+              "rate_kc": "15572ab708111e43341e6d81136e11f7be7eb4d50055279d2c9730ac85660fe6",
+              "rate_dan": "620dade5a7b1d53f9d952f3f7bfc7651644b05a74411324fb65555f46d43c7f3",
+              "r8_light": "1f6c2c33fb2a74c6508e2adf4485d2cf2ec91332afde63137a055771b4cf7e83"
+            },
+            "after_sha256": {
+              "v": "739e75cf53573665158f23da84d9fdfc261b9ce5bf721192e47632b87a676ee3",
+              "g": "e359995ca86eedb4697d8cdfe1bd543495d4d69991848c400d3d4c7963f24cc3",
+              "refractory": "1a0eab33f6e46b5a78fc049bcbee5bfb866f030632156c083db131f1974182e9",
+              "drive": "0af84f5a1bd9a26c86fe5e79c40bcd63a405f71bdfd1bf0a3af810339fb4ece3",
+              "previous_drive": "0af84f5a1bd9a26c86fe5e79c40bcd63a405f71bdfd1bf0a3af810339fb4ece3",
+              "queue": "ce35d1a3cfe11ab254b2b6650029d8110db4e6b5bcb5c9769e9970043916eed4",
+              "queue_count": "649381afe2e0776ff491ae8c2c3063bebc82dd2471fc3606f90c0644f3695a18",
+              "counts": "0416e2063de8ab906de0a0d3ba73380a5ad803723c3cb77e77a16539b59fb066",
+              "luminance": "e5cb1b7bfcf795e4fe959402e5ec63fe9ba9cbea88c1171eeda8696380720c95",
+              "active": "f9f79d0005df64b15e76747d6b98256307c43046aa755f21c697076b3e8b6212",
+              "active_flag": "4cc0c6d4443ca4cf461f784701cc1992f2f4a30038252e5956cb3944f3f575e8",
+              "nactive": "50a1ea9a7e69d8422d83232f5b73b75d049706f56ce4bbd11415bd1d4fb9eeba",
+              "last": "dbfad5d1c62988f9cf78e1ecfe5b174ff59e90f51542567368ef5d24e310197b",
+              "eligibility": "db8ed649d51e8293bfa73b126320bcb7b02dffa495b5ae129aab3bcbb956a686",
+              "eligibility_last": "d00594c0d1c8efa724174efc8422ecd4b61d4f764c4716c38a40b94d1899be5f",
+              "modulation": "ee7ebb959bed4f7dac1db89987c89275cc8233af4799c9d51b5ad92cdbdf6cdf",
+              "modulation_last": "9d0a5d50fdec6246a7a69b5b3264f9ff4d17dc639d3fa7118eb61ebce2a66640",
+              "adaptation": "482754d4f5b2d459b7e4eef515fe4c2779e6d0d949fdc67db3f83c459bc12471",
+              "rate_kc": "15572ab708111e43341e6d81136e11f7be7eb4d50055279d2c9730ac85660fe6",
+              "rate_dan": "620dade5a7b1d53f9d952f3f7bfc7651644b05a74411324fb65555f46d43c7f3",
+              "r8_light": "1f6c2c33fb2a74c6508e2adf4485d2cf2ec91332afde63137a055771b4cf7e83"
+            }
+          }
+        }
+      ],
+      "initial_memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+      "final_memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+      "training_memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+      "reference_report_sha256": "038e6f2c69c00a60ab88d89340cf1f85cc7b75e9a3fc8567e1d284cf90ce01e3",
+      "plan_sha256": "3896dedeacf436b240c3f29e4ebfc656410c868dbeab45ac8c33537b70cbc19a",
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "interpretation": "Post hoc mechanism experiment. Full retained graph and fixed decoder. All eight conditions reported; no account, P&L, policy selection, or live deployment. Resetting dynamics is a controlled intervention, not a claim of biological recovery or profitable learning."
+    },
+    "trained_carry": {
+      "schema": 1,
+      "source": "matched_market_stimulus_assay",
+      "config": {
+        "preset": "recorded_market",
+        "view": "original",
+        "news": "none",
+        "eta": 0.001,
+        "learning": false,
+        "pulses": "none",
+        "memory": "trained",
+        "state_reset": "carry"
+      },
+      "graph": {
+        "neurons": 166700,
+        "edges": 25582938,
+        "plastic_edges": 7835
+      },
+      "native_build": {
+        "model": "stonkfly-dual-compartment-v1",
+        "source_sha256": "e2d4d584f4633613277bb1bf6ea7ba20855c01a332ae2e9344ed7782604c8509",
+        "binary_sha256": "9c0768fc4f8e34ba730a31ef04a5de958e7d4276c1552f30ec6f2c2eddbfa1b1",
+        "flags": [
+          "-O3",
+          "-std=c++17",
+          "-shared",
+          "-fPIC"
+        ]
+      },
+      "upstream_commit": "78ef3e05ab0fa086032098558d893667068944a0",
+      "seconds": 19.982926094,
+      "events": [
+        {
+          "side": "BUY",
+          "left_hz": 30.0,
+          "right_hz": 38.0,
+          "difference_hz": 8.0,
+          "gate_spikes": 31,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 500.0,
+          "compute_seconds": 1.4786515679999823,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 16,
+          "KC_spikes": 14,
+          "total_spikes": 362898,
+          "spike_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+          "input_sha256": "77bc6b7f69ed101fed1672833465d77c483e36fdbcf80b0281b44f36e1fa9aa7",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 3066,
+            "mean_efficacy": 1.0002872943878174,
+            "minimum_efficacy": 0.6515528559684753,
+            "sha256": "7ab38ccccb0396c7cc1939e0ad9a2db1dc3cdf82e1f495aa902c55501c369675",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "plasticity_enabled": false,
+            "changed_edges": 0,
+            "weight_delta_l2": 0.0,
+            "max_abs_delta": 0.0,
+            "efficacy_min": 0.6515528495489835,
+            "efficacy_max": 1.1017670896185976,
+            "clipped_edges": 0
+          },
+          "phase": "replay",
+          "phase_step": 1,
+          "market_decision_ts": 1789212900,
+          "input_preset": "recorded_market",
+          "input_news": "none",
+          "activity_boundary": {
+            "mode": "initial",
+            "requested_mode": "carry",
+            "observation": 1,
+            "target_fields": [],
+            "before_clock": {
+              "cursor": 0,
+              "sim_ms": 0.0,
+              "total_spikes": 0
+            },
+            "after_clock": {
+              "cursor": 0,
+              "sim_ms": 0.0,
+              "total_spikes": 0
+            },
+            "artifact_sha256": "cd133555b7eca8a200afe9d1614b838ea340b8774a127e7454c48be78063f834",
+            "all_weight_sha256": "04b44b1fc2f88f3576c7c95c7d75a414e204a2b6fdfe1dfbb51f46a73206efc6",
+            "memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+            "changed_fields": [],
+            "before_sha256": {
+              "v": "275bd935e4f1a56cbc2ca22b8f258f1cef511894f42f531e9a52476dd7b02946",
+              "g": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "refractory": "fe721ce07571ce5e6d09fc093440dfdbca4d3e360d5ddf903e3641aa4c6d0977",
+              "drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "previous_drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "queue": "56185bbe1f2586ea5668c759f2396dc7693f8b3b21d7015d24db8f37c2958453",
+              "queue_count": "f2c0d5456a983ecd12e314fcfa19879179fc8424343baeb1325457472ae85601",
+              "counts": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "luminance": "c411c207fb379b3beccac216c633ae620c51f23c78971c7d028d0266aee0cdc7",
+              "active": "bd5ad58a15d4ad9db612f07addacd70bf96d075969aa35f0c4a9e159124b5c26",
+              "active_flag": "557e5066485a8948d9ba5408da8359bdea92f316cc4574af08427bb77dd3a23e",
+              "nactive": "bc1b961d22c114f540586ed92bd23822a05caa6b98e73413f41f13e2b0deac6d",
+              "last": "543e44862a6bae300a72f840ceff3f11ac91905d58b046fb6ffbd4653c0b052c",
+              "eligibility": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "eligibility_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "modulation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "modulation_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "adaptation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "rate_kc": "9cf5a5bbc54b97f49e0c591d653fd61cadc8b2d88dbc2fde77c0035b7c42055d",
+              "rate_dan": "b707241545a346265aab1ffb32ff64b55bf8f8dc1b56a46ef33ce3d15db11d33",
+              "r8_light": "ac0a4091bbd9d73854a2d4a2944b5f8bb40cd7039d89d5575cb2629710c8c160"
+            },
+            "after_sha256": {
+              "v": "275bd935e4f1a56cbc2ca22b8f258f1cef511894f42f531e9a52476dd7b02946",
+              "g": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "refractory": "fe721ce07571ce5e6d09fc093440dfdbca4d3e360d5ddf903e3641aa4c6d0977",
+              "drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "previous_drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "queue": "56185bbe1f2586ea5668c759f2396dc7693f8b3b21d7015d24db8f37c2958453",
+              "queue_count": "f2c0d5456a983ecd12e314fcfa19879179fc8424343baeb1325457472ae85601",
+              "counts": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "luminance": "c411c207fb379b3beccac216c633ae620c51f23c78971c7d028d0266aee0cdc7",
+              "active": "bd5ad58a15d4ad9db612f07addacd70bf96d075969aa35f0c4a9e159124b5c26",
+              "active_flag": "557e5066485a8948d9ba5408da8359bdea92f316cc4574af08427bb77dd3a23e",
+              "nactive": "bc1b961d22c114f540586ed92bd23822a05caa6b98e73413f41f13e2b0deac6d",
+              "last": "543e44862a6bae300a72f840ceff3f11ac91905d58b046fb6ffbd4653c0b052c",
+              "eligibility": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "eligibility_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "modulation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "modulation_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "adaptation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "rate_kc": "9cf5a5bbc54b97f49e0c591d653fd61cadc8b2d88dbc2fde77c0035b7c42055d",
+              "rate_dan": "b707241545a346265aab1ffb32ff64b55bf8f8dc1b56a46ef33ce3d15db11d33",
+              "r8_light": "ac0a4091bbd9d73854a2d4a2944b5f8bb40cd7039d89d5575cb2629710c8c160"
+            }
+          }
+        },
+        {
+          "side": "BUY",
+          "left_hz": 34.0,
+          "right_hz": 36.0,
+          "difference_hz": 2.0,
+          "gate_spikes": 3,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 1000.0,
+          "compute_seconds": 3.7358353780000044,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 103,
+          "KC_spikes": 4853,
+          "total_spikes": 554534,
+          "spike_sha256": "a761c0adc67889c4fed9439ec2aee51526f5aeef5fb9ca299daecfbf92ebf9b6",
+          "input_sha256": "0758728838cf369025d4ffbff13f8c1c826722a6a42f9391bc3ea10b98b6a4f2",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 3066,
+            "mean_efficacy": 1.0002872943878174,
+            "minimum_efficacy": 0.6515528559684753,
+            "sha256": "7ab38ccccb0396c7cc1939e0ad9a2db1dc3cdf82e1f495aa902c55501c369675",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "plasticity_enabled": false,
+            "changed_edges": 0,
+            "weight_delta_l2": 0.0,
+            "max_abs_delta": 0.0,
+            "efficacy_min": 0.6515528495489835,
+            "efficacy_max": 1.1017670896185976,
+            "clipped_edges": 0
+          },
+          "phase": "replay",
+          "phase_step": 2,
+          "market_decision_ts": 1789213200,
+          "input_preset": "recorded_market",
+          "input_news": "none",
+          "activity_boundary": {
+            "mode": "carry",
+            "requested_mode": "carry",
+            "observation": 2,
+            "target_fields": [],
+            "before_clock": {
+              "cursor": 5000,
+              "sim_ms": 500.0,
+              "total_spikes": 362898
+            },
+            "after_clock": {
+              "cursor": 5000,
+              "sim_ms": 500.0,
+              "total_spikes": 362898
+            },
+            "artifact_sha256": "1919ca2fc8fc000cdce3cdf89defa1fad6f7aa5149db4f1fc9ca0ef7e27beb85",
+            "all_weight_sha256": "04b44b1fc2f88f3576c7c95c7d75a414e204a2b6fdfe1dfbb51f46a73206efc6",
+            "memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+            "changed_fields": [],
+            "before_sha256": {
+              "v": "f25df441181ff4d8fbba3642874fb0fd710fa06737c62f8fdfe897c72fff93bd",
+              "g": "bf864f006c3bcee326b11d56f95e4c4f2a43f2222540fb665b43aac34e0fe1f4",
+              "refractory": "21d0b999e95b0d4e583550086b2d2282e71471ebf34eeaa9ed00152d0bc00892",
+              "drive": "178d1ea6b19908a717fa6bfe6b560853ddf48ec60e11c03dda8d950ac45bf7e8",
+              "previous_drive": "178d1ea6b19908a717fa6bfe6b560853ddf48ec60e11c03dda8d950ac45bf7e8",
+              "queue": "86471c78f9e7186ab3842a6291202eb189d20d5499a64deeaaa76dabf4716993",
+              "queue_count": "b78efe9218059da48a9427a6f476e20684ddf92b50285f8144f596be2d7b8c20",
+              "counts": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+              "luminance": "e8841fa6b7c62be68b105512f345feab708d7fa973421fb45f6fc46a40c9e1ae",
+              "active": "4f8edfeffbecf6adb1c95f12c18e2a8d8dc36ea97fdd9cd220deb6f3e2041908",
+              "active_flag": "0dc3e4c0418c1a15908285a33503916835930fe9d779510b573edb636f23f71a",
+              "nactive": "515329d3e7d99208c83d8c2631c64d92d6f396bb5a3d8573df0bde7bb07154e8",
+              "last": "4112e44a3a9c24b3c8165aea46f24334d137182659f38a2c313bb1b414e653c2",
+              "eligibility": "6cd34b5af05f1a664d2284ee58e1f5525e59c0015b3f1540b6f23a9a18e9f34c",
+              "eligibility_last": "708b0bfdbcecf03572772a07f27b703011ef67d0b30db5c1b05859cbcd05f0a5",
+              "modulation": "64b0ea847764f83d482b274d639c6e24fbe992c87e2021d3ff0cc54d0743a18c",
+              "modulation_last": "579dda9bb98d55d969a1f126a0262ceb0bc0888996d6698de09f0d13844b2e89",
+              "adaptation": "f89b8c6cc06a58e2fe71c4b1414e5a66793c12c2f128e0e4012ab45a25d506b1",
+              "rate_kc": "0e71ecdab90ec8a8ed1ab336704c91a93dc8efc55540e207e1cc7c4a38bb2e38",
+              "rate_dan": "938c302244e1010dbb54305baee88b1d3ca88f1f1ff7b8524fde6fdc74f7f32b",
+              "r8_light": "5c293d9874a4e8cb789d4d3c01e414bff98d9a6326a34270c09ce50900cb368f"
+            },
+            "after_sha256": {
+              "v": "f25df441181ff4d8fbba3642874fb0fd710fa06737c62f8fdfe897c72fff93bd",
+              "g": "bf864f006c3bcee326b11d56f95e4c4f2a43f2222540fb665b43aac34e0fe1f4",
+              "refractory": "21d0b999e95b0d4e583550086b2d2282e71471ebf34eeaa9ed00152d0bc00892",
+              "drive": "178d1ea6b19908a717fa6bfe6b560853ddf48ec60e11c03dda8d950ac45bf7e8",
+              "previous_drive": "178d1ea6b19908a717fa6bfe6b560853ddf48ec60e11c03dda8d950ac45bf7e8",
+              "queue": "86471c78f9e7186ab3842a6291202eb189d20d5499a64deeaaa76dabf4716993",
+              "queue_count": "b78efe9218059da48a9427a6f476e20684ddf92b50285f8144f596be2d7b8c20",
+              "counts": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+              "luminance": "e8841fa6b7c62be68b105512f345feab708d7fa973421fb45f6fc46a40c9e1ae",
+              "active": "4f8edfeffbecf6adb1c95f12c18e2a8d8dc36ea97fdd9cd220deb6f3e2041908",
+              "active_flag": "0dc3e4c0418c1a15908285a33503916835930fe9d779510b573edb636f23f71a",
+              "nactive": "515329d3e7d99208c83d8c2631c64d92d6f396bb5a3d8573df0bde7bb07154e8",
+              "last": "4112e44a3a9c24b3c8165aea46f24334d137182659f38a2c313bb1b414e653c2",
+              "eligibility": "6cd34b5af05f1a664d2284ee58e1f5525e59c0015b3f1540b6f23a9a18e9f34c",
+              "eligibility_last": "708b0bfdbcecf03572772a07f27b703011ef67d0b30db5c1b05859cbcd05f0a5",
+              "modulation": "64b0ea847764f83d482b274d639c6e24fbe992c87e2021d3ff0cc54d0743a18c",
+              "modulation_last": "579dda9bb98d55d969a1f126a0262ceb0bc0888996d6698de09f0d13844b2e89",
+              "adaptation": "f89b8c6cc06a58e2fe71c4b1414e5a66793c12c2f128e0e4012ab45a25d506b1",
+              "rate_kc": "0e71ecdab90ec8a8ed1ab336704c91a93dc8efc55540e207e1cc7c4a38bb2e38",
+              "rate_dan": "938c302244e1010dbb54305baee88b1d3ca88f1f1ff7b8524fde6fdc74f7f32b",
+              "r8_light": "5c293d9874a4e8cb789d4d3c01e414bff98d9a6326a34270c09ce50900cb368f"
+            }
+          }
+        },
+        {
+          "side": "HOLD",
+          "left_hz": 36.0,
+          "right_hz": 40.0,
+          "difference_hz": 4.0,
+          "gate_spikes": 0,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 1500.0,
+          "compute_seconds": 4.380383795000014,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 127,
+          "KC_spikes": 4566,
+          "total_spikes": 621082,
+          "spike_sha256": "36d9081dd0294519b1d0de9dd83d5eeaf0e916859367d57d2c75d7c8b36efee3",
+          "input_sha256": "c9c6c5e50d923ce6c302246c96b984528b5af0f116894c6b787ca6bf376aadf1",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 3066,
+            "mean_efficacy": 1.0002872943878174,
+            "minimum_efficacy": 0.6515528559684753,
+            "sha256": "7ab38ccccb0396c7cc1939e0ad9a2db1dc3cdf82e1f495aa902c55501c369675",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "plasticity_enabled": false,
+            "changed_edges": 0,
+            "weight_delta_l2": 0.0,
+            "max_abs_delta": 0.0,
+            "efficacy_min": 0.6515528495489835,
+            "efficacy_max": 1.1017670896185976,
+            "clipped_edges": 0
+          },
+          "phase": "replay",
+          "phase_step": 3,
+          "market_decision_ts": 1789213500,
+          "input_preset": "recorded_market",
+          "input_news": "none",
+          "activity_boundary": {
+            "mode": "carry",
+            "requested_mode": "carry",
+            "observation": 3,
+            "target_fields": [],
+            "before_clock": {
+              "cursor": 10000,
+              "sim_ms": 1000.0,
+              "total_spikes": 917432
+            },
+            "after_clock": {
+              "cursor": 10000,
+              "sim_ms": 1000.0,
+              "total_spikes": 917432
+            },
+            "artifact_sha256": "056b66127e2b3a626a43d0aa0ad407e679c273f87ffd2b28eae215e9f0da0fa9",
+            "all_weight_sha256": "04b44b1fc2f88f3576c7c95c7d75a414e204a2b6fdfe1dfbb51f46a73206efc6",
+            "memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+            "changed_fields": [],
+            "before_sha256": {
+              "v": "0f5b82afe74f0e3c5aa1fd52c8f6ecb10ba899c6a7b4a21c3179a39426881601",
+              "g": "ae36634d9956d99d2c1d2a61e276b2d48aadd7a3566383153b22ac52c86fa36e",
+              "refractory": "4b0e579e4d463c5d966c8a3c2805849f0522bf7aa1519f947b2e2b0c24cd2915",
+              "drive": "0af84f5a1bd9a26c86fe5e79c40bcd63a405f71bdfd1bf0a3af810339fb4ece3",
+              "previous_drive": "0af84f5a1bd9a26c86fe5e79c40bcd63a405f71bdfd1bf0a3af810339fb4ece3",
+              "queue": "d2839e2a312180383836679a0e98336e6d9675dc8585886d95e0276511ec4cf1",
+              "queue_count": "da6b12becf3db2825a7e09568fa80eb557440364d03f0876f03b1af96cfcb97e",
+              "counts": "a761c0adc67889c4fed9439ec2aee51526f5aeef5fb9ca299daecfbf92ebf9b6",
+              "luminance": "e5cb1b7bfcf795e4fe959402e5ec63fe9ba9cbea88c1171eeda8696380720c95",
+              "active": "57dce3967b5246d3bdd615d5d89df52621371f840b228359584bfd868878e173",
+              "active_flag": "7c5c6cea4c34b6de3a653964936e0be86f82a5332bdc0285573391303e3e78f2",
+              "nactive": "6abde951bbebbeb2a9ffd5dd8a95adf80bad2824a2dc5d5495606da1b9f41908",
+              "last": "dbfad5d1c62988f9cf78e1ecfe5b174ff59e90f51542567368ef5d24e310197b",
+              "eligibility": "f285adbb2adc3ed388e44eeb6eb686d7236a9c30fbd7ca14a7ae261ef030566a",
+              "eligibility_last": "c168ea24903019ab370b33326c73c0c4e9c3baa82f86eae29bec85a4aaf69dde",
+              "modulation": "5888a59753ccd08d7c8fd5bc997d5271d2c7fa2f0fa05e2a7f67f46345b77614",
+              "modulation_last": "ec8e3d7f046308accd0867b755611e0097d08aefe5415adaebdbff75cb07023e",
+              "adaptation": "91d9dcdf2b77eadb7896dc4e9edc329ee00abe3e51a76ef194722b502e8d64cf",
+              "rate_kc": "c898c8741ceec93a8f6ef05e549e5541403a1d68df429c54bb80876217371d09",
+              "rate_dan": "801acc971236101787b12138e2822046bb800644ad222ad7513f5d0209c9a444",
+              "r8_light": "1f6c2c33fb2a74c6508e2adf4485d2cf2ec91332afde63137a055771b4cf7e83"
+            },
+            "after_sha256": {
+              "v": "0f5b82afe74f0e3c5aa1fd52c8f6ecb10ba899c6a7b4a21c3179a39426881601",
+              "g": "ae36634d9956d99d2c1d2a61e276b2d48aadd7a3566383153b22ac52c86fa36e",
+              "refractory": "4b0e579e4d463c5d966c8a3c2805849f0522bf7aa1519f947b2e2b0c24cd2915",
+              "drive": "0af84f5a1bd9a26c86fe5e79c40bcd63a405f71bdfd1bf0a3af810339fb4ece3",
+              "previous_drive": "0af84f5a1bd9a26c86fe5e79c40bcd63a405f71bdfd1bf0a3af810339fb4ece3",
+              "queue": "d2839e2a312180383836679a0e98336e6d9675dc8585886d95e0276511ec4cf1",
+              "queue_count": "da6b12becf3db2825a7e09568fa80eb557440364d03f0876f03b1af96cfcb97e",
+              "counts": "a761c0adc67889c4fed9439ec2aee51526f5aeef5fb9ca299daecfbf92ebf9b6",
+              "luminance": "e5cb1b7bfcf795e4fe959402e5ec63fe9ba9cbea88c1171eeda8696380720c95",
+              "active": "57dce3967b5246d3bdd615d5d89df52621371f840b228359584bfd868878e173",
+              "active_flag": "7c5c6cea4c34b6de3a653964936e0be86f82a5332bdc0285573391303e3e78f2",
+              "nactive": "6abde951bbebbeb2a9ffd5dd8a95adf80bad2824a2dc5d5495606da1b9f41908",
+              "last": "dbfad5d1c62988f9cf78e1ecfe5b174ff59e90f51542567368ef5d24e310197b",
+              "eligibility": "f285adbb2adc3ed388e44eeb6eb686d7236a9c30fbd7ca14a7ae261ef030566a",
+              "eligibility_last": "c168ea24903019ab370b33326c73c0c4e9c3baa82f86eae29bec85a4aaf69dde",
+              "modulation": "5888a59753ccd08d7c8fd5bc997d5271d2c7fa2f0fa05e2a7f67f46345b77614",
+              "modulation_last": "ec8e3d7f046308accd0867b755611e0097d08aefe5415adaebdbff75cb07023e",
+              "adaptation": "91d9dcdf2b77eadb7896dc4e9edc329ee00abe3e51a76ef194722b502e8d64cf",
+              "rate_kc": "c898c8741ceec93a8f6ef05e549e5541403a1d68df429c54bb80876217371d09",
+              "rate_dan": "801acc971236101787b12138e2822046bb800644ad222ad7513f5d0209c9a444",
+              "r8_light": "1f6c2c33fb2a74c6508e2adf4485d2cf2ec91332afde63137a055771b4cf7e83"
+            }
+          }
+        }
+      ],
+      "initial_memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+      "final_memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+      "training_memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+      "reference_report_sha256": "038e6f2c69c00a60ab88d89340cf1f85cc7b75e9a3fc8567e1d284cf90ce01e3",
+      "plan_sha256": "3896dedeacf436b240c3f29e4ebfc656410c868dbeab45ac8c33537b70cbc19a",
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "interpretation": "Post hoc mechanism experiment. Full retained graph and fixed decoder. All eight conditions reported; no account, P&L, policy selection, or live deployment. Resetting dynamics is a controlled intervention, not a claim of biological recovery or profitable learning."
+    },
+    "pristine_full": {
+      "schema": 1,
+      "source": "matched_market_stimulus_assay",
+      "config": {
+        "preset": "recorded_market",
+        "view": "original",
+        "news": "none",
+        "eta": 0.001,
+        "learning": false,
+        "pulses": "none",
+        "memory": "pristine",
+        "state_reset": "full"
+      },
+      "graph": {
+        "neurons": 166700,
+        "edges": 25582938,
+        "plastic_edges": 7835
+      },
+      "native_build": {
+        "model": "stonkfly-dual-compartment-v1",
+        "source_sha256": "e2d4d584f4633613277bb1bf6ea7ba20855c01a332ae2e9344ed7782604c8509",
+        "binary_sha256": "9c0768fc4f8e34ba730a31ef04a5de958e7d4276c1552f30ec6f2c2eddbfa1b1",
+        "flags": [
+          "-O3",
+          "-std=c++17",
+          "-shared",
+          "-fPIC"
+        ]
+      },
+      "upstream_commit": "78ef3e05ab0fa086032098558d893667068944a0",
+      "seconds": 15.050635729999996,
+      "events": [
+        {
+          "side": "BUY",
+          "left_hz": 30.0,
+          "right_hz": 38.0,
+          "difference_hz": 8.0,
+          "gate_spikes": 31,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 500.0,
+          "compute_seconds": 1.541944928999989,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 16,
+          "KC_spikes": 14,
+          "total_spikes": 362898,
+          "spike_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+          "input_sha256": "77bc6b7f69ed101fed1672833465d77c483e36fdbcf80b0281b44f36e1fa9aa7",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 0,
+            "mean_efficacy": 1.0,
+            "minimum_efficacy": 1.0,
+            "sha256": "9f9c000fb9819eb99c214cc1da747d44e13f009bc4c3454f6b7dfe4ee669acf7",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "plasticity_enabled": false,
+            "changed_edges": 0,
+            "weight_delta_l2": 0.0,
+            "max_abs_delta": 0.0,
+            "efficacy_min": 1.0,
+            "efficacy_max": 1.0,
+            "clipped_edges": 0
+          },
+          "phase": "replay",
+          "phase_step": 1,
+          "market_decision_ts": 1789212900,
+          "input_preset": "recorded_market",
+          "input_news": "none",
+          "activity_boundary": {
+            "mode": "initial",
+            "requested_mode": "full",
+            "observation": 1,
+            "target_fields": [],
+            "before_clock": {
+              "cursor": 0,
+              "sim_ms": 0.0,
+              "total_spikes": 0
+            },
+            "after_clock": {
+              "cursor": 0,
+              "sim_ms": 0.0,
+              "total_spikes": 0
+            },
+            "artifact_sha256": "141a5a129c0cf4c7733f1fb61d5962bdc941c021cfddda2316b6570c65e9dfc3",
+            "all_weight_sha256": "40a2e78d7299197d24ba03a24c94a8e1cd0eb45a653d69f001fc3acee2fdc779",
+            "memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+            "changed_fields": [],
+            "before_sha256": {
+              "v": "275bd935e4f1a56cbc2ca22b8f258f1cef511894f42f531e9a52476dd7b02946",
+              "g": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "refractory": "fe721ce07571ce5e6d09fc093440dfdbca4d3e360d5ddf903e3641aa4c6d0977",
+              "drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "previous_drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "queue": "56185bbe1f2586ea5668c759f2396dc7693f8b3b21d7015d24db8f37c2958453",
+              "queue_count": "f2c0d5456a983ecd12e314fcfa19879179fc8424343baeb1325457472ae85601",
+              "counts": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "luminance": "c411c207fb379b3beccac216c633ae620c51f23c78971c7d028d0266aee0cdc7",
+              "active": "bd5ad58a15d4ad9db612f07addacd70bf96d075969aa35f0c4a9e159124b5c26",
+              "active_flag": "557e5066485a8948d9ba5408da8359bdea92f316cc4574af08427bb77dd3a23e",
+              "nactive": "bc1b961d22c114f540586ed92bd23822a05caa6b98e73413f41f13e2b0deac6d",
+              "last": "543e44862a6bae300a72f840ceff3f11ac91905d58b046fb6ffbd4653c0b052c",
+              "eligibility": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "eligibility_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "modulation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "modulation_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "adaptation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "rate_kc": "9cf5a5bbc54b97f49e0c591d653fd61cadc8b2d88dbc2fde77c0035b7c42055d",
+              "rate_dan": "b707241545a346265aab1ffb32ff64b55bf8f8dc1b56a46ef33ce3d15db11d33",
+              "r8_light": "ac0a4091bbd9d73854a2d4a2944b5f8bb40cd7039d89d5575cb2629710c8c160"
+            },
+            "after_sha256": {
+              "v": "275bd935e4f1a56cbc2ca22b8f258f1cef511894f42f531e9a52476dd7b02946",
+              "g": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "refractory": "fe721ce07571ce5e6d09fc093440dfdbca4d3e360d5ddf903e3641aa4c6d0977",
+              "drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "previous_drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "queue": "56185bbe1f2586ea5668c759f2396dc7693f8b3b21d7015d24db8f37c2958453",
+              "queue_count": "f2c0d5456a983ecd12e314fcfa19879179fc8424343baeb1325457472ae85601",
+              "counts": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "luminance": "c411c207fb379b3beccac216c633ae620c51f23c78971c7d028d0266aee0cdc7",
+              "active": "bd5ad58a15d4ad9db612f07addacd70bf96d075969aa35f0c4a9e159124b5c26",
+              "active_flag": "557e5066485a8948d9ba5408da8359bdea92f316cc4574af08427bb77dd3a23e",
+              "nactive": "bc1b961d22c114f540586ed92bd23822a05caa6b98e73413f41f13e2b0deac6d",
+              "last": "543e44862a6bae300a72f840ceff3f11ac91905d58b046fb6ffbd4653c0b052c",
+              "eligibility": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "eligibility_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "modulation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "modulation_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "adaptation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "rate_kc": "9cf5a5bbc54b97f49e0c591d653fd61cadc8b2d88dbc2fde77c0035b7c42055d",
+              "rate_dan": "b707241545a346265aab1ffb32ff64b55bf8f8dc1b56a46ef33ce3d15db11d33",
+              "r8_light": "ac0a4091bbd9d73854a2d4a2944b5f8bb40cd7039d89d5575cb2629710c8c160"
+            }
+          }
+        },
+        {
+          "side": "BUY",
+          "left_hz": 28.0,
+          "right_hz": 40.0,
+          "difference_hz": 12.0,
+          "gate_spikes": 23,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 500.0,
+          "compute_seconds": 1.5973735849999429,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 21,
+          "KC_spikes": 16,
+          "total_spikes": 371123,
+          "spike_sha256": "23dc568d6240f0dbb30dce25d52388db002d2a87c7bbb30b93346b1ed98f532f",
+          "input_sha256": "0758728838cf369025d4ffbff13f8c1c826722a6a42f9391bc3ea10b98b6a4f2",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 0,
+            "mean_efficacy": 1.0,
+            "minimum_efficacy": 1.0,
+            "sha256": "9f9c000fb9819eb99c214cc1da747d44e13f009bc4c3454f6b7dfe4ee669acf7",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "plasticity_enabled": false,
+            "changed_edges": 0,
+            "weight_delta_l2": 0.0,
+            "max_abs_delta": 0.0,
+            "efficacy_min": 1.0,
+            "efficacy_max": 1.0,
+            "clipped_edges": 0
+          },
+          "phase": "replay",
+          "phase_step": 2,
+          "market_decision_ts": 1789213200,
+          "input_preset": "recorded_market",
+          "input_news": "none",
+          "activity_boundary": {
+            "mode": "full",
+            "requested_mode": "full",
+            "observation": 2,
+            "target_fields": [
+              "v",
+              "g",
+              "refractory",
+              "drive",
+              "previous_drive",
+              "queue",
+              "queue_count",
+              "counts",
+              "luminance",
+              "active",
+              "active_flag",
+              "nactive",
+              "last",
+              "eligibility",
+              "eligibility_last",
+              "modulation",
+              "modulation_last",
+              "adaptation",
+              "rate_kc",
+              "rate_dan",
+              "r8_light"
+            ],
+            "before_clock": {
+              "cursor": 5000,
+              "sim_ms": 500.0,
+              "total_spikes": 362898
+            },
+            "after_clock": {
+              "cursor": 0,
+              "sim_ms": 0.0,
+              "total_spikes": 0
+            },
+            "artifact_sha256": "82b35e34e36fd9d674abfacaef47f3da821d3482b6497f65ceb6d729170ad612",
+            "all_weight_sha256": "40a2e78d7299197d24ba03a24c94a8e1cd0eb45a653d69f001fc3acee2fdc779",
+            "memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+            "changed_fields": [
+              "v",
+              "g",
+              "refractory",
+              "drive",
+              "previous_drive",
+              "queue",
+              "queue_count",
+              "counts",
+              "luminance",
+              "active",
+              "active_flag",
+              "nactive",
+              "last",
+              "eligibility",
+              "eligibility_last",
+              "modulation",
+              "modulation_last",
+              "adaptation",
+              "rate_kc",
+              "rate_dan",
+              "r8_light"
+            ],
+            "before_sha256": {
+              "v": "ad0f89a6bdd1b74e7e08b10e44351d3eb9f95844a4e4a555e1af052f1f22d07b",
+              "g": "edab5bcbed53745eeb0e765101584be5552dcc6b98d17271e16d42b50eee8b26",
+              "refractory": "21d0b999e95b0d4e583550086b2d2282e71471ebf34eeaa9ed00152d0bc00892",
+              "drive": "178d1ea6b19908a717fa6bfe6b560853ddf48ec60e11c03dda8d950ac45bf7e8",
+              "previous_drive": "178d1ea6b19908a717fa6bfe6b560853ddf48ec60e11c03dda8d950ac45bf7e8",
+              "queue": "86471c78f9e7186ab3842a6291202eb189d20d5499a64deeaaa76dabf4716993",
+              "queue_count": "b78efe9218059da48a9427a6f476e20684ddf92b50285f8144f596be2d7b8c20",
+              "counts": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+              "luminance": "e8841fa6b7c62be68b105512f345feab708d7fa973421fb45f6fc46a40c9e1ae",
+              "active": "4f8edfeffbecf6adb1c95f12c18e2a8d8dc36ea97fdd9cd220deb6f3e2041908",
+              "active_flag": "0dc3e4c0418c1a15908285a33503916835930fe9d779510b573edb636f23f71a",
+              "nactive": "515329d3e7d99208c83d8c2631c64d92d6f396bb5a3d8573df0bde7bb07154e8",
+              "last": "4112e44a3a9c24b3c8165aea46f24334d137182659f38a2c313bb1b414e653c2",
+              "eligibility": "6cd34b5af05f1a664d2284ee58e1f5525e59c0015b3f1540b6f23a9a18e9f34c",
+              "eligibility_last": "708b0bfdbcecf03572772a07f27b703011ef67d0b30db5c1b05859cbcd05f0a5",
+              "modulation": "64b0ea847764f83d482b274d639c6e24fbe992c87e2021d3ff0cc54d0743a18c",
+              "modulation_last": "579dda9bb98d55d969a1f126a0262ceb0bc0888996d6698de09f0d13844b2e89",
+              "adaptation": "f89b8c6cc06a58e2fe71c4b1414e5a66793c12c2f128e0e4012ab45a25d506b1",
+              "rate_kc": "0e71ecdab90ec8a8ed1ab336704c91a93dc8efc55540e207e1cc7c4a38bb2e38",
+              "rate_dan": "938c302244e1010dbb54305baee88b1d3ca88f1f1ff7b8524fde6fdc74f7f32b",
+              "r8_light": "5c293d9874a4e8cb789d4d3c01e414bff98d9a6326a34270c09ce50900cb368f"
+            },
+            "after_sha256": {
+              "v": "275bd935e4f1a56cbc2ca22b8f258f1cef511894f42f531e9a52476dd7b02946",
+              "g": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "refractory": "fe721ce07571ce5e6d09fc093440dfdbca4d3e360d5ddf903e3641aa4c6d0977",
+              "drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "previous_drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "queue": "56185bbe1f2586ea5668c759f2396dc7693f8b3b21d7015d24db8f37c2958453",
+              "queue_count": "f2c0d5456a983ecd12e314fcfa19879179fc8424343baeb1325457472ae85601",
+              "counts": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "luminance": "c411c207fb379b3beccac216c633ae620c51f23c78971c7d028d0266aee0cdc7",
+              "active": "bd5ad58a15d4ad9db612f07addacd70bf96d075969aa35f0c4a9e159124b5c26",
+              "active_flag": "557e5066485a8948d9ba5408da8359bdea92f316cc4574af08427bb77dd3a23e",
+              "nactive": "bc1b961d22c114f540586ed92bd23822a05caa6b98e73413f41f13e2b0deac6d",
+              "last": "543e44862a6bae300a72f840ceff3f11ac91905d58b046fb6ffbd4653c0b052c",
+              "eligibility": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "eligibility_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "modulation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "modulation_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "adaptation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "rate_kc": "9cf5a5bbc54b97f49e0c591d653fd61cadc8b2d88dbc2fde77c0035b7c42055d",
+              "rate_dan": "b707241545a346265aab1ffb32ff64b55bf8f8dc1b56a46ef33ce3d15db11d33",
+              "r8_light": "ac0a4091bbd9d73854a2d4a2944b5f8bb40cd7039d89d5575cb2629710c8c160"
+            }
+          }
+        },
+        {
+          "side": "BUY",
+          "left_hz": 30.0,
+          "right_hz": 38.0,
+          "difference_hz": 8.0,
+          "gate_spikes": 18,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 500.0,
+          "compute_seconds": 1.6762449900000291,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 29,
+          "KC_spikes": 16,
+          "total_spikes": 378259,
+          "spike_sha256": "2ad875ac3e4f52de99683117a303db394da66d2119b3aeca48cad5989880f6b9",
+          "input_sha256": "c9c6c5e50d923ce6c302246c96b984528b5af0f116894c6b787ca6bf376aadf1",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 0,
+            "mean_efficacy": 1.0,
+            "minimum_efficacy": 1.0,
+            "sha256": "9f9c000fb9819eb99c214cc1da747d44e13f009bc4c3454f6b7dfe4ee669acf7",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "plasticity_enabled": false,
+            "changed_edges": 0,
+            "weight_delta_l2": 0.0,
+            "max_abs_delta": 0.0,
+            "efficacy_min": 1.0,
+            "efficacy_max": 1.0,
+            "clipped_edges": 0
+          },
+          "phase": "replay",
+          "phase_step": 3,
+          "market_decision_ts": 1789213500,
+          "input_preset": "recorded_market",
+          "input_news": "none",
+          "activity_boundary": {
+            "mode": "full",
+            "requested_mode": "full",
+            "observation": 3,
+            "target_fields": [
+              "v",
+              "g",
+              "refractory",
+              "drive",
+              "previous_drive",
+              "queue",
+              "queue_count",
+              "counts",
+              "luminance",
+              "active",
+              "active_flag",
+              "nactive",
+              "last",
+              "eligibility",
+              "eligibility_last",
+              "modulation",
+              "modulation_last",
+              "adaptation",
+              "rate_kc",
+              "rate_dan",
+              "r8_light"
+            ],
+            "before_clock": {
+              "cursor": 5000,
+              "sim_ms": 500.0,
+              "total_spikes": 371123
+            },
+            "after_clock": {
+              "cursor": 0,
+              "sim_ms": 0.0,
+              "total_spikes": 0
+            },
+            "artifact_sha256": "371c28c8fd75b54f00c6b292abea76e747c9d54f45f2f261e9a942e9b4c16903",
+            "all_weight_sha256": "40a2e78d7299197d24ba03a24c94a8e1cd0eb45a653d69f001fc3acee2fdc779",
+            "memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+            "changed_fields": [
+              "v",
+              "g",
+              "refractory",
+              "drive",
+              "previous_drive",
+              "queue",
+              "queue_count",
+              "counts",
+              "luminance",
+              "active",
+              "active_flag",
+              "nactive",
+              "last",
+              "eligibility",
+              "eligibility_last",
+              "modulation",
+              "modulation_last",
+              "adaptation",
+              "rate_kc",
+              "rate_dan",
+              "r8_light"
+            ],
+            "before_sha256": {
+              "v": "3ce9f27d0782ddaccea6b5ce2c1510696a55d02705b26ec913cb903a57a03934",
+              "g": "b8d0ecd1bebd8b9acf999f2387c799f7004483b2034631c81084f03f4508ad10",
+              "refractory": "ea714bd1c4e06093587f62ca58c4a3edbb190af5239ad881381ad33583d7f2d4",
+              "drive": "0af84f5a1bd9a26c86fe5e79c40bcd63a405f71bdfd1bf0a3af810339fb4ece3",
+              "previous_drive": "0af84f5a1bd9a26c86fe5e79c40bcd63a405f71bdfd1bf0a3af810339fb4ece3",
+              "queue": "d228470e27d4a7e6e82f0fbef334306f04570dd9f2e8a7206e9510c3a3a21f64",
+              "queue_count": "b16f317e7525574005ab4b369e381d1f5e5cf57d98fb43f1b444663672b05fca",
+              "counts": "23dc568d6240f0dbb30dce25d52388db002d2a87c7bbb30b93346b1ed98f532f",
+              "luminance": "e5cb1b7bfcf795e4fe959402e5ec63fe9ba9cbea88c1171eeda8696380720c95",
+              "active": "0d636e7d28121803c7ea1eefee0cbc6ef088fa2f87f0f2c115b552a50184ee43",
+              "active_flag": "d5e8de58100a314fdc8291a8fcf138435ff70cbbb39a35fa8d1e0505b1f44940",
+              "nactive": "0d09b476a61133e1b8b06d3d4557634462dc26a9694390d87889bc986f1626eb",
+              "last": "4112e44a3a9c24b3c8165aea46f24334d137182659f38a2c313bb1b414e653c2",
+              "eligibility": "517206b7b0455ab826a7662396144587ff9c6975cf575306312b1526147c7160",
+              "eligibility_last": "fd349f2849c2b549cd0fd7b01b162ba54e89068197f29fb7b2179fb403193fc0",
+              "modulation": "9affb316e0c8670a74573bbec723347a75b3ea5a49431694d49cb2629691987e",
+              "modulation_last": "7eda7465935cff7e66207e7ea797c92d80d4745f9af8e154c0075ca6e8ce9986",
+              "adaptation": "b87fd659b5b563027b2a5937dabaf518a00414d4f2e1eba1b03ceda49d4d0d8e",
+              "rate_kc": "4571a02166dc584983e467120cf1385251e9511e23c78541be0bb7f55d55f553",
+              "rate_dan": "9f0c8e388402fe443b9e01005933e55d579d60194fa2d24f11051928ace1a7cc",
+              "r8_light": "1f6c2c33fb2a74c6508e2adf4485d2cf2ec91332afde63137a055771b4cf7e83"
+            },
+            "after_sha256": {
+              "v": "275bd935e4f1a56cbc2ca22b8f258f1cef511894f42f531e9a52476dd7b02946",
+              "g": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "refractory": "fe721ce07571ce5e6d09fc093440dfdbca4d3e360d5ddf903e3641aa4c6d0977",
+              "drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "previous_drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "queue": "56185bbe1f2586ea5668c759f2396dc7693f8b3b21d7015d24db8f37c2958453",
+              "queue_count": "f2c0d5456a983ecd12e314fcfa19879179fc8424343baeb1325457472ae85601",
+              "counts": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "luminance": "c411c207fb379b3beccac216c633ae620c51f23c78971c7d028d0266aee0cdc7",
+              "active": "bd5ad58a15d4ad9db612f07addacd70bf96d075969aa35f0c4a9e159124b5c26",
+              "active_flag": "557e5066485a8948d9ba5408da8359bdea92f316cc4574af08427bb77dd3a23e",
+              "nactive": "bc1b961d22c114f540586ed92bd23822a05caa6b98e73413f41f13e2b0deac6d",
+              "last": "543e44862a6bae300a72f840ceff3f11ac91905d58b046fb6ffbd4653c0b052c",
+              "eligibility": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "eligibility_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "modulation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "modulation_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "adaptation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "rate_kc": "9cf5a5bbc54b97f49e0c591d653fd61cadc8b2d88dbc2fde77c0035b7c42055d",
+              "rate_dan": "b707241545a346265aab1ffb32ff64b55bf8f8dc1b56a46ef33ce3d15db11d33",
+              "r8_light": "ac0a4091bbd9d73854a2d4a2944b5f8bb40cd7039d89d5575cb2629710c8c160"
+            }
+          }
+        }
+      ],
+      "initial_memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+      "final_memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+      "training_memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+      "reference_report_sha256": "038e6f2c69c00a60ab88d89340cf1f85cc7b75e9a3fc8567e1d284cf90ce01e3",
+      "plan_sha256": "3896dedeacf436b240c3f29e4ebfc656410c868dbeab45ac8c33537b70cbc19a",
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "interpretation": "Post hoc mechanism experiment. Full retained graph and fixed decoder. All eight conditions reported; no account, P&L, policy selection, or live deployment. Resetting dynamics is a controlled intervention, not a claim of biological recovery or profitable learning."
+    },
+    "trained_full": {
+      "schema": 1,
+      "source": "matched_market_stimulus_assay",
+      "config": {
+        "preset": "recorded_market",
+        "view": "original",
+        "news": "none",
+        "eta": 0.001,
+        "learning": false,
+        "pulses": "none",
+        "memory": "trained",
+        "state_reset": "full"
+      },
+      "graph": {
+        "neurons": 166700,
+        "edges": 25582938,
+        "plastic_edges": 7835
+      },
+      "native_build": {
+        "model": "stonkfly-dual-compartment-v1",
+        "source_sha256": "e2d4d584f4633613277bb1bf6ea7ba20855c01a332ae2e9344ed7782604c8509",
+        "binary_sha256": "9c0768fc4f8e34ba730a31ef04a5de958e7d4276c1552f30ec6f2c2eddbfa1b1",
+        "flags": [
+          "-O3",
+          "-std=c++17",
+          "-shared",
+          "-fPIC"
+        ]
+      },
+      "upstream_commit": "78ef3e05ab0fa086032098558d893667068944a0",
+      "seconds": 15.273219131999994,
+      "events": [
+        {
+          "side": "BUY",
+          "left_hz": 30.0,
+          "right_hz": 38.0,
+          "difference_hz": 8.0,
+          "gate_spikes": 31,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 500.0,
+          "compute_seconds": 1.452583199000074,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 16,
+          "KC_spikes": 14,
+          "total_spikes": 362898,
+          "spike_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+          "input_sha256": "77bc6b7f69ed101fed1672833465d77c483e36fdbcf80b0281b44f36e1fa9aa7",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 3066,
+            "mean_efficacy": 1.0002872943878174,
+            "minimum_efficacy": 0.6515528559684753,
+            "sha256": "7ab38ccccb0396c7cc1939e0ad9a2db1dc3cdf82e1f495aa902c55501c369675",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "plasticity_enabled": false,
+            "changed_edges": 0,
+            "weight_delta_l2": 0.0,
+            "max_abs_delta": 0.0,
+            "efficacy_min": 0.6515528495489835,
+            "efficacy_max": 1.1017670896185976,
+            "clipped_edges": 0
+          },
+          "phase": "replay",
+          "phase_step": 1,
+          "market_decision_ts": 1789212900,
+          "input_preset": "recorded_market",
+          "input_news": "none",
+          "activity_boundary": {
+            "mode": "initial",
+            "requested_mode": "full",
+            "observation": 1,
+            "target_fields": [],
+            "before_clock": {
+              "cursor": 0,
+              "sim_ms": 0.0,
+              "total_spikes": 0
+            },
+            "after_clock": {
+              "cursor": 0,
+              "sim_ms": 0.0,
+              "total_spikes": 0
+            },
+            "artifact_sha256": "cd133555b7eca8a200afe9d1614b838ea340b8774a127e7454c48be78063f834",
+            "all_weight_sha256": "04b44b1fc2f88f3576c7c95c7d75a414e204a2b6fdfe1dfbb51f46a73206efc6",
+            "memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+            "changed_fields": [],
+            "before_sha256": {
+              "v": "275bd935e4f1a56cbc2ca22b8f258f1cef511894f42f531e9a52476dd7b02946",
+              "g": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "refractory": "fe721ce07571ce5e6d09fc093440dfdbca4d3e360d5ddf903e3641aa4c6d0977",
+              "drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "previous_drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "queue": "56185bbe1f2586ea5668c759f2396dc7693f8b3b21d7015d24db8f37c2958453",
+              "queue_count": "f2c0d5456a983ecd12e314fcfa19879179fc8424343baeb1325457472ae85601",
+              "counts": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "luminance": "c411c207fb379b3beccac216c633ae620c51f23c78971c7d028d0266aee0cdc7",
+              "active": "bd5ad58a15d4ad9db612f07addacd70bf96d075969aa35f0c4a9e159124b5c26",
+              "active_flag": "557e5066485a8948d9ba5408da8359bdea92f316cc4574af08427bb77dd3a23e",
+              "nactive": "bc1b961d22c114f540586ed92bd23822a05caa6b98e73413f41f13e2b0deac6d",
+              "last": "543e44862a6bae300a72f840ceff3f11ac91905d58b046fb6ffbd4653c0b052c",
+              "eligibility": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "eligibility_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "modulation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "modulation_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "adaptation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "rate_kc": "9cf5a5bbc54b97f49e0c591d653fd61cadc8b2d88dbc2fde77c0035b7c42055d",
+              "rate_dan": "b707241545a346265aab1ffb32ff64b55bf8f8dc1b56a46ef33ce3d15db11d33",
+              "r8_light": "ac0a4091bbd9d73854a2d4a2944b5f8bb40cd7039d89d5575cb2629710c8c160"
+            },
+            "after_sha256": {
+              "v": "275bd935e4f1a56cbc2ca22b8f258f1cef511894f42f531e9a52476dd7b02946",
+              "g": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "refractory": "fe721ce07571ce5e6d09fc093440dfdbca4d3e360d5ddf903e3641aa4c6d0977",
+              "drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "previous_drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "queue": "56185bbe1f2586ea5668c759f2396dc7693f8b3b21d7015d24db8f37c2958453",
+              "queue_count": "f2c0d5456a983ecd12e314fcfa19879179fc8424343baeb1325457472ae85601",
+              "counts": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "luminance": "c411c207fb379b3beccac216c633ae620c51f23c78971c7d028d0266aee0cdc7",
+              "active": "bd5ad58a15d4ad9db612f07addacd70bf96d075969aa35f0c4a9e159124b5c26",
+              "active_flag": "557e5066485a8948d9ba5408da8359bdea92f316cc4574af08427bb77dd3a23e",
+              "nactive": "bc1b961d22c114f540586ed92bd23822a05caa6b98e73413f41f13e2b0deac6d",
+              "last": "543e44862a6bae300a72f840ceff3f11ac91905d58b046fb6ffbd4653c0b052c",
+              "eligibility": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "eligibility_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "modulation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "modulation_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "adaptation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "rate_kc": "9cf5a5bbc54b97f49e0c591d653fd61cadc8b2d88dbc2fde77c0035b7c42055d",
+              "rate_dan": "b707241545a346265aab1ffb32ff64b55bf8f8dc1b56a46ef33ce3d15db11d33",
+              "r8_light": "ac0a4091bbd9d73854a2d4a2944b5f8bb40cd7039d89d5575cb2629710c8c160"
+            }
+          }
+        },
+        {
+          "side": "BUY",
+          "left_hz": 28.0,
+          "right_hz": 40.0,
+          "difference_hz": 12.0,
+          "gate_spikes": 23,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 500.0,
+          "compute_seconds": 1.6014316400000013,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 21,
+          "KC_spikes": 16,
+          "total_spikes": 371123,
+          "spike_sha256": "23dc568d6240f0dbb30dce25d52388db002d2a87c7bbb30b93346b1ed98f532f",
+          "input_sha256": "0758728838cf369025d4ffbff13f8c1c826722a6a42f9391bc3ea10b98b6a4f2",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 3066,
+            "mean_efficacy": 1.0002872943878174,
+            "minimum_efficacy": 0.6515528559684753,
+            "sha256": "7ab38ccccb0396c7cc1939e0ad9a2db1dc3cdf82e1f495aa902c55501c369675",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "plasticity_enabled": false,
+            "changed_edges": 0,
+            "weight_delta_l2": 0.0,
+            "max_abs_delta": 0.0,
+            "efficacy_min": 0.6515528495489835,
+            "efficacy_max": 1.1017670896185976,
+            "clipped_edges": 0
+          },
+          "phase": "replay",
+          "phase_step": 2,
+          "market_decision_ts": 1789213200,
+          "input_preset": "recorded_market",
+          "input_news": "none",
+          "activity_boundary": {
+            "mode": "full",
+            "requested_mode": "full",
+            "observation": 2,
+            "target_fields": [
+              "v",
+              "g",
+              "refractory",
+              "drive",
+              "previous_drive",
+              "queue",
+              "queue_count",
+              "counts",
+              "luminance",
+              "active",
+              "active_flag",
+              "nactive",
+              "last",
+              "eligibility",
+              "eligibility_last",
+              "modulation",
+              "modulation_last",
+              "adaptation",
+              "rate_kc",
+              "rate_dan",
+              "r8_light"
+            ],
+            "before_clock": {
+              "cursor": 5000,
+              "sim_ms": 500.0,
+              "total_spikes": 362898
+            },
+            "after_clock": {
+              "cursor": 0,
+              "sim_ms": 0.0,
+              "total_spikes": 0
+            },
+            "artifact_sha256": "24544af4e5be5d9c5229a3f2e9b5a8f15c366864fe880c8d912f29778e8d0185",
+            "all_weight_sha256": "04b44b1fc2f88f3576c7c95c7d75a414e204a2b6fdfe1dfbb51f46a73206efc6",
+            "memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+            "changed_fields": [
+              "v",
+              "g",
+              "refractory",
+              "drive",
+              "previous_drive",
+              "queue",
+              "queue_count",
+              "counts",
+              "luminance",
+              "active",
+              "active_flag",
+              "nactive",
+              "last",
+              "eligibility",
+              "eligibility_last",
+              "modulation",
+              "modulation_last",
+              "adaptation",
+              "rate_kc",
+              "rate_dan",
+              "r8_light"
+            ],
+            "before_sha256": {
+              "v": "f25df441181ff4d8fbba3642874fb0fd710fa06737c62f8fdfe897c72fff93bd",
+              "g": "bf864f006c3bcee326b11d56f95e4c4f2a43f2222540fb665b43aac34e0fe1f4",
+              "refractory": "21d0b999e95b0d4e583550086b2d2282e71471ebf34eeaa9ed00152d0bc00892",
+              "drive": "178d1ea6b19908a717fa6bfe6b560853ddf48ec60e11c03dda8d950ac45bf7e8",
+              "previous_drive": "178d1ea6b19908a717fa6bfe6b560853ddf48ec60e11c03dda8d950ac45bf7e8",
+              "queue": "86471c78f9e7186ab3842a6291202eb189d20d5499a64deeaaa76dabf4716993",
+              "queue_count": "b78efe9218059da48a9427a6f476e20684ddf92b50285f8144f596be2d7b8c20",
+              "counts": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+              "luminance": "e8841fa6b7c62be68b105512f345feab708d7fa973421fb45f6fc46a40c9e1ae",
+              "active": "4f8edfeffbecf6adb1c95f12c18e2a8d8dc36ea97fdd9cd220deb6f3e2041908",
+              "active_flag": "0dc3e4c0418c1a15908285a33503916835930fe9d779510b573edb636f23f71a",
+              "nactive": "515329d3e7d99208c83d8c2631c64d92d6f396bb5a3d8573df0bde7bb07154e8",
+              "last": "4112e44a3a9c24b3c8165aea46f24334d137182659f38a2c313bb1b414e653c2",
+              "eligibility": "6cd34b5af05f1a664d2284ee58e1f5525e59c0015b3f1540b6f23a9a18e9f34c",
+              "eligibility_last": "708b0bfdbcecf03572772a07f27b703011ef67d0b30db5c1b05859cbcd05f0a5",
+              "modulation": "64b0ea847764f83d482b274d639c6e24fbe992c87e2021d3ff0cc54d0743a18c",
+              "modulation_last": "579dda9bb98d55d969a1f126a0262ceb0bc0888996d6698de09f0d13844b2e89",
+              "adaptation": "f89b8c6cc06a58e2fe71c4b1414e5a66793c12c2f128e0e4012ab45a25d506b1",
+              "rate_kc": "0e71ecdab90ec8a8ed1ab336704c91a93dc8efc55540e207e1cc7c4a38bb2e38",
+              "rate_dan": "938c302244e1010dbb54305baee88b1d3ca88f1f1ff7b8524fde6fdc74f7f32b",
+              "r8_light": "5c293d9874a4e8cb789d4d3c01e414bff98d9a6326a34270c09ce50900cb368f"
+            },
+            "after_sha256": {
+              "v": "275bd935e4f1a56cbc2ca22b8f258f1cef511894f42f531e9a52476dd7b02946",
+              "g": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "refractory": "fe721ce07571ce5e6d09fc093440dfdbca4d3e360d5ddf903e3641aa4c6d0977",
+              "drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "previous_drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "queue": "56185bbe1f2586ea5668c759f2396dc7693f8b3b21d7015d24db8f37c2958453",
+              "queue_count": "f2c0d5456a983ecd12e314fcfa19879179fc8424343baeb1325457472ae85601",
+              "counts": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "luminance": "c411c207fb379b3beccac216c633ae620c51f23c78971c7d028d0266aee0cdc7",
+              "active": "bd5ad58a15d4ad9db612f07addacd70bf96d075969aa35f0c4a9e159124b5c26",
+              "active_flag": "557e5066485a8948d9ba5408da8359bdea92f316cc4574af08427bb77dd3a23e",
+              "nactive": "bc1b961d22c114f540586ed92bd23822a05caa6b98e73413f41f13e2b0deac6d",
+              "last": "543e44862a6bae300a72f840ceff3f11ac91905d58b046fb6ffbd4653c0b052c",
+              "eligibility": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "eligibility_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "modulation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "modulation_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "adaptation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "rate_kc": "9cf5a5bbc54b97f49e0c591d653fd61cadc8b2d88dbc2fde77c0035b7c42055d",
+              "rate_dan": "b707241545a346265aab1ffb32ff64b55bf8f8dc1b56a46ef33ce3d15db11d33",
+              "r8_light": "ac0a4091bbd9d73854a2d4a2944b5f8bb40cd7039d89d5575cb2629710c8c160"
+            }
+          }
+        },
+        {
+          "side": "BUY",
+          "left_hz": 30.0,
+          "right_hz": 38.0,
+          "difference_hz": 8.0,
+          "gate_spikes": 18,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 500.0,
+          "compute_seconds": 1.8352797599999349,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 29,
+          "KC_spikes": 16,
+          "total_spikes": 378259,
+          "spike_sha256": "2ad875ac3e4f52de99683117a303db394da66d2119b3aeca48cad5989880f6b9",
+          "input_sha256": "c9c6c5e50d923ce6c302246c96b984528b5af0f116894c6b787ca6bf376aadf1",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 3066,
+            "mean_efficacy": 1.0002872943878174,
+            "minimum_efficacy": 0.6515528559684753,
+            "sha256": "7ab38ccccb0396c7cc1939e0ad9a2db1dc3cdf82e1f495aa902c55501c369675",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "plasticity_enabled": false,
+            "changed_edges": 0,
+            "weight_delta_l2": 0.0,
+            "max_abs_delta": 0.0,
+            "efficacy_min": 0.6515528495489835,
+            "efficacy_max": 1.1017670896185976,
+            "clipped_edges": 0
+          },
+          "phase": "replay",
+          "phase_step": 3,
+          "market_decision_ts": 1789213500,
+          "input_preset": "recorded_market",
+          "input_news": "none",
+          "activity_boundary": {
+            "mode": "full",
+            "requested_mode": "full",
+            "observation": 3,
+            "target_fields": [
+              "v",
+              "g",
+              "refractory",
+              "drive",
+              "previous_drive",
+              "queue",
+              "queue_count",
+              "counts",
+              "luminance",
+              "active",
+              "active_flag",
+              "nactive",
+              "last",
+              "eligibility",
+              "eligibility_last",
+              "modulation",
+              "modulation_last",
+              "adaptation",
+              "rate_kc",
+              "rate_dan",
+              "r8_light"
+            ],
+            "before_clock": {
+              "cursor": 5000,
+              "sim_ms": 500.0,
+              "total_spikes": 371123
+            },
+            "after_clock": {
+              "cursor": 0,
+              "sim_ms": 0.0,
+              "total_spikes": 0
+            },
+            "artifact_sha256": "6d1727bca045f3b17dd9ffd229b305345d1c47fde3d64221cac7e41b72066d48",
+            "all_weight_sha256": "04b44b1fc2f88f3576c7c95c7d75a414e204a2b6fdfe1dfbb51f46a73206efc6",
+            "memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+            "changed_fields": [
+              "v",
+              "g",
+              "refractory",
+              "drive",
+              "previous_drive",
+              "queue",
+              "queue_count",
+              "counts",
+              "luminance",
+              "active",
+              "active_flag",
+              "nactive",
+              "last",
+              "eligibility",
+              "eligibility_last",
+              "modulation",
+              "modulation_last",
+              "adaptation",
+              "rate_kc",
+              "rate_dan",
+              "r8_light"
+            ],
+            "before_sha256": {
+              "v": "0090db407f55ce884f3be624a7a3f6fa711836ce672a3904411080072dcef4b6",
+              "g": "889b67cc2ca5d20d10f0e34d9633f4c3fd98040f21ae48d74e351209843a0338",
+              "refractory": "ea714bd1c4e06093587f62ca58c4a3edbb190af5239ad881381ad33583d7f2d4",
+              "drive": "0af84f5a1bd9a26c86fe5e79c40bcd63a405f71bdfd1bf0a3af810339fb4ece3",
+              "previous_drive": "0af84f5a1bd9a26c86fe5e79c40bcd63a405f71bdfd1bf0a3af810339fb4ece3",
+              "queue": "d228470e27d4a7e6e82f0fbef334306f04570dd9f2e8a7206e9510c3a3a21f64",
+              "queue_count": "b16f317e7525574005ab4b369e381d1f5e5cf57d98fb43f1b444663672b05fca",
+              "counts": "23dc568d6240f0dbb30dce25d52388db002d2a87c7bbb30b93346b1ed98f532f",
+              "luminance": "e5cb1b7bfcf795e4fe959402e5ec63fe9ba9cbea88c1171eeda8696380720c95",
+              "active": "9bc920d78ca22cb2788c1ada97a96f4611294f67c19d38908c0e9274bbdcfdb6",
+              "active_flag": "d5e8de58100a314fdc8291a8fcf138435ff70cbbb39a35fa8d1e0505b1f44940",
+              "nactive": "0d09b476a61133e1b8b06d3d4557634462dc26a9694390d87889bc986f1626eb",
+              "last": "4112e44a3a9c24b3c8165aea46f24334d137182659f38a2c313bb1b414e653c2",
+              "eligibility": "517206b7b0455ab826a7662396144587ff9c6975cf575306312b1526147c7160",
+              "eligibility_last": "fd349f2849c2b549cd0fd7b01b162ba54e89068197f29fb7b2179fb403193fc0",
+              "modulation": "9affb316e0c8670a74573bbec723347a75b3ea5a49431694d49cb2629691987e",
+              "modulation_last": "7eda7465935cff7e66207e7ea797c92d80d4745f9af8e154c0075ca6e8ce9986",
+              "adaptation": "b87fd659b5b563027b2a5937dabaf518a00414d4f2e1eba1b03ceda49d4d0d8e",
+              "rate_kc": "4571a02166dc584983e467120cf1385251e9511e23c78541be0bb7f55d55f553",
+              "rate_dan": "9f0c8e388402fe443b9e01005933e55d579d60194fa2d24f11051928ace1a7cc",
+              "r8_light": "1f6c2c33fb2a74c6508e2adf4485d2cf2ec91332afde63137a055771b4cf7e83"
+            },
+            "after_sha256": {
+              "v": "275bd935e4f1a56cbc2ca22b8f258f1cef511894f42f531e9a52476dd7b02946",
+              "g": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "refractory": "fe721ce07571ce5e6d09fc093440dfdbca4d3e360d5ddf903e3641aa4c6d0977",
+              "drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "previous_drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "queue": "56185bbe1f2586ea5668c759f2396dc7693f8b3b21d7015d24db8f37c2958453",
+              "queue_count": "f2c0d5456a983ecd12e314fcfa19879179fc8424343baeb1325457472ae85601",
+              "counts": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "luminance": "c411c207fb379b3beccac216c633ae620c51f23c78971c7d028d0266aee0cdc7",
+              "active": "bd5ad58a15d4ad9db612f07addacd70bf96d075969aa35f0c4a9e159124b5c26",
+              "active_flag": "557e5066485a8948d9ba5408da8359bdea92f316cc4574af08427bb77dd3a23e",
+              "nactive": "bc1b961d22c114f540586ed92bd23822a05caa6b98e73413f41f13e2b0deac6d",
+              "last": "543e44862a6bae300a72f840ceff3f11ac91905d58b046fb6ffbd4653c0b052c",
+              "eligibility": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "eligibility_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "modulation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "modulation_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "adaptation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "rate_kc": "9cf5a5bbc54b97f49e0c591d653fd61cadc8b2d88dbc2fde77c0035b7c42055d",
+              "rate_dan": "b707241545a346265aab1ffb32ff64b55bf8f8dc1b56a46ef33ce3d15db11d33",
+              "r8_light": "ac0a4091bbd9d73854a2d4a2944b5f8bb40cd7039d89d5575cb2629710c8c160"
+            }
+          }
+        }
+      ],
+      "initial_memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+      "final_memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+      "training_memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+      "reference_report_sha256": "038e6f2c69c00a60ab88d89340cf1f85cc7b75e9a3fc8567e1d284cf90ce01e3",
+      "plan_sha256": "3896dedeacf436b240c3f29e4ebfc656410c868dbeab45ac8c33537b70cbc19a",
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "interpretation": "Post hoc mechanism experiment. Full retained graph and fixed decoder. All eight conditions reported; no account, P&L, policy selection, or live deployment. Resetting dynamics is a controlled intervention, not a claim of biological recovery or profitable learning."
+    },
+    "pristine_visual_filters": {
+      "schema": 1,
+      "source": "matched_market_stimulus_assay",
+      "config": {
+        "preset": "recorded_market",
+        "view": "original",
+        "news": "none",
+        "eta": 0.001,
+        "learning": false,
+        "pulses": "none",
+        "memory": "pristine",
+        "state_reset": "visual_filters"
+      },
+      "graph": {
+        "neurons": 166700,
+        "edges": 25582938,
+        "plastic_edges": 7835
+      },
+      "native_build": {
+        "model": "stonkfly-dual-compartment-v1",
+        "source_sha256": "e2d4d584f4633613277bb1bf6ea7ba20855c01a332ae2e9344ed7782604c8509",
+        "binary_sha256": "9c0768fc4f8e34ba730a31ef04a5de958e7d4276c1552f30ec6f2c2eddbfa1b1",
+        "flags": [
+          "-O3",
+          "-std=c++17",
+          "-shared",
+          "-fPIC"
+        ]
+      },
+      "upstream_commit": "78ef3e05ab0fa086032098558d893667068944a0",
+      "seconds": 19.636443369999995,
+      "events": [
+        {
+          "side": "BUY",
+          "left_hz": 30.0,
+          "right_hz": 38.0,
+          "difference_hz": 8.0,
+          "gate_spikes": 31,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 500.0,
+          "compute_seconds": 1.4271071610000376,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 16,
+          "KC_spikes": 14,
+          "total_spikes": 362898,
+          "spike_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+          "input_sha256": "77bc6b7f69ed101fed1672833465d77c483e36fdbcf80b0281b44f36e1fa9aa7",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 0,
+            "mean_efficacy": 1.0,
+            "minimum_efficacy": 1.0,
+            "sha256": "9f9c000fb9819eb99c214cc1da747d44e13f009bc4c3454f6b7dfe4ee669acf7",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "plasticity_enabled": false,
+            "changed_edges": 0,
+            "weight_delta_l2": 0.0,
+            "max_abs_delta": 0.0,
+            "efficacy_min": 1.0,
+            "efficacy_max": 1.0,
+            "clipped_edges": 0
+          },
+          "phase": "replay",
+          "phase_step": 1,
+          "market_decision_ts": 1789212900,
+          "input_preset": "recorded_market",
+          "input_news": "none",
+          "activity_boundary": {
+            "mode": "initial",
+            "requested_mode": "visual_filters",
+            "observation": 1,
+            "target_fields": [],
+            "before_clock": {
+              "cursor": 0,
+              "sim_ms": 0.0,
+              "total_spikes": 0
+            },
+            "after_clock": {
+              "cursor": 0,
+              "sim_ms": 0.0,
+              "total_spikes": 0
+            },
+            "artifact_sha256": "141a5a129c0cf4c7733f1fb61d5962bdc941c021cfddda2316b6570c65e9dfc3",
+            "all_weight_sha256": "40a2e78d7299197d24ba03a24c94a8e1cd0eb45a653d69f001fc3acee2fdc779",
+            "memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+            "changed_fields": [],
+            "before_sha256": {
+              "v": "275bd935e4f1a56cbc2ca22b8f258f1cef511894f42f531e9a52476dd7b02946",
+              "g": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "refractory": "fe721ce07571ce5e6d09fc093440dfdbca4d3e360d5ddf903e3641aa4c6d0977",
+              "drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "previous_drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "queue": "56185bbe1f2586ea5668c759f2396dc7693f8b3b21d7015d24db8f37c2958453",
+              "queue_count": "f2c0d5456a983ecd12e314fcfa19879179fc8424343baeb1325457472ae85601",
+              "counts": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "luminance": "c411c207fb379b3beccac216c633ae620c51f23c78971c7d028d0266aee0cdc7",
+              "active": "bd5ad58a15d4ad9db612f07addacd70bf96d075969aa35f0c4a9e159124b5c26",
+              "active_flag": "557e5066485a8948d9ba5408da8359bdea92f316cc4574af08427bb77dd3a23e",
+              "nactive": "bc1b961d22c114f540586ed92bd23822a05caa6b98e73413f41f13e2b0deac6d",
+              "last": "543e44862a6bae300a72f840ceff3f11ac91905d58b046fb6ffbd4653c0b052c",
+              "eligibility": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "eligibility_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "modulation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "modulation_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "adaptation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "rate_kc": "9cf5a5bbc54b97f49e0c591d653fd61cadc8b2d88dbc2fde77c0035b7c42055d",
+              "rate_dan": "b707241545a346265aab1ffb32ff64b55bf8f8dc1b56a46ef33ce3d15db11d33",
+              "r8_light": "ac0a4091bbd9d73854a2d4a2944b5f8bb40cd7039d89d5575cb2629710c8c160"
+            },
+            "after_sha256": {
+              "v": "275bd935e4f1a56cbc2ca22b8f258f1cef511894f42f531e9a52476dd7b02946",
+              "g": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "refractory": "fe721ce07571ce5e6d09fc093440dfdbca4d3e360d5ddf903e3641aa4c6d0977",
+              "drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "previous_drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "queue": "56185bbe1f2586ea5668c759f2396dc7693f8b3b21d7015d24db8f37c2958453",
+              "queue_count": "f2c0d5456a983ecd12e314fcfa19879179fc8424343baeb1325457472ae85601",
+              "counts": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "luminance": "c411c207fb379b3beccac216c633ae620c51f23c78971c7d028d0266aee0cdc7",
+              "active": "bd5ad58a15d4ad9db612f07addacd70bf96d075969aa35f0c4a9e159124b5c26",
+              "active_flag": "557e5066485a8948d9ba5408da8359bdea92f316cc4574af08427bb77dd3a23e",
+              "nactive": "bc1b961d22c114f540586ed92bd23822a05caa6b98e73413f41f13e2b0deac6d",
+              "last": "543e44862a6bae300a72f840ceff3f11ac91905d58b046fb6ffbd4653c0b052c",
+              "eligibility": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "eligibility_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "modulation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "modulation_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "adaptation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "rate_kc": "9cf5a5bbc54b97f49e0c591d653fd61cadc8b2d88dbc2fde77c0035b7c42055d",
+              "rate_dan": "b707241545a346265aab1ffb32ff64b55bf8f8dc1b56a46ef33ce3d15db11d33",
+              "r8_light": "ac0a4091bbd9d73854a2d4a2944b5f8bb40cd7039d89d5575cb2629710c8c160"
+            }
+          }
+        },
+        {
+          "side": "SELL",
+          "left_hz": 40.0,
+          "right_hz": 34.0,
+          "difference_hz": -6.0,
+          "gate_spikes": 5,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 1000.0,
+          "compute_seconds": 3.747969272999981,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 1,
+          "aversive_spikes": 77,
+          "KC_spikes": 4832,
+          "total_spikes": 549838,
+          "spike_sha256": "58b9573adbd18e07d0745627718e0757b13dada2b02657335ab0d0b04e9be1f1",
+          "input_sha256": "0758728838cf369025d4ffbff13f8c1c826722a6a42f9391bc3ea10b98b6a4f2",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 0,
+            "mean_efficacy": 1.0,
+            "minimum_efficacy": 1.0,
+            "sha256": "9f9c000fb9819eb99c214cc1da747d44e13f009bc4c3454f6b7dfe4ee669acf7",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "plasticity_enabled": false,
+            "changed_edges": 0,
+            "weight_delta_l2": 0.0,
+            "max_abs_delta": 0.0,
+            "efficacy_min": 1.0,
+            "efficacy_max": 1.0,
+            "clipped_edges": 0
+          },
+          "phase": "replay",
+          "phase_step": 2,
+          "market_decision_ts": 1789213200,
+          "input_preset": "recorded_market",
+          "input_news": "none",
+          "activity_boundary": {
+            "mode": "visual_filters",
+            "requested_mode": "visual_filters",
+            "observation": 2,
+            "target_fields": [
+              "luminance",
+              "r8_light"
+            ],
+            "before_clock": {
+              "cursor": 5000,
+              "sim_ms": 500.0,
+              "total_spikes": 362898
+            },
+            "after_clock": {
+              "cursor": 5000,
+              "sim_ms": 500.0,
+              "total_spikes": 362898
+            },
+            "artifact_sha256": "716a701c7808f0a68690dbc7465ad434c96640652946633c614144224ba2b48d",
+            "all_weight_sha256": "40a2e78d7299197d24ba03a24c94a8e1cd0eb45a653d69f001fc3acee2fdc779",
+            "memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+            "changed_fields": [
+              "luminance",
+              "r8_light"
+            ],
+            "before_sha256": {
+              "v": "ad0f89a6bdd1b74e7e08b10e44351d3eb9f95844a4e4a555e1af052f1f22d07b",
+              "g": "edab5bcbed53745eeb0e765101584be5552dcc6b98d17271e16d42b50eee8b26",
+              "refractory": "21d0b999e95b0d4e583550086b2d2282e71471ebf34eeaa9ed00152d0bc00892",
+              "drive": "178d1ea6b19908a717fa6bfe6b560853ddf48ec60e11c03dda8d950ac45bf7e8",
+              "previous_drive": "178d1ea6b19908a717fa6bfe6b560853ddf48ec60e11c03dda8d950ac45bf7e8",
+              "queue": "86471c78f9e7186ab3842a6291202eb189d20d5499a64deeaaa76dabf4716993",
+              "queue_count": "b78efe9218059da48a9427a6f476e20684ddf92b50285f8144f596be2d7b8c20",
+              "counts": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+              "luminance": "e8841fa6b7c62be68b105512f345feab708d7fa973421fb45f6fc46a40c9e1ae",
+              "active": "4f8edfeffbecf6adb1c95f12c18e2a8d8dc36ea97fdd9cd220deb6f3e2041908",
+              "active_flag": "0dc3e4c0418c1a15908285a33503916835930fe9d779510b573edb636f23f71a",
+              "nactive": "515329d3e7d99208c83d8c2631c64d92d6f396bb5a3d8573df0bde7bb07154e8",
+              "last": "4112e44a3a9c24b3c8165aea46f24334d137182659f38a2c313bb1b414e653c2",
+              "eligibility": "6cd34b5af05f1a664d2284ee58e1f5525e59c0015b3f1540b6f23a9a18e9f34c",
+              "eligibility_last": "708b0bfdbcecf03572772a07f27b703011ef67d0b30db5c1b05859cbcd05f0a5",
+              "modulation": "64b0ea847764f83d482b274d639c6e24fbe992c87e2021d3ff0cc54d0743a18c",
+              "modulation_last": "579dda9bb98d55d969a1f126a0262ceb0bc0888996d6698de09f0d13844b2e89",
+              "adaptation": "f89b8c6cc06a58e2fe71c4b1414e5a66793c12c2f128e0e4012ab45a25d506b1",
+              "rate_kc": "0e71ecdab90ec8a8ed1ab336704c91a93dc8efc55540e207e1cc7c4a38bb2e38",
+              "rate_dan": "938c302244e1010dbb54305baee88b1d3ca88f1f1ff7b8524fde6fdc74f7f32b",
+              "r8_light": "5c293d9874a4e8cb789d4d3c01e414bff98d9a6326a34270c09ce50900cb368f"
+            },
+            "after_sha256": {
+              "v": "ad0f89a6bdd1b74e7e08b10e44351d3eb9f95844a4e4a555e1af052f1f22d07b",
+              "g": "edab5bcbed53745eeb0e765101584be5552dcc6b98d17271e16d42b50eee8b26",
+              "refractory": "21d0b999e95b0d4e583550086b2d2282e71471ebf34eeaa9ed00152d0bc00892",
+              "drive": "178d1ea6b19908a717fa6bfe6b560853ddf48ec60e11c03dda8d950ac45bf7e8",
+              "previous_drive": "178d1ea6b19908a717fa6bfe6b560853ddf48ec60e11c03dda8d950ac45bf7e8",
+              "queue": "86471c78f9e7186ab3842a6291202eb189d20d5499a64deeaaa76dabf4716993",
+              "queue_count": "b78efe9218059da48a9427a6f476e20684ddf92b50285f8144f596be2d7b8c20",
+              "counts": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+              "luminance": "c411c207fb379b3beccac216c633ae620c51f23c78971c7d028d0266aee0cdc7",
+              "active": "4f8edfeffbecf6adb1c95f12c18e2a8d8dc36ea97fdd9cd220deb6f3e2041908",
+              "active_flag": "0dc3e4c0418c1a15908285a33503916835930fe9d779510b573edb636f23f71a",
+              "nactive": "515329d3e7d99208c83d8c2631c64d92d6f396bb5a3d8573df0bde7bb07154e8",
+              "last": "4112e44a3a9c24b3c8165aea46f24334d137182659f38a2c313bb1b414e653c2",
+              "eligibility": "6cd34b5af05f1a664d2284ee58e1f5525e59c0015b3f1540b6f23a9a18e9f34c",
+              "eligibility_last": "708b0bfdbcecf03572772a07f27b703011ef67d0b30db5c1b05859cbcd05f0a5",
+              "modulation": "64b0ea847764f83d482b274d639c6e24fbe992c87e2021d3ff0cc54d0743a18c",
+              "modulation_last": "579dda9bb98d55d969a1f126a0262ceb0bc0888996d6698de09f0d13844b2e89",
+              "adaptation": "f89b8c6cc06a58e2fe71c4b1414e5a66793c12c2f128e0e4012ab45a25d506b1",
+              "rate_kc": "0e71ecdab90ec8a8ed1ab336704c91a93dc8efc55540e207e1cc7c4a38bb2e38",
+              "rate_dan": "938c302244e1010dbb54305baee88b1d3ca88f1f1ff7b8524fde6fdc74f7f32b",
+              "r8_light": "ac0a4091bbd9d73854a2d4a2944b5f8bb40cd7039d89d5575cb2629710c8c160"
+            }
+          }
+        },
+        {
+          "side": "HOLD",
+          "left_hz": 36.0,
+          "right_hz": 44.0,
+          "difference_hz": 8.0,
+          "gate_spikes": 0,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 1500.0,
+          "compute_seconds": 4.356091506000041,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 76,
+          "KC_spikes": 4510,
+          "total_spikes": 604377,
+          "spike_sha256": "db972e1e5b5c8197934cf742028ce6c3300badd934f5384d4fb14d7c9cca5d41",
+          "input_sha256": "c9c6c5e50d923ce6c302246c96b984528b5af0f116894c6b787ca6bf376aadf1",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 0,
+            "mean_efficacy": 1.0,
+            "minimum_efficacy": 1.0,
+            "sha256": "9f9c000fb9819eb99c214cc1da747d44e13f009bc4c3454f6b7dfe4ee669acf7",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "plasticity_enabled": false,
+            "changed_edges": 0,
+            "weight_delta_l2": 0.0,
+            "max_abs_delta": 0.0,
+            "efficacy_min": 1.0,
+            "efficacy_max": 1.0,
+            "clipped_edges": 0
+          },
+          "phase": "replay",
+          "phase_step": 3,
+          "market_decision_ts": 1789213500,
+          "input_preset": "recorded_market",
+          "input_news": "none",
+          "activity_boundary": {
+            "mode": "visual_filters",
+            "requested_mode": "visual_filters",
+            "observation": 3,
+            "target_fields": [
+              "luminance",
+              "r8_light"
+            ],
+            "before_clock": {
+              "cursor": 10000,
+              "sim_ms": 1000.0,
+              "total_spikes": 912736
+            },
+            "after_clock": {
+              "cursor": 10000,
+              "sim_ms": 1000.0,
+              "total_spikes": 912736
+            },
+            "artifact_sha256": "babbac55923b92a7df3f0ab2f5761a87c4daac0fb7a73c86503d40a6a97656ba",
+            "all_weight_sha256": "40a2e78d7299197d24ba03a24c94a8e1cd0eb45a653d69f001fc3acee2fdc779",
+            "memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+            "changed_fields": [
+              "luminance",
+              "r8_light"
+            ],
+            "before_sha256": {
+              "v": "631d4107c07396a1681d878fac605c2f353a6180512b532946381c715934de7e",
+              "g": "9d77119b261c29315545b482a8c17c9228ba0bbed9991a13b733d0c17e7a5c52",
+              "refractory": "e57d1b1309c03f509ad9ba22cc03e32cfebe7c03d992f59afbd2e39b2835a595",
+              "drive": "0af84f5a1bd9a26c86fe5e79c40bcd63a405f71bdfd1bf0a3af810339fb4ece3",
+              "previous_drive": "0af84f5a1bd9a26c86fe5e79c40bcd63a405f71bdfd1bf0a3af810339fb4ece3",
+              "queue": "c714fe0e83dbcc574bd49280feb9222a52f776a0c4fc6a0fd2276ef17393e7af",
+              "queue_count": "af20d81bbb4918f5cbdb42909aa3fa21bd216d706ab13dbd80620feada375499",
+              "counts": "58b9573adbd18e07d0745627718e0757b13dada2b02657335ab0d0b04e9be1f1",
+              "luminance": "e5cb1b7bfcf795e4fe959402e5ec63fe9ba9cbea88c1171eeda8696380720c95",
+              "active": "6300319b8e265b8f30f417985f4f050cdf2ff9375cf64529e853de1930a903c5",
+              "active_flag": "91154c23f2af8e5ecffce448340ce28f6c3e1be093c68ad205c1b19ec311fde2",
+              "nactive": "fd72fe9006ac924043ec0369a5876d2df525e6fdf087d617b6a32c2acf7f5510",
+              "last": "dbfad5d1c62988f9cf78e1ecfe5b174ff59e90f51542567368ef5d24e310197b",
+              "eligibility": "63c31b32b689bbdfe760ab22893ed520a5895d7784cc5e0a7dea40ba0c627385",
+              "eligibility_last": "7e085697a3bbd0beeb1f841ec523be23a2106c33071cc04b1f53bd13470c28a5",
+              "modulation": "6f43f655a67ce5e1d42c0f72f4bd844122509b7ed4cd36fd6d653e794df89b00",
+              "modulation_last": "ba11d65eec1fd66a9906cdf059ad1ed82e51505224541dfc45d12322e4a72dc8",
+              "adaptation": "4d92485806fc8f9e576f264a0c615ed7687f877ec48db9f39553e7ae26390992",
+              "rate_kc": "82584a3f0467d9bcb8ffb8e2e2ac526c3779e77eca5bc6156cf1f3cedb767b8e",
+              "rate_dan": "34095cd0d61767bae99dc37fcd4f4c676de897130f62786858b772a47ad2da89",
+              "r8_light": "1f6c2c33fb2a74c6508e2adf4485d2cf2ec91332afde63137a055771b4cf7e83"
+            },
+            "after_sha256": {
+              "v": "631d4107c07396a1681d878fac605c2f353a6180512b532946381c715934de7e",
+              "g": "9d77119b261c29315545b482a8c17c9228ba0bbed9991a13b733d0c17e7a5c52",
+              "refractory": "e57d1b1309c03f509ad9ba22cc03e32cfebe7c03d992f59afbd2e39b2835a595",
+              "drive": "0af84f5a1bd9a26c86fe5e79c40bcd63a405f71bdfd1bf0a3af810339fb4ece3",
+              "previous_drive": "0af84f5a1bd9a26c86fe5e79c40bcd63a405f71bdfd1bf0a3af810339fb4ece3",
+              "queue": "c714fe0e83dbcc574bd49280feb9222a52f776a0c4fc6a0fd2276ef17393e7af",
+              "queue_count": "af20d81bbb4918f5cbdb42909aa3fa21bd216d706ab13dbd80620feada375499",
+              "counts": "58b9573adbd18e07d0745627718e0757b13dada2b02657335ab0d0b04e9be1f1",
+              "luminance": "c411c207fb379b3beccac216c633ae620c51f23c78971c7d028d0266aee0cdc7",
+              "active": "6300319b8e265b8f30f417985f4f050cdf2ff9375cf64529e853de1930a903c5",
+              "active_flag": "91154c23f2af8e5ecffce448340ce28f6c3e1be093c68ad205c1b19ec311fde2",
+              "nactive": "fd72fe9006ac924043ec0369a5876d2df525e6fdf087d617b6a32c2acf7f5510",
+              "last": "dbfad5d1c62988f9cf78e1ecfe5b174ff59e90f51542567368ef5d24e310197b",
+              "eligibility": "63c31b32b689bbdfe760ab22893ed520a5895d7784cc5e0a7dea40ba0c627385",
+              "eligibility_last": "7e085697a3bbd0beeb1f841ec523be23a2106c33071cc04b1f53bd13470c28a5",
+              "modulation": "6f43f655a67ce5e1d42c0f72f4bd844122509b7ed4cd36fd6d653e794df89b00",
+              "modulation_last": "ba11d65eec1fd66a9906cdf059ad1ed82e51505224541dfc45d12322e4a72dc8",
+              "adaptation": "4d92485806fc8f9e576f264a0c615ed7687f877ec48db9f39553e7ae26390992",
+              "rate_kc": "82584a3f0467d9bcb8ffb8e2e2ac526c3779e77eca5bc6156cf1f3cedb767b8e",
+              "rate_dan": "34095cd0d61767bae99dc37fcd4f4c676de897130f62786858b772a47ad2da89",
+              "r8_light": "ac0a4091bbd9d73854a2d4a2944b5f8bb40cd7039d89d5575cb2629710c8c160"
+            }
+          }
+        }
+      ],
+      "initial_memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+      "final_memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+      "training_memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+      "reference_report_sha256": "038e6f2c69c00a60ab88d89340cf1f85cc7b75e9a3fc8567e1d284cf90ce01e3",
+      "plan_sha256": "3896dedeacf436b240c3f29e4ebfc656410c868dbeab45ac8c33537b70cbc19a",
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "interpretation": "Post hoc mechanism experiment. Full retained graph and fixed decoder. All eight conditions reported; no account, P&L, policy selection, or live deployment. Resetting dynamics is a controlled intervention, not a claim of biological recovery or profitable learning."
+    },
+    "trained_visual_filters": {
+      "schema": 1,
+      "source": "matched_market_stimulus_assay",
+      "config": {
+        "preset": "recorded_market",
+        "view": "original",
+        "news": "none",
+        "eta": 0.001,
+        "learning": false,
+        "pulses": "none",
+        "memory": "trained",
+        "state_reset": "visual_filters"
+      },
+      "graph": {
+        "neurons": 166700,
+        "edges": 25582938,
+        "plastic_edges": 7835
+      },
+      "native_build": {
+        "model": "stonkfly-dual-compartment-v1",
+        "source_sha256": "e2d4d584f4633613277bb1bf6ea7ba20855c01a332ae2e9344ed7782604c8509",
+        "binary_sha256": "9c0768fc4f8e34ba730a31ef04a5de958e7d4276c1552f30ec6f2c2eddbfa1b1",
+        "flags": [
+          "-O3",
+          "-std=c++17",
+          "-shared",
+          "-fPIC"
+        ]
+      },
+      "upstream_commit": "78ef3e05ab0fa086032098558d893667068944a0",
+      "seconds": 20.025106773000005,
+      "events": [
+        {
+          "side": "BUY",
+          "left_hz": 30.0,
+          "right_hz": 38.0,
+          "difference_hz": 8.0,
+          "gate_spikes": 31,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 500.0,
+          "compute_seconds": 1.5421251219999874,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 16,
+          "KC_spikes": 14,
+          "total_spikes": 362898,
+          "spike_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+          "input_sha256": "77bc6b7f69ed101fed1672833465d77c483e36fdbcf80b0281b44f36e1fa9aa7",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 3066,
+            "mean_efficacy": 1.0002872943878174,
+            "minimum_efficacy": 0.6515528559684753,
+            "sha256": "7ab38ccccb0396c7cc1939e0ad9a2db1dc3cdf82e1f495aa902c55501c369675",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "plasticity_enabled": false,
+            "changed_edges": 0,
+            "weight_delta_l2": 0.0,
+            "max_abs_delta": 0.0,
+            "efficacy_min": 0.6515528495489835,
+            "efficacy_max": 1.1017670896185976,
+            "clipped_edges": 0
+          },
+          "phase": "replay",
+          "phase_step": 1,
+          "market_decision_ts": 1789212900,
+          "input_preset": "recorded_market",
+          "input_news": "none",
+          "activity_boundary": {
+            "mode": "initial",
+            "requested_mode": "visual_filters",
+            "observation": 1,
+            "target_fields": [],
+            "before_clock": {
+              "cursor": 0,
+              "sim_ms": 0.0,
+              "total_spikes": 0
+            },
+            "after_clock": {
+              "cursor": 0,
+              "sim_ms": 0.0,
+              "total_spikes": 0
+            },
+            "artifact_sha256": "cd133555b7eca8a200afe9d1614b838ea340b8774a127e7454c48be78063f834",
+            "all_weight_sha256": "04b44b1fc2f88f3576c7c95c7d75a414e204a2b6fdfe1dfbb51f46a73206efc6",
+            "memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+            "changed_fields": [],
+            "before_sha256": {
+              "v": "275bd935e4f1a56cbc2ca22b8f258f1cef511894f42f531e9a52476dd7b02946",
+              "g": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "refractory": "fe721ce07571ce5e6d09fc093440dfdbca4d3e360d5ddf903e3641aa4c6d0977",
+              "drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "previous_drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "queue": "56185bbe1f2586ea5668c759f2396dc7693f8b3b21d7015d24db8f37c2958453",
+              "queue_count": "f2c0d5456a983ecd12e314fcfa19879179fc8424343baeb1325457472ae85601",
+              "counts": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "luminance": "c411c207fb379b3beccac216c633ae620c51f23c78971c7d028d0266aee0cdc7",
+              "active": "bd5ad58a15d4ad9db612f07addacd70bf96d075969aa35f0c4a9e159124b5c26",
+              "active_flag": "557e5066485a8948d9ba5408da8359bdea92f316cc4574af08427bb77dd3a23e",
+              "nactive": "bc1b961d22c114f540586ed92bd23822a05caa6b98e73413f41f13e2b0deac6d",
+              "last": "543e44862a6bae300a72f840ceff3f11ac91905d58b046fb6ffbd4653c0b052c",
+              "eligibility": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "eligibility_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "modulation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "modulation_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "adaptation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "rate_kc": "9cf5a5bbc54b97f49e0c591d653fd61cadc8b2d88dbc2fde77c0035b7c42055d",
+              "rate_dan": "b707241545a346265aab1ffb32ff64b55bf8f8dc1b56a46ef33ce3d15db11d33",
+              "r8_light": "ac0a4091bbd9d73854a2d4a2944b5f8bb40cd7039d89d5575cb2629710c8c160"
+            },
+            "after_sha256": {
+              "v": "275bd935e4f1a56cbc2ca22b8f258f1cef511894f42f531e9a52476dd7b02946",
+              "g": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "refractory": "fe721ce07571ce5e6d09fc093440dfdbca4d3e360d5ddf903e3641aa4c6d0977",
+              "drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "previous_drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "queue": "56185bbe1f2586ea5668c759f2396dc7693f8b3b21d7015d24db8f37c2958453",
+              "queue_count": "f2c0d5456a983ecd12e314fcfa19879179fc8424343baeb1325457472ae85601",
+              "counts": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "luminance": "c411c207fb379b3beccac216c633ae620c51f23c78971c7d028d0266aee0cdc7",
+              "active": "bd5ad58a15d4ad9db612f07addacd70bf96d075969aa35f0c4a9e159124b5c26",
+              "active_flag": "557e5066485a8948d9ba5408da8359bdea92f316cc4574af08427bb77dd3a23e",
+              "nactive": "bc1b961d22c114f540586ed92bd23822a05caa6b98e73413f41f13e2b0deac6d",
+              "last": "543e44862a6bae300a72f840ceff3f11ac91905d58b046fb6ffbd4653c0b052c",
+              "eligibility": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "eligibility_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "modulation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "modulation_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "adaptation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "rate_kc": "9cf5a5bbc54b97f49e0c591d653fd61cadc8b2d88dbc2fde77c0035b7c42055d",
+              "rate_dan": "b707241545a346265aab1ffb32ff64b55bf8f8dc1b56a46ef33ce3d15db11d33",
+              "r8_light": "ac0a4091bbd9d73854a2d4a2944b5f8bb40cd7039d89d5575cb2629710c8c160"
+            }
+          }
+        },
+        {
+          "side": "BUY",
+          "left_hz": 32.0,
+          "right_hz": 40.0,
+          "difference_hz": 8.0,
+          "gate_spikes": 5,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 1000.0,
+          "compute_seconds": 3.686449203999942,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 1,
+          "aversive_spikes": 81,
+          "KC_spikes": 4761,
+          "total_spikes": 548441,
+          "spike_sha256": "698d309bedd8441501a6706731ec83a760521293b5afaa2cc9d69753e500cb4b",
+          "input_sha256": "0758728838cf369025d4ffbff13f8c1c826722a6a42f9391bc3ea10b98b6a4f2",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 3066,
+            "mean_efficacy": 1.0002872943878174,
+            "minimum_efficacy": 0.6515528559684753,
+            "sha256": "7ab38ccccb0396c7cc1939e0ad9a2db1dc3cdf82e1f495aa902c55501c369675",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "plasticity_enabled": false,
+            "changed_edges": 0,
+            "weight_delta_l2": 0.0,
+            "max_abs_delta": 0.0,
+            "efficacy_min": 0.6515528495489835,
+            "efficacy_max": 1.1017670896185976,
+            "clipped_edges": 0
+          },
+          "phase": "replay",
+          "phase_step": 2,
+          "market_decision_ts": 1789213200,
+          "input_preset": "recorded_market",
+          "input_news": "none",
+          "activity_boundary": {
+            "mode": "visual_filters",
+            "requested_mode": "visual_filters",
+            "observation": 2,
+            "target_fields": [
+              "luminance",
+              "r8_light"
+            ],
+            "before_clock": {
+              "cursor": 5000,
+              "sim_ms": 500.0,
+              "total_spikes": 362898
+            },
+            "after_clock": {
+              "cursor": 5000,
+              "sim_ms": 500.0,
+              "total_spikes": 362898
+            },
+            "artifact_sha256": "83bc30d971f76db53c38222b5aa4ebd3450c6e31e20bac3fd0cf2274fc7ade27",
+            "all_weight_sha256": "04b44b1fc2f88f3576c7c95c7d75a414e204a2b6fdfe1dfbb51f46a73206efc6",
+            "memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+            "changed_fields": [
+              "luminance",
+              "r8_light"
+            ],
+            "before_sha256": {
+              "v": "f25df441181ff4d8fbba3642874fb0fd710fa06737c62f8fdfe897c72fff93bd",
+              "g": "bf864f006c3bcee326b11d56f95e4c4f2a43f2222540fb665b43aac34e0fe1f4",
+              "refractory": "21d0b999e95b0d4e583550086b2d2282e71471ebf34eeaa9ed00152d0bc00892",
+              "drive": "178d1ea6b19908a717fa6bfe6b560853ddf48ec60e11c03dda8d950ac45bf7e8",
+              "previous_drive": "178d1ea6b19908a717fa6bfe6b560853ddf48ec60e11c03dda8d950ac45bf7e8",
+              "queue": "86471c78f9e7186ab3842a6291202eb189d20d5499a64deeaaa76dabf4716993",
+              "queue_count": "b78efe9218059da48a9427a6f476e20684ddf92b50285f8144f596be2d7b8c20",
+              "counts": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+              "luminance": "e8841fa6b7c62be68b105512f345feab708d7fa973421fb45f6fc46a40c9e1ae",
+              "active": "4f8edfeffbecf6adb1c95f12c18e2a8d8dc36ea97fdd9cd220deb6f3e2041908",
+              "active_flag": "0dc3e4c0418c1a15908285a33503916835930fe9d779510b573edb636f23f71a",
+              "nactive": "515329d3e7d99208c83d8c2631c64d92d6f396bb5a3d8573df0bde7bb07154e8",
+              "last": "4112e44a3a9c24b3c8165aea46f24334d137182659f38a2c313bb1b414e653c2",
+              "eligibility": "6cd34b5af05f1a664d2284ee58e1f5525e59c0015b3f1540b6f23a9a18e9f34c",
+              "eligibility_last": "708b0bfdbcecf03572772a07f27b703011ef67d0b30db5c1b05859cbcd05f0a5",
+              "modulation": "64b0ea847764f83d482b274d639c6e24fbe992c87e2021d3ff0cc54d0743a18c",
+              "modulation_last": "579dda9bb98d55d969a1f126a0262ceb0bc0888996d6698de09f0d13844b2e89",
+              "adaptation": "f89b8c6cc06a58e2fe71c4b1414e5a66793c12c2f128e0e4012ab45a25d506b1",
+              "rate_kc": "0e71ecdab90ec8a8ed1ab336704c91a93dc8efc55540e207e1cc7c4a38bb2e38",
+              "rate_dan": "938c302244e1010dbb54305baee88b1d3ca88f1f1ff7b8524fde6fdc74f7f32b",
+              "r8_light": "5c293d9874a4e8cb789d4d3c01e414bff98d9a6326a34270c09ce50900cb368f"
+            },
+            "after_sha256": {
+              "v": "f25df441181ff4d8fbba3642874fb0fd710fa06737c62f8fdfe897c72fff93bd",
+              "g": "bf864f006c3bcee326b11d56f95e4c4f2a43f2222540fb665b43aac34e0fe1f4",
+              "refractory": "21d0b999e95b0d4e583550086b2d2282e71471ebf34eeaa9ed00152d0bc00892",
+              "drive": "178d1ea6b19908a717fa6bfe6b560853ddf48ec60e11c03dda8d950ac45bf7e8",
+              "previous_drive": "178d1ea6b19908a717fa6bfe6b560853ddf48ec60e11c03dda8d950ac45bf7e8",
+              "queue": "86471c78f9e7186ab3842a6291202eb189d20d5499a64deeaaa76dabf4716993",
+              "queue_count": "b78efe9218059da48a9427a6f476e20684ddf92b50285f8144f596be2d7b8c20",
+              "counts": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+              "luminance": "c411c207fb379b3beccac216c633ae620c51f23c78971c7d028d0266aee0cdc7",
+              "active": "4f8edfeffbecf6adb1c95f12c18e2a8d8dc36ea97fdd9cd220deb6f3e2041908",
+              "active_flag": "0dc3e4c0418c1a15908285a33503916835930fe9d779510b573edb636f23f71a",
+              "nactive": "515329d3e7d99208c83d8c2631c64d92d6f396bb5a3d8573df0bde7bb07154e8",
+              "last": "4112e44a3a9c24b3c8165aea46f24334d137182659f38a2c313bb1b414e653c2",
+              "eligibility": "6cd34b5af05f1a664d2284ee58e1f5525e59c0015b3f1540b6f23a9a18e9f34c",
+              "eligibility_last": "708b0bfdbcecf03572772a07f27b703011ef67d0b30db5c1b05859cbcd05f0a5",
+              "modulation": "64b0ea847764f83d482b274d639c6e24fbe992c87e2021d3ff0cc54d0743a18c",
+              "modulation_last": "579dda9bb98d55d969a1f126a0262ceb0bc0888996d6698de09f0d13844b2e89",
+              "adaptation": "f89b8c6cc06a58e2fe71c4b1414e5a66793c12c2f128e0e4012ab45a25d506b1",
+              "rate_kc": "0e71ecdab90ec8a8ed1ab336704c91a93dc8efc55540e207e1cc7c4a38bb2e38",
+              "rate_dan": "938c302244e1010dbb54305baee88b1d3ca88f1f1ff7b8524fde6fdc74f7f32b",
+              "r8_light": "ac0a4091bbd9d73854a2d4a2944b5f8bb40cd7039d89d5575cb2629710c8c160"
+            }
+          }
+        },
+        {
+          "side": "HOLD",
+          "left_hz": 32.0,
+          "right_hz": 42.0,
+          "difference_hz": 10.0,
+          "gate_spikes": 0,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 1500.0,
+          "compute_seconds": 4.3212527859999454,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 80,
+          "KC_spikes": 4652,
+          "total_spikes": 603912,
+          "spike_sha256": "4efeb5a6416fca5f0561a398c949694ecf968cb48012b3a92840b83cfd2bf54f",
+          "input_sha256": "c9c6c5e50d923ce6c302246c96b984528b5af0f116894c6b787ca6bf376aadf1",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 3066,
+            "mean_efficacy": 1.0002872943878174,
+            "minimum_efficacy": 0.6515528559684753,
+            "sha256": "7ab38ccccb0396c7cc1939e0ad9a2db1dc3cdf82e1f495aa902c55501c369675",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "plasticity_enabled": false,
+            "changed_edges": 0,
+            "weight_delta_l2": 0.0,
+            "max_abs_delta": 0.0,
+            "efficacy_min": 0.6515528495489835,
+            "efficacy_max": 1.1017670896185976,
+            "clipped_edges": 0
+          },
+          "phase": "replay",
+          "phase_step": 3,
+          "market_decision_ts": 1789213500,
+          "input_preset": "recorded_market",
+          "input_news": "none",
+          "activity_boundary": {
+            "mode": "visual_filters",
+            "requested_mode": "visual_filters",
+            "observation": 3,
+            "target_fields": [
+              "luminance",
+              "r8_light"
+            ],
+            "before_clock": {
+              "cursor": 10000,
+              "sim_ms": 1000.0,
+              "total_spikes": 911339
+            },
+            "after_clock": {
+              "cursor": 10000,
+              "sim_ms": 1000.0,
+              "total_spikes": 911339
+            },
+            "artifact_sha256": "d306a8263a70e5e711e7a682d0d59fa03657d74a0506ca02580ac35bf5f8f692",
+            "all_weight_sha256": "04b44b1fc2f88f3576c7c95c7d75a414e204a2b6fdfe1dfbb51f46a73206efc6",
+            "memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+            "changed_fields": [
+              "luminance",
+              "r8_light"
+            ],
+            "before_sha256": {
+              "v": "19738aa48a8e9fa265a11095713aa1611f8ee586561785a7789c5678fd92eb20",
+              "g": "20e8d902712664913f7c204464710bb2411ea73efd2f25db36f7c2d1fb9ab7fd",
+              "refractory": "5a5bf19bc733c25dd8c5c5000554d0232a115981c7ecbbae15695d1eab2c7491",
+              "drive": "0af84f5a1bd9a26c86fe5e79c40bcd63a405f71bdfd1bf0a3af810339fb4ece3",
+              "previous_drive": "0af84f5a1bd9a26c86fe5e79c40bcd63a405f71bdfd1bf0a3af810339fb4ece3",
+              "queue": "57fcf0deaf79be55ad3259b9c80436950809f52ddcc7efebd7fb4acdc63254e1",
+              "queue_count": "a5e1997f377ad98f483ff4b5c94b7f2d794ccfd250dcad7ce34d81648e5263d2",
+              "counts": "698d309bedd8441501a6706731ec83a760521293b5afaa2cc9d69753e500cb4b",
+              "luminance": "e5cb1b7bfcf795e4fe959402e5ec63fe9ba9cbea88c1171eeda8696380720c95",
+              "active": "2209272e5139537d85e8ab042bf73c2f2e02c99becdaf1b35ebeb70a4a42b6e4",
+              "active_flag": "d516d59f99123f6300b1ac24c09b6c2efd94bbe1efea49c334e3fac85dbec7d3",
+              "nactive": "0cefe35782e2cb84a0713e6010c88a5a7084b8d16404ab4ee1071d10ab16f8e4",
+              "last": "dbfad5d1c62988f9cf78e1ecfe5b174ff59e90f51542567368ef5d24e310197b",
+              "eligibility": "3689dc59232769335a37d693cf2a61e118eb5840696000fdb555bf8252d77fed",
+              "eligibility_last": "8a8a382328ac46ef561308cde24b2237fde284492d41e4c71f80c2e676547e7d",
+              "modulation": "0c15516b1c5fb41c92a1acdc02cf0f4c100f85e61a80a3161c1f5d6074730111",
+              "modulation_last": "dbf1ccbcc7155472d6a14ff8f1cc32ebd332a5016ca2473cfc78d41cb5c70829",
+              "adaptation": "f9cc10f7b9e481f6262258c17d6ce3f0acd05cc9b0aebbf0759d2f5188cb693d",
+              "rate_kc": "6708d070302abff484acbbbc8aef0624d9e3e6bac66df199580a98f7cdb540d4",
+              "rate_dan": "9f344cf054a1a827f22477a61074ceca9a491b983647888d3e74b6eb663f4017",
+              "r8_light": "1f6c2c33fb2a74c6508e2adf4485d2cf2ec91332afde63137a055771b4cf7e83"
+            },
+            "after_sha256": {
+              "v": "19738aa48a8e9fa265a11095713aa1611f8ee586561785a7789c5678fd92eb20",
+              "g": "20e8d902712664913f7c204464710bb2411ea73efd2f25db36f7c2d1fb9ab7fd",
+              "refractory": "5a5bf19bc733c25dd8c5c5000554d0232a115981c7ecbbae15695d1eab2c7491",
+              "drive": "0af84f5a1bd9a26c86fe5e79c40bcd63a405f71bdfd1bf0a3af810339fb4ece3",
+              "previous_drive": "0af84f5a1bd9a26c86fe5e79c40bcd63a405f71bdfd1bf0a3af810339fb4ece3",
+              "queue": "57fcf0deaf79be55ad3259b9c80436950809f52ddcc7efebd7fb4acdc63254e1",
+              "queue_count": "a5e1997f377ad98f483ff4b5c94b7f2d794ccfd250dcad7ce34d81648e5263d2",
+              "counts": "698d309bedd8441501a6706731ec83a760521293b5afaa2cc9d69753e500cb4b",
+              "luminance": "c411c207fb379b3beccac216c633ae620c51f23c78971c7d028d0266aee0cdc7",
+              "active": "2209272e5139537d85e8ab042bf73c2f2e02c99becdaf1b35ebeb70a4a42b6e4",
+              "active_flag": "d516d59f99123f6300b1ac24c09b6c2efd94bbe1efea49c334e3fac85dbec7d3",
+              "nactive": "0cefe35782e2cb84a0713e6010c88a5a7084b8d16404ab4ee1071d10ab16f8e4",
+              "last": "dbfad5d1c62988f9cf78e1ecfe5b174ff59e90f51542567368ef5d24e310197b",
+              "eligibility": "3689dc59232769335a37d693cf2a61e118eb5840696000fdb555bf8252d77fed",
+              "eligibility_last": "8a8a382328ac46ef561308cde24b2237fde284492d41e4c71f80c2e676547e7d",
+              "modulation": "0c15516b1c5fb41c92a1acdc02cf0f4c100f85e61a80a3161c1f5d6074730111",
+              "modulation_last": "dbf1ccbcc7155472d6a14ff8f1cc32ebd332a5016ca2473cfc78d41cb5c70829",
+              "adaptation": "f9cc10f7b9e481f6262258c17d6ce3f0acd05cc9b0aebbf0759d2f5188cb693d",
+              "rate_kc": "6708d070302abff484acbbbc8aef0624d9e3e6bac66df199580a98f7cdb540d4",
+              "rate_dan": "9f344cf054a1a827f22477a61074ceca9a491b983647888d3e74b6eb663f4017",
+              "r8_light": "ac0a4091bbd9d73854a2d4a2944b5f8bb40cd7039d89d5575cb2629710c8c160"
+            }
+          }
+        }
+      ],
+      "initial_memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+      "final_memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+      "training_memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+      "reference_report_sha256": "038e6f2c69c00a60ab88d89340cf1f85cc7b75e9a3fc8567e1d284cf90ce01e3",
+      "plan_sha256": "3896dedeacf436b240c3f29e4ebfc656410c868dbeab45ac8c33537b70cbc19a",
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "interpretation": "Post hoc mechanism experiment. Full retained graph and fixed decoder. All eight conditions reported; no account, P&L, policy selection, or live deployment. Resetting dynamics is a controlled intervention, not a claim of biological recovery or profitable learning."
+    },
+    "pristine_adaptation": {
+      "schema": 1,
+      "source": "matched_market_stimulus_assay",
+      "config": {
+        "preset": "recorded_market",
+        "view": "original",
+        "news": "none",
+        "eta": 0.001,
+        "learning": false,
+        "pulses": "none",
+        "memory": "pristine",
+        "state_reset": "adaptation"
+      },
+      "graph": {
+        "neurons": 166700,
+        "edges": 25582938,
+        "plastic_edges": 7835
+      },
+      "native_build": {
+        "model": "stonkfly-dual-compartment-v1",
+        "source_sha256": "e2d4d584f4633613277bb1bf6ea7ba20855c01a332ae2e9344ed7782604c8509",
+        "binary_sha256": "9c0768fc4f8e34ba730a31ef04a5de958e7d4276c1552f30ec6f2c2eddbfa1b1",
+        "flags": [
+          "-O3",
+          "-std=c++17",
+          "-shared",
+          "-fPIC"
+        ]
+      },
+      "upstream_commit": "78ef3e05ab0fa086032098558d893667068944a0",
+      "seconds": 19.708431250000018,
+      "events": [
+        {
+          "side": "BUY",
+          "left_hz": 30.0,
+          "right_hz": 38.0,
+          "difference_hz": 8.0,
+          "gate_spikes": 31,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 500.0,
+          "compute_seconds": 1.54319707800002,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 16,
+          "KC_spikes": 14,
+          "total_spikes": 362898,
+          "spike_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+          "input_sha256": "77bc6b7f69ed101fed1672833465d77c483e36fdbcf80b0281b44f36e1fa9aa7",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 0,
+            "mean_efficacy": 1.0,
+            "minimum_efficacy": 1.0,
+            "sha256": "9f9c000fb9819eb99c214cc1da747d44e13f009bc4c3454f6b7dfe4ee669acf7",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "plasticity_enabled": false,
+            "changed_edges": 0,
+            "weight_delta_l2": 0.0,
+            "max_abs_delta": 0.0,
+            "efficacy_min": 1.0,
+            "efficacy_max": 1.0,
+            "clipped_edges": 0
+          },
+          "phase": "replay",
+          "phase_step": 1,
+          "market_decision_ts": 1789212900,
+          "input_preset": "recorded_market",
+          "input_news": "none",
+          "activity_boundary": {
+            "mode": "initial",
+            "requested_mode": "adaptation",
+            "observation": 1,
+            "target_fields": [],
+            "before_clock": {
+              "cursor": 0,
+              "sim_ms": 0.0,
+              "total_spikes": 0
+            },
+            "after_clock": {
+              "cursor": 0,
+              "sim_ms": 0.0,
+              "total_spikes": 0
+            },
+            "artifact_sha256": "141a5a129c0cf4c7733f1fb61d5962bdc941c021cfddda2316b6570c65e9dfc3",
+            "all_weight_sha256": "40a2e78d7299197d24ba03a24c94a8e1cd0eb45a653d69f001fc3acee2fdc779",
+            "memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+            "changed_fields": [],
+            "before_sha256": {
+              "v": "275bd935e4f1a56cbc2ca22b8f258f1cef511894f42f531e9a52476dd7b02946",
+              "g": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "refractory": "fe721ce07571ce5e6d09fc093440dfdbca4d3e360d5ddf903e3641aa4c6d0977",
+              "drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "previous_drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "queue": "56185bbe1f2586ea5668c759f2396dc7693f8b3b21d7015d24db8f37c2958453",
+              "queue_count": "f2c0d5456a983ecd12e314fcfa19879179fc8424343baeb1325457472ae85601",
+              "counts": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "luminance": "c411c207fb379b3beccac216c633ae620c51f23c78971c7d028d0266aee0cdc7",
+              "active": "bd5ad58a15d4ad9db612f07addacd70bf96d075969aa35f0c4a9e159124b5c26",
+              "active_flag": "557e5066485a8948d9ba5408da8359bdea92f316cc4574af08427bb77dd3a23e",
+              "nactive": "bc1b961d22c114f540586ed92bd23822a05caa6b98e73413f41f13e2b0deac6d",
+              "last": "543e44862a6bae300a72f840ceff3f11ac91905d58b046fb6ffbd4653c0b052c",
+              "eligibility": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "eligibility_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "modulation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "modulation_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "adaptation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "rate_kc": "9cf5a5bbc54b97f49e0c591d653fd61cadc8b2d88dbc2fde77c0035b7c42055d",
+              "rate_dan": "b707241545a346265aab1ffb32ff64b55bf8f8dc1b56a46ef33ce3d15db11d33",
+              "r8_light": "ac0a4091bbd9d73854a2d4a2944b5f8bb40cd7039d89d5575cb2629710c8c160"
+            },
+            "after_sha256": {
+              "v": "275bd935e4f1a56cbc2ca22b8f258f1cef511894f42f531e9a52476dd7b02946",
+              "g": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "refractory": "fe721ce07571ce5e6d09fc093440dfdbca4d3e360d5ddf903e3641aa4c6d0977",
+              "drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "previous_drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "queue": "56185bbe1f2586ea5668c759f2396dc7693f8b3b21d7015d24db8f37c2958453",
+              "queue_count": "f2c0d5456a983ecd12e314fcfa19879179fc8424343baeb1325457472ae85601",
+              "counts": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "luminance": "c411c207fb379b3beccac216c633ae620c51f23c78971c7d028d0266aee0cdc7",
+              "active": "bd5ad58a15d4ad9db612f07addacd70bf96d075969aa35f0c4a9e159124b5c26",
+              "active_flag": "557e5066485a8948d9ba5408da8359bdea92f316cc4574af08427bb77dd3a23e",
+              "nactive": "bc1b961d22c114f540586ed92bd23822a05caa6b98e73413f41f13e2b0deac6d",
+              "last": "543e44862a6bae300a72f840ceff3f11ac91905d58b046fb6ffbd4653c0b052c",
+              "eligibility": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "eligibility_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "modulation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "modulation_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "adaptation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "rate_kc": "9cf5a5bbc54b97f49e0c591d653fd61cadc8b2d88dbc2fde77c0035b7c42055d",
+              "rate_dan": "b707241545a346265aab1ffb32ff64b55bf8f8dc1b56a46ef33ce3d15db11d33",
+              "r8_light": "ac0a4091bbd9d73854a2d4a2944b5f8bb40cd7039d89d5575cb2629710c8c160"
+            }
+          }
+        },
+        {
+          "side": "BUY",
+          "left_hz": 32.0,
+          "right_hz": 36.0,
+          "difference_hz": 4.0,
+          "gate_spikes": 4,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 1000.0,
+          "compute_seconds": 3.7830193489999715,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 1,
+          "aversive_spikes": 69,
+          "KC_spikes": 4797,
+          "total_spikes": 549574,
+          "spike_sha256": "664a8c3aea4e57f1d721ed415294a98d685989b7cc29b8403502f7832ce02d5d",
+          "input_sha256": "0758728838cf369025d4ffbff13f8c1c826722a6a42f9391bc3ea10b98b6a4f2",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 0,
+            "mean_efficacy": 1.0,
+            "minimum_efficacy": 1.0,
+            "sha256": "9f9c000fb9819eb99c214cc1da747d44e13f009bc4c3454f6b7dfe4ee669acf7",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "plasticity_enabled": false,
+            "changed_edges": 0,
+            "weight_delta_l2": 0.0,
+            "max_abs_delta": 0.0,
+            "efficacy_min": 1.0,
+            "efficacy_max": 1.0,
+            "clipped_edges": 0
+          },
+          "phase": "replay",
+          "phase_step": 2,
+          "market_decision_ts": 1789213200,
+          "input_preset": "recorded_market",
+          "input_news": "none",
+          "activity_boundary": {
+            "mode": "adaptation",
+            "requested_mode": "adaptation",
+            "observation": 2,
+            "target_fields": [
+              "adaptation"
+            ],
+            "before_clock": {
+              "cursor": 5000,
+              "sim_ms": 500.0,
+              "total_spikes": 362898
+            },
+            "after_clock": {
+              "cursor": 5000,
+              "sim_ms": 500.0,
+              "total_spikes": 362898
+            },
+            "artifact_sha256": "46ddd4d25a674fba7b7970d763fa95ae4580d1f8933322c5698e452c73673498",
+            "all_weight_sha256": "40a2e78d7299197d24ba03a24c94a8e1cd0eb45a653d69f001fc3acee2fdc779",
+            "memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+            "changed_fields": [
+              "adaptation"
+            ],
+            "before_sha256": {
+              "v": "ad0f89a6bdd1b74e7e08b10e44351d3eb9f95844a4e4a555e1af052f1f22d07b",
+              "g": "edab5bcbed53745eeb0e765101584be5552dcc6b98d17271e16d42b50eee8b26",
+              "refractory": "21d0b999e95b0d4e583550086b2d2282e71471ebf34eeaa9ed00152d0bc00892",
+              "drive": "178d1ea6b19908a717fa6bfe6b560853ddf48ec60e11c03dda8d950ac45bf7e8",
+              "previous_drive": "178d1ea6b19908a717fa6bfe6b560853ddf48ec60e11c03dda8d950ac45bf7e8",
+              "queue": "86471c78f9e7186ab3842a6291202eb189d20d5499a64deeaaa76dabf4716993",
+              "queue_count": "b78efe9218059da48a9427a6f476e20684ddf92b50285f8144f596be2d7b8c20",
+              "counts": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+              "luminance": "e8841fa6b7c62be68b105512f345feab708d7fa973421fb45f6fc46a40c9e1ae",
+              "active": "4f8edfeffbecf6adb1c95f12c18e2a8d8dc36ea97fdd9cd220deb6f3e2041908",
+              "active_flag": "0dc3e4c0418c1a15908285a33503916835930fe9d779510b573edb636f23f71a",
+              "nactive": "515329d3e7d99208c83d8c2631c64d92d6f396bb5a3d8573df0bde7bb07154e8",
+              "last": "4112e44a3a9c24b3c8165aea46f24334d137182659f38a2c313bb1b414e653c2",
+              "eligibility": "6cd34b5af05f1a664d2284ee58e1f5525e59c0015b3f1540b6f23a9a18e9f34c",
+              "eligibility_last": "708b0bfdbcecf03572772a07f27b703011ef67d0b30db5c1b05859cbcd05f0a5",
+              "modulation": "64b0ea847764f83d482b274d639c6e24fbe992c87e2021d3ff0cc54d0743a18c",
+              "modulation_last": "579dda9bb98d55d969a1f126a0262ceb0bc0888996d6698de09f0d13844b2e89",
+              "adaptation": "f89b8c6cc06a58e2fe71c4b1414e5a66793c12c2f128e0e4012ab45a25d506b1",
+              "rate_kc": "0e71ecdab90ec8a8ed1ab336704c91a93dc8efc55540e207e1cc7c4a38bb2e38",
+              "rate_dan": "938c302244e1010dbb54305baee88b1d3ca88f1f1ff7b8524fde6fdc74f7f32b",
+              "r8_light": "5c293d9874a4e8cb789d4d3c01e414bff98d9a6326a34270c09ce50900cb368f"
+            },
+            "after_sha256": {
+              "v": "ad0f89a6bdd1b74e7e08b10e44351d3eb9f95844a4e4a555e1af052f1f22d07b",
+              "g": "edab5bcbed53745eeb0e765101584be5552dcc6b98d17271e16d42b50eee8b26",
+              "refractory": "21d0b999e95b0d4e583550086b2d2282e71471ebf34eeaa9ed00152d0bc00892",
+              "drive": "178d1ea6b19908a717fa6bfe6b560853ddf48ec60e11c03dda8d950ac45bf7e8",
+              "previous_drive": "178d1ea6b19908a717fa6bfe6b560853ddf48ec60e11c03dda8d950ac45bf7e8",
+              "queue": "86471c78f9e7186ab3842a6291202eb189d20d5499a64deeaaa76dabf4716993",
+              "queue_count": "b78efe9218059da48a9427a6f476e20684ddf92b50285f8144f596be2d7b8c20",
+              "counts": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+              "luminance": "e8841fa6b7c62be68b105512f345feab708d7fa973421fb45f6fc46a40c9e1ae",
+              "active": "4f8edfeffbecf6adb1c95f12c18e2a8d8dc36ea97fdd9cd220deb6f3e2041908",
+              "active_flag": "0dc3e4c0418c1a15908285a33503916835930fe9d779510b573edb636f23f71a",
+              "nactive": "515329d3e7d99208c83d8c2631c64d92d6f396bb5a3d8573df0bde7bb07154e8",
+              "last": "4112e44a3a9c24b3c8165aea46f24334d137182659f38a2c313bb1b414e653c2",
+              "eligibility": "6cd34b5af05f1a664d2284ee58e1f5525e59c0015b3f1540b6f23a9a18e9f34c",
+              "eligibility_last": "708b0bfdbcecf03572772a07f27b703011ef67d0b30db5c1b05859cbcd05f0a5",
+              "modulation": "64b0ea847764f83d482b274d639c6e24fbe992c87e2021d3ff0cc54d0743a18c",
+              "modulation_last": "579dda9bb98d55d969a1f126a0262ceb0bc0888996d6698de09f0d13844b2e89",
+              "adaptation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "rate_kc": "0e71ecdab90ec8a8ed1ab336704c91a93dc8efc55540e207e1cc7c4a38bb2e38",
+              "rate_dan": "938c302244e1010dbb54305baee88b1d3ca88f1f1ff7b8524fde6fdc74f7f32b",
+              "r8_light": "5c293d9874a4e8cb789d4d3c01e414bff98d9a6326a34270c09ce50900cb368f"
+            }
+          }
+        },
+        {
+          "side": "HOLD",
+          "left_hz": 34.0,
+          "right_hz": 34.0,
+          "difference_hz": 0.0,
+          "gate_spikes": 0,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 1500.0,
+          "compute_seconds": 4.121491986000052,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 5,
+          "aversive_spikes": 85,
+          "KC_spikes": 5907,
+          "total_spikes": 607275,
+          "spike_sha256": "1cb9d3ded880a762dff2ba35c61d129bb0e71c8bac5123bb41b4e4a596005ecc",
+          "input_sha256": "c9c6c5e50d923ce6c302246c96b984528b5af0f116894c6b787ca6bf376aadf1",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 0,
+            "mean_efficacy": 1.0,
+            "minimum_efficacy": 1.0,
+            "sha256": "9f9c000fb9819eb99c214cc1da747d44e13f009bc4c3454f6b7dfe4ee669acf7",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "plasticity_enabled": false,
+            "changed_edges": 0,
+            "weight_delta_l2": 0.0,
+            "max_abs_delta": 0.0,
+            "efficacy_min": 1.0,
+            "efficacy_max": 1.0,
+            "clipped_edges": 0
+          },
+          "phase": "replay",
+          "phase_step": 3,
+          "market_decision_ts": 1789213500,
+          "input_preset": "recorded_market",
+          "input_news": "none",
+          "activity_boundary": {
+            "mode": "adaptation",
+            "requested_mode": "adaptation",
+            "observation": 3,
+            "target_fields": [
+              "adaptation"
+            ],
+            "before_clock": {
+              "cursor": 10000,
+              "sim_ms": 1000.0,
+              "total_spikes": 912472
+            },
+            "after_clock": {
+              "cursor": 10000,
+              "sim_ms": 1000.0,
+              "total_spikes": 912472
+            },
+            "artifact_sha256": "cc54b0560ba6a0f6ff9007e244174e7ace299e319febb2dae1ed140ae00b085c",
+            "all_weight_sha256": "40a2e78d7299197d24ba03a24c94a8e1cd0eb45a653d69f001fc3acee2fdc779",
+            "memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+            "changed_fields": [
+              "adaptation"
+            ],
+            "before_sha256": {
+              "v": "60b415f7c92eec904696fba1e0ee7aefd3995ae709334e7f6e456ee92232cb4e",
+              "g": "f88348a3f1d2a0cdf76eb8e8b13125605a80dcaf04ac8fc85008a81eeca7a2f9",
+              "refractory": "84cda9e7afd0644ada376a7ecc9855d8e55b243f7628e94455f6d9b819edfcef",
+              "drive": "0af84f5a1bd9a26c86fe5e79c40bcd63a405f71bdfd1bf0a3af810339fb4ece3",
+              "previous_drive": "0af84f5a1bd9a26c86fe5e79c40bcd63a405f71bdfd1bf0a3af810339fb4ece3",
+              "queue": "92b3f95079a70756f5abe4c5cd2a25eacb42e9b5148f3b75d82f0acaf31f4494",
+              "queue_count": "bf2eaac6542f049edbb1eac5eaf10cd219668fe6f154661f09cc949a41bfb43e",
+              "counts": "664a8c3aea4e57f1d721ed415294a98d685989b7cc29b8403502f7832ce02d5d",
+              "luminance": "e5cb1b7bfcf795e4fe959402e5ec63fe9ba9cbea88c1171eeda8696380720c95",
+              "active": "30ea56b85a1bf330a4dee0978f9f00ad12581ccde479e2d34182d4a6e875a256",
+              "active_flag": "b1404478f078e15777335e03a410f339d3687ec6ebd049922bdb7e6fc4a08287",
+              "nactive": "a241699c5504029eaf0b2c076dfe057155e9ff998036d6df8a8db60b48fd554e",
+              "last": "dbfad5d1c62988f9cf78e1ecfe5b174ff59e90f51542567368ef5d24e310197b",
+              "eligibility": "d6fd6f5bc77a72c11e5983d6d31664c73612d6d0f02975dd1c78933f999a52d9",
+              "eligibility_last": "c576538b636e7ff198d136dc74b0aa5f36d102b1df02e23241413b2032f801bd",
+              "modulation": "2318ffec2271a8fae0452d1860c5b7fc5e39dbfb9ebbad606b86456f9d8856fb",
+              "modulation_last": "cd3cd4d05d74cb82e27f262096f79143c499a1e58221eead6a15494854cbaba8",
+              "adaptation": "3d206f612d4062370c769634e6557a75a9be86a9bc397c07177004e329ee6836",
+              "rate_kc": "332df78655912e09230b4eadfc949af86418449714e48be6d6639fd46cda591f",
+              "rate_dan": "4e81137ec01a586c97fed1aa6ced5790fcb8bb503d33e5bb23422db0a53d7c69",
+              "r8_light": "1f6c2c33fb2a74c6508e2adf4485d2cf2ec91332afde63137a055771b4cf7e83"
+            },
+            "after_sha256": {
+              "v": "60b415f7c92eec904696fba1e0ee7aefd3995ae709334e7f6e456ee92232cb4e",
+              "g": "f88348a3f1d2a0cdf76eb8e8b13125605a80dcaf04ac8fc85008a81eeca7a2f9",
+              "refractory": "84cda9e7afd0644ada376a7ecc9855d8e55b243f7628e94455f6d9b819edfcef",
+              "drive": "0af84f5a1bd9a26c86fe5e79c40bcd63a405f71bdfd1bf0a3af810339fb4ece3",
+              "previous_drive": "0af84f5a1bd9a26c86fe5e79c40bcd63a405f71bdfd1bf0a3af810339fb4ece3",
+              "queue": "92b3f95079a70756f5abe4c5cd2a25eacb42e9b5148f3b75d82f0acaf31f4494",
+              "queue_count": "bf2eaac6542f049edbb1eac5eaf10cd219668fe6f154661f09cc949a41bfb43e",
+              "counts": "664a8c3aea4e57f1d721ed415294a98d685989b7cc29b8403502f7832ce02d5d",
+              "luminance": "e5cb1b7bfcf795e4fe959402e5ec63fe9ba9cbea88c1171eeda8696380720c95",
+              "active": "30ea56b85a1bf330a4dee0978f9f00ad12581ccde479e2d34182d4a6e875a256",
+              "active_flag": "b1404478f078e15777335e03a410f339d3687ec6ebd049922bdb7e6fc4a08287",
+              "nactive": "a241699c5504029eaf0b2c076dfe057155e9ff998036d6df8a8db60b48fd554e",
+              "last": "dbfad5d1c62988f9cf78e1ecfe5b174ff59e90f51542567368ef5d24e310197b",
+              "eligibility": "d6fd6f5bc77a72c11e5983d6d31664c73612d6d0f02975dd1c78933f999a52d9",
+              "eligibility_last": "c576538b636e7ff198d136dc74b0aa5f36d102b1df02e23241413b2032f801bd",
+              "modulation": "2318ffec2271a8fae0452d1860c5b7fc5e39dbfb9ebbad606b86456f9d8856fb",
+              "modulation_last": "cd3cd4d05d74cb82e27f262096f79143c499a1e58221eead6a15494854cbaba8",
+              "adaptation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "rate_kc": "332df78655912e09230b4eadfc949af86418449714e48be6d6639fd46cda591f",
+              "rate_dan": "4e81137ec01a586c97fed1aa6ced5790fcb8bb503d33e5bb23422db0a53d7c69",
+              "r8_light": "1f6c2c33fb2a74c6508e2adf4485d2cf2ec91332afde63137a055771b4cf7e83"
+            }
+          }
+        }
+      ],
+      "initial_memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+      "final_memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+      "training_memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+      "reference_report_sha256": "038e6f2c69c00a60ab88d89340cf1f85cc7b75e9a3fc8567e1d284cf90ce01e3",
+      "plan_sha256": "3896dedeacf436b240c3f29e4ebfc656410c868dbeab45ac8c33537b70cbc19a",
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "interpretation": "Post hoc mechanism experiment. Full retained graph and fixed decoder. All eight conditions reported; no account, P&L, policy selection, or live deployment. Resetting dynamics is a controlled intervention, not a claim of biological recovery or profitable learning."
+    },
+    "trained_adaptation": {
+      "schema": 1,
+      "source": "matched_market_stimulus_assay",
+      "config": {
+        "preset": "recorded_market",
+        "view": "original",
+        "news": "none",
+        "eta": 0.001,
+        "learning": false,
+        "pulses": "none",
+        "memory": "trained",
+        "state_reset": "adaptation"
+      },
+      "graph": {
+        "neurons": 166700,
+        "edges": 25582938,
+        "plastic_edges": 7835
+      },
+      "native_build": {
+        "model": "stonkfly-dual-compartment-v1",
+        "source_sha256": "e2d4d584f4633613277bb1bf6ea7ba20855c01a332ae2e9344ed7782604c8509",
+        "binary_sha256": "9c0768fc4f8e34ba730a31ef04a5de958e7d4276c1552f30ec6f2c2eddbfa1b1",
+        "flags": [
+          "-O3",
+          "-std=c++17",
+          "-shared",
+          "-fPIC"
+        ]
+      },
+      "upstream_commit": "78ef3e05ab0fa086032098558d893667068944a0",
+      "seconds": 20.41368157300002,
+      "events": [
+        {
+          "side": "BUY",
+          "left_hz": 30.0,
+          "right_hz": 38.0,
+          "difference_hz": 8.0,
+          "gate_spikes": 31,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 500.0,
+          "compute_seconds": 1.4940440979999323,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 0,
+          "aversive_spikes": 16,
+          "KC_spikes": 14,
+          "total_spikes": 362898,
+          "spike_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+          "input_sha256": "77bc6b7f69ed101fed1672833465d77c483e36fdbcf80b0281b44f36e1fa9aa7",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 3066,
+            "mean_efficacy": 1.0002872943878174,
+            "minimum_efficacy": 0.6515528559684753,
+            "sha256": "7ab38ccccb0396c7cc1939e0ad9a2db1dc3cdf82e1f495aa902c55501c369675",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "plasticity_enabled": false,
+            "changed_edges": 0,
+            "weight_delta_l2": 0.0,
+            "max_abs_delta": 0.0,
+            "efficacy_min": 0.6515528495489835,
+            "efficacy_max": 1.1017670896185976,
+            "clipped_edges": 0
+          },
+          "phase": "replay",
+          "phase_step": 1,
+          "market_decision_ts": 1789212900,
+          "input_preset": "recorded_market",
+          "input_news": "none",
+          "activity_boundary": {
+            "mode": "initial",
+            "requested_mode": "adaptation",
+            "observation": 1,
+            "target_fields": [],
+            "before_clock": {
+              "cursor": 0,
+              "sim_ms": 0.0,
+              "total_spikes": 0
+            },
+            "after_clock": {
+              "cursor": 0,
+              "sim_ms": 0.0,
+              "total_spikes": 0
+            },
+            "artifact_sha256": "cd133555b7eca8a200afe9d1614b838ea340b8774a127e7454c48be78063f834",
+            "all_weight_sha256": "04b44b1fc2f88f3576c7c95c7d75a414e204a2b6fdfe1dfbb51f46a73206efc6",
+            "memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+            "changed_fields": [],
+            "before_sha256": {
+              "v": "275bd935e4f1a56cbc2ca22b8f258f1cef511894f42f531e9a52476dd7b02946",
+              "g": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "refractory": "fe721ce07571ce5e6d09fc093440dfdbca4d3e360d5ddf903e3641aa4c6d0977",
+              "drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "previous_drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "queue": "56185bbe1f2586ea5668c759f2396dc7693f8b3b21d7015d24db8f37c2958453",
+              "queue_count": "f2c0d5456a983ecd12e314fcfa19879179fc8424343baeb1325457472ae85601",
+              "counts": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "luminance": "c411c207fb379b3beccac216c633ae620c51f23c78971c7d028d0266aee0cdc7",
+              "active": "bd5ad58a15d4ad9db612f07addacd70bf96d075969aa35f0c4a9e159124b5c26",
+              "active_flag": "557e5066485a8948d9ba5408da8359bdea92f316cc4574af08427bb77dd3a23e",
+              "nactive": "bc1b961d22c114f540586ed92bd23822a05caa6b98e73413f41f13e2b0deac6d",
+              "last": "543e44862a6bae300a72f840ceff3f11ac91905d58b046fb6ffbd4653c0b052c",
+              "eligibility": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "eligibility_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "modulation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "modulation_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "adaptation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "rate_kc": "9cf5a5bbc54b97f49e0c591d653fd61cadc8b2d88dbc2fde77c0035b7c42055d",
+              "rate_dan": "b707241545a346265aab1ffb32ff64b55bf8f8dc1b56a46ef33ce3d15db11d33",
+              "r8_light": "ac0a4091bbd9d73854a2d4a2944b5f8bb40cd7039d89d5575cb2629710c8c160"
+            },
+            "after_sha256": {
+              "v": "275bd935e4f1a56cbc2ca22b8f258f1cef511894f42f531e9a52476dd7b02946",
+              "g": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "refractory": "fe721ce07571ce5e6d09fc093440dfdbca4d3e360d5ddf903e3641aa4c6d0977",
+              "drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "previous_drive": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "queue": "56185bbe1f2586ea5668c759f2396dc7693f8b3b21d7015d24db8f37c2958453",
+              "queue_count": "f2c0d5456a983ecd12e314fcfa19879179fc8424343baeb1325457472ae85601",
+              "counts": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "luminance": "c411c207fb379b3beccac216c633ae620c51f23c78971c7d028d0266aee0cdc7",
+              "active": "bd5ad58a15d4ad9db612f07addacd70bf96d075969aa35f0c4a9e159124b5c26",
+              "active_flag": "557e5066485a8948d9ba5408da8359bdea92f316cc4574af08427bb77dd3a23e",
+              "nactive": "bc1b961d22c114f540586ed92bd23822a05caa6b98e73413f41f13e2b0deac6d",
+              "last": "543e44862a6bae300a72f840ceff3f11ac91905d58b046fb6ffbd4653c0b052c",
+              "eligibility": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "eligibility_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "modulation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "modulation_last": "82dba2ccacd519455579208551100f050d621df48cdd21f7961e562673c0e333",
+              "adaptation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "rate_kc": "9cf5a5bbc54b97f49e0c591d653fd61cadc8b2d88dbc2fde77c0035b7c42055d",
+              "rate_dan": "b707241545a346265aab1ffb32ff64b55bf8f8dc1b56a46ef33ce3d15db11d33",
+              "r8_light": "ac0a4091bbd9d73854a2d4a2944b5f8bb40cd7039d89d5575cb2629710c8c160"
+            }
+          }
+        },
+        {
+          "side": "BUY",
+          "left_hz": 32.0,
+          "right_hz": 38.0,
+          "difference_hz": 6.0,
+          "gate_spikes": 3,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 1000.0,
+          "compute_seconds": 3.7208705699998745,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 1,
+          "aversive_spikes": 99,
+          "KC_spikes": 4853,
+          "total_spikes": 555953,
+          "spike_sha256": "a52ede38ffe316bfd94a23c115f2f309065959d953260bd2dc391a92c1294ed2",
+          "input_sha256": "0758728838cf369025d4ffbff13f8c1c826722a6a42f9391bc3ea10b98b6a4f2",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 3066,
+            "mean_efficacy": 1.0002872943878174,
+            "minimum_efficacy": 0.6515528559684753,
+            "sha256": "7ab38ccccb0396c7cc1939e0ad9a2db1dc3cdf82e1f495aa902c55501c369675",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "plasticity_enabled": false,
+            "changed_edges": 0,
+            "weight_delta_l2": 0.0,
+            "max_abs_delta": 0.0,
+            "efficacy_min": 0.6515528495489835,
+            "efficacy_max": 1.1017670896185976,
+            "clipped_edges": 0
+          },
+          "phase": "replay",
+          "phase_step": 2,
+          "market_decision_ts": 1789213200,
+          "input_preset": "recorded_market",
+          "input_news": "none",
+          "activity_boundary": {
+            "mode": "adaptation",
+            "requested_mode": "adaptation",
+            "observation": 2,
+            "target_fields": [
+              "adaptation"
+            ],
+            "before_clock": {
+              "cursor": 5000,
+              "sim_ms": 500.0,
+              "total_spikes": 362898
+            },
+            "after_clock": {
+              "cursor": 5000,
+              "sim_ms": 500.0,
+              "total_spikes": 362898
+            },
+            "artifact_sha256": "f0eef3d0a3505eea22b3476b464ee0e846065c44ecdb89e3ba4196c7062fe3a9",
+            "all_weight_sha256": "04b44b1fc2f88f3576c7c95c7d75a414e204a2b6fdfe1dfbb51f46a73206efc6",
+            "memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+            "changed_fields": [
+              "adaptation"
+            ],
+            "before_sha256": {
+              "v": "f25df441181ff4d8fbba3642874fb0fd710fa06737c62f8fdfe897c72fff93bd",
+              "g": "bf864f006c3bcee326b11d56f95e4c4f2a43f2222540fb665b43aac34e0fe1f4",
+              "refractory": "21d0b999e95b0d4e583550086b2d2282e71471ebf34eeaa9ed00152d0bc00892",
+              "drive": "178d1ea6b19908a717fa6bfe6b560853ddf48ec60e11c03dda8d950ac45bf7e8",
+              "previous_drive": "178d1ea6b19908a717fa6bfe6b560853ddf48ec60e11c03dda8d950ac45bf7e8",
+              "queue": "86471c78f9e7186ab3842a6291202eb189d20d5499a64deeaaa76dabf4716993",
+              "queue_count": "b78efe9218059da48a9427a6f476e20684ddf92b50285f8144f596be2d7b8c20",
+              "counts": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+              "luminance": "e8841fa6b7c62be68b105512f345feab708d7fa973421fb45f6fc46a40c9e1ae",
+              "active": "4f8edfeffbecf6adb1c95f12c18e2a8d8dc36ea97fdd9cd220deb6f3e2041908",
+              "active_flag": "0dc3e4c0418c1a15908285a33503916835930fe9d779510b573edb636f23f71a",
+              "nactive": "515329d3e7d99208c83d8c2631c64d92d6f396bb5a3d8573df0bde7bb07154e8",
+              "last": "4112e44a3a9c24b3c8165aea46f24334d137182659f38a2c313bb1b414e653c2",
+              "eligibility": "6cd34b5af05f1a664d2284ee58e1f5525e59c0015b3f1540b6f23a9a18e9f34c",
+              "eligibility_last": "708b0bfdbcecf03572772a07f27b703011ef67d0b30db5c1b05859cbcd05f0a5",
+              "modulation": "64b0ea847764f83d482b274d639c6e24fbe992c87e2021d3ff0cc54d0743a18c",
+              "modulation_last": "579dda9bb98d55d969a1f126a0262ceb0bc0888996d6698de09f0d13844b2e89",
+              "adaptation": "f89b8c6cc06a58e2fe71c4b1414e5a66793c12c2f128e0e4012ab45a25d506b1",
+              "rate_kc": "0e71ecdab90ec8a8ed1ab336704c91a93dc8efc55540e207e1cc7c4a38bb2e38",
+              "rate_dan": "938c302244e1010dbb54305baee88b1d3ca88f1f1ff7b8524fde6fdc74f7f32b",
+              "r8_light": "5c293d9874a4e8cb789d4d3c01e414bff98d9a6326a34270c09ce50900cb368f"
+            },
+            "after_sha256": {
+              "v": "f25df441181ff4d8fbba3642874fb0fd710fa06737c62f8fdfe897c72fff93bd",
+              "g": "bf864f006c3bcee326b11d56f95e4c4f2a43f2222540fb665b43aac34e0fe1f4",
+              "refractory": "21d0b999e95b0d4e583550086b2d2282e71471ebf34eeaa9ed00152d0bc00892",
+              "drive": "178d1ea6b19908a717fa6bfe6b560853ddf48ec60e11c03dda8d950ac45bf7e8",
+              "previous_drive": "178d1ea6b19908a717fa6bfe6b560853ddf48ec60e11c03dda8d950ac45bf7e8",
+              "queue": "86471c78f9e7186ab3842a6291202eb189d20d5499a64deeaaa76dabf4716993",
+              "queue_count": "b78efe9218059da48a9427a6f476e20684ddf92b50285f8144f596be2d7b8c20",
+              "counts": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+              "luminance": "e8841fa6b7c62be68b105512f345feab708d7fa973421fb45f6fc46a40c9e1ae",
+              "active": "4f8edfeffbecf6adb1c95f12c18e2a8d8dc36ea97fdd9cd220deb6f3e2041908",
+              "active_flag": "0dc3e4c0418c1a15908285a33503916835930fe9d779510b573edb636f23f71a",
+              "nactive": "515329d3e7d99208c83d8c2631c64d92d6f396bb5a3d8573df0bde7bb07154e8",
+              "last": "4112e44a3a9c24b3c8165aea46f24334d137182659f38a2c313bb1b414e653c2",
+              "eligibility": "6cd34b5af05f1a664d2284ee58e1f5525e59c0015b3f1540b6f23a9a18e9f34c",
+              "eligibility_last": "708b0bfdbcecf03572772a07f27b703011ef67d0b30db5c1b05859cbcd05f0a5",
+              "modulation": "64b0ea847764f83d482b274d639c6e24fbe992c87e2021d3ff0cc54d0743a18c",
+              "modulation_last": "579dda9bb98d55d969a1f126a0262ceb0bc0888996d6698de09f0d13844b2e89",
+              "adaptation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "rate_kc": "0e71ecdab90ec8a8ed1ab336704c91a93dc8efc55540e207e1cc7c4a38bb2e38",
+              "rate_dan": "938c302244e1010dbb54305baee88b1d3ca88f1f1ff7b8524fde6fdc74f7f32b",
+              "r8_light": "5c293d9874a4e8cb789d4d3c01e414bff98d9a6326a34270c09ce50900cb368f"
+            }
+          }
+        },
+        {
+          "side": "HOLD",
+          "left_hz": 34.0,
+          "right_hz": 44.0,
+          "difference_hz": 10.0,
+          "gate_spikes": 0,
+          "cell_ids": {
+            "left": [
+              "10162"
+            ],
+            "right": [
+              "10059"
+            ],
+            "gate": [
+              "10527",
+              "555871"
+            ]
+          },
+          "brain_ms": 1500.0,
+          "compute_seconds": 4.658209889000119,
+          "stimulus": "none",
+          "stimulus_ms": 0.0,
+          "reward_spikes": 5,
+          "aversive_spikes": 130,
+          "KC_spikes": 6209,
+          "total_spikes": 618054,
+          "spike_sha256": "205c972463b1bdcc1f72c0b5fca8bd81fd62516770b6dda29e822fd2b74ae6c1",
+          "input_sha256": "c9c6c5e50d923ce6c302246c96b984528b5af0f116894c6b787ca6bf376aadf1",
+          "memory": {
+            "plastic_edges": 7835,
+            "changed_edges": 3066,
+            "mean_efficacy": 1.0002872943878174,
+            "minimum_efficacy": 0.6515528559684753,
+            "sha256": "7ab38ccccb0396c7cc1939e0ad9a2db1dc3cdf82e1f495aa902c55501c369675",
+            "model": "stonkfly-dual-compartment-v1"
+          },
+          "diagnostics": {
+            "loss": null,
+            "backprop_gradient": null,
+            "plasticity_enabled": false,
+            "changed_edges": 0,
+            "weight_delta_l2": 0.0,
+            "max_abs_delta": 0.0,
+            "efficacy_min": 0.6515528495489835,
+            "efficacy_max": 1.1017670896185976,
+            "clipped_edges": 0
+          },
+          "phase": "replay",
+          "phase_step": 3,
+          "market_decision_ts": 1789213500,
+          "input_preset": "recorded_market",
+          "input_news": "none",
+          "activity_boundary": {
+            "mode": "adaptation",
+            "requested_mode": "adaptation",
+            "observation": 3,
+            "target_fields": [
+              "adaptation"
+            ],
+            "before_clock": {
+              "cursor": 10000,
+              "sim_ms": 1000.0,
+              "total_spikes": 918851
+            },
+            "after_clock": {
+              "cursor": 10000,
+              "sim_ms": 1000.0,
+              "total_spikes": 918851
+            },
+            "artifact_sha256": "8bc4e8e21218badec1f24dff4691bde1337ce17509e9755aaadbcf28f83fde9a",
+            "all_weight_sha256": "04b44b1fc2f88f3576c7c95c7d75a414e204a2b6fdfe1dfbb51f46a73206efc6",
+            "memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+            "changed_fields": [
+              "adaptation"
+            ],
+            "before_sha256": {
+              "v": "37013602e4ca5bfecd61bbaf6e8ab0e63ae9b012fa8ecd5d1bbd763ca3fcf3d2",
+              "g": "468e7b3f9117666c293b43ec919a33557b085dd93949109df4f1dc94c9d9f76b",
+              "refractory": "ac2f835e723bd6b738967083a060a0e604bb46d36e3cdae5553236a2f01c0e29",
+              "drive": "0af84f5a1bd9a26c86fe5e79c40bcd63a405f71bdfd1bf0a3af810339fb4ece3",
+              "previous_drive": "0af84f5a1bd9a26c86fe5e79c40bcd63a405f71bdfd1bf0a3af810339fb4ece3",
+              "queue": "ace1bfae52b922313b2815f398f82a4f36a750bb11adeb4ad7f41e733790f3db",
+              "queue_count": "0aa882f4240e1a8a0ca7133ab4b2c0e2332ef46dab9638913ad51ec4e82a3255",
+              "counts": "a52ede38ffe316bfd94a23c115f2f309065959d953260bd2dc391a92c1294ed2",
+              "luminance": "e5cb1b7bfcf795e4fe959402e5ec63fe9ba9cbea88c1171eeda8696380720c95",
+              "active": "b4fdd2b6d799457b93dc6ca48856d4e0712f4f64ccd4198ac316df5d19b40903",
+              "active_flag": "e7a36fdad6212473de81fd5ca9434f40b7f1673bab5c030cfc32795e3050bae0",
+              "nactive": "daa4243b5cae56f34d793e42987fed3052ebed8af4fc3bd76424aee1d7858e03",
+              "last": "dbfad5d1c62988f9cf78e1ecfe5b174ff59e90f51542567368ef5d24e310197b",
+              "eligibility": "4eb448337d20dc93aaf9135e31e56647214122b5c79fee826a8db90d650ae3f7",
+              "eligibility_last": "6cda8b85e6e8fbeb1301510bccac98d3ce92e5f7e6525c3e775b44c08207855e",
+              "modulation": "c8903c986bac825ba9605afd41da18cdc883b8a269b9cfc4231f720519d651f4",
+              "modulation_last": "ff2ca94ee281beac0ed6385f384dbc3efab0579c26738338001d4ebbd566c76d",
+              "adaptation": "84eb07840922ef0587c555a9856d37d4326a3cb3769b6a53044d4e56e1aabe44",
+              "rate_kc": "e7528bb6be5dc65a4641c615b06b9c88aa48410e888d5662d400d00bcb623af9",
+              "rate_dan": "216c119e8f3fb89d650f24b0818e76a001dd6a123bc389ab141d38e2d825976c",
+              "r8_light": "1f6c2c33fb2a74c6508e2adf4485d2cf2ec91332afde63137a055771b4cf7e83"
+            },
+            "after_sha256": {
+              "v": "37013602e4ca5bfecd61bbaf6e8ab0e63ae9b012fa8ecd5d1bbd763ca3fcf3d2",
+              "g": "468e7b3f9117666c293b43ec919a33557b085dd93949109df4f1dc94c9d9f76b",
+              "refractory": "ac2f835e723bd6b738967083a060a0e604bb46d36e3cdae5553236a2f01c0e29",
+              "drive": "0af84f5a1bd9a26c86fe5e79c40bcd63a405f71bdfd1bf0a3af810339fb4ece3",
+              "previous_drive": "0af84f5a1bd9a26c86fe5e79c40bcd63a405f71bdfd1bf0a3af810339fb4ece3",
+              "queue": "ace1bfae52b922313b2815f398f82a4f36a750bb11adeb4ad7f41e733790f3db",
+              "queue_count": "0aa882f4240e1a8a0ca7133ab4b2c0e2332ef46dab9638913ad51ec4e82a3255",
+              "counts": "a52ede38ffe316bfd94a23c115f2f309065959d953260bd2dc391a92c1294ed2",
+              "luminance": "e5cb1b7bfcf795e4fe959402e5ec63fe9ba9cbea88c1171eeda8696380720c95",
+              "active": "b4fdd2b6d799457b93dc6ca48856d4e0712f4f64ccd4198ac316df5d19b40903",
+              "active_flag": "e7a36fdad6212473de81fd5ca9434f40b7f1673bab5c030cfc32795e3050bae0",
+              "nactive": "daa4243b5cae56f34d793e42987fed3052ebed8af4fc3bd76424aee1d7858e03",
+              "last": "dbfad5d1c62988f9cf78e1ecfe5b174ff59e90f51542567368ef5d24e310197b",
+              "eligibility": "4eb448337d20dc93aaf9135e31e56647214122b5c79fee826a8db90d650ae3f7",
+              "eligibility_last": "6cda8b85e6e8fbeb1301510bccac98d3ce92e5f7e6525c3e775b44c08207855e",
+              "modulation": "c8903c986bac825ba9605afd41da18cdc883b8a269b9cfc4231f720519d651f4",
+              "modulation_last": "ff2ca94ee281beac0ed6385f384dbc3efab0579c26738338001d4ebbd566c76d",
+              "adaptation": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+              "rate_kc": "e7528bb6be5dc65a4641c615b06b9c88aa48410e888d5662d400d00bcb623af9",
+              "rate_dan": "216c119e8f3fb89d650f24b0818e76a001dd6a123bc389ab141d38e2d825976c",
+              "r8_light": "1f6c2c33fb2a74c6508e2adf4485d2cf2ec91332afde63137a055771b4cf7e83"
+            }
+          }
+        }
+      ],
+      "initial_memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+      "final_memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+      "training_memory_sha256": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809",
+      "reference_report_sha256": "038e6f2c69c00a60ab88d89340cf1f85cc7b75e9a3fc8567e1d284cf90ce01e3",
+      "plan_sha256": "3896dedeacf436b240c3f29e4ebfc656410c868dbeab45ac8c33537b70cbc19a",
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "interpretation": "Post hoc mechanism experiment. Full retained graph and fixed decoder. All eight conditions reported; no account, P&L, policy selection, or live deployment. Resetting dynamics is a controlled intervention, not a claim of biological recovery or profitable learning."
+    }
+  },
+  "summary": {
+    "pristine_carry": {
+      "actions": [
+        "BUY",
+        "BUY",
+        "HOLD"
+      ],
+      "gate_spikes": [
+        31,
+        4,
+        0
+      ],
+      "difference_hz": [
+        8.0,
+        6.0,
+        10.0
+      ]
+    },
+    "trained_carry": {
+      "actions": [
+        "BUY",
+        "BUY",
+        "HOLD"
+      ],
+      "gate_spikes": [
+        31,
+        3,
+        0
+      ],
+      "difference_hz": [
+        8.0,
+        2.0,
+        4.0
+      ]
+    },
+    "pristine_full": {
+      "actions": [
+        "BUY",
+        "BUY",
+        "BUY"
+      ],
+      "gate_spikes": [
+        31,
+        23,
+        18
+      ],
+      "difference_hz": [
+        8.0,
+        12.0,
+        8.0
+      ]
+    },
+    "trained_full": {
+      "actions": [
+        "BUY",
+        "BUY",
+        "BUY"
+      ],
+      "gate_spikes": [
+        31,
+        23,
+        18
+      ],
+      "difference_hz": [
+        8.0,
+        12.0,
+        8.0
+      ]
+    },
+    "pristine_visual_filters": {
+      "actions": [
+        "BUY",
+        "SELL",
+        "HOLD"
+      ],
+      "gate_spikes": [
+        31,
+        5,
+        0
+      ],
+      "difference_hz": [
+        8.0,
+        -6.0,
+        8.0
+      ]
+    },
+    "trained_visual_filters": {
+      "actions": [
+        "BUY",
+        "BUY",
+        "HOLD"
+      ],
+      "gate_spikes": [
+        31,
+        5,
+        0
+      ],
+      "difference_hz": [
+        8.0,
+        8.0,
+        10.0
+      ]
+    },
+    "pristine_adaptation": {
+      "actions": [
+        "BUY",
+        "BUY",
+        "HOLD"
+      ],
+      "gate_spikes": [
+        31,
+        4,
+        0
+      ],
+      "difference_hz": [
+        8.0,
+        4.0,
+        0.0
+      ]
+    },
+    "trained_adaptation": {
+      "actions": [
+        "BUY",
+        "BUY",
+        "HOLD"
+      ],
+      "gate_spikes": [
+        31,
+        3,
+        0
+      ],
+      "difference_hz": [
+        8.0,
+        6.0,
+        10.0
+      ]
+    }
+  },
+  "initial_dynamics_sha256": "fe9303113b85b64d5be35a088df3fec81577357294b7627f42a2282de25e13c3",
+  "code_sha256": {
+    "fly_market_activity.py": "8dfd7c9b44646015d9bc6e7ed21730e8585dbf1af565e6fc3df88f999abf8fe5",
+    "fly_market_activity_audit.py": "8061258ac435d4dd560b31bd5063310415c3d1ffbb8c542d7e1982a5caecc74d",
+    "fly_market_pulse.py": "070824d264ed8b615bd7535ad0613c31e6ec5c5cc91ee4a2ad7d8d66c4cb53b4",
+    "fly_market_restoration.py": "8351610e09fdba46251cb44c61510509e1c46e1ade58dfbd880848e85878d1a2",
+    "fly_market_study.py": "6056e7ce209d1f62a4136326c31f476207a5b081383eeb251e7f977406f2f6fa",
+    "fly_trace.py": "1b3a299d8423835a5abf1a2e3fd9a985f51a6280d2e2cd707aa47dd16e1575b1",
+    "fly.py": "4935f43219ab63d19fa2cc04b36a5612307a4cf44a016b0af2c8f0d69e4a5fea",
+    "cloud_debug.py": "cf74a5123294d98116367e3e44b0a96740ef3eb04f4b38ce915b032f7f18baef"
+  }
+}

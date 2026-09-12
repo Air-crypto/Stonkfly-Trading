@@ -1724,8 +1724,8 @@ the scheduled paper policy were unchanged.
 The next mechanism to isolate is activity carryover and gate dropout, separately
 from learned memory. In the prior nine-condition replay the gate declined from
 31 spikes to zero or one even with pristine memory. A controlled carryover/reset
-comparison can test that explanation without selecting a replacement trading
-policy from these test returns. It has not yet been run.
+comparison tests that explanation without selecting a replacement trading
+policy from these test returns; see the [completed activity-reset diagnostic](#activity-reset-results).
 
 ## Isolate carried activity
 
@@ -1777,3 +1777,85 @@ uv run python -m paperlab.fly_market_activity_audit \
 The viewer's **Activity boundary before this observation** panel identifies the
 reset, target fields, fields whose values changed, and the before/after neural
 clock. This appears only on recordings that contain boundary metadata.
+
+## Activity-reset results
+
+All eight conditions completed on the registered market06 pool-1 inputs. Both
+carry controls reproduced the reference actions, rates, gate counts, and
+whole-neuron spike-count hashes. Reconstructed training memory matched its saved
+reference. The offline audit checked **24 actual before/after boundary files**,
+including all target fields, untouched fields, preserved weights/`u/w`, and clock
+continuity. The first observation matched its carried-state control in every arm.
+
+| Memory / activity treatment | Actions on images 1–3 | Gate spikes | Right − left Hz |
+| --- | --- | --- | --- |
+| Pristine / carry | BUY, BUY, HOLD | 31, 4, 0 | 8, 6, 10 |
+| Trained / carry | BUY, BUY, HOLD | 31, 3, 0 | 8, 2, 4 |
+| Pristine / full reset | BUY, BUY, BUY | 31, 23, 18 | 8, 12, 8 |
+| Trained / full reset | BUY, BUY, BUY | 31, 23, 18 | 8, 12, 8 |
+| Pristine / visual filters reset | BUY, SELL, HOLD | 31, 5, 0 | 8, −6, 8 |
+| Trained / visual filters reset | BUY, BUY, HOLD | 31, 5, 0 | 8, 8, 10 |
+| Pristine / adaptation reset | BUY, BUY, HOLD | 31, 4, 0 | 8, 4, 0 |
+| Trained / adaptation reset | BUY, BUY, HOLD | 31, 3, 0 | 8, 6, 10 |
+
+![Audited activity-reset comparison on identical inputs](assets/fly-market-activity-01.png)
+
+**A full dynamic-state reset is sufficient to recover gate activity in this
+replay while keeping learned memory.** Before image three, it resets 21 recorded
+dynamic fields and the neural clock. The resulting 18 gate spikes comprise 13
+from body 10527 and five from body 555871, versus zero for both in the trained
+carry control. Both gates first fire in zero-based bin 2, **20–30 ms into the
+image**. This is bin-level timing, not an exact spike timestamp.
+
+[Jump to the restored gate spike](http://127.0.0.1:8765/?run=activity01-trained_full&step=2&bin=2&neuron=10527&compare=activity01-trained_carry).
+The reset recording's neural clock reads 30 ms there; the carried-state recording
+reads 1,030 ms. Paired plots align by market observation and elapsed time in the
+image, so these different absolute neural clocks are not conflated.
+
+![Declared activity reset and neural clock boundary](assets/fly-activity-boundary.png)
+
+![Gate voltage and spikes after reset versus carried state](assets/fly-activity-gate.png)
+
+These active-neuron display subsets have no shared displayed plastic edge. The
+paired viewer explicitly marks the selected connection unavailable in the other
+subset. Preserved synaptic memory is verified by the full boundary checkpoints,
+not inferred from a missing connection plot.
+
+Neither narrower reset recovered the final gate. Clearing visual filters changed
+the second pristine action to SELL but left the trained action BUY. Clearing
+stored intrinsic adaptation changed some rates but kept the final HOLD. These
+are conditional state effects within this implemented model. The adaptation
+field accumulates on KC spikes; these partial interventions clear stored arrays
+in the native lazy integrator, not a modeled biological treatment.
+
+Full resets also made **all three whole-neuron spike-count hashes match between
+pristine and trained memory**, even though their weights and stored `u/w` stayed
+different. That does not establish identical voltages or exact spike timing.
+It means recovering a gate can also remove the measured spike-count distinction
+associated with learning on these short inputs. No account, fills, returns, or
+policy promotion were computed, so this is not evidence that resetting improves
+trading. The next useful isolation is which of the remaining dynamic fields, or
+which interactions among fields, produce this effect without a blanket reset.
+
+Artifacts: [protocol](../reports/fly-market-activity-protocol-01.json),
+[all events and source hashes](../reports/fly-market-activity-study-01.json),
+[boundary-array audit](../reports/fly-market-activity-audit-01.json), and the eight
+included `activity01-*` recordings. The executed source was committed as
+`f038d56` before submission. Estimated compute for the call was **$0.01650**,
+with worker monthly reserved compute **$1.35153 / $25**. These are application
+estimates rather than the provider bill. The scheduled paper policy was unchanged.
+
+Regenerate the standalone figure from the published audit and event report:
+
+```sh
+uv run python -m paperlab.fly_activity_figure \
+  --study reports/fly-market-activity-study-01.json \
+  --audit reports/fly-market-activity-audit-01.json \
+  --out runs/activity-results.svg
+FLY_VIEW_URL=http://127.0.0.1:8765 node scripts/check-fly-activity-view.cjs
+```
+
+The browser check verifies all 24 boundary views, output counts, exact clocks,
+reset fields, memory identity, aligned gate traces, mobile layout, and clearing
+when a legacy recording is loaded. It blocks model-job submissions. The full
+native reset/replay test and 246 unit/regression tests passed before deployment.
