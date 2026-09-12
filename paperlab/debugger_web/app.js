@@ -1,6 +1,22 @@
 'use strict';
 const $=id=>document.getElementById(id);
 const historical=report=>['sealed_retrospective_market_replay','matched_market_stimulus_assay'].includes(report.source);
+const phaseKey=(f,i)=>`${f.event.phase||'assay'}:${f.event.phase_step??i+1}`;
+const inputHash=f=>typeof f.event.input_sha256==='string'&&/^[a-f0-9]{64}$/.test(f.event.input_sha256)?f.event.input_sha256:null;
+function observationPairs(current,other,market){
+ const keys=view=>view.frames.map((f,i)=>market?(Number.isFinite(f.event.market_decision_ts)?f.event.market_decision_ts:null):phaseKey(f,i));
+ const a=keys(current),b=keys(other),counts=keys=>{const result=new Map();for(const k of keys)if(k!==null)result.set(k,(result.get(k)||0)+1);return result;};
+ const ac=counts(a),bc=counts(b),indices=new Map(b.map((k,i)=>[k,i])),matched=[],ambiguous=new Set();
+ for(let i=0;i<a.length;i++){
+  const key=a[i];if(key===null||!indices.has(key))continue;
+  if(ac.get(key)!==1||bc.get(key)!==1){ambiguous.add(key);continue;}
+  const j=indices.get(key),prefixA=current.frames.slice(0,i+1),prefixB=other.frames.slice(0,j+1);
+  const unknown=prefixA.some((f,k)=>!inputHash(f)||a[k]===null||ac.get(a[k])!==1)||prefixB.some((f,k)=>!inputHash(f)||b[k]===null||bc.get(b[k])!==1);
+  const history=unknown?'unverified':i===j&&prefixA.every((f,k)=>a[k]===b[k]&&inputHash(f)===inputHash(prefixB[k]))?'identical':'different';
+  matched.push([current.frames[i],other.frames[j],i,history]);
+ }
+ return {matched,ambiguous:ambiguous.size};
+}
 let data=null, step=0, bin=0, node=0, edge=0, timer=null, runName='', positions=[], imported=false, viewRequest=0, externalNeuron=false, paired=null;
 const colors={visual:'#8fbcff',KC:'#b2bfd1',DAN:'#e6a8e8',MBON:'#ffbf69',output:'#67e8cf',other:'#b2bfd1'};
 const num=(x,d=3)=>Number(x).toLocaleString(undefined,{maximumFractionDigits:d});
@@ -68,8 +84,10 @@ function pairedTraces(){
  if(xs.length!==otherXs.length||xs.some((t,i)=>Math.abs(t-otherXs[i])>1e-6)){
   note.textContent='The recordings have different time bins. No traces are interpolated or aligned.';return;
  }
- const identical=!!f.event.input_sha256&&f.event.input_sha256===o.event.input_sha256;
+ const identical=!!inputHash(f)&&inputHash(f)===inputHash(o);
  note.textContent=`Displayed selections at ${num(xs[bin])} ms into this observation. Blue: current; pink: comparison. Input identical: ${identical?'yes':'no'}. Bins are 10 ms, not exact spike times.`;
+ const history=paired.histories.get(step)||'unverified';
+ note.textContent+=` Recorded input prefix: ${history}. This covers the images saved here through this observation, not earlier training or activity resets.`;
  const build=data.report.native_build?.binary_sha256,otherBuild=paired.data.report.native_build?.binary_sha256;
  if(!build||!otherBuild||build!==otherBuild)note.textContent+=' Matching native build is unverified; differences may include build effects.';
  const n=data.nodes[node],ni=paired.data.nodes.findIndex(v=>String(v.id)===String(n.id));
@@ -170,13 +188,14 @@ $('compare').onchange=async e=>{try{
  if(request!==viewRequest||current!==data)return;
  const market=historical(current.report),otherMarket=historical(other.report);
  if(market!==otherMarket){$('comparison').textContent='A synthetic assay and a market replay cannot be paired by observation index.';return;}
- const byTime=new Map(other.frames.map(f=>[f.event.market_decision_ts,f]));const phaseKey=(f,i)=>`${f.event.phase||'assay'}:${f.event.phase_step||i+1}`;const byPhase=new Map(other.frames.map((f,i)=>[phaseKey(f,i),f]));
- const matched=current.frames.map((f,i)=>[f,market?byTime.get(f.event.market_decision_ts):byPhase.get(phaseKey(f,i)),i]).filter(([f,o])=>o&&(!market||Number.isFinite(f.event.market_decision_ts)));
+ const {matched,ambiguous}=observationPairs(current,other,market);
  const wrap=document.createElement('div');wrap.className='table-wrap';
- wrap.append(table([market?'Decision UTC':'Phase / observation','Current action','Other action','Current R−L Hz','Other R−L Hz','Current gate spikes','Other gate spikes','Input identical'],matched.map(([f,o,i])=>[market?utc(f.event.market_decision_ts):phaseKey(f,i),f.event.side,o.event.side,num(f.event.difference_hz),num(o.event.difference_hz),f.event.gate_spikes,o.event.gate_spikes,f.event.input_sha256===o.event.input_sha256?'Yes':'No'])));
+ wrap.append(table([market?'Decision UTC':'Phase / observation','Current action','Other action','Current R−L Hz','Other R−L Hz','Current gate spikes','Other gate spikes','Input identical','Recorded input prefix'],matched.map(([f,o,i,history])=>[market?utc(f.event.market_decision_ts):phaseKey(f,i),f.event.side,o.event.side,num(f.event.difference_hz),num(o.event.difference_hz),f.event.gate_spikes,o.event.gate_spikes,inputHash(f)&&inputHash(f)===inputHash(o)?'Yes':'No / unverified',history])));
  const names=document.createElement('p');names.textContent=`Current: ${currentName} · Other: ${otherName}`;const note=document.createElement('p');note.textContent=market?`${matched.length} shared decision timestamps. Unmatched slots are excluded; inspect each timeline for gaps.`:`${matched.length} observations paired by phase and within-phase index.`;
+ if(ambiguous)note.textContent+=` ${ambiguous} ambiguous observation keys excluded; duplicated timestamps or phase indices cannot be aligned.`;
+ note.textContent+=' The input prefix compares only saved image hashes and observation keys. It does not establish matching earlier training or dynamic state.';
  if([current,other].some(d=>d.report.source==='matched_market_stimulus_assay'))note.textContent+=' Neural responses only: the diagnostic does not recompute fills or returns.';
- const currentBuild=current.report.native_build?.binary_sha256,otherBuild=other.report.native_build?.binary_sha256;if(!currentBuild||!otherBuild)note.textContent+=' Native build provenance is missing; controlled pairing is unverified.';else if(currentBuild!==otherBuild)note.textContent+=' Native binaries differ; this comparison includes build/platform effects.';const config=document.createElement('pre');config.textContent=JSON.stringify({current:current.report.config,comparison:other.report.config},null,2);const details=document.createElement('details'),heading=document.createElement('summary');heading.textContent='Compared configurations';details.append(heading,config);$('comparison').replaceChildren(names,note,wrap,details);paired={data:other,frames:new Map(matched.map(([f,o,i])=>[i,o]))};pairedTraces();
+ const currentBuild=current.report.native_build?.binary_sha256,otherBuild=other.report.native_build?.binary_sha256;if(!currentBuild||!otherBuild)note.textContent+=' Native build provenance is missing; controlled pairing is unverified.';else if(currentBuild!==otherBuild)note.textContent+=' Native binaries differ; this comparison includes build/platform effects.';const config=document.createElement('pre');config.textContent=JSON.stringify(Object.fromEntries([['current',current],['comparison',other]].map(([name,view])=>[name,{configuration:view.report.config,evaluation_phase:view.report.evaluation_phase,memory_origin:view.report.memory_origin,training_exposure:view.report.training_exposure}])),null,2);const details=document.createElement('details'),heading=document.createElement('summary');heading.textContent='Compared configurations';details.append(heading,config);$('comparison').replaceChildren(names,note,wrap,details);paired={data:other,frames:new Map(matched.map(([f,o,i])=>[i,o])),histories:new Map(matched.map(([f,o,i,history])=>[i,history]))};pairedTraces();
  }catch(e){error(e);}};
 window.addEventListener('resize',()=>draw());refresh().then(async()=>{
  const q=new URLSearchParams(location.search);

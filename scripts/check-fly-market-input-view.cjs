@@ -50,6 +50,8 @@ const assert=require('node:assert/strict'),fs=require('fs'),path=require('path')
    const other=name.replace(/-trained_input_reset(?=-development$|$)/,'-trained_frozen');if(!views.has(other))continue;
    await page.goto(`${base}/?run=${name}&step=${v.frames.length-1}&bin=49&neuron=10527&compare=${other}`);
    await page.waitForFunction(()=>document.querySelector('#paired-spikes svg'));assert((await page.locator('#paired-note').innerText()).includes('Input identical: yes'));
+   assert((await page.locator('#paired-note').innerText()).includes('Recorded input prefix: identical'));
+   if(v.report.memory_origin){await page.locator('#comparison summary').click();assert((await page.locator('#comparison pre').innerText()).includes('training_exposure'));}
   }
   await page.setViewportSize({width:390,height:844});assert(!(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth)));
   assert.deepEqual(errors,[]);assert.equal(writes,0);console.log(JSON.stringify({recordings:views.size,slots,boundaries,errors,writes}));

@@ -46,6 +46,9 @@ shares equivalent training checkpoints and audits each separate inference run.
 The comparison now overlays the selected neuron’s voltage and spike bins, plus
 the same connection’s weight. It matches identities and observation times so
 retained memory differences remain visible even when inference is frozen.
+[Recorded input-history matching](docs/fly-debugger.md#distinguish-a-matching-image-from-matching-recorded-history)
+distinguishes the current image from preceding inputs and excludes ambiguous
+timestamp matches.
 [Stored connection memory](docs/fly-debugger.md#inspect-stored-connection-memory)
 adds the recorded `u` and `w` states behind each weight.
 

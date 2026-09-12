@@ -2258,3 +2258,38 @@ excludes post-endpoint receipts and retains unavailable periods instead of
 replacing disappeared pools. The observer stops before publishing recordings
 when this check fails. This is a local verification addition; it does not alter
 the registered window, model execution, cloud schedule or spending caps.
+
+
+### Distinguish a matching image from matching recorded history
+
+A stateful fly can respond differently to the same current image because its
+earlier inputs differed. The comparison table and selected-neuron panel now show
+both the current image match and the **recorded input prefix** through that
+observation. The prefix is identical only when both recordings contain the same
+ordered observation keys and image hashes from their respective starts. A
+shorter recording or earlier changed image is reported as different; missing
+hashes or ambiguous preceding identities make it unverified.
+
+This describes the images stored in the selected files. It does not establish
+matching activity, resets or training before those files begin. The compared
+configuration details include the evaluation phase, imported-memory origin and
+pinned training exposure when available. Duplicate decision timestamps or phase
+indices are excluded from alignment rather than silently selecting the last
+record. The viewer still permits deliberate comparisons of different inputs,
+with the difference visible beside the traces.
+
+Browser checks cover current-image matches with changed earlier images, missing
+hashes, shortened histories, duplicate timestamps, permuted neuron identities,
+missing timestamps, mismatched time bins, cursor movement and mobile layout.
+The study 09 fixture also verifies matching recorded prefixes in both development
+and test views. Every check blocks model-job submission.
+
+
+![Recorded voltage, spike and weight comparison with explicit input-prefix matching](assets/fly-input-history-comparison.png)
+
+This screenshot uses the previously audited 10704-restoration replay and its
+frozen control, not the pending study 09. At 380 ms, both recorded input prefixes
+match, while edge 9976879 (51865 → 10704) has different frozen weights and the
+selected neuron's voltage traces differ. Matching image history does not imply
+identical connection memory. This older recording lacks per-connection `u`/`w`
+arrays; the viewer labels them unavailable instead of inferring values.

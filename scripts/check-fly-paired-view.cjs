@@ -32,6 +32,25 @@ const {chromium}=require('playwright');
  assert((await page.locator('#paired-note').innerText()).includes('Body 10704'));
  assert.deepEqual(await page.locator('#paired-traces svg path').evaluateAll(ns=>ns.map(n=>n.getAttribute('d'))),originalPaths);
  const pairedBefore=await page.locator('#paired-spikes svg path').evaluateAll(ns=>ns.map(n=>n.getAttribute('d')));
+ assert((await page.locator('#paired-note').innerText()).includes('Recorded input prefix: identical'));
+ // A matching current image must not imply the preceding recorded input history matched.
+ fixture=structuredClone(reordered);fixture.frames[0].event.input_sha256='f'.repeat(64);
+ await page.selectOption('#compare','');await page.selectOption('#compare',other);
+ await page.waitForFunction(()=>document.querySelector('#paired-note').textContent.includes('Recorded input prefix: different'));
+ assert((await page.locator('#paired-note').innerText()).includes('Input identical: yes'));
+ fixture=structuredClone(reordered);delete fixture.frames[0].event.input_sha256;
+ await page.selectOption('#compare','');await page.selectOption('#compare',other);
+ await page.waitForFunction(()=>document.querySelector('#paired-note').textContent.includes('Recorded input prefix: unverified'));
+ fixture=structuredClone(reordered);fixture.frames.shift();
+ await page.selectOption('#compare','');await page.selectOption('#compare',other);
+ await page.waitForFunction(()=>document.querySelector('#paired-note').textContent.includes('Recorded input prefix: different'));
+ assert.equal(await page.locator('#paired-traces svg').count(),3);
+ fixture=structuredClone(reordered);fixture.frames.push(structuredClone(fixture.frames[1]));
+ await page.selectOption('#compare','');await page.selectOption('#compare',other);
+ await page.waitForFunction(()=>document.querySelector('#comparison').textContent.includes('ambiguous observation keys excluded'));
+ assert.equal(await page.locator('#paired-traces svg').count(),0);
+ assert((await page.locator('#paired-note').innerText()).includes('No shared observation'));
+
  fixture=structuredClone(reordered);fixture.frames.forEach(f=>f.event.market_decision_ts+=1);
  await page.selectOption('#compare','');await page.selectOption('#compare',other);
  await page.waitForFunction(()=>document.querySelector('#paired-note').textContent.includes('No shared observation'));assert.equal(await page.locator('#paired-traces svg').count(),0);
@@ -42,6 +61,6 @@ const {chromium}=require('playwright');
  assert.deepEqual(await page.locator('#paired-spikes svg path').evaluateAll(ns=>ns.map(n=>n.getAttribute('d'))),pairedBefore);
  await page.selectOption('#runs','marketrestore01-restore_11402');await page.waitForFunction(()=>document.querySelector('#paired-traces').hidden);assert.equal(await page.inputValue('#compare'),'');
  await page.setViewportSize({width:390,height:844});assert(!(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth)));
- assert.deepEqual(errors,[]);assert.equal(writes,0);console.log(JSON.stringify({checks:'paired traces, identity mapping, cursor, refresh, absent timestamps, mismatched bins, clearing, mobile',errors,writes}));
+ assert.deepEqual(errors,[]);assert.equal(writes,0);console.log(JSON.stringify({checks:'paired traces, identity mapping, cursor, refresh, input prefix, ambiguous timestamps, absent timestamps, mismatched bins, clearing, mobile',errors,writes}));
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});
