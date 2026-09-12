@@ -152,6 +152,21 @@ artifacts retain pool identity, probabilities, losses, gradients, and updates.
 The older static BTC visualization does not automatically become a live memecoin
 dashboard. Inspect these new records for this experiment's progress.
 
+## Collector recovery check
+
+The [recorded operational check](../reports/collector-repair-01.json) follows the
+same five pools assigned before the pacing repair. In the first completed window
+with recovery prioritization, 15 of 17 requests succeeded; two still received 429s.
+At five minute-boundary checkpoints from 09:00 through 09:04 UTC on September 12,
+2026, all 25 pool/checkpoint observations were fresh and eligible. At completion,
+all five latest receipts were about 38.6 seconds old.
+
+This verifies a short recovery interval, not sustained coverage or better trading.
+The prior 30-minute operational baseline had stale receipts and activity-filter
+rejections, but the windows differ in length and market conditions. The provider
+can continue throttling shared infrastructure; freshness and eligibility guards
+remain necessary. No fee, activity, capital, or budget thresholds changed.
+
 ## Provider references
 
 - [PumpPortal free launch/migration versus metered trade streams](https://pumpportal.fun/data-api/real-time/)

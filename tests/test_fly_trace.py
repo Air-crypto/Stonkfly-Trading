@@ -54,6 +54,19 @@ def test_paths_and_full_neuron_lookup(tmp_path):
     with pytest.raises(ValueError): neuron_trace(tmp_path,"789")
 
 
+def test_recorder_does_not_leave_a_bound_method_cycle():
+    import weakref
+    class Brain:
+        def __init__(self):
+            self.weight=np.array([1.]);self.circuit={"edges":np.array([0])}
+        def rgb_step(self, *args, **kwargs): pass
+    brain=Brain();ref=weakref.ref(brain)
+    with Recorder(brain): pass
+    assert "rgb_step" not in vars(brain)
+    del brain
+    assert ref() is None  # Full graph must release without a later garbage-collection cycle.
+
+
 @pytest.mark.skipif(not os.environ.get("FLY_TRACE_DATA"), reason="requires prepared full retained graph")
 def test_full_native_trace_is_observational_and_reset_is_reproducible(tmp_path):
     lab=TraceLab(Path(os.environ["FLY_TRACE_DATA"]))

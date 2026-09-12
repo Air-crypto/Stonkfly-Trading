@@ -100,6 +100,7 @@ class Recorder:
     def __init__(self, brain, extra_indices=(), current=0):
         self.brain = brain
         self.original = brain.rgb_step
+        self.had_override = "rgb_step" in vars(brain)
         self.indices = np.asarray(extra_indices, dtype=np.int32)
         self.current = current
         self.rows = []
@@ -110,7 +111,12 @@ class Recorder:
         return self
 
     def __exit__(self, *exc):
-        self.brain.rgb_step = self.original
+        if self.had_override:
+            self.brain.rgb_step = self.original
+        else:
+            # Restore class-method lookup; storing a bound method would retain
+            # a brain -> bound method -> brain cycle and all its large arrays.
+            del self.brain.rgb_step
 
     def step(self, rgb, duration_ms, **kwargs):
         if duration_ms > 10 + 1e-8:

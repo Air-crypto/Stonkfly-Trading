@@ -47,6 +47,11 @@ observations. Both arms received identical images:
 
 ![Learning versus frozen decoder comparison](docs/assets/fly-learning-comparison.png)
 
+The [memory-output intervention study](docs/fly-debugger.md#memory-output-intervention-study)
+confirms that stimulating the plastic-memory output groups can change the fixed
+decoder with weights frozen. All five controls and runnable recordings are included;
+this demonstrates model sensitivity, not profitable learning.
+
 ## Run
 
 Python 3.12 and a C++ compiler are required. Run from this source checkout so the preserved upstream files are available.

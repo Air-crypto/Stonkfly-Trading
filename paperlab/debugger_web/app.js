@@ -71,7 +71,7 @@ $('compare').onchange=async e=>{try{
  const byTime=new Map(other.frames.map(f=>[f.event.market_decision_ts,f]));
  const matched=current.frames.map((f,i)=>[f,market?byTime.get(f.event.market_decision_ts):other.frames[i],i]).filter(([f,o])=>o&&(!market||Number.isFinite(f.event.market_decision_ts)));
  const wrap=document.createElement('div');wrap.className='table-wrap';
- wrap.append(table([market?'Decision UTC':'Observation','Current action','Other action','Current R−L Hz','Other R−L Hz','Input identical'],matched.map(([f,o,i])=>[market?utc(f.event.market_decision_ts):i+1,f.event.side,o.event.side,num(f.event.difference_hz),num(o.event.difference_hz),f.event.input_sha256===o.event.input_sha256?'Yes':'No'])));
+ wrap.append(table([market?'Decision UTC':'Observation','Current action','Other action','Current R−L Hz','Other R−L Hz','Current gate spikes','Other gate spikes','Input identical'],matched.map(([f,o,i])=>[market?utc(f.event.market_decision_ts):i+1,f.event.side,o.event.side,num(f.event.difference_hz),num(o.event.difference_hz),f.event.gate_spikes,o.event.gate_spikes,f.event.input_sha256===o.event.input_sha256?'Yes':'No'])));
  const note=document.createElement('p');note.textContent=market?`${matched.length} shared decision timestamps. Unmatched slots are excluded; inspect each timeline for gaps.`:`${matched.length} paired observations.`;
  const config=document.createElement('pre');config.textContent=JSON.stringify({current:current.report.config,comparison:other.report.config},null,2);$('comparison').replaceChildren(note,wrap,config);
  }catch(e){error(e);}};

@@ -1,0 +1,241 @@
+{
+  "purpose": "Operational collection continuity check, not a neural or financial comparison",
+  "collector_commit": "d50e4a6",
+  "provider_reference": "https://api.geckoterminal.com/docs/index.html",
+  "before_snapshot_sha256": "627cccd9876a3b31355caca1b2884eb58bf259480dfe3d53dd492beba05a547d",
+  "after_snapshot_sha256": "8ba732c829dc36f65212650b13a078d2b1e2a54bd29f2a37f28d3af93eee5736",
+  "baseline": {
+    "start": 1789201429.5944118,
+    "end": 1789203229.5944118,
+    "sampling_seconds": 60,
+    "cohort_selected_at_baseline_end": true,
+    "interpretation": "Operational baseline for the end-of-window assigned pools; not an unbiased strategy-performance sample. Availability counts include declared activity filters. No future prices or imputed fills.",
+    "pools": [
+      {
+        "cohort_index": 0,
+        "samples": 30,
+        "reasons": {
+          "stale_observation": 9,
+          "eligible": 21
+        },
+        "max_age_seconds": 666.7994697093964
+      },
+      {
+        "cohort_index": 1,
+        "samples": 30,
+        "reasons": {
+          "stale_observation": 8,
+          "eligible": 22
+        },
+        "max_age_seconds": 332.837858915329
+      },
+      {
+        "cohort_index": 2,
+        "samples": 30,
+        "reasons": {
+          "eligible": 17,
+          "insufficient_two_sided_activity": 7,
+          "stale_observation": 6
+        },
+        "max_age_seconds": 272.837858915329
+      },
+      {
+        "cohort_index": 3,
+        "samples": 30,
+        "reasons": {
+          "stale_observation": 8,
+          "eligible": 19,
+          "insufficient_two_sided_activity": 3
+        },
+        "max_age_seconds": 260.70039343833923
+      },
+      {
+        "cohort_index": 4,
+        "samples": 30,
+        "reasons": {
+          "stale_observation": 12,
+          "eligible": 18
+        },
+        "max_age_seconds": 510.5517864227295
+      }
+    ]
+  },
+  "after": {
+    "start": 1789203600,
+    "end": 1789203840,
+    "sampling_seconds": 60,
+    "cohort": "Same five assigned pools saved before deployment; no replacement by survivors",
+    "samples": [
+      {
+        "cohort_index": 0,
+        "ts": 1789203600,
+        "age_seconds": 44.27691078186035,
+        "rejection": null
+      },
+      {
+        "cohort_index": 0,
+        "ts": 1789203660,
+        "age_seconds": 34.4791841506958,
+        "rejection": null
+      },
+      {
+        "cohort_index": 0,
+        "ts": 1789203720,
+        "age_seconds": 94.4791841506958,
+        "rejection": null
+      },
+      {
+        "cohort_index": 0,
+        "ts": 1789203780,
+        "age_seconds": 50.128308057785034,
+        "rejection": null
+      },
+      {
+        "cohort_index": 0,
+        "ts": 1789203840,
+        "age_seconds": 12.653051376342773,
+        "rejection": null
+      },
+      {
+        "cohort_index": 1,
+        "ts": 1789203600,
+        "age_seconds": 44.27691078186035,
+        "rejection": null
+      },
+      {
+        "cohort_index": 1,
+        "ts": 1789203660,
+        "age_seconds": 34.4791841506958,
+        "rejection": null
+      },
+      {
+        "cohort_index": 1,
+        "ts": 1789203720,
+        "age_seconds": 94.4791841506958,
+        "rejection": null
+      },
+      {
+        "cohort_index": 1,
+        "ts": 1789203780,
+        "age_seconds": 50.128308057785034,
+        "rejection": null
+      },
+      {
+        "cohort_index": 1,
+        "ts": 1789203840,
+        "age_seconds": 12.653051376342773,
+        "rejection": null
+      },
+      {
+        "cohort_index": 2,
+        "ts": 1789203600,
+        "age_seconds": 44.27691078186035,
+        "rejection": null
+      },
+      {
+        "cohort_index": 2,
+        "ts": 1789203660,
+        "age_seconds": 34.4791841506958,
+        "rejection": null
+      },
+      {
+        "cohort_index": 2,
+        "ts": 1789203720,
+        "age_seconds": 94.4791841506958,
+        "rejection": null
+      },
+      {
+        "cohort_index": 2,
+        "ts": 1789203780,
+        "age_seconds": 50.128308057785034,
+        "rejection": null
+      },
+      {
+        "cohort_index": 2,
+        "ts": 1789203840,
+        "age_seconds": 12.653051376342773,
+        "rejection": null
+      },
+      {
+        "cohort_index": 3,
+        "ts": 1789203600,
+        "age_seconds": 44.27691078186035,
+        "rejection": null
+      },
+      {
+        "cohort_index": 3,
+        "ts": 1789203660,
+        "age_seconds": 34.4791841506958,
+        "rejection": null
+      },
+      {
+        "cohort_index": 3,
+        "ts": 1789203720,
+        "age_seconds": 94.4791841506958,
+        "rejection": null
+      },
+      {
+        "cohort_index": 3,
+        "ts": 1789203780,
+        "age_seconds": 50.128308057785034,
+        "rejection": null
+      },
+      {
+        "cohort_index": 3,
+        "ts": 1789203840,
+        "age_seconds": 12.653051376342773,
+        "rejection": null
+      },
+      {
+        "cohort_index": 4,
+        "ts": 1789203600,
+        "age_seconds": 44.27691078186035,
+        "rejection": null
+      },
+      {
+        "cohort_index": 4,
+        "ts": 1789203660,
+        "age_seconds": 34.4791841506958,
+        "rejection": null
+      },
+      {
+        "cohort_index": 4,
+        "ts": 1789203720,
+        "age_seconds": 94.4791841506958,
+        "rejection": null
+      },
+      {
+        "cohort_index": 4,
+        "ts": 1789203780,
+        "age_seconds": 50.128308057785034,
+        "rejection": null
+      },
+      {
+        "cohort_index": 4,
+        "ts": 1789203840,
+        "age_seconds": 12.653051376342773,
+        "rejection": null
+      }
+    ],
+    "rejection_counts": {
+      "eligible": 25
+    }
+  },
+  "completed_window": {
+    "as_of": 1789203865.9572272,
+    "window_requests_attempted": 17,
+    "window_requests_completed": 15,
+    "request_interval_seconds": 7.5,
+    "requests_per_round": 8,
+    "provider_consecutive_429": 0,
+    "window_exhausted": true
+  },
+  "final_priority_age_seconds": [
+    38.610677003860474,
+    38.610677003860474,
+    38.610677003860474,
+    38.610677003860474,
+    38.610677003860474
+  ],
+  "limitations": "One short post-deployment window and a longer prior operational baseline. Provider 429 responses persisted (two failed requests). No statistical coverage improvement or trading-return claim. Model, eligibility, and spending caps unchanged."
+}

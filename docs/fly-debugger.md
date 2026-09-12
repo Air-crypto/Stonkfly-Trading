@@ -42,6 +42,14 @@ the same call. Credentials remain in the SDK and are never sent to the browser.
 An uncertain submission/result blocks duplicate work rather than resubmitting.
 Inspect the recorded Modal call if a receipt says `attention`.
 
+The worker uses Modal single-use containers. A diagnostic batch exposed open-file
+reload failures when a native-model container handled a second invocation; a fresh
+container per call closes those handles before the next call. This adds startup
+latency to queued diagnostic batches; scheduled five-minute calls already normally
+start cold. The existing ten-second startup reservation remains unchanged.
+The recorder also restores class-method lookup on exit instead of retaining a
+bound-method reference cycle around the full brain.
+
 Cloud assays share the existing worker lease and budget ledger. No extra paid
 endpoint or always-on GPU is created. A long diagnostic can delay a scheduled
 paper cycle; collection runs separately. Assays retain the worker's 600-second
@@ -345,3 +353,53 @@ these causes: some latest receipts were 261–398 seconds old, exceeding the
 threshold. Provider health also logged HTTP 429 responses. These observations
 make collection continuity and activity eligibility distinct debugging targets;
 loosening the trading filter would change the experiment rather than repair data.
+
+## Memory-output intervention study
+
+The [preregistered five-arm protocol](../reports/fly-mbon-protocol-01.json) and
+[complete native results](../reports/fly-mbon-study-01.json) test whether the two
+plastic-memory output groups can influence the fixed decoder. Every arm begins
+pristine, receives the same four flat-price images, and has learning and weights
+frozen. Signed current is delivered to all four MBON07 cells or both MBON11 cells
+throughout each 500 ms observation. These are deliberately strong interventions,
+not learned weight changes or proposed trading controls.
+
+| Intervention | Actions across four observations | Different from baseline | Target spikes across all four observations |
+| --- | --- | ---: | ---: |
+| None | BUY, HOLD, BUY, HOLD | 0 | MBON07: 12; MBON11: 83 |
+| MBON07, −20 current | BUY, HOLD, HOLD, HOLD | 1 | MBON07: 1 |
+| MBON07, +20 current | HOLD, BUY, BUY, BUY | 3 | MBON07: 729 |
+| MBON11, −20 current | HOLD, HOLD, HOLD, BUY | 3 | MBON11: 36 |
+| MBON11, +20 current | HOLD, HOLD, BUY, BUY | 2 | MBON11: 217 |
+
+All 20 observations had zero plastic-weight displacement. Matching input hashes
+were verified for every arm. MBON07 negative current removed the third
+observation's gate spike: baseline BUY became HOLD despite a positive right-minus-
+left rate difference in both. MBON07 positive current increased gate activity,
+but its first output was HOLD because the left/right rate difference was zero.
+Neither rate difference nor gate activity alone determines the action.
+
+This is causal sensitivity within the implemented network: changing the current
+changes outputs while images, initial state, and weights are controlled. It is
+not a learned association, a calibrated biological intervention, or evidence of
+profit. The +20 MBON07 arm fires far more than baseline and also suppresses
+MBON11 activity; it should not be interpreted as a small physiological weight
+adjustment. The next test should compare reinforcement-trained memory states
+using frozen, pulse-free probes to separate retained associations from immediate
+stimulation and transient neural dynamics.
+
+To inspect the included recording, use the read-only server at the start of this
+guide, select `mbon01-mbon07_inhibit`, and compare `mbon01-baseline`. Observation 3
+shows the action disagreement. The comparison table now includes gate counts.
+To reproduce an arm, copy its complete configuration from the protocol into a
+JSON file and pass it to `capture --config`, or enter the same values in the cloud
+form. MBON07 IDs are `12855,15626,18603,515338`; MBON11 IDs are listed in the
+protocol. The full recordings remain available in their isolated cloud runs.
+
+![Signed MBON stimulation and gate-dependent decoder comparison](assets/fly-mbon-comparison.png)
+
+Four initial follow-on cloud calls failed before simulation because a reused
+container could not reload the volume. Their outcomes were verified before the
+same four inputs were retried with single-use containers; all four retries
+succeeded in distinct containers. No failed scientific outcome was discarded or
+replaced. The baseline from the first successful call was retained.

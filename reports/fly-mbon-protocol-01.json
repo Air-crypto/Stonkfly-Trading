@@ -1,0 +1,83 @@
+{
+  "recorded_at": 1789203580.0975811,
+  "purpose": "Causal sensitivity of the fixed decoder to the two plastic-memory output groups; full retained graph, synthetic inputs, no trades",
+  "arms": {
+    "baseline": {
+      "preset": "flat",
+      "steps": 4,
+      "learning": false,
+      "reinforcement_only": false,
+      "eta": 0.001,
+      "reinforcement": "none",
+      "view": "original",
+      "news": "none",
+      "neurons": [],
+      "current": 0
+    },
+    "mbon07_inhibit": {
+      "preset": "flat",
+      "steps": 4,
+      "learning": false,
+      "reinforcement_only": false,
+      "eta": 0.001,
+      "reinforcement": "none",
+      "view": "original",
+      "news": "none",
+      "neurons": [
+        "12859",
+        "15626",
+        "18603",
+        "515338"
+      ],
+      "current": -20
+    },
+    "mbon07_excite": {
+      "preset": "flat",
+      "steps": 4,
+      "learning": false,
+      "reinforcement_only": false,
+      "eta": 0.001,
+      "reinforcement": "none",
+      "view": "original",
+      "news": "none",
+      "neurons": [
+        "12859",
+        "15626",
+        "18603",
+        "515338"
+      ],
+      "current": 20
+    },
+    "mbon11_inhibit": {
+      "preset": "flat",
+      "steps": 4,
+      "learning": false,
+      "reinforcement_only": false,
+      "eta": 0.001,
+      "reinforcement": "none",
+      "view": "original",
+      "news": "none",
+      "neurons": [
+        "10704",
+        "11402"
+      ],
+      "current": -20
+    },
+    "mbon11_excite": {
+      "preset": "flat",
+      "steps": 4,
+      "learning": false,
+      "reinforcement_only": false,
+      "eta": 0.001,
+      "reinforcement": "none",
+      "view": "original",
+      "news": "none",
+      "neurons": [
+        "10704",
+        "11402"
+      ],
+      "current": 20
+    }
+  },
+  "comparison": "Same pristine state and flat input in every arm; all weights frozen. Report all spike/decoder changes. Direct stimulation is an intervention, not a trained policy or biological validation."
+}

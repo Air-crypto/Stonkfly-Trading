@@ -44,8 +44,10 @@ def exclusive(name, call, *args):
 WORKER_MEMORY=8192 if FULL_FLY and UNIVERSE else 16384 if FULL_FLY else 4096
 
 
+# Native libraries and model readers can retain volume handles after a call.
+# Fresh containers make the next reload safe, including back-to-back diagnostic jobs.
 @app.function(image=image, volumes={"/state": volume,"/discovery":discovery_volume}, cpu=(2,2), memory=(WORKER_MEMORY,WORKER_MEMORY),
-              max_containers=1, min_containers=0, scaledown_window=2, timeout=600,
+              max_containers=1, min_containers=0, scaledown_window=2, timeout=600, single_use_containers=True,
               schedule=modal.Cron("*/5 * * * *") if ENABLED else None, retries=0)
 def worker(prepare: bool = False, probe: bool = False, diagnostics: bool = False, debug: dict | None = None):
     return exclusive("worker",_worker,prepare,probe,diagnostics,debug)
