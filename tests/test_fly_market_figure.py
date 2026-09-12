@@ -8,7 +8,7 @@ import pytest
 from paperlab.fly_market_figure import phase_series,render
 
 
-@pytest.mark.parametrize("number", ["03", "04", "05"])
+@pytest.mark.parametrize("number", ["03", "04", "05", "06"])
 def test_market_figure_reconciles_each_panel_and_marks_gaps(number):
     report=json.loads(Path(f'reports/fly-market-study-{number}.json').read_text())
     for arm,totals in report['total_equity'].items():

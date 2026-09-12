@@ -1,0 +1,125 @@
+{
+  "plan_sha256": "3896dedeacf436b240c3f29e4ebfc656410c868dbeab45ac8c33537b70cbc19a",
+  "report_sha256": "038e6f2c69c00a60ab88d89340cf1f85cc7b75e9a3fc8567e1d284cf90ce01e3",
+  "pools": {
+    "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ": {
+      "10704": {
+        "edge_count": 2048,
+        "changed_weights": 821,
+        "delta_l2": {
+          "weights": 7.227587647949241,
+          "u": 1.8173796908318471,
+          "w": 1.7175583372935062
+        }
+      },
+      "11402": {
+        "edge_count": 2136,
+        "changed_weights": 914,
+        "delta_l2": {
+          "weights": 11.195171635210244,
+          "u": 1.9023828083684227,
+          "w": 1.7729121647900918
+        }
+      },
+      "12859": {
+        "edge_count": 956,
+        "changed_weights": 353,
+        "delta_l2": {
+          "weights": 0.2611360369641852,
+          "u": 0.2124936843308907,
+          "w": 0.14609379643234277
+        }
+      },
+      "15626": {
+        "edge_count": 882,
+        "changed_weights": 300,
+        "delta_l2": {
+          "weights": 0.28150200672827813,
+          "u": 0.2186306724851764,
+          "w": 0.16634870330263873
+        }
+      },
+      "18603": {
+        "edge_count": 878,
+        "changed_weights": 302,
+        "delta_l2": {
+          "weights": 0.3275711732081413,
+          "u": 0.2195132178166243,
+          "w": 0.16724740670862043
+        }
+      },
+      "515338": {
+        "edge_count": 935,
+        "changed_weights": 354,
+        "delta_l2": {
+          "weights": 0.3188582251128902,
+          "u": 0.2104282285433536,
+          "w": 0.14423372900959547
+        }
+      }
+    },
+    "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu": {
+      "10704": {
+        "edge_count": 2048,
+        "changed_weights": 827,
+        "delta_l2": {
+          "weights": 6.121475898159073,
+          "u": 1.1165181151389307,
+          "w": 0.943928326047618
+        }
+      },
+      "11402": {
+        "edge_count": 2136,
+        "changed_weights": 923,
+        "delta_l2": {
+          "weights": 8.36265156249391,
+          "u": 1.0642051527935454,
+          "w": 0.8045632304646915
+        }
+      },
+      "12859": {
+        "edge_count": 956,
+        "changed_weights": 363,
+        "delta_l2": {
+          "weights": 0.8403111157238463,
+          "u": 0.4043676046256382,
+          "w": 0.47812602909868446
+        }
+      },
+      "15626": {
+        "edge_count": 882,
+        "changed_weights": 294,
+        "delta_l2": {
+          "weights": 0.7159264931970563,
+          "u": 0.3698222024130456,
+          "w": 0.4141721045438891
+        }
+      },
+      "18603": {
+        "edge_count": 878,
+        "changed_weights": 296,
+        "delta_l2": {
+          "weights": 0.801094408571683,
+          "u": 0.3697485775933086,
+          "w": 0.4141147042579828
+        }
+      },
+      "515338": {
+        "edge_count": 935,
+        "changed_weights": 363,
+        "delta_l2": {
+          "weights": 1.061236177819712,
+          "u": 0.3984095695691782,
+          "w": 0.4714969180163911
+        }
+      }
+    }
+  },
+  "artifact_sha256": {
+    "plastic-map.npz": "d2cc90d65439b565f1812b00c8a2f2e137c0e1d0fc0013215bb80ffc322274d2",
+    "pool0-pristine_frozen-training-memory.npz": "5b1fac5bd0e8cdcabdfccf0ecc17204bf21161d9193c27c54636181a71318e21",
+    "pool0-trained_frozen-training-memory.npz": "9d4fb6b8ef1c32093106edb18d8a2dad6a5f3a31dd9e1676570129a79bc1beec",
+    "pool1-pristine_frozen-training-memory.npz": "5b1fac5bd0e8cdcabdfccf0ecc17204bf21161d9193c27c54636181a71318e21",
+    "pool1-trained_frozen-training-memory.npz": "f38842f21ed33c8a5078fac92b1b523949c754e9209d4bb18f5b6c793b7d821b"
+  }
+}

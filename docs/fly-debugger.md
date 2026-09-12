@@ -1333,3 +1333,76 @@ Chromium executable. The check verifies identity mapping even when the
 comparison's displayed indices are reordered, cursor updates, missing time
 matches, incompatible bins, clearing stale plots, and mobile layout. It blocks
 `/api/run` and submits no model jobs.
+
+
+### Sixth market replay result
+
+The [sixth report](../reports/fly-market-study-06.json) used the
+[registered five-arm protocol](../reports/fly-market-study-06-preregistration.json)
+and a [sealed snapshot](../reports/fly-market-study-06-plan.json). It trained on
+11:05–11:20 UTC, developed on 11:20–11:35, and tested on 11:35–11:50 on September
+12. All phases start with separate $1,000 accounts, including $500 idle cash.
+
+| Variant | Development equity | Test equity |
+| --- | ---: | ---: |
+| Pristine / frozen | $997.66 | $994.18 |
+| Trained / frozen | $997.66 | $994.18 |
+| Restore inputs to 10704 | $996.58 | $994.18 |
+| Restore inputs to 11402 | $997.66 | $1,000.46 |
+| Restore both MBON11 cells | $996.58 | $994.18 |
+
+**No variant passed the development gate.** The 11402 test result is a lead for
+a new experiment; it cannot be selected after seeing the test. The normal paper
+policy was not changed.
+
+![Registered memory-restoration market comparison](assets/fly-market-study-06.png)
+
+All six test decision slots had usable inputs. Each variant made four fills
+with $1.25 in entry/exit fees, plus the declared slippage. The entire difference
+came from pool 1 (`baton`): at 11:40, restoring 11402 changed BUY to SELL, which
+filled at the next quote. The $25 order cap meant the sale left approximately
+364.62 tokens, while the BUY variants ended with approximately 5,868.95. Both
+pools still had open inventory at test end. Consequently the $6.2854 difference
+is in terminal simulated equity, not a fully realized profit. Hosting is
+excluded from the table.
+
+[Open the new comparison](http://127.0.0.1:8765/?run=market06-pool1-restore_11402&step=1&neuron=11402&compare=market06-pool1-trained_frozen)
+after starting the included recording server. All ten pool/variant recordings
+are included under `market06-pool{0,1}-{variant}`.
+
+![11402 restoration changes BUY to SELL on the matched input](assets/fly-market-study-06-comparison.png)
+
+The [recorded trace audit](../reports/fly-market-study-06-trace-audit.json) confirms
+identical inputs and native builds. At that decision, the trained control's left
+and right decoder neurons fired 17 and 18 spikes; restoration produced 18 and
+17. That changes right-minus-left from +2 to −2 Hz. The two gate cells had
+identical binned counts (three and zero spikes), so the changed action follows
+the directional readout. Body 11402's first differing spike-count bin was
+150–160 ms into the observation. This is temporal evidence, not a traced causal
+path from one synapse. The intervention changed 2,136 incoming connections
+together. Use the paired voltage, spike-bin and connection plots to inspect it.
+
+The [checkpoint audit](../reports/fly-market-study-06-memory-audit.json) verifies
+that inference used exactly the declared restorations, retained every other
+training value and stayed frozen. Training changed 3,044 weights in pool 0 and
+3,066 in pool 1. Unlike the previous experiment,
+[training affected MBON07 inputs too](../reports/fly-market-study-06-memory-targets.json):
+1,309 and 1,316 changed weights respectively. Restoring both MBON11 cells
+therefore did not restore pristine memory. The four trained variants reused one
+identical training checkpoint per pool; these are controlled interventions, not
+four independent training replications.
+
+The training-end drop to $969.79 includes unavailable inventory valued at zero
+in pool 1; it is not a realized liquidation loss. Development began there with
+no quote and a fresh cash account. It had five of six observed decisions. All
+reported totals, fill counts/fees, source hashes and saved-memory boundaries
+were reconciled before marking the cloud call complete. Estimated compute for
+this call was $0.0242; the worker ledger then reserved $1.2484 for the month
+against its unchanged $25 cap. This ledger is not the provider bill.
+
+The [seventh registration](../reports/fly-market-study-07-preregistration.json)
+retains all five variants and both original pools. Its train/development/test
+windows are 11:50–12:05, 12:05–12:20 and 12:20–12:35 UTC. It was registered at
+11:57 UTC, before development and test. The next comparison will test whether
+the restoration effect repeats; it will not choose the 11402 variant from the
+sixth test result.

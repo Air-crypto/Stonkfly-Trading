@@ -18,7 +18,7 @@ news, neuron stimulation, and selected connection restoration. The simulation
 retains the full graph; the display is a labeled subset with full-neuron lookup
 in generated recordings. Paper accounts remain separate from diagnostic assays.
 
-![Fly circuit debugger highlighting restored incoming connections](docs/assets/fly-market-restoration-circuit.png)
+![Fly circuit debugger highlighting restored incoming connections](docs/assets/fly-market-study-06-circuit.png)
 
 After installing below, open the included recordings without model compute:
 
@@ -59,9 +59,12 @@ The diagnostics have identified concrete limitations:
 - A [controlled restoration replay](docs/fly-debugger.md#market-restoration-results)
   recovered the missing BUY by restoring either MBON11 cell's incoming memory.
   Restoring both reproduced all three pristine spike-count records. These are
-  mechanism results; a new market test is registered before any promotion.
+  mechanism results. The [sixth market test](docs/fly-debugger.md#sixth-market-replay-result)
+  found a test-only benefit from restoring 11402: **$1,000.46** versus **$994.18**
+  for the other variants. Every variant failed development, so none was promoted.
+  The same five-way comparison is registered on the following window.
 
-![Frozen-inference comparison across training, development, and test](docs/assets/fly-market-study-05.png)
+![Memory-restoration comparison across training, development, and test](docs/assets/fly-market-study-06.png)
 
 [Inspect the restored connections](http://127.0.0.1:8765/?run=marketrestore01-restore_10704&step=1&neuron=10704&compare=marketrestore01-trained_frozen).
 These are indicative DEX marks with fees/slippage, not realized or monthly returns.

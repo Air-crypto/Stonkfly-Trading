@@ -1,0 +1,135 @@
+{
+  "plan_sha256": "3896dedeacf436b240c3f29e4ebfc656410c868dbeab45ac8c33537b70cbc19a",
+  "decision_ts": 1789213200,
+  "input_sha256": "0758728838cf369025d4ffbff13f8c1c826722a6a42f9391bc3ea10b98b6a4f2",
+  "recordings": {
+    "pool1-restore_11402": "6b9ed0bf66f08e5b8e8d5491ddc92d304722c6e6e3425a436ea46c01da475e05",
+    "pool1-trained_frozen": "5302209634603e0299a7123505557b1a263f583a1d80a71413f2f002d8e13e0b"
+  },
+  "cells": {
+    "11402": {
+      "restored_spikes": 27,
+      "trained_spikes": 22,
+      "different_bins": [
+        15,
+        16,
+        18,
+        19,
+        20,
+        22,
+        24,
+        25,
+        26,
+        33,
+        34,
+        35,
+        39,
+        40,
+        45,
+        46,
+        47,
+        48,
+        49
+      ],
+      "first_different_bin_interval_ms_in_observation": [
+        150,
+        160
+      ]
+    },
+    "10704": {
+      "restored_spikes": 13,
+      "trained_spikes": 15,
+      "different_bins": [
+        16,
+        17,
+        21,
+        32,
+        41,
+        42,
+        48
+      ],
+      "first_different_bin_interval_ms_in_observation": [
+        160,
+        170
+      ]
+    },
+    "10162": {
+      "restored_spikes": 18,
+      "trained_spikes": 17,
+      "different_bins": [
+        21,
+        22,
+        24,
+        27,
+        30,
+        33,
+        36,
+        38,
+        41,
+        44,
+        45,
+        48,
+        49
+      ],
+      "first_different_bin_interval_ms_in_observation": [
+        210,
+        220
+      ]
+    },
+    "10059": {
+      "restored_spikes": 17,
+      "trained_spikes": 18,
+      "different_bins": [
+        18,
+        19,
+        20,
+        21,
+        23,
+        25,
+        28,
+        30,
+        36,
+        38,
+        41,
+        42,
+        43,
+        46,
+        48,
+        49
+      ],
+      "first_different_bin_interval_ms_in_observation": [
+        180,
+        190
+      ]
+    },
+    "10527": {
+      "restored_spikes": 3,
+      "trained_spikes": 3,
+      "different_bins": [],
+      "first_different_bin_interval_ms_in_observation": null
+    },
+    "555871": {
+      "restored_spikes": 0,
+      "trained_spikes": 0,
+      "different_bins": [],
+      "first_different_bin_interval_ms_in_observation": null
+    }
+  },
+  "decoder": {
+    "restore_11402": {
+      "side": "SELL",
+      "left_hz": 36.0,
+      "right_hz": 34.0,
+      "difference_hz": -2.0,
+      "gate_spikes": 3
+    },
+    "trained_frozen": {
+      "side": "BUY",
+      "left_hz": 34.0,
+      "right_hz": 36.0,
+      "difference_hz": 2.0,
+      "gate_spikes": 3
+    }
+  },
+  "interpretation": "Same recorded input, native build, trained checkpoint and inference protocol; intervention restores all 2136 incoming weights/u/w of 11402. Gate-cell binned counts match; directional cells each differ by one net spike. Temporal order of displayed divergence does not identify a causal path or a single responsible synapse. This was an unselected test result."
+}
