@@ -17,7 +17,9 @@ and input-state resets before exposing recordings. No improvement is established
 until the registered evaluation is completed and assessed. An optional
 [two-phase figure](docs/fly-debugger.md#plot-the-two-phase-paper-memory-result)
 shows matched training effects, fees and missing observations from the audited
-report.
+report. The [decision comparison](docs/fly-debugger.md#compare-neural-decisions-with-later-fills)
+separates current neural signals from fills executing earlier decisions, with
+links to each paired trace.
 
 The [captured training-memory map](docs/fly-debugger.md#map-captured-paper-memory-to-native-recipients)
 shows net weaker KC inputs at all six plastic recipients, with the largest

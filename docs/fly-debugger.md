@@ -2365,3 +2365,40 @@ and checkpoint arrays are not included in Git.
 This map does not isolate reward-driven changes from ongoing plasticity, measure
 transmission or downstream firing, or establish profitable learning. The
 figure's axes show model-weight percentages, not financial returns.
+
+
+### Compare neural decisions with later fills
+
+After the paper-study observer completes its audits, derive a readable decision
+table and machine-readable comparison without rerunning the network:
+
+```sh
+uv run python -m paperlab.fly_paper_decisions \
+  runs/research-market-09/report.json \
+  --out runs/research-market-09/decision-comparison
+```
+
+Open the resulting `comparison.md`. Each pool and phase has four comparisons:
+trained versus pristine under each input-state setting, and reset versus carry
+for each memory origin. Every slot retains both decoded sides, direction rates,
+gate counts, full-count equality, executed fills and sleeve-equity differences.
+The JSON also identifies the first observation with different whole-network
+counts, different decoder counts, a different side, or a different execution
+outcome. Those can occur at different times. A full-count difference refers to
+the entire 500 ms observation; it does not locate the first differing spike.
+
+A fill shown at a slot can execute the preceding observation's intent. Filled
+orders therefore retain their original decision time and fee alongside the new
+signal. The terminal slot can contain a fill without a new neural decision.
+Unavailable or repeated-quote slots have no invented signal or trace link.
+Links index actual observations, so skipping a missing slot does not shift the
+viewer to the wrong decision. Serve `runs/research-market-09` on port 8765 before
+following these links.
+
+The command requires the completed audited report and reconciled development
+selection. It rejects mismatched quote times, observation coverage, image/news
+inputs, non-frozen updates or inconsistent fixed-decoder outputs. Its report and
+source hashes are saved with the comparison. These derived checks do not replace
+the observer's raw-price, news, checkpoint, full-neuron and broker audits.
+An unchanged BUY/HOLD/SELL sequence does not imply unchanged firing; a changed
+signal does not by itself establish better execution or profitability.
