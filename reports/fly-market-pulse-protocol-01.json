@@ -1,0 +1,59 @@
+{
+  "registered_at": 1789208962.279207,
+  "purpose": "Post hoc mechanism experiment on the priced pool from market study 04. Separate retained training memory, ongoing plasticity, and immediate reinforcement stimulation behind the extra BUY. This is not a new out-of-sample trading score.",
+  "reference_report_sha256": "e56582789be4ba86003bd253d0115236b44ccdfeec9255e47f13e72148fd2fc3",
+  "plan_sha256": "d84d828f7108ad34de85d307447e3871c1d914d4b81f0577ee4a25787c9c2c36",
+  "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+  "arms": {
+    "pristine_frozen_none": {
+      "memory": "pristine",
+      "learning": false,
+      "pulses": "none"
+    },
+    "pristine_frozen_recorded": {
+      "memory": "pristine",
+      "learning": false,
+      "pulses": "recorded"
+    },
+    "pristine_online_none": {
+      "memory": "pristine",
+      "learning": true,
+      "pulses": "none"
+    },
+    "pristine_online_recorded": {
+      "memory": "pristine",
+      "learning": true,
+      "pulses": "recorded"
+    },
+    "trained_frozen_none": {
+      "memory": "trained",
+      "learning": false,
+      "pulses": "none"
+    },
+    "trained_frozen_recorded": {
+      "memory": "trained",
+      "learning": false,
+      "pulses": "recorded"
+    },
+    "trained_online_none": {
+      "memory": "trained",
+      "learning": true,
+      "pulses": "none"
+    },
+    "trained_online_recorded": {
+      "memory": "trained",
+      "learning": true,
+      "pulses": "recorded"
+    }
+  },
+  "training": "Reproduce the original online training observations and reinforcement from the recorded ledger; verify input and spike-count hashes before testing.",
+  "probe": "Reset neural activity and sensory/rate traces before each arm. Retain or restore training memory as declared. Replay the exact three recorded test images; recorded pulse mode uses none, aversive, reward independently of counterfactual outputs.",
+  "checks": [
+    "Pristine frozen without pulses must reproduce the original frozen test spike counts.",
+    "Trained online with recorded pulses must reproduce the original online test spike counts.",
+    "All arms receive identical test images.",
+    "Frozen arms must preserve all weight and efficacy memory.",
+    "Keep the full graph, native integrator and fixed decoder unchanged."
+  ],
+  "interpretation": "Actions are diagnostics only. No simulated account is recomputed, no variant selected for profit, and no policy is automatically promoted. Publish all eight arms even if no mechanism is isolated."
+}

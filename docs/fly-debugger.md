@@ -796,3 +796,71 @@ Open `restore01-MBON11`, compare `restore01-retained`, and select **probe 3**.
 Purple edges mark the restored subset; the comparison shows HOLD versus BUY with
 identical inputs and no learning during the probe. All five recordings ship in
 `examples/fly-debugger`; full NPZ traces remain local generated artifacts.
+
+## Fourth market replay result
+
+The [preregistration](../reports/fly-market-study-04-preregistration.json),
+[sealed plan](../reports/fly-market-study-04-plan.json), and
+[complete results](../reports/fly-market-study-04.json) cover September 12 UTC:
+training 09:35–09:50, development 09:50–10:05, and test 10:05–10:20.
+The cohort and costs match study 03. The four arms cross original/fixed-return
+inputs with frozen/online learning; every phase starts with $1,000 across two
+$250 sleeves plus $500 cash. The snapshot extends beyond the registered endpoint;
+plan, source hashes, selection receipt, and ledger totals were verified.
+
+| Arm | Development equity | Test equity | Test fills | Test fees |
+| --- | ---: | ---: | ---: | ---: |
+| Original, frozen | $996.79 | $973.70 | 2 | $0.625 |
+| Original, online | $996.79 | $972.35 | 3 | $0.938 |
+| Fixed returns, frozen | $998.18 | $969.85 | 4 | $1.250 |
+| Fixed returns, online | $998.18 | $969.85 | 4 | $1.250 |
+
+**No arm passed the development gate.** The fixed encoding preserved magnitude
+and improved this development result relative to the original encoding, but
+remained below cash and performed worse in the subsequent test. Neither the
+encoding nor a learning variant was promoted. These short results do not estimate
+monthly returns. The cloud replay used about $0.0192 in estimated compute.
+
+![Phase-separated equity from the decision ledger](assets/fly-market-study-04.png)
+
+Five of six test decision slots were observed per arm. Pool 1 failed the
+two-sided activity filter by 10:15, and its final equity is a conservative
+$224.6875 inventory stress mark in every arm. Unavailable inventory is valued at
+zero; this is not a realized sale or a confirmed token-price collapse. The fixed
+models generated SELL at 10:10, but the next execution quote was unavailable and
+the order was rejected. No replacement order or imaginary fill was inserted.
+
+Pool 0 remained priced throughout test and makes the model differences clearer:
+
+- Original frozen: BUY, HOLD, HOLD; one fill; final sleeve equity $249.015263.
+- Original online: BUY, HOLD, BUY; two fills; final sleeve equity $247.660619.
+- Both fixed-return arms: BUY, BUY, BUY; three fills; final sleeve equity $245.160112.
+
+The extra original-online BUY cost $1.354644 relative to frozen at the final
+indicative mark. At 10:15, the decoder gate had one spike instead of zero and
+right-minus-left activity was 12 Hz instead of 8 Hz. The online arm received
+`none`, `aversive`, and `reward` pulses across the three observations; the frozen
+arm received none. Its weight-update L2 values were 0.269950, 7.765848, and 8.476544.
+This comparison therefore changes both synaptic learning and immediate
+reinforcement stimulation. It does not yet identify weight changes as the cause
+of that extra trade. The next diagnostic should hold the recorded images and
+pulse schedule fixed while independently toggling retained memory and updates.
+The [eight-arm mechanism protocol](../reports/fly-market-pulse-protocol-01.json)
+is registered for that next diagnostic; it has not been executed yet.
+
+Open `market04-online_original`, compare `market04-pristine_frozen`, and select
+observation 3 to inspect the 10:15 disagreement. All four pool-0 recordings are
+included; the complete two-pool decision ledger remains in the public report.
+
+![Identical inputs, different gate activity and action](assets/fly-market-study-04-comparison.png)
+
+Regenerate the overview directly from that report without model compute:
+
+```sh
+uv run python -m paperlab.fly_market_figure reports/fly-market-study-04.json \
+  --out runs/market-04.svg --title 'Market replay 04: price encoding and learning'
+```
+
+Each chart panel reconciles its last ledger value to the published phase total.
+Red points mark an unavailable pool quote, including cases where that sleeve
+holds only cash. All panels share the same dollar scale; hosting is excluded.

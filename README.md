@@ -69,8 +69,10 @@ simulated fills per arm, but every variant ended at $996.36 and failed selection
 The [input audit](docs/fly-debugger.md#price-magnitude-lost-in-the-visual-adapter)
 found that automatic scaling can render 1% and 20% rises identically. The debugger
 now offers an [experimental fixed return scale](docs/fly-debugger.md#experimental-fixed-return-input)
-and price-movement controls. It separates the audited inputs; market effectiveness
-is still unproven and the paper trader continues using the original adapter.
+and price-movement controls. It separates the audited inputs, but the
+[fourth market replay](docs/fly-debugger.md#fourth-market-replay-result) rejected it:
+no arm passed development, and the fixed encoding performed worse in test. The
+paper trader continues using the original adapter.
 
 ![Original and fixed return encodings of the same prices](docs/assets/fly-fixed-return-input.png)
 
@@ -82,6 +84,12 @@ experiment, restoring MBON11 inputs recovered pristine outputs; restoring MBON07
 inputs did not. This localizes one synthetic effect, without proving better trading.
 
 ![Purple edges were restored to pristine memory before the frozen probe](docs/assets/fly-memory-restoration.png)
+
+The latest market trace exposes an extra BUY in the original training mode,
+with identical chart inputs but a reward pulse and changed neural activity.
+The guide distinguishes this from proof that weight changes caused the trade.
+
+![Four-arm market equity, quote gaps, fills, and fees](docs/assets/fly-market-study-04.png)
 
 ## Run
 
