@@ -1406,3 +1406,43 @@ windows are 11:50–12:05, 12:05–12:20 and 12:20–12:35 UTC. It was registere
 11:57 UTC, before development and test. The next comparison will test whether
 the restoration effect repeats; it will not choose the 11402 variant from the
 sixth test result.
+
+### Cross the three learned input groups
+
+The [second restoration protocol](../reports/fly-market-restoration-protocol-02.json)
+uses the sixth study's pool 1 images. It crosses keeping/restoring MBON07 inputs,
+10704 inputs and 11402 inputs: eight combinations, plus a separate pristine
+control. These three groups cover every plastic connection. Each restoration
+replaces weights, u and w together; no graph connections are removed.
+
+Before additional interventions, the run must reproduce training and the five
+known market-reference variants. The all-restored condition must reproduce the
+pristine memory and whole-neuron spike counts. The offline audit reads saved
+checkpoints and the actual edge-to-post map, verifying every selected and
+untouched value. It also reports the effect of restoring 11402 under each fixed
+combination of the other two choices. These are deterministic contrasts on
+previously examined images, not trading performance estimates.
+
+```sh
+uv run python -m paperlab.fly_market_restoration pack \
+  --protocol reports/fly-market-restoration-protocol-02.json \
+  --reference reports/fly-market-study-06.json \
+  --plan reports/fly-market-study-06-plan.json \
+  --out runs/restoration02-payload.json
+uv run python -m paperlab.fly_market_restoration cloud \
+  --payload runs/restoration02-payload.json --out runs/restoration02
+```
+
+Repeat the cloud command with the same output directory after an observation
+timeout. It resumes the saved call, downloads the nine compact recordings and
+memory checkpoints, and audits them before marking the call complete. To repeat
+the audit and produce a figure after completion:
+
+```sh
+uv run python -m paperlab.fly_market_restoration_audit \
+  --study runs/restoration02/summary.json \
+  --reference reports/fly-market-study-06.json \
+  --plan reports/fly-market-study-06-plan.json \
+  --artifacts runs/restoration02/artifacts \
+  --out runs/restoration02/audit.json --figure runs/restoration02/figure.svg
+```

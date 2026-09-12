@@ -86,3 +86,37 @@ def test_uncertain_restoration_submission_is_not_retried(tmp_path,monkeypatch):
     with pytest.raises(ConnectionError):cloud_run(payload(),tmp_path)
     with pytest.raises(RuntimeError,match='Uncertain'):cloud_run(payload(),tmp_path)
     assert len(calls)==1
+
+
+def factorial_payload():
+    return {'protocol':json.loads(Path('reports/fly-market-restoration-protocol-02.json').read_text()),
+            'reference_json':Path('reports/fly-market-study-06.json').read_text(),
+            'market_plan':json.loads(Path('reports/fly-market-study-06-plan.json').read_text())}
+
+
+def test_factorial_registration_covers_each_combination_and_reconstructs_images(monkeypatch):
+    monkeypatch.syspath_prepend(str(Path("vendor/stonkfly").resolve()))
+    from paperlab.fly_market_restoration import FACTORIAL_ARMS,MBON07
+    from paperlab.fly_market_pulse import input_sequences
+    p=factorial_payload();protocol,reference,plan=validate(p)
+    assert len(FACTORIAL_ARMS)==9
+    targets=[set(a['restore_post_ids']) for n,a in FACTORIAL_ARMS.items() if n!='pristine_frozen']
+    assert len({tuple(sorted(s)) for s in targets})==8
+    for group in [set(MBON07),{'10704'},{'11402'}]:
+        assert sum(group<=s for s in targets)==4
+    sequences=input_sequences(plan,reference,protocol['pool'],protocol['training_source'])
+    assert [len(sequences[p]) for p in ('training','test')]==[3,3]
+    assert validate_request({'run_id':'assay-factorial-test','restoration_plan':p})==p
+
+
+@pytest.mark.parametrize('mutation',['omit','target','source','control'])
+def test_factorial_registration_rejects_incomplete_factors_and_bad_references(mutation):
+    p=factorial_payload()
+    if mutation=='omit':p['protocol']['arms'].pop('restore_MBON07_11402')
+    if mutation=='target':p['protocol']['arms']['restore_MBON07']['restore_post_ids'].pop()
+    if mutation=='source':p['protocol']['training_source']='online_original'
+    if mutation=='control':
+        r=json.loads(p['reference_json']);row=r['phase_diagnostics'][p['protocol']['pool']]['restore_11402']['test']['decisions'][1]
+        row['neural']['plasticity_enabled']=True
+        p['reference_json']=json.dumps(r);p['protocol']['reference_report_sha256']=hashlib.sha256(p['reference_json'].encode()).hexdigest()
+    with pytest.raises(ValueError):validate(p)

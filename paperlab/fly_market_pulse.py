@@ -58,14 +58,14 @@ def validate(payload):
     return protocol,reference,plan
 
 
-def input_sequences(plan, reference, pool):
+def input_sequences(plan, reference, pool, source="online_original"):
     ticks=[Tick(**r) for r in plan["series"][pool]]
     news=News(enabled=False)
     sequences={}
     try:
         for phase in ("training","test"):
             pairs=[]
-            rows=reference["phase_diagnostics"][pool]["online_original"][phase]["decisions"][:3]
+            rows=reference["phase_diagnostics"][pool][source][phase]["decisions"][:3]
             for row in rows:
                 index,quote=quote_at(ticks,row["decision_ts"])
                 if not quote.available or quote.ts!=row["quote_ts"]:

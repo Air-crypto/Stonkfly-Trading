@@ -1,0 +1,99 @@
+{
+  "schema": 2,
+  "recorded_at": 1789214640.169337,
+  "kind": "post_hoc_market_memory_factorial",
+  "reference_report_sha256": "038e6f2c69c00a60ab88d89340cf1f85cc7b75e9a3fc8567e1d284cf90ce01e3",
+  "market_plan_sha256": "3896dedeacf436b240c3f29e4ebfc656410c868dbeab45ac8c33537b70cbc19a",
+  "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+  "training_source": "trained_frozen",
+  "test_source": "trained_frozen",
+  "arms": {
+    "pristine_frozen": {
+      "memory": "pristine",
+      "restore_post_ids": []
+    },
+    "trained_frozen": {
+      "memory": "trained",
+      "restore_post_ids": []
+    },
+    "restore_10704": {
+      "memory": "trained",
+      "restore_post_ids": [
+        "10704"
+      ]
+    },
+    "restore_11402": {
+      "memory": "trained",
+      "restore_post_ids": [
+        "11402"
+      ]
+    },
+    "restore_both": {
+      "memory": "trained",
+      "restore_post_ids": [
+        "10704",
+        "11402"
+      ]
+    },
+    "restore_MBON07": {
+      "memory": "trained",
+      "restore_post_ids": [
+        "12859",
+        "15626",
+        "18603",
+        "515338"
+      ]
+    },
+    "restore_MBON07_10704": {
+      "memory": "trained",
+      "restore_post_ids": [
+        "12859",
+        "15626",
+        "18603",
+        "515338",
+        "10704"
+      ]
+    },
+    "restore_MBON07_11402": {
+      "memory": "trained",
+      "restore_post_ids": [
+        "12859",
+        "15626",
+        "18603",
+        "515338",
+        "11402"
+      ]
+    },
+    "restore_all": {
+      "memory": "trained",
+      "restore_post_ids": [
+        "12859",
+        "15626",
+        "18603",
+        "515338",
+        "10704",
+        "11402"
+      ]
+    }
+  },
+  "inference": {
+    "learning": false,
+    "reinforcement": "none",
+    "extra_current": 0,
+    "steps": 3
+  },
+  "requirements": [
+    "Reconstruct the same original market images and match every recorded input hash.",
+    "Reproduce the reference training spike counts and save its weights and efficacy memory.",
+    "Reset neural dynamics identically before each arm, preserving trained memory except for the declared restoration.",
+    "Restore weights, u, and w on all plastic inputs to the exact named postsynaptic body IDs; preserve the full graph and all other state.",
+    "Match pristine_frozen and trained_frozen reference test spike counts and decoder outputs before interpreting interventions.",
+    "Verify every frozen observation leaves its starting synaptic memory unchanged.",
+    "Record all three observations at 10 ms resolution; retain full traces and compact debugger views.",
+    "Reproduce all five reference test variants before running the four additional MBON07 combinations.",
+    "Verify that the three groups partition all 7835 plastic edges; save their true edge-to-post mapping and independently audit every restored and untouched weights/u/w value.",
+    "Restoring all three groups must reproduce pristine memory and all three pristine whole-neuron spike-count records."
+  ],
+  "interpretation": "Post hoc causal localization on already examined market inputs. Outputs only: no recomputed account or claimed fresh returns. No automatic policy promotion. A later market evaluation is required for any proposed improvement.",
+  "hypothesis": "The directional change from restoring 11402 depends on retained changes to 10704 and MBON07. Cross all three restoration choices to measure these interactions on the same recorded inputs, with all five market-reference outcomes and complete-restoration pristine equality as controls."
+}

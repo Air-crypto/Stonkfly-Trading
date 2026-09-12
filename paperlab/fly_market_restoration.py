@@ -21,6 +21,10 @@ ARMS={
     'restore_11402':{'memory':'trained','restore_post_ids':['11402']},
     'restore_both':{'memory':'trained','restore_post_ids':['10704','11402']},
 }
+MBON07=['12859','15626','18603','515338']
+FACTORIAL_ARMS={**ARMS,**{name:{'memory':'trained','restore_post_ids':ids} for name,ids in (
+    ('restore_MBON07',MBON07),('restore_MBON07_10704',MBON07+['10704']),
+    ('restore_MBON07_11402',MBON07+['11402']),('restore_all',MBON07+['10704','11402']))}}
 FILES=('fly_market_restoration.py','fly_market_pulse.py','fly_market_study.py','fly_trace.py','fly.py')
 DECODER=('side','left_hz','right_hz','difference_hz','gate_spikes','spike_sha256')
 
@@ -29,11 +33,14 @@ def validate(payload):
     if not isinstance(payload,dict) or set(payload)!={'protocol','reference_json','market_plan'}:
         raise ValueError('Expected protocol, reference JSON, and sealed market plan')
     protocol=payload['protocol'];raw=payload['reference_json']
-    if not isinstance(protocol,dict) or protocol.get('schema')!=1 or protocol.get('kind')!='post_hoc_market_memory_restoration' or protocol.get('arms')!=ARMS:
-        raise ValueError('Expected the five registered restoration controls')
+    schema=protocol.get('schema') if isinstance(protocol,dict) else None
+    expected={1:('post_hoc_market_memory_restoration',ARMS),2:('post_hoc_market_memory_factorial',FACTORIAL_ARMS)}
+    if schema not in expected or (protocol.get('kind'),protocol.get('arms'))!=expected[schema]:
+        raise ValueError('Expected the complete registered restoration controls')
+    source='online_original' if schema==1 else 'trained_frozen'
     if protocol.get('inference')!={'learning':False,'reinforcement':'none','extra_current':0,'steps':3}:
         raise ValueError('Restoration inference must remain frozen and unstimulated')
-    if protocol.get('training_source')!='online_original' or protocol.get('test_source')!='trained_frozen':
+    if protocol.get('training_source')!=source or protocol.get('test_source')!='trained_frozen':
         raise ValueError('Changed restoration reference arms')
     if not isinstance(raw,str) or len(raw.encode())>2_000_000 or hashlib.sha256(raw.encode()).hexdigest()!=protocol.get('reference_report_sha256'):
         raise ValueError('Reference report differs from registration')
@@ -42,11 +49,12 @@ def validate(payload):
     plan=validate_market(envelope['plan'])
     if signature(plan)!=envelope['sha256'] or reference.get('plan_sha256')!=envelope['sha256'] or protocol.get('market_plan_sha256')!=envelope['sha256']:
         raise ValueError('Market plan provenance mismatch')
-    if plan['schema']!=4 or plan['phase_steps']!=3:raise ValueError('Requires three-step frozen-inference reference')
+    if plan['schema']!=(4 if schema==1 else 5) or plan['phase_steps']!=3:raise ValueError('Requires the matching three-step frozen-inference reference')
     pool=protocol.get('pool')
     if pool not in plan['cohort'] or pool not in reference.get('phase_diagnostics',{}):raise ValueError('Registered pool missing')
     rows=reference['phase_diagnostics'][pool]
-    for arm,phase in (('online_original','training'),('online_original','test'),('pristine_frozen','test'),('trained_frozen','test')):
+    controls=('online_original','pristine_frozen','trained_frozen') if schema==1 else tuple(ARMS)
+    for arm,phase in [(source,'training')]+[(name,'test') for name in controls]:
         decisions=rows[arm][phase]['decisions'];start=plan['start']+(1800 if phase=='test' else 0)
         if len(decisions)!=4 or [d['decision_ts'] for d in decisions]!=[start+i*300 for i in range(4)] or not decisions[-1]['terminal']:
             raise ValueError('Incomplete reference timeline')
@@ -55,7 +63,7 @@ def validate(payload):
             e=d['neural']
             if e['stimulus'] not in ('none','reward','aversive'):raise ValueError('Invalid training stimulus')
             if phase=='test':
-                original=rows['online_original']['test']['decisions'][i]
+                original=rows[source]['test']['decisions'][i]
                 if d['quote_ts']!=original['quote_ts'] or e['input_sha256']!=original['neural']['input_sha256']:
                     raise ValueError('Reference controls saw different inputs')
                 if arm!='online_original' and (e['stimulus']!='none' or e['plasticity_enabled'] or e['weight_delta_l2']!=0):
@@ -85,7 +93,7 @@ def run(payload,data,output):
     root=Path(output);root.mkdir(parents=True,exist_ok=False);atomic_json(root/'protocol.json',protocol)
     lab=TraceLab(data);b=lab.brain
     if b.build!=reference['native_build']:raise ValueError('Native build differs from the reference')
-    sequences=input_sequences(plan,reference,protocol['pool']);rows=reference['phase_diagnostics'][protocol['pool']]
+    sequences=input_sequences(plan,reference,protocol['pool'],protocol['training_source']);rows=reference['phase_diagnostics'][protocol['pool']]
     deadline=time.monotonic()+420
     def check_time():
         if time.monotonic()>deadline:raise TimeoutError('Bounded restoration assay expired')
@@ -97,15 +105,21 @@ def run(payload,data,output):
         if not matches(event,row['neural']):raise AssertionError('Reference training did not reproduce')
         training.append(event)
     trained=learned_state(b)
-    if memory_signature(trained)!=rows['online_original']['training']['final_memory_sha256']:
+    if memory_signature(trained)!=rows[protocol['training_source']]['training']['final_memory_sha256']:
         raise AssertionError('Reconstructed trained memory differs from reference')
     np.savez_compressed(root/'trained-memory.npz',**trained)
     posts=b.post[b.circuit['edges']];post_ids=np.array([str(b.ids[i]) for i in posts])
     for target in ('10704','11402'):
         indices=np.flatnonzero(b.ids==int(target))
         if len(indices)!=1 or str(lab.types[int(indices[0])])!='MBON11':raise ValueError('Expected annotated MBON11 target')
+    if protocol['schema']==2:
+        if set(post_ids)!=set(MBON07+['10704','11402']):raise ValueError('Factorial groups do not cover the full plastic circuit')
+        for target in MBON07:
+            indices=np.flatnonzero(b.ids==int(target))
+            if len(indices)!=1 or str(lab.types[int(indices[0])])!='MBON07':raise ValueError('Expected annotated MBON07 target')
+    np.savez_compressed(root/'plastic-map.npz',edge_ids=b.circuit['edges'],post_ids=b.ids[posts])
     reports={};summary={}
-    for name,arm in ARMS.items():
+    for name,arm in (ARMS if protocol['schema']==1 else FACTORIAL_ARMS).items():
         check_time();initial,mask=restore_posts(pristine,trained if arm['memory']=='trained' else pristine,post_ids,arm['restore_post_ids'])
         restore_learned(b,initial);b.eta=.001;b.weights_frozen=True
         lab.fly.controller.s=replace(lab.fly.controller.s,learning=False)
@@ -118,7 +132,7 @@ def run(payload,data,output):
             if event['input_sha256']!=row['neural']['input_sha256'] or not same_memory(b,initial):
                 raise AssertionError('Frozen replay changed input or synaptic memory')
             events.append(event)
-        if name in ('pristine_frozen','trained_frozen'):
+        if name in (ARMS if protocol['schema']==2 else ('pristine_frozen','trained_frozen')):
             expected=rows[name]['test']['decisions'][:3]
             if any(not matches(e,r['neural']) for e,r in zip(events,expected)):raise AssertionError(f'Reference control did not reproduce: {name}')
         restoration={'post_ids':arm['restore_post_ids'],'edge_ids':[str(e) for e in b.circuit['edges'][mask]],
@@ -134,7 +148,7 @@ def run(payload,data,output):
                        'difference_hz':[e['difference_hz'] for e in events],'restored_edges':int(mask.sum())}
         print(f"restoration_study arm={name} actions={summary[name]['actions']}",flush=True)
     result={'status':'market_restoration_study_completed','protocol':protocol,'training_events':training,'reports':reports,'summary':summary,
-            'verification':{'same_native_build':True,'training_and_memory_reproduced':True,'both_reference_controls_reproduced':True,
+            'verification':{'same_native_build':True,'training_and_memory_reproduced':True,'both_reference_controls_reproduced':True,'reference_arms_reproduced':list(ARMS) if protocol['schema']==2 else ['pristine_frozen','trained_frozen'],
                             'all_frozen_memory_preserved':True,'identical_test_images':True},
             'code_sha256':{name:digest(Path(__file__).with_name(name)) for name in FILES}}
     atomic_json(root/'summary.json',result);return result
@@ -161,14 +175,27 @@ def cloud_run(payload,output):
     report=result['report']
     if report['protocol']!=payload['protocol'] or report['code_sha256']!=json.loads((root/'source-hashes.json').read_text()):raise ValueError('Executed protocol or source differs from submission')
     volume=modal.Volume.from_name('fly-paper-lab-state',environment_name='main')
-    for arm in ARMS:
+    base='/state/fly-debugger/'+receipt['run_id']
+    if result['remote_path']!=base:raise ValueError('Unexpected artifact directory')
+    for arm in payload['protocol']['arms']:
         folder=root/arm;folder.mkdir(exist_ok=True);remote=result['remote_path']+'/'+arm;view=folder/'view.json'
         if not view.exists():
             partial=view.with_suffix('.partial')
             with partial.open('wb') as f:
                 for block in volume.read_file(remote.removeprefix('/state')+'/view.json'):f.write(block)
             partial.replace(view)
+        if json.loads(view.read_text())['report']!=report['reports'][arm]:raise ValueError('Downloaded view differs from its reported provenance')
         atomic_json(folder/'report.json',report['reports'][arm]);atomic_json(folder/'remote.json',{'remote_path':remote,'call_id':receipt['call_id']})
+    if payload['protocol']['schema']==2:
+        for name in ['plastic-map.npz','pristine-memory.npz','trained-memory.npz',*[arm+'/initial-memory.npz' for arm in payload['protocol']['arms']]]:
+            target=root/'artifacts'/name;target.parent.mkdir(parents=True,exist_ok=True)
+            if not target.exists():
+                partial=target.with_suffix('.partial')
+                with partial.open('wb') as f:
+                    for block in volume.read_file(base.removeprefix('/state')+'/'+name):f.write(block)
+                partial.replace(target)
+        from .fly_market_restoration_audit import audit
+        atomic_json(root/'audit.json',audit(report,payload['reference_json'],payload['market_plan'],root/'artifacts'))
     atomic_json(root/'summary.json',report);receipt.update(status='completed',budget=result['budget']);atomic_json(receipt_path,receipt)
     print(json.dumps({'summary':report['summary'],'verification':report['verification'],'budget':result['budget']},indent=2))
 
