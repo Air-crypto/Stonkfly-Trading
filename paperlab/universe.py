@@ -123,6 +123,19 @@ class Store:
                 self.db.execute("INSERT OR IGNORE INTO observations VALUES (?,?,?,?)",
                                 (p.key, int(p.observed//60), raw, p.rejection()))
 
+    def snapshot(self, path):
+        """Publish a closed, consistent SQLite image; never expose a hot journal."""
+        if self.db.in_transaction:
+            raise RuntimeError("Publish snapshots only after committing discovery updates")
+        path = Path(path)
+        temporary = path.with_suffix(".partial")
+        with sqlite3.connect(temporary) as destination:
+            self.db.backup(destination)
+            if destination.execute("PRAGMA quick_check").fetchone() != ("ok",):
+                raise RuntimeError("Discovery snapshot integrity failure")
+        destination.close()
+        temporary.replace(path)
+
     def launch(self, obj, seen):
         if obj.get("txType") not in ("create", "migration", "migrate"):
             return False
@@ -230,7 +243,7 @@ async def launch_stream(store, deadline):
     store.health("launch_stream_window_ended")
 
 
-async def collect_window(root, seconds=285, publish=lambda:None, priorities=lambda:()):
+async def collect_window(root, seconds=240, publish=lambda:None, priorities=lambda:()):
     """One writer; bounded windows make shutdown and budget checks inevitable."""
     from .core import atomic_json
     if not 1 <= seconds <= 285:
@@ -274,7 +287,11 @@ async def collect_window(root, seconds=285, publish=lambda:None, priorities=lamb
                 "prices":"Indicative indexer prices; no executable bid/ask or verified sellability."}
             store.health("collection_snapshot",**last_report)
             atomic_json(root/"latest.json",last_report)
-            publish()
+            store.snapshot(root/"universe-snapshot.db")
+            import inspect
+            published = publish()
+            if inspect.isawaitable(published):
+                await published
             print(json.dumps({"event":"universe_collected",**last_report}),flush=True)
             await asyncio.sleep(min(max(0,60-(time.monotonic()-started)),max(0,deadline-time.monotonic())))
     finally:
@@ -283,6 +300,10 @@ async def collect_window(root, seconds=285, publish=lambda:None, priorities=lamb
         store.health("collector_window_finished")
         last_report.update(as_of=time.time(),launch_events=store.db.execute("SELECT count(*) FROM launches").fetchone()[0])
         atomic_json(root/"latest.json",last_report)
+        store.snapshot(root/"universe-snapshot.db")
         store.db.close()
-        publish()
+        import inspect
+        published = publish()
+        if inspect.isawaitable(published):
+            await published
     return last_report

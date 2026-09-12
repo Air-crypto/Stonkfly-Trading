@@ -158,26 +158,7 @@ class TraceLab:
             reinforcement = config.reinforcement
             if reinforcement == "alternating":
                 reinforcement = "reward" if i % 2 == 0 else "aversive"
-            with Recorder(b, extra, config.current) as trace:
-                event = self.fly.controller.observe(rgb, reinforcement)
-            arrays = trace.arrays()
-            if not np.array_equal(arrays["counts"].sum(axis=0), b.counts):
-                raise AssertionError("Trace does not reproduce controller spike counts")
-            delta = arrays["weights"][-1] - trace.initial_weights
-            event["diagnostics"] = {
-                "loss": None, "backprop_gradient": None,
-                "changed_edges": int(np.count_nonzero(delta)),
-                "weight_delta_l2": float(np.linalg.norm(delta)),
-                "max_abs_delta": float(np.max(np.abs(delta))),
-                "efficacy_min": float(1 + b.memory_w.min()),
-                "efficacy_max": float(1 + b.memory_w.max()),
-                "clipped_edges": int(np.count_nonzero((b.memory_w <= -.9) | (b.memory_w >= 1))),
-            }
-            np.savez_compressed(output / f"step-{i+1:02}.npz", **arrays,
-                                initial_weights=trace.initial_weights, neuron_ids=b.ids,
-                                plastic_edges=b.circuit["edges"], plastic_pre=b.circuit["pre"],
-                                plastic_post=b.post[b.circuit["edges"]])
-            Image.fromarray(rgb).save(output / f"input-{i+1:02}.png")
+            event = self.capture(rgb, reinforcement, output, i+1, extra, config.current)
             events.append(event)
             print(f"assay step={i+1}/{config.steps} side={event['side']} "
                   f"spikes={event['total_spikes']} changed={event['diagnostics']['changed_edges']}", flush=True)
@@ -192,6 +173,31 @@ class TraceLab:
         view = self.export_view(output, report, extra)
         atomic_json(output / "view.json", view)
         return report
+
+    def capture(self, rgb, reinforcement, output, index, extra=(), current=0):
+        """Record one native observation without changing its integration semantics."""
+        b = self.brain
+        with Recorder(b, extra, current) as trace:
+            event = self.fly.controller.observe(rgb, reinforcement)
+        arrays = trace.arrays()
+        if not np.array_equal(arrays["counts"].sum(axis=0), b.counts):
+            raise AssertionError("Trace does not reproduce controller spike counts")
+        delta = arrays["weights"][-1] - trace.initial_weights
+        event["diagnostics"] = {
+            "loss": None, "backprop_gradient": None,
+            "changed_edges": int(np.count_nonzero(delta)),
+            "weight_delta_l2": float(np.linalg.norm(delta)),
+            "max_abs_delta": float(np.max(np.abs(delta))),
+            "efficacy_min": float(1 + b.memory_w.min()),
+            "efficacy_max": float(1 + b.memory_w.max()),
+            "clipped_edges": int(np.count_nonzero((b.memory_w <= -.9) | (b.memory_w >= 1))),
+        }
+        np.savez_compressed(output / f"step-{index:02}.npz", **arrays,
+                            initial_weights=trace.initial_weights, neuron_ids=b.ids,
+                            plastic_edges=b.circuit["edges"], plastic_pre=b.circuit["pre"],
+                            plastic_post=b.post[b.circuit["edges"]])
+        Image.fromarray(rgb).save(output / f"input-{index:02}.png")
+        return event
 
     def export_view(self, output, report, requested=()):
         """A bounded view of a full-network recording; selection never affects simulation."""

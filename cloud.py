@@ -47,11 +47,11 @@ WORKER_MEMORY=8192 if FULL_FLY and UNIVERSE else 16384 if FULL_FLY else 4096
 @app.function(image=image, volumes={"/state": volume,"/discovery":discovery_volume}, cpu=(2,2), memory=(WORKER_MEMORY,WORKER_MEMORY),
               max_containers=1, min_containers=0, scaledown_window=2, timeout=600,
               schedule=modal.Cron("*/5 * * * *") if ENABLED else None, retries=0)
-def worker(prepare: bool = False, probe: bool = False, diagnostics: bool = False):
-    return exclusive("worker",_worker,prepare,probe,diagnostics)
+def worker(prepare: bool = False, probe: bool = False, diagnostics: bool = False, debug: dict | None = None):
+    return exclusive("worker",_worker,prepare,probe,diagnostics,debug)
 
 
-def _worker(prepare=False,probe=False,diagnostics=False):
+def _worker(prepare=False,probe=False,diagnostics=False,debug=None):
     import os
     import sys
     import time
@@ -61,8 +61,13 @@ def _worker(prepare=False,probe=False,diagnostics=False):
     from paperlab.core import atomic_json
     from paperlab.telemetry import emit
     full = os.environ["PAPERLAB_FLY"] == "1"
-    if sum((prepare, probe, diagnostics)) > 1:
+    if sum((prepare, probe, diagnostics, debug is not None)) > 1:
         raise ValueError("Prepare and probe are separate bounded invocations")
+    if debug is not None:
+        from paperlab.cloud_debug import validate_request
+        validate_request(debug)
+        if not full:
+            raise ValueError("Fly diagnostics require the full retained graph")
     volume.reload()
     # Match the explicitly saved provider usage cap; never rely on credits to expand it.
     # Measured cold starts were ~3 seconds. Ten seconds plus the unchanged 2x
@@ -74,6 +79,18 @@ def _worker(prepare=False,probe=False,diagnostics=False):
         emit("budget_stopped", action="Disable schedule; reserved compute limit reached")
         return {"status": "budget_stopped", "action": "Remove the schedule and redeploy. Compute estimate reached its reserved limit."}
     volume.commit()  # Persist worst-case reservation before expensive work; crashes retain it.
+    if debug is not None:
+        from paperlab.cloud_debug import run
+        try:
+            result = run(debug, "/state/fly-debugger", "/state/fly-data")
+            result["budget"] = settle("/state/budget.json", reservation, time.time() - reservation["started"])
+            atomic_json(Path("/state/fly-debugger") / debug["run_id"] / "cloud-result.json", result)
+            volume.commit()
+            return result
+        except Exception as exc:
+            emit("fly_debug_failed", error_type=type(exc).__name__, error=str(exc)[:300])
+            volume.commit()
+            raise
     if diagnostics:
         try:
             if universe:
@@ -144,10 +161,10 @@ def _worker(prepare=False,probe=False,diagnostics=False):
         if universe:
             from paperlab.multi import cycle as multi_cycle
             discovery_volume.reload()
-            if not Path("/discovery/universe.db").exists():
+            if not Path("/discovery/universe-snapshot.db").exists():
                 result={"status":"waiting_for_universe_collector"}
             else:
-                result=multi_cycle(output_root,"/discovery/universe.db","/state/fly-data",use_fly=full)
+                result=multi_cycle(output_root,"/discovery/universe-snapshot.db","/state/fly-data",use_fly=full)
         else:
             result = cycle("/state/fast-5m", os.environ["PAPERLAB_PRODUCT"], full, train_daily=True,
                            interval_seconds=300, train_every_seconds=21600, news_every_seconds=900,
@@ -203,7 +220,7 @@ def _universe_collector():
         path=Path("/state/meme-pools-v1/watch.json")
         return json.loads(path.read_text()) if path.exists() else []
     try:
-        result=asyncio.run(collect_window("/discovery",publish=discovery_volume.commit,priorities=priorities))
+        result=asyncio.run(collect_window("/discovery",seconds=240,publish=discovery_volume.commit.aio,priorities=priorities))
     except Exception:
         discovery_volume.commit()  # Retain worst-case charge and received launch events.
         raise

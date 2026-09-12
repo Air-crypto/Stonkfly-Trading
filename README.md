@@ -30,6 +30,12 @@ Visit <http://127.0.0.1:8765>. See the debugger guide for input tests, the eight
 study, and its limitations. These visualizations are diagnostic evidence, not
 evidence of profitable trading.
 
+With Modal already deployed and authenticated, run tests in the cloud with
+`uv run python -m paperlab.debugger serve --backend modal --out runs/cloud-debugger`.
+The guide also covers sealed, cost-aware market replays and saved call recovery.
+The [first sealed market comparison](docs/fly-debugger.md#first-market-replay-result)
+rejected all proposed changes under its development gate; no policy was promoted.
+
 The first paired falling-price assay found one action disagreement in four
 observations. Both arms received identical images:
 

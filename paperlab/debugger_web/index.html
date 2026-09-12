@@ -2,7 +2,7 @@
 <html lang="en">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fly circuit debugger</title><link rel="stylesheet" href="/style.css"><script defer src="/app.js"></script></head>
 <body>
-<header><div><span class="eyebrow">STONKFLY / RESEARCH INSTRUMENT</span><h1>Fly circuit debugger</h1><p>Follow inputs through actual spikes, plasticity, and the fixed decision decoder.</p></div><span class="badge">Synthetic assay · paper only</span></header>
+<header><div><span class="eyebrow">STONKFLY / RESEARCH INSTRUMENT</span><h1>Fly circuit debugger</h1><p>Follow inputs through actual spikes, plasticity, and the fixed decision decoder.</p></div><span class="badge" id="source-badge">Synthetic assay · paper only</span></header>
 <main>
 <div class="toolbar"><label>Recorded run <select id="runs"></select></label><button id="refresh">Refresh runs</button><label>Import trace <input id="import" type="file" accept="application/json,.json"></label></div>
 <p id="status" role="status">Loading recordings…</p><p id="error" role="alert"></p>
@@ -30,7 +30,7 @@
 </div>
 <div class="results">
 <section class="panel"><h2>What the brain saw</h2><img id="input" width="320" height="180" alt="Exact RGB input to the fly"><p id="input-info"></p></section>
-<section class="panel"><h2>Fixed decoder output</h2><p id="decision" class="decision">—</p><dl id="decoder"></dl><p class="small">Whole-observation result (500 ms). BUY/SELL are engineered mappings of downstream firing rates; this assay executes no trades.</p></section>
+<section class="panel"><h2>Fixed decoder output</h2><p id="decision" class="decision">—</p><dl id="decoder"></dl><p class="small" id="decoder-note">Whole-observation result (500 ms). BUY/SELL are engineered mappings of downstream firing rates; this assay executes no trades.</p></section>
 <section class="panel"><h2>Learning diagnostics</h2><dl id="metrics"></dl><p class="small">The fly has no optimizer loss or backprop gradient. Weight change and trace activity do not establish useful learning.</p></section>
 </div>
 <div class="plots"><section class="panel"><h2>Network spikes</h2><div id="spike-chart"></div></section><section class="panel"><h2>Plastic weight movement</h2><div id="weight-chart"></div></section><section class="panel"><h2>KC & DAN traces</h2><div id="trace-chart"></div></section></div>

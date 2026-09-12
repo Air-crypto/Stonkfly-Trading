@@ -68,6 +68,27 @@ def test_registry_keeps_first_seen_rejections_and_deduplicates(tmp_path):
     s.db.close()
 
 
+def test_published_snapshot_is_closed_and_stable_during_source_writes(tmp_path):
+    store=Store(tmp_path/"live.db")
+    store.add([pool()])
+    snapshot=tmp_path/"universe-snapshot.db"
+    store.snapshot(snapshot)
+    store.db.execute("UPDATE pools SET first_seen=0")
+    with pytest.raises(RuntimeError): store.snapshot(snapshot)
+    reader=sqlite3.connect(f"file:{snapshot}?mode=ro",uri=True)
+    assert reader.execute("SELECT first_seen FROM pools").fetchone()[0]==pool().observed
+    assert reader.execute("PRAGMA integrity_check").fetchone()==("ok",)
+    reader.close()
+    store.db.rollback()
+    store.add([pool(1)])
+    store.snapshot(snapshot)
+    reader=sqlite3.connect(f"file:{snapshot}?mode=ro",uri=True)
+    assert reader.execute("SELECT count(*) FROM pools").fetchone()[0]==2
+    reader.close()
+    store.db.close()
+    assert not snapshot.with_name(snapshot.name+"-journal").exists()
+
+
 def test_request_budget_rotates_chains_and_keeps_holdings_first():
     from paperlab.universe import refresh_requests
     watch=[replace(pool(i),network=f"chain{i:02d}",key=f"chain{i:02d}:pool{i}") for i in range(20)]

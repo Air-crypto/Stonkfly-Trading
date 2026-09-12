@@ -55,6 +55,8 @@ class Jobs:
         self.lock = threading.Lock()
         self.process = None
         self.name = None
+        self.can_run = self.data is not None
+        self.backend = "local" if self.data else "recordings"
 
     def launch(self, config):
         if self.data is None:
@@ -79,8 +81,12 @@ class Jobs:
                     "exit_code": code}
 
 
-def serve(root, data, port):
-    jobs = Jobs(root, data)
+def serve(root, data, port, backend="local"):
+    if backend == "modal":
+        from .debugger_cloud import CloudJobs
+        jobs = CloudJobs(root)
+    else:
+        jobs = Jobs(root, data)
 
     class Handler(BaseHTTPRequestHandler):
         def send(self, status, value, content_type="application/json"):
@@ -110,7 +116,7 @@ def serve(root, data, port):
             try:
                 if url.path == "/api/runs":
                     runs = sorted(p.parent.name for p in jobs.root.glob("*/view.json"))
-                    return self.send(200, {"runs": runs, "can_run": jobs.data is not None})
+                    return self.send(200, {"runs": runs, "can_run": jobs.can_run, "backend": jobs.backend})
                 if url.path == "/api/status":
                     return self.send(200, jobs.status())
                 if url.path == "/api/view":
@@ -118,6 +124,8 @@ def serve(root, data, port):
                     return self.send(200, json.loads(path.read_text()))
                 if url.path == "/api/neuron":
                     path = safe_run(jobs.root, q.get("run", [""])[0])
+                    if jobs.backend == "modal":
+                        jobs.ensure_recordings(path)
                     return self.send(200, neuron_trace(path, q.get("id", [""])[0]))
                 if url.path == "/api/log":
                     name = q.get("run", [""])[0]
@@ -131,6 +139,8 @@ def serve(root, data, port):
                 self.send(200, (WEB / name).read_bytes(), mime)
             except (ValueError, FileNotFoundError, OverflowError) as exc:
                 self.send(400, {"error": str(exc)})
+            except Exception as exc:
+                self.send(502, {"error": f"{type(exc).__name__}: {exc}"[:500]})
 
         def do_POST(self):
             if not self.allowed(write=True):
@@ -145,6 +155,8 @@ def serve(root, data, port):
                 self.send(202, {"run": jobs.launch(config)})
             except (ValueError, TypeError) as exc:
                 self.send(400, {"error": str(exc)})
+            except Exception as exc:
+                self.send(502, {"error": f"{type(exc).__name__}: {exc}"[:500]})
 
         def log_message(self, *args):
             pass
@@ -166,6 +178,7 @@ def main():
         sub.add_argument("--out", type=Path, required=True, help="Isolated output directory, never a paper account")
         if name == "serve":
             sub.add_argument("--port", type=int, default=8765)
+            sub.add_argument("--backend", choices=["local", "modal"], default="local")
         else:
             sub.add_argument("--steps", type=int, default=4)
             if name == "capture":
@@ -174,7 +187,7 @@ def main():
                 sub.add_argument("--frozen", action="store_true")
     args = parser.parse_args()
     if args.command == "serve":
-        serve(args.out, args.fly_data, args.port)
+        serve(args.out, args.fly_data, args.port, args.backend)
     elif args.command == "study":
         paired_study(args.fly_data, args.out, args.steps)
     else:

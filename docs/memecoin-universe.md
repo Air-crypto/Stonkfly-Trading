@@ -9,8 +9,9 @@ No wallet, transaction submission, paid trading stream, or real-order API is use
 
 The small `universe_collector` function subscribes to PumpPortal's **free token
 creation and migration events**, using one WebSocket. It does not subscribe to
-metered token/account trade events. A bounded 285-second invocation starts every
-five minutes; connection setup, restart gaps, and provider errors are recorded.
+metered token/account trade events. A bounded 240-second collection window starts
+every five minutes, leaving time for publication within the 300-second function
+timeout; connection setup, restart gaps, and provider errors are recorded.
 This is near-continuous discovery with observable gaps, not guaranteed complete
 event delivery or a backfilled blockchain index.
 
@@ -105,8 +106,13 @@ PAPERLAB_SCHEDULE=1 PAPERLAB_UNIVERSE=1 PAPERLAB_FLY=1 .venv/bin/modal deploy cl
 PAPERLAB_SCHEDULE=0 PAPERLAB_UNIVERSE=1 PAPERLAB_FLY=1 .venv/bin/modal deploy cloud.py
 ```
 
-The collector owns `fly-paper-lab-universe` (`universe.db`, `latest.json`,
-`last-window.json`, `budget.json`). The trader only reads this volume. The trader
+The collector owns `fly-paper-lab-universe` (`universe.db`, `universe-snapshot.db`,
+`latest.json`, `last-window.json`, `budget.json`). It publishes a closed SQLite
+backup through atomic replacement after committed updates. The trader reads
+`universe-snapshot.db`, not the changing writer database: a read-only connection
+cannot recover a hot journal captured while that database is being modified.
+Volume publication uses the async API so it does not block launch reception.
+The trader only reads this volume. The trader
 owns `fly-paper-lab-state` (`meme-pools-v1/paper.db`, `latest.json`, `watch.json`,
 native checkpoints, and candidate PPO artifacts). The collector only reads the
 trader's watch file. Each function has exactly one writer; no shared writable
