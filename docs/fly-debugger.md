@@ -2846,7 +2846,7 @@ rejects fixed dual-recipient stimulation as a demonstrated improvement; it does
 not establish that all activation or learning approaches must fail. The prepared
 single-recipient assay remains a mechanism test, not a profitable-policy claim.
 
-## Prepared recipient isolation: test each target separately
+## Recipient isolation: test each target separately
 
 The [isolation protocol](../reports/fly-recipient-isolation-protocol-01.json)
 follows the native-bin finding at cell 11402. It crosses pristine and paper-trained
@@ -2865,12 +2865,19 @@ weight/u/w bin, phase boundaries, images/news and the unchanged full-count decod
 It reports trained-versus-pristine differences within each target set and each
 single-target response versus its corresponding both-target control.
 
-**Prepared, not submitted:** the source is committed for deployment after study
-10. The client checks that study 10's exact owning Modal call has completed; a
+**Submitted after study 10 passed its audit:** revision `3bb976a` was deployed
+with all four existing experiment/schedule flags enabled. The saved call is
+`fc-01M2BFRC1XT9M5SMBMZE846CVX`, run
+`assay-recipient-80d38773d0d249b79825927e64d97fdc`. It was still pending when
+observed at **18:59 UTC on September 12, 2026**; no isolation result is claimed
+here. Reattach using the same output directory below rather than submitting
+another experiment.
+
+The client verified that study 10's exact owning Modal call had completed; a
 completed receipt with a still-pending call is insufficient. The cloud entrypoint
-also rejects isolation until the study 10 completion receipt exists. These guards
-leave the registered comparison's code and execution unchanged. The assay uses
-the existing worker lease, timeout, CPU/memory allocation and budget.
+also rejects isolation until the study 10 completion receipt exists. The assay
+uses the existing worker lease, timeout, CPU/memory allocation and budget. Neither
+the paper-trading policy nor its spending caps were changed.
 
 Prepare the immutable request without submitting compute:
 
