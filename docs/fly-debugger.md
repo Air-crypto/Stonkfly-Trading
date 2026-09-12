@@ -2453,3 +2453,72 @@ its reconciliation assertions remain enabled. Validation also altered a filled
 price and recomputed the ledger hash: broker replay still rejected it before
 writing a report. Detailed per-step rows remain private; the published aggregate
 retains capture, ledger, script and relevant implementation hashes.
+
+
+### Ninth market replay result
+
+![Audited study 09: imported paper memory and input-state reset](assets/fly-market-study-09.png)
+
+Study 09 completed on the scheduled worker after the September 12
+**16:30–16:45 UTC development** and **16:45–17:00 UTC test** windows closed.
+It imports the two audited paper-trained memories, with 82 and 72 observations,
+into fresh neural activity and independent $1,000 phase accounts. All four
+conditions use identical sealed prices and timestamp-eligible news.
+
+| Condition | Development equity | Test equity | Test fills | Test fees |
+|---|---:|---:|---:|---:|
+| Pristine / carry input | $985.1634 | $997.3386 | 6 | $1.875 |
+| Paper-trained / carry input | $985.1634 | $997.3386 | 6 | $1.875 |
+| Pristine / reset input | $985.1634 | $991.1157 | 6 | $1.875 |
+| Paper-trained / reset input | $986.5181 | $991.1157 | 6 | $1.875 |
+
+No trained condition beat cash in development, so **none was selected or
+promoted**. Under input reset, trained memory avoided one development BUY and
+its subsequent cost, improving development equity by $1.3546 relative to
+pristine/reset. That advantage did not recur in test. Within either input-state
+setting, trained and pristine models produced **identical whole-network spike
+counts for all six test observations**, as well as identical signals and fills.
+This establishes no retained-memory benefit on this short test; it does not
+claim identical voltages or prove that training is ineffective on all inputs.
+
+Resetting input changed the test signals in both memory conditions:
+
+| Pool | Carry input | Reset input | Reset minus carry, end equity |
+|---|---|---|---:|
+| 0 (ALL) | BUY → SELL → BUY | BUY → BUY → BUY | −$4.8682 |
+| 1 (baton) | BUY → BUY → SELL | BUY → BUY → BUY | −$1.3546 |
+
+Both direction and gate counts are preserved in the
+[decision comparison](../reports/fly-market-study-09-decisions.json). Pool 0's
+16:50 UTC observation changes direction from −2 Hz to +6 Hz; gates fire in
+both conditions. Pool 1's 16:55 observation changes from −6 Hz to +2 Hz, again
+with gates present. These are direction reversals, not merely gates suppressing
+an otherwise identical action. The resulting fills occur at later quotes.
+The combined reset disadvantage is $6.2229, despite equal charged fees; changed
+positions and modeled execution/liquidation marks also affect equity.
+
+All six intended observations per condition were available in each phase:
+**48 neural observations, 64 ledger slots and 16 recordings**. The observer
+reconstructed the sealed price histories from original collector receipts,
+excluded post-endpoint prices, reconstructed news, replayed every broker ledger,
+verified imported memory and activity boundaries, and rebuilt the decoder from
+all 166,700 neuron counts. Browser QA checked all recordings, timeline slots
+and boundaries with zero page errors or model submissions. Recorded compute
+for this comparison was approximately **$0.0233**, excluding provider billing
+items outside the compute estimator.
+
+Published evidence: [report](../reports/fly-market-study-09.json),
+[sealed plan](../reports/fly-market-study-09-plan.json),
+[native/news/ledger audit](../reports/fly-market-study-09-audit.json), and
+[original-price audit](../reports/fly-market-study-09-price-audit.json). Private
+checkpoint arrays, news database and full-neuron boundary files remain excluded
+from Git. The portable recordings are included under `examples/fly-debugger`.
+
+After serving the included recordings, inspect the
+[pool 0 SELL-to-BUY reversal](http://127.0.0.1:8765/?run=market09-pool0-trained_input_reset&step=1&neuron=10059&compare=market09-pool0-trained_frozen),
+or compare [trained and pristine test memory](http://127.0.0.1:8765/?run=market09-pool0-trained_frozen&step=1&neuron=10059&compare=market09-pool0-pristine_frozen).
+For the development-only action difference, open
+[trained versus pristine reset](http://127.0.0.1:8765/?run=market09-pool0-trained_input_reset-development&step=2&neuron=10527&compare=market09-pool0-pristine_input_reset-development).
+
+These remain indicative, cost-aware DEX simulations on two short windows.
+No live-trading or monthly-profit conclusion follows from this result.

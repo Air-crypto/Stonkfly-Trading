@@ -10,14 +10,16 @@ the original BTC archive remains available.
 
 The fly is a sparse spiking network, not a transformer. The compact policy is an MLP actor/critic, not an SLM. An optional, separately pinned FinBERT transformer encodes headline sentiment. News features enter the compact policy numerically and the fly through an explicit visual adapter.
 
-The next [registered comparison of paper-trained memory](docs/fly-debugger.md#run-and-inspect-the-registered-paper-checkpoint-comparison)
-uses audited reward-exposed checkpoints, identical timestamped news, and separate
-development/test windows. Its observer checks full-neuron decoder counts, fills,
-and input-state resets before exposing recordings. No improvement is established
-until the registered evaluation is completed and assessed. An optional
-[two-phase figure](docs/fly-debugger.md#plot-the-two-phase-paper-memory-result)
-shows matched training effects, fees and missing observations from the audited
-report. The [decision comparison](docs/fly-debugger.md#compare-neural-decisions-with-later-fills)
+The [ninth market comparison](docs/fly-debugger.md#ninth-market-replay-result)
+completed with fully audited prices, timestamped news, fills and neural counts.
+Trained and pristine models both ended test at **$997.34**, or **$991.12** with
+input-state reset, from separate $1,000 accounts. Trained/pristine test spike
+counts matched across every neuron. No condition passed development; no policy
+was promoted.
+
+![Audited paper-memory comparison, with separate development and test](docs/assets/fly-market-study-09.png)
+
+The [decision comparison](docs/fly-debugger.md#compare-neural-decisions-with-later-fills)
 separates current neural signals from fills executing earlier decisions, with
 links to each paired trace.
 
