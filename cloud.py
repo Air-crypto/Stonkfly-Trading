@@ -9,6 +9,9 @@ ENABLED = os.environ.get("PAPERLAB_SCHEDULE") == "1"
 FULL_FLY = os.environ.get("PAPERLAB_FLY", "1") == "1"
 UNIVERSE = os.environ.get("PAPERLAB_UNIVERSE", "0") == "1"
 PAPER_STUDY = os.environ.get('PAPERLAB_PAPER_STUDY') == '1'
+ONLINE_STUDY = os.environ.get('PAPERLAB_ONLINE_STUDY') == '1'
+if ONLINE_STUDY and not (PAPER_STUDY and FULL_FLY and UNIVERSE):
+    raise ValueError('Online study requires paper study, full fly and universe flags')
 PRODUCT = os.environ.get("PAPERLAB_PRODUCT", "BTC-USD")
 if PRODUCT not in ("BTC-USD", "ETH-USD"):
     raise ValueError("Unsupported product")
@@ -36,6 +39,13 @@ if PAPER_STUDY:
     for i in range(2):
         image=image.add_local_file(ROOT/f'runs/reward-exposure-01/verified-export/pool{i}-memory.npz',f'/opt/paperlab/paper-memory-01/pool{i}-memory.npz',copy=True)
     image=image.env({'PAPERLAB_PAPER_STUDY':'1'})
+
+if ONLINE_STUDY:
+    for name in ('fly-market-study-11-preregistration.json','fly-market-study-10-plan.json',
+                 'fly-market-study-10.json','fly-credit-reset-study-01.json','fly-credit-reset-audit-01.json'):
+        image=image.add_local_file(ROOT/'reports'/name,'/opt/paperlab/registered/'+name,copy=True)
+    image=image.add_local_file(ROOT/'cloud.py','/opt/paperlab/registered/cloud-source.py',copy=True)
+    image=image.env({'PAPERLAB_ONLINE_STUDY':'1'})
 
 
 def exclusive(name, call, *args):
@@ -71,6 +81,7 @@ def _worker(prepare=False,probe=False,diagnostics=False,debug=None):
     import os
     import sys
     import time
+    worker_started=time.monotonic()
     sys.path.insert(0, "/opt/paperlab")
     from paperlab.runtime import cycle
     from paperlab.budget import reserve, settle
@@ -208,6 +219,24 @@ def _worker(prepare=False,probe=False,diagnostics=False,debug=None):
         volume.commit()
         raise
     result["cycle_seconds"] = time.time() - started
+    if full and universe and os.environ.get('PAPERLAB_ONLINE_STUDY')=='1':
+        # The normal account/checkpoint transaction becomes durable before a
+        # diagnostic chunk. A failed or killed study cannot erase that cycle.
+        if result['status']!='duplicate_or_old_slot':
+            atomic_json('/state/latest.json',result)
+            atomic_json(Path(output_root)/'latest.json',result)
+        volume.commit()
+        from paperlab.fly_online_schedule import execute_due as online_due
+        from paperlab.fly_online_study import run_chunk
+        try:
+            result['study_11']=online_due('/state','/discovery','/opt/paperlab/registered','/opt/paperlab/paper-memory-01',
+                call_id=modal.current_function_call_id(),input_id=modal.current_input_id(),commit=volume.commit,
+                run=run_chunk,deadline=worker_started+570,
+                allow_compute=result['status']=='paper_research' and result['cycle_seconds']<=90)
+        except Exception as exc:
+            emit('paper_online_failed',error_type=type(exc).__name__,error=str(exc)[:300])
+            volume.commit()
+            raise
     result["budget"] = settle("/state/budget.json", reservation, time.time() - reservation["started"])
     atomic_json("/state/last-call.json", result)
     atomic_json(Path(output_root)/"last-call.json", result)

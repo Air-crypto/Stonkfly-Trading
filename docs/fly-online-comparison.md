@@ -1,13 +1,16 @@
 # Longer online learning comparison
 
-The study 11 runner and offline auditor are implemented and tested. **The future
-market window is not yet registered or scheduled.** No study 11 cloud job was
-submitted during this validation, and the normal paper policies are unchanged.
+The study 11 runner and offline auditor are implemented and tested, and the
+once-only dispatcher is connected after the normal paper cycle. The
+[registration](../reports/fly-market-study-11-preregistration.json), recorded
+September 12, 2026 at 20:17:29 UTC, fixes development at **20:35–22:35 UTC** and
+test at **22:35–00:35 UTC** (ending September 13). In Chicago these are
+3:35–5:35 p.m. and 5:35–7:35 p.m. on September 12. Cloud arming is awaiting
+verification; this registration alone does not prove a deployed job or result.
 The [validation record](../reports/fly-online-validation-01.json) retains the
 native artifact/source hashes and the completed test scope.
-The next integration is a durable, once-only cloud dispatcher that runs each
-condition after a normal paper cycle, retains the owning Modal call/input IDs,
-and persists development selection before any test condition runs.
+The dispatcher retains owning Modal call/input IDs and persists development
+selection before any test condition runs. Normal paper policies are unchanged.
 
 The previous [trace-reset experiment](fly-debugger.md#learning-trace-reset-result)
 showed that clearing only KC/DAN rate traces between images changes later online
@@ -24,10 +27,9 @@ three images to two hours of development and a separate two hours of test data.
 | `trained_online_carry` | Same pinned paper memory | Online equity feedback | Carry activity |
 | `trained_online_reset_rates` | Same pinned paper memory | Online equity feedback | Clear only `rate_kc` and `rate_dan` |
 
-The fixed definitions are in `paperlab/fly_online_protocol.py`; they do not
-constitute a timestamped registration. A future registration must pin the
-completed mechanism report/audit, study 10 parent plan/result, actual imported
-memory, and timestamps before development begins.
+The definitions are in `paperlab/fly_online_protocol.py`. The timestamped
+registration pins the completed mechanism report/audit, study 10 parent
+plan/result, actual imported memory, and the future evaluation windows.
 
 Each phase has **24 five-minute decision slots plus a terminal execution/mark**.
 The two previously pinned pools, ALL and baton, retain their actual audited
@@ -60,8 +62,27 @@ There are 16 complete chunks: two pools × four conditions × two phases.
 A chunk captures an entire two-hour phase in one invocation; it does not resume
 partially saved neural dynamics. The runner refuses to overwrite an existing
 output. Test chunks require all eight development summaries before loading
-the graph. Cloud ownership, source pinning and once-only dispatch still need to
-be connected before this becomes a scheduled experiment.
+the graph. Before the first market window starts, the scheduled worker must
+commit an arming receipt that pins the registration, runner/auditor modules,
+native sources and deployed worker source. Missing that deadline stops this
+registration; the worker does not silently move its windows.
+
+Each scheduled call commits its normal paper cycle first. Research is deferred
+if that cycle took over 90 seconds or insufficient call time remains. Sealing
+and each chunk have durable claims before work begins; failed and uncertain
+claims are never retried or skipped. Source or registration changes before
+study completion stop research. Selection is committed with its own receipt
+after all eight development chunks and before any test chunk. All sixteen
+capture results still require independent audits before publication.
+
+The existing single worker, 600-second reservation and $25 monthly worker cap
+remain unchanged, as does the separate $15 collector cap. No GPU is added.
+After the four-hour market window, sixteen worker slots take roughly another
+80 minutes if every slot can run a chunk; missing data, long paper cycles or
+provider interruptions can delay or stop execution. Full recordings remain on
+the existing volume. Modal currently lists volume storage at $0.09/GiB-month
+with 1 TiB/month included, separately from compute; account-wide consumption
+determines any actual charge ([pricing, checked September 12, 2026](https://modal.com/pricing)).
 
 For each eligible observation, retain all 50 native bins, all neuron counts and
 voltages, every plastic weight and `u/w` update, before/after boundary arrays,
@@ -131,6 +152,18 @@ browser read responses with fixtures, and aborts `/api/run`.
 
 `python -m paperlab.fly_online_study --help` describes the complete-chunk CLI.
 Use it only with a sealed study 11 plan and the matching memory/news archives.
-The CLI does not create a registration or schedule a cloud job. Fresh data,
-prospective cloud receipts and complete comparison audits are still required
-before reporting a trading result.
+The CLI does not create a registration or schedule a cloud job. Deployment uses
+the already authorized app and all five feature flags:
+
+```sh
+PAPERLAB_SCHEDULE=1 PAPERLAB_FLY=1 PAPERLAB_UNIVERSE=1 \
+PAPERLAB_PAPER_STUDY=1 PAPERLAB_ONLINE_STUDY=1 uv run --extra cloud modal deploy cloud.py
+```
+
+This requires the two verified private memory exports already described in
+the checkpoint study setup. Keep the registration and pinned execution sources
+unchanged until completion. The dispatcher writes receipts and snapshots below
+`/state/registered-paper-11`; actual chunk artifacts live in
+`chunks/<phase>-pool<index>-<arm>/artifacts`. An absent or timed-out observation
+of a call does not authorize another submission. Fresh data, prospective cloud
+receipts and complete comparison audits are required before reporting a result.

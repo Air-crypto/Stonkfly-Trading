@@ -1,0 +1,85 @@
+{
+  "schema": 3,
+  "kind": "paper_checkpoint_comparison",
+  "study": "11",
+  "recorded_at": 1789244249.4920902,
+  "development_start": 1789245300,
+  "test_start": 1789252500,
+  "end": 1789259700,
+  "phase_steps": 24,
+  "decision_seconds": 300,
+  "checkpoint_capture_at": 1789227931.94799,
+  "training_cutoff": 1789227900,
+  "parent_plan_sha256": "e046ae7d76af4c66f1614eb733ef250e08f095c7a811b3c2cc89ee4f89e343c2",
+  "parent_report_sha256": "5faa479dd5f5cc98d46e7a9a1c8f856741b2b632c42229eba97acaebeb42e5da",
+  "training_audit_sha256": "00477914d03d95cd860f956763687d5c8cb70c06a7c4a75fce539fe2e5c945cd",
+  "cohort": [
+    "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+    "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu"
+  ],
+  "source_memories": {
+    "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ": {
+      "memory_sha256": "bd571d82a52a281a7d514a33d7a4323356d067b6d1d1e8d2efc5ef54bb38bac7",
+      "memory_file_sha256": "c560ab857b5cfaa4b6c97906803f5a63f75f685f3851c38368d19d8ad9fa9031",
+      "checkpoint_sha256": "c6691896427df3c84434c819c1f3523939f8201154c3aeb5271292bd213bd38a",
+      "last_slot": 5964092,
+      "observations": 82,
+      "positive_rewards": 35,
+      "negative_rewards": 41
+    },
+    "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu": {
+      "memory_sha256": "d51108311964a41133941d0fede8c6f00f38bfd70b1c676e0245a5c056a44eff",
+      "memory_file_sha256": "6f7f6d4c3cb7e73cf0be44bc3f61a401c22039f2b8677f70e11502a645fc5040",
+      "checkpoint_sha256": "575cd3ad2e121dc056bcbce92b5b793fad705421c373888197c2dee8715e13ee",
+      "last_slot": 5964092,
+      "observations": 72,
+      "positive_rewards": 29,
+      "negative_rewards": 30
+    }
+  },
+  "arms": {
+    "pristine_frozen": {
+      "memory": "pristine",
+      "activity_reset": "carry",
+      "eta": 0.001,
+      "learning": false
+    },
+    "trained_frozen": {
+      "memory": "paper_trained",
+      "activity_reset": "carry",
+      "eta": 0.001,
+      "learning": false
+    },
+    "trained_online_carry": {
+      "memory": "paper_trained",
+      "activity_reset": "carry",
+      "eta": 0.001,
+      "learning": true
+    },
+    "trained_online_reset_rates": {
+      "memory": "paper_trained",
+      "activity_reset": "reset_rates",
+      "eta": 0.001,
+      "learning": true
+    }
+  },
+  "costs": {
+    "capital": 250.0,
+    "fee_bps": 125,
+    "slippage_bps": 100,
+    "max_exposure": 0.5,
+    "max_order": 25,
+    "max_spread_bps": 150,
+    "max_delay": 420,
+    "loss_stop": 0.2
+  },
+  "news_protocol": "Use the unchanged market-frame adapter and 50-dimensional news features reconstructed at each selected quote timestamp. Include only revisions whose published, seen and encoded clocks are no later than that timestamp. Seal the feature vectors and news snapshot hash before model evaluation. All four arms receive identical images; never fetch headlines during simulation.",
+  "inference_protocol": "Import the same pinned plastic weights/u/w for every paper_trained arm; pristine uses native initial memory. Start each pool, arm and phase with fresh dynamics and the declared memory, a fresh $250 account, and no pending order. Do not carry development memory or accounts into test. Frozen arms receive no reinforcement or learning. Online arms use their own equity change after execution of the preceding decision as feedback, zero across unpriced gaps; map changes above $0.01 to reward, below -$0.01 to aversive, otherwise none. Keep learning enabled even without a pulse. Use the unchanged 500 ms observation and 200 ms dopamine pulse at current 20. The reset_rates arm clears only rate_kc and rate_dan immediately before each eligible observation after the first. Carry all other dynamic state, weights/u/w and the neural clock across that boundary. Missing or repeated quotes do not advance or reset the brain. Keep the full graph, original image adapter, eta 0.001 and fixed decoder unchanged.",
+  "selection_rule": "The sole candidate is trained_online_reset_rates. Require at least 18 of 24 eligible observations per pool in development and identical coverage across arms. Select the candidate only if its aggregate development equity strictly exceeds all three controls and $1000 plus $40/month hosting prorated to two hours on a 30-day month, by more than 1e-9. Persist selection after all eight development chunks and before any test chunk. Evaluate every test arm regardless of selection. Report test coverage and costs; never reselect or automatically deploy a policy.",
+  "hypothesis": "Determine whether fixed tonic current to the two identified MBON11 recipients exposes a useful effect of retained paper-trained memory on future cost-aware decisions, relative to pristine and unstimulated controls.",
+  "limitations": "Two fixed pools and short future phases. Checkpoints have observed engineered paper P&L feedback; this does not establish successful reward learning. Simulated indicative DEX execution, no monthly return estimate. Neural activity and account state are not carried into evaluation. Preserve missing and ineligible observations and the original cohort.",
+  "rationale": "The audited trace-reset assay reproduced three carry controls and all first observations. Clearing only KC/DAN rate traces changed subsequent online updates and one recorded action, while frozen counts stayed identical. Test that single intervention over fresh two-hour development and two-hour test intervals; no claim of improved returns follows from the earlier three-image mechanism assay.",
+  "mechanism_report_sha256": "8e4c25bf19e24b390be738735cb089dd5dea01ca3f1d52022ec26cc03f1efd44",
+  "mechanism_audit_sha256": "1cf91421490195a817aa91dcfa8afc0039e1185a03de23a9d687ed3d6176f5ae",
+  "execution_protocol": "Witness this registration and pin execution sources in the cloud before development starts. Seal the full four-hour price/news window before evaluation. Run at most one complete pool/arm/phase per scheduled worker call after committing its normal paper cycle, within the existing 600-second reservation and unchanged worker $25 / collector $15 monthly caps. Run eight development chunks before eight test chunks; persist development selection before any test chunk. Claim each chunk durably with its owning Modal call/input before compute. Never retry or skip failed/uncertain chunks. Refuse source or registration drift until completion. Require independent raw-input and full-bin audits before publishing results; no automatic policy promotion."
+}

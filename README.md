@@ -179,8 +179,9 @@ The [longer online comparison runner](docs/fly-online-comparison.md) now records
 24 decision slots per condition, with full native-bin audits, independent paper
 feedback, and preserved missing-data gaps. A synthetic full-graph check verified
 21 observations across 1,050 bins; the viewer supports the resulting larger
-recordings. The fresh four-hour cloud experiment is not registered yet. This is
-implementation validation, not evidence that the intervention earns money.
+recordings. The [registered four-hour follow-up](reports/fly-market-study-11-preregistration.json)
+uses separate development and test windows; see the guide for cloud arming and
+execution status. Synthetic validation is not evidence that the intervention earns money.
 
 The [decoder count view](docs/fly-debugger.md#inspect-accumulated-decoder-counts)
 shows how output spikes accumulate. In the examined BUY/SELL reversal, one net
