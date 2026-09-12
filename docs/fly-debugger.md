@@ -3515,3 +3515,100 @@ real retained examples plus explicit reordered, missing-memory, conflicting-edge
 unmatched-timestamp and mismatched-bin fixtures. It also checks signed deltas,
 cursor links, playback pause, comparison clearing and mobile overflow. No model
 job or paper-policy change is submitted by these checks.
+
+## Why a quiet source connection can still update
+
+![DAN contributions to the first different learning updates](assets/fly-first-drive-01.png)
+
+The [first-update reconstruction](../reports/fly-first-drive-01.json) examines
+the first differing weight-update bin in the two online carry/reset pairs.
+It rechecks the original full-array divergence audit, raw trace and boundary
+hashes, circuit gains, and unchanged learning-rule source. Both pairs have
+identical whole-neuron count histories through the selected bin and identical
+starting weights and `u/w` immediately before it. Reapplying the original rule
+reproduces every one of the 7,835 recorded float32 weights exactly, along with
+the saved rate traces and `u/w` values.
+
+For the recorded-pulse pair, the first weight difference occurs in **0–10 ms of
+image 2**, during its aversive pulse. The source neurons on all five first-changing
+connections have **zero spikes in that bin**. However, they retain activity
+traces from the previous image. Two model DAN cells, **11327 and 11900**, each
+spike once. Their current activity combines with the old KC trace in the rule's
+negative term.
+
+For connection **4110156**, `18540 → 11402`:
+
+| Recorded quantity in that bin | Carry | Reset both rate histories |
+|---|---:|---:|
+| Source KC spikes | 0 | 0 |
+| Mid-bin KC activity trace | 5.264479 Hz | 0 Hz |
+| DAN 11327 contribution to drive | −0.295583 u/s | 0 |
+| DAN 11900 contribution to drive | −0.230865 u/s | 0 |
+| Total learning drive | −0.526448 u/s | 0 |
+| Weight before the bin | 22.250257 | 22.250257 |
+| Weight after the bin | 22.236349 | 22.247196 |
+
+The positive term, current KC activity times DAN history, is zero because the
+KC does not fire in this bin. The negative term, current DAN activity times KC
+history, accounts for the entire drive. The reset's weight still moves slightly
+despite zero drive because its existing `u/w` memory continues to evolve.
+This is why the viewer separately marks source spikes and weight changes.
+
+Without an injected pulse, the same kind of first change appears at **30–40 ms
+of image 2**. Cell 11327 fires once; 11900 does not fire in that bin. For the same
+connection the carry drive is **−0.286847 u/s**, versus zero in the reset case.
+No injected pulse does not imply that model DAN cells are inactive.
+
+### Separate KC and DAN history in the one-bin calculation
+
+The reconstruction then holds the recorded firing and common starting memory
+fixed, substitutes the carry/reset histories independently, and applies one
+10 ms memory-rule update. In both examined bins:
+
+| Histories used in the calculation | All 7,835 resulting weights match |
+|---|---|
+| Carry KC + carry DAN | Recorded carry |
+| Reset KC + carry DAN | Recorded both-histories reset |
+| Carry KC + reset DAN | Recorded carry |
+| Reset KC + reset DAN | Recorded both-histories reset |
+
+This isolates KC-history removal as sufficient for the **immediate first weight
+change** in these two recorded cases. It is not a KC-only boundary intervention
+propagated through the full network. In particular, the no-pulse calculation
+uses each recorded history at the start of bin 4, not a fabricated all-zero
+state. Later spike timing, actions, reward feedback and trading outcomes could
+differ under either one-history intervention. A future neural experiment would
+have to measure those effects.
+
+Old KC activity can also be relevant to delayed reinforcement from an earlier
+paper decision. Removing its contribution is therefore not proof of repairing
+incorrect learning. The registered comparison still tests the original
+both-traces reset against its existing controls, with no execution changes.
+
+In the included viewer, inspect the
+[quiet KC source and changing weight](http://127.0.0.1:8765/?run=creditdivergence01-trained_online_recorded_carry&step=1&bin=0&neuron=18540&edge=4110156&compare=creditdivergence01-trained_online_recorded_reset_rates),
+then select [DAN 11327 at the same time](http://127.0.0.1:8765/?run=creditdivergence01-trained_online_recorded_carry&step=1&bin=0&neuron=11327&edge=4110156&compare=creditdivergence01-trained_online_recorded_reset_rates).
+The neuron and edge remain independently selected; the display does not label
+4110156 as an anatomical DAN-to-KC connection.
+
+With retained raw recordings, reproduce the report and figures in a new folder:
+
+```sh
+uv run --extra plots python -m paperlab.fly_first_drive \
+  --audit runs/credit-reset-01/cloud/audit.json \
+  --artifacts runs/credit-reset-01/cloud/artifacts \
+  --out runs/first-drive-new
+FLY_CREDIT_RESET_RECORDINGS="$PWD/runs/credit-reset-01/cloud" \
+  uv run --extra dev python -m pytest -q tests/test_fly_first_drive.py
+# With the included viewer on 8765 and Playwright installed:
+FLY_VIEW_URL=http://127.0.0.1:8765 node scripts/check-fly-first-drive-view.cjs
+```
+
+The [validation record](../reports/fly-first-drive-validation-01.json) records
+eight passing tests, including the retained native arrays. Without the private
+recordings, that retained-data test explicitly skips; the seven algebra and
+input-validation tests still run. This analysis submits no model job and does
+not alter the original recordings or cloud study.
+The browser check verifies the quiet KC source, independently changing weight,
+both DAN spikes, displayed drive and weight steps, and the linked selections
+in both recorded conditions, with model submissions blocked.

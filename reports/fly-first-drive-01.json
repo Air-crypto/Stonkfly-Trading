@@ -1,0 +1,769 @@
+{
+  "status": "first_learning_drive_reconstructed",
+  "audit_sha256": "1cf91421490195a817aa91dcfa8afc0039e1185a03de23a9d687ed3d6176f5ae",
+  "source_sha256": "26c2a84e588584524ccd03a6abd5b773d61fea4fa5be1fea2500cdf79e9d8016",
+  "rule_sha256": "3c80680450c3b73042e332bd7ce8289d7d74d8695c60e7ac19eefd9759d95c44",
+  "rule_parameters": {
+    "trace_kc_seconds": 1.0,
+    "trace_dan_seconds": 1.0,
+    "memory_decay_seconds": 1800.0,
+    "weight_filter_seconds": 0.05,
+    "minimum_fraction": 0.1,
+    "maximum_fraction": 2.0,
+    "maximum_rate_bin_ms": 10.0,
+    "source": "https://doi.org/10.1038/s41586-024-07819-w",
+    "interpretation": "Centered rate-rule adaptation on existing individual edges, not an exact reproduction of the published nine-unit model. Equal trace constants, efficacy bounds, gain and 50 ms weight filter require calibration."
+  },
+  "pairs": [
+    {
+      "control": "trained_online_recorded_carry",
+      "reset": "trained_online_recorded_reset_rates",
+      "observation": 2,
+      "bin": 0,
+      "end_ms_in_observation": 10.0,
+      "current_counts_identical_through_this_bin": true,
+      "starting_connection_memory_identical": true,
+      "recorded_control_errors": {
+        "carry": {
+          "kc": 0.0,
+          "dan": 0.0,
+          "u": 0.0,
+          "w": 0.0
+        },
+        "reset_both_histories": {
+          "kc": 0.0,
+          "dan": 0.0,
+          "u": 0.0,
+          "w": 0.0
+        }
+      },
+      "entries": [
+        {
+          "edge": 4110156,
+          "source": "18540",
+          "target": "11402",
+          "carry": {
+            "source_spikes": 0,
+            "kc_mid_trace_hz": 5.264478727569794,
+            "earlier_image_kc_mid_trace_hz": 5.264478727569794,
+            "drive_u_per_second": -0.5264478727569795,
+            "drivers": [
+              {
+                "id": "11327",
+                "type": "PPL101",
+                "gain": 0.5614665746688843,
+                "spikes": 1,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.2955828838585819,
+                "total_by_dan": -0.2955828838585819
+              },
+              {
+                "id": "11900",
+                "type": "PPL101",
+                "gain": 0.4385334253311157,
+                "spikes": 1,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.23086498889839754,
+                "total_by_dan": -0.23086498889839754
+              }
+            ],
+            "weight_before": 22.25025749206543,
+            "weight_after": 22.23634910583496
+          },
+          "reset": {
+            "source_spikes": 0,
+            "kc_mid_trace_hz": 0.0,
+            "earlier_image_kc_mid_trace_hz": 0.0,
+            "drive_u_per_second": 0.0,
+            "drivers": [
+              {
+                "id": "11327",
+                "type": "PPL101",
+                "gain": 0.5614665746688843,
+                "spikes": 1,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.0,
+                "total_by_dan": 0.0
+              },
+              {
+                "id": "11900",
+                "type": "PPL101",
+                "gain": 0.4385334253311157,
+                "spikes": 1,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.0,
+                "total_by_dan": 0.0
+              }
+            ],
+            "weight_before": 22.25025749206543,
+            "weight_after": 22.247196197509766
+          }
+        },
+        {
+          "edge": 4110853,
+          "source": "18540",
+          "target": "10704",
+          "carry": {
+            "source_spikes": 0,
+            "kc_mid_trace_hz": 5.264478727569794,
+            "earlier_image_kc_mid_trace_hz": 5.264478727569794,
+            "drive_u_per_second": -0.5264478727569795,
+            "drivers": [
+              {
+                "id": "11327",
+                "type": "PPL101",
+                "gain": 0.4826086759567261,
+                "spikes": 1,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.25406831083148085,
+                "total_by_dan": -0.25406831083148085
+              },
+              {
+                "id": "11900",
+                "type": "PPL101",
+                "gain": 0.5173913240432739,
+                "spikes": 1,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.2723795619254986,
+                "total_by_dan": -0.2723795619254986
+              }
+            ],
+            "weight_before": 0.2784050703048706,
+            "weight_after": 0.2782144248485565
+          },
+          "reset": {
+            "source_spikes": 0,
+            "kc_mid_trace_hz": 0.0,
+            "earlier_image_kc_mid_trace_hz": 0.0,
+            "drive_u_per_second": 0.0,
+            "drivers": [
+              {
+                "id": "11327",
+                "type": "PPL101",
+                "gain": 0.4826086759567261,
+                "spikes": 1,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.0,
+                "total_by_dan": 0.0
+              },
+              {
+                "id": "11900",
+                "type": "PPL101",
+                "gain": 0.5173913240432739,
+                "spikes": 1,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.0,
+                "total_by_dan": 0.0
+              }
+            ],
+            "weight_before": 0.2784050703048706,
+            "weight_after": 0.27835002541542053
+          }
+        },
+        {
+          "edge": 4931279,
+          "source": "21778",
+          "target": "10704",
+          "carry": {
+            "source_spikes": 0,
+            "kc_mid_trace_hz": 5.378889434124784,
+            "earlier_image_kc_mid_trace_hz": 5.378889434124784,
+            "drive_u_per_second": -0.5378889434124785,
+            "drivers": [
+              {
+                "id": "11327",
+                "type": "PPL101",
+                "gain": 0.4826086759567261,
+                "spikes": 1,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.2595898707920586,
+                "total_by_dan": -0.2595898707920586
+              },
+              {
+                "id": "11900",
+                "type": "PPL101",
+                "gain": 0.5173913240432739,
+                "spikes": 1,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.27829907262041986,
+                "total_by_dan": -0.27829907262041986
+              }
+            ],
+            "weight_before": 16.021785736083984,
+            "weight_after": 16.015119552612305
+          },
+          "reset": {
+            "source_spikes": 0,
+            "kc_mid_trace_hz": 0.0,
+            "earlier_image_kc_mid_trace_hz": 0.0,
+            "drive_u_per_second": 0.0,
+            "drivers": [
+              {
+                "id": "11327",
+                "type": "PPL101",
+                "gain": 0.4826086759567261,
+                "spikes": 1,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.0,
+                "total_by_dan": 0.0
+              },
+              {
+                "id": "11900",
+                "type": "PPL101",
+                "gain": 0.5173913240432739,
+                "spikes": 1,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.0,
+                "total_by_dan": 0.0
+              }
+            ],
+            "weight_before": 16.021785736083984,
+            "weight_after": 16.02301597595215
+          }
+        },
+        {
+          "edge": 8863131,
+          "source": "44069",
+          "target": "10704",
+          "carry": {
+            "source_spikes": 0,
+            "kc_mid_trace_hz": 0.8187341644603805,
+            "earlier_image_kc_mid_trace_hz": 0.8187341644603805,
+            "drive_u_per_second": -0.08187341644603806,
+            "drivers": [
+              {
+                "id": "11327",
+                "type": "PPL101",
+                "gain": 0.4826086759567261,
+                "spikes": 1,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.03951282110707607,
+                "total_by_dan": -0.03951282110707607
+              },
+              {
+                "id": "11900",
+                "type": "PPL101",
+                "gain": 0.5173913240432739,
+                "spikes": 1,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.04236059533896199,
+                "total_by_dan": -0.04236059533896199
+              }
+            ],
+            "weight_before": 8.372844696044922,
+            "weight_after": 8.371625900268555
+          },
+          "reset": {
+            "source_spikes": 0,
+            "kc_mid_trace_hz": 0.0,
+            "earlier_image_kc_mid_trace_hz": 0.0,
+            "drive_u_per_second": 0.0,
+            "drivers": [
+              {
+                "id": "11327",
+                "type": "PPL101",
+                "gain": 0.4826086759567261,
+                "spikes": 1,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.0,
+                "total_by_dan": 0.0
+              },
+              {
+                "id": "11900",
+                "type": "PPL101",
+                "gain": 0.5173913240432739,
+                "spikes": 1,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.0,
+                "total_by_dan": 0.0
+              }
+            ],
+            "weight_before": 8.372844696044922,
+            "weight_after": 8.372279167175293
+          }
+        },
+        {
+          "edge": 20309425,
+          "source": "520206",
+          "target": "11402",
+          "carry": {
+            "source_spikes": 0,
+            "kc_mid_trace_hz": 0.7945369130641461,
+            "earlier_image_kc_mid_trace_hz": 0.7945369130641461,
+            "drive_u_per_second": -0.07945369130641461,
+            "drivers": [
+              {
+                "id": "11327",
+                "type": "PPL101",
+                "gain": 0.5614665746688843,
+                "spikes": 1,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.044610591902611525,
+                "total_by_dan": -0.044610591902611525
+              },
+              {
+                "id": "11900",
+                "type": "PPL101",
+                "gain": 0.4385334253311157,
+                "spikes": 1,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.03484309940380309,
+                "total_by_dan": -0.03484309940380309
+              }
+            ],
+            "weight_before": 10.949749946594238,
+            "weight_after": 10.948272705078125
+          },
+          "reset": {
+            "source_spikes": 0,
+            "kc_mid_trace_hz": 0.0,
+            "earlier_image_kc_mid_trace_hz": 0.0,
+            "drive_u_per_second": 0.0,
+            "drivers": [
+              {
+                "id": "11327",
+                "type": "PPL101",
+                "gain": 0.5614665746688843,
+                "spikes": 1,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.0,
+                "total_by_dan": 0.0
+              },
+              {
+                "id": "11900",
+                "type": "PPL101",
+                "gain": 0.4385334253311157,
+                "spikes": 1,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.0,
+                "total_by_dan": 0.0
+              }
+            ],
+            "weight_before": 10.949749946594238,
+            "weight_after": 10.949090957641602
+          }
+        }
+      ],
+      "substitutions": [
+        {
+          "name": "carry",
+          "weights_equal_recorded_carry": true,
+          "weights_equal_recorded_reset": false,
+          "weight_count": 7835,
+          "different_weights_from_carry": 0
+        },
+        {
+          "name": "reset_kc_history_only",
+          "weights_equal_recorded_carry": false,
+          "weights_equal_recorded_reset": true,
+          "weight_count": 7835,
+          "different_weights_from_carry": 5
+        },
+        {
+          "name": "reset_dan_history_only",
+          "weights_equal_recorded_carry": true,
+          "weights_equal_recorded_reset": false,
+          "weight_count": 7835,
+          "different_weights_from_carry": 0
+        },
+        {
+          "name": "reset_both_histories",
+          "weights_equal_recorded_carry": false,
+          "weights_equal_recorded_reset": true,
+          "weight_count": 7835,
+          "different_weights_from_carry": 5
+        }
+      ]
+    },
+    {
+      "control": "trained_online_none_carry",
+      "reset": "trained_online_none_reset_rates",
+      "observation": 2,
+      "bin": 3,
+      "end_ms_in_observation": 40.0,
+      "current_counts_identical_through_this_bin": true,
+      "starting_connection_memory_identical": true,
+      "recorded_control_errors": {
+        "carry": {
+          "kc": 0.0,
+          "dan": 0.0,
+          "u": 0.0,
+          "w": 0.0
+        },
+        "reset_both_histories": {
+          "kc": 0.0,
+          "dan": 0.0,
+          "u": 0.0,
+          "w": 0.0
+        }
+      },
+      "entries": [
+        {
+          "edge": 4110156,
+          "source": "18540",
+          "target": "11402",
+          "carry": {
+            "source_spikes": 0,
+            "kc_mid_trace_hz": 5.108889867631241,
+            "earlier_image_kc_mid_trace_hz": 5.10888986763124,
+            "drive_u_per_second": -0.28684708943394827,
+            "drivers": [
+              {
+                "id": "11327",
+                "type": "PPL101",
+                "gain": 0.5614665746688843,
+                "spikes": 1,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.28684708943394827,
+                "total_by_dan": -0.28684708943394827
+              },
+              {
+                "id": "11900",
+                "type": "PPL101",
+                "gain": 0.4385334253311157,
+                "spikes": 0,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.0,
+                "total_by_dan": 0.0
+              }
+            ],
+            "weight_before": 22.24263572692871,
+            "weight_after": 22.235044479370117
+          },
+          "reset": {
+            "source_spikes": 0,
+            "kc_mid_trace_hz": 0.0,
+            "earlier_image_kc_mid_trace_hz": 0.0,
+            "drive_u_per_second": 0.0,
+            "drivers": [
+              {
+                "id": "11327",
+                "type": "PPL101",
+                "gain": 0.5614665746688843,
+                "spikes": 1,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.0,
+                "total_by_dan": 0.0
+              },
+              {
+                "id": "11900",
+                "type": "PPL101",
+                "gain": 0.4385334253311157,
+                "spikes": 0,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.0,
+                "total_by_dan": 0.0
+              }
+            ],
+            "weight_before": 22.24263572692871,
+            "weight_after": 22.240955352783203
+          }
+        },
+        {
+          "edge": 4110853,
+          "source": "18540",
+          "target": "10704",
+          "carry": {
+            "source_spikes": 0,
+            "kc_mid_trace_hz": 5.108889867631241,
+            "earlier_image_kc_mid_trace_hz": 5.10888986763124,
+            "drive_u_per_second": -0.24655945746262467,
+            "drivers": [
+              {
+                "id": "11327",
+                "type": "PPL101",
+                "gain": 0.4826086759567261,
+                "spikes": 1,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.24655945746262467,
+                "total_by_dan": -0.24655945746262467
+              },
+              {
+                "id": "11900",
+                "type": "PPL101",
+                "gain": 0.5173913240432739,
+                "spikes": 0,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.0,
+                "total_by_dan": 0.0
+              }
+            ],
+            "weight_before": 0.278268039226532,
+            "weight_after": 0.27817434072494507
+          },
+          "reset": {
+            "source_spikes": 0,
+            "kc_mid_trace_hz": 0.0,
+            "earlier_image_kc_mid_trace_hz": 0.0,
+            "drive_u_per_second": 0.0,
+            "drivers": [
+              {
+                "id": "11327",
+                "type": "PPL101",
+                "gain": 0.4826086759567261,
+                "spikes": 1,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.0,
+                "total_by_dan": 0.0
+              },
+              {
+                "id": "11900",
+                "type": "PPL101",
+                "gain": 0.5173913240432739,
+                "spikes": 0,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.0,
+                "total_by_dan": 0.0
+              }
+            ],
+            "weight_before": 0.278268039226532,
+            "weight_after": 0.27823784947395325
+          }
+        },
+        {
+          "edge": 4931279,
+          "source": "21778",
+          "target": "10704",
+          "carry": {
+            "source_spikes": 0,
+            "kc_mid_trace_hz": 5.219919226797661,
+            "earlier_image_kc_mid_trace_hz": 5.21991922679766,
+            "drive_u_per_second": -0.2519178306645876,
+            "drivers": [
+              {
+                "id": "11327",
+                "type": "PPL101",
+                "gain": 0.4826086759567261,
+                "spikes": 1,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.2519178306645876,
+                "total_by_dan": -0.2519178306645876
+              },
+              {
+                "id": "11900",
+                "type": "PPL101",
+                "gain": 0.5173913240432739,
+                "spikes": 0,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.0,
+                "total_by_dan": 0.0
+              }
+            ],
+            "weight_before": 16.02484893798828,
+            "weight_after": 16.021825790405273
+          },
+          "reset": {
+            "source_spikes": 0,
+            "kc_mid_trace_hz": 0.0,
+            "earlier_image_kc_mid_trace_hz": 0.0,
+            "drive_u_per_second": 0.0,
+            "drivers": [
+              {
+                "id": "11327",
+                "type": "PPL101",
+                "gain": 0.4826086759567261,
+                "spikes": 1,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.0,
+                "total_by_dan": 0.0
+              },
+              {
+                "id": "11900",
+                "type": "PPL101",
+                "gain": 0.5173913240432739,
+                "spikes": 0,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.0,
+                "total_by_dan": 0.0
+              }
+            ],
+            "weight_before": 16.02484893798828,
+            "weight_after": 16.025524139404297
+          }
+        },
+        {
+          "edge": 8863131,
+          "source": "44069",
+          "target": "10704",
+          "carry": {
+            "source_spikes": 0,
+            "kc_mid_trace_hz": 0.7945369130641461,
+            "earlier_image_kc_mid_trace_hz": 0.794536913064146,
+            "drive_u_per_second": -0.03834504076126319,
+            "drivers": [
+              {
+                "id": "11327",
+                "type": "PPL101",
+                "gain": 0.4826086759567261,
+                "spikes": 1,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.03834504076126319,
+                "total_by_dan": -0.03834504076126319
+              },
+              {
+                "id": "11900",
+                "type": "PPL101",
+                "gain": 0.5173913240432739,
+                "spikes": 0,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.0,
+                "total_by_dan": 0.0
+              }
+            ],
+            "weight_before": 8.371438980102539,
+            "weight_after": 8.37082290649414
+          },
+          "reset": {
+            "source_spikes": 0,
+            "kc_mid_trace_hz": 0.0,
+            "earlier_image_kc_mid_trace_hz": 0.0,
+            "drive_u_per_second": 0.0,
+            "drivers": [
+              {
+                "id": "11327",
+                "type": "PPL101",
+                "gain": 0.4826086759567261,
+                "spikes": 1,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.0,
+                "total_by_dan": 0.0
+              },
+              {
+                "id": "11900",
+                "type": "PPL101",
+                "gain": 0.5173913240432739,
+                "spikes": 0,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.0,
+                "total_by_dan": 0.0
+              }
+            ],
+            "weight_before": 8.371438980102539,
+            "weight_after": 8.371129035949707
+          }
+        },
+        {
+          "edge": 20309425,
+          "source": "520206",
+          "target": "11402",
+          "carry": {
+            "source_spikes": 0,
+            "kc_mid_trace_hz": 0.77105479852252,
+            "earlier_image_kc_mid_trace_hz": 0.7710547985225199,
+            "drive_u_per_second": -0.0432921496608446,
+            "drivers": [
+              {
+                "id": "11327",
+                "type": "PPL101",
+                "gain": 0.5614665746688843,
+                "spikes": 1,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.0432921496608446,
+                "total_by_dan": -0.0432921496608446
+              },
+              {
+                "id": "11900",
+                "type": "PPL101",
+                "gain": 0.4385334253311157,
+                "spikes": 0,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.0,
+                "total_by_dan": 0.0
+              }
+            ],
+            "weight_before": 10.948110580444336,
+            "weight_after": 10.94730281829834
+          },
+          "reset": {
+            "source_spikes": 0,
+            "kc_mid_trace_hz": 0.0,
+            "earlier_image_kc_mid_trace_hz": 0.0,
+            "drive_u_per_second": 0.0,
+            "drivers": [
+              {
+                "id": "11327",
+                "type": "PPL101",
+                "gain": 0.5614665746688843,
+                "spikes": 1,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.0,
+                "total_by_dan": 0.0
+              },
+              {
+                "id": "11900",
+                "type": "PPL101",
+                "gain": 0.4385334253311157,
+                "spikes": 0,
+                "current_kc_times_dan_trace": 0.0,
+                "current_dan_times_kc_trace": -0.0,
+                "total_by_dan": 0.0
+              }
+            ],
+            "weight_before": 10.948110580444336,
+            "weight_after": 10.947749137878418
+          }
+        }
+      ],
+      "substitutions": [
+        {
+          "name": "carry",
+          "weights_equal_recorded_carry": true,
+          "weights_equal_recorded_reset": false,
+          "weight_count": 7835,
+          "different_weights_from_carry": 0
+        },
+        {
+          "name": "reset_kc_history_only",
+          "weights_equal_recorded_carry": false,
+          "weights_equal_recorded_reset": true,
+          "weight_count": 7835,
+          "different_weights_from_carry": 5
+        },
+        {
+          "name": "reset_dan_history_only",
+          "weights_equal_recorded_carry": true,
+          "weights_equal_recorded_reset": false,
+          "weight_count": 7835,
+          "different_weights_from_carry": 0
+        },
+        {
+          "name": "reset_both_histories",
+          "weights_equal_recorded_carry": false,
+          "weights_equal_recorded_reset": true,
+          "weight_count": 7835,
+          "different_weights_from_carry": 5
+        }
+      ]
+    }
+  ],
+  "artifact_sha256": {
+    "circuit.npz": "98eeaf3114569b92a9be766fba69ddc61acb2cd29b58e87d00fec2c4dd91b5e7",
+    "trained_online_recorded_carry/step-02.npz": "a842cb108a464c43d039a04287f9e3cd7c585fb5c1a52aefeeaa33635962b093",
+    "trained_online_recorded_carry/boundary-02.npz": "0a2198e18437861c1afd472f1cb577c457e284da2e7aecf6ba4fbb49b53704b5",
+    "trained_online_recorded_carry/step-01.npz": "7a0ca6001e718f14ce49ab3897d9569a4d315e0a0369fb7145662797e7b44dbc",
+    "trained_online_recorded_carry/view.json": "36857c31389e325942dc518f9120d0a728263f0cdf6d41a2f2d73967280c13d7",
+    "trained_online_recorded_reset_rates/step-02.npz": "614e309281c7b2e2228766d7e3c1ff1c30396fa58ebc4efaf2851983422170f0",
+    "trained_online_recorded_reset_rates/boundary-02.npz": "0bab53fe82a57113918cb665aefe615bbea505aa06fc1e304b8a3a02cafad9aa",
+    "trained_online_recorded_reset_rates/step-01.npz": "7a0ca6001e718f14ce49ab3897d9569a4d315e0a0369fb7145662797e7b44dbc",
+    "trained_online_recorded_reset_rates/view.json": "b2a08a266fb9010ab44ec92137adf2cbacc67cadf4fda9f63465328cdecd6e3e",
+    "trained_online_none_carry/step-02.npz": "1207a806457679ee4be6bf6b3dfaea8c450196181a887fbfa9caf493f292d11c",
+    "trained_online_none_carry/boundary-02.npz": "0a2198e18437861c1afd472f1cb577c457e284da2e7aecf6ba4fbb49b53704b5",
+    "trained_online_none_carry/view.json": "1a04c8d60d1eb82c5a01215e3c6ab4e8ef840b03634d36db8dda41a6ed91e5cd",
+    "trained_online_none_reset_rates/step-02.npz": "a3df42f795e07bb1adc0239bd8fca9a1e7e4ec5afd4afa3f447358242ee66bd9",
+    "trained_online_none_reset_rates/boundary-02.npz": "0bab53fe82a57113918cb665aefe615bbea505aa06fc1e304b8a3a02cafad9aa",
+    "trained_online_none_reset_rates/view.json": "c5149e148f8586d649034826eddf1d82d056ff00539e0ae90689260a088d6ec7"
+  },
+  "full_divergence_verification": {
+    "all_18_trace_hashes_match": true,
+    "all_six_view_hashes_match": true,
+    "all_fixed_decoders_reconstructed": true,
+    "published_comparisons_reproduced": true,
+    "frozen_memory_counts_and_sampled_voltages_identical": true
+  },
+  "neural_observations": 0,
+  "interpretation": "Algebraic substitutions of recorded rate histories at the first differing memory-update bin. All recorded spikes and the common starting connection memory are held fixed. These are not KC-only or DAN-only full-network replays and make no claim about their later spikes, actions, or returns. Prior activity traces may be part of delayed reinforcement; removing a drive is not proof of correcting an error.",
+  "figure_sha256": {
+    ".png": "6da2fab46dc470121e400ccca92a9c10bbe178b18b2e251e2cd7e720be477f39",
+    ".svg": "205c54f257ed4988378d9889d75fd2b6a2b18d5fad572420db147bf859e9faec"
+  }
+}

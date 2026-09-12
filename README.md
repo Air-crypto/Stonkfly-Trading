@@ -187,6 +187,14 @@ selected neuron and connection, with signed differences at the current cursor.
 
 ![Recorded weight, voltage, spike-count and gate divergence](docs/assets/fly-credit-divergence-01.png)
 
+The [first-update reconstruction](docs/fly-debugger.md#why-a-quiet-source-connection-can-still-update)
+identifies carried KC activity as the immediate term behind those first weight
+differences. A connection can update while its source is silent: current DAN
+spikes combine with earlier KC activity. One-bin substitutions isolate this
+effect; they do not establish the outcome of a full alternative training run.
+
+![Recorded contributors to the earliest connection updates](docs/assets/fly-first-drive-01.png)
+
 The [longer online comparison runner](docs/fly-online-comparison.md) now records
 24 decision slots per condition, with full native-bin audits, independent paper
 feedback, and preserved missing-data gaps. A synthetic full-graph check verified

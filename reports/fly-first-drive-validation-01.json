@@ -1,0 +1,52 @@
+{
+  "status": "first_learning_drive_verified",
+  "observed_at": "2026-09-12T21:26:52.165471+00:00",
+  "audit_sha256": "1cf91421490195a817aa91dcfa8afc0039e1185a03de23a9d687ed3d6176f5ae",
+  "tests": {
+    "passed": 8,
+    "retained_data_tests": 1,
+    "without_retained_data": "Seven tests run; one explicitly skips."
+  },
+  "verification": {
+    "original_full_divergence_audit_reproduced": true,
+    "current_full_neuron_counts_identical_through_each_selected_bin": true,
+    "starting_weights_u_w_identical": true,
+    "per_dan_terms_match_matrix_rule": true,
+    "recorded_control_weights_exact": true,
+    "recorded_control_rate_and_memory_maximum_error": 0.0,
+    "one_bin_cases": 8,
+    "weights_checked_per_case": 7835,
+    "kc_history_substitution_matches_reset_in_both_bins": true,
+    "dan_history_substitution_matches_carry_in_both_bins": true,
+    "figure_visually_inspected": true
+  },
+  "browser": {
+    "script": "scripts/check-fly-first-drive-view.cjs",
+    "recordings": 2,
+    "quiet_source": "18540",
+    "updating_edge": "4110156",
+    "active_dan_ids": [
+      "11327",
+      "11900"
+    ],
+    "verified": [
+      "source has zero spikes and no source-activity dash",
+      "weight changed from image-start value",
+      "carry and reset drive and weight-step labels",
+      "both DAN cells show one spike",
+      "independent neuron/edge moment links"
+    ],
+    "page_errors": [],
+    "model_submission_requests": 0
+  },
+  "artifact_sha256": {
+    "paperlab/fly_first_drive.py": "26c2a84e588584524ccd03a6abd5b773d61fea4fa5be1fea2500cdf79e9d8016",
+    "tests/test_fly_first_drive.py": "ae592afeb269ce9244bbd432e7e3e5e6b8810312f42233295741e4e1c1e673de",
+    "scripts/check-fly-first-drive-view.cjs": "35d9bd8a6078d6283c0fa660c9ca078be2c961c378929116155c4eef265aa66c",
+    "reports/fly-first-drive-01.json": "27eca87085d08664ac7290d4b1da151a286a79b7551c21cbbf355807e4ae5001",
+    "docs/assets/fly-first-drive-01.png": "6da2fab46dc470121e400ccca92a9c10bbe178b18b2e251e2cd7e720be477f39",
+    "docs/assets/fly-first-drive-01.svg": "205c54f257ed4988378d9889d75fd2b6a2b18d5fad572420db147bf859e9faec"
+  },
+  "execution_sources_match_cloud_arming": true,
+  "interpretation": "The isolated rate-history substitutions compute one memory-rule bin using fixed recorded spikes and common starting memory. They do not rerun neural propagation, establish a full KC-only or DAN-only reset policy, change the registered cloud experiment, or demonstrate profitable learning."
+}
