@@ -86,3 +86,22 @@ def test_native_zero_current_is_transparent_and_current_reaches_targets(tmp_path
     assert matches(events[0],events[1]) and np.array_equal(counts[0],counts[1])
     assert not np.array_equal(counts[1],counts[2])
     assert np.any(counts[2][indices]>counts[1][indices])
+
+
+@pytest.mark.skipif(not os.environ.get('FLY_STIMULATION_EVIDENCE'),reason='requires captured stimulation evidence')
+@pytest.mark.parametrize('corruption',['current_target','frozen_weight'])
+def test_auditor_rejects_corrupted_native_evidence(monkeypatch,corruption):
+    import paperlab.fly_paper_stimulation_audit as module
+    root=Path(os.environ['FLY_STIMULATION_EVIDENCE'])
+    study=json.loads((root/'cloud-result.json').read_text())['report']
+    p=json.loads((root/'payload.json').read_text());original=module.read_arrays
+    def corrupted(path):
+        a=original(path)
+        if str(path).endswith('pool0-pristine-current0/current-01.npz') and corruption=='current_target':
+            a['target_indices'][0]+=1
+        if str(path).endswith('pool0-pristine-current0/step-01.npz') and corruption=='frozen_weight':
+            a['weights'][17,0]+=1
+        return a
+    monkeypatch.setattr(module,'read_arrays',corrupted)
+    with pytest.raises(ValueError,match='targeted different|Plastic memory changed'):
+        module.audit(study,p,root/'artifacts')

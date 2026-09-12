@@ -2617,3 +2617,52 @@ inspection. All native traces, stimulation arguments, input images, boundaries,
 weights, and decoded outputs are audited before portable views become available.
 The private input/checkpoint archive stays outside Git; an ordinary clone can
 inspect the public reports and recordings without cloud credentials.
+
+### Recipient-stimulation result
+
+The [completed study](../reports/fly-paper-stimulation-study-01.json) and
+[independent audit](../reports/fly-paper-stimulation-audit-01.json) verify all
+36 observations and 1,800 native recording bins. Every original zero-current
+control reproduced. The cloud simulation took 219 seconds; its conservative
+compute estimate was $0.0208, not a provider invoice.
+
+Across each pool's three observations, summed spikes at the two targeted cells were:
+
+| Current per cell | ALL pristine | ALL trained | baton pristine | baton trained |
+|---|---:|---:|---:|---:|
+| 0 | 0 | 0 | 0 | 0 |
+| 5 | 14 | 0 | 13 | 0 |
+| 10 | 59 | 78 | 104 | 48 |
+
+At current 5, trained and pristine memory produced different decisions on one
+of three images in **each** pool. The trained cells stayed silent and retained
+their original actions; the pristine cells became active. At current 10, both
+memories produced recipient spikes and again differed on one action per pool.
+The full-network comparison found 5,739–15,752 neurons with different total counts
+per image under current 10, versus zero differences under current 0.
+
+![Audited activity and every decoded action](assets/fly-paper-stimulation-01.png)
+
+This supports a threshold-dependent expression of stored memory in these inputs.
+It rejects the idea that changed weights cannot reach the fixed output decoder.
+It does **not** establish a profitable intervention: the same stimulation can
+produce more or fewer spikes depending on the pool, and all inputs had already
+been examined. Any trading test of an activation change needs a separately
+registered future development/test window, unchanged execution assumptions, and
+both trained and pristine controls. Nothing was promoted to the paper trader.
+
+Inspect the [stimulated trained/pristine pair](http://127.0.0.1:8766/?run=stimulation01-pool0-trained-current10&step=0&bin=3&neuron=11402&edge=4110156&pristine=1&compare=stimulation01-pool0-pristine-current10)
+in the cloud debugger, or load any of the twelve `stimulation01-*` recordings
+from `examples/fly-debugger` into a local viewer. The comparison uses actual
+voltages, source counts, weight 3.096958 versus 22 on edge 4110156, and frozen
+stored efficacy; these are not backpropagation gradients.
+
+![Actual paired neuron and connection traces](assets/fly-paper-stimulation-paired-01.png)
+
+Recreate the chart from the public audit without a cloud call or neural simulation:
+
+```sh
+uv run --locked --extra plots python -m paperlab.fly_stimulation_figure \
+  --audit reports/fly-paper-stimulation-audit-01.json \
+  --out runs/recipient-stimulation-figure
+```

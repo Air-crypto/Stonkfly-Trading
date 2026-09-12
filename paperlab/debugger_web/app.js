@@ -96,6 +96,11 @@ function pairedTraces(){
  }
  const identical=!!inputHash(f)&&inputHash(f)===inputHash(o);
  note.textContent=`Displayed selections at ${num(xs[bin])} ms into this observation. Blue: current; pink: comparison. Input identical: ${identical?'yes':'no'}. Bins are 10 ms, not exact spike times.`;
+ if(f.event.stimulation||o.event.stimulation){
+  const applied=e=>e.stimulation?`${e.stimulation.current} to cells ${e.stimulation.target_ids.join(', ')} for ${e.stimulation.duration_ms} ms`:'unrecorded';
+  note.textContent+=` Applied diagnostic current: blue ${applied(f.event)}; pink ${applied(o.event)}.`;
+  note.textContent+=` Stored memory: blue ${data.report.config.memory}; pink ${paired.data.report.config.memory}.`;
+ }
  const history=paired.histories.get(step)||'unverified';
  note.textContent+=` Recorded input prefix: ${history}. This covers the images saved here through this observation, not earlier training or activity resets.`;
  const build=data.report.native_build?.binary_sha256,otherBuild=paired.data.report.native_build?.binary_sha256;

@@ -1,0 +1,994 @@
+{
+  "status": "verified",
+  "protocol": {
+    "schema": 1,
+    "kind": "paper_memory_recipient_stimulation",
+    "reference_report_sha256": "090c24107447aea170a9a9c764217f7486025377558f253843d352d444ddd00b",
+    "plan_sha256": "ecb89e2cb48cab07080e5c3437dd1ec3b86bdd71feb4f892190b8ad3603c136b",
+    "target_ids": [
+      "10704",
+      "11402"
+    ],
+    "currents": [
+      0,
+      5,
+      10
+    ],
+    "inference": {
+      "learning": false,
+      "reinforcement": "none",
+      "steps": 3,
+      "duration_ms": 500,
+      "state_reset": "carry",
+      "eta": 0.001
+    },
+    "arms": {
+      "pool0-pristine-current0": {
+        "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+        "memory": "pristine",
+        "current": 0
+      },
+      "pool0-trained-current0": {
+        "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+        "memory": "trained",
+        "current": 0
+      },
+      "pool1-pristine-current0": {
+        "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+        "memory": "pristine",
+        "current": 0
+      },
+      "pool1-trained-current0": {
+        "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+        "memory": "trained",
+        "current": 0
+      },
+      "pool0-pristine-current5": {
+        "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+        "memory": "pristine",
+        "current": 5
+      },
+      "pool0-trained-current5": {
+        "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+        "memory": "trained",
+        "current": 5
+      },
+      "pool1-pristine-current5": {
+        "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+        "memory": "pristine",
+        "current": 5
+      },
+      "pool1-trained-current5": {
+        "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+        "memory": "trained",
+        "current": 5
+      },
+      "pool0-pristine-current10": {
+        "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+        "memory": "pristine",
+        "current": 10
+      },
+      "pool0-trained-current10": {
+        "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+        "memory": "trained",
+        "current": 10
+      },
+      "pool1-pristine-current10": {
+        "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+        "memory": "pristine",
+        "current": 10
+      },
+      "pool1-trained-current10": {
+        "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+        "memory": "trained",
+        "current": 10
+      }
+    },
+    "timing": "Same current to both targets throughout each observation; fresh dynamics per arm; carry between observations.",
+    "control_gate": "All four zero-current controls must reproduce the original full-neuron counts and decoder before stimulation.",
+    "interpretation": "Post-hoc mechanism test on the already examined study 09 test inputs. No account, fills, returns, training, or policy promotion. Applied current is an explicit diagnostic intervention, not a biologically calibrated input."
+  },
+  "full_observations_verified": 36,
+  "native_bins_verified": 1800,
+  "controls_verified": [
+    "pool0-pristine-current0",
+    "pool0-trained-current0",
+    "pool1-pristine-current0",
+    "pool1-trained-current0"
+  ],
+  "rows": {
+    "pool0-pristine-current0": [
+      {
+        "observation": 1,
+        "decision_ts": 1789231500.0,
+        "input_sha256": "f09fe22992725825204d3771399e50f5bb17a961fe0ee7b4269e066ec714b70a",
+        "side": "BUY",
+        "difference_hz": 8,
+        "gate_spikes": 25,
+        "total_spikes": 372609,
+        "recipient_counts": {
+          "10704": 0,
+          "11402": 0
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -49.65010452270508,
+          "11402": -49.620670318603516
+        },
+        "spike_sha256": "12ebbf0f226c682fa67ed921277495cd7fa713f0c1f53f4cee50d157c7e1685b"
+      },
+      {
+        "observation": 2,
+        "decision_ts": 1789231800.0,
+        "input_sha256": "f7baa326d95b9e619fe0a0c018f243531fd33954986cf427f0ff342c1a2e51c3",
+        "side": "SELL",
+        "difference_hz": -2,
+        "gate_spikes": 12,
+        "total_spikes": 380536,
+        "recipient_counts": {
+          "10704": 0,
+          "11402": 0
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -52.76955795288086,
+          "11402": -51.47875213623047
+        },
+        "spike_sha256": "4b1d70aba5d3a7b7b12f958a64decb4d0211e7b379f0178e9d3504d961323a85"
+      },
+      {
+        "observation": 3,
+        "decision_ts": 1789232100.0,
+        "input_sha256": "04a10b0db7425b23d0ef60b5d6aa0d99aa21fde83ea61e1beb3e2ed038400a37",
+        "side": "BUY",
+        "difference_hz": 6,
+        "gate_spikes": 5,
+        "total_spikes": 383518,
+        "recipient_counts": {
+          "10704": 0,
+          "11402": 0
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -52.59943771362305,
+          "11402": -51.529510498046875
+        },
+        "spike_sha256": "5dc0a9ae3c247ed0f072fc2780eb13ea82e40159dd934344ed084cf81a59c3d8"
+      }
+    ],
+    "pool0-trained-current0": [
+      {
+        "observation": 1,
+        "decision_ts": 1789231500.0,
+        "input_sha256": "f09fe22992725825204d3771399e50f5bb17a961fe0ee7b4269e066ec714b70a",
+        "side": "BUY",
+        "difference_hz": 8,
+        "gate_spikes": 25,
+        "total_spikes": 372609,
+        "recipient_counts": {
+          "10704": 0,
+          "11402": 0
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -51.68112564086914,
+          "11402": -51.67112731933594
+        },
+        "spike_sha256": "12ebbf0f226c682fa67ed921277495cd7fa713f0c1f53f4cee50d157c7e1685b"
+      },
+      {
+        "observation": 2,
+        "decision_ts": 1789231800.0,
+        "input_sha256": "f7baa326d95b9e619fe0a0c018f243531fd33954986cf427f0ff342c1a2e51c3",
+        "side": "SELL",
+        "difference_hz": -2,
+        "gate_spikes": 12,
+        "total_spikes": 380536,
+        "recipient_counts": {
+          "10704": 0,
+          "11402": 0
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -54.93326950073242,
+          "11402": -54.265018463134766
+        },
+        "spike_sha256": "4b1d70aba5d3a7b7b12f958a64decb4d0211e7b379f0178e9d3504d961323a85"
+      },
+      {
+        "observation": 3,
+        "decision_ts": 1789232100.0,
+        "input_sha256": "04a10b0db7425b23d0ef60b5d6aa0d99aa21fde83ea61e1beb3e2ed038400a37",
+        "side": "BUY",
+        "difference_hz": 6,
+        "gate_spikes": 5,
+        "total_spikes": 383518,
+        "recipient_counts": {
+          "10704": 0,
+          "11402": 0
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -54.66690444946289,
+          "11402": -54.381656646728516
+        },
+        "spike_sha256": "5dc0a9ae3c247ed0f072fc2780eb13ea82e40159dd934344ed084cf81a59c3d8"
+      }
+    ],
+    "pool1-pristine-current0": [
+      {
+        "observation": 1,
+        "decision_ts": 1789231500.0,
+        "input_sha256": "d30709cb7d84751353125ccd2f1a213376b4ad32a6df3f6334140300759a6b94",
+        "side": "BUY",
+        "difference_hz": 2,
+        "gate_spikes": 18,
+        "total_spikes": 375245,
+        "recipient_counts": {
+          "10704": 0,
+          "11402": 0
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -49.86829376220703,
+          "11402": -48.96555709838867
+        },
+        "spike_sha256": "02b800e3a097435e8cd9e3fc518ad3dc93ca8cc616b0917aa145c32769c3df2f"
+      },
+      {
+        "observation": 2,
+        "decision_ts": 1789231800.0,
+        "input_sha256": "c63ad279102e4123fe08be3f39aeddcf642eb0923793e8f685170eca100cba98",
+        "side": "BUY",
+        "difference_hz": 10,
+        "gate_spikes": 5,
+        "total_spikes": 379956,
+        "recipient_counts": {
+          "10704": 0,
+          "11402": 0
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -49.25658416748047,
+          "11402": -50.46729278564453
+        },
+        "spike_sha256": "f482f00f2f78eca7ff7c972c339cbefac299130419d9abf35dd53de7e8c22bb6"
+      },
+      {
+        "observation": 3,
+        "decision_ts": 1789232100.0,
+        "input_sha256": "b21f8136058158dcd5093398dc38beaedb6c5b74b1b65b027724610808f303b2",
+        "side": "SELL",
+        "difference_hz": -6,
+        "gate_spikes": 12,
+        "total_spikes": 384646,
+        "recipient_counts": {
+          "10704": 0,
+          "11402": 0
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -49.5666618347168,
+          "11402": -50.74767303466797
+        },
+        "spike_sha256": "c5feed2d5e1990b3a1c7347f096c35c9f05a311305f99f95dc503d2ed350e2b9"
+      }
+    ],
+    "pool1-trained-current0": [
+      {
+        "observation": 1,
+        "decision_ts": 1789231500.0,
+        "input_sha256": "d30709cb7d84751353125ccd2f1a213376b4ad32a6df3f6334140300759a6b94",
+        "side": "BUY",
+        "difference_hz": 2,
+        "gate_spikes": 18,
+        "total_spikes": 375245,
+        "recipient_counts": {
+          "10704": 0,
+          "11402": 0
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -51.63302993774414,
+          "11402": -51.62002944946289
+        },
+        "spike_sha256": "02b800e3a097435e8cd9e3fc518ad3dc93ca8cc616b0917aa145c32769c3df2f"
+      },
+      {
+        "observation": 2,
+        "decision_ts": 1789231800.0,
+        "input_sha256": "c63ad279102e4123fe08be3f39aeddcf642eb0923793e8f685170eca100cba98",
+        "side": "BUY",
+        "difference_hz": 10,
+        "gate_spikes": 5,
+        "total_spikes": 379956,
+        "recipient_counts": {
+          "10704": 0,
+          "11402": 0
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -51.08678436279297,
+          "11402": -53.285247802734375
+        },
+        "spike_sha256": "f482f00f2f78eca7ff7c972c339cbefac299130419d9abf35dd53de7e8c22bb6"
+      },
+      {
+        "observation": 3,
+        "decision_ts": 1789232100.0,
+        "input_sha256": "b21f8136058158dcd5093398dc38beaedb6c5b74b1b65b027724610808f303b2",
+        "side": "SELL",
+        "difference_hz": -6,
+        "gate_spikes": 12,
+        "total_spikes": 384646,
+        "recipient_counts": {
+          "10704": 0,
+          "11402": 0
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -51.23405456542969,
+          "11402": -53.37055969238281
+        },
+        "spike_sha256": "c5feed2d5e1990b3a1c7347f096c35c9f05a311305f99f95dc503d2ed350e2b9"
+      }
+    ],
+    "pool0-pristine-current5": [
+      {
+        "observation": 1,
+        "decision_ts": 1789231500.0,
+        "input_sha256": "f09fe22992725825204d3771399e50f5bb17a961fe0ee7b4269e066ec714b70a",
+        "side": "BUY",
+        "difference_hz": 6,
+        "gate_spikes": 34,
+        "total_spikes": 358475,
+        "recipient_counts": {
+          "10704": 1,
+          "11402": 7
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.0965461730957,
+          "11402": -45.77412033081055
+        },
+        "spike_sha256": "6e2bed2e2c50fd42aad897ab0ad91ccdc258345d5879b1efde1fbcbbbb728026"
+      },
+      {
+        "observation": 2,
+        "decision_ts": 1789231800.0,
+        "input_sha256": "f7baa326d95b9e619fe0a0c018f243531fd33954986cf427f0ff342c1a2e51c3",
+        "side": "BUY",
+        "difference_hz": 4,
+        "gate_spikes": 13,
+        "total_spikes": 379883,
+        "recipient_counts": {
+          "10704": 3,
+          "11402": 1
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.683467864990234,
+          "11402": -45.29899597167969
+        },
+        "spike_sha256": "79eff33a23697b98cab6cfc5ab522171a153df6d8dbed8594ea2f43fb091c17c"
+      },
+      {
+        "observation": 3,
+        "decision_ts": 1789232100.0,
+        "input_sha256": "04a10b0db7425b23d0ef60b5d6aa0d99aa21fde83ea61e1beb3e2ed038400a37",
+        "side": "BUY",
+        "difference_hz": 6,
+        "gate_spikes": 7,
+        "total_spikes": 386638,
+        "recipient_counts": {
+          "10704": 2,
+          "11402": 0
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.547542572021484,
+          "11402": -45.9582633972168
+        },
+        "spike_sha256": "0bd5f2d3d18f7cf3ee473ab979c1966fbdc70bcabe1eda67710037634affc078"
+      }
+    ],
+    "pool0-trained-current5": [
+      {
+        "observation": 1,
+        "decision_ts": 1789231500.0,
+        "input_sha256": "f09fe22992725825204d3771399e50f5bb17a961fe0ee7b4269e066ec714b70a",
+        "side": "BUY",
+        "difference_hz": 8,
+        "gate_spikes": 25,
+        "total_spikes": 372609,
+        "recipient_counts": {
+          "10704": 0,
+          "11402": 0
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -46.68114471435547,
+          "11402": -46.671390533447266
+        },
+        "spike_sha256": "12ebbf0f226c682fa67ed921277495cd7fa713f0c1f53f4cee50d157c7e1685b"
+      },
+      {
+        "observation": 2,
+        "decision_ts": 1789231800.0,
+        "input_sha256": "f7baa326d95b9e619fe0a0c018f243531fd33954986cf427f0ff342c1a2e51c3",
+        "side": "SELL",
+        "difference_hz": -2,
+        "gate_spikes": 12,
+        "total_spikes": 380536,
+        "recipient_counts": {
+          "10704": 0,
+          "11402": 0
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -49.93327331542969,
+          "11402": -49.26502990722656
+        },
+        "spike_sha256": "4b1d70aba5d3a7b7b12f958a64decb4d0211e7b379f0178e9d3504d961323a85"
+      },
+      {
+        "observation": 3,
+        "decision_ts": 1789232100.0,
+        "input_sha256": "04a10b0db7425b23d0ef60b5d6aa0d99aa21fde83ea61e1beb3e2ed038400a37",
+        "side": "BUY",
+        "difference_hz": 6,
+        "gate_spikes": 5,
+        "total_spikes": 383518,
+        "recipient_counts": {
+          "10704": 0,
+          "11402": 0
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -49.66691589355469,
+          "11402": -49.38167190551758
+        },
+        "spike_sha256": "5dc0a9ae3c247ed0f072fc2780eb13ea82e40159dd934344ed084cf81a59c3d8"
+      }
+    ],
+    "pool1-pristine-current5": [
+      {
+        "observation": 1,
+        "decision_ts": 1789231500.0,
+        "input_sha256": "d30709cb7d84751353125ccd2f1a213376b4ad32a6df3f6334140300759a6b94",
+        "side": "BUY",
+        "difference_hz": 8,
+        "gate_spikes": 30,
+        "total_spikes": 359133,
+        "recipient_counts": {
+          "10704": 1,
+          "11402": 6
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.25364303588867,
+          "11402": -45.53030776977539
+        },
+        "spike_sha256": "141aaabbc634df572e4495d54c7f22e6a3f00430f979297e9a3e3847ec610137"
+      },
+      {
+        "observation": 2,
+        "decision_ts": 1789231800.0,
+        "input_sha256": "c63ad279102e4123fe08be3f39aeddcf642eb0923793e8f685170eca100cba98",
+        "side": "BUY",
+        "difference_hz": 4,
+        "gate_spikes": 27,
+        "total_spikes": 365296,
+        "recipient_counts": {
+          "10704": 2,
+          "11402": 4
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.070533752441406,
+          "11402": -46.19422149658203
+        },
+        "spike_sha256": "5b71e44961c6a671b3624775d5ab893e3604a9f409cc6158a5851783097dbde1"
+      },
+      {
+        "observation": 3,
+        "decision_ts": 1789232100.0,
+        "input_sha256": "b21f8136058158dcd5093398dc38beaedb6c5b74b1b65b027724610808f303b2",
+        "side": "BUY",
+        "difference_hz": 4,
+        "gate_spikes": 7,
+        "total_spikes": 385261,
+        "recipient_counts": {
+          "10704": 0,
+          "11402": 0
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -47.52920150756836,
+          "11402": -46.13193130493164
+        },
+        "spike_sha256": "5039dac1710f59783c0e45f3c00d498f55cfa109ca5e1c6d6b09da014efd981d"
+      }
+    ],
+    "pool1-trained-current5": [
+      {
+        "observation": 1,
+        "decision_ts": 1789231500.0,
+        "input_sha256": "d30709cb7d84751353125ccd2f1a213376b4ad32a6df3f6334140300759a6b94",
+        "side": "BUY",
+        "difference_hz": 2,
+        "gate_spikes": 18,
+        "total_spikes": 375245,
+        "recipient_counts": {
+          "10704": 0,
+          "11402": 0
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -46.63367462158203,
+          "11402": -46.620689392089844
+        },
+        "spike_sha256": "02b800e3a097435e8cd9e3fc518ad3dc93ca8cc616b0917aa145c32769c3df2f"
+      },
+      {
+        "observation": 2,
+        "decision_ts": 1789231800.0,
+        "input_sha256": "c63ad279102e4123fe08be3f39aeddcf642eb0923793e8f685170eca100cba98",
+        "side": "BUY",
+        "difference_hz": 10,
+        "gate_spikes": 5,
+        "total_spikes": 379956,
+        "recipient_counts": {
+          "10704": 0,
+          "11402": 0
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -46.08682632446289,
+          "11402": -48.28525924682617
+        },
+        "spike_sha256": "f482f00f2f78eca7ff7c972c339cbefac299130419d9abf35dd53de7e8c22bb6"
+      },
+      {
+        "observation": 3,
+        "decision_ts": 1789232100.0,
+        "input_sha256": "b21f8136058158dcd5093398dc38beaedb6c5b74b1b65b027724610808f303b2",
+        "side": "SELL",
+        "difference_hz": -6,
+        "gate_spikes": 12,
+        "total_spikes": 384646,
+        "recipient_counts": {
+          "10704": 0,
+          "11402": 0
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -46.23408126831055,
+          "11402": -48.37059020996094
+        },
+        "spike_sha256": "c5feed2d5e1990b3a1c7347f096c35c9f05a311305f99f95dc503d2ed350e2b9"
+      }
+    ],
+    "pool0-pristine-current10": [
+      {
+        "observation": 1,
+        "decision_ts": 1789231500.0,
+        "input_sha256": "f09fe22992725825204d3771399e50f5bb17a961fe0ee7b4269e066ec714b70a",
+        "side": "BUY",
+        "difference_hz": 2,
+        "gate_spikes": 32,
+        "total_spikes": 364031,
+        "recipient_counts": {
+          "10704": 10,
+          "11402": 18
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.422080993652344,
+          "11402": -45.01271438598633
+        },
+        "spike_sha256": "9a875d2970107740c5c341c8e87edc5c44dc055cc13fbe49febffcfef73b77ca"
+      },
+      {
+        "observation": 2,
+        "decision_ts": 1789231800.0,
+        "input_sha256": "f7baa326d95b9e619fe0a0c018f243531fd33954986cf427f0ff342c1a2e51c3",
+        "side": "BUY",
+        "difference_hz": 10,
+        "gate_spikes": 10,
+        "total_spikes": 384609,
+        "recipient_counts": {
+          "10704": 6,
+          "11402": 11
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.42164993286133,
+          "11402": -45.06831741333008
+        },
+        "spike_sha256": "ad8d78384e3fa1234d6611ec6147dd8b9cf00c039c7ce623899815220f776b38"
+      },
+      {
+        "observation": 3,
+        "decision_ts": 1789232100.0,
+        "input_sha256": "04a10b0db7425b23d0ef60b5d6aa0d99aa21fde83ea61e1beb3e2ed038400a37",
+        "side": "BUY",
+        "difference_hz": 2,
+        "gate_spikes": 4,
+        "total_spikes": 388964,
+        "recipient_counts": {
+          "10704": 6,
+          "11402": 8
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.09074401855469,
+          "11402": -45.022911071777344
+        },
+        "spike_sha256": "e80707bee5f070f6d3728538fa6bd1a2fe2549812f1f050d2c75cb6a9af90e10"
+      }
+    ],
+    "pool0-trained-current10": [
+      {
+        "observation": 1,
+        "decision_ts": 1789231500.0,
+        "input_sha256": "f09fe22992725825204d3771399e50f5bb17a961fe0ee7b4269e066ec714b70a",
+        "side": "BUY",
+        "difference_hz": 4,
+        "gate_spikes": 33,
+        "total_spikes": 361479,
+        "recipient_counts": {
+          "10704": 12,
+          "11402": 16
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.33502960205078,
+          "11402": -45.05984115600586
+        },
+        "spike_sha256": "e9d8a2b0232d1a06e8393300491aaa13ea7c664faa963cf3528afc01c3d12107"
+      },
+      {
+        "observation": 2,
+        "decision_ts": 1789231800.0,
+        "input_sha256": "f7baa326d95b9e619fe0a0c018f243531fd33954986cf427f0ff342c1a2e51c3",
+        "side": "HOLD",
+        "difference_hz": 0,
+        "gate_spikes": 11,
+        "total_spikes": 382060,
+        "recipient_counts": {
+          "10704": 12,
+          "11402": 7
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.03770065307617,
+          "11402": -45.02279281616211
+        },
+        "spike_sha256": "8ca5a9dbde19cb6ea16f8e65f8681e7287fe371cf8c318ab7406ad772a9ca330"
+      },
+      {
+        "observation": 3,
+        "decision_ts": 1789232100.0,
+        "input_sha256": "04a10b0db7425b23d0ef60b5d6aa0d99aa21fde83ea61e1beb3e2ed038400a37",
+        "side": "BUY",
+        "difference_hz": 12,
+        "gate_spikes": 6,
+        "total_spikes": 448746,
+        "recipient_counts": {
+          "10704": 11,
+          "11402": 20
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.04237365722656,
+          "11402": -45.22531509399414
+        },
+        "spike_sha256": "4a66f72885e1af2b776d40b153dd3cc905ead3c39006b1867934a032adfeb11c"
+      }
+    ],
+    "pool1-pristine-current10": [
+      {
+        "observation": 1,
+        "decision_ts": 1789231500.0,
+        "input_sha256": "d30709cb7d84751353125ccd2f1a213376b4ad32a6df3f6334140300759a6b94",
+        "side": "BUY",
+        "difference_hz": 8,
+        "gate_spikes": 20,
+        "total_spikes": 445892,
+        "recipient_counts": {
+          "10704": 19,
+          "11402": 25
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.2829475402832,
+          "11402": -45.339725494384766
+        },
+        "spike_sha256": "510ef73ce87d4c2fdac50f64f7f8c90bba47d2a68a50e412c4d484b3f7532b78"
+      },
+      {
+        "observation": 2,
+        "decision_ts": 1789231800.0,
+        "input_sha256": "c63ad279102e4123fe08be3f39aeddcf642eb0923793e8f685170eca100cba98",
+        "side": "HOLD",
+        "difference_hz": 0,
+        "gate_spikes": 0,
+        "total_spikes": 603772,
+        "recipient_counts": {
+          "10704": 9,
+          "11402": 27
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.15460205078125,
+          "11402": -45.932456970214844
+        },
+        "spike_sha256": "1ee6eb4296c182705e4bc2f7992e2928e1745c265ee18deb181eb82538424640"
+      },
+      {
+        "observation": 3,
+        "decision_ts": 1789232100.0,
+        "input_sha256": "b21f8136058158dcd5093398dc38beaedb6c5b74b1b65b027724610808f303b2",
+        "side": "HOLD",
+        "difference_hz": 4,
+        "gate_spikes": 0,
+        "total_spikes": 605945,
+        "recipient_counts": {
+          "10704": 6,
+          "11402": 18
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -48.42406463623047,
+          "11402": -45.22062301635742
+        },
+        "spike_sha256": "2e2f69d5fffb6f3fffcc083f0c304ffcf610506a01b0e9d97cb3c744b6acecde"
+      }
+    ],
+    "pool1-trained-current10": [
+      {
+        "observation": 1,
+        "decision_ts": 1789231500.0,
+        "input_sha256": "d30709cb7d84751353125ccd2f1a213376b4ad32a6df3f6334140300759a6b94",
+        "side": "BUY",
+        "difference_hz": 8,
+        "gate_spikes": 21,
+        "total_spikes": 427399,
+        "recipient_counts": {
+          "10704": 14,
+          "11402": 20
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.09266662597656,
+          "11402": -45.1368293762207
+        },
+        "spike_sha256": "b1dbf6d7784c7908e638370067f4d5c37c89fe84989431bc8a4b224be3857485"
+      },
+      {
+        "observation": 2,
+        "decision_ts": 1789231800.0,
+        "input_sha256": "c63ad279102e4123fe08be3f39aeddcf642eb0923793e8f685170eca100cba98",
+        "side": "BUY",
+        "difference_hz": 6,
+        "gate_spikes": 1,
+        "total_spikes": 601743,
+        "recipient_counts": {
+          "10704": 7,
+          "11402": 0
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.321651458740234,
+          "11402": -54.674583435058594
+        },
+        "spike_sha256": "9f6e5087dbfb3b4293a73b21d183b6aaf73815650c13ebbb1e79c59618bfd804"
+      },
+      {
+        "observation": 3,
+        "decision_ts": 1789232100.0,
+        "input_sha256": "b21f8136058158dcd5093398dc38beaedb6c5b74b1b65b027724610808f303b2",
+        "side": "HOLD",
+        "difference_hz": 14,
+        "gate_spikes": 0,
+        "total_spikes": 615148,
+        "recipient_counts": {
+          "10704": 3,
+          "11402": 4
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.737945556640625,
+          "11402": -47.641902923583984
+        },
+        "spike_sha256": "0af9b09132604b846ed6df7c44329bfcb0ca127290ab3f8baf6bfda2abd3d6ff"
+      }
+    ]
+  },
+  "comparisons": [
+    {
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "current": 0,
+      "pristine": "pool0-pristine-current0",
+      "trained": "pool0-trained-current0",
+      "changed_neurons": [
+        0,
+        0,
+        0
+      ],
+      "different_actions": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "current": 0,
+      "pristine": "pool1-pristine-current0",
+      "trained": "pool1-trained-current0",
+      "changed_neurons": [
+        0,
+        0,
+        0
+      ],
+      "different_actions": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "current": 5,
+      "pristine": "pool0-pristine-current5",
+      "trained": "pool0-trained-current5",
+      "changed_neurons": [
+        6516,
+        8515,
+        7859
+      ],
+      "different_actions": [
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "current": 5,
+      "pristine": "pool1-pristine-current5",
+      "trained": "pool1-trained-current5",
+      "changed_neurons": [
+        6952,
+        8182,
+        7819
+      ],
+      "different_actions": [
+        false,
+        false,
+        true
+      ]
+    },
+    {
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "current": 10,
+      "pristine": "pool0-pristine-current10",
+      "trained": "pool0-trained-current10",
+      "changed_neurons": [
+        5739,
+        7829,
+        15752
+      ],
+      "different_actions": [
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "current": 10,
+      "pristine": "pool1-pristine-current10",
+      "trained": "pool1-trained-current10",
+      "changed_neurons": [
+        13318,
+        12765,
+        13148
+      ],
+      "different_actions": [
+        false,
+        true,
+        false
+      ]
+    }
+  ],
+  "artifact_sha256": {
+    "pool0-pristine-current0/step-01.npz": "1c4ea5482991244e277276235a673a1a0760cd9120118c0790111a1524b710a7",
+    "pool0-pristine-current0/current-01.npz": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52",
+    "pool0-pristine-current0/boundary-01.npz": "141a5a129c0cf4c7733f1fb61d5962bdc941c021cfddda2316b6570c65e9dfc3",
+    "pool0-pristine-current0/step-02.npz": "038d3cb5c0eb5d93a551c3d87e1fbcc7b5986f484eb81f4549dd7b6b9abe0dfc",
+    "pool0-pristine-current0/current-02.npz": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52",
+    "pool0-pristine-current0/boundary-02.npz": "99d7dfcd7216136ea1ba93b24980400dc80f0f441984b434bf093174de59b55c",
+    "pool0-pristine-current0/step-03.npz": "5a159d69a8a197756c0ef6156ff48d6a53755bda18ce31abbe9244618b33ffc1",
+    "pool0-pristine-current0/current-03.npz": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52",
+    "pool0-pristine-current0/boundary-03.npz": "c67932605d33d3c1c4589199dcc843a1aaf4a3a857667dfb62f929f9d1e81e03",
+    "pool0-pristine-current0/view.json": "9d65eb55b77f7948fbea4a745b721b5ec2290a4596e7ddd189afa7db96e36d90",
+    "pool0-trained-current0/step-01.npz": "7bc105b8e4b2c393e742a7b1e4864cfba206c791a3b1d15b27fdabb644f2ef14",
+    "pool0-trained-current0/current-01.npz": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52",
+    "pool0-trained-current0/boundary-01.npz": "381f0aa81fdd079d79c80fcd7a8b4dd8ae0f1fd9cf3d594d029b0dbce45028ed",
+    "pool0-trained-current0/step-02.npz": "840c49301a27faff13bd1daa4a0d786fa29f03f0d989f861ce1f4f01f87c8f9f",
+    "pool0-trained-current0/current-02.npz": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52",
+    "pool0-trained-current0/boundary-02.npz": "d59a82198affcabdb241c3456eb69fff4704f0ecbdffa6f33b1d08848bf8cced",
+    "pool0-trained-current0/step-03.npz": "b74044703d8f95fcbf6d2a45dc8d8fb248fa942ef1b2a2879a9a0df5b11bb1bf",
+    "pool0-trained-current0/current-03.npz": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52",
+    "pool0-trained-current0/boundary-03.npz": "a64dc82108170d5d23173b6bb5aeadcfef226db55ce7aecb029ec7204a7f5825",
+    "pool0-trained-current0/view.json": "1d00472e40a6805a8f525c123115dd1df6aaeed2ba749741bd1d2534772898cd",
+    "pool1-pristine-current0/step-01.npz": "07d4862a5194dbdedd08c54fe54c4b71019e03fa0fc93b98dfc2d02389851854",
+    "pool1-pristine-current0/current-01.npz": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52",
+    "pool1-pristine-current0/boundary-01.npz": "141a5a129c0cf4c7733f1fb61d5962bdc941c021cfddda2316b6570c65e9dfc3",
+    "pool1-pristine-current0/step-02.npz": "d771fc92494c84752349a0ea084e245479f648b9f263348ca70fca5ece69b454",
+    "pool1-pristine-current0/current-02.npz": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52",
+    "pool1-pristine-current0/boundary-02.npz": "a9951c70be744b946e691c76d1277dce82961922b65c9de8ba6d0ac2e7c7efca",
+    "pool1-pristine-current0/step-03.npz": "f6bbf76011c437f1a82fd786ea22330453e38819aa59f270e5e2b4f955ff33ca",
+    "pool1-pristine-current0/current-03.npz": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52",
+    "pool1-pristine-current0/boundary-03.npz": "9f75ac8f8441583e95b84c4cecc813484163ea5d5f90e8748dd115536c77aa5d",
+    "pool1-pristine-current0/view.json": "c7eea64604db3ce8f4c0f36f553a38129eef17e57a48f4be9eb628059162ae40",
+    "pool1-trained-current0/step-01.npz": "0bb02d0fd1f4c8102bb84155ee41ba068758f0bc8d07846c15fe9942ac0268a4",
+    "pool1-trained-current0/current-01.npz": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52",
+    "pool1-trained-current0/boundary-01.npz": "3a6cc9c95df33496bac79d71f5e0cd450f47df2aa66a9d50dbbc9ba7c796049e",
+    "pool1-trained-current0/step-02.npz": "e474e90a25882f34a03f7607b0539309e54faa9b556e5dc882a598caea3b8cdd",
+    "pool1-trained-current0/current-02.npz": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52",
+    "pool1-trained-current0/boundary-02.npz": "64c6deb8ad729a7d2dcfd6d40d71427a50ed404368398e57217202bc469268c2",
+    "pool1-trained-current0/step-03.npz": "765d1930748a14ebad7daedf186706ae67b11eec6492ff76f8b1604bb41591fd",
+    "pool1-trained-current0/current-03.npz": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52",
+    "pool1-trained-current0/boundary-03.npz": "24977ec69a1e955b68763fa22251fd2710bc030a3d5c2b631f0dcc2558499218",
+    "pool1-trained-current0/view.json": "b474e4c34cc84cdaffc54be7a3443305b653a49ff1cd72c1579ff1e3a1565c99",
+    "pool0-pristine-current5/step-01.npz": "5e3004d6b20502653b91dd28e9425d3b410c7daf590cb9d849e5d93a16dbdb75",
+    "pool0-pristine-current5/current-01.npz": "e7e988b276b569bef1e7cef8cd3917d72723c9339cb40bcf3d2a904eb128735b",
+    "pool0-pristine-current5/boundary-01.npz": "141a5a129c0cf4c7733f1fb61d5962bdc941c021cfddda2316b6570c65e9dfc3",
+    "pool0-pristine-current5/step-02.npz": "28fe9c57425e1ccf2268b619803855f3524d556102582f2f3f0ff423baf20dde",
+    "pool0-pristine-current5/current-02.npz": "e7e988b276b569bef1e7cef8cd3917d72723c9339cb40bcf3d2a904eb128735b",
+    "pool0-pristine-current5/boundary-02.npz": "1b88c4d89907153c4ce9946c3ccbd263880ee164c691122c1f62a6a8d7299313",
+    "pool0-pristine-current5/step-03.npz": "74f8dc69fec20887ebcf5a2f3a2fda391d825f8abc37e03685301786672266de",
+    "pool0-pristine-current5/current-03.npz": "e7e988b276b569bef1e7cef8cd3917d72723c9339cb40bcf3d2a904eb128735b",
+    "pool0-pristine-current5/boundary-03.npz": "2313f695f36684d1c377e072f1bd89c973c58d722ee3c1aa7ee1825e6ec59ae8",
+    "pool0-pristine-current5/view.json": "fc0bec3bf857e161ebb0ffbcf09542729b2c1138d937b7f7ef321c71c2275b30",
+    "pool0-trained-current5/step-01.npz": "82208c392a58792cb803192447cb88a72623b088817376f8e3ea710dc6d8f0e8",
+    "pool0-trained-current5/current-01.npz": "e7e988b276b569bef1e7cef8cd3917d72723c9339cb40bcf3d2a904eb128735b",
+    "pool0-trained-current5/boundary-01.npz": "381f0aa81fdd079d79c80fcd7a8b4dd8ae0f1fd9cf3d594d029b0dbce45028ed",
+    "pool0-trained-current5/step-02.npz": "3c9eebc0dc9b0b963ff8e6bb5d843fd89cb00ba1b11f7ffc8e90db03c38a7847",
+    "pool0-trained-current5/current-02.npz": "e7e988b276b569bef1e7cef8cd3917d72723c9339cb40bcf3d2a904eb128735b",
+    "pool0-trained-current5/boundary-02.npz": "00e6ef2f8533265fe6aaa63ef763ba2c6f0c946663b40ad1b098c96d8b7e2335",
+    "pool0-trained-current5/step-03.npz": "a8aeb39aefe1f312412f0abc348f473afaf93ffd8b36b1fc0901992fb3d7c00f",
+    "pool0-trained-current5/current-03.npz": "e7e988b276b569bef1e7cef8cd3917d72723c9339cb40bcf3d2a904eb128735b",
+    "pool0-trained-current5/boundary-03.npz": "f75056aa9f114e648a4bce6fa7dc95c6a53104195ede4cc8cd23742b1ad90ce0",
+    "pool0-trained-current5/view.json": "b2f5a643a22c1c4c8a12903d6cff1f316fe210cd5cd29e1a56a0a1b77acae46a",
+    "pool1-pristine-current5/step-01.npz": "64e2a20848acf11ecfba594106e3bc2d7729e6d8396f0efb9b4edcc8de052cd9",
+    "pool1-pristine-current5/current-01.npz": "e7e988b276b569bef1e7cef8cd3917d72723c9339cb40bcf3d2a904eb128735b",
+    "pool1-pristine-current5/boundary-01.npz": "141a5a129c0cf4c7733f1fb61d5962bdc941c021cfddda2316b6570c65e9dfc3",
+    "pool1-pristine-current5/step-02.npz": "d66dea86ab06c4fc961efc0d36fbb94fd20b2c65fd6c730cd2e369c88251bbc5",
+    "pool1-pristine-current5/current-02.npz": "e7e988b276b569bef1e7cef8cd3917d72723c9339cb40bcf3d2a904eb128735b",
+    "pool1-pristine-current5/boundary-02.npz": "6867ae0e984c9a699d1f30cd21e590969422ac3d419a37fdd69d11682251d801",
+    "pool1-pristine-current5/step-03.npz": "5cb45287810c201bc615e63c3f1329d5177aac6b2d42df21e6c453fcf8a4ff74",
+    "pool1-pristine-current5/current-03.npz": "e7e988b276b569bef1e7cef8cd3917d72723c9339cb40bcf3d2a904eb128735b",
+    "pool1-pristine-current5/boundary-03.npz": "e4a9ba5793264ffbe83dd251a51647e2caa0fc4e4f2b66fafb7ad2d2c4498235",
+    "pool1-pristine-current5/view.json": "378060e56e248d2297fb7813c8c6a7a4bf91a3d5102db8351cd416ec8955d61c",
+    "pool1-trained-current5/step-01.npz": "ef965418a651b69d376fa17fff5d473de553ff7483ca1fd4690d3a9aff635924",
+    "pool1-trained-current5/current-01.npz": "e7e988b276b569bef1e7cef8cd3917d72723c9339cb40bcf3d2a904eb128735b",
+    "pool1-trained-current5/boundary-01.npz": "3a6cc9c95df33496bac79d71f5e0cd450f47df2aa66a9d50dbbc9ba7c796049e",
+    "pool1-trained-current5/step-02.npz": "e68d879ba7dff2a3de98df50ff37bdf683ff65c46c9fc5d52fe46da138f33963",
+    "pool1-trained-current5/current-02.npz": "e7e988b276b569bef1e7cef8cd3917d72723c9339cb40bcf3d2a904eb128735b",
+    "pool1-trained-current5/boundary-02.npz": "a9a724ed32439132429a44e3cd1cf7418a888a7ea40ab16104c336e7d2e9f55f",
+    "pool1-trained-current5/step-03.npz": "854f92d7f54833d29d7cbbb6259ca215c67d5e7e305cef8654cf1993ff75a12e",
+    "pool1-trained-current5/current-03.npz": "e7e988b276b569bef1e7cef8cd3917d72723c9339cb40bcf3d2a904eb128735b",
+    "pool1-trained-current5/boundary-03.npz": "cd6161620bbe5aee6940f134c35dff64071292bd253ebc63f57c1feff15ccf3e",
+    "pool1-trained-current5/view.json": "5b295753709a92ac27bd799f45d0728b439ab42865dc5cbf601ba55313d1d9e0",
+    "pool0-pristine-current10/step-01.npz": "fe45a849bbf56389cddd57acca08e7e44f775705cd5343d16baa49bd4b65757d",
+    "pool0-pristine-current10/current-01.npz": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333",
+    "pool0-pristine-current10/boundary-01.npz": "141a5a129c0cf4c7733f1fb61d5962bdc941c021cfddda2316b6570c65e9dfc3",
+    "pool0-pristine-current10/step-02.npz": "2ba89c67479546a577048b9f1b5145656784783dda58c4ad6f6a38a336e4157b",
+    "pool0-pristine-current10/current-02.npz": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333",
+    "pool0-pristine-current10/boundary-02.npz": "5cf897f55f51eaa10d8ef8c01890697aee51dcfb77eca68ecdc04053eee81e5b",
+    "pool0-pristine-current10/step-03.npz": "4f8947f40b6a5f4490d5134119ee4cec856015ec4d799b9157829cde71e7df9b",
+    "pool0-pristine-current10/current-03.npz": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333",
+    "pool0-pristine-current10/boundary-03.npz": "79ec2960cbd61c9f9360fa42cf459d0c6add00686c31ce0591ba2607b121b628",
+    "pool0-pristine-current10/view.json": "4eb1c890f06e9ae7c53d715088a8c673aca2d948eced1d7c89da2a04be66dafa",
+    "pool0-trained-current10/step-01.npz": "aa80e12a10b821ea5341e4afe3f7491f848a2f0155c9f45da847339a9956a491",
+    "pool0-trained-current10/current-01.npz": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333",
+    "pool0-trained-current10/boundary-01.npz": "381f0aa81fdd079d79c80fcd7a8b4dd8ae0f1fd9cf3d594d029b0dbce45028ed",
+    "pool0-trained-current10/step-02.npz": "f1668de818bfdcd402e0e087b7d55f55ba5dd04fcc57a548b90b49fbe1c951b4",
+    "pool0-trained-current10/current-02.npz": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333",
+    "pool0-trained-current10/boundary-02.npz": "56e4202ae83109ae3fed0aca2f3a9106e41e9849c7da6f908e4ef000b2be85ac",
+    "pool0-trained-current10/step-03.npz": "fec2ca3dd42018f1e2a0cc91411056041f4cb69376754f5efeaf026dadaa8d0f",
+    "pool0-trained-current10/current-03.npz": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333",
+    "pool0-trained-current10/boundary-03.npz": "6b637e0243bffc873dce67d84af306cb4640ebba193e798a2dc81445a4c91d11",
+    "pool0-trained-current10/view.json": "6049453b084a93ca2e8d8f7565021fae54ecd8fd69a416d58e2ccd32566876a4",
+    "pool1-pristine-current10/step-01.npz": "59bd5198d68eae980dffe0ebfd4eb8be5f33e74f00a4086574b275e02fa79dd9",
+    "pool1-pristine-current10/current-01.npz": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333",
+    "pool1-pristine-current10/boundary-01.npz": "141a5a129c0cf4c7733f1fb61d5962bdc941c021cfddda2316b6570c65e9dfc3",
+    "pool1-pristine-current10/step-02.npz": "f8c597c469e279de7aa5c28262f847048cdf25d4206f936396bdbfe00422df4f",
+    "pool1-pristine-current10/current-02.npz": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333",
+    "pool1-pristine-current10/boundary-02.npz": "8ab1544560cf54828a8a7a5dc8a2b2353eee8454919599131fe98866b25ff339",
+    "pool1-pristine-current10/step-03.npz": "a13520e0886dc829ec3fe19b565123695e096450b7c9267d95392120e2221de2",
+    "pool1-pristine-current10/current-03.npz": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333",
+    "pool1-pristine-current10/boundary-03.npz": "afd1f46b0f4864d799c789e8a67f3b48e8f8aa3eefd4a78f6229fd129313f29e",
+    "pool1-pristine-current10/view.json": "6690523ffdbc7c653ff9b1eab08d18bd4be1513e04ed4b100e84485b0f4da110",
+    "pool1-trained-current10/step-01.npz": "4cf598a1c086e3bf0dbc109d77b27071d9defac4817a3716d4e988e5672a57a0",
+    "pool1-trained-current10/current-01.npz": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333",
+    "pool1-trained-current10/boundary-01.npz": "3a6cc9c95df33496bac79d71f5e0cd450f47df2aa66a9d50dbbc9ba7c796049e",
+    "pool1-trained-current10/step-02.npz": "9332697b1dd8c9b65970ce982ddc3d3575002354a837bf280904fd7dac2490d1",
+    "pool1-trained-current10/current-02.npz": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333",
+    "pool1-trained-current10/boundary-02.npz": "d6e5c444b2d67693e9b0b6f1bbd6a8fafe497cd1f9d755276d82d8c38a99d7f7",
+    "pool1-trained-current10/step-03.npz": "76cbe0773e12c897edec82600ee9341f20cb8d1205f77251a5161f49ab396a4b",
+    "pool1-trained-current10/current-03.npz": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333",
+    "pool1-trained-current10/boundary-03.npz": "eff2e625430c4a33167509a198ad278e435ecbea33a6ee648e9ab92974fed138",
+    "pool1-trained-current10/view.json": "998fcd0bdc410e41015669c61417900135ae886797fd53c2b116a58686139031"
+  },
+  "interpretation": "Post-hoc mechanism test on the already examined study 09 test inputs. No account, fills, returns, training, or policy promotion. Applied current is an explicit diagnostic intervention, not a biologically calibrated input."
+}

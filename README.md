@@ -124,6 +124,15 @@ Recorded voltages still changed with trained memory.
 
 ![Plastic-path activity and silent recipient voltage](docs/assets/fly-paper-activation-09.png)
 
+The [recipient-stimulation experiment](docs/fly-debugger.md#recipient-stimulation-result)
+then reproduced all unstimulated controls and exposed a threshold effect:
+moderate current activated pristine recipients while trained recipients stayed
+silent; stronger current activated both and produced different neural decisions.
+All 36 observations were audited. This explains when stored memory affects output;
+no trading improvement or policy promotion is claimed.
+
+![Frozen memory under controlled recipient stimulation](docs/assets/fly-paper-stimulation-01.png)
+
 The [decoder count view](docs/fly-debugger.md#inspect-accumulated-decoder-counts)
 shows how output spikes accumulate. In the examined BUY/SELL reversal, one net
 spike equals the fixed 2 Hz threshold; a count-edit audit separates direction
