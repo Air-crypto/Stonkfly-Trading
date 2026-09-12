@@ -203,3 +203,32 @@ def test_cloud_writer_guard_blocks_overlap_and_releases_on_error(monkeypatch):
     def fail(): raise RuntimeError("failed input")
     with pytest.raises(RuntimeError): cloud.exclusive("worker",fail)
     assert owners.keys=={}
+
+
+@pytest.mark.parametrize("has_archive",[False,True])
+def test_normal_cloud_entrypoint_with_and_without_archive(monkeypatch,has_archive):
+    import cloud
+    from pathlib import Path
+    class LocalPath(type(Path())):
+        def exists(self): return has_archive
+    class Volume:
+        def reload(self): pass
+        def commit(self): pass
+    monkeypatch.setattr(cloud,"Path",LocalPath)
+    monkeypatch.setattr(cloud,"volume",Volume())
+    monkeypatch.setattr(cloud,"discovery_volume",Volume())
+    monkeypatch.setenv("PAPERLAB_FLY","1")
+    monkeypatch.setenv("PAPERLAB_UNIVERSE","1")
+    recorded={}
+    def reserve(*a,**kw):
+        recorded.update(kw)
+        return {"started":0}
+    monkeypatch.setattr("paperlab.budget.reserve",reserve)
+    monkeypatch.setattr("paperlab.budget.settle",lambda *a:{"estimated_compute_usd":0,"monthly_reserved_usd":0})
+    written={}
+    monkeypatch.setattr("paperlab.core.atomic_json",lambda p,v:written.update({str(p):v}))
+    monkeypatch.setattr("paperlab.multi.cycle",lambda *a,**kw:{"status":"paper_research"})
+    result=cloud._worker()
+    assert result["status"]==("paper_research" if has_archive else "waiting_for_universe_collector")
+    assert "/state/meme-pools-v1/latest.json" in written
+    assert recorded["limit_override"]==25 and recorded["memory_gib"]==8

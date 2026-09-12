@@ -106,7 +106,6 @@ def _worker(prepare=False,probe=False,diagnostics=False):
             train(load_ticks("/state/bootstrap.jsonl"), news, "/state/bootstrap", dataset_sha=digest("/state/bootstrap.jsonl"))
         finally:
             news.db.close()
-        from pathlib import Path
         active = Path("/state/active-policy.pt")
         active.with_suffix(".partial").write_bytes(Path("/state/bootstrap/policy.pt").read_bytes())
         active.with_suffix(".partial").replace(active)
