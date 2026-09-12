@@ -1,0 +1,3753 @@
+{
+  "kind": "paper_checkpoint_decision_comparison",
+  "plan_sha256": "e046ae7d76af4c66f1614eb733ef250e08f095c7a811b3c2cc89ee4f89e343c2",
+  "selection": {
+    "selected": null,
+    "development_equity": {
+      "pristine_frozen": 995.2952165156521,
+      "trained_frozen": 995.2952165156521,
+      "pristine_stimulated": 994.0883237433786,
+      "trained_stimulated": 997.0103069816614
+    },
+    "cash_equity": 1000,
+    "plan_sha256": "e046ae7d76af4c66f1614eb733ef250e08f095c7a811b3c2cc89ee4f89e343c2",
+    "test_simulated_before_selection": false
+  },
+  "comparisons": [
+    {
+      "pool_index": 0,
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "phase": "development",
+      "comparison": "memory_current_0",
+      "baseline_arm": "pristine_frozen",
+      "variant_arm": "trained_frozen",
+      "first_full_count_difference": null,
+      "first_decoder_difference": null,
+      "first_side_difference": null,
+      "first_fill_difference": null,
+      "rows": [
+        {
+          "decision_ts": 1789236600.0,
+          "quote_ts": 1789236519.6924503,
+          "available": false,
+          "terminal": false,
+          "baseline": null,
+          "variant": null,
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": true,
+          "baseline_equity": 250.0,
+          "variant_equity": 250.0,
+          "equity_difference": 0.0,
+          "observation_index": null,
+          "viewer_query": null
+        },
+        {
+          "decision_ts": 1789236900.0,
+          "quote_ts": 1789236826.93816,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 32.0,
+            "right_hz": 36.0,
+            "difference_hz": 4.0,
+            "gate_spikes": 24,
+            "total_spikes": 367521,
+            "spike_sha256": "6d5e4a52f167219e06d13211ab4ae9135aac6bd60f30c7588f5cc4d3005bcd5e",
+            "input_sha256": "50c1321e917233c1cf566c00e6cc0c8b45ab0d2b463e104fe35a8cfb99165aa7",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "variant": {
+            "side": "BUY",
+            "left_hz": 32.0,
+            "right_hz": 36.0,
+            "difference_hz": 4.0,
+            "gate_spikes": 24,
+            "total_spikes": 367521,
+            "spike_sha256": "6d5e4a52f167219e06d13211ab4ae9135aac6bd60f30c7588f5cc4d3005bcd5e",
+            "input_sha256": "50c1321e917233c1cf566c00e6cc0c8b45ab0d2b463e104fe35a8cfb99165aa7",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": true,
+          "baseline_equity": 250.0,
+          "variant_equity": 250.0,
+          "equity_difference": 0.0,
+          "observation_index": 0,
+          "viewer_query": "?run=pool0-trained_frozen-development&step=0&compare=pool0-pristine_frozen-development",
+          "input_match": true,
+          "full_counts_equal": true,
+          "decoder_equal": true,
+          "side_equal": true,
+          "direction_difference_hz": 0.0,
+          "gate_difference": 0
+        },
+        {
+          "decision_ts": 1789237200.0,
+          "quote_ts": 1789237127.3058186,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 32.0,
+            "right_hz": 36.0,
+            "difference_hz": 4.0,
+            "gate_spikes": 9,
+            "total_spikes": 380504,
+            "spike_sha256": "ace88a0a40e9a426eb2be6d6f4653d814b6b1c0890d2ac2f903235dd7efd85a5",
+            "input_sha256": "6c7dcaac02f112e2c23485362c359eeb5aabcf9d963a09c05927ab632e1c0a83",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "variant": {
+            "side": "BUY",
+            "left_hz": 32.0,
+            "right_hz": 36.0,
+            "difference_hz": 4.0,
+            "gate_spikes": 9,
+            "total_spikes": 380504,
+            "spike_sha256": "ace88a0a40e9a426eb2be6d6f4653d814b6b1c0890d2ac2f903235dd7efd85a5",
+            "input_sha256": "6c7dcaac02f112e2c23485362c359eeb5aabcf9d963a09c05927ab632e1c0a83",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "baseline_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "8457.345513417113396499890556",
+            "price": "0.002956010246990486",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789236900.0,
+            "fill_ts": 1789237127.3058186,
+            "simulation": true
+          },
+          "variant_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "8457.345513417113396499890556",
+            "price": "0.002956010246990486",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789236900.0,
+            "fill_ts": 1789237127.3058186,
+            "simulation": true
+          },
+          "fills_equal": true,
+          "baseline_equity": 248.64535614009162,
+          "variant_equity": 248.64535614009162,
+          "equity_difference": 0.0,
+          "observation_index": 1,
+          "viewer_query": "?run=pool0-trained_frozen-development&step=1&compare=pool0-pristine_frozen-development",
+          "input_match": true,
+          "full_counts_equal": true,
+          "decoder_equal": true,
+          "side_equal": true,
+          "direction_difference_hz": 0.0,
+          "gate_difference": 0
+        },
+        {
+          "decision_ts": 1789237500.0,
+          "quote_ts": 1789237439.4044986,
+          "available": true,
+          "terminal": true,
+          "baseline": null,
+          "variant": null,
+          "baseline_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "8557.503444659801446254918330",
+            "price": "0.002921412788399276",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789237200.0,
+            "fill_ts": 1789237439.4044986,
+            "simulation": true
+          },
+          "variant_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "8557.503444659801446254918330",
+            "price": "0.002921412788399276",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789237200.0,
+            "fill_ts": 1789237439.4044986,
+            "simulation": true
+          },
+          "fills_equal": true,
+          "baseline_equity": 247.01030698166142,
+          "variant_equity": 247.01030698166142,
+          "equity_difference": 0.0,
+          "observation_index": null,
+          "viewer_query": null
+        }
+      ]
+    },
+    {
+      "pool_index": 0,
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "phase": "development",
+      "comparison": "memory_current_10",
+      "baseline_arm": "pristine_stimulated",
+      "variant_arm": "trained_stimulated",
+      "first_full_count_difference": 1789236900.0,
+      "first_decoder_difference": 1789236900.0,
+      "first_side_difference": null,
+      "first_fill_difference": null,
+      "rows": [
+        {
+          "decision_ts": 1789236600.0,
+          "quote_ts": 1789236519.6924503,
+          "available": false,
+          "terminal": false,
+          "baseline": null,
+          "variant": null,
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": true,
+          "baseline_equity": 250.0,
+          "variant_equity": 250.0,
+          "equity_difference": 0.0,
+          "observation_index": null,
+          "viewer_query": null
+        },
+        {
+          "decision_ts": 1789236900.0,
+          "quote_ts": 1789236826.93816,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 28.0,
+            "right_hz": 34.0,
+            "difference_hz": 6.0,
+            "gate_spikes": 23,
+            "total_spikes": 373255,
+            "spike_sha256": "187584cfacc38d30f6d81e04f05612204500786eec95e68a669d1cbdd22c79fb",
+            "input_sha256": "50c1321e917233c1cf566c00e6cc0c8b45ab0d2b463e104fe35a8cfb99165aa7",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "variant": {
+            "side": "BUY",
+            "left_hz": 30.0,
+            "right_hz": 38.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 17,
+            "total_spikes": 448804,
+            "spike_sha256": "2e7d228558716f4c477b9299b53a424e1c497c0cd43800b9877d6690599a292f",
+            "input_sha256": "50c1321e917233c1cf566c00e6cc0c8b45ab0d2b463e104fe35a8cfb99165aa7",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": true,
+          "baseline_equity": 250.0,
+          "variant_equity": 250.0,
+          "equity_difference": 0.0,
+          "observation_index": 0,
+          "viewer_query": "?run=pool0-trained_stimulated-development&step=0&compare=pool0-pristine_stimulated-development",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": true,
+          "direction_difference_hz": 2.0,
+          "gate_difference": -6
+        },
+        {
+          "decision_ts": 1789237200.0,
+          "quote_ts": 1789237127.3058186,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 34.0,
+            "right_hz": 34.0,
+            "difference_hz": 0.0,
+            "gate_spikes": 12,
+            "total_spikes": 383959,
+            "spike_sha256": "0b2c1efa9b34c4db1a94597a380bd97ab2229266d5c9681a9d0634abc27984cc",
+            "input_sha256": "6c7dcaac02f112e2c23485362c359eeb5aabcf9d963a09c05927ab632e1c0a83",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "variant": {
+            "side": "HOLD",
+            "left_hz": 38.0,
+            "right_hz": 46.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 0,
+            "total_spikes": 600520,
+            "spike_sha256": "e51efe84254b9d38479c9f9c6588d8faa6c1279d5e2213d4c50311da24862fcd",
+            "input_sha256": "6c7dcaac02f112e2c23485362c359eeb5aabcf9d963a09c05927ab632e1c0a83",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "baseline_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "8457.345513417113396499890556",
+            "price": "0.002956010246990486",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789236900.0,
+            "fill_ts": 1789237127.3058186,
+            "simulation": true
+          },
+          "variant_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "8457.345513417113396499890556",
+            "price": "0.002956010246990486",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789236900.0,
+            "fill_ts": 1789237127.3058186,
+            "simulation": true
+          },
+          "fills_equal": true,
+          "baseline_equity": 248.64535614009162,
+          "variant_equity": 248.64535614009162,
+          "equity_difference": 0.0,
+          "observation_index": 1,
+          "viewer_query": "?run=pool0-trained_stimulated-development&step=1&compare=pool0-pristine_stimulated-development",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": true,
+          "direction_difference_hz": 8.0,
+          "gate_difference": -12
+        },
+        {
+          "decision_ts": 1789237500.0,
+          "quote_ts": 1789237439.4044986,
+          "available": true,
+          "terminal": true,
+          "baseline": null,
+          "variant": null,
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": true,
+          "baseline_equity": 248.3649508415698,
+          "variant_equity": 248.3649508415698,
+          "equity_difference": 0.0,
+          "observation_index": null,
+          "viewer_query": null
+        }
+      ]
+    },
+    {
+      "pool_index": 0,
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "phase": "development",
+      "comparison": "activation_pristine",
+      "baseline_arm": "pristine_frozen",
+      "variant_arm": "pristine_stimulated",
+      "first_full_count_difference": 1789236900.0,
+      "first_decoder_difference": 1789236900.0,
+      "first_side_difference": 1789237200.0,
+      "first_fill_difference": 1789237500.0,
+      "rows": [
+        {
+          "decision_ts": 1789236600.0,
+          "quote_ts": 1789236519.6924503,
+          "available": false,
+          "terminal": false,
+          "baseline": null,
+          "variant": null,
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": true,
+          "baseline_equity": 250.0,
+          "variant_equity": 250.0,
+          "equity_difference": 0.0,
+          "observation_index": null,
+          "viewer_query": null
+        },
+        {
+          "decision_ts": 1789236900.0,
+          "quote_ts": 1789236826.93816,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 32.0,
+            "right_hz": 36.0,
+            "difference_hz": 4.0,
+            "gate_spikes": 24,
+            "total_spikes": 367521,
+            "spike_sha256": "6d5e4a52f167219e06d13211ab4ae9135aac6bd60f30c7588f5cc4d3005bcd5e",
+            "input_sha256": "50c1321e917233c1cf566c00e6cc0c8b45ab0d2b463e104fe35a8cfb99165aa7",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "variant": {
+            "side": "BUY",
+            "left_hz": 28.0,
+            "right_hz": 34.0,
+            "difference_hz": 6.0,
+            "gate_spikes": 23,
+            "total_spikes": 373255,
+            "spike_sha256": "187584cfacc38d30f6d81e04f05612204500786eec95e68a669d1cbdd22c79fb",
+            "input_sha256": "50c1321e917233c1cf566c00e6cc0c8b45ab0d2b463e104fe35a8cfb99165aa7",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": true,
+          "baseline_equity": 250.0,
+          "variant_equity": 250.0,
+          "equity_difference": 0.0,
+          "observation_index": 0,
+          "viewer_query": "?run=pool0-pristine_stimulated-development&step=0&compare=pool0-pristine_frozen-development",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": true,
+          "direction_difference_hz": 2.0,
+          "gate_difference": -1
+        },
+        {
+          "decision_ts": 1789237200.0,
+          "quote_ts": 1789237127.3058186,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 32.0,
+            "right_hz": 36.0,
+            "difference_hz": 4.0,
+            "gate_spikes": 9,
+            "total_spikes": 380504,
+            "spike_sha256": "ace88a0a40e9a426eb2be6d6f4653d814b6b1c0890d2ac2f903235dd7efd85a5",
+            "input_sha256": "6c7dcaac02f112e2c23485362c359eeb5aabcf9d963a09c05927ab632e1c0a83",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "variant": {
+            "side": "HOLD",
+            "left_hz": 34.0,
+            "right_hz": 34.0,
+            "difference_hz": 0.0,
+            "gate_spikes": 12,
+            "total_spikes": 383959,
+            "spike_sha256": "0b2c1efa9b34c4db1a94597a380bd97ab2229266d5c9681a9d0634abc27984cc",
+            "input_sha256": "6c7dcaac02f112e2c23485362c359eeb5aabcf9d963a09c05927ab632e1c0a83",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "baseline_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "8457.345513417113396499890556",
+            "price": "0.002956010246990486",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789236900.0,
+            "fill_ts": 1789237127.3058186,
+            "simulation": true
+          },
+          "variant_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "8457.345513417113396499890556",
+            "price": "0.002956010246990486",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789236900.0,
+            "fill_ts": 1789237127.3058186,
+            "simulation": true
+          },
+          "fills_equal": true,
+          "baseline_equity": 248.64535614009162,
+          "variant_equity": 248.64535614009162,
+          "equity_difference": 0.0,
+          "observation_index": 1,
+          "viewer_query": "?run=pool0-pristine_stimulated-development&step=1&compare=pool0-pristine_frozen-development",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": false,
+          "direction_difference_hz": -4.0,
+          "gate_difference": 3
+        },
+        {
+          "decision_ts": 1789237500.0,
+          "quote_ts": 1789237439.4044986,
+          "available": true,
+          "terminal": true,
+          "baseline": null,
+          "variant": null,
+          "baseline_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "8557.503444659801446254918330",
+            "price": "0.002921412788399276",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789237200.0,
+            "fill_ts": 1789237439.4044986,
+            "simulation": true
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": false,
+          "baseline_equity": 247.01030698166142,
+          "variant_equity": 248.3649508415698,
+          "equity_difference": 1.3546438599083785,
+          "observation_index": null,
+          "viewer_query": null
+        }
+      ]
+    },
+    {
+      "pool_index": 0,
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "phase": "development",
+      "comparison": "activation_trained",
+      "baseline_arm": "trained_frozen",
+      "variant_arm": "trained_stimulated",
+      "first_full_count_difference": 1789236900.0,
+      "first_decoder_difference": 1789236900.0,
+      "first_side_difference": 1789237200.0,
+      "first_fill_difference": 1789237500.0,
+      "rows": [
+        {
+          "decision_ts": 1789236600.0,
+          "quote_ts": 1789236519.6924503,
+          "available": false,
+          "terminal": false,
+          "baseline": null,
+          "variant": null,
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": true,
+          "baseline_equity": 250.0,
+          "variant_equity": 250.0,
+          "equity_difference": 0.0,
+          "observation_index": null,
+          "viewer_query": null
+        },
+        {
+          "decision_ts": 1789236900.0,
+          "quote_ts": 1789236826.93816,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 32.0,
+            "right_hz": 36.0,
+            "difference_hz": 4.0,
+            "gate_spikes": 24,
+            "total_spikes": 367521,
+            "spike_sha256": "6d5e4a52f167219e06d13211ab4ae9135aac6bd60f30c7588f5cc4d3005bcd5e",
+            "input_sha256": "50c1321e917233c1cf566c00e6cc0c8b45ab0d2b463e104fe35a8cfb99165aa7",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "variant": {
+            "side": "BUY",
+            "left_hz": 30.0,
+            "right_hz": 38.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 17,
+            "total_spikes": 448804,
+            "spike_sha256": "2e7d228558716f4c477b9299b53a424e1c497c0cd43800b9877d6690599a292f",
+            "input_sha256": "50c1321e917233c1cf566c00e6cc0c8b45ab0d2b463e104fe35a8cfb99165aa7",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": true,
+          "baseline_equity": 250.0,
+          "variant_equity": 250.0,
+          "equity_difference": 0.0,
+          "observation_index": 0,
+          "viewer_query": "?run=pool0-trained_stimulated-development&step=0&compare=pool0-trained_frozen-development",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": true,
+          "direction_difference_hz": 4.0,
+          "gate_difference": -7
+        },
+        {
+          "decision_ts": 1789237200.0,
+          "quote_ts": 1789237127.3058186,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 32.0,
+            "right_hz": 36.0,
+            "difference_hz": 4.0,
+            "gate_spikes": 9,
+            "total_spikes": 380504,
+            "spike_sha256": "ace88a0a40e9a426eb2be6d6f4653d814b6b1c0890d2ac2f903235dd7efd85a5",
+            "input_sha256": "6c7dcaac02f112e2c23485362c359eeb5aabcf9d963a09c05927ab632e1c0a83",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "variant": {
+            "side": "HOLD",
+            "left_hz": 38.0,
+            "right_hz": 46.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 0,
+            "total_spikes": 600520,
+            "spike_sha256": "e51efe84254b9d38479c9f9c6588d8faa6c1279d5e2213d4c50311da24862fcd",
+            "input_sha256": "6c7dcaac02f112e2c23485362c359eeb5aabcf9d963a09c05927ab632e1c0a83",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "baseline_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "8457.345513417113396499890556",
+            "price": "0.002956010246990486",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789236900.0,
+            "fill_ts": 1789237127.3058186,
+            "simulation": true
+          },
+          "variant_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "8457.345513417113396499890556",
+            "price": "0.002956010246990486",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789236900.0,
+            "fill_ts": 1789237127.3058186,
+            "simulation": true
+          },
+          "fills_equal": true,
+          "baseline_equity": 248.64535614009162,
+          "variant_equity": 248.64535614009162,
+          "equity_difference": 0.0,
+          "observation_index": 1,
+          "viewer_query": "?run=pool0-trained_stimulated-development&step=1&compare=pool0-trained_frozen-development",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": false,
+          "direction_difference_hz": 4.0,
+          "gate_difference": -9
+        },
+        {
+          "decision_ts": 1789237500.0,
+          "quote_ts": 1789237439.4044986,
+          "available": true,
+          "terminal": true,
+          "baseline": null,
+          "variant": null,
+          "baseline_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "8557.503444659801446254918330",
+            "price": "0.002921412788399276",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789237200.0,
+            "fill_ts": 1789237439.4044986,
+            "simulation": true
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": false,
+          "baseline_equity": 247.01030698166142,
+          "variant_equity": 248.3649508415698,
+          "equity_difference": 1.3546438599083785,
+          "observation_index": null,
+          "viewer_query": null
+        }
+      ]
+    },
+    {
+      "pool_index": 0,
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "phase": "test",
+      "comparison": "memory_current_0",
+      "baseline_arm": "pristine_frozen",
+      "variant_arm": "trained_frozen",
+      "first_full_count_difference": 1789237800.0,
+      "first_decoder_difference": 1789237800.0,
+      "first_side_difference": null,
+      "first_fill_difference": null,
+      "rows": [
+        {
+          "decision_ts": 1789237500.0,
+          "quote_ts": 1789237439.4044986,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 36.0,
+            "right_hz": 38.0,
+            "difference_hz": 2.0,
+            "gate_spikes": 26,
+            "total_spikes": 370607,
+            "spike_sha256": "28b90f215ca1b8c5dabfbd76b312345a1d2f64497dee5bdbb7132736cd8cb167",
+            "input_sha256": "be822d65c1dc49dfb90249e7aaa48a534dda3c36bd35d68471fa00b7ec422e84",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "variant": {
+            "side": "BUY",
+            "left_hz": 36.0,
+            "right_hz": 38.0,
+            "difference_hz": 2.0,
+            "gate_spikes": 26,
+            "total_spikes": 370607,
+            "spike_sha256": "28b90f215ca1b8c5dabfbd76b312345a1d2f64497dee5bdbb7132736cd8cb167",
+            "input_sha256": "be822d65c1dc49dfb90249e7aaa48a534dda3c36bd35d68471fa00b7ec422e84",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": true,
+          "baseline_equity": 250.0,
+          "variant_equity": 250.0,
+          "equity_difference": 0.0,
+          "observation_index": 0,
+          "viewer_query": "?run=pool0-trained_frozen&step=0&compare=pool0-pristine_frozen",
+          "input_match": true,
+          "full_counts_equal": true,
+          "decoder_equal": true,
+          "side_equal": true,
+          "direction_difference_hz": 0.0,
+          "gate_difference": 0
+        },
+        {
+          "decision_ts": 1789237800.0,
+          "quote_ts": 1789237739.9254973,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 26.0,
+            "right_hz": 36.0,
+            "difference_hz": 10.0,
+            "gate_spikes": 4,
+            "total_spikes": 441683,
+            "spike_sha256": "d8f94b261177413e206ccc74f01327bde328099adc4f3a9360faf3deeb8e5510",
+            "input_sha256": "707ee2ff40501aeb0b01471f962980d209a9afc37a2fbb676cfa4c73d3083dd4",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "variant": {
+            "side": "BUY",
+            "left_hz": 28.0,
+            "right_hz": 38.0,
+            "difference_hz": 10.0,
+            "gate_spikes": 4,
+            "total_spikes": 441474,
+            "spike_sha256": "270c3dd514b27a5dac36d42a8cf4083c97ea9b65b5f9dcb04f3993abd0f8be83",
+            "input_sha256": "707ee2ff40501aeb0b01471f962980d209a9afc37a2fbb676cfa4c73d3083dd4",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "baseline_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "8684.971868618620575404706815",
+            "price": "0.002878535518385778",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789237500.0,
+            "fill_ts": 1789237739.9254973,
+            "simulation": true
+          },
+          "variant_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "8684.971868618620575404706815",
+            "price": "0.002878535518385778",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789237500.0,
+            "fill_ts": 1789237739.9254973,
+            "simulation": true
+          },
+          "fills_equal": true,
+          "baseline_equity": 248.64535614009162,
+          "variant_equity": 248.64535614009162,
+          "equity_difference": 0.0,
+          "observation_index": 1,
+          "viewer_query": "?run=pool0-trained_frozen&step=1&compare=pool0-pristine_frozen",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": true,
+          "direction_difference_hz": 0.0,
+          "gate_difference": 0
+        },
+        {
+          "decision_ts": 1789238100.0,
+          "quote_ts": 1789238048.9059582,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 34.0,
+            "right_hz": 38.0,
+            "difference_hz": 4.0,
+            "gate_spikes": 0,
+            "total_spikes": 602424,
+            "spike_sha256": "b1376538e905bddc009a7a095b56ec4e28b5cbcfa2769608738ca23e42ffaf3e",
+            "input_sha256": "70e5d535bc205b2b52ea2a143db5ef0fdfa9520791b5982bc0e9595cb0e8096e",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "variant": {
+            "side": "HOLD",
+            "left_hz": 40.0,
+            "right_hz": 40.0,
+            "difference_hz": 0.0,
+            "gate_spikes": 0,
+            "total_spikes": 604392,
+            "spike_sha256": "c0ecac3477e07fd0ad1955cf8f6562b2d2da0342b1fc471878ec69b0fc87b999",
+            "input_sha256": "70e5d535bc205b2b52ea2a143db5ef0fdfa9520791b5982bc0e9595cb0e8096e",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "baseline_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "8771.730232237089673595473749",
+            "price": "0.0028500648490217134",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789237800.0,
+            "fill_ts": 1789238048.9059582,
+            "simulation": true
+          },
+          "variant_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "8771.730232237089673595473749",
+            "price": "0.0028500648490217134",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789237800.0,
+            "fill_ts": 1789238048.9059582,
+            "simulation": true
+          },
+          "fills_equal": true,
+          "baseline_equity": 247.05375282754503,
+          "variant_equity": 247.05375282754503,
+          "equity_difference": 0.0,
+          "observation_index": 2,
+          "viewer_query": "?run=pool0-trained_frozen&step=2&compare=pool0-pristine_frozen",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": true,
+          "direction_difference_hz": -4.0,
+          "gate_difference": 0
+        },
+        {
+          "decision_ts": 1789238400.0,
+          "quote_ts": 1789238328.6113563,
+          "available": true,
+          "terminal": true,
+          "baseline": null,
+          "variant": null,
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": true,
+          "baseline_equity": 247.93287772539654,
+          "variant_equity": 247.93287772539654,
+          "equity_difference": 0.0,
+          "observation_index": null,
+          "viewer_query": null
+        }
+      ]
+    },
+    {
+      "pool_index": 0,
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "phase": "test",
+      "comparison": "memory_current_10",
+      "baseline_arm": "pristine_stimulated",
+      "variant_arm": "trained_stimulated",
+      "first_full_count_difference": 1789237500.0,
+      "first_decoder_difference": 1789237500.0,
+      "first_side_difference": null,
+      "first_fill_difference": null,
+      "rows": [
+        {
+          "decision_ts": 1789237500.0,
+          "quote_ts": 1789237439.4044986,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 28.0,
+            "right_hz": 34.0,
+            "difference_hz": 6.0,
+            "gate_spikes": 24,
+            "total_spikes": 373939,
+            "spike_sha256": "355a1b825c8bc2f3bf0bedb65af4068918cf79a6762164964d2000a0b3f092fa",
+            "input_sha256": "be822d65c1dc49dfb90249e7aaa48a534dda3c36bd35d68471fa00b7ec422e84",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "variant": {
+            "side": "BUY",
+            "left_hz": 30.0,
+            "right_hz": 34.0,
+            "difference_hz": 4.0,
+            "gate_spikes": 21,
+            "total_spikes": 373444,
+            "spike_sha256": "35e0bcb21fb9a9db2eeb8299773e688eea4b2977f1a2f41c8c42bf6e883dfd21",
+            "input_sha256": "be822d65c1dc49dfb90249e7aaa48a534dda3c36bd35d68471fa00b7ec422e84",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": true,
+          "baseline_equity": 250.0,
+          "variant_equity": 250.0,
+          "equity_difference": 0.0,
+          "observation_index": 0,
+          "viewer_query": "?run=pool0-trained_stimulated&step=0&compare=pool0-pristine_stimulated",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": true,
+          "direction_difference_hz": -2.0,
+          "gate_difference": -3
+        },
+        {
+          "decision_ts": 1789237800.0,
+          "quote_ts": 1789237739.9254973,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 28.0,
+            "right_hz": 36.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 4,
+            "total_spikes": 382881,
+            "spike_sha256": "5f22e3dc349519a0d2c9318f40ed0d7bd43daecfcfea476111527462a391bac4",
+            "input_sha256": "707ee2ff40501aeb0b01471f962980d209a9afc37a2fbb676cfa4c73d3083dd4",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "variant": {
+            "side": "BUY",
+            "left_hz": 32.0,
+            "right_hz": 34.0,
+            "difference_hz": 2.0,
+            "gate_spikes": 9,
+            "total_spikes": 380685,
+            "spike_sha256": "4e4e92b6159335a80129d12f06c51d5e244964ce056cb11174de1edb821e22b3",
+            "input_sha256": "707ee2ff40501aeb0b01471f962980d209a9afc37a2fbb676cfa4c73d3083dd4",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "baseline_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "8684.971868618620575404706815",
+            "price": "0.002878535518385778",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789237500.0,
+            "fill_ts": 1789237739.9254973,
+            "simulation": true
+          },
+          "variant_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "8684.971868618620575404706815",
+            "price": "0.002878535518385778",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789237500.0,
+            "fill_ts": 1789237739.9254973,
+            "simulation": true
+          },
+          "fills_equal": true,
+          "baseline_equity": 248.64535614009162,
+          "variant_equity": 248.64535614009162,
+          "equity_difference": 0.0,
+          "observation_index": 1,
+          "viewer_query": "?run=pool0-trained_stimulated&step=1&compare=pool0-pristine_stimulated",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": true,
+          "direction_difference_hz": -6.0,
+          "gate_difference": 5
+        },
+        {
+          "decision_ts": 1789238100.0,
+          "quote_ts": 1789238048.9059582,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 26.0,
+            "right_hz": 42.0,
+            "difference_hz": 16.0,
+            "gate_spikes": 4,
+            "total_spikes": 589560,
+            "spike_sha256": "8ec2b87d9bcaf604b5d8a8c275c5438d6e6fc1ed822529dc67aa438eaf217650",
+            "input_sha256": "70e5d535bc205b2b52ea2a143db5ef0fdfa9520791b5982bc0e9595cb0e8096e",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "variant": {
+            "side": "BUY",
+            "left_hz": 28.0,
+            "right_hz": 36.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 8,
+            "total_spikes": 386361,
+            "spike_sha256": "2fd052f0acd2570dd9e8c46a04824561855f1fb5d16fc48c261a6a4ff01696f8",
+            "input_sha256": "70e5d535bc205b2b52ea2a143db5ef0fdfa9520791b5982bc0e9595cb0e8096e",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "baseline_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "8771.730232237089673595473749",
+            "price": "0.0028500648490217134",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789237800.0,
+            "fill_ts": 1789238048.9059582,
+            "simulation": true
+          },
+          "variant_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "8771.730232237089673595473749",
+            "price": "0.0028500648490217134",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789237800.0,
+            "fill_ts": 1789238048.9059582,
+            "simulation": true
+          },
+          "fills_equal": true,
+          "baseline_equity": 247.05375282754503,
+          "variant_equity": 247.05375282754503,
+          "equity_difference": 0.0,
+          "observation_index": 2,
+          "viewer_query": "?run=pool0-trained_stimulated&step=2&compare=pool0-pristine_stimulated",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": true,
+          "direction_difference_hz": -8.0,
+          "gate_difference": 4
+        },
+        {
+          "decision_ts": 1789238400.0,
+          "quote_ts": 1789238328.6113563,
+          "available": true,
+          "terminal": true,
+          "baseline": null,
+          "variant": null,
+          "baseline_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "8612.920852469586380539431822",
+            "price": "0.002902615782523038",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789238100.0,
+            "fill_ts": 1789238328.6113563,
+            "simulation": true
+          },
+          "variant_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "8612.920852469586380539431822",
+            "price": "0.002902615782523038",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789238100.0,
+            "fill_ts": 1789238328.6113563,
+            "simulation": true
+          },
+          "fills_equal": true,
+          "baseline_equity": 246.57823386548816,
+          "variant_equity": 246.57823386548816,
+          "equity_difference": 0.0,
+          "observation_index": null,
+          "viewer_query": null
+        }
+      ]
+    },
+    {
+      "pool_index": 0,
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "phase": "test",
+      "comparison": "activation_pristine",
+      "baseline_arm": "pristine_frozen",
+      "variant_arm": "pristine_stimulated",
+      "first_full_count_difference": 1789237500.0,
+      "first_decoder_difference": 1789237500.0,
+      "first_side_difference": 1789238100.0,
+      "first_fill_difference": 1789238400.0,
+      "rows": [
+        {
+          "decision_ts": 1789237500.0,
+          "quote_ts": 1789237439.4044986,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 36.0,
+            "right_hz": 38.0,
+            "difference_hz": 2.0,
+            "gate_spikes": 26,
+            "total_spikes": 370607,
+            "spike_sha256": "28b90f215ca1b8c5dabfbd76b312345a1d2f64497dee5bdbb7132736cd8cb167",
+            "input_sha256": "be822d65c1dc49dfb90249e7aaa48a534dda3c36bd35d68471fa00b7ec422e84",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "variant": {
+            "side": "BUY",
+            "left_hz": 28.0,
+            "right_hz": 34.0,
+            "difference_hz": 6.0,
+            "gate_spikes": 24,
+            "total_spikes": 373939,
+            "spike_sha256": "355a1b825c8bc2f3bf0bedb65af4068918cf79a6762164964d2000a0b3f092fa",
+            "input_sha256": "be822d65c1dc49dfb90249e7aaa48a534dda3c36bd35d68471fa00b7ec422e84",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": true,
+          "baseline_equity": 250.0,
+          "variant_equity": 250.0,
+          "equity_difference": 0.0,
+          "observation_index": 0,
+          "viewer_query": "?run=pool0-pristine_stimulated&step=0&compare=pool0-pristine_frozen",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": true,
+          "direction_difference_hz": 4.0,
+          "gate_difference": -2
+        },
+        {
+          "decision_ts": 1789237800.0,
+          "quote_ts": 1789237739.9254973,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 26.0,
+            "right_hz": 36.0,
+            "difference_hz": 10.0,
+            "gate_spikes": 4,
+            "total_spikes": 441683,
+            "spike_sha256": "d8f94b261177413e206ccc74f01327bde328099adc4f3a9360faf3deeb8e5510",
+            "input_sha256": "707ee2ff40501aeb0b01471f962980d209a9afc37a2fbb676cfa4c73d3083dd4",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "variant": {
+            "side": "BUY",
+            "left_hz": 28.0,
+            "right_hz": 36.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 4,
+            "total_spikes": 382881,
+            "spike_sha256": "5f22e3dc349519a0d2c9318f40ed0d7bd43daecfcfea476111527462a391bac4",
+            "input_sha256": "707ee2ff40501aeb0b01471f962980d209a9afc37a2fbb676cfa4c73d3083dd4",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "baseline_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "8684.971868618620575404706815",
+            "price": "0.002878535518385778",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789237500.0,
+            "fill_ts": 1789237739.9254973,
+            "simulation": true
+          },
+          "variant_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "8684.971868618620575404706815",
+            "price": "0.002878535518385778",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789237500.0,
+            "fill_ts": 1789237739.9254973,
+            "simulation": true
+          },
+          "fills_equal": true,
+          "baseline_equity": 248.64535614009162,
+          "variant_equity": 248.64535614009162,
+          "equity_difference": 0.0,
+          "observation_index": 1,
+          "viewer_query": "?run=pool0-pristine_stimulated&step=1&compare=pool0-pristine_frozen",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": true,
+          "direction_difference_hz": -2.0,
+          "gate_difference": 0
+        },
+        {
+          "decision_ts": 1789238100.0,
+          "quote_ts": 1789238048.9059582,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 34.0,
+            "right_hz": 38.0,
+            "difference_hz": 4.0,
+            "gate_spikes": 0,
+            "total_spikes": 602424,
+            "spike_sha256": "b1376538e905bddc009a7a095b56ec4e28b5cbcfa2769608738ca23e42ffaf3e",
+            "input_sha256": "70e5d535bc205b2b52ea2a143db5ef0fdfa9520791b5982bc0e9595cb0e8096e",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "variant": {
+            "side": "BUY",
+            "left_hz": 26.0,
+            "right_hz": 42.0,
+            "difference_hz": 16.0,
+            "gate_spikes": 4,
+            "total_spikes": 589560,
+            "spike_sha256": "8ec2b87d9bcaf604b5d8a8c275c5438d6e6fc1ed822529dc67aa438eaf217650",
+            "input_sha256": "70e5d535bc205b2b52ea2a143db5ef0fdfa9520791b5982bc0e9595cb0e8096e",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "baseline_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "8771.730232237089673595473749",
+            "price": "0.0028500648490217134",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789237800.0,
+            "fill_ts": 1789238048.9059582,
+            "simulation": true
+          },
+          "variant_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "8771.730232237089673595473749",
+            "price": "0.0028500648490217134",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789237800.0,
+            "fill_ts": 1789238048.9059582,
+            "simulation": true
+          },
+          "fills_equal": true,
+          "baseline_equity": 247.05375282754503,
+          "variant_equity": 247.05375282754503,
+          "equity_difference": 0.0,
+          "observation_index": 2,
+          "viewer_query": "?run=pool0-pristine_stimulated&step=2&compare=pool0-pristine_frozen",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": false,
+          "direction_difference_hz": 12.0,
+          "gate_difference": 4
+        },
+        {
+          "decision_ts": 1789238400.0,
+          "quote_ts": 1789238328.6113563,
+          "available": true,
+          "terminal": true,
+          "baseline": null,
+          "variant": null,
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "8612.920852469586380539431822",
+            "price": "0.002902615782523038",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789238100.0,
+            "fill_ts": 1789238328.6113563,
+            "simulation": true
+          },
+          "fills_equal": false,
+          "baseline_equity": 247.93287772539654,
+          "variant_equity": 246.57823386548816,
+          "equity_difference": -1.3546438599083785,
+          "observation_index": null,
+          "viewer_query": null
+        }
+      ]
+    },
+    {
+      "pool_index": 0,
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "phase": "test",
+      "comparison": "activation_trained",
+      "baseline_arm": "trained_frozen",
+      "variant_arm": "trained_stimulated",
+      "first_full_count_difference": 1789237500.0,
+      "first_decoder_difference": 1789237500.0,
+      "first_side_difference": 1789238100.0,
+      "first_fill_difference": 1789238400.0,
+      "rows": [
+        {
+          "decision_ts": 1789237500.0,
+          "quote_ts": 1789237439.4044986,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 36.0,
+            "right_hz": 38.0,
+            "difference_hz": 2.0,
+            "gate_spikes": 26,
+            "total_spikes": 370607,
+            "spike_sha256": "28b90f215ca1b8c5dabfbd76b312345a1d2f64497dee5bdbb7132736cd8cb167",
+            "input_sha256": "be822d65c1dc49dfb90249e7aaa48a534dda3c36bd35d68471fa00b7ec422e84",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "variant": {
+            "side": "BUY",
+            "left_hz": 30.0,
+            "right_hz": 34.0,
+            "difference_hz": 4.0,
+            "gate_spikes": 21,
+            "total_spikes": 373444,
+            "spike_sha256": "35e0bcb21fb9a9db2eeb8299773e688eea4b2977f1a2f41c8c42bf6e883dfd21",
+            "input_sha256": "be822d65c1dc49dfb90249e7aaa48a534dda3c36bd35d68471fa00b7ec422e84",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": true,
+          "baseline_equity": 250.0,
+          "variant_equity": 250.0,
+          "equity_difference": 0.0,
+          "observation_index": 0,
+          "viewer_query": "?run=pool0-trained_stimulated&step=0&compare=pool0-trained_frozen",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": true,
+          "direction_difference_hz": 2.0,
+          "gate_difference": -5
+        },
+        {
+          "decision_ts": 1789237800.0,
+          "quote_ts": 1789237739.9254973,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 28.0,
+            "right_hz": 38.0,
+            "difference_hz": 10.0,
+            "gate_spikes": 4,
+            "total_spikes": 441474,
+            "spike_sha256": "270c3dd514b27a5dac36d42a8cf4083c97ea9b65b5f9dcb04f3993abd0f8be83",
+            "input_sha256": "707ee2ff40501aeb0b01471f962980d209a9afc37a2fbb676cfa4c73d3083dd4",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "variant": {
+            "side": "BUY",
+            "left_hz": 32.0,
+            "right_hz": 34.0,
+            "difference_hz": 2.0,
+            "gate_spikes": 9,
+            "total_spikes": 380685,
+            "spike_sha256": "4e4e92b6159335a80129d12f06c51d5e244964ce056cb11174de1edb821e22b3",
+            "input_sha256": "707ee2ff40501aeb0b01471f962980d209a9afc37a2fbb676cfa4c73d3083dd4",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "baseline_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "8684.971868618620575404706815",
+            "price": "0.002878535518385778",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789237500.0,
+            "fill_ts": 1789237739.9254973,
+            "simulation": true
+          },
+          "variant_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "8684.971868618620575404706815",
+            "price": "0.002878535518385778",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789237500.0,
+            "fill_ts": 1789237739.9254973,
+            "simulation": true
+          },
+          "fills_equal": true,
+          "baseline_equity": 248.64535614009162,
+          "variant_equity": 248.64535614009162,
+          "equity_difference": 0.0,
+          "observation_index": 1,
+          "viewer_query": "?run=pool0-trained_stimulated&step=1&compare=pool0-trained_frozen",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": true,
+          "direction_difference_hz": -8.0,
+          "gate_difference": 5
+        },
+        {
+          "decision_ts": 1789238100.0,
+          "quote_ts": 1789238048.9059582,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 40.0,
+            "right_hz": 40.0,
+            "difference_hz": 0.0,
+            "gate_spikes": 0,
+            "total_spikes": 604392,
+            "spike_sha256": "c0ecac3477e07fd0ad1955cf8f6562b2d2da0342b1fc471878ec69b0fc87b999",
+            "input_sha256": "70e5d535bc205b2b52ea2a143db5ef0fdfa9520791b5982bc0e9595cb0e8096e",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "variant": {
+            "side": "BUY",
+            "left_hz": 28.0,
+            "right_hz": 36.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 8,
+            "total_spikes": 386361,
+            "spike_sha256": "2fd052f0acd2570dd9e8c46a04824561855f1fb5d16fc48c261a6a4ff01696f8",
+            "input_sha256": "70e5d535bc205b2b52ea2a143db5ef0fdfa9520791b5982bc0e9595cb0e8096e",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "baseline_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "8771.730232237089673595473749",
+            "price": "0.0028500648490217134",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789237800.0,
+            "fill_ts": 1789238048.9059582,
+            "simulation": true
+          },
+          "variant_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "8771.730232237089673595473749",
+            "price": "0.0028500648490217134",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789237800.0,
+            "fill_ts": 1789238048.9059582,
+            "simulation": true
+          },
+          "fills_equal": true,
+          "baseline_equity": 247.05375282754503,
+          "variant_equity": 247.05375282754503,
+          "equity_difference": 0.0,
+          "observation_index": 2,
+          "viewer_query": "?run=pool0-trained_stimulated&step=2&compare=pool0-trained_frozen",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": false,
+          "direction_difference_hz": 8.0,
+          "gate_difference": 8
+        },
+        {
+          "decision_ts": 1789238400.0,
+          "quote_ts": 1789238328.6113563,
+          "available": true,
+          "terminal": true,
+          "baseline": null,
+          "variant": null,
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "8612.920852469586380539431822",
+            "price": "0.002902615782523038",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789238100.0,
+            "fill_ts": 1789238328.6113563,
+            "simulation": true
+          },
+          "fills_equal": false,
+          "baseline_equity": 247.93287772539654,
+          "variant_equity": 246.57823386548816,
+          "equity_difference": -1.3546438599083785,
+          "observation_index": null,
+          "viewer_query": null
+        }
+      ]
+    },
+    {
+      "pool_index": 1,
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "phase": "development",
+      "comparison": "memory_current_0",
+      "baseline_arm": "pristine_frozen",
+      "variant_arm": "trained_frozen",
+      "first_full_count_difference": 1789236900.0,
+      "first_decoder_difference": 1789237200.0,
+      "first_side_difference": null,
+      "first_fill_difference": null,
+      "rows": [
+        {
+          "decision_ts": 1789236600.0,
+          "quote_ts": 1789236519.6924503,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 36.0,
+            "right_hz": 36.0,
+            "difference_hz": 0.0,
+            "gate_spikes": 16,
+            "total_spikes": 377224,
+            "spike_sha256": "d2924678624a2f1c6c41f9667b0bf4b21d8085e1dffba1a2b05460b85d939f82",
+            "input_sha256": "ac16d1d424c3453b4af149854c59864dbc9d72335110c8e734e130d430cdda76",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "variant": {
+            "side": "HOLD",
+            "left_hz": 36.0,
+            "right_hz": 36.0,
+            "difference_hz": 0.0,
+            "gate_spikes": 16,
+            "total_spikes": 377224,
+            "spike_sha256": "d2924678624a2f1c6c41f9667b0bf4b21d8085e1dffba1a2b05460b85d939f82",
+            "input_sha256": "ac16d1d424c3453b4af149854c59864dbc9d72335110c8e734e130d430cdda76",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": true,
+          "baseline_equity": 250.0,
+          "variant_equity": 250.0,
+          "equity_difference": 0.0,
+          "observation_index": 0,
+          "viewer_query": "?run=pool1-trained_frozen-development&step=0&compare=pool1-pristine_frozen-development",
+          "input_match": true,
+          "full_counts_equal": true,
+          "decoder_equal": true,
+          "side_equal": true,
+          "direction_difference_hz": 0.0,
+          "gate_difference": 0
+        },
+        {
+          "decision_ts": 1789236900.0,
+          "quote_ts": 1789236826.93816,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 30.0,
+            "right_hz": 32.0,
+            "difference_hz": 2.0,
+            "gate_spikes": 10,
+            "total_spikes": 394840,
+            "spike_sha256": "fce3db9e78889688980407073496fbc987aacfccf4b606226b55677f69c45cb6",
+            "input_sha256": "7bf1e109ce46f1128818d8051a4643bb0a49440359d4d7fafb2f936853b26f8d",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "variant": {
+            "side": "BUY",
+            "left_hz": 30.0,
+            "right_hz": 32.0,
+            "difference_hz": 2.0,
+            "gate_spikes": 10,
+            "total_spikes": 394820,
+            "spike_sha256": "06a073e3031bd0af40baabb64edc6a4cc6b012197770e68e5b1bcf05f0e1214d",
+            "input_sha256": "7bf1e109ce46f1128818d8051a4643bb0a49440359d4d7fafb2f936853b26f8d",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": true,
+          "baseline_equity": 250.0,
+          "variant_equity": 250.0,
+          "equity_difference": 0.0,
+          "observation_index": 1,
+          "viewer_query": "?run=pool1-trained_frozen-development&step=1&compare=pool1-pristine_frozen-development",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": true,
+          "side_equal": true,
+          "direction_difference_hz": 0.0,
+          "gate_difference": 0
+        },
+        {
+          "decision_ts": 1789237200.0,
+          "quote_ts": 1789237127.3058186,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 36.0,
+            "right_hz": 40.0,
+            "difference_hz": 4.0,
+            "gate_spikes": 0,
+            "total_spikes": 607968,
+            "spike_sha256": "1c8360658f588b5d329ab1b2807f1c06968fb27eaa323d3d673cf953c3ab668c",
+            "input_sha256": "9f26901a2b956a9adf5f14328e12a5f8ab41f210ed052078c66358460854ec85",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "variant": {
+            "side": "HOLD",
+            "left_hz": 34.0,
+            "right_hz": 42.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 0,
+            "total_spikes": 605815,
+            "spike_sha256": "3625aba3711e1d5355a33020f269c5d87a09e0cb7cae82b46be88fa114971482",
+            "input_sha256": "9f26901a2b956a9adf5f14328e12a5f8ab41f210ed052078c66358460854ec85",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "baseline_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "1810.871389309258067073949665",
+            "price": "0.013805508302572522",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789236900.0,
+            "fill_ts": 1789237127.3058186,
+            "simulation": true
+          },
+          "variant_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "1810.871389309258067073949665",
+            "price": "0.013805508302572522",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789236900.0,
+            "fill_ts": 1789237127.3058186,
+            "simulation": true
+          },
+          "fills_equal": true,
+          "baseline_equity": 248.64535614009162,
+          "variant_equity": 248.64535614009162,
+          "equity_difference": 0.0,
+          "observation_index": 2,
+          "viewer_query": "?run=pool1-trained_frozen-development&step=2&compare=pool1-pristine_frozen-development",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": true,
+          "direction_difference_hz": 4.0,
+          "gate_difference": 0
+        },
+        {
+          "decision_ts": 1789237500.0,
+          "quote_ts": 1789237439.4044986,
+          "available": true,
+          "terminal": true,
+          "baseline": null,
+          "variant": null,
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": true,
+          "baseline_equity": 248.2849095339907,
+          "variant_equity": 248.2849095339907,
+          "equity_difference": 0.0,
+          "observation_index": null,
+          "viewer_query": null
+        }
+      ]
+    },
+    {
+      "pool_index": 1,
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "phase": "development",
+      "comparison": "memory_current_10",
+      "baseline_arm": "pristine_stimulated",
+      "variant_arm": "trained_stimulated",
+      "first_full_count_difference": 1789236600.0,
+      "first_decoder_difference": 1789236600.0,
+      "first_side_difference": 1789236600.0,
+      "first_fill_difference": 1789236900.0,
+      "rows": [
+        {
+          "decision_ts": 1789236600.0,
+          "quote_ts": 1789236519.6924503,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 32.0,
+            "right_hz": 34.0,
+            "difference_hz": 2.0,
+            "gate_spikes": 21,
+            "total_spikes": 407509,
+            "spike_sha256": "3755c10c01083da7199792f319ebbc5b20b7b58c3a882c099d2d46d26bedfa33",
+            "input_sha256": "ac16d1d424c3453b4af149854c59864dbc9d72335110c8e734e130d430cdda76",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "variant": {
+            "side": "SELL",
+            "left_hz": 40.0,
+            "right_hz": 38.0,
+            "difference_hz": -2.0,
+            "gate_spikes": 11,
+            "total_spikes": 518710,
+            "spike_sha256": "2f6af8da082bdda432c2e9dc6ce0aea9a3435c39d18d07ce2bcae70075e6c38f",
+            "input_sha256": "ac16d1d424c3453b4af149854c59864dbc9d72335110c8e734e130d430cdda76",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": true,
+          "baseline_equity": 250.0,
+          "variant_equity": 250.0,
+          "equity_difference": 0.0,
+          "observation_index": 0,
+          "viewer_query": "?run=pool1-trained_stimulated-development&step=0&compare=pool1-pristine_stimulated-development",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": false,
+          "direction_difference_hz": -4.0,
+          "gate_difference": -10
+        },
+        {
+          "decision_ts": 1789236900.0,
+          "quote_ts": 1789236826.93816,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "SELL",
+            "left_hz": 46.0,
+            "right_hz": 44.0,
+            "difference_hz": -2.0,
+            "gate_spikes": 1,
+            "total_spikes": 603449,
+            "spike_sha256": "8d542da3730ae4c0267b7ee18a2b5aeea053e343e89868950ceecbc646bdb1ac",
+            "input_sha256": "7bf1e109ce46f1128818d8051a4643bb0a49440359d4d7fafb2f936853b26f8d",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "variant": {
+            "side": "HOLD",
+            "left_hz": 38.0,
+            "right_hz": 40.0,
+            "difference_hz": 2.0,
+            "gate_spikes": 0,
+            "total_spikes": 603387,
+            "spike_sha256": "a94afc2130e764e2856b8629d7dbb8f683c67d3aeb8d0f0ae9e32faa19252d7b",
+            "input_sha256": "7bf1e109ce46f1128818d8051a4643bb0a49440359d4d7fafb2f936853b26f8d",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "baseline_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "1590.011233237412333779109407",
+            "price": "0.015723159357244068",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789236600.0,
+            "fill_ts": 1789236826.93816,
+            "simulation": true
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": false,
+          "baseline_equity": 248.64535614009162,
+          "variant_equity": 250.0,
+          "equity_difference": 1.3546438599083785,
+          "observation_index": 1,
+          "viewer_query": "?run=pool1-trained_stimulated-development&step=1&compare=pool1-pristine_stimulated-development",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": false,
+          "direction_difference_hz": 4.0,
+          "gate_difference": -1
+        },
+        {
+          "decision_ts": 1789237200.0,
+          "quote_ts": 1789237127.3058186,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 30.0,
+            "right_hz": 34.0,
+            "difference_hz": 4.0,
+            "gate_spikes": 0,
+            "total_spikes": 605751,
+            "spike_sha256": "7ee6313922e4ba583c792dce108067d925ef2468f15a5486668f2d52fb3b390a",
+            "input_sha256": "9f26901a2b956a9adf5f14328e12a5f8ab41f210ed052078c66358460854ec85",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "variant": {
+            "side": "BUY",
+            "left_hz": 30.0,
+            "right_hz": 38.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 2,
+            "total_spikes": 619713,
+            "spike_sha256": "e1a08b94051ad83949789fceb5251d91436e596724085022b64b2d2765e4aac0",
+            "input_sha256": "9f26901a2b956a9adf5f14328e12a5f8ab41f210ed052078c66358460854ec85",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "baseline_fill": {
+            "status": "filled",
+            "side": "SELL",
+            "quantity": "1590.011233237412333779109407",
+            "price": "0.013397483821929032",
+            "fee": "0.2662768721747957563718561215",
+            "decision_ts": 1789236900.0,
+            "fill_ts": 1789237127.3058186,
+            "simulation": true
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": false,
+          "baseline_equity": 245.72337290180886,
+          "variant_equity": 250.0,
+          "equity_difference": 4.276627098191142,
+          "observation_index": 2,
+          "viewer_query": "?run=pool1-trained_stimulated-development&step=2&compare=pool1-pristine_stimulated-development",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": false,
+          "direction_difference_hz": 4.0,
+          "gate_difference": 2
+        },
+        {
+          "decision_ts": 1789237500.0,
+          "quote_ts": 1789237439.4044986,
+          "available": true,
+          "terminal": true,
+          "baseline": null,
+          "variant": null,
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "1838.532156285462455378479597",
+            "price": "0.0135978040495683",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789237200.0,
+            "fill_ts": 1789237439.4044986,
+            "simulation": true
+          },
+          "fills_equal": false,
+          "baseline_equity": 245.72337290180886,
+          "variant_equity": 248.64535614009162,
+          "equity_difference": 2.9219832382827633,
+          "observation_index": null,
+          "viewer_query": null
+        }
+      ]
+    },
+    {
+      "pool_index": 1,
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "phase": "development",
+      "comparison": "activation_pristine",
+      "baseline_arm": "pristine_frozen",
+      "variant_arm": "pristine_stimulated",
+      "first_full_count_difference": 1789236600.0,
+      "first_decoder_difference": 1789236600.0,
+      "first_side_difference": 1789236600.0,
+      "first_fill_difference": 1789236900.0,
+      "rows": [
+        {
+          "decision_ts": 1789236600.0,
+          "quote_ts": 1789236519.6924503,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 36.0,
+            "right_hz": 36.0,
+            "difference_hz": 0.0,
+            "gate_spikes": 16,
+            "total_spikes": 377224,
+            "spike_sha256": "d2924678624a2f1c6c41f9667b0bf4b21d8085e1dffba1a2b05460b85d939f82",
+            "input_sha256": "ac16d1d424c3453b4af149854c59864dbc9d72335110c8e734e130d430cdda76",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "variant": {
+            "side": "BUY",
+            "left_hz": 32.0,
+            "right_hz": 34.0,
+            "difference_hz": 2.0,
+            "gate_spikes": 21,
+            "total_spikes": 407509,
+            "spike_sha256": "3755c10c01083da7199792f319ebbc5b20b7b58c3a882c099d2d46d26bedfa33",
+            "input_sha256": "ac16d1d424c3453b4af149854c59864dbc9d72335110c8e734e130d430cdda76",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": true,
+          "baseline_equity": 250.0,
+          "variant_equity": 250.0,
+          "equity_difference": 0.0,
+          "observation_index": 0,
+          "viewer_query": "?run=pool1-pristine_stimulated-development&step=0&compare=pool1-pristine_frozen-development",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": false,
+          "direction_difference_hz": 2.0,
+          "gate_difference": 5
+        },
+        {
+          "decision_ts": 1789236900.0,
+          "quote_ts": 1789236826.93816,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 30.0,
+            "right_hz": 32.0,
+            "difference_hz": 2.0,
+            "gate_spikes": 10,
+            "total_spikes": 394840,
+            "spike_sha256": "fce3db9e78889688980407073496fbc987aacfccf4b606226b55677f69c45cb6",
+            "input_sha256": "7bf1e109ce46f1128818d8051a4643bb0a49440359d4d7fafb2f936853b26f8d",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "variant": {
+            "side": "SELL",
+            "left_hz": 46.0,
+            "right_hz": 44.0,
+            "difference_hz": -2.0,
+            "gate_spikes": 1,
+            "total_spikes": 603449,
+            "spike_sha256": "8d542da3730ae4c0267b7ee18a2b5aeea053e343e89868950ceecbc646bdb1ac",
+            "input_sha256": "7bf1e109ce46f1128818d8051a4643bb0a49440359d4d7fafb2f936853b26f8d",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "1590.011233237412333779109407",
+            "price": "0.015723159357244068",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789236600.0,
+            "fill_ts": 1789236826.93816,
+            "simulation": true
+          },
+          "fills_equal": false,
+          "baseline_equity": 250.0,
+          "variant_equity": 248.64535614009162,
+          "equity_difference": -1.3546438599083785,
+          "observation_index": 1,
+          "viewer_query": "?run=pool1-pristine_stimulated-development&step=1&compare=pool1-pristine_frozen-development",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": false,
+          "direction_difference_hz": -4.0,
+          "gate_difference": -9
+        },
+        {
+          "decision_ts": 1789237200.0,
+          "quote_ts": 1789237127.3058186,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 36.0,
+            "right_hz": 40.0,
+            "difference_hz": 4.0,
+            "gate_spikes": 0,
+            "total_spikes": 607968,
+            "spike_sha256": "1c8360658f588b5d329ab1b2807f1c06968fb27eaa323d3d673cf953c3ab668c",
+            "input_sha256": "9f26901a2b956a9adf5f14328e12a5f8ab41f210ed052078c66358460854ec85",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "variant": {
+            "side": "HOLD",
+            "left_hz": 30.0,
+            "right_hz": 34.0,
+            "difference_hz": 4.0,
+            "gate_spikes": 0,
+            "total_spikes": 605751,
+            "spike_sha256": "7ee6313922e4ba583c792dce108067d925ef2468f15a5486668f2d52fb3b390a",
+            "input_sha256": "9f26901a2b956a9adf5f14328e12a5f8ab41f210ed052078c66358460854ec85",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "baseline_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "1810.871389309258067073949665",
+            "price": "0.013805508302572522",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789236900.0,
+            "fill_ts": 1789237127.3058186,
+            "simulation": true
+          },
+          "variant_fill": {
+            "status": "filled",
+            "side": "SELL",
+            "quantity": "1590.011233237412333779109407",
+            "price": "0.013397483821929032",
+            "fee": "0.2662768721747957563718561215",
+            "decision_ts": 1789236900.0,
+            "fill_ts": 1789237127.3058186,
+            "simulation": true
+          },
+          "fills_equal": false,
+          "baseline_equity": 248.64535614009162,
+          "variant_equity": 245.72337290180886,
+          "equity_difference": -2.9219832382827633,
+          "observation_index": 2,
+          "viewer_query": "?run=pool1-pristine_stimulated-development&step=2&compare=pool1-pristine_frozen-development",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": true,
+          "direction_difference_hz": 0.0,
+          "gate_difference": 0
+        },
+        {
+          "decision_ts": 1789237500.0,
+          "quote_ts": 1789237439.4044986,
+          "available": true,
+          "terminal": true,
+          "baseline": null,
+          "variant": null,
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": true,
+          "baseline_equity": 248.2849095339907,
+          "variant_equity": 245.72337290180886,
+          "equity_difference": -2.5615366321818556,
+          "observation_index": null,
+          "viewer_query": null
+        }
+      ]
+    },
+    {
+      "pool_index": 1,
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "phase": "development",
+      "comparison": "activation_trained",
+      "baseline_arm": "trained_frozen",
+      "variant_arm": "trained_stimulated",
+      "first_full_count_difference": 1789236600.0,
+      "first_decoder_difference": 1789236600.0,
+      "first_side_difference": 1789236600.0,
+      "first_fill_difference": 1789237200.0,
+      "rows": [
+        {
+          "decision_ts": 1789236600.0,
+          "quote_ts": 1789236519.6924503,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 36.0,
+            "right_hz": 36.0,
+            "difference_hz": 0.0,
+            "gate_spikes": 16,
+            "total_spikes": 377224,
+            "spike_sha256": "d2924678624a2f1c6c41f9667b0bf4b21d8085e1dffba1a2b05460b85d939f82",
+            "input_sha256": "ac16d1d424c3453b4af149854c59864dbc9d72335110c8e734e130d430cdda76",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "variant": {
+            "side": "SELL",
+            "left_hz": 40.0,
+            "right_hz": 38.0,
+            "difference_hz": -2.0,
+            "gate_spikes": 11,
+            "total_spikes": 518710,
+            "spike_sha256": "2f6af8da082bdda432c2e9dc6ce0aea9a3435c39d18d07ce2bcae70075e6c38f",
+            "input_sha256": "ac16d1d424c3453b4af149854c59864dbc9d72335110c8e734e130d430cdda76",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": true,
+          "baseline_equity": 250.0,
+          "variant_equity": 250.0,
+          "equity_difference": 0.0,
+          "observation_index": 0,
+          "viewer_query": "?run=pool1-trained_stimulated-development&step=0&compare=pool1-trained_frozen-development",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": false,
+          "direction_difference_hz": -2.0,
+          "gate_difference": -5
+        },
+        {
+          "decision_ts": 1789236900.0,
+          "quote_ts": 1789236826.93816,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 30.0,
+            "right_hz": 32.0,
+            "difference_hz": 2.0,
+            "gate_spikes": 10,
+            "total_spikes": 394820,
+            "spike_sha256": "06a073e3031bd0af40baabb64edc6a4cc6b012197770e68e5b1bcf05f0e1214d",
+            "input_sha256": "7bf1e109ce46f1128818d8051a4643bb0a49440359d4d7fafb2f936853b26f8d",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "variant": {
+            "side": "HOLD",
+            "left_hz": 38.0,
+            "right_hz": 40.0,
+            "difference_hz": 2.0,
+            "gate_spikes": 0,
+            "total_spikes": 603387,
+            "spike_sha256": "a94afc2130e764e2856b8629d7dbb8f683c67d3aeb8d0f0ae9e32faa19252d7b",
+            "input_sha256": "7bf1e109ce46f1128818d8051a4643bb0a49440359d4d7fafb2f936853b26f8d",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": true,
+          "baseline_equity": 250.0,
+          "variant_equity": 250.0,
+          "equity_difference": 0.0,
+          "observation_index": 1,
+          "viewer_query": "?run=pool1-trained_stimulated-development&step=1&compare=pool1-trained_frozen-development",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": false,
+          "direction_difference_hz": 0.0,
+          "gate_difference": -10
+        },
+        {
+          "decision_ts": 1789237200.0,
+          "quote_ts": 1789237127.3058186,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 34.0,
+            "right_hz": 42.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 0,
+            "total_spikes": 605815,
+            "spike_sha256": "3625aba3711e1d5355a33020f269c5d87a09e0cb7cae82b46be88fa114971482",
+            "input_sha256": "9f26901a2b956a9adf5f14328e12a5f8ab41f210ed052078c66358460854ec85",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "variant": {
+            "side": "BUY",
+            "left_hz": 30.0,
+            "right_hz": 38.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 2,
+            "total_spikes": 619713,
+            "spike_sha256": "e1a08b94051ad83949789fceb5251d91436e596724085022b64b2d2765e4aac0",
+            "input_sha256": "9f26901a2b956a9adf5f14328e12a5f8ab41f210ed052078c66358460854ec85",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "baseline_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "1810.871389309258067073949665",
+            "price": "0.013805508302572522",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789236900.0,
+            "fill_ts": 1789237127.3058186,
+            "simulation": true
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": false,
+          "baseline_equity": 248.64535614009162,
+          "variant_equity": 250.0,
+          "equity_difference": 1.3546438599083785,
+          "observation_index": 2,
+          "viewer_query": "?run=pool1-trained_stimulated-development&step=2&compare=pool1-trained_frozen-development",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": false,
+          "direction_difference_hz": 0.0,
+          "gate_difference": 2
+        },
+        {
+          "decision_ts": 1789237500.0,
+          "quote_ts": 1789237439.4044986,
+          "available": true,
+          "terminal": true,
+          "baseline": null,
+          "variant": null,
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "1838.532156285462455378479597",
+            "price": "0.0135978040495683",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789237200.0,
+            "fill_ts": 1789237439.4044986,
+            "simulation": true
+          },
+          "fills_equal": false,
+          "baseline_equity": 248.2849095339907,
+          "variant_equity": 248.64535614009162,
+          "equity_difference": 0.36044660610090773,
+          "observation_index": null,
+          "viewer_query": null
+        }
+      ]
+    },
+    {
+      "pool_index": 1,
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "phase": "test",
+      "comparison": "memory_current_0",
+      "baseline_arm": "pristine_frozen",
+      "variant_arm": "trained_frozen",
+      "first_full_count_difference": 1789237500.0,
+      "first_decoder_difference": 1789237500.0,
+      "first_side_difference": null,
+      "first_fill_difference": null,
+      "rows": [
+        {
+          "decision_ts": 1789237500.0,
+          "quote_ts": 1789237439.4044986,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 36.0,
+            "right_hz": 36.0,
+            "difference_hz": 0.0,
+            "gate_spikes": 19,
+            "total_spikes": 423280,
+            "spike_sha256": "446888b3bb6ffe4a7ebb6d696a049cd5f76ec9dc4ee90adbdf16c54c5aa427de",
+            "input_sha256": "eaf68d52d2c584c684dc98a8b07e3d2758fb7598480897d618fd0c2ee3e9ef96",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "variant": {
+            "side": "HOLD",
+            "left_hz": 38.0,
+            "right_hz": 38.0,
+            "difference_hz": 0.0,
+            "gate_spikes": 19,
+            "total_spikes": 422625,
+            "spike_sha256": "c1687dcd7d810e334ceb17ffec13338a7f4a22272da4234223f44ed3d4fe813f",
+            "input_sha256": "eaf68d52d2c584c684dc98a8b07e3d2758fb7598480897d618fd0c2ee3e9ef96",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": true,
+          "baseline_equity": 250.0,
+          "variant_equity": 250.0,
+          "equity_difference": 0.0,
+          "observation_index": 0,
+          "viewer_query": "?run=pool1-trained_frozen&step=0&compare=pool1-pristine_frozen",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": true,
+          "direction_difference_hz": 0.0,
+          "gate_difference": 0
+        },
+        {
+          "decision_ts": 1789237800.0,
+          "quote_ts": 1789237739.9254973,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 32.0,
+            "right_hz": 36.0,
+            "difference_hz": 4.0,
+            "gate_spikes": 0,
+            "total_spikes": 606139,
+            "spike_sha256": "f4c51c960d9de470660e492b77aafeb0c8d9c7d858563a6b6b1fa5551970eb48",
+            "input_sha256": "907f28ce4579a6ca36e0866ccd03be0627b1823eba6fb9f365f3c46d39495162",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "variant": {
+            "side": "HOLD",
+            "left_hz": 34.0,
+            "right_hz": 36.0,
+            "difference_hz": 2.0,
+            "gate_spikes": 0,
+            "total_spikes": 603524,
+            "spike_sha256": "d48b2565e71ef0970879921be9c0a9355b9a05135653c7324c5f59fbb9f2aaee",
+            "input_sha256": "907f28ce4579a6ca36e0866ccd03be0627b1823eba6fb9f365f3c46d39495162",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": true,
+          "baseline_equity": 250.0,
+          "variant_equity": 250.0,
+          "equity_difference": 0.0,
+          "observation_index": 1,
+          "viewer_query": "?run=pool1-trained_frozen&step=1&compare=pool1-pristine_frozen",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": true,
+          "direction_difference_hz": -2.0,
+          "gate_difference": 0
+        },
+        {
+          "decision_ts": 1789238100.0,
+          "quote_ts": 1789238048.9059582,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 36.0,
+            "right_hz": 36.0,
+            "difference_hz": 0.0,
+            "gate_spikes": 0,
+            "total_spikes": 604138,
+            "spike_sha256": "99a25fddd23a02066eec8d2a8ac8a467cf398bd7bae628ef0067680a8d194d7d",
+            "input_sha256": "93789074b46156e1dac251d1a5b75ad8767f975e071c3f59d21902116ceb34cd",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "variant": {
+            "side": "HOLD",
+            "left_hz": 42.0,
+            "right_hz": 50.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 0,
+            "total_spikes": 604777,
+            "spike_sha256": "091a073059f6e46e193c89cbd4415475ec76d5e1c267bf556fbfba390efa49c3",
+            "input_sha256": "93789074b46156e1dac251d1a5b75ad8767f975e071c3f59d21902116ceb34cd",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": true,
+          "baseline_equity": 250.0,
+          "variant_equity": 250.0,
+          "equity_difference": 0.0,
+          "observation_index": 2,
+          "viewer_query": "?run=pool1-trained_frozen&step=2&compare=pool1-pristine_frozen",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": true,
+          "direction_difference_hz": 8.0,
+          "gate_difference": 0
+        },
+        {
+          "decision_ts": 1789238400.0,
+          "quote_ts": 1789238328.6113563,
+          "available": true,
+          "terminal": true,
+          "baseline": null,
+          "variant": null,
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": true,
+          "baseline_equity": 250.0,
+          "variant_equity": 250.0,
+          "equity_difference": 0.0,
+          "observation_index": null,
+          "viewer_query": null
+        }
+      ]
+    },
+    {
+      "pool_index": 1,
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "phase": "test",
+      "comparison": "memory_current_10",
+      "baseline_arm": "pristine_stimulated",
+      "variant_arm": "trained_stimulated",
+      "first_full_count_difference": 1789237500.0,
+      "first_decoder_difference": 1789237500.0,
+      "first_side_difference": 1789238100.0,
+      "first_fill_difference": 1789238400.0,
+      "rows": [
+        {
+          "decision_ts": 1789237500.0,
+          "quote_ts": 1789237439.4044986,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 28.0,
+            "right_hz": 32.0,
+            "difference_hz": 4.0,
+            "gate_spikes": 32,
+            "total_spikes": 367792,
+            "spike_sha256": "598f7adc0e967e69033c4d44deb7da9ec387a62fea8c23d5c146d23d071862bf",
+            "input_sha256": "eaf68d52d2c584c684dc98a8b07e3d2758fb7598480897d618fd0c2ee3e9ef96",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "variant": {
+            "side": "BUY",
+            "left_hz": 28.0,
+            "right_hz": 34.0,
+            "difference_hz": 6.0,
+            "gate_spikes": 21,
+            "total_spikes": 374484,
+            "spike_sha256": "eac9ccf768001e32b8d499e0e67d1958bd9109972e5686440c7e7bb8ed76395c",
+            "input_sha256": "eaf68d52d2c584c684dc98a8b07e3d2758fb7598480897d618fd0c2ee3e9ef96",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": true,
+          "baseline_equity": 250.0,
+          "variant_equity": 250.0,
+          "equity_difference": 0.0,
+          "observation_index": 0,
+          "viewer_query": "?run=pool1-trained_stimulated&step=0&compare=pool1-pristine_stimulated",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": true,
+          "direction_difference_hz": 2.0,
+          "gate_difference": -11
+        },
+        {
+          "decision_ts": 1789237800.0,
+          "quote_ts": 1789237739.9254973,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 26.0,
+            "right_hz": 32.0,
+            "difference_hz": 6.0,
+            "gate_spikes": 12,
+            "total_spikes": 384289,
+            "spike_sha256": "3406aae5ae5853219b3d993af4b071121cde2b5538a26e20c2bff16508d49690",
+            "input_sha256": "907f28ce4579a6ca36e0866ccd03be0627b1823eba6fb9f365f3c46d39495162",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "variant": {
+            "side": "BUY",
+            "left_hz": 32.0,
+            "right_hz": 42.0,
+            "difference_hz": 10.0,
+            "gate_spikes": 6,
+            "total_spikes": 521853,
+            "spike_sha256": "5db888031403feccb808e153567ff6cf89493d3eef1040eac4b87b8ef541bbf6",
+            "input_sha256": "907f28ce4579a6ca36e0866ccd03be0627b1823eba6fb9f365f3c46d39495162",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "baseline_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "1822.866543525599815085883691",
+            "price": "0.013714662814342726",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789237500.0,
+            "fill_ts": 1789237739.9254973,
+            "simulation": true
+          },
+          "variant_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "1822.866543525599815085883691",
+            "price": "0.013714662814342726",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789237500.0,
+            "fill_ts": 1789237739.9254973,
+            "simulation": true
+          },
+          "fills_equal": true,
+          "baseline_equity": 248.64535614009162,
+          "variant_equity": 248.64535614009162,
+          "equity_difference": 0.0,
+          "observation_index": 1,
+          "viewer_query": "?run=pool1-trained_stimulated&step=1&compare=pool1-pristine_stimulated",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": true,
+          "direction_difference_hz": 4.0,
+          "gate_difference": -6
+        },
+        {
+          "decision_ts": 1789238100.0,
+          "quote_ts": 1789238048.9059582,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "SELL",
+            "left_hz": 36.0,
+            "right_hz": 34.0,
+            "difference_hz": -2.0,
+            "gate_spikes": 9,
+            "total_spikes": 386326,
+            "spike_sha256": "30284e22e28d42558fb858db1796db5c6d0f176e24c2a4fc9ac6b44e758e348e",
+            "input_sha256": "93789074b46156e1dac251d1a5b75ad8767f975e071c3f59d21902116ceb34cd",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "variant": {
+            "side": "HOLD",
+            "left_hz": 42.0,
+            "right_hz": 40.0,
+            "difference_hz": -2.0,
+            "gate_spikes": 0,
+            "total_spikes": 607094,
+            "spike_sha256": "165e882a10396720359d2159018e40068b0497067b705aa1182fb755742e447a",
+            "input_sha256": "93789074b46156e1dac251d1a5b75ad8767f975e071c3f59d21902116ceb34cd",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "baseline_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "1903.618657248757702133787395",
+            "price": "0.013132882420963315",
+            "fee": "0.3124999999999999999999999999",
+            "decision_ts": 1789237800.0,
+            "fill_ts": 1789238048.9059582,
+            "simulation": true
+          },
+          "variant_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "1903.618657248757702133787395",
+            "price": "0.013132882420963315",
+            "fee": "0.3124999999999999999999999999",
+            "decision_ts": 1789237800.0,
+            "fill_ts": 1789238048.9059582,
+            "simulation": true
+          },
+          "fills_equal": true,
+          "baseline_equity": 246.27441234205182,
+          "variant_equity": 246.27441234205182,
+          "equity_difference": 0.0,
+          "observation_index": 2,
+          "viewer_query": "?run=pool1-trained_stimulated&step=2&compare=pool1-pristine_stimulated",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": false,
+          "direction_difference_hz": 0.0,
+          "gate_difference": -9
+        },
+        {
+          "decision_ts": 1789238400.0,
+          "quote_ts": 1789238328.6113563,
+          "available": true,
+          "terminal": true,
+          "baseline": null,
+          "variant": null,
+          "baseline_fill": {
+            "status": "filled",
+            "side": "SELL",
+            "quantity": "1904.806560639048817363971196",
+            "price": "0.013124692300310369",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789238100.0,
+            "fill_ts": 1789238328.6113563,
+            "simulation": true
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": false,
+          "baseline_equity": 247.67260947655095,
+          "variant_equity": 247.67260947655095,
+          "equity_difference": 0.0,
+          "observation_index": null,
+          "viewer_query": null
+        }
+      ]
+    },
+    {
+      "pool_index": 1,
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "phase": "test",
+      "comparison": "activation_pristine",
+      "baseline_arm": "pristine_frozen",
+      "variant_arm": "pristine_stimulated",
+      "first_full_count_difference": 1789237500.0,
+      "first_decoder_difference": 1789237500.0,
+      "first_side_difference": 1789237500.0,
+      "first_fill_difference": 1789237800.0,
+      "rows": [
+        {
+          "decision_ts": 1789237500.0,
+          "quote_ts": 1789237439.4044986,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 36.0,
+            "right_hz": 36.0,
+            "difference_hz": 0.0,
+            "gate_spikes": 19,
+            "total_spikes": 423280,
+            "spike_sha256": "446888b3bb6ffe4a7ebb6d696a049cd5f76ec9dc4ee90adbdf16c54c5aa427de",
+            "input_sha256": "eaf68d52d2c584c684dc98a8b07e3d2758fb7598480897d618fd0c2ee3e9ef96",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "variant": {
+            "side": "BUY",
+            "left_hz": 28.0,
+            "right_hz": 32.0,
+            "difference_hz": 4.0,
+            "gate_spikes": 32,
+            "total_spikes": 367792,
+            "spike_sha256": "598f7adc0e967e69033c4d44deb7da9ec387a62fea8c23d5c146d23d071862bf",
+            "input_sha256": "eaf68d52d2c584c684dc98a8b07e3d2758fb7598480897d618fd0c2ee3e9ef96",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": true,
+          "baseline_equity": 250.0,
+          "variant_equity": 250.0,
+          "equity_difference": 0.0,
+          "observation_index": 0,
+          "viewer_query": "?run=pool1-pristine_stimulated&step=0&compare=pool1-pristine_frozen",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": false,
+          "direction_difference_hz": 4.0,
+          "gate_difference": 13
+        },
+        {
+          "decision_ts": 1789237800.0,
+          "quote_ts": 1789237739.9254973,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 32.0,
+            "right_hz": 36.0,
+            "difference_hz": 4.0,
+            "gate_spikes": 0,
+            "total_spikes": 606139,
+            "spike_sha256": "f4c51c960d9de470660e492b77aafeb0c8d9c7d858563a6b6b1fa5551970eb48",
+            "input_sha256": "907f28ce4579a6ca36e0866ccd03be0627b1823eba6fb9f365f3c46d39495162",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "variant": {
+            "side": "BUY",
+            "left_hz": 26.0,
+            "right_hz": 32.0,
+            "difference_hz": 6.0,
+            "gate_spikes": 12,
+            "total_spikes": 384289,
+            "spike_sha256": "3406aae5ae5853219b3d993af4b071121cde2b5538a26e20c2bff16508d49690",
+            "input_sha256": "907f28ce4579a6ca36e0866ccd03be0627b1823eba6fb9f365f3c46d39495162",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "1822.866543525599815085883691",
+            "price": "0.013714662814342726",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789237500.0,
+            "fill_ts": 1789237739.9254973,
+            "simulation": true
+          },
+          "fills_equal": false,
+          "baseline_equity": 250.0,
+          "variant_equity": 248.64535614009162,
+          "equity_difference": -1.3546438599083785,
+          "observation_index": 1,
+          "viewer_query": "?run=pool1-pristine_stimulated&step=1&compare=pool1-pristine_frozen",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": false,
+          "direction_difference_hz": 2.0,
+          "gate_difference": 12
+        },
+        {
+          "decision_ts": 1789238100.0,
+          "quote_ts": 1789238048.9059582,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 36.0,
+            "right_hz": 36.0,
+            "difference_hz": 0.0,
+            "gate_spikes": 0,
+            "total_spikes": 604138,
+            "spike_sha256": "99a25fddd23a02066eec8d2a8ac8a467cf398bd7bae628ef0067680a8d194d7d",
+            "input_sha256": "93789074b46156e1dac251d1a5b75ad8767f975e071c3f59d21902116ceb34cd",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "variant": {
+            "side": "SELL",
+            "left_hz": 36.0,
+            "right_hz": 34.0,
+            "difference_hz": -2.0,
+            "gate_spikes": 9,
+            "total_spikes": 386326,
+            "spike_sha256": "30284e22e28d42558fb858db1796db5c6d0f176e24c2a4fc9ac6b44e758e348e",
+            "input_sha256": "93789074b46156e1dac251d1a5b75ad8767f975e071c3f59d21902116ceb34cd",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "1903.618657248757702133787395",
+            "price": "0.013132882420963315",
+            "fee": "0.3124999999999999999999999999",
+            "decision_ts": 1789237800.0,
+            "fill_ts": 1789238048.9059582,
+            "simulation": true
+          },
+          "fills_equal": false,
+          "baseline_equity": 250.0,
+          "variant_equity": 246.27441234205182,
+          "equity_difference": -3.725587657948182,
+          "observation_index": 2,
+          "viewer_query": "?run=pool1-pristine_stimulated&step=2&compare=pool1-pristine_frozen",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": false,
+          "direction_difference_hz": -2.0,
+          "gate_difference": 9
+        },
+        {
+          "decision_ts": 1789238400.0,
+          "quote_ts": 1789238328.6113563,
+          "available": true,
+          "terminal": true,
+          "baseline": null,
+          "variant": null,
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "filled",
+            "side": "SELL",
+            "quantity": "1904.806560639048817363971196",
+            "price": "0.013124692300310369",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789238100.0,
+            "fill_ts": 1789238328.6113563,
+            "simulation": true
+          },
+          "fills_equal": false,
+          "baseline_equity": 250.0,
+          "variant_equity": 247.67260947655095,
+          "equity_difference": -2.327390523449054,
+          "observation_index": null,
+          "viewer_query": null
+        }
+      ]
+    },
+    {
+      "pool_index": 1,
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "phase": "test",
+      "comparison": "activation_trained",
+      "baseline_arm": "trained_frozen",
+      "variant_arm": "trained_stimulated",
+      "first_full_count_difference": 1789237500.0,
+      "first_decoder_difference": 1789237500.0,
+      "first_side_difference": 1789237500.0,
+      "first_fill_difference": 1789237800.0,
+      "rows": [
+        {
+          "decision_ts": 1789237500.0,
+          "quote_ts": 1789237439.4044986,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 38.0,
+            "right_hz": 38.0,
+            "difference_hz": 0.0,
+            "gate_spikes": 19,
+            "total_spikes": 422625,
+            "spike_sha256": "c1687dcd7d810e334ceb17ffec13338a7f4a22272da4234223f44ed3d4fe813f",
+            "input_sha256": "eaf68d52d2c584c684dc98a8b07e3d2758fb7598480897d618fd0c2ee3e9ef96",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "variant": {
+            "side": "BUY",
+            "left_hz": 28.0,
+            "right_hz": 34.0,
+            "difference_hz": 6.0,
+            "gate_spikes": 21,
+            "total_spikes": 374484,
+            "spike_sha256": "eac9ccf768001e32b8d499e0e67d1958bd9109972e5686440c7e7bb8ed76395c",
+            "input_sha256": "eaf68d52d2c584c684dc98a8b07e3d2758fb7598480897d618fd0c2ee3e9ef96",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": true,
+          "baseline_equity": 250.0,
+          "variant_equity": 250.0,
+          "equity_difference": 0.0,
+          "observation_index": 0,
+          "viewer_query": "?run=pool1-trained_stimulated&step=0&compare=pool1-trained_frozen",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": false,
+          "direction_difference_hz": 6.0,
+          "gate_difference": 2
+        },
+        {
+          "decision_ts": 1789237800.0,
+          "quote_ts": 1789237739.9254973,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 34.0,
+            "right_hz": 36.0,
+            "difference_hz": 2.0,
+            "gate_spikes": 0,
+            "total_spikes": 603524,
+            "spike_sha256": "d48b2565e71ef0970879921be9c0a9355b9a05135653c7324c5f59fbb9f2aaee",
+            "input_sha256": "907f28ce4579a6ca36e0866ccd03be0627b1823eba6fb9f365f3c46d39495162",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "variant": {
+            "side": "BUY",
+            "left_hz": 32.0,
+            "right_hz": 42.0,
+            "difference_hz": 10.0,
+            "gate_spikes": 6,
+            "total_spikes": 521853,
+            "spike_sha256": "5db888031403feccb808e153567ff6cf89493d3eef1040eac4b87b8ef541bbf6",
+            "input_sha256": "907f28ce4579a6ca36e0866ccd03be0627b1823eba6fb9f365f3c46d39495162",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "1822.866543525599815085883691",
+            "price": "0.013714662814342726",
+            "fee": "0.3125000000000000000000000000",
+            "decision_ts": 1789237500.0,
+            "fill_ts": 1789237739.9254973,
+            "simulation": true
+          },
+          "fills_equal": false,
+          "baseline_equity": 250.0,
+          "variant_equity": 248.64535614009162,
+          "equity_difference": -1.3546438599083785,
+          "observation_index": 1,
+          "viewer_query": "?run=pool1-trained_stimulated&step=1&compare=pool1-trained_frozen",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": false,
+          "direction_difference_hz": 8.0,
+          "gate_difference": 6
+        },
+        {
+          "decision_ts": 1789238100.0,
+          "quote_ts": 1789238048.9059582,
+          "available": true,
+          "terminal": false,
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 42.0,
+            "right_hz": 50.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 0,
+            "total_spikes": 604777,
+            "spike_sha256": "091a073059f6e46e193c89cbd4415475ec76d5e1c267bf556fbfba390efa49c3",
+            "input_sha256": "93789074b46156e1dac251d1a5b75ad8767f975e071c3f59d21902116ceb34cd",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 0,
+              "duration_ms": 500,
+              "artifact_sha256": "5575bccd1b09ba496f96ecf2fb46502469250a95adabb2bf167d608d8c079b52"
+            }
+          },
+          "variant": {
+            "side": "HOLD",
+            "left_hz": 42.0,
+            "right_hz": 40.0,
+            "difference_hz": -2.0,
+            "gate_spikes": 0,
+            "total_spikes": 607094,
+            "spike_sha256": "165e882a10396720359d2159018e40068b0497067b705aa1182fb755742e447a",
+            "input_sha256": "93789074b46156e1dac251d1a5b75ad8767f975e071c3f59d21902116ceb34cd",
+            "stimulation": {
+              "target_ids": [
+                "10704",
+                "11402"
+              ],
+              "current": 10,
+              "duration_ms": 500,
+              "artifact_sha256": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333"
+            }
+          },
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "filled",
+            "side": "BUY",
+            "quantity": "1903.618657248757702133787395",
+            "price": "0.013132882420963315",
+            "fee": "0.3124999999999999999999999999",
+            "decision_ts": 1789237800.0,
+            "fill_ts": 1789238048.9059582,
+            "simulation": true
+          },
+          "fills_equal": false,
+          "baseline_equity": 250.0,
+          "variant_equity": 246.27441234205182,
+          "equity_difference": -3.725587657948182,
+          "observation_index": 2,
+          "viewer_query": "?run=pool1-trained_stimulated&step=2&compare=pool1-trained_frozen",
+          "input_match": true,
+          "full_counts_equal": false,
+          "decoder_equal": false,
+          "side_equal": true,
+          "direction_difference_hz": -10.0,
+          "gate_difference": 0
+        },
+        {
+          "decision_ts": 1789238400.0,
+          "quote_ts": 1789238328.6113563,
+          "available": true,
+          "terminal": true,
+          "baseline": null,
+          "variant": null,
+          "baseline_fill": {
+            "status": "hold"
+          },
+          "variant_fill": {
+            "status": "hold"
+          },
+          "fills_equal": true,
+          "baseline_equity": 250.0,
+          "variant_equity": 247.67260947655095,
+          "equity_difference": -2.327390523449054,
+          "observation_index": null,
+          "viewer_query": null
+        }
+      ]
+    }
+  ],
+  "interpretation": "Derived from an audited report. Full-count differences refer to whole observations, not the first spike in time. Current fills can execute an earlier decision. Identical sides can coexist with different neural counts. This comparison neither reruns nor selects a policy. Applied current is explicitly recorded for both conditions. Activation effects compare current 10 with 0 within the same memory. The interaction subtracts the pristine activation effect from the trained activation effect; a gain shared by both brains is not a learned-memory advantage. These are descriptive interval effects, not statistical significance.",
+  "activation_effects": {
+    "development": {
+      "activation_pristine_usd": -1.206892772273477,
+      "activation_trained_usd": 1.7150904660093147,
+      "memory_current_0_usd": 0.0,
+      "memory_current_10_usd": 2.9219832382827917,
+      "memory_activation_interaction_usd": 2.9219832382827917
+    },
+    "test": {
+      "activation_pristine_usd": -3.6820343833574043,
+      "activation_trained_usd": -3.6820343833574043,
+      "memory_current_0_usd": 0.0,
+      "memory_current_10_usd": 0.0,
+      "memory_activation_interaction_usd": 0.0
+    }
+  },
+  "report_sha256": "5faa479dd5f5cc98d46e7a9a1c8f856741b2b632c42229eba97acaebeb42e5da",
+  "source_sha256": "e24f7824c96f73dd7b296fb2f2de94824607813891b4bfb6a068bdc8a637d599"
+}

@@ -2789,6 +2789,63 @@ The normal worker writes each invocation to `last-call.json`. A duplicate/old-sl
 skip leaves `latest.json` at the last full portfolio result, preserving its actual
 observation timestamp instead of replacing the portfolio with a skip status.
 
+### Tenth market comparison result
+
+![Audited prospective recipient activation comparison](assets/fly-market-study-10.png)
+
+The once-only worker claimed study 10 at **18:45:13 UTC**, after the registered
+window and a complete collector snapshot. The observer recovered the same call
+`fc-01M2BEZY1G7Z0TCAKG5AM6G0DH` and independently audited the original prices,
+timestamped news, imported memory, all simulated ledgers, native decoder counts,
+44 activity boundaries and recorded current arrays. All sixteen recordings are
+published as `market10-*`. Development observed five of six pool/decision slots;
+ALL's 18:10 quote was unavailable. Test observed all six. Missing observations
+were not replaced or simulated.
+
+| Frozen memory / applied current | Development equity | Test equity |
+|---|---:|---:|
+| Pristine / 0 | $995.2952 | $997.9329 |
+| Paper-trained / 0 | $995.2952 | $997.9329 |
+| Pristine / 10 | $994.0883 | $994.2508 |
+| Paper-trained / 10 | $997.0103 | $994.2508 |
+
+Each phase starts with a separate $1,000 account. The trained stimulated arm was
+$2.9220 above its matched pristine control in development, but remained below
+cash. The saved development selection was therefore **none**. Its matched memory
+advantage was exactly zero in test, and stimulation reduced test equity by
+$3.6820 for both memory conditions. No policy is promoted. The worker's estimated
+compute charge was $0.025881; the worker reservation ledger was $1.866169 of its
+unchanged $25 cap. Those are compute estimates, not provider billing totals.
+
+The [decision comparison](../reports/fly-market-study-10-decisions.json) separates
+neural differences from account differences. Without added current, trained and
+pristine full-neuron counts differed in **7 of 11 observed images**, yet all
+eleven actions matched. With current 10, counts differed in all eleven images
+and actions differed in four. Stored memory can affect activity without changing
+the decoded trade; the earlier silent-recipient result is not universal across
+inputs and carried activity.
+
+Two examples locate the effect in the existing viewer:
+
+- [ALL's final test HOLD becomes BUY under stimulation](http://127.0.0.1:8765/?run=market10-pool0-trained_stimulated&step=2&bin=49&neuron=10527&compare=market10-pool0-trained_frozen).
+  Added current changes the trained gate count from zero to eight. The subsequent
+  terminal fill lowers that sleeve's equity by $1.3546 relative to no stimulation.
+- [Baton's final stimulated SELL becomes HOLD with trained memory](http://127.0.0.1:8765/?run=market10-pool1-trained_stimulated&step=2&bin=49&neuron=10527&compare=market10-pool1-pristine_stimulated).
+  Both directions are −2 Hz, but trained memory has zero gate spikes versus nine
+  for pristine. The pristine terminal SELL and trained HOLD end at equal marked
+  equity because remaining inventory is already valued net of assumed exit fees
+  and slippage. Equal equity does not mean identical decisions, fills or paid fees.
+
+Published evidence: [audited report](../reports/fly-market-study-10.json),
+[sealed plan](../reports/fly-market-study-10-plan.json),
+[native/news/ledger audit](../reports/fly-market-study-10-audit.json), and
+[original-price audit](../reports/fly-market-study-10-price-audit.json).
+The browser check passed all sixteen recordings, 64 timeline rows and 44 observed
+boundaries with no browser errors or model submissions. This short two-pool test
+rejects fixed dual-recipient stimulation as a demonstrated improvement; it does
+not establish that all activation or learning approaches must fail. The prepared
+single-recipient assay remains a mechanism test, not a profitable-policy claim.
+
 ## Prepared recipient isolation: test each target separately
 
 The [isolation protocol](../reports/fly-recipient-isolation-protocol-01.json)

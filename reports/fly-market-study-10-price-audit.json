@@ -1,0 +1,145 @@
+{
+  "plan_sha256": "e046ae7d76af4c66f1614eb733ef250e08f095c7a811b3c2cc89ee4f89e343c2",
+  "snapshot_sha256": "fb0196325804cf67fd65c36b0570e406df88888d9caaea6939aee9340e894c0c",
+  "snapshot_end": 1789238646.8598506,
+  "prices_reconstructed_from_snapshot": true,
+  "verifier_sha256": "b0945773b42d7eac3a3dc4b557e66ad4a24279b0be7891efb0cf0fa1de88e06e",
+  "pools": {
+    "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ": {
+      "raw_receipts_through_endpoint": 417,
+      "post_endpoint_receipts_excluded": 3,
+      "gap_markers": 61,
+      "retained_context_rows": 478,
+      "coverage": {
+        "development": [
+          {
+            "decision_ts": 1789236600.0,
+            "quote_ts": 1789236519.6924503,
+            "available": false,
+            "terminal": false,
+            "neural_observation_expected": false
+          },
+          {
+            "decision_ts": 1789236900.0,
+            "quote_ts": 1789236826.93816,
+            "available": true,
+            "terminal": false,
+            "neural_observation_expected": true
+          },
+          {
+            "decision_ts": 1789237200.0,
+            "quote_ts": 1789237127.3058186,
+            "available": true,
+            "terminal": false,
+            "neural_observation_expected": true
+          },
+          {
+            "decision_ts": 1789237500.0,
+            "quote_ts": 1789237439.4044986,
+            "available": true,
+            "terminal": true,
+            "neural_observation_expected": false
+          }
+        ],
+        "test": [
+          {
+            "decision_ts": 1789237500.0,
+            "quote_ts": 1789237439.4044986,
+            "available": true,
+            "terminal": false,
+            "neural_observation_expected": true
+          },
+          {
+            "decision_ts": 1789237800.0,
+            "quote_ts": 1789237739.9254973,
+            "available": true,
+            "terminal": false,
+            "neural_observation_expected": true
+          },
+          {
+            "decision_ts": 1789238100.0,
+            "quote_ts": 1789238048.9059582,
+            "available": true,
+            "terminal": false,
+            "neural_observation_expected": true
+          },
+          {
+            "decision_ts": 1789238400.0,
+            "quote_ts": 1789238328.6113563,
+            "available": true,
+            "terminal": true,
+            "neural_observation_expected": false
+          }
+        ]
+      }
+    },
+    "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu": {
+      "raw_receipts_through_endpoint": 421,
+      "post_endpoint_receipts_excluded": 3,
+      "gap_markers": 65,
+      "retained_context_rows": 486,
+      "coverage": {
+        "development": [
+          {
+            "decision_ts": 1789236600.0,
+            "quote_ts": 1789236519.6924503,
+            "available": true,
+            "terminal": false,
+            "neural_observation_expected": true
+          },
+          {
+            "decision_ts": 1789236900.0,
+            "quote_ts": 1789236826.93816,
+            "available": true,
+            "terminal": false,
+            "neural_observation_expected": true
+          },
+          {
+            "decision_ts": 1789237200.0,
+            "quote_ts": 1789237127.3058186,
+            "available": true,
+            "terminal": false,
+            "neural_observation_expected": true
+          },
+          {
+            "decision_ts": 1789237500.0,
+            "quote_ts": 1789237439.4044986,
+            "available": true,
+            "terminal": true,
+            "neural_observation_expected": false
+          }
+        ],
+        "test": [
+          {
+            "decision_ts": 1789237500.0,
+            "quote_ts": 1789237439.4044986,
+            "available": true,
+            "terminal": false,
+            "neural_observation_expected": true
+          },
+          {
+            "decision_ts": 1789237800.0,
+            "quote_ts": 1789237739.9254973,
+            "available": true,
+            "terminal": false,
+            "neural_observation_expected": true
+          },
+          {
+            "decision_ts": 1789238100.0,
+            "quote_ts": 1789238048.9059582,
+            "available": true,
+            "terminal": false,
+            "neural_observation_expected": true
+          },
+          {
+            "decision_ts": 1789238400.0,
+            "quote_ts": 1789238328.6113563,
+            "available": true,
+            "terminal": true,
+            "neural_observation_expected": false
+          }
+        ]
+      }
+    }
+  }
+}
