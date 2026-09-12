@@ -58,10 +58,12 @@ def test_sealer_preserves_registered_prices_and_all_three_news_clocks(tmp_path):
         seal(archive,news,'reports/fly-market-study-09-preregistration.json','reports/fly-paper-memory-audit-01.json','reports/fly-market-study-08-plan.json',tmp_path/'incomplete.json')
 
 
-def native_fixture(tmp_path):
+def native_fixture(tmp_path,study="09"):
     from paperlab.fly_trace import TraceLab,synthetic_ticks
     from paperlab.fly_paper_memory import array_hash
-    r,a=documents();lab=TraceLab(Path(os.environ['FLY_TRACE_DATA']));b=lab.brain
+    r,a=documents()
+    if study=='10':r=json.loads(Path('reports/fly-market-study-10-preregistration.json').read_text())
+    lab=TraceLab(Path(os.environ['FLY_TRACE_DATA']));b=lab.brain
     from stonkfly.neural.brain import PARAMETERS
     # Explicit synthetic learned-memory fixture. Real checkpoint/ledger export is tested separately.
     package=tmp_path/'memory';package.mkdir();series={}

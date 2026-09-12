@@ -18,9 +18,14 @@ MEMORY_FIELDS=('memory_sha256','memory_file_sha256','checkpoint_sha256','last_sl
 
 def validate_registration(registration,audit):
     r=registration
-    if r.get('schema')!=1 or r.get('kind')!='paper_checkpoint_comparison' or r.get('study')!='09':
+    activation=r.get('study')=='10'
+    if r.get('schema')!=(2 if activation else 1) or r.get('kind')!='paper_checkpoint_comparison' or r.get('study') not in ('09','10'):
         raise ValueError('Unknown paper checkpoint comparison')
-    if r.get('arms')!=ARMS or r.get('inference_protocol')!=INFERENCE or r.get('news_protocol')!=NEWS or r.get('selection_rule')!=SELECTION:
+    from .fly_activation_protocol import ARMS as activated, INFERENCE as activation_inference, SELECTION as activation_selection, RATIONALE
+    arms,inference,selection=(activated,activation_inference,activation_selection) if activation else (ARMS,INFERENCE,SELECTION)
+    if activation and (r.get('rationale')!=RATIONALE or any(not isinstance(r.get(k),str) or len(r[k])!=64 or any(c not in '0123456789abcdef' for c in r[k]) for k in ('mechanism_report_sha256','mechanism_audit_sha256'))):
+        raise ValueError('Missing pinned activation mechanism evidence')
+    if r.get('arms')!=arms or r.get('inference_protocol')!=inference or r.get('news_protocol')!=NEWS or r.get('selection_rule')!=selection:
         raise ValueError('Registered inference, news or selection protocol differs')
     if r.get('costs')!=asdict(DEX_COSTS) or r.get('decision_seconds')!=300 or r.get('phase_steps')!=3:
         raise ValueError('Registered costs or cadence differ')
@@ -49,7 +54,11 @@ def validate_registration(registration,audit):
 
 
 def development_choice(equities):
-    if set(equities)!=set(ARMS) or any(type(v) not in (int,float) or not math.isfinite(v) for v in equities.values()):
+    from .fly_activation_protocol import ARMS as activated
+    activation=set(equities)==set(activated)
+    if set(equities) not in (set(ARMS),set(activated)) or any(type(v) not in (int,float) or not math.isfinite(v) for v in equities.values()):
         raise ValueError('Expected finite development equity for all four arms')
-    candidate='trained_input_reset' if equities['trained_input_reset']>equities['trained_frozen']+1e-9 else 'trained_frozen'
-    return candidate if equities[candidate]>max(1000,equities['pristine_frozen'],equities['pristine_input_reset'])+1e-9 else None
+    alternative='trained_stimulated' if activation else 'trained_input_reset'
+    pristine='pristine_stimulated' if activation else 'pristine_input_reset'
+    candidate=alternative if equities[alternative]>equities['trained_frozen']+1e-9 else 'trained_frozen'
+    return candidate if equities[candidate]>max(1000,equities['pristine_frozen'],equities[pristine])+1e-9 else None

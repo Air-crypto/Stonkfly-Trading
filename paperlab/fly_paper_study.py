@@ -18,7 +18,8 @@ from .fly_trace import TraceLab
 SOURCE_FILES=('fly_paper_study.py','fly_paper_inputs.py','fly_paper_protocol.py','fly_paper_memory.py',
               'fly_paper_audit.py','fly_market_study.py','fly_trace.py','fly.py','fly_visual.py','news.py',
               'fly_market_activity.py','fly_market_activity_audit.py','fly_market_pulse.py',
-              'fly_market_restoration.py','fly_market_memory_audit.py','core.py','multi.py')
+              'fly_market_restoration.py','fly_market_memory_audit.py','core.py','multi.py',
+              'fly_activation_protocol.py','fly_paper_stimulation.py')
 PHASES=('development','test')
 
 

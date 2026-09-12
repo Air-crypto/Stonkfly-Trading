@@ -243,7 +243,8 @@ def test_cloud_writer_guard_blocks_overlap_and_releases_on_error(monkeypatch):
 
 
 @pytest.mark.parametrize("has_archive",[False,True])
-def test_normal_cloud_entrypoint_with_and_without_archive(monkeypatch,has_archive):
+@pytest.mark.parametrize("cycle_status",["paper_research","duplicate_or_old_slot"])
+def test_normal_cloud_entrypoint_with_and_without_archive(monkeypatch,has_archive,cycle_status):
     import cloud
     from pathlib import Path
     class LocalPath(type(Path())):
@@ -264,9 +265,10 @@ def test_normal_cloud_entrypoint_with_and_without_archive(monkeypatch,has_archiv
     monkeypatch.setattr("paperlab.budget.settle",lambda *a:{"estimated_compute_usd":0,"monthly_reserved_usd":0})
     written={}
     monkeypatch.setattr("paperlab.core.atomic_json",lambda p,v:written.update({str(p):v}))
-    monkeypatch.setattr("paperlab.multi.cycle",lambda *a,**kw:{"status":"paper_research"})
+    monkeypatch.setattr("paperlab.multi.cycle",lambda *a,**kw:{"status":cycle_status})
     monkeypatch.setattr("paperlab.fly_market_schedule.execute_due",lambda *a,**kw:None)
     result=cloud._worker()
-    assert result["status"]==("paper_research" if has_archive else "waiting_for_universe_collector")
-    assert "/state/meme-pools-v1/latest.json" in written
+    assert result["status"]==(cycle_status if has_archive else "waiting_for_universe_collector")
+    assert "/state/meme-pools-v1/last-call.json" in written
+    assert ("/state/meme-pools-v1/latest.json" in written)==(not has_archive or cycle_status!="duplicate_or_old_slot")
     assert recorded["limit_override"]==25 and recorded["memory_gib"]==8

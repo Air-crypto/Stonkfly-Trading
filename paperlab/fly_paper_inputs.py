@@ -64,8 +64,12 @@ def seal(archive,news_archive,registration,training_audit,parent,output):
     if Path(output).exists():raise ValueError('Refuse to overwrite a sealed paper comparison')
     r=json.loads(Path(registration).read_text());a=json.loads(Path(training_audit).read_text());validate_registration(r,a)
     if digest(training_audit)!=r['training_audit_sha256']:raise ValueError('Training audit file differs from registration')
-    old=json.loads(Path(parent).read_text());validate_parent(old['plan'])
-    if signature(old['plan'])!=old['sha256'] or old['sha256']!=r['parent_plan_sha256'] or old['plan']['cohort']!=r['cohort']:
+    old=json.loads(Path(parent).read_text())
+    if r['study']=='10':
+        validate(old);parent_cohort=old['plan']['registration']['cohort']
+    else:
+        validate_parent(old['plan']);parent_cohort=old['plan']['cohort']
+    if signature(old['plan'])!=old['sha256'] or old['sha256']!=r['parent_plan_sha256'] or parent_cohort!=r['cohort']:
         raise ValueError('Original cohort or parent plan differs')
     db=sqlite3.connect(f'file:{Path(archive).resolve()}?mode=ro',uri=True)
     try:last=db.execute("SELECT max(json_extract(payload,'$.observed')) FROM observations").fetchone()[0]

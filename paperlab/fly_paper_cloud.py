@@ -1,4 +1,4 @@
-"""Observe and audit scheduled study 09. This command cannot submit compute."""
+"""Observe and audit a registered paper study. This command cannot submit compute."""
 import argparse
 import json
 from pathlib import Path
@@ -9,14 +9,15 @@ from .fly_paper_inputs import validate
 from .fly_paper_study import SOURCE_FILES,PHASES,trace_name
 from .fly_paper_audit import audit
 from .fly_paper_price_audit import audit_prices
-from .fly_paper_schedule import DIRECTORY
+from .fly_paper_schedule import DIRECTORY,directory
 
 
 def observe(registration,output):
     import modal
     from modal.exception import NotFoundError
     volume=modal.Volume.from_name('fly-paper-lab-state',environment_name='main')
-    def read(name):return json.loads(b''.join(volume.read_file('/'+DIRECTORY+'/'+name)))
+    remote_directory=directory(registration.get('study','09'))
+    def read(name):return json.loads(b''.join(volume.read_file('/'+remote_directory+'/'+name)))
     try:
         receipt=read('cloud-call.json')
     except (FileNotFoundError,NotFoundError):
@@ -24,6 +25,10 @@ def observe(registration,output):
         return
     if receipt.get('dispatch')!='scheduled-worker-once' or not receipt.get('call_id') or receipt.get('status') not in ('pending','completed'):
         raise RuntimeError('Scheduled comparison unready, failed or uncertain; never submit a replacement')
+    if registration.get('study')=='10':
+        armed=read('armed.json')
+        if armed['registration_signature']!=signature(registration) or not registration['recorded_at']<=armed['armed_at']<registration['development_start']:
+            raise ValueError('Cloud did not witness this registration before development')
     envelope=read('plan.json');p=validate(envelope)
     if p['registration']!=registration or read('preregistration.json')!=registration:raise ValueError('Scheduled registration differs')
     if receipt['plan_sha256']!=envelope['sha256'] or receipt['request_sha256']!=signature({'plan':envelope,'registration':registration}):raise ValueError('Scheduled receipt differs from sealed request')
@@ -39,6 +44,7 @@ def observe(registration,output):
         old=json.loads(receipt_path.read_text())
         if any(old.get(k)!=receipt.get(k) for k in ('run_id','call_id','request_sha256')):raise ValueError('Output belongs to another call')
     else:atomic_json(receipt_path,receipt)
+    if registration.get('study')=='10':atomic_json(root/'armed.json',armed)
     print('Observing saved call '+receipt['call_id'],flush=True)
     try:result=modal.FunctionCall.from_id(receipt['call_id']).get(timeout=50)
     except TimeoutError:
@@ -56,7 +62,7 @@ def observe(registration,output):
                 for block in volume.read_file(remote or base.removeprefix('/state')+'/'+name):f.write(block)
             partial.replace(path)
         return path
-    prices=audit_prices(envelope,download('universe.db','/'+DIRECTORY+'/universe.db'))
+    prices=audit_prices(envelope,download('universe.db','/'+remote_directory+'/universe.db'))
     atomic_json(root/'price-audit.json',prices)
     for name in ('results.json','selection.json','news.db','pristine-memory.npz','initial-dynamics.npz','neuron-ids.npz','imported/audit.json'):download(name)
     raw=json.loads((artifacts/'results.json').read_text())
@@ -69,10 +75,17 @@ def observe(registration,output):
                 folder=f'boundaries/pool{i}-{name}-{stage}'
                 for j in range(1,len(events)+1):download(folder+f'/boundary-{j:02}.npz')
                 download(folder+'/final-counts.npz')
-                if events:download(trace+'/view.json')
+                if events:
+                    download(trace+'/view.json')
+                    if 'recipient_current' in registration['arms'][name]:
+                        for j in range(1,len(events)+1):download(trace+f'/current-{j:02}.npz')
     report,checked=audit(envelope,result['report'],artifacts)
     report['verification']['code_hashes_match_submission']=True
     report['verification']['prices_reconstructed_from_snapshot']=True
+    if registration.get('study')=='10':
+        report['verification']['prospective_cloud_registration_verified']=True
+        report['verification']['native_recipient_current_verified']=True
+        report['cloud_registration']=armed
     report['price_audit']=prices
     atomic_json(root/'report.json',report);atomic_json(root/'audit.json',checked)
     # Only expose recordings after all input, ledger, memory and boundary audits pass.

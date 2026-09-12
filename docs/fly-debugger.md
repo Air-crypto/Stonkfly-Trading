@@ -2666,3 +2666,52 @@ uv run --locked --extra plots python -m paperlab.fly_stimulation_figure \
   --audit reports/fly-paper-stimulation-audit-01.json \
   --out runs/recipient-stimulation-figure
 ```
+
+## Tenth market comparison: prospective recipient activation
+
+The [study 10 registration](../reports/fly-market-study-10-preregistration.json)
+was fixed after the recipient-stimulation diagnostic, before its new market
+window. Development is September 12, 2026, **18:10–18:25 UTC** and test is
+**18:25–18:40 UTC** (1:10–1:40 p.m. CDT overall). It retains the original ALL/baton
+cohort and the same captured paper-trained memories. Each of four independent
+$1,000 portfolios uses two $250 sleeves and $500 idle cash.
+
+The four conditions cross pristine versus trained memory with zero versus fixed
+current 10 to MBON11 cells 10704 and 11402 throughout each 500 ms observation.
+All arms keep their memory frozen, use fresh activity per phase, carry activity
+between observations, and retain the same timestamped news, price adapter, fixed
+decoder and adverse simulated execution costs. There are three decision slots
+per pool per phase plus a terminal mark/fill. Missing observations stay missing.
+The experiment is a short prospective check, not statistical evidence of reliable
+monthly profitability.
+
+The higher development equity among the two trained conditions is selected only
+if it beats cash and **both** pristine controls. Ties prefer the unstimulated
+trained condition. Selection is persisted before test simulation; every test
+condition is reported and none is deployed automatically.
+
+`PAPERLAB_PAPER_STUDY=1` now packages both once-only studies. Study 09's completed
+claim prevents a rerun. Study 10 must first write a cloud `armed.json` receipt
+before development starts, with its registration hash and owning call. A late
+first registration closes the experiment without submitting it. After 18:40 UTC,
+the existing worker can claim one bounded invocation once the sealed collector
+snapshot reaches the endpoint. It uses the existing worker reservation, memory,
+CPU and lease; no new schedule or increased spending cap is introduced.
+
+After completion, use the read-only observer, which cannot submit a replacement:
+
+```sh
+python -m paperlab.fly_paper_cloud \
+  --registration reports/fly-market-study-10-preregistration.json \
+  --out runs/research-market-10
+```
+
+The audit checks the prospective cloud receipt, raw prices, news clocks, imported
+memory, all ledger fills, full-neuron decoder counts, activity boundaries, and the
+exact recorded current/targets/durations. Native regression fixtures also corrupt
+a current value while updating its checksum and verify rejection against the
+registered intervention. Public results and traces are exposed only after audits.
+
+The normal worker writes each invocation to `last-call.json`. A duplicate/old-slot
+skip leaves `latest.json` at the last full portfolio result, preserving its actual
+observation timestamp instead of replacing the portfolio with a skip status.

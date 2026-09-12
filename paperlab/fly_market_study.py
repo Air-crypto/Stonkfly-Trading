@@ -251,8 +251,20 @@ def phase(lab, ticks, start, steps, arm, learning, deadline, trace_output=None, 
                     boundary=apply_boundary(b,arm["activity_reset"],observations+1,activity_output/f"boundary-{observations+1:02}.npz")
                 before=b.weight[b.circuit["edges"]].copy()
                 frozen_memory=learned_state(b) if not enabled else None
-                event=(lab.capture(rgb,stimulus,trace_output,len(trace_events)+1)
-                       if trace_output is not None else lab.fly.controller.observe(rgb,stimulus))
+                if 'recipient_current' in arm:
+                    from .fly_paper_stimulation import AppliedCurrent
+                    if learning or trace_output is None or arm.get('recipient_ids')!=['10704','11402'] or arm['recipient_current'] not in (0,10):
+                        raise ValueError('Recipient activation requires bounded frozen recording')
+                    targets=[lab.id_index[x] for x in arm['recipient_ids']]
+                    if any(str(lab.types[i])!='MBON11' for i in targets):raise ValueError('Recipient identity differs')
+                    with AppliedCurrent(b,targets,arm['recipient_current']) as applied:
+                        event=lab.capture(rgb,'none',trace_output,len(trace_events)+1,targets,arm['recipient_current'])
+                    current_path=trace_output/f'current-{len(trace_events)+1:02}.npz';applied.save(current_path)
+                    event['stimulation']={'target_ids':arm['recipient_ids'],'current':arm['recipient_current'],
+                                          'duration_ms':500,'artifact_sha256':digest(current_path)}
+                else:
+                    event=(lab.capture(rgb,stimulus,trace_output,len(trace_events)+1)
+                           if trace_output is not None else lab.fly.controller.observe(rgb,stimulus))
                 observations+=1
                 if boundary is not None:event["activity_boundary"]=boundary
                 if frozen_memory is not None:
@@ -282,8 +294,12 @@ def phase(lab, ticks, start, steps, arm, learning, deadline, trace_output=None, 
                     "market_timeline":decision_timeline(rows),"visual_encoding":encoding(arm["view"]),"restoration":restoration,
                     "initial_memory_sha256":memory_signature(initial_memory),"final_memory_sha256":memory_signature(learned_state(b)),
                     "interpretation":"Recorded market replay, isolated paper account. No executable DEX or monthly-return claim."}
+            requested=[]
+            if 'recipient_current' in arm:
+                report['config'].update(recipient_current=arm['recipient_current'],recipient_ids=arm['recipient_ids'])
+                requested=[lab.id_index[x] for x in arm['recipient_ids']]
             atomic_json(trace_output/"report.json",report)
-            view=lab.export_view(trace_output,report)
+            view=lab.export_view(trace_output,report,requested)
             if activity_output is not None:
                 report["config"]["activity_reset"]=arm["activity_reset"]
                 atomic_json(trace_output/"report.json",report)

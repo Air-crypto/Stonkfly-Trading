@@ -28,7 +28,9 @@ image = (modal.Image.debian_slim(python_version="3.12")
          .env({"PYTHONPATH": "/opt/paperlab", "OMP_NUM_THREADS": "2", "HF_HOME": "/state/huggingface", "PAPERLAB_FINBERT_REVISION": "4556d13015211d73dccd3fdd39d39232506f3e43", "PAPERLAB_PRODUCT": PRODUCT, "PAPERLAB_FLY": "1" if FULL_FLY else "0", "PAPERLAB_UNIVERSE":"1" if UNIVERSE else "0"}))
 
 if PAPER_STUDY:
-    for name in ('fly-market-study-09-preregistration.json','fly-market-study-08-plan.json','fly-market-study-08.json'):
+    for name in ('fly-market-study-09-preregistration.json','fly-market-study-08-plan.json','fly-market-study-08.json',
+                 'fly-market-study-10-preregistration.json','fly-market-study-09-plan.json','fly-market-study-09.json',
+                 'fly-paper-stimulation-study-01.json','fly-paper-stimulation-audit-01.json'):
         image=image.add_local_file(ROOT/'reports'/name,'/opt/paperlab/registered/'+name,copy=True)
     image=image.add_local_file(ROOT/'reports/fly-paper-memory-audit-01.json','/opt/paperlab/paper-memory-01/audit.json',copy=True)
     for i in range(2):
@@ -106,10 +108,11 @@ def _worker(prepare=False,probe=False,diagnostics=False,debug=None):
         if os.environ.get('PAPERLAB_PAPER_STUDY')=='1':
             from paperlab.fly_paper_schedule import execute_due as paper_due
             from paperlab.fly_paper_study import run as paper_run
-            scheduled=paper_due('/state','/discovery','/opt/paperlab/registered','/opt/paperlab/paper-memory-01',
-                call_id=modal.current_function_call_id(),input_id=modal.current_input_id(),commit=volume.commit,
-                run=paper_run,settle_budget=lambda:settle('/state/budget.json',reservation,time.time()-reservation['started']))
-            if scheduled is not None:return scheduled
+            for study in ('09','10'):
+                scheduled=paper_due('/state','/discovery','/opt/paperlab/registered','/opt/paperlab/paper-memory-01',
+                    call_id=modal.current_function_call_id(),input_id=modal.current_input_id(),commit=volume.commit,
+                    run=paper_run,settle_budget=lambda:settle('/state/budget.json',reservation,time.time()-reservation['started']),study=study)
+                if scheduled is not None:return scheduled
     if debug is not None:
         from paperlab.cloud_debug import run
         try:
@@ -206,8 +209,11 @@ def _worker(prepare=False,probe=False,diagnostics=False,debug=None):
         raise
     result["cycle_seconds"] = time.time() - started
     result["budget"] = settle("/state/budget.json", reservation, time.time() - reservation["started"])
-    atomic_json("/state/latest.json", result)
-    atomic_json(Path(output_root)/"latest.json", result)
+    atomic_json("/state/last-call.json", result)
+    atomic_json(Path(output_root)/"last-call.json", result)
+    if result["status"] != "duplicate_or_old_slot":
+        atomic_json("/state/latest.json", result)
+        atomic_json(Path(output_root)/"latest.json", result)
     emit("worker_completed", status=result["status"], cycle_seconds=result["cycle_seconds"],
          estimated_compute_usd=result["budget"]["estimated_compute_usd"],
          monthly_reserved_usd=result["budget"]["monthly_reserved_usd"])

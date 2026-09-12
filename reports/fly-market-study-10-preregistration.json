@@ -1,0 +1,100 @@
+{
+  "schema": 2,
+  "kind": "paper_checkpoint_comparison",
+  "study": "10",
+  "recorded_at": 1789235296.567376,
+  "development_start": 1789236600.0,
+  "test_start": 1789237500.0,
+  "end": 1789238400.0,
+  "phase_steps": 3,
+  "decision_seconds": 300,
+  "checkpoint_capture_at": 1789227931.94799,
+  "training_cutoff": 1789227900,
+  "parent_plan_sha256": "ecb89e2cb48cab07080e5c3437dd1ec3b86bdd71feb4f892190b8ad3603c136b",
+  "parent_report_sha256": "090c24107447aea170a9a9c764217f7486025377558f253843d352d444ddd00b",
+  "training_audit_sha256": "00477914d03d95cd860f956763687d5c8cb70c06a7c4a75fce539fe2e5c945cd",
+  "cohort": [
+    "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+    "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu"
+  ],
+  "source_memories": {
+    "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ": {
+      "memory_sha256": "bd571d82a52a281a7d514a33d7a4323356d067b6d1d1e8d2efc5ef54bb38bac7",
+      "memory_file_sha256": "c560ab857b5cfaa4b6c97906803f5a63f75f685f3851c38368d19d8ad9fa9031",
+      "checkpoint_sha256": "c6691896427df3c84434c819c1f3523939f8201154c3aeb5271292bd213bd38a",
+      "last_slot": 5964092,
+      "observations": 82,
+      "positive_rewards": 35,
+      "negative_rewards": 41
+    },
+    "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu": {
+      "memory_sha256": "d51108311964a41133941d0fede8c6f00f38bfd70b1c676e0245a5c056a44eff",
+      "memory_file_sha256": "6f7f6d4c3cb7e73cf0be44bc3f61a401c22039f2b8677f70e11502a645fc5040",
+      "checkpoint_sha256": "575cd3ad2e121dc056bcbce92b5b793fad705421c373888197c2dee8715e13ee",
+      "last_slot": 5964092,
+      "observations": 72,
+      "positive_rewards": 29,
+      "negative_rewards": 30
+    }
+  },
+  "arms": {
+    "pristine_frozen": {
+      "memory": "pristine",
+      "activity_reset": "carry",
+      "eta": 0.001,
+      "recipient_current": 0,
+      "recipient_ids": [
+        "10704",
+        "11402"
+      ]
+    },
+    "trained_frozen": {
+      "memory": "paper_trained",
+      "activity_reset": "carry",
+      "eta": 0.001,
+      "recipient_current": 0,
+      "recipient_ids": [
+        "10704",
+        "11402"
+      ]
+    },
+    "pristine_stimulated": {
+      "memory": "pristine",
+      "activity_reset": "carry",
+      "eta": 0.001,
+      "recipient_current": 10,
+      "recipient_ids": [
+        "10704",
+        "11402"
+      ]
+    },
+    "trained_stimulated": {
+      "memory": "paper_trained",
+      "activity_reset": "carry",
+      "eta": 0.001,
+      "recipient_current": 10,
+      "recipient_ids": [
+        "10704",
+        "11402"
+      ]
+    }
+  },
+  "costs": {
+    "capital": 250.0,
+    "fee_bps": 125,
+    "slippage_bps": 100,
+    "max_exposure": 0.5,
+    "max_order": 25,
+    "max_spread_bps": 150,
+    "max_delay": 420,
+    "loss_stop": 0.2
+  },
+  "news_protocol": "Use the unchanged market-frame adapter and 50-dimensional news features reconstructed at each selected quote timestamp. Include only revisions whose published, seen and encoded clocks are no later than that timestamp. Seal the feature vectors and news snapshot hash before model evaluation. All four arms receive identical images; never fetch headlines during simulation.",
+  "inference_protocol": "Import only the pinned plastic weights/u/w for paper_trained arms; pristine arms use native initial memory. Start development and test separately with fresh dynamics and declared memory. Freeze all inference with no reinforcement. Carry activity between eligible observations. Apply the declared current to both identified MBON11 cells 10704 and 11402 throughout each 500 ms observation, recording exact native stimulation arguments; zero-current controls receive no extra current. Missing slots do not advance or reset the brain. Retain the native graph, kernel, all other parameters, and fixed decoder.",
+  "selection_rule": "Choose the higher development equity of trained_frozen and trained_stimulated; ties within 1e-9 prefer trained_frozen. Select it only if it strictly exceeds cash and both pristine controls by more than 1e-9. Persist selection before test simulation. Report every test arm without reselection or automatic policy deployment.",
+  "hypothesis": "Determine whether fixed tonic current to the two identified MBON11 recipients exposes a useful effect of retained paper-trained memory on future cost-aware decisions, relative to pristine and unstimulated controls.",
+  "limitations": "Two fixed pools and short future phases. Checkpoints have observed engineered paper P&L feedback; this does not establish successful reward learning. Simulated indicative DEX execution, no monthly return estimate. Neural activity and account state are not carried into evaluation. Preserve missing and ineligible observations and the original cohort.",
+  "rationale": "The prior controlled current assay reproduced all unstimulated counts. Current 5 left trained recipients silent; current 10 activated both memory conditions and exposed different decoded actions. Evaluate only the predeclared current 10 against zero on fresh market inputs; do not tune from these future outcomes.",
+  "mechanism_report_sha256": "01330a25795235efc4256b9c8732b86053aa9b29eaa3d363580cbd12d0aef3ee",
+  "mechanism_audit_sha256": "14b6a4e341a47e4101c152a5e587c8d3bbfdf540a0701a85c2705dffdec88533"
+}

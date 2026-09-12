@@ -82,7 +82,18 @@ def audit(envelope,summary,root):
                     if event['input_sha256']!=array_hash(rgb) or not np.array_equal(event['news_features'],news.features(t.ts)):
                         raise ValueError('Event price/news image differs from sealed inputs')
                     if event['stimulus']!='none' or event['stimulus_ms']!=0 or event['plasticity_enabled'] or event['weight_delta_l2']!=0 or event['equity_reward_usd']!=0:
-                        raise ValueError('Frozen inference enabled learning or stimulation')
+                        raise ValueError('Frozen inference enabled learning or reinforcement')
+                    if 'recipient_current' in arm:
+                        current_path=trace/f'current-{n:02}.npz';applied=read_arrays(current_path)
+                        targets=[int(np.flatnonzero(ids==int(x))[0]) for x in arm['recipient_ids']]
+                        expected_current={'target_ids':arm['recipient_ids'],'current':arm['recipient_current'],
+                                          'duration_ms':500,'artifact_sha256':digest(current_path)}
+                        if event.get('stimulation')!=expected_current or set(applied)!={'durations_ms','currents','target_indices'}:
+                            raise ValueError('Registered recipient stimulation differs')
+                        if not np.array_equal(applied['target_indices'],targets) or not np.array_equal(applied['durations_ms'],np.full(50,10)) or not np.array_equal(applied['currents'],np.full((50,2),arm['recipient_current'])):
+                            raise ValueError('Native recipient targets, current or timing differs')
+                    elif event.get('stimulation'):
+                        raise ValueError('Unregistered stimulation in the paper comparison')
                     if event['market_decision_ts']!=stamp:raise ValueError('Neural event decision time differs')
                     boundary=event['activity_boundary']
                     if boundary['before_clock']!=clock or event['brain_ms']!=clock['sim_ms']+500:
@@ -113,6 +124,8 @@ def audit(envelope,summary,root):
                     if vreport['events']!=events or [f['event'] for f in view['frames']]!=events or vreport['market_timeline']!=decision_timeline(rows):raise ValueError('Viewer events or market timeline differs')
                     if vreport['config']['news']!='sealed_timestamped' or vreport['config']['activity_reset']!=arm['activity_reset'] or vreport['evaluation_phase']!=stage or vreport['memory_origin']!=arm['memory']:
                         raise ValueError('Viewer inference provenance differs')
+                    if 'recipient_current' in arm and any(vreport['config'].get(k)!=arm[k] for k in ('recipient_current','recipient_ids')):
+                        raise ValueError('Viewer recipient intervention differs')
                     expected_exposure=r['source_memories'][key] if arm['memory']=='paper_trained' else None
                     if vreport.get('training_exposure')!=expected_exposure:raise ValueError('Viewer training exposure differs from pinned checkpoint')
                     if vreport['native_build']!=summary['native_build'] or vreport['plan_sha256']!=envelope['sha256'] or vreport['initial_memory_sha256']!=memory_hash or vreport['final_memory_sha256']!=memory_hash or vreport['config']['learning'] is not False:
@@ -122,7 +135,8 @@ def audit(envelope,summary,root):
                         if array_hash(rgb)!=event['input_sha256']:raise ValueError('Displayed image differs from the sealed input')
                     audit_view_boundaries(view,folder,ids)
                 elif (trace/'view.json').exists():raise ValueError('Unobserved phase has a fabricated viewer')
-                verified[key][name][stage]={'observations':len(events),'boundaries':checks,'full_count_decoders_verified':len(events),'paper_ledger_replayed':True}
+                verified[key][name][stage]={'observations':len(events),'boundaries':checks,'full_count_decoders_verified':len(events),'paper_ledger_replayed':True,
+                    **({'recipient_current_observations_verified':len(events)} if 'recipient_current' in arm else {})}
                 diagnostics[key][name][stage]={**{k:v for k,v in outcome.items() if k!='rows'},'decisions':[{**{k:v for k,v in row.items() if k!='event'},'neural':row['event']} for row in rows]}
     for name in r['arms']:
         for stage in PHASES:
