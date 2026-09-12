@@ -126,3 +126,32 @@ def test_observer_checks_saved_price_snapshot_before_exposing_results(tmp_path,m
     with pytest.raises(ValueError,match='price audit rejected'):observe(s.registration,out)
     assert reads[-1]=='/'+DIRECTORY+'/universe.db'
     assert not (out/'report.json').exists() and not list(out.glob('pool*'))
+
+
+@pytest.mark.parametrize('kind',['filesystem','modal'])
+def test_observer_waits_for_absent_claim_without_submitting_or_writing(tmp_path,monkeypatch,capsys,kind):
+    import modal
+    from modal.exception import NotFoundError
+    from paperlab.fly_paper_cloud import observe
+    reads=[]
+    class Volume:
+        def read_file(self,path):
+            reads.append(path)
+            raise (FileNotFoundError if kind=='filesystem' else NotFoundError)('claim is not created yet')
+    monkeypatch.setattr(modal.Volume,'from_name',lambda *a,**k:Volume())
+    monkeypatch.setattr(modal.FunctionCall,'from_id',lambda *a,**k:pytest.fail('No saved call to observe'))
+    monkeypatch.setattr(modal.Function,'from_name',lambda *a,**k:pytest.fail('Never submit compute'))
+    out=tmp_path/'out'
+    observe({},out)
+    assert reads==['/'+DIRECTORY+'/cloud-call.json']
+    assert 'No scheduled claim yet' in capsys.readouterr().out
+    assert not out.exists()
+
+
+def test_observer_does_not_disguise_permissions_as_an_unclaimed_study(tmp_path,monkeypatch):
+    import modal
+    from paperlab.fly_paper_cloud import observe
+    class Volume:
+        def read_file(self,path):raise PermissionError('access denied')
+    monkeypatch.setattr(modal.Volume,'from_name',lambda *a,**k:Volume())
+    with pytest.raises(PermissionError):observe({},tmp_path/'out')

@@ -14,9 +14,14 @@ from .fly_paper_schedule import DIRECTORY
 
 def observe(registration,output):
     import modal
+    from modal.exception import NotFoundError
     volume=modal.Volume.from_name('fly-paper-lab-state',environment_name='main')
     def read(name):return json.loads(b''.join(volume.read_file('/'+DIRECTORY+'/'+name)))
-    receipt=read('cloud-call.json')
+    try:
+        receipt=read('cloud-call.json')
+    except (FileNotFoundError,NotFoundError):
+        print('No scheduled claim yet; repeat this read-only observer after the next worker cycle.',flush=True)
+        return
     if receipt.get('dispatch')!='scheduled-worker-once' or not receipt.get('call_id') or receipt.get('status') not in ('pending','completed'):
         raise RuntimeError('Scheduled comparison unready, failed or uncertain; never submit a replacement')
     envelope=read('plan.json');p=validate(envelope)

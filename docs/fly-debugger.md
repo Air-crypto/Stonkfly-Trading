@@ -2190,6 +2190,9 @@ uv run python -m paperlab.debugger serve --out runs/research-market-09
 If the observer reports that the same call is pending, repeat the same command
 and output directory. It has no submission path. A missing claim means the
 scheduled study has not started; inspect the existing worker and collector.
+The observer treats both SDK `NotFoundError` and translated `FileNotFoundError`
+for the initial claim as an ordinary wait, without creating local receipts or
+submitting a call. Permission and other errors remain visible.
 The observer requires local source hashes to match the executed version.
 
 Before exposing recordings, the observer downloads the exact saved collector
