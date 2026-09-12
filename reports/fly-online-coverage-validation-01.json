@@ -1,0 +1,36 @@
+{
+  "status": "provisional_coverage_check_verified",
+  "observed_at": "2026-09-12T21:16:53.108018+00:00",
+  "tests": {
+    "passed": 7,
+    "seconds": 1.2,
+    "cases": [
+      "future slots unknown",
+      "later receipts preserve prior assessments",
+      "terminal marks excluded from neural counts",
+      "fresh ineligible receipts and unreachable threshold",
+      "gap markers retain real receipt age",
+      "missing fixed cohort retained",
+      "tampered eligibility rejected",
+      "registration and sources pinned",
+      "earlier report preserved"
+    ]
+  },
+  "download": {
+    "started_at": "2026-09-12T21:12:41.621281+00:00",
+    "completed_at": "2026-09-12T21:12:45.624345+00:00",
+    "volume": "fly-paper-lab-universe",
+    "path": "universe-snapshot.db",
+    "snapshot_sha256": "82d03ecebdaa9179c6c9d4cfb491cd193043e59a2c49cca302f34c79acb1e2ca",
+    "bytes": 55889920
+  },
+  "artifact_sha256": {
+    "paperlab/fly_online_coverage.py": "6f986a11d6a2869739c3af523d41ce660449be9f40766d28ed0ddb12ede82ca9",
+    "tests/test_fly_online_coverage.py": "dd5a0aa8786e20589a8e5ca221edda2b7f753462265b3ab01d6a5c28ff87d959",
+    "reports/fly-online-coverage-11-01.json": "f29fe6c8e9504f1fce5ef18d84f2c0e418c5e2bf63aa5a862ac4c793f83e30f9",
+    "reports/fly-online-registration-note-11.json": "45500cfa5ceb704edd38113e6640a82c7b47229d3bfd2df471fe6806c6972bcb"
+  },
+  "source_manifest_matches_cloud_arming": true,
+  "model_submissions": 0,
+  "interpretation": "Coverage of a fixed collector snapshot, with no news audit, model execution, returns or selection. Unknown future observations are not counted as missing. The final sealed comparison and full-bin audits remain pending."
+}

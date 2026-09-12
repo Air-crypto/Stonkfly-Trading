@@ -1,0 +1,68 @@
+{
+  "status": "registration_description_clarification",
+  "noted_at": "2026-09-12T21:16:53.108018+00:00",
+  "study": "11",
+  "registration_sha256": "078553e736a666d576337f895133409c5ccc18cda8c1edf1cb60d735fc6dfb25",
+  "arming_evidence_sha256": "e508c087f61c403ff0849c79d9177476358f58c10ddd595b547f9c57c4970217",
+  "inconsistent_field": "hypothesis",
+  "original_text": "Determine whether fixed tonic current to the two identified MBON11 recipients exposes a useful effect of retained paper-trained memory on future cost-aware decisions, relative to pristine and unstimulated controls.",
+  "inherited_from": "reports/fly-market-study-10-preregistration.json",
+  "clarified_description": "Determine whether clearing only KC/DAN rate traces between observations improves cost-aware paper performance of online learning relative to online carry and both frozen controls, using the existing development selection and subsequent test.",
+  "already_registered_definitions": {
+    "arms": {
+      "pristine_frozen": {
+        "memory": "pristine",
+        "activity_reset": "carry",
+        "eta": 0.001,
+        "learning": false
+      },
+      "trained_frozen": {
+        "memory": "paper_trained",
+        "activity_reset": "carry",
+        "eta": 0.001,
+        "learning": false
+      },
+      "trained_online_carry": {
+        "memory": "paper_trained",
+        "activity_reset": "carry",
+        "eta": 0.001,
+        "learning": true
+      },
+      "trained_online_reset_rates": {
+        "memory": "paper_trained",
+        "activity_reset": "reset_rates",
+        "eta": 0.001,
+        "learning": true
+      }
+    },
+    "rationale": "The audited trace-reset assay reproduced three carry controls and all first observations. Clearing only KC/DAN rate traces changed subsequent online updates and one recorded action, while frozen counts stayed identical. Test that single intervention over fresh two-hour development and two-hour test intervals; no claim of improved returns follows from the earlier three-image mechanism assay.",
+    "inference_protocol": "Import the same pinned plastic weights/u/w for every paper_trained arm; pristine uses native initial memory. Start each pool, arm and phase with fresh dynamics and the declared memory, a fresh $250 account, and no pending order. Do not carry development memory or accounts into test. Frozen arms receive no reinforcement or learning. Online arms use their own equity change after execution of the preceding decision as feedback, zero across unpriced gaps; map changes above $0.01 to reward, below -$0.01 to aversive, otherwise none. Keep learning enabled even without a pulse. Use the unchanged 500 ms observation and 200 ms dopamine pulse at current 20. The reset_rates arm clears only rate_kc and rate_dan immediately before each eligible observation after the first. Carry all other dynamic state, weights/u/w and the neural clock across that boundary. Missing or repeated quotes do not advance or reset the brain. Keep the full graph, original image adapter, eta 0.001 and fixed decoder unchanged.",
+    "selection_rule": "The sole candidate is trained_online_reset_rates. Require at least 18 of 24 eligible observations per pool in development and identical coverage across arms. Select the candidate only if its aggregate development equity strictly exceeds all three controls and $1000 plus $40/month hosting prorated to two hours on a 30-day month, by more than 1e-9. Persist selection after all eight development chunks and before any test chunk. Evaluate every test arm regardless of selection. Report test coverage and costs; never reselect or automatically deploy a policy."
+  },
+  "verification": {
+    "hypothesis_equals_parent_study_10": true,
+    "arms_and_protocol_match_cloud_pinned_sources": true,
+    "recipient_current_absent_from_every_arm": true,
+    "original_registration_bytes_unchanged": true,
+    "execution_sources_unchanged": true
+  },
+  "observer_at_discovery": {
+    "status": "development_collection",
+    "armed": {
+      "armed_at": 1789244747.9571583,
+      "registration_sha256": "078553e736a666d576337f895133409c5ccc18cda8c1edf1cb60d735fc6dfb25",
+      "registration_signature": "8ec0342f1fb715abcf60d32c22c16acc3bb90b9f7576d68a3f92304ddaf56449",
+      "source_sha256": "5862a6aebfe9db84c39d94564a230eb8f7bf8e5703bbf19ddaf64d246f529dc0",
+      "call_id": "fc-01M2BMPXVS3ZSQY2YVD4TN5RM1",
+      "input_id": "in-01M2BMPXW1M7059SGXFTQHS84Y:1789244700567-0"
+    },
+    "completed_chunks": 0,
+    "audited_chunks": 0,
+    "total_chunks": 16,
+    "development_start": 1789245300,
+    "test_start": 1789252500,
+    "end": 1789259700,
+    "observed_at": 1789247734.216363
+  },
+  "interpretation": "A descriptive sentence was inherited incorrectly from study 10. This dated note is written after collection began, before development finished and before any study 11 chunk was computed. It clarifies the pre-existing explicit arms/rationale/inference/selection definitions; it is not a replacement or backdated registration. Preserve and disclose the inconsistency when reporting results. No arm, candidate, window, threshold, cost, source, or cloud deployment changed."
+}

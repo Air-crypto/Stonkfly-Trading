@@ -199,6 +199,9 @@ at 20:25:47 UTC on September 12, before the 20:35 UTC development start. The
 reattaches saved calls and audits full recordings into paired debugger views.
 No result from this follow-up is claimed yet. Synthetic validation is not
 evidence that the intervention earns money.
+The guide includes a [dated registration clarification](docs/fly-online-comparison.md#registration-description-clarification)
+and a [provisional quote-coverage check](docs/fly-online-comparison.md#check-coverage-before-the-window-closes).
+The original registration and executed comparison remain unchanged.
 
 The [full-window diagnostic figures](docs/fly-online-comparison.md#compare-the-full-financial-and-neural-timelines)
 align decisions, later fills, gate spikes, weight movement and learning history,

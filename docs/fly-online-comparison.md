@@ -23,6 +23,24 @@ updates and an action, while frozen spike counts remain unchanged. It did not
 measure a profitable improvement. This follow-up extends the comparison from
 three images to two hours of development and a separate two hours of test data.
 
+## Registration description clarification
+
+At **21:16:53 UTC on September 12**, a review found that the registration's
+`hypothesis` field still contains study 10's neuron-stimulation description.
+It is exactly the same sentence as in the parent registration. This is a
+descriptive inconsistency in the original record and must remain visible when
+reporting study 11 results.
+
+The [dated clarification](../reports/fly-online-registration-note-11.json)
+preserves that original sentence and the unchanged registration hash. Study 11's
+pre-existing `arms`, `rationale`, `inference_protocol`, and `selection_rule`
+explicitly define the online trace-reset comparison shown below. Those fields
+match the cloud-pinned execution definitions; none of the four arms supplies
+the recipient-current parameters used in study 10. The note was written after
+collection began, before development ended and before any study 11 chunk was
+computed. It is not a replacement or backdated registration, and changes no
+candidate, window, cost, threshold, source file, or deployment.
+
 ## Fixed comparison
 
 | Condition | Starting connection memory | Updates during each phase | Between observations |
@@ -60,6 +78,64 @@ hours on a 30-day month, or $0.111111 per $1,000 comparison. Fees, artificial
 spread and slippage remain the existing adverse DEX scenario. Every test
 condition is evaluated regardless of selection; no policy is promoted
 automatically. Two pools and four hours cannot establish monthly profitability.
+
+## Check coverage before the window closes
+
+The [provisional coverage report](../reports/fly-online-coverage-11-01.json)
+inspects a closed collector snapshot downloaded at **21:12:45 UTC**, with
+coverage assessed through **21:10 UTC / 4:10 p.m. CDT**. It verifies raw receipt
+identity, chronology, stored eligibility reasons, and the snapshot database's
+integrity. The registration and execution-source hashes must match the cloud
+arming evidence before the CLI produces a report.
+
+| Pool | Eligible prior context | Usable development decision slots | Missing elapsed slots | Development slots still pending |
+|---|---:|---:|---:|---:|
+| ALL | 455 | 8 | 0 | 16 |
+| baton | 434 | 8 | 0 | 16 |
+
+All 24 test decisions were still pending in that snapshot. These are expected
+neural-observation slots based on quotes, not completed brain captures or
+successful trades. The 18-of-24 development coverage requirement had not yet
+been met. Final coverage, news inputs, actions, returns and selection still
+require the sealed four-hour window and its independent audits.
+
+The checker uses the same quote selection and eligibility code as the
+registered runner. It excludes the snapshot's open receipt minute and leaves
+future slots unknown. Stale quotes, freshly received but ineligible pools,
+repeated quotes and absent registered pools remain distinct. A synthetic gap
+marker does not conceal the age of the last actual receipt. Terminal account
+marks never count as neural observations. If observed plus remaining slots
+falls below 18, the report marks that pool's coverage threshold unreachable;
+it does not replace the pool, move the window, or change selection rules.
+
+To inspect another snapshot, create a new output directory and download the
+collector's published backup with authenticated Modal access:
+
+```sh
+uv run --extra cloud python - <<'PY'
+from pathlib import Path
+import modal
+root = Path('runs/coverage-next')
+root.mkdir(exist_ok=False)
+volume = modal.Volume.from_name('fly-paper-lab-universe', environment_name='main')
+with (root / 'universe.db').open('wb') as target:
+    for block in volume.read_file('universe-snapshot.db'):
+        target.write(block)
+PY
+uv run --extra cloud python -m paperlab.fly_online_coverage \
+  --registration reports/fly-market-study-11-preregistration.json \
+  --arming reports/fly-online-cloud-arming-11.json \
+  --archive runs/coverage-next/universe.db \
+  --out runs/coverage-next/coverage.json
+```
+
+The [validation record](../reports/fly-online-coverage-validation-01.json)
+records seven passing tests for future/past separation, eligibility and gaps,
+missing cohort members, terminal handling, registration/source drift and
+preservation of earlier reports. Reproduce them with
+`uv run --extra dev python -m pytest -q tests/test_fly_online_coverage.py`.
+The coverage check does not create a neural run, seal an experiment, audit news,
+calculate a return, or select a policy.
 
 ## Complete recordings and audit
 
