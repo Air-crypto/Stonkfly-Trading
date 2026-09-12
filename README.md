@@ -188,6 +188,13 @@ reattaches saved calls and audits full recordings into paired debugger views.
 No result from this follow-up is claimed yet. Synthetic validation is not
 evidence that the intervention earns money.
 
+The [full-window diagnostic figures](docs/fly-online-comparison.md#compare-the-full-financial-and-neural-timelines)
+align decisions, later fills, gate spikes, weight movement and learning history,
+with links back to matched circuit recordings. This preview is explicitly
+synthetic; the cloud comparison still needs its complete data and audits.
+
+![Synthetic validation of longer trading and learning timelines](docs/assets/fly-online-diagnostics-validation-01.png)
+
 The [decoder count view](docs/fly-debugger.md#inspect-accumulated-decoder-counts)
 shows how output spikes accumulate. In the examined BUY/SELL reversal, one net
 spike equals the fixed 2 Hz threshold; a count-edit audit separates direction

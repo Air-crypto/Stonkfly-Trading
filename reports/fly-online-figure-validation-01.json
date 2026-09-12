@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "status": "synthetic_figure_validation_completed",
+  "checked_at": "2026-09-12T20:41:53.338433+00:00",
+  "source": "synthetic prices and neural diagnostics with actual paper ledger implementation",
+  "native_model_run": false,
+  "cloud_submissions": 0,
+  "market_performance_evidence": false,
+  "test_file": "tests/test_fly_online_figure.py",
+  "tests_passed": 10,
+  "checks": {
+    "all_sixteen_chunks_required": true,
+    "summary_and_audit_hashes_checked": true,
+    "saved_development_choice_reconstructed": true,
+    "gaps_distinct_from_hold_and_zero_spikes": true,
+    "no_drive_share_undefined": true,
+    "buy_target_rebalance_sell_preserved": true,
+    "fills_require_prior_decisions": true,
+    "observed_frame_links_skip_gaps": true,
+    "synthetic_badge_automatic": true,
+    "input_report_preserved": true,
+    "output_overwrite_rejected": true,
+    "five_png_figures_visually_inspected": true,
+    "five_svg_figures_emitted": true,
+    "pinned_cloud_execution_sources_unchanged": true
+  },
+  "cli_result": {
+    "status": "online_figures_rendered",
+    "validation_only": true,
+    "report_sha256": "a2ab248d567e650d1e62016e092b19d881d9d968536e95a1b11cba6b158798fc",
+    "source_sha256": "2ade0d9ad4b00a0d2ebbdc3a3810e47f9478eb38dc5d48ad25cd55c1ab9fed4c",
+    "diagnostics_sha256": "d856422a6bfc8fb5e488a96a553c1e7004f89ba965999a19152e5a2e11e0d0f6",
+    "figure_sha256": {
+      "comparison.png": "edfc3ac470820643999da16cbdf20b0166212d69011a6d5b24ac4a25a1986f99",
+      "comparison.svg": "9bbe251ed132df94984a6919ecf05abb2fb2906c54af9cc32fa6cca3f3010a57",
+      "development-pool0.png": "2cb2dff5cca9e9dcbb4efb7900db4fddd533a78baeeacd39a34f828d912b69a4",
+      "development-pool0.svg": "fd1fe73806573881e705c1d89bc4ed11911145a8739dc07caa0033957b7367ed",
+      "development-pool1.png": "b8369f73eb6719d9e965fab3fc325a861ae4169aa456c40cd90d7bfc059577ec",
+      "development-pool1.svg": "afe46ea1f3466f7e5b86e7e76abfd036db31ebfda843af6cc035befc5b6c734d",
+      "test-pool0.png": "8f4e0026dc4a61c27c8b760509aaa32e6b137c81e131866b8a7a78b5c125fd6b",
+      "test-pool0.svg": "55d7e0efd5870cfc7fa01439be42918ae7312626ff4956af4c639405ff668de9",
+      "test-pool1.png": "c163e2f6834ea7330cadbfe2413d07840a22cc0fab88302fb45c538d90d10864",
+      "test-pool1.svg": "6332c3f4a22bc6cfaf73810bb538b4ab2756ef329ec0b16e7ca82bb372c21302"
+    }
+  },
+  "plotted_slots": 400,
+  "paired_observations": 80,
+  "preview_file": "docs/assets/fly-online-diagnostics-validation-01.png",
+  "preview_sha256": "2cb2dff5cca9e9dcbb4efb7900db4fddd533a78baeeacd39a34f828d912b69a4",
+  "test_source_sha256": "53d0020da5151e98bc240610fb434cb1e30a7fcb258dc024197ca48eafffe969",
+  "interpretation": "This verifies figure generation and evidence reconciliation with explicitly synthetic diagnostics. It does not replace full-native audits or establish a profitable improvement. The registered cloud experiment continues unchanged."
+}

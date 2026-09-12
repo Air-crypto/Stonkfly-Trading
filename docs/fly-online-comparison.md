@@ -225,3 +225,59 @@ plot, connection `u/w`, gate spikes and subsequent fills across observations;
 repeat for pool 1 and the separate test phase. The reset clears KC/DAN **firing
 rate traces**, not a learning-rate hyperparameter or stored connection memory.
 Keep the pinned execution sources unchanged until capture and audits finish.
+
+## Compare the full financial and neural timelines
+
+After the observer has written its fully audited `report.json`, export the
+comparison and four per-pool/per-phase diagnostic figures:
+
+```sh
+uv run --extra plots python -m paperlab.fly_online_figure \
+  --root runs/online-cloud-11 --out runs/online-cloud-11/figures
+```
+
+This reads existing evidence and runs no model. It requires all sixteen chunk
+audits, verifies their file hashes against the report, reconstructs the saved
+development choice, and reconciles each displayed slot with its ledger and
+neural audit. It refuses to overwrite an existing figure directory.
+
+`comparison.png` and `.svg` show both complete equity timelines, fees, fills,
+observation coverage, and the fixed development decision. The four other
+PNG/SVG pairs align per-pool equity with new actions, gate spikes, full-edge
+weight-update norms, and the earlier-image share of integrated absolute
+learning-drive components. Gaps remain missing in neural plots; a zero-drive
+share is undefined rather than plotted as zero. Red crosses on equity mark
+unavailable quotes and their conservative stress values.
+
+Fill triangles are placed at the decision slot that processes the earlier
+order, and the exported rows retain its exact decision and quote/fill times.
+The fly's BUY means target 50% exposure; a price rise can therefore cause a
+SELL fill while rebalancing to that target. An action label and a fill side
+must not be interpreted as interchangeable.
+
+`diagnostics.md` links each shared observation directly to the paired online
+carry/reset debugger views on port 8767. Links use observed frame indices, so
+a missing market slot cannot shift the selected neural observation. The
+accompanying `figures.json` preserves all plotted rows, paired action changes,
+equity differences, and source/report/figure hashes. The component share is
+an algebraic description of recorded learning drive, not causal attribution
+or a backprop gradient. Policy selection remains fixed before test.
+
+The example below uses **synthetic prices and synthetic neural diagnostics**
+with the actual paper ledger implementation. It verifies layout, missing-data
+handling, rebalance fills, and links; its values are not native-model or market
+results. The [figure validation record](../reports/fly-online-figure-validation-01.json)
+keeps these checks separate from the earlier full-native validation.
+
+![Synthetic full-window diagnostics, with decisions separated from later fills](assets/fly-online-diagnostics-validation-01.png)
+
+Reproduce this fixture without downloading the graph or submitting cloud work:
+
+```sh
+uv run --extra dev --extra plots pytest -q tests/test_fly_online_figure.py \
+  --basetemp=runs/online-figure-validation
+```
+
+The rendered files appear under
+`runs/online-figure-validation/test_render_produces_all_five_0/figures`.
+Use a fresh `--basetemp` directory to preserve previous validation evidence.
