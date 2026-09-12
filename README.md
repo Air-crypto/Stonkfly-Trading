@@ -72,11 +72,14 @@ The diagnostics have identified concrete limitations:
   Resetting more memory can reverse it or introduce an extra gate-driven BUY.
   All reference controls reproduced; blanket restoration is not a demonstrated fix.
 
-An [eight-condition activity replay](docs/fly-debugger.md#activity-reset-results)
-restored the final gate from **0 to 18 spikes** by resetting dynamics while
-keeping learned memory. Resetting visual filters or adaptation alone did not.
-Full resets also made pristine and trained spike-count records identical on these
-three inputs, so recovered activity is not yet a demonstrated trading fix.
+The [twelve-condition activity comparison](docs/fly-debugger.md#voltage-and-synaptic-input-results)
+found that clearing synaptic input between images recovered **five final gate
+spikes** while retaining a trained-versus-pristine firing difference. Resetting
+only the two gate cells failed for the trained model; global voltage resets made
+all three trained/pristine spike-count records identical. These are mechanism
+results, with no fills or P&L; no reset policy has been promoted.
+
+![All twelve audited activity reset conditions](docs/assets/fly-market-activity-02.png)
 
 The [decoder count view](docs/fly-debugger.md#inspect-accumulated-decoder-counts)
 shows how output spikes accumulate. In the examined BUY/SELL reversal, one net

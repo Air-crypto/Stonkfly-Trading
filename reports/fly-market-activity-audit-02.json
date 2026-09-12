@@ -1,0 +1,1786 @@
+{
+  "protocol": {
+    "schema": 2,
+    "kind": "post_hoc_market_activity_reset",
+    "recorded_at": 1789218920.146156,
+    "market_plan_sha256": "3896dedeacf436b240c3f29e4ebfc656410c868dbeab45ac8c33537b70cbc19a",
+    "reference_report_sha256": "038e6f2c69c00a60ab88d89340cf1f85cc7b75e9a3fc8567e1d284cf90ce01e3",
+    "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+    "arms": {
+      "pristine_carry": {
+        "memory": "pristine",
+        "state_reset": "carry"
+      },
+      "trained_carry": {
+        "memory": "trained",
+        "state_reset": "carry"
+      },
+      "pristine_full": {
+        "memory": "pristine",
+        "state_reset": "full"
+      },
+      "trained_full": {
+        "memory": "trained",
+        "state_reset": "full"
+      },
+      "pristine_voltage": {
+        "memory": "pristine",
+        "state_reset": "voltage"
+      },
+      "trained_voltage": {
+        "memory": "trained",
+        "state_reset": "voltage"
+      },
+      "pristine_conductance": {
+        "memory": "pristine",
+        "state_reset": "conductance"
+      },
+      "trained_conductance": {
+        "memory": "trained",
+        "state_reset": "conductance"
+      },
+      "pristine_voltage_conductance": {
+        "memory": "pristine",
+        "state_reset": "voltage_conductance"
+      },
+      "trained_voltage_conductance": {
+        "memory": "trained",
+        "state_reset": "voltage_conductance"
+      },
+      "pristine_gate_voltage_conductance": {
+        "memory": "pristine",
+        "state_reset": "gate_voltage_conductance"
+      },
+      "trained_gate_voltage_conductance": {
+        "memory": "trained",
+        "state_reset": "gate_voltage_conductance"
+      }
+    },
+    "training_source": "trained_frozen",
+    "test_source": "trained_frozen",
+    "inference": {
+      "learning": false,
+      "reinforcement": "none",
+      "extra_current": 0,
+      "steps": 3
+    },
+    "reset_fields": {
+      "voltage": [
+        "v"
+      ],
+      "conductance": [
+        "g"
+      ],
+      "voltage_conductance": [
+        "v",
+        "g"
+      ],
+      "gate_voltage_conductance": [
+        "v",
+        "g"
+      ]
+    },
+    "reset_timing": "Between observations only; first observation starts from the same fresh dynamics in every arm.",
+    "hypothesis": "The retained gate neurons are hyperpolarized at the failed observation boundary, while their stored intrinsic adaptation is zero. Compare resetting voltage, synaptic current, both fields globally, or both fields only at the two gate neurons. Reproduce pristine/trained carry and full-reset controls before these narrower interventions.",
+    "interpretation": "Post hoc mechanism refinement. Each intervention occurs at a materialized native observation boundary. All other arrays, the neural clock, and all synaptic weights/u/w remain unchanged for partial resets. Twelve fixed conditions, full graph, fixed decoder, no added current, no account or profit calculation. Recovering a reset-induced spike is not evidence of better trading.",
+    "gate_ids": [
+      "10527",
+      "555871"
+    ],
+    "activity_reference_sha256": "585a659e66f48ed70fb6b5cbd527e993e2c6a640fb0dbbf7ea9d61a0aebdc513"
+  },
+  "reference_controls": [
+    "pristine_carry",
+    "trained_carry",
+    "pristine_full",
+    "trained_full"
+  ],
+  "initial_dynamics_sha256": "fe9303113b85b64d5be35a088df3fec81577357294b7627f42a2282de25e13c3",
+  "memory_sha256": {
+    "pristine": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+    "trained": "ea0a47fc5821e3ceb0bf4f0d27b1470133ff6b38454c99cd19e2f4715d22c809"
+  },
+  "arms": {
+    "pristine_carry": {
+      "boundaries": [
+        {
+          "mode": "initial",
+          "changed_fields": [],
+          "reset_fields": [],
+          "target_ids": [],
+          "target_indices": [],
+          "preserved_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "g",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory",
+            "v"
+          ],
+          "artifact_sha256": "141a5a129c0cf4c7733f1fb61d5962bdc941c021cfddda2316b6570c65e9dfc3",
+          "before_count_sha256": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10"
+        },
+        {
+          "mode": "carry",
+          "changed_fields": [],
+          "reset_fields": [],
+          "target_ids": [],
+          "target_indices": [],
+          "preserved_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "g",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory",
+            "v"
+          ],
+          "artifact_sha256": "9897d9d8f9cb39f2ca5e6ad2711dd0ce08876c8f287560156a9b8f1322bf7aab",
+          "before_count_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb"
+        },
+        {
+          "mode": "carry",
+          "changed_fields": [],
+          "reset_fields": [],
+          "target_ids": [],
+          "target_indices": [],
+          "preserved_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "g",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory",
+            "v"
+          ],
+          "artifact_sha256": "cb83a8f7c0a8234b241cdcae434dfb5bc31ffbbafbff99de215a7049bf8a1f05",
+          "before_count_sha256": "0416e2063de8ab906de0a0d3ba73380a5ad803723c3cb77e77a16539b59fb066"
+        }
+      ],
+      "actions": [
+        "BUY",
+        "BUY",
+        "HOLD"
+      ],
+      "gate_spikes": [
+        31,
+        4,
+        0
+      ],
+      "difference_hz": [
+        8.0,
+        6.0,
+        10.0
+      ],
+      "action_matches_carry": [
+        true,
+        true,
+        true
+      ],
+      "whole_count_matches_carry": [
+        true,
+        true,
+        true
+      ]
+    },
+    "trained_carry": {
+      "boundaries": [
+        {
+          "mode": "initial",
+          "changed_fields": [],
+          "reset_fields": [],
+          "target_ids": [],
+          "target_indices": [],
+          "preserved_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "g",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory",
+            "v"
+          ],
+          "artifact_sha256": "cd133555b7eca8a200afe9d1614b838ea340b8774a127e7454c48be78063f834",
+          "before_count_sha256": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10"
+        },
+        {
+          "mode": "carry",
+          "changed_fields": [],
+          "reset_fields": [],
+          "target_ids": [],
+          "target_indices": [],
+          "preserved_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "g",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory",
+            "v"
+          ],
+          "artifact_sha256": "3c327ae29c4dd709f0474b219c1f7db4d0efb0a2d75d2b0577f22c8eabf11b33",
+          "before_count_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb"
+        },
+        {
+          "mode": "carry",
+          "changed_fields": [],
+          "reset_fields": [],
+          "target_ids": [],
+          "target_indices": [],
+          "preserved_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "g",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory",
+            "v"
+          ],
+          "artifact_sha256": "3f17cbbd34f7a2ac954115c5bd45eefe383ae38add0a3fdda4731f3d1227e873",
+          "before_count_sha256": "a761c0adc67889c4fed9439ec2aee51526f5aeef5fb9ca299daecfbf92ebf9b6"
+        }
+      ],
+      "actions": [
+        "BUY",
+        "BUY",
+        "HOLD"
+      ],
+      "gate_spikes": [
+        31,
+        3,
+        0
+      ],
+      "difference_hz": [
+        8.0,
+        2.0,
+        4.0
+      ],
+      "action_matches_carry": [
+        true,
+        true,
+        true
+      ],
+      "whole_count_matches_carry": [
+        true,
+        true,
+        true
+      ]
+    },
+    "pristine_full": {
+      "boundaries": [
+        {
+          "mode": "initial",
+          "changed_fields": [],
+          "reset_fields": [],
+          "target_ids": [],
+          "target_indices": [],
+          "preserved_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "g",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory",
+            "v"
+          ],
+          "artifact_sha256": "141a5a129c0cf4c7733f1fb61d5962bdc941c021cfddda2316b6570c65e9dfc3",
+          "before_count_sha256": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10"
+        },
+        {
+          "mode": "full",
+          "changed_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "g",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory",
+            "v"
+          ],
+          "reset_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "g",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory",
+            "v"
+          ],
+          "target_ids": [],
+          "target_indices": [],
+          "preserved_fields": [],
+          "artifact_sha256": "45757f0de9b390469f5f572c0f3c4ef315bf818845156484d7f83b3ae10c2011",
+          "before_count_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb"
+        },
+        {
+          "mode": "full",
+          "changed_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "g",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory",
+            "v"
+          ],
+          "reset_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "g",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory",
+            "v"
+          ],
+          "target_ids": [],
+          "target_indices": [],
+          "preserved_fields": [],
+          "artifact_sha256": "7253b37b4416abef78207590098e45e1daeb1dc22e130fc74f390b785206a493",
+          "before_count_sha256": "23dc568d6240f0dbb30dce25d52388db002d2a87c7bbb30b93346b1ed98f532f"
+        }
+      ],
+      "actions": [
+        "BUY",
+        "BUY",
+        "BUY"
+      ],
+      "gate_spikes": [
+        31,
+        23,
+        18
+      ],
+      "difference_hz": [
+        8.0,
+        12.0,
+        8.0
+      ],
+      "action_matches_carry": [
+        true,
+        true,
+        false
+      ],
+      "whole_count_matches_carry": [
+        true,
+        false,
+        false
+      ]
+    },
+    "trained_full": {
+      "boundaries": [
+        {
+          "mode": "initial",
+          "changed_fields": [],
+          "reset_fields": [],
+          "target_ids": [],
+          "target_indices": [],
+          "preserved_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "g",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory",
+            "v"
+          ],
+          "artifact_sha256": "cd133555b7eca8a200afe9d1614b838ea340b8774a127e7454c48be78063f834",
+          "before_count_sha256": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10"
+        },
+        {
+          "mode": "full",
+          "changed_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "g",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory",
+            "v"
+          ],
+          "reset_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "g",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory",
+            "v"
+          ],
+          "target_ids": [],
+          "target_indices": [],
+          "preserved_fields": [],
+          "artifact_sha256": "3d8ffc1179a975be27baa6ad9b40688ff30af72f84ee4c559f875af56af563c4",
+          "before_count_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb"
+        },
+        {
+          "mode": "full",
+          "changed_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "g",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory",
+            "v"
+          ],
+          "reset_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "g",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory",
+            "v"
+          ],
+          "target_ids": [],
+          "target_indices": [],
+          "preserved_fields": [],
+          "artifact_sha256": "a9326d5c212e9f8c047148f38908479107b67eb80e13d12ec607f4803897d179",
+          "before_count_sha256": "23dc568d6240f0dbb30dce25d52388db002d2a87c7bbb30b93346b1ed98f532f"
+        }
+      ],
+      "actions": [
+        "BUY",
+        "BUY",
+        "BUY"
+      ],
+      "gate_spikes": [
+        31,
+        23,
+        18
+      ],
+      "difference_hz": [
+        8.0,
+        12.0,
+        8.0
+      ],
+      "action_matches_carry": [
+        true,
+        true,
+        false
+      ],
+      "whole_count_matches_carry": [
+        true,
+        false,
+        false
+      ]
+    },
+    "pristine_voltage": {
+      "boundaries": [
+        {
+          "mode": "initial",
+          "changed_fields": [],
+          "reset_fields": [],
+          "target_ids": [],
+          "target_indices": [],
+          "preserved_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "g",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory",
+            "v"
+          ],
+          "artifact_sha256": "141a5a129c0cf4c7733f1fb61d5962bdc941c021cfddda2316b6570c65e9dfc3",
+          "before_count_sha256": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10"
+        },
+        {
+          "mode": "voltage",
+          "changed_fields": [
+            "v"
+          ],
+          "reset_fields": [
+            "v"
+          ],
+          "target_ids": [],
+          "target_indices": [],
+          "preserved_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "g",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory"
+          ],
+          "artifact_sha256": "38833c414d27c91fbce1c12d8e0fc2de97e369b77e644d397ddc8f8a2884cd71",
+          "before_count_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb"
+        },
+        {
+          "mode": "voltage",
+          "changed_fields": [
+            "v"
+          ],
+          "reset_fields": [
+            "v"
+          ],
+          "target_ids": [],
+          "target_indices": [],
+          "preserved_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "g",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory"
+          ],
+          "artifact_sha256": "0fb227b61d92611a819218c2eb93e17f357dd2145979367507f38a6bac3c16c5",
+          "before_count_sha256": "de236f446fdbc71002d063ac8d1df166198d735c56fb3b3f219d3a10d089b1a5"
+        }
+      ],
+      "actions": [
+        "BUY",
+        "BUY",
+        "BUY"
+      ],
+      "gate_spikes": [
+        31,
+        12,
+        6
+      ],
+      "difference_hz": [
+        8.0,
+        4.0,
+        2.0
+      ],
+      "action_matches_carry": [
+        true,
+        true,
+        false
+      ],
+      "whole_count_matches_carry": [
+        true,
+        false,
+        false
+      ]
+    },
+    "trained_voltage": {
+      "boundaries": [
+        {
+          "mode": "initial",
+          "changed_fields": [],
+          "reset_fields": [],
+          "target_ids": [],
+          "target_indices": [],
+          "preserved_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "g",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory",
+            "v"
+          ],
+          "artifact_sha256": "cd133555b7eca8a200afe9d1614b838ea340b8774a127e7454c48be78063f834",
+          "before_count_sha256": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10"
+        },
+        {
+          "mode": "voltage",
+          "changed_fields": [
+            "v"
+          ],
+          "reset_fields": [
+            "v"
+          ],
+          "target_ids": [],
+          "target_indices": [],
+          "preserved_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "g",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory"
+          ],
+          "artifact_sha256": "fc5ad0027ee01015cc4cb14762b1952dd83038aa00f7a60ef4b27a43a30196bd",
+          "before_count_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb"
+        },
+        {
+          "mode": "voltage",
+          "changed_fields": [
+            "v"
+          ],
+          "reset_fields": [
+            "v"
+          ],
+          "target_ids": [],
+          "target_indices": [],
+          "preserved_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "g",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory"
+          ],
+          "artifact_sha256": "fd104328dfb07857e5abdbf8e26c3df4d27bbf0641de1239fc24914ca28462be",
+          "before_count_sha256": "de236f446fdbc71002d063ac8d1df166198d735c56fb3b3f219d3a10d089b1a5"
+        }
+      ],
+      "actions": [
+        "BUY",
+        "BUY",
+        "BUY"
+      ],
+      "gate_spikes": [
+        31,
+        12,
+        6
+      ],
+      "difference_hz": [
+        8.0,
+        4.0,
+        2.0
+      ],
+      "action_matches_carry": [
+        true,
+        true,
+        false
+      ],
+      "whole_count_matches_carry": [
+        true,
+        false,
+        false
+      ]
+    },
+    "pristine_conductance": {
+      "boundaries": [
+        {
+          "mode": "initial",
+          "changed_fields": [],
+          "reset_fields": [],
+          "target_ids": [],
+          "target_indices": [],
+          "preserved_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "g",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory",
+            "v"
+          ],
+          "artifact_sha256": "141a5a129c0cf4c7733f1fb61d5962bdc941c021cfddda2316b6570c65e9dfc3",
+          "before_count_sha256": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10"
+        },
+        {
+          "mode": "conductance",
+          "changed_fields": [
+            "g"
+          ],
+          "reset_fields": [
+            "g"
+          ],
+          "target_ids": [],
+          "target_indices": [],
+          "preserved_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory",
+            "v"
+          ],
+          "artifact_sha256": "c43d30b96b7b4b9b50396828f9ddd841f656aa9469410da6576ca55bde894531",
+          "before_count_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb"
+        },
+        {
+          "mode": "conductance",
+          "changed_fields": [
+            "g"
+          ],
+          "reset_fields": [
+            "g"
+          ],
+          "target_ids": [],
+          "target_indices": [],
+          "preserved_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory",
+            "v"
+          ],
+          "artifact_sha256": "1d59348b8aa0fd82e0a644efd0e717a13e20ce5b9864a713144aad4aee15bb9e",
+          "before_count_sha256": "db2d804ab5dd26e4af21d9772d0a9100b024a747fbf2fe0cc87ae0a6c973dd93"
+        }
+      ],
+      "actions": [
+        "BUY",
+        "BUY",
+        "BUY"
+      ],
+      "gate_spikes": [
+        31,
+        12,
+        5
+      ],
+      "difference_hz": [
+        8.0,
+        6.0,
+        8.0
+      ],
+      "action_matches_carry": [
+        true,
+        true,
+        false
+      ],
+      "whole_count_matches_carry": [
+        true,
+        false,
+        false
+      ]
+    },
+    "trained_conductance": {
+      "boundaries": [
+        {
+          "mode": "initial",
+          "changed_fields": [],
+          "reset_fields": [],
+          "target_ids": [],
+          "target_indices": [],
+          "preserved_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "g",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory",
+            "v"
+          ],
+          "artifact_sha256": "cd133555b7eca8a200afe9d1614b838ea340b8774a127e7454c48be78063f834",
+          "before_count_sha256": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10"
+        },
+        {
+          "mode": "conductance",
+          "changed_fields": [
+            "g"
+          ],
+          "reset_fields": [
+            "g"
+          ],
+          "target_ids": [],
+          "target_indices": [],
+          "preserved_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory",
+            "v"
+          ],
+          "artifact_sha256": "07f0c31d07a9d13fcd25950dee3bb58bc63151c1e532dabb679ca35401487608",
+          "before_count_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb"
+        },
+        {
+          "mode": "conductance",
+          "changed_fields": [
+            "g"
+          ],
+          "reset_fields": [
+            "g"
+          ],
+          "target_ids": [],
+          "target_indices": [],
+          "preserved_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory",
+            "v"
+          ],
+          "artifact_sha256": "9ebf65b96878963358bd6305e0796f8e5b5ab739f3dd0bd8b6d4b4ff2b512b75",
+          "before_count_sha256": "db2d804ab5dd26e4af21d9772d0a9100b024a747fbf2fe0cc87ae0a6c973dd93"
+        }
+      ],
+      "actions": [
+        "BUY",
+        "BUY",
+        "BUY"
+      ],
+      "gate_spikes": [
+        31,
+        12,
+        5
+      ],
+      "difference_hz": [
+        8.0,
+        6.0,
+        14.0
+      ],
+      "action_matches_carry": [
+        true,
+        true,
+        false
+      ],
+      "whole_count_matches_carry": [
+        true,
+        false,
+        false
+      ]
+    },
+    "pristine_voltage_conductance": {
+      "boundaries": [
+        {
+          "mode": "initial",
+          "changed_fields": [],
+          "reset_fields": [],
+          "target_ids": [],
+          "target_indices": [],
+          "preserved_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "g",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory",
+            "v"
+          ],
+          "artifact_sha256": "141a5a129c0cf4c7733f1fb61d5962bdc941c021cfddda2316b6570c65e9dfc3",
+          "before_count_sha256": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10"
+        },
+        {
+          "mode": "voltage_conductance",
+          "changed_fields": [
+            "g",
+            "v"
+          ],
+          "reset_fields": [
+            "g",
+            "v"
+          ],
+          "target_ids": [],
+          "target_indices": [],
+          "preserved_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory"
+          ],
+          "artifact_sha256": "930ec6b7244e2ecda03e53e09b0b79802fc166c63afdbb353eb7b503cee35f58",
+          "before_count_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb"
+        },
+        {
+          "mode": "voltage_conductance",
+          "changed_fields": [
+            "g",
+            "v"
+          ],
+          "reset_fields": [
+            "g",
+            "v"
+          ],
+          "target_ids": [],
+          "target_indices": [],
+          "preserved_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory"
+          ],
+          "artifact_sha256": "b49d25923e61797f51356f89754f675a5b9447263dda299cd9d324b032388a91",
+          "before_count_sha256": "e07af848bfb964dc96268757b9579094be8c7b89c4585a680cdbe808fcb2737e"
+        }
+      ],
+      "actions": [
+        "BUY",
+        "BUY",
+        "HOLD"
+      ],
+      "gate_spikes": [
+        31,
+        4,
+        1
+      ],
+      "difference_hz": [
+        8.0,
+        2.0,
+        0.0
+      ],
+      "action_matches_carry": [
+        true,
+        true,
+        true
+      ],
+      "whole_count_matches_carry": [
+        true,
+        false,
+        false
+      ]
+    },
+    "trained_voltage_conductance": {
+      "boundaries": [
+        {
+          "mode": "initial",
+          "changed_fields": [],
+          "reset_fields": [],
+          "target_ids": [],
+          "target_indices": [],
+          "preserved_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "g",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory",
+            "v"
+          ],
+          "artifact_sha256": "cd133555b7eca8a200afe9d1614b838ea340b8774a127e7454c48be78063f834",
+          "before_count_sha256": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10"
+        },
+        {
+          "mode": "voltage_conductance",
+          "changed_fields": [
+            "g",
+            "v"
+          ],
+          "reset_fields": [
+            "g",
+            "v"
+          ],
+          "target_ids": [],
+          "target_indices": [],
+          "preserved_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory"
+          ],
+          "artifact_sha256": "6051b7a8ad3850da95945af9dc57dfdead474e4ba8b47ecf1c8cab1cd09a5fb0",
+          "before_count_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb"
+        },
+        {
+          "mode": "voltage_conductance",
+          "changed_fields": [
+            "g",
+            "v"
+          ],
+          "reset_fields": [
+            "g",
+            "v"
+          ],
+          "target_ids": [],
+          "target_indices": [],
+          "preserved_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory"
+          ],
+          "artifact_sha256": "aaf443dd75e9cbd7ab36e25f50a97ed97ea3d64ce4eb84e9eb53d3d2ec3ae245",
+          "before_count_sha256": "c52bddaf1770f6cf302c2a3a2dd98b72f2285797a823b880ed5ef7369daa6ac4"
+        }
+      ],
+      "actions": [
+        "BUY",
+        "BUY",
+        "SELL"
+      ],
+      "gate_spikes": [
+        31,
+        4,
+        1
+      ],
+      "difference_hz": [
+        8.0,
+        8.0,
+        -2.0
+      ],
+      "action_matches_carry": [
+        true,
+        true,
+        false
+      ],
+      "whole_count_matches_carry": [
+        true,
+        false,
+        false
+      ]
+    },
+    "pristine_gate_voltage_conductance": {
+      "boundaries": [
+        {
+          "mode": "initial",
+          "changed_fields": [],
+          "reset_fields": [],
+          "target_ids": [
+            "10527",
+            "555871"
+          ],
+          "target_indices": [
+            489,
+            142493
+          ],
+          "preserved_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "g",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory",
+            "v"
+          ],
+          "artifact_sha256": "141a5a129c0cf4c7733f1fb61d5962bdc941c021cfddda2316b6570c65e9dfc3",
+          "before_count_sha256": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10"
+        },
+        {
+          "mode": "gate_voltage_conductance",
+          "changed_fields": [
+            "g",
+            "v"
+          ],
+          "reset_fields": [
+            "g",
+            "v"
+          ],
+          "target_ids": [
+            "10527",
+            "555871"
+          ],
+          "target_indices": [
+            489,
+            142493
+          ],
+          "preserved_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory"
+          ],
+          "artifact_sha256": "69f103c20e91b50493b2e01ff94c415a43fad9d9263e5fd4db69904232a8e5db",
+          "before_count_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb"
+        },
+        {
+          "mode": "gate_voltage_conductance",
+          "changed_fields": [
+            "g",
+            "v"
+          ],
+          "reset_fields": [
+            "g",
+            "v"
+          ],
+          "target_ids": [
+            "10527",
+            "555871"
+          ],
+          "target_indices": [
+            489,
+            142493
+          ],
+          "preserved_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory"
+          ],
+          "artifact_sha256": "32ced0d51701fb1702bba566d55c64672baaf3b18d205ee48b80eb3cb70fdf22",
+          "before_count_sha256": "d02208376570c42eb601c8344d90185cd09e812427e89a0824bf827eacff3710"
+        }
+      ],
+      "actions": [
+        "BUY",
+        "SELL",
+        "BUY"
+      ],
+      "gate_spikes": [
+        31,
+        4,
+        2
+      ],
+      "difference_hz": [
+        8.0,
+        -2.0,
+        8.0
+      ],
+      "action_matches_carry": [
+        true,
+        false,
+        false
+      ],
+      "whole_count_matches_carry": [
+        true,
+        false,
+        false
+      ]
+    },
+    "trained_gate_voltage_conductance": {
+      "boundaries": [
+        {
+          "mode": "initial",
+          "changed_fields": [],
+          "reset_fields": [],
+          "target_ids": [
+            "10527",
+            "555871"
+          ],
+          "target_indices": [
+            489,
+            142493
+          ],
+          "preserved_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "g",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory",
+            "v"
+          ],
+          "artifact_sha256": "cd133555b7eca8a200afe9d1614b838ea340b8774a127e7454c48be78063f834",
+          "before_count_sha256": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10"
+        },
+        {
+          "mode": "gate_voltage_conductance",
+          "changed_fields": [
+            "g",
+            "v"
+          ],
+          "reset_fields": [
+            "g",
+            "v"
+          ],
+          "target_ids": [
+            "10527",
+            "555871"
+          ],
+          "target_indices": [
+            489,
+            142493
+          ],
+          "preserved_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory"
+          ],
+          "artifact_sha256": "230e2a8cfd6b2b56e59c960e92e8959baad5bd60a954e6c8978dd1d865080331",
+          "before_count_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb"
+        },
+        {
+          "mode": "gate_voltage_conductance",
+          "changed_fields": [
+            "g",
+            "v"
+          ],
+          "reset_fields": [
+            "g",
+            "v"
+          ],
+          "target_ids": [
+            "10527",
+            "555871"
+          ],
+          "target_indices": [
+            489,
+            142493
+          ],
+          "preserved_fields": [
+            "active",
+            "active_flag",
+            "adaptation",
+            "counts",
+            "drive",
+            "eligibility",
+            "eligibility_last",
+            "last",
+            "luminance",
+            "modulation",
+            "modulation_last",
+            "nactive",
+            "previous_drive",
+            "queue",
+            "queue_count",
+            "r8_light",
+            "rate_dan",
+            "rate_kc",
+            "refractory"
+          ],
+          "artifact_sha256": "e3a242645bcb6bd2e6afe7c58e852b791f536e280522ac502417fb962c5e25a7",
+          "before_count_sha256": "5df075be82f418b4867ced2372c0f988c080e305e76d71d1d825a3295b176185"
+        }
+      ],
+      "actions": [
+        "BUY",
+        "BUY",
+        "HOLD"
+      ],
+      "gate_spikes": [
+        31,
+        5,
+        0
+      ],
+      "difference_hz": [
+        8.0,
+        2.0,
+        8.0
+      ],
+      "action_matches_carry": [
+        true,
+        true,
+        true
+      ],
+      "whole_count_matches_carry": [
+        true,
+        false,
+        false
+      ]
+    }
+  },
+  "interpretation": "Actual saved before/after arrays verify every targeted and untouched dynamic field and synaptic memory. Both carry controls and all first observations reproduce. Full resets change multiple dynamic fields and the neural clock; partial resets preserve every other recorded dynamic field. No trading account or returns are computed."
+}

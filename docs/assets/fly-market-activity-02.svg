@@ -1,0 +1,179 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="1422" viewBox="0 0 1120 1422"><rect width="1120" height="1422" rx="14" fill="#0e1727"/><style>text{font-family:Arial,sans-serif;fill:#e8edf6}.small{fill:#b2bfd1}</style>
+<text x="28" y="40" font-size="25" class="">Activity resets on the same market inputs</text>
+<text x="28" y="67" font-size="14" class="small">Same three market images · frozen synaptic memory · full retained graph · unchanged decoder</text>
+<text x="28" y="91" font-size="13" class="small">Intervene before images 2 and 3. All first-image outputs must match their carried-state control.</text>
+<text x="322" y="125" font-size="15" class="">Image 1 · 11:35 UTC</text>
+<text x="582" y="125" font-size="15" class="">Image 2 · 11:40 UTC</text>
+<text x="842" y="125" font-size="15" class="">Image 3 · 11:45 UTC</text>
+<text x="28" y="178" font-size="16" class="">Pristine memory</text>
+<text x="28" y="201" font-size="14" class="small">Carry activity</text>
+<rect x="306" y="148" width="242" height="80" rx="7" fill="#172237" stroke="#35445c"/>
+<text x="322" y="175" font-size="20" class="">BUY</text>
+<text x="322" y="200" font-size="14" class="">Gate: 31 spikes</text>
+<text x="322" y="218" font-size="13" class="small">Right − left: 8 Hz</text>
+<rect x="566" y="148" width="242" height="80" rx="7" fill="#172237" stroke="#35445c"/>
+<text x="582" y="175" font-size="20" class="">BUY</text>
+<text x="582" y="200" font-size="14" class="">Gate: 4 spikes</text>
+<text x="582" y="218" font-size="13" class="small">Right − left: 6 Hz</text>
+<rect x="826" y="148" width="242" height="80" rx="7" fill="#172237" stroke="#35445c"/>
+<text x="842" y="175" font-size="20" class="">HOLD</text>
+<text x="842" y="200" font-size="14" class="">Gate: 0 spikes</text>
+<text x="842" y="218" font-size="13" class="small">Right − left: 10 Hz</text>
+<text x="28" y="276" font-size="16" class="">Trained memory</text>
+<text x="28" y="299" font-size="14" class="small">Carry activity</text>
+<rect x="306" y="246" width="242" height="80" rx="7" fill="#172237" stroke="#35445c"/>
+<text x="322" y="273" font-size="20" class="">BUY</text>
+<text x="322" y="298" font-size="14" class="">Gate: 31 spikes</text>
+<text x="322" y="316" font-size="13" class="small">Right − left: 8 Hz</text>
+<rect x="566" y="246" width="242" height="80" rx="7" fill="#172237" stroke="#35445c"/>
+<text x="582" y="273" font-size="20" class="">BUY</text>
+<text x="582" y="298" font-size="14" class="">Gate: 3 spikes</text>
+<text x="582" y="316" font-size="13" class="small">Right − left: 2 Hz</text>
+<rect x="826" y="246" width="242" height="80" rx="7" fill="#172237" stroke="#35445c"/>
+<text x="842" y="273" font-size="20" class="">HOLD</text>
+<text x="842" y="298" font-size="14" class="">Gate: 0 spikes</text>
+<text x="842" y="316" font-size="13" class="small">Right − left: 4 Hz</text>
+<text x="28" y="374" font-size="16" class="">Pristine memory</text>
+<text x="28" y="397" font-size="14" class="small">Full dynamics reset</text>
+<rect x="306" y="344" width="242" height="80" rx="7" fill="#172237" stroke="#35445c"/>
+<text x="322" y="371" font-size="20" class="">BUY</text>
+<text x="322" y="396" font-size="14" class="">Gate: 31 spikes</text>
+<text x="322" y="414" font-size="13" class="small">Right − left: 8 Hz</text>
+<rect x="566" y="344" width="242" height="80" rx="7" fill="#172237" stroke="#c4a1ff"/>
+<text x="582" y="371" font-size="20" class="">BUY</text>
+<text x="582" y="396" font-size="14" class="">Gate: 23 spikes</text>
+<text x="582" y="414" font-size="13" class="small">Right − left: 12 Hz</text>
+<rect x="826" y="344" width="242" height="80" rx="7" fill="#172237" stroke="#c4a1ff"/>
+<text x="842" y="371" font-size="20" class="">BUY</text>
+<text x="842" y="396" font-size="14" class="">Gate: 18 spikes</text>
+<text x="842" y="414" font-size="13" class="small">Right − left: 8 Hz</text>
+<text x="28" y="472" font-size="16" class="">Trained memory</text>
+<text x="28" y="495" font-size="14" class="small">Full dynamics reset</text>
+<rect x="306" y="442" width="242" height="80" rx="7" fill="#172237" stroke="#35445c"/>
+<text x="322" y="469" font-size="20" class="">BUY</text>
+<text x="322" y="494" font-size="14" class="">Gate: 31 spikes</text>
+<text x="322" y="512" font-size="13" class="small">Right − left: 8 Hz</text>
+<rect x="566" y="442" width="242" height="80" rx="7" fill="#172237" stroke="#c4a1ff"/>
+<text x="582" y="469" font-size="20" class="">BUY</text>
+<text x="582" y="494" font-size="14" class="">Gate: 23 spikes</text>
+<text x="582" y="512" font-size="13" class="small">Right − left: 12 Hz</text>
+<rect x="826" y="442" width="242" height="80" rx="7" fill="#172237" stroke="#c4a1ff"/>
+<text x="842" y="469" font-size="20" class="">BUY</text>
+<text x="842" y="494" font-size="14" class="">Gate: 18 spikes</text>
+<text x="842" y="512" font-size="13" class="small">Right − left: 8 Hz</text>
+<text x="28" y="570" font-size="16" class="">Pristine memory</text>
+<text x="28" y="593" font-size="14" class="small">Voltage reset</text>
+<rect x="306" y="540" width="242" height="80" rx="7" fill="#172237" stroke="#35445c"/>
+<text x="322" y="567" font-size="20" class="">BUY</text>
+<text x="322" y="592" font-size="14" class="">Gate: 31 spikes</text>
+<text x="322" y="610" font-size="13" class="small">Right − left: 8 Hz</text>
+<rect x="566" y="540" width="242" height="80" rx="7" fill="#172237" stroke="#c4a1ff"/>
+<text x="582" y="567" font-size="20" class="">BUY</text>
+<text x="582" y="592" font-size="14" class="">Gate: 12 spikes</text>
+<text x="582" y="610" font-size="13" class="small">Right − left: 4 Hz</text>
+<rect x="826" y="540" width="242" height="80" rx="7" fill="#172237" stroke="#c4a1ff"/>
+<text x="842" y="567" font-size="20" class="">BUY</text>
+<text x="842" y="592" font-size="14" class="">Gate: 6 spikes</text>
+<text x="842" y="610" font-size="13" class="small">Right − left: 2 Hz</text>
+<text x="28" y="668" font-size="16" class="">Trained memory</text>
+<text x="28" y="691" font-size="14" class="small">Voltage reset</text>
+<rect x="306" y="638" width="242" height="80" rx="7" fill="#172237" stroke="#35445c"/>
+<text x="322" y="665" font-size="20" class="">BUY</text>
+<text x="322" y="690" font-size="14" class="">Gate: 31 spikes</text>
+<text x="322" y="708" font-size="13" class="small">Right − left: 8 Hz</text>
+<rect x="566" y="638" width="242" height="80" rx="7" fill="#172237" stroke="#c4a1ff"/>
+<text x="582" y="665" font-size="20" class="">BUY</text>
+<text x="582" y="690" font-size="14" class="">Gate: 12 spikes</text>
+<text x="582" y="708" font-size="13" class="small">Right − left: 4 Hz</text>
+<rect x="826" y="638" width="242" height="80" rx="7" fill="#172237" stroke="#c4a1ff"/>
+<text x="842" y="665" font-size="20" class="">BUY</text>
+<text x="842" y="690" font-size="14" class="">Gate: 6 spikes</text>
+<text x="842" y="708" font-size="13" class="small">Right − left: 2 Hz</text>
+<text x="28" y="766" font-size="16" class="">Pristine memory</text>
+<text x="28" y="789" font-size="14" class="small">Synaptic current reset</text>
+<rect x="306" y="736" width="242" height="80" rx="7" fill="#172237" stroke="#35445c"/>
+<text x="322" y="763" font-size="20" class="">BUY</text>
+<text x="322" y="788" font-size="14" class="">Gate: 31 spikes</text>
+<text x="322" y="806" font-size="13" class="small">Right − left: 8 Hz</text>
+<rect x="566" y="736" width="242" height="80" rx="7" fill="#172237" stroke="#c4a1ff"/>
+<text x="582" y="763" font-size="20" class="">BUY</text>
+<text x="582" y="788" font-size="14" class="">Gate: 12 spikes</text>
+<text x="582" y="806" font-size="13" class="small">Right − left: 6 Hz</text>
+<rect x="826" y="736" width="242" height="80" rx="7" fill="#172237" stroke="#c4a1ff"/>
+<text x="842" y="763" font-size="20" class="">BUY</text>
+<text x="842" y="788" font-size="14" class="">Gate: 5 spikes</text>
+<text x="842" y="806" font-size="13" class="small">Right − left: 8 Hz</text>
+<text x="28" y="864" font-size="16" class="">Trained memory</text>
+<text x="28" y="887" font-size="14" class="small">Synaptic current reset</text>
+<rect x="306" y="834" width="242" height="80" rx="7" fill="#172237" stroke="#35445c"/>
+<text x="322" y="861" font-size="20" class="">BUY</text>
+<text x="322" y="886" font-size="14" class="">Gate: 31 spikes</text>
+<text x="322" y="904" font-size="13" class="small">Right − left: 8 Hz</text>
+<rect x="566" y="834" width="242" height="80" rx="7" fill="#172237" stroke="#c4a1ff"/>
+<text x="582" y="861" font-size="20" class="">BUY</text>
+<text x="582" y="886" font-size="14" class="">Gate: 12 spikes</text>
+<text x="582" y="904" font-size="13" class="small">Right − left: 6 Hz</text>
+<rect x="826" y="834" width="242" height="80" rx="7" fill="#172237" stroke="#c4a1ff"/>
+<text x="842" y="861" font-size="20" class="">BUY</text>
+<text x="842" y="886" font-size="14" class="">Gate: 5 spikes</text>
+<text x="842" y="904" font-size="13" class="small">Right − left: 14 Hz</text>
+<text x="28" y="962" font-size="16" class="">Pristine memory</text>
+<text x="28" y="985" font-size="14" class="small">Voltage + current reset</text>
+<rect x="306" y="932" width="242" height="80" rx="7" fill="#172237" stroke="#35445c"/>
+<text x="322" y="959" font-size="20" class="">BUY</text>
+<text x="322" y="984" font-size="14" class="">Gate: 31 spikes</text>
+<text x="322" y="1002" font-size="13" class="small">Right − left: 8 Hz</text>
+<rect x="566" y="932" width="242" height="80" rx="7" fill="#172237" stroke="#c4a1ff"/>
+<text x="582" y="959" font-size="20" class="">BUY</text>
+<text x="582" y="984" font-size="14" class="">Gate: 4 spikes</text>
+<text x="582" y="1002" font-size="13" class="small">Right − left: 2 Hz</text>
+<rect x="826" y="932" width="242" height="80" rx="7" fill="#172237" stroke="#c4a1ff"/>
+<text x="842" y="959" font-size="20" class="">HOLD</text>
+<text x="842" y="984" font-size="14" class="">Gate: 1 spikes</text>
+<text x="842" y="1002" font-size="13" class="small">Right − left: 0 Hz</text>
+<text x="28" y="1060" font-size="16" class="">Trained memory</text>
+<text x="28" y="1083" font-size="14" class="small">Voltage + current reset</text>
+<rect x="306" y="1030" width="242" height="80" rx="7" fill="#172237" stroke="#35445c"/>
+<text x="322" y="1057" font-size="20" class="">BUY</text>
+<text x="322" y="1082" font-size="14" class="">Gate: 31 spikes</text>
+<text x="322" y="1100" font-size="13" class="small">Right − left: 8 Hz</text>
+<rect x="566" y="1030" width="242" height="80" rx="7" fill="#172237" stroke="#c4a1ff"/>
+<text x="582" y="1057" font-size="20" class="">BUY</text>
+<text x="582" y="1082" font-size="14" class="">Gate: 4 spikes</text>
+<text x="582" y="1100" font-size="13" class="small">Right − left: 8 Hz</text>
+<rect x="826" y="1030" width="242" height="80" rx="7" fill="#172237" stroke="#c4a1ff"/>
+<text x="842" y="1057" font-size="20" class="">SELL</text>
+<text x="842" y="1082" font-size="14" class="">Gate: 1 spikes</text>
+<text x="842" y="1100" font-size="13" class="small">Right − left: -2 Hz</text>
+<text x="28" y="1158" font-size="16" class="">Pristine memory</text>
+<text x="28" y="1181" font-size="14" class="small">Gate voltage + current reset</text>
+<rect x="306" y="1128" width="242" height="80" rx="7" fill="#172237" stroke="#35445c"/>
+<text x="322" y="1155" font-size="20" class="">BUY</text>
+<text x="322" y="1180" font-size="14" class="">Gate: 31 spikes</text>
+<text x="322" y="1198" font-size="13" class="small">Right − left: 8 Hz</text>
+<rect x="566" y="1128" width="242" height="80" rx="7" fill="#172237" stroke="#c4a1ff"/>
+<text x="582" y="1155" font-size="20" class="">SELL</text>
+<text x="582" y="1180" font-size="14" class="">Gate: 4 spikes</text>
+<text x="582" y="1198" font-size="13" class="small">Right − left: -2 Hz</text>
+<rect x="826" y="1128" width="242" height="80" rx="7" fill="#172237" stroke="#c4a1ff"/>
+<text x="842" y="1155" font-size="20" class="">BUY</text>
+<text x="842" y="1180" font-size="14" class="">Gate: 2 spikes</text>
+<text x="842" y="1198" font-size="13" class="small">Right − left: 8 Hz</text>
+<text x="28" y="1256" font-size="16" class="">Trained memory</text>
+<text x="28" y="1279" font-size="14" class="small">Gate voltage + current reset</text>
+<rect x="306" y="1226" width="242" height="80" rx="7" fill="#172237" stroke="#35445c"/>
+<text x="322" y="1253" font-size="20" class="">BUY</text>
+<text x="322" y="1278" font-size="14" class="">Gate: 31 spikes</text>
+<text x="322" y="1296" font-size="13" class="small">Right − left: 8 Hz</text>
+<rect x="566" y="1226" width="242" height="80" rx="7" fill="#172237" stroke="#c4a1ff"/>
+<text x="582" y="1253" font-size="20" class="">BUY</text>
+<text x="582" y="1278" font-size="14" class="">Gate: 5 spikes</text>
+<text x="582" y="1296" font-size="13" class="small">Right − left: 2 Hz</text>
+<rect x="826" y="1226" width="242" height="80" rx="7" fill="#172237" stroke="#c4a1ff"/>
+<text x="842" y="1253" font-size="20" class="">HOLD</text>
+<text x="842" y="1278" font-size="14" class="">Gate: 0 spikes</text>
+<text x="842" y="1296" font-size="13" class="small">Right − left: 8 Hz</text>
+<text x="28" y="1353" font-size="13" class="small">Purple border: a displayed output differs from its carried-state control. All 12 conditions shown.</text>
+<text x="28" y="1377" font-size="13" class="small">Actual boundary arrays verify the reset scope and preserved memory. No fills, P&amp;L or promotion computed.</text>
+<text x="28" y="1401" font-size="13" class="small">A full reset changes multiple dynamic fields and neural time; a recovered gate alone does not validate a trading fix.</text>
+</svg>

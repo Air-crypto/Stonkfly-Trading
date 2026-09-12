@@ -1893,3 +1893,79 @@ The previous study is pinned by its file hash and all four controls must reprodu
 before narrower conditions run. This is a post hoc mechanism experiment on
 already observed inputs. A reset-induced gate spike does not demonstrate a
 better trading policy; any candidate needs a separate market evaluation.
+
+## Voltage and synaptic-input results
+
+All twelve conditions completed, with the four earlier controls reproduced.
+The independent audit checked all 36 boundary checkpoints, including each
+untouched array element, neuron identities, frozen synaptic memory and the
+exact boundary values exported to the viewer. Source was registered and pushed
+as `4af2774` before deployment and execution.
+
+| Memory / reset | Actions on images 1–3 | Gate spikes | Right − left Hz |
+| --- | --- | --- | --- |
+| Pristine / carry | BUY, BUY, HOLD | 31, 4, 0 | 8, 6, 10 |
+| Trained / carry | BUY, BUY, HOLD | 31, 3, 0 | 8, 2, 4 |
+| Pristine / full | BUY, BUY, BUY | 31, 23, 18 | 8, 12, 8 |
+| Trained / full | BUY, BUY, BUY | 31, 23, 18 | 8, 12, 8 |
+| Pristine / voltage | BUY, BUY, BUY | 31, 12, 6 | 8, 4, 2 |
+| Trained / voltage | BUY, BUY, BUY | 31, 12, 6 | 8, 4, 2 |
+| Pristine / synaptic input | BUY, BUY, BUY | 31, 12, 5 | 8, 6, 8 |
+| Trained / synaptic input | BUY, BUY, BUY | 31, 12, 5 | 8, 6, 14 |
+| Pristine / voltage + input | BUY, BUY, HOLD | 31, 4, 1 | 8, 2, 0 |
+| Trained / voltage + input | BUY, BUY, SELL | 31, 4, 1 | 8, 8, −2 |
+| Pristine / gate voltage + input | BUY, SELL, BUY | 31, 4, 2 | 8, −2, 8 |
+| Trained / gate voltage + input | BUY, BUY, HOLD | 31, 5, 0 | 8, 2, 8 |
+
+![Every registered voltage and synaptic-input condition](assets/fly-market-activity-02.png)
+
+**Resetting just the two gate cells was insufficient for the trained model.**
+Before image three, their voltages were −89.56 and −89.77 mV. The intervention
+set both to their initial −52 mV and cleared their input state, yet neither fired
+in the following 500 ms. The rest of the network was preserved; for example,
+MBON11 body 11402 retained its −76.70 mV and −45.14 input state at that boundary.
+The first reset also changed subsequent activity, so this is a two-boundary
+intervention, not an isolated manipulation of image three alone.
+
+![Actual two-cell reset values before the third image](assets/fly-activity02-boundary.png)
+
+![Two-cell reset versus carry: both gate traces remain silent](assets/fly-activity02-gate.png)
+
+**Clearing the synaptic-input state globally recovered the gate while retaining
+an observable learned-memory effect.** Image three had five gate spikes in both
+memory conditions, but the right-minus-left rate was 14 Hz with trained memory
+versus 8 Hz with pristine memory. Their full-network count records differed on
+that image, and matched on the first two. In the trained run, body 10527 fired in
+bins 2, 4 and 12; body 555871 fired in bins 3 and 4. The first recovered gate bin
+spans 20–30 ms into the image. Voltage, neural time and every other dynamic field
+were preserved at each input-only reset.
+
+[Inspect recovered gate firing](http://127.0.0.1:8765/?run=activity02-trained_conductance&step=2&bin=2&neuron=10527&edge=10020213&compare=activity02-trained_carry).
+
+![Recovered gate after clearing synaptic input versus carry](assets/fly-activity02-recovered.png)
+
+Global voltage-only resets recovered six final gate spikes but made the pristine
+and trained full-network count records identical on all three images. Resetting
+voltage and input together yielded a learned SELL versus an untrained HOLD, but
+that SELL depends on one gate spike and the exact −2 Hz direction threshold.
+These results show why more spikes or more reset fields cannot be assumed better.
+
+No account, fills or P&L were computed here. Input-only reset is a candidate for
+a separately registered market comparison, not a promoted strategy. Both
+memory variants still emitted three BUYs on these inputs; an altered firing rate
+alone does not establish useful trading information.
+
+Artifacts: [protocol](../reports/fly-market-activity-protocol-02.json),
+[complete study](../reports/fly-market-activity-study-02.json),
+[boundary audit](../reports/fly-market-activity-audit-02.json), and twelve included
+`activity02-*` recordings. The run's internal compute estimate was **$0.02768**;
+worker monthly reserved compute was **$1.51574 / $25** at completion. Those
+estimates exclude the separately capped collector and are not provider billing.
+
+```sh
+uv run python -m paperlab.fly_activity_figure \
+  --study reports/fly-market-activity-study-02.json \
+  --audit reports/fly-market-activity-audit-02.json \
+  --out runs/activity-results-02.svg
+FLY_VIEW_URL=http://127.0.0.1:8765 node scripts/check-fly-activity02-view.cjs
+```
