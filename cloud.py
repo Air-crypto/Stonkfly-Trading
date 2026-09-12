@@ -22,6 +22,8 @@ image = (modal.Image.debian_slim(python_version="3.12")
          .pip_install("numpy==2.5.3", "requests==2.34.2", "feedparser==6.0.14", "defusedxml==0.7.1", "pillow==12.3.0", "pandas==3.0.5", "pyarrow==25.0.1", "transformers==5.17.0")
          .add_local_dir(ROOT / "paperlab", "/opt/paperlab/paperlab", copy=True, ignore=["__pycache__/"])
          .add_local_dir(ROOT / "vendor", "/opt/paperlab/vendor", copy=True, ignore=["__pycache__/"])
+         .add_local_file(ROOT / "reports/fly-market-study-08-preregistration.json", "/opt/paperlab/registered/fly-market-study-08-preregistration.json", copy=True)
+         .add_local_file(ROOT / "reports/fly-market-study-07-plan.json", "/opt/paperlab/registered/fly-market-study-07-plan.json", copy=True)
          .env({"PYTHONPATH": "/opt/paperlab", "OMP_NUM_THREADS": "2", "HF_HOME": "/state/huggingface", "PAPERLAB_FINBERT_REVISION": "4556d13015211d73dccd3fdd39d39232506f3e43", "PAPERLAB_PRODUCT": PRODUCT, "PAPERLAB_FLY": "1" if FULL_FLY else "0", "PAPERLAB_UNIVERSE":"1" if UNIVERSE else "0"}))
 
 
@@ -82,6 +84,16 @@ def _worker(prepare=False,probe=False,diagnostics=False,debug=None):
         emit("budget_stopped", action="Disable schedule; reserved compute limit reached")
         return {"status": "budget_stopped", "action": "Remove the schedule and redeploy. Compute estimate reached its reserved limit."}
     volume.commit()  # Persist worst-case reservation before expensive work; crashes retain it.
+    if full and universe and not any((prepare, probe, diagnostics, debug is not None)):
+        from paperlab.fly_market_schedule import execute_due
+        from paperlab.cloud_debug import run
+        discovery_volume.reload()
+        scheduled = execute_due('/state', '/discovery', '/opt/paperlab/registered',
+            call_id=modal.current_function_call_id(), input_id=modal.current_input_id(),
+            commit=volume.commit, run=run,
+            settle_budget=lambda: settle('/state/budget.json', reservation, time.time() - reservation['started']))
+        if scheduled is not None:
+            return scheduled  # Give the bounded study this entire worker invocation.
     if debug is not None:
         from paperlab.cloud_debug import run
         try:

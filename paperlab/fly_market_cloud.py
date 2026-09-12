@@ -58,7 +58,7 @@ def build_report(envelope,summary,raw,selection):
     return summary
 
 
-def cloud_run(envelope,registration,output):
+def cloud_run(envelope,registration,output,*,allow_submit=True):
     import modal
     import uuid
     plan=validate_registration(envelope,registration)
@@ -68,6 +68,7 @@ def cloud_run(envelope,registration,output):
         path=root/name
         if path.exists() and json.loads(path.read_text())!=value:raise ValueError('Existing output metadata belongs to a different request')
     if not receipt_path.exists():
+        if not allow_submit:raise RuntimeError('Missing scheduled receipt; observer cannot submit work')
         receipt={'run_id':'assay-market-'+uuid.uuid4().hex,'status':'submitting','request_sha256':request_hash,'plan_sha256':envelope['sha256']}
         atomic_json(receipt_path,receipt);atomic_json(root/'source-hashes.json',{name:digest(Path(__file__).with_name(name)) for name in source_files(plan['schema'])})
         if not (root/'plan.json').exists():atomic_json(root/'plan.json',envelope)
@@ -127,10 +128,44 @@ def cloud_run(envelope,registration,output):
     print(json.dumps({'equity':summary['total_equity'],'selection':selection,'verification':summary['verification'],'budget':result['budget']},indent=2))
 
 
+def observe_scheduled(registration, output):
+    """Attach to the cloud-owned study 08; this path can never spawn a worker."""
+    import modal
+    from .fly_market_schedule import DIRECTORY
+    volume=modal.Volume.from_name('fly-paper-lab-state',environment_name='main')
+    def read(name):return json.loads(b''.join(volume.read_file('/'+DIRECTORY+'/'+name)))
+    receipt=read('cloud-call.json')
+    if receipt.get('dispatch')!='scheduled-worker-once' or not receipt.get('call_id') or receipt.get('status') not in ('pending','completed'):
+        raise RuntimeError('Scheduled call is unready, failed or uncertain; inspect its saved receipt, never resubmit')
+    envelope=read('plan.json');registered=read('preregistration.json');hashes=read('source-hashes.json')
+    if registered!=registration:raise ValueError('Scheduled registration differs from the local registration')
+    plan=validate_registration(envelope,registration)
+    if receipt['plan_sha256']!=envelope['sha256'] or receipt['request_sha256']!=signature({'plan':envelope,'registration':registration}):
+        raise ValueError('Scheduled receipt differs from its sealed request')
+    if hashes!={name:digest(Path(__file__).with_name(name)) for name in source_files(plan['schema'])}:
+        raise ValueError('Local audit source differs from scheduled execution source')
+    root=Path(output);root.mkdir(parents=True,exist_ok=True)
+    saved=root/'cloud-call.json'
+    if saved.exists():
+        old=json.loads(saved.read_text())
+        if any(old.get(k)!=receipt.get(k) for k in ('call_id','run_id','request_sha256')):
+            raise ValueError('Local directory belongs to another call; do not mix results')
+    for name,value in (('plan.json',envelope),('preregistration.json',registered),('source-hashes.json',hashes)):
+        path=root/name
+        if path.exists() and json.loads(path.read_text())!=value:raise ValueError('Existing scheduled metadata differs')
+        atomic_json(path,value)
+    if not saved.exists():atomic_json(saved,receipt)
+    return cloud_run(envelope,registration,root,allow_submit=False)
+
+
 def main():
     p=argparse.ArgumentParser(description=__doc__)
-    for field in ('plan','registration','out'):p.add_argument('--'+field,type=Path,required=True)
-    a=p.parse_args();cloud_run(json.loads(a.plan.read_text()),json.loads(a.registration.read_text()),a.out)
+    mode=p.add_mutually_exclusive_group(required=True)
+    mode.add_argument('--plan',type=Path);mode.add_argument('--scheduled',action='store_true')
+    for field in ('registration','out'):p.add_argument('--'+field,type=Path,required=True)
+    a=p.parse_args();registration=json.loads(a.registration.read_text())
+    if a.scheduled:observe_scheduled(registration,a.out)
+    else:cloud_run(json.loads(a.plan.read_text()),registration,a.out)
 
 
 if __name__=='__main__':main()

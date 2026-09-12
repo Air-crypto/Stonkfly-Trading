@@ -1991,22 +1991,32 @@ training checkpoints, exact before/after state arrays and every displayed
 boundary value. It also reconstructs each inference image from the sealed quotes
 to verify that the recorded input matches. No automatic strategy deployment.
 
-Once the collector's completed snapshot covers the registered endpoint:
+The deployed scheduled worker owns this study's once-only launch. After 15:30
+UTC it waits until the actual SQLite snapshot reaches the endpoint, then uses
+one existing worker invocation for the study instead of the ordinary baseline
+cycle. It saves the owning call/input IDs and a durable claim **before** sealing
+or running the brain. The image contains only the pinned registration and parent
+plan. The saved snapshot, sealed plan and source hashes remain on the state
+volume under `registered-market-08`.
+
+The launch shares the worker's lease, 600-second reservation and $25 cap. Later
+ticks resume normal paper trading. A failed, interrupted or uncertain study is
+never retried automatically. Cloud collection and the launch do not require an
+open laptop; the local visualization and artifact observer do.
+
+Attach to the scheduled call and download/audit its results with:
 
 ```sh
-uv run python -m paperlab.fly_market_input \
-  --archive runs/universe.db \
-  --previous reports/fly-market-study-07-plan.json \
-  --registration reports/fly-market-study-08-preregistration.json \
-  --out runs/market08-plan.json
 uv run python -m paperlab.fly_market_cloud \
-  --plan runs/market08-plan.json \
+  --scheduled \
   --registration reports/fly-market-study-08-preregistration.json \
   --out runs/market08
 ```
 
-Repeat the observer with the same output directory after a timeout; it observes
-the saved call. A late collector snapshot never substitutes future prices into
+This command cannot submit a worker. Before a durable pending receipt exists it
+stops; after a timeout, repeat it with the same output directory to observe the
+same call. Do not separately submit this registered study with `--plan`.
+A late collector snapshot never substitutes future prices into
 the sealed window. The sealer retains up to 512 chronological receipts per pool,
 including at least the unchanged visual adapter's preceding 100 observations.
 Unavailable inventory and indicative DEX costs retain the existing treatment.

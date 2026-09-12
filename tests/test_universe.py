@@ -265,6 +265,7 @@ def test_normal_cloud_entrypoint_with_and_without_archive(monkeypatch,has_archiv
     written={}
     monkeypatch.setattr("paperlab.core.atomic_json",lambda p,v:written.update({str(p):v}))
     monkeypatch.setattr("paperlab.multi.cycle",lambda *a,**kw:{"status":"paper_research"})
+    monkeypatch.setattr("paperlab.fly_market_schedule.execute_due",lambda *a,**kw:None)
     result=cloud._worker()
     assert result["status"]==("paper_research" if has_archive else "waiting_for_universe_collector")
     assert "/state/meme-pools-v1/latest.json" in written
