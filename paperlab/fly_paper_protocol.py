@@ -19,20 +19,25 @@ MEMORY_FIELDS=('memory_sha256','memory_file_sha256','checkpoint_sha256','last_sl
 def validate_registration(registration,audit):
     r=registration
     activation=r.get('study')=='10'
-    if r.get('schema')!=(2 if activation else 1) or r.get('kind')!='paper_checkpoint_comparison' or r.get('study') not in ('09','10'):
+    online=r.get('study')=='11'
+    if r.get('schema')!=(3 if online else 2 if activation else 1) or r.get('kind')!='paper_checkpoint_comparison' or r.get('study') not in ('09','10','11'):
         raise ValueError('Unknown paper checkpoint comparison')
     from .fly_activation_protocol import ARMS as activated, INFERENCE as activation_inference, SELECTION as activation_selection, RATIONALE
     arms,inference,selection=(activated,activation_inference,activation_selection) if activation else (ARMS,INFERENCE,SELECTION)
-    if activation and (r.get('rationale')!=RATIONALE or any(not isinstance(r.get(k),str) or len(r[k])!=64 or any(c not in '0123456789abcdef' for c in r[k]) for k in ('mechanism_report_sha256','mechanism_audit_sha256'))):
+    steps=3
+    if online:
+        from .fly_online_protocol import ARMS as arms, INFERENCE as inference, SELECTION as selection, RATIONALE, PHASE_STEPS
+        steps=PHASE_STEPS
+    if (activation or online) and (r.get('rationale')!=RATIONALE or any(not isinstance(r.get(k),str) or len(r[k])!=64 or any(c not in '0123456789abcdef' for c in r[k]) for k in ('mechanism_report_sha256','mechanism_audit_sha256'))):
         raise ValueError('Missing pinned activation mechanism evidence')
     if r.get('arms')!=arms or r.get('inference_protocol')!=inference or r.get('news_protocol')!=NEWS or r.get('selection_rule')!=selection:
         raise ValueError('Registered inference, news or selection protocol differs')
-    if r.get('costs')!=asdict(DEX_COSTS) or r.get('decision_seconds')!=300 or r.get('phase_steps')!=3:
+    if r.get('costs')!=asdict(DEX_COSTS) or r.get('decision_seconds')!=300 or type(r.get('phase_steps')) is not int or r['phase_steps']!=steps:
         raise ValueError('Registered costs or cadence differ')
     start=r['development_start']
     if not all(isinstance(r.get(k),(float,int)) and math.isfinite(r[k]) for k in ('recorded_at','development_start','test_start','end','training_cutoff','checkpoint_capture_at')):
         raise ValueError('Invalid registered timestamps')
-    if start%300 or r['test_start']!=start+900 or r['end']!=start+1800 or not 0<r['training_cutoff']<r['checkpoint_capture_at']<=r['recorded_at']<start:
+    if start%300 or r['test_start']!=start+steps*300 or r['end']!=start+2*steps*300 or not 0<r['training_cutoff']<r['checkpoint_capture_at']<=r['recorded_at']<start:
         raise ValueError('Capture and register before the separate future evaluation phases')
     if len(r['cohort'])!=2 or len(set(r['cohort']))!=2 or set(r['cohort'])!=set(audit['pools']) or set(r['source_memories'])!=set(r['cohort']):
         raise ValueError('Checkpoint cohort differs')

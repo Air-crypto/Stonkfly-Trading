@@ -65,13 +65,13 @@ def audit_prices(envelope, archive):
             coverage = {}
             for phase in ('development', 'test'):
                 slots = [];last_quote = 0
-                for i in range(4):
+                for i in range(r['phase_steps']+1):
                     stamp = r[phase + '_start'] + i * 300
                     _, quote = quote_at(retained, stamp)
-                    observed = i < 3 and quote.available and quote.ts > last_quote
+                    observed = i < r['phase_steps'] and quote.available and quote.ts > last_quote
                     if observed:last_quote = quote.ts
                     slots.append({'decision_ts': stamp, 'quote_ts': quote.ts,
-                                  'available': quote.available, 'terminal': i == 3,
+                                  'available': quote.available, 'terminal': i == r['phase_steps'],
                                   'neural_observation_expected': observed})
                 coverage[phase] = slots
             checked[key] = {'raw_receipts_through_endpoint': receipts,

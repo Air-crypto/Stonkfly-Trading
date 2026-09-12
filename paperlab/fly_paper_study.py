@@ -53,6 +53,7 @@ def imported_memory(brain,plan,memory_root):
 
 def run(envelope,memory_root,news_archive,data,output):
     p=validate(envelope);r=p['registration'];root=Path(output)
+    if r['study'] not in ('09','10'):raise ValueError('Use the online chunk runner for study 11')
     if root.exists():raise ValueError('Refuse to overwrite a checkpoint comparison')
     # Check news provenance before loading the full graph or simulating a decision.
     news_audit=audit_news(envelope,news_archive)

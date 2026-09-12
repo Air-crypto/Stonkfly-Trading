@@ -33,7 +33,7 @@ def news_stamps(registration,series):
     for raw in series.values():
         ticks=[Tick(**t) for t in raw]
         for phase in ('development_start','test_start'):
-            for i in range(4):stamps.add(quote_at(ticks,registration[phase]+300*i)[1].ts)
+            for i in range(registration['phase_steps']+1):stamps.add(quote_at(ticks,registration[phase]+300*i)[1].ts)
     return sorted(stamps)
 
 
@@ -65,8 +65,10 @@ def seal(archive,news_archive,registration,training_audit,parent,output):
     r=json.loads(Path(registration).read_text());a=json.loads(Path(training_audit).read_text());validate_registration(r,a)
     if digest(training_audit)!=r['training_audit_sha256']:raise ValueError('Training audit file differs from registration')
     old=json.loads(Path(parent).read_text())
-    if r['study']=='10':
+    if r['study'] in ('10','11'):
         validate(old);parent_cohort=old['plan']['registration']['cohort']
+        if r['study']=='11' and (old['plan']['registration']['study']!='10' or r['development_start']<=old['plan']['registration']['end']):
+            raise ValueError('Study 11 must follow the completed study 10 window')
     else:
         validate_parent(old['plan']);parent_cohort=old['plan']['cohort']
     if signature(old['plan'])!=old['sha256'] or old['sha256']!=r['parent_plan_sha256'] or parent_cohort!=r['cohort']:

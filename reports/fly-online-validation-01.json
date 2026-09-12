@@ -1,0 +1,119 @@
+{
+  "schema": 1,
+  "status": "implementation_validated_not_registered",
+  "study": "11",
+  "source": "synthetic_price_fixture_with_native_full_graph",
+  "prospective_market_window_registered": false,
+  "cloud_submissions": 0,
+  "normal_paper_policy_changed": false,
+  "native": {
+    "seconds": 90.23223208298441,
+    "graph": {
+      "neurons": 166700,
+      "edges": 25582938,
+      "plastic_edges": 7835
+    },
+    "verification": {
+      "decision_slots": 25,
+      "observations": 21,
+      "native_bins": 1050,
+      "plastic_edges_per_bin": 7835,
+      "ledger_replayed": true,
+      "feedback_reconstructed": true,
+      "all_boundaries_verified": true,
+      "all_weights_exact": true,
+      "rule_rtol": 1e-11,
+      "rule_atol": 1e-12
+    },
+    "full_artifact_bytes": 766026255,
+    "audited_view_bytes": 16995309,
+    "summary_sha256": "461b114a36a50c7bc3efeacd443b9307ff3522049c404484139fd0d4097c9151",
+    "audit_sha256": "d44c010f78a9bb44bdc9f9210e83bb1bb2551a20f5d98f145f0c038244ae9df9",
+    "view_sha256": "43e6e77259a439040379857f64c9fea8f78d4a4f03d415d127274e0a27ff5636",
+    "executed_source_sha256": {
+      "fly_paper_study.py": "e58f3abbad26c1c27eccb134580d95e7fac139b27180f11ea14e69f9f885190e",
+      "fly_paper_inputs.py": "514f622194eea7f44f8417b5a028928e4454c80d38ecdbf2757638193cfcfaa9",
+      "fly_paper_protocol.py": "3c9a341a9c117cf68f298cce4346c19d05b7d0aeade719cf2d064a338ece105f",
+      "fly_paper_memory.py": "f644c93acf1804b914a67d0cabe3bec3be1c65951b4fdb201b17962caad929ba",
+      "fly_paper_audit.py": "3cb98eeaf2e4d68ef569a8e2f5dc50bf214882d5dcd699648dd12de5de55d41b",
+      "fly_market_study.py": "3432a2db341f99d5ced2d03db5f4812d39067022ea8f2f28be99227bf1f70bb9",
+      "fly_trace.py": "1b3a299d8423835a5abf1a2e3fd9a985f51a6280d2e2cd707aa47dd16e1575b1",
+      "fly.py": "4935f43219ab63d19fa2cc04b36a5612307a4cf44a016b0af2c8f0d69e4a5fea",
+      "fly_visual.py": "8d543c2ac60011e1bc80d676e488772ff331d3b0410ff9217b3ce440e497904b",
+      "news.py": "b35fd73eed9051ff7c92972ec4f245c52c462bee61b986c5b777217d87a04058",
+      "fly_market_activity.py": "d805504fcae6f303dc8b96d2b3321c4db6638d8163c035af07f8f537d6930e3f",
+      "fly_market_activity_audit.py": "46042fad9113bafea192937dcca0a01f2f6901ea11b430793b4f1e17e3391ff2",
+      "fly_market_pulse.py": "070824d264ed8b615bd7535ad0613c31e6ec5c5cc91ee4a2ad7d8d66c4cb53b4",
+      "fly_market_restoration.py": "8351610e09fdba46251cb44c61510509e1c46e1ade58dfbd880848e85878d1a2",
+      "fly_market_memory_audit.py": "3d11d00bc6643d6f7a5efa0fe9db009a8c13526d4aa30e222179cf628be8ad3b",
+      "core.py": "c13a32ba4d2336a0ffdee1cfdd3ab551a292d45fa358fc07959bbff0824a219f",
+      "multi.py": "5ea7ad4f7522475707f4a15eefe094750007a2814f72caad9bea0a9c8076d475",
+      "fly_activation_protocol.py": "47150d63c39d2a12aabbe04ff0d7c5a3f77f2f6f05905656ba11970e669d8ccd",
+      "fly_paper_stimulation.py": "85072fc69a321b5d378fcde43d8485e4b8b09735e7ea5257eb05f79ec7ebd4b7",
+      "fly_online_protocol.py": "2f01ef48bb69ac1149d9ea4f1529410a5e3e869a5ace02d8fa2b6e516e258d65",
+      "fly_online_study.py": "368f3078dd5d96dede1b8dd56d4bd5574f42dcb4420720a0040e959d1d0a3ea5",
+      "fly_online_audit.py": "f17444d1434f199ec37e7583773b635344b30a6d6afe1b81ac120bc38859cb9a",
+      "fly_credit_audit.py": "5a9260b232fb827e7e266278933753899b3b26887fe9826f48017769b08a5f73",
+      "fly_credit_reset_audit.py": "39a06c9502501150d19e779ea12081b622504638477714fa74277beb67f40501",
+      "fly_trace_memory.py": "263b0c9181a8b6d3651c6481a48c076d387680e8c08f17631fb1dcdc8dd5178f",
+      "fly_paper_price_audit.py": "6603b60bcaa6fa7fd91f26764d2361bc351399c5b955b971ed5768ec8b9561ed"
+    },
+    "audit_source_sha256": "26c6fdf96e3d7d18f35f9891d017fc6c0250df7ee12d0809bc43391e563f7c6a"
+  },
+  "checks": {
+    "non_native_suite": {
+      "passed": 112,
+      "skipped_native": 5
+    },
+    "native_suite": {
+      "passed": 2,
+      "seconds": 124.81
+    },
+    "browser": {
+      "observations": 21,
+      "selected_bins": 84,
+      "decision_slots": 24,
+      "terminal_marks": 1,
+      "large_import": true,
+      "frozen_regression": true,
+      "mobile_overflow": false,
+      "errors": 0,
+      "model_submissions": 0
+    }
+  },
+  "current_source_sha256": {
+    "fly_paper_study.py": "e58f3abbad26c1c27eccb134580d95e7fac139b27180f11ea14e69f9f885190e",
+    "fly_paper_inputs.py": "514f622194eea7f44f8417b5a028928e4454c80d38ecdbf2757638193cfcfaa9",
+    "fly_paper_protocol.py": "3c9a341a9c117cf68f298cce4346c19d05b7d0aeade719cf2d064a338ece105f",
+    "fly_paper_memory.py": "f644c93acf1804b914a67d0cabe3bec3be1c65951b4fdb201b17962caad929ba",
+    "fly_paper_audit.py": "3cb98eeaf2e4d68ef569a8e2f5dc50bf214882d5dcd699648dd12de5de55d41b",
+    "fly_market_study.py": "3432a2db341f99d5ced2d03db5f4812d39067022ea8f2f28be99227bf1f70bb9",
+    "fly_trace.py": "1b3a299d8423835a5abf1a2e3fd9a985f51a6280d2e2cd707aa47dd16e1575b1",
+    "fly.py": "4935f43219ab63d19fa2cc04b36a5612307a4cf44a016b0af2c8f0d69e4a5fea",
+    "fly_visual.py": "8d543c2ac60011e1bc80d676e488772ff331d3b0410ff9217b3ce440e497904b",
+    "news.py": "b35fd73eed9051ff7c92972ec4f245c52c462bee61b986c5b777217d87a04058",
+    "fly_market_activity.py": "d805504fcae6f303dc8b96d2b3321c4db6638d8163c035af07f8f537d6930e3f",
+    "fly_market_activity_audit.py": "46042fad9113bafea192937dcca0a01f2f6901ea11b430793b4f1e17e3391ff2",
+    "fly_market_pulse.py": "070824d264ed8b615bd7535ad0613c31e6ec5c5cc91ee4a2ad7d8d66c4cb53b4",
+    "fly_market_restoration.py": "8351610e09fdba46251cb44c61510509e1c46e1ade58dfbd880848e85878d1a2",
+    "fly_market_memory_audit.py": "3d11d00bc6643d6f7a5efa0fe9db009a8c13526d4aa30e222179cf628be8ad3b",
+    "core.py": "c13a32ba4d2336a0ffdee1cfdd3ab551a292d45fa358fc07959bbff0824a219f",
+    "multi.py": "5ea7ad4f7522475707f4a15eefe094750007a2814f72caad9bea0a9c8076d475",
+    "fly_activation_protocol.py": "47150d63c39d2a12aabbe04ff0d7c5a3f77f2f6f05905656ba11970e669d8ccd",
+    "fly_paper_stimulation.py": "85072fc69a321b5d378fcde43d8485e4b8b09735e7ea5257eb05f79ec7ebd4b7",
+    "fly_online_protocol.py": "2f01ef48bb69ac1149d9ea4f1529410a5e3e869a5ace02d8fa2b6e516e258d65",
+    "fly_online_study.py": "368f3078dd5d96dede1b8dd56d4bd5574f42dcb4420720a0040e959d1d0a3ea5",
+    "fly_online_audit.py": "26c6fdf96e3d7d18f35f9891d017fc6c0250df7ee12d0809bc43391e563f7c6a",
+    "fly_credit_audit.py": "5a9260b232fb827e7e266278933753899b3b26887fe9826f48017769b08a5f73",
+    "fly_credit_reset_audit.py": "39a06c9502501150d19e779ea12081b622504638477714fa74277beb67f40501",
+    "fly_trace_memory.py": "263b0c9181a8b6d3651c6481a48c076d387680e8c08f17631fb1dcdc8dd5178f",
+    "fly_paper_price_audit.py": "6603b60bcaa6fa7fd91f26764d2361bc351399c5b955b971ed5768ec8b9561ed"
+  },
+  "screenshot_sha256": "5d68b6c501545ba7d6ea0dab703fd50cc782889d4a548cc6406a1cd026c4d2ee",
+  "remaining": [
+    "Connect once-only chunk dispatch after normal paper cycles.",
+    "Pin source and protocol with a cloud receipt before a future four-hour market window.",
+    "Collect sealed prices/news, execute all sixteen chunks, and independently audit and publish the comparison."
+  ],
+  "interpretation": "This validates recording, feedback, plasticity reconstruction and the viewer. Synthetic equity is not trading-performance evidence; no learned policy was promoted."
+}

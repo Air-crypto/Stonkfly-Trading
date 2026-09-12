@@ -211,7 +211,11 @@ def decision_timeline(rows):
              "equity": r["equity"]} for r in rows]
 
 
-def phase(lab, ticks, start, steps, arm, learning, deadline, trace_output=None, restoration=None, activity_output=None, news=None):
+def phase(lab, ticks, start, steps, arm, learning, deadline, trace_output=None, restoration=None, activity_output=None, news=None, record_end_state=False):
+    if record_end_state and (trace_output is None or activity_output is None):
+        raise ValueError('End-state recording requires full traces and boundary records')
+    if activity_output is not None and learning and arm.get('activity_reset') not in ('carry','reset_rates'):
+        raise ValueError('Online boundary recording supports only carry or learning-rate trace resets')
     b=lab.brain
     b.weights_frozen=not learning
     b.eta=arm["eta"]
@@ -224,7 +228,6 @@ def phase(lab, ticks, start, steps, arm, learning, deadline, trace_output=None, 
     trace_events=[]; observations=0; wall_start=time.monotonic()
     if activity_output is not None:
         activity_output.mkdir(parents=True,exist_ok=False)
-        if learning:raise ValueError("Activity reset is an inference-only intervention")
         from .fly_market_activity import apply_boundary, attach_boundary_state
     if trace_output is not None:
         trace_output.mkdir(parents=True,exist_ok=False)
@@ -266,6 +269,12 @@ def phase(lab, ticks, start, steps, arm, learning, deadline, trace_output=None, 
                     event=(lab.capture(rgb,stimulus,trace_output,len(trace_events)+1)
                            if trace_output is not None else lab.fly.controller.observe(rgb,stimulus))
                 observations+=1
+                if record_end_state:
+                    from .fly_market_activity import dynamic_state, array_hash
+                    end_path=activity_output/f'end-{observations:02}.npz'
+                    np.savez_compressed(end_path,**dynamic_state(b))
+                    event['end_state_sha256']=digest(end_path)
+                    event['all_weight_sha256']=array_hash(b.weight)
                 if boundary is not None:event["activity_boundary"]=boundary
                 if frozen_memory is not None:
                     after_memory=learned_state(b)

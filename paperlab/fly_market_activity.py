@@ -99,7 +99,7 @@ def dynamic_state(brain):
 
 def apply_boundary(brain, mode, observation, path):
     """Save actual before/after arrays, checking target and non-target state separately."""
-    if mode not in (*MODES,*ALL_RESET_FIELDS) or observation not in (1,2,3):raise ValueError('Invalid boundary mode or observation')
+    if mode not in (*MODES,*ALL_RESET_FIELDS) or type(observation) is not int or not 1<=observation<=24:raise ValueError('Invalid boundary mode or observation')
     before=dynamic_state(brain);memory_before=learned_state(brain)
     clock_before={k:getattr(brain,k) for k in SCALARS};all_weights_before=array_hash(brain.weight)
     indices=[]
