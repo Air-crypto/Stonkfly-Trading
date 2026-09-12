@@ -67,8 +67,12 @@ and an offline comparison audit are included.
 The [third market replay](docs/fly-debugger.md#third-market-replay-result) had five
 simulated fills per arm, but every variant ended at $996.36 and failed selection.
 The [input audit](docs/fly-debugger.md#price-magnitude-lost-in-the-visual-adapter)
-found that automatic scaling can render 1% and 20% rises identically. An explicit
-return scale is the next sensory change to test; the deployed policy is unchanged.
+found that automatic scaling can render 1% and 20% rises identically. The debugger
+now offers an [experimental fixed return scale](docs/fly-debugger.md#experimental-fixed-return-input)
+and price-movement controls. It separates the audited inputs; market effectiveness
+is still unproven and the paper trader continues using the original adapter.
+
+![Original and fixed return encodings of the same prices](docs/assets/fly-fixed-return-input.png)
 
 ![Retained reward versus neutral training after a neural reset](docs/assets/fly-retention-comparison.png)
 

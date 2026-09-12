@@ -7,7 +7,7 @@ import numpy as np
 import pytest
 
 from paperlab.core import Tick
-from paperlab.fly_market_study import ARMS, REINFORCEMENT_ARMS, phase, quote_at, seal, seal_followup, signature, validate
+from paperlab.fly_market_study import ARMS, REINFORCEMENT_ARMS, VISUAL_ARMS, phase, quote_at, seal, seal_followup, signature, validate
 from paperlab.universe import Pool, Store
 
 
@@ -31,6 +31,11 @@ def test_sealed_cohort_does_not_select_on_future_returns(tmp_path):
     assert follow["plan"]["arms"]==REINFORCEMENT_ARMS
     assert follow["plan"]["start"]==first["plan"]["start"]+2700
     assert follow["plan"]["parent_plan_sha256"]==first["sha256"]
+    visual=seal_followup(tmp_path/"archive.db",first,tmp_path/"visual.json",phase_steps=2,protocol="visual")
+    assert visual["plan"]["arms"]==VISUAL_ARMS and visual["plan"]["schema"]==3
+    assert visual["plan"]["start"]==follow["plan"]["start"]
+    bad=json.loads(json.dumps(visual["plan"]));bad["visual_encoding"]["log_return_knee"] = .1
+    with pytest.raises(ValueError):validate(bad)
     bad=json.loads(json.dumps(follow["plan"]));bad["start"]-=300
     with pytest.raises(ValueError):validate(bad)
     bad=json.loads(json.dumps(first["plan"]));bad["series"][bad["cohort"][0]][0]["ts"]=bad["start"]+999999

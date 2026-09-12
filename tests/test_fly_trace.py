@@ -119,3 +119,18 @@ def test_retention_probe_clears_transients_preserves_memory_and_freezes_updates(
         assert np.array_equal(a["u"][-1],b["u"][-1])
         assert np.array_equal(a["w"][-1],b["w"][-1])
         assert b["ms"][0]==10
+
+
+@pytest.mark.skipif(not os.environ.get("FLY_TRACE_DATA"), reason="requires prepared full retained graph")
+def test_fixed_return_magnitude_reaches_the_full_network_with_weights_frozen(tmp_path):
+    lab=TraceLab(Path(os.environ["FLY_TRACE_DATA"]))
+    config=Assay(steps=1,learning=False)
+    original=lab.run(config,tmp_path/"original")
+    original_small=lab.run(replace(config,amplitude=.05),tmp_path/"original_small")
+    assert original["events"][0]["input_sha256"]==original_small["events"][0]["input_sha256"]
+    assert original["events"][0]["spike_sha256"]==original_small["events"][0]["spike_sha256"]
+    large=lab.run(replace(config,view="fixed_returns"),tmp_path/"large")
+    small=lab.run(replace(config,view="fixed_returns",amplitude=.05),tmp_path/"small")
+    assert large["events"][0]["input_sha256"]!=small["events"][0]["input_sha256"]
+    assert large["events"][0]["spike_sha256"]!=small["events"][0]["spike_sha256"]
+    assert all(r["events"][0]["diagnostics"]["weight_delta_l2"]==0 for r in (original,original_small,large,small))

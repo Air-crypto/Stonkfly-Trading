@@ -16,6 +16,7 @@ from PIL import Image
 from .core import Tick, atomic_json
 from .fly import Fly, UPSTREAM_COMMIT, frame
 from .news import News
+from .fly_visual import VIEWS, apply_view, encoding
 
 
 @dataclass(frozen=True)
@@ -24,6 +25,8 @@ class Assay:
     steps: int = 4
     probe_steps: int = 0
     probe_preset: str = "rise"
+    amplitude: float = 1
+    probe_amplitude: float = 1
     learning: bool = True
     reinforcement_only: bool = False
     eta: float = .001
@@ -50,8 +53,11 @@ class Assay:
             raise ValueError("eta must be between 0 and .002")
         if self.reinforcement not in ("none", "reward", "aversive", "alternating"):
             raise ValueError("Unknown reinforcement")
-        if self.view not in ("original", "price_only", "blank"):
+        if self.view not in VIEWS:
             raise ValueError("Unknown visual ablation")
+        if any(type(v) not in (int, float) or not math.isfinite(v) or not .01 <= v <= 1
+               for v in (self.amplitude, self.probe_amplitude)):
+            raise ValueError("Synthetic amplitude factors must be between .01 and 1")
         if self.news not in ("none", "positive", "negative"):
             raise ValueError("Unknown synthetic news preset")
         if not isinstance(self.neurons, (tuple, list)) or len(self.neurons) > 16:
@@ -64,7 +70,7 @@ class Assay:
             raise ValueError("Choose neuron IDs for nonzero current")
 
 
-def synthetic_ticks(preset, steps):
+def synthetic_ticks(preset, steps, amplitude=1):
     """Fixed input fixture; prices are never chosen using model outputs."""
     x = np.arange(100 + steps, dtype=float)
     if preset == "rise":
@@ -77,12 +83,14 @@ def synthetic_ticks(preset, steps):
         p = 1 + .003 * np.minimum(x, 96) - .02 * np.maximum(0, x - 96)
     else:
         p = 1 + .001 * x - .18 * (x >= 100)
+    if amplitude != 1:
+        p = p[0] + (p-p[0])*amplitude
     return [Tick(1700000000 + i * 300, float(v * .995), float(v * 1.005),
                  product="SYNTHETIC", source="synthetic_assay") for i, v in enumerate(p)]
 
 
 def input_frames(config):
-    ticks = synthetic_ticks(config.preset, config.steps)
+    ticks = synthetic_ticks(config.preset, config.steps, config.amplitude)
     news = News()
     if config.news != "none":
         news.add("https://example.invalid/fixture", "growth rally approved" if config.news == "positive"
@@ -90,12 +98,7 @@ def input_frames(config):
     try:
         images = []
         for i in range(99, 99 + config.steps):
-            rgb = frame(ticks, i, news)
-            if config.view == "blank":
-                rgb[:] = 128
-            elif config.view == "price_only":
-                rgb[:28] = (235, 240, 249)
-                rgb[140:] = (235, 240, 249)
+            rgb = apply_view(frame(ticks, i, news), ticks, i, config.view)
             images.append(rgb)
         return images
     finally:
@@ -179,7 +182,7 @@ class TraceLab:
             self.fly.controller.s = replace(self.fly.controller.s, learning=enabled)
             event = self.capture(rgb, reinforcement, output, i+1, extra, config.current)
             event.update(phase="training" if config.probe_steps else "assay", phase_step=i+1,
-                         input_preset=config.preset, input_news=config.news)
+                         input_preset=config.preset, input_news=config.news, input_amplitude=config.amplitude)
             events.append(event)
             print(f"assay step={i+1}/{config.steps} side={event['side']} "
                   f"spikes={event['total_spikes']} changed={event['diagnostics']['changed_edges']}", flush=True)
@@ -201,11 +204,13 @@ class TraceLab:
                       "probe_learning":False,"probe_reinforcement":"none","probe_extra_current":0}
             b.weights_frozen=True
             self.fly.controller.s=replace(self.fly.controller.s,learning=False)
-            probe=replace(config,preset=config.probe_preset,steps=config.probe_steps,probe_steps=0,
+            probe=replace(config,preset=config.probe_preset,amplitude=config.probe_amplitude,
+                          steps=config.probe_steps,probe_steps=0,
                           learning=False,reinforcement="none",neurons=(),current=0,news="none")
             for i,rgb in enumerate(input_frames(probe)):
                 event=self.capture(rgb,"none",output,len(events)+1)
-                event.update(phase="probe",phase_step=i+1,input_preset=probe.preset,input_news="none")
+                event.update(phase="probe",phase_step=i+1,input_preset=probe.preset,input_news="none",
+                             input_amplitude=probe.amplitude)
                 events.append(event)
                 if not np.array_equal(weights,b.weight[b.circuit["edges"]]):
                     raise AssertionError("Frozen probe changed trained weights")
@@ -215,7 +220,7 @@ class TraceLab:
                   "config": asdict(config), "upstream_commit": UPSTREAM_COMMIT,
                   "graph": {"neurons": b.n, "edges": len(b.post), "plastic_edges": len(b.circuit["edges"])},
                   "native_build": b.build, "seconds": time.monotonic() - started,
-                  "events": events,"probe_boundary":boundary,
+                  "events": events,"probe_boundary":boundary,"visual_encoding":encoding(config.view),
                   "interpretation": "Synthetic mechanics assay, no trading return. No optimizer loss or backprop gradient. "
                   "Source spike highlights are not a measurement of transmission or causality."}
         atomic_json(output / "report.json", report)

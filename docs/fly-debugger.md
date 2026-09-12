@@ -627,15 +627,109 @@ which trades would improve.
 
 ![Different return magnitudes produce identical inputs](assets/fly-input-scale-audit.png)
 
-The next candidate is an explicit, fixed return scale or magnitude channel,
-derived only from prices available at the observation time. It must first separate
-these fixtures without introducing a suggested action, then be compared against
-the unchanged adapter on a fresh sealed interval. The completed market test
-must not be reused to select it. Keep the full graph, fixed decoder, execution
-costs, and original recordings available as controls. No sensory or paper-policy
-change has been deployed from this audit.
+The candidate below provides a fixed return encoding derived only from prices
+available at the observation time. It separates these fixtures without introducing
+a suggested action. Market effectiveness requires a fresh sealed interval; the
+completed market test must not be reused to select it. The full graph, fixed
+decoder, execution costs, and original recordings remain controls. Existing paper
+traders continue using the original adapter.
 
 The audit JSON records the exact price formula, bid/ask factors, frame index,
 render-library versions, source hashes, input hashes, and differing-pixel counts.
 The accompanying SVG contains the original rendered PNGs at their native size;
 the PNG is a browser-rendered documentation figure.
+
+## Experimental fixed return input
+
+Choose **Fixed return magnitude (experimental)** in the debugger's visual-input
+menu. **Price movement multiplier** scales the synthetic preset's changes about
+its initial level: 0.05 yields one twentieth of the usual movement. The separate
+probe multiplier controls the frozen probe after a training/reset boundary.
+Both default to 1, preserving existing presets.
+
+The candidate redraws only the chart region. It leaves the product header and
+news strip intact. For each trailing window, it computes `r = log(mid/reference)`,
+where the reference is the first of at most 100 observed prices. It maps this to
+`y = 85 - 51 * asinh(r / 0.01) / asinh(log(100) / 0.01)` and clips outside the
+0.01×–100× reference-price bounds. Amber dots expose clipped observations. The
+mapping is fixed across windows, rather than divided by each window's price
+range. Its nonlinear scale makes small moves visible while accommodating large
+ones; it still has finite pixel resolution and can lose detail at the bounds.
+
+These are declared sensory parameters, not values fitted to trade outcomes.
+There is no suggested action, equity, fee threshold, or future price in the
+encoding. The original mode remains byte-identical. Tests verify the documented
+small/large input collisions separate, header/news pixels remain unchanged,
+future and older-than-window prices have no effect, denomination scaling leaves
+the tested images unchanged, and clipping is marked. A full-network test verifies
+different magnitude inputs produce different spike-count recordings with weights
+frozen; that does not establish correct BUY/SELL decisions.
+
+![Magnitude controls preserve different input histories](assets/fly-fixed-return-input.png)
+
+Example synthetic assay configuration:
+
+```json
+{
+  "preset": "rise", "steps": 4,
+  "amplitude": 0.05, "view": "fixed_returns",
+  "learning": false, "reinforcement": "none", "news": "none"
+}
+```
+
+Save it as `scale.json` and use the existing capture command:
+
+```sh
+uv run python -m paperlab.debugger capture --fly-data data/fly --config scale.json --out runs/scale-small
+uv run python -m paperlab.debugger serve --out runs --fly-data data/fly
+```
+
+Alternatively, enter the same settings in the Modal-backed form. The
+[eight-arm protocol](../reports/fly-fixed-scale-protocol-01.json) compares two
+magnitudes, two directions, and the original/fixed encodings with weights frozen.
+Its offline audit consumes saved `<arm>-result.json` files:
+
+```sh
+uv run python -m paperlab.fly_visual_study runs/fixed-scale-01 --out reports/fly-fixed-scale-study-01.json
+```
+
+The [next market preregistration](../reports/fly-market-study-04-preregistration.json)
+crosses original/fixed inputs with frozen/online plasticity. It preserves the
+prior cohort, costs, and development gate on new decision windows. After the
+collector reaches the endpoint, seal it with:
+
+```sh
+uv run python -m paperlab.fly_market_study followup --archive runs/research-market-04/universe.db --previous runs/research-market-03/plan.json --phase-steps 3 --protocol visual --out runs/research-market-04/plan.json
+```
+
+The sealed plan pins the transform metadata and rejects changes to its parameters.
+This diagnostic option is available in the deployed worker; it does not replace
+the paper trader's input mode or automatically promote a policy.
+
+### Frozen-network magnitude results
+
+All eight registered cloud arms completed. The [full report](../reports/fly-fixed-scale-study-01.json)
+verifies one native build, graph, and pristine weight state, with zero weight
+updates throughout all 32 observations. The small multiplier is 0.05; large is 1.
+
+| Input mode / direction | Different images | Different spike-count observations | Small actions | Large actions |
+| --- | ---: | ---: | --- | --- |
+| Original / rise | 0/4 | 0/4 | BUY, HOLD, HOLD, HOLD | BUY, HOLD, HOLD, HOLD |
+| Original / fall | 0/4 | 0/4 | BUY, SELL, BUY, HOLD | BUY, SELL, BUY, HOLD |
+| Fixed returns / rise | 4/4 | 4/4 | SELL, HOLD, HOLD, HOLD | SELL, HOLD, HOLD, SELL |
+| Fixed returns / fall | 4/4 | 4/4 | BUY, BUY, BUY, BUY | BUY, BUY, HOLD, HOLD |
+
+The magnitude distinction reaches the full network, rather than only changing
+the picture shown by the UI. Three of eight fixed-scale action comparisons also
+differ. This is not evidence that those actions are correct: both rising controls
+begin with SELL and both falling controls begin with BUY. No future prices,
+execution costs, or trading returns were scored in this assay. Keep all outcomes
+and evaluate the registered market comparison without retuning the renderer to
+produce preferred action labels.
+
+The included `scale01-rise_small` and `scale01-rise_large` recordings show the
+fourth-observation disagreement with weights frozen. Load the small run, compare
+the large run, and select observation 4. The input panel identifies the movement
+multiplier and fixed-scale bounds; the comparison table shows different images.
+
+![Frozen-network response to small and large moves](assets/fly-fixed-return-comparison.png)

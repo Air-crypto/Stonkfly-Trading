@@ -14,6 +14,7 @@ import numpy as np
 from .core import Broker, Tick, atomic_json, digest
 from .fly import frame, UPSTREAM_COMMIT
 from .fly_trace import TraceLab
+from .fly_visual import apply_view, encoding
 from .multi import DEX_COSTS, read_archive
 from .news import News
 from .universe import MIN_CONTEXT, Pool
@@ -30,6 +31,13 @@ REINFORCEMENT_ARMS = {
     "pristine_frozen": ARMS["pristine_frozen"],
     "online_original": ARMS["online_original"],
     "reinforcement_gated": {**ARMS["online_original"], "reinforcement_only": True},
+}
+
+VISUAL_ARMS = {
+    "pristine_frozen": ARMS["pristine_frozen"],
+    "online_original": ARMS["online_original"],
+    "fixed_returns_frozen": {**ARMS["pristine_frozen"], "view": "fixed_returns"},
+    "fixed_returns_online": {**ARMS["online_original"], "view": "fixed_returns"},
 }
 
 
@@ -80,7 +88,7 @@ def seal(archive, output, phase_steps=3):
 
 
 def validate(plan):
-    protocols = {1: ARMS, 2: REINFORCEMENT_ARMS}
+    protocols = {1: ARMS, 2: REINFORCEMENT_ARMS, 3: VISUAL_ARMS}
     if not isinstance(plan,dict) or plan.get("schema") not in protocols or plan.get("arms")!=protocols[plan["schema"]]:
         raise ValueError("Unknown study protocol")
     n=plan.get("phase_steps")
@@ -88,6 +96,8 @@ def validate(plan):
         raise ValueError("Invalid study horizon")
     if plan.get("costs")!=asdict(DEX_COSTS):
         raise ValueError("Study must retain the declared adverse DEX costs")
+    if plan["schema"]==3 and plan.get("visual_encoding")!=encoding("fixed_returns"):
+        raise ValueError("Visual protocol must pin the executed sensory transform")
     if not 1<=len(plan.get("cohort",[]))<=2 or len(set(plan["cohort"]))!=len(plan["cohort"]):
         raise ValueError("Use one or two unique admitted pools")
     if set(plan["series"])!=set(plan["cohort"]):
@@ -95,7 +105,7 @@ def validate(plan):
     start=plan["start"]
     if not math.isfinite(start) or start<=0 or start%300 or plan["snapshot_end"]<start+3*n*300:
         raise ValueError("Insufficient chronological horizon")
-    if plan["schema"]==2 and (plan.get("previous_test_end")!=start or
+    if plan["schema"]>=2 and (plan.get("previous_test_end")!=start or
                               not isinstance(plan.get("parent_plan_sha256"),str) or len(plan["parent_plan_sha256"])!=64):
         raise ValueError("A follow-up must start after the recorded prior test interval")
     for key,raw in plan["series"].items():
@@ -112,7 +122,7 @@ def validate(plan):
     return plan
 
 
-def seal_followup(archive, previous, output, phase_steps=2):
+def seal_followup(archive, previous, output, phase_steps=2, protocol="reinforcement"):
     """Preserve the prior cohort and move every decision past its test endpoint."""
     previous = json.loads(Path(previous).read_text()) if isinstance(previous,(str,Path)) else previous
     old=validate(previous["plan"])
@@ -122,6 +132,8 @@ def seal_followup(archive, previous, output, phase_steps=2):
         raise ValueError("Refuse to overwrite a sealed plan")
     if type(phase_steps) is not int or not 2<=phase_steps<=4:
         raise ValueError("Use 2–4 decisions per phase")
+    if protocol not in ("reinforcement", "visual"):
+        raise ValueError("Unknown follow-up protocol")
     start=old["start"]+3*old["phase_steps"]*300
     end=start+3*phase_steps*300
     archive=Path(archive)
@@ -135,12 +147,15 @@ def seal_followup(archive, previous, output, phase_steps=2):
     _,series=read_archive(archive,last)
     if not all(key in series for key in old["cohort"]):
         raise ValueError("Prior cohort fell outside the bounded archive; do not replace it with survivors")
-    plan={**old,"schema":2,"start":start,"previous_test_end":start,"parent_plan_sha256":previous["sha256"],
+    plan={**old,"schema":3 if protocol=="visual" else 2,"start":start,"previous_test_end":start,"parent_plan_sha256":previous["sha256"],
           "phase_steps":phase_steps,"snapshot_sha256":digest(archive),"snapshot_end":last,
-          "arms":REINFORCEMENT_ARMS,
+          "arms":VISUAL_ARMS if protocol=="visual" else REINFORCEMENT_ARMS,
           "series":{key:[asdict(t) for t in series[key] if t.ts<=end] for key in old["cohort"]},
           "selection":"Same cohort as parent study, regardless of later eligibility or survival. New decision windows start at parent test end.",
           "hypothesis":"Freeze efficacy and weight updates when reinforcement is none; retain neural propagation and rate traces. No decoder or risk-limit change."}
+    if protocol=="visual":
+        plan["hypothesis"]="Compare fixed return encoding with the unchanged visual adapter, crossed with frozen versus online plasticity. No decoder or risk-limit change."
+        plan["visual_encoding"]=encoding("fixed_returns")
     validate(plan)
     envelope={"plan":plan,"sha256":signature(plan)}
     atomic_json(output,envelope)
@@ -192,9 +207,7 @@ def phase(lab, ticks, start, steps, arm, learning, deadline, trace_output=None):
             event=None
             if step<steps and t.available and t.ts>last_quote:
                 reward=0 if unpriced else equity-anchor
-                rgb=frame(ticks,index,news)
-                if arm["view"]=="price_only":
-                    rgb[:28]=(235,240,249);rgb[140:]=(235,240,249)
+                rgb=apply_view(frame(ticks,index,news),ticks,index,arm["view"])
                 stimulus=("reward" if reward>.01 else "aversive" if reward<-.01 else "none") if learning else "none"
                 enabled=learning and (not arm.get("reinforcement_only",False) or stimulus!="none")
                 b.weights_frozen=not enabled
@@ -221,7 +234,7 @@ def phase(lab, ticks, start, steps, arm, learning, deadline, trace_output=None):
                               "reinforcement_only":arm.get("reinforcement_only",False)},
                     "upstream_commit":UPSTREAM_COMMIT,"graph":{"neurons":b.n,"edges":len(b.post),"plastic_edges":len(b.circuit["edges"])},
                     "native_build":b.build,"seconds":time.monotonic()-wall_start,"events":trace_events,
-                    "market_timeline":decision_timeline(rows),
+                    "market_timeline":decision_timeline(rows),"visual_encoding":encoding(arm["view"]),
                     "interpretation":"Recorded market replay, isolated paper account. No executable DEX or monthly-return claim."}
             atomic_json(trace_output/"report.json",report)
             atomic_json(trace_output/"view.json",lab.export_view(trace_output,report))
@@ -278,7 +291,7 @@ def run(envelope, data, output):
         for name,arm in arms.items():
             # Learned weights always come from training, not a test-tuned or development-updated state.
             restore_learned(lab.brain,states[key,name])
-            traces=(root/f"pool{plan['cohort'].index(key)}-{name}") if name in ("pristine_frozen","online_original","reinforcement_gated") else None
+            traces=(root/f"pool{plan['cohort'].index(key)}-{name}") if name in ("pristine_frozen","online_original","reinforcement_gated","fixed_returns_frozen","fixed_returns_online") else None
             results[key][name]["test"]=phase(lab,ticks,plan["start"]+2*n*300,n,arm,arm["online"],deadline,traces)
             print(f"market_study test pool={plan['cohort'].index(key)} arm={name} return={results[key][name]['test']['return_pct']:.4f}%",flush=True)
             atomic_json(root/"results.json",results)
@@ -286,7 +299,7 @@ def run(envelope, data, output):
                   for phase_name in ("training","development","test")} for name in arms}
     elapsed=n*300
     summary={"status":"market_study_completed","plan_sha256":envelope["sha256"],"selection":selection,
-             "code_sha256":{name:digest(Path(__file__).with_name(name)) for name in ("fly_market_study.py","fly_trace.py","fly.py")},
+             "code_sha256":{name:digest(Path(__file__).with_name(name)) for name in ("fly_market_study.py","fly_trace.py","fly.py","fly_visual.py")},
              "total_equity":totals,"initial_capital":1000,"active_sleeves":len(plan["cohort"]),
              "test_net_after_monthly_hosting":{str(cost):{name:totals[name]["test"]-1000-cost*elapsed/(30*86400)
                  for name in arms} for cost in (20,40)},"costs":asdict(DEX_COSTS),"phase_steps":n,
@@ -303,12 +316,13 @@ def main():
     sub=parser.add_subparsers(dest="command",required=True)
     s=sub.add_parser("seal");s.add_argument("--archive",required=True);s.add_argument("--out",required=True);s.add_argument("--phase-steps",type=int,default=3)
     f=sub.add_parser("followup");f.add_argument("--archive",required=True);f.add_argument("--previous",required=True);f.add_argument("--out",required=True);f.add_argument("--phase-steps",type=int,default=2)
+    f.add_argument("--protocol",choices=("reinforcement","visual"),default="reinforcement")
     r=sub.add_parser("run");r.add_argument("--plan",required=True);r.add_argument("--fly-data",required=True);r.add_argument("--out",required=True)
     a=parser.parse_args()
     if a.command=="seal":
         result=seal(a.archive,a.out,a.phase_steps)
     elif a.command=="followup":
-        result=seal_followup(a.archive,a.previous,a.out,a.phase_steps)
+        result=seal_followup(a.archive,a.previous,a.out,a.phase_steps,a.protocol)
     else:
         result=run(json.loads(Path(a.plan).read_text()),a.fly_data,a.out)
     print(json.dumps({k:v for k,v in result.items() if k!="plan"},indent=2))
