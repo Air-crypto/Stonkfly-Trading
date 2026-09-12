@@ -120,3 +120,102 @@ def test_native_boundary_preserves_graph_and_reproduces_frozen_input(tmp_path):
     path=tmp_path/'boundary.npz';m=apply_boundary(b,'full',2,path);audit_boundary(path,m,initial,memory,'full',2)
     actual=lab.fly.controller.observe(rgb,'none')
     assert actual['spike_sha256']==expected['spike_sha256'] and actual['memory']==expected['memory']
+
+
+def refinement_payload():
+    p=payload();p['protocol']=json.loads(Path('reports/fly-market-activity-protocol-02.json').read_text())
+    p['activity_reference_json']=Path('reports/fly-market-activity-study-01.json').read_text();return p
+
+
+def refinement_brain():
+    b=Brain();b.ids=np.array([10527,99,10059,555871]);b.initial['g']=np.zeros(4,dtype=np.float32);b.g=np.full(4,3,dtype=np.float32)
+    b.initial['last']=np.full(4,-1,dtype=np.int64);b.last=np.full(4,b.cursor-1,dtype=np.int64);return b
+
+
+def test_refinement_has_four_controls_before_eight_partial_resets():
+    from paperlab.fly_market_activity import catalog
+    p=refinement_payload();validate(p)
+    assert list(catalog(p['protocol']))[:4]==['pristine_carry','trained_carry','pristine_full','trained_full']
+    assert len(catalog(p['protocol']))==12
+    assert validate_request({'run_id':'assay-refinement-test','activity_plan':p})==p
+
+
+@pytest.mark.parametrize('bad',['missing_parent','parent_hash','parent_pool','parent_input','parent_controls','gate_ids','fields'])
+def test_refinement_rejects_changed_reference_or_scope(bad):
+    import hashlib
+    p=refinement_payload()
+    if bad=='missing_parent':p.pop('activity_reference_json')
+    if bad=='parent_hash':p['activity_reference_json']+=' '
+    if bad=='gate_ids':p['protocol']['gate_ids']=['10059','10162']
+    if bad=='fields':p['protocol']['reset_fields']['voltage'].append('g')
+    if bad in ('parent_pool','parent_input','parent_controls'):
+        r=json.loads(p['activity_reference_json'])
+        if bad=='parent_pool':r['protocol']['pool']='other'
+        if bad=='parent_input':r['reports']['trained_full']['events'][1]['input_sha256']='changed'
+        if bad=='parent_controls':r['reports'].pop('trained_full')
+        p['activity_reference_json']=json.dumps(r);p['protocol']['activity_reference_sha256']=hashlib.sha256(p['activity_reference_json'].encode()).hexdigest()
+    with pytest.raises(ValueError):validate(p)
+
+
+@pytest.mark.parametrize('mode,fields,indices',[('voltage',{'v'},None),('conductance',{'g'},None),('voltage_conductance',{'v','g'},None),('gate_voltage_conductance',{'v','g'},[0,3])])
+def test_refinement_resets_only_declared_elements_at_a_materialized_boundary(tmp_path,mode,fields,indices):
+    b=refinement_brain();memory=learned_state(b);initial={k:v for k,v in b.initial.items() if k not in ('memory_u','memory_w')};before={k:getattr(b,k).copy() for k in initial}
+    path=tmp_path/'boundary.npz';m=apply_boundary(b,mode,2,path);audit_boundary(path,m,initial,memory,mode,2,b.ids)
+    for k in initial:
+        expected=before[k].copy()
+        if k in fields:
+            if indices is None:expected[:]=initial[k]
+            else:expected[indices]=initial[k][indices]
+        np.testing.assert_array_equal(getattr(b,k),expected)
+    assert b.sim_ms==500 and b.cursor==5000 and b.total_spikes==12
+
+
+def test_gate_reset_rejects_unmaterialized_state_and_unknown_identity(tmp_path):
+    b=refinement_brain();b.last[1]-=1
+    with pytest.raises(ValueError,match='materialized'):apply_boundary(b,'gate_voltage_conductance',2,tmp_path/'bad.npz')
+    assert not (tmp_path/'bad.npz').exists()
+    b=refinement_brain();b.ids[0]=7
+    with pytest.raises(ValueError,match='gate neuron'):apply_boundary(b,'gate_voltage_conductance',2,tmp_path/'bad.npz')
+
+
+@pytest.mark.parametrize('bad',['non_target_value','target_indices','identity_map'])
+def test_gate_array_audit_catches_wrong_neuron_even_with_updated_hashes(tmp_path,bad):
+    b=refinement_brain();memory=learned_state(b);initial={k:v for k,v in b.initial.items() if k not in ('memory_u','memory_w')};p=tmp_path/'boundary.npz';m=apply_boundary(b,'gate_voltage_conductance',2,p)
+    ids=b.ids.copy()
+    if bad=='non_target_value':
+        with np.load(p) as a:values={k:a[k].copy() for k in a.files}
+        values['after__v'][1]+=7;np.savez_compressed(p,**values);m['artifact_sha256']=digest(p);m['after_sha256']['v']=array_hash(values['after__v'])
+    if bad=='target_indices':m['target_indices']=[1,2]
+    if bad=='identity_map':ids=ids[::-1]
+    with pytest.raises(ValueError):audit_boundary(p,m,initial,memory,'gate_voltage_conductance',2,ids)
+
+
+@pytest.mark.skipif(not __import__('os').environ.get('FLY_TRACE_DATA'),reason='requires prepared full graph')
+def test_native_gate_reset_preserves_every_other_neuron_and_clock(tmp_path):
+    from dataclasses import replace
+    import os
+    from paperlab.fly_trace import TraceLab,Assay,input_frames
+    lab=TraceLab(Path(os.environ['FLY_TRACE_DATA']));b=lab.brain;b.weights_frozen=True;lab.fly.controller.s=replace(lab.fly.controller.s,learning=False)
+    rgb=input_frames(Assay(steps=1))[0];lab.fly.controller.observe(rgb,'none');memory=learned_state(b)
+    initial={k:v for k,v in b.initial.items() if k not in ('memory_u','memory_w')};path=tmp_path/'boundary.npz'
+    m=apply_boundary(b,'gate_voltage_conductance',2,path);r=audit_boundary(path,m,initial,memory,'gate_voltage_conductance',2,b.ids)
+    assert r['target_ids']==['10527','555871'] and b.sim_ms==500 and b.cursor==5000
+    assert set(r['changed_fields'])<= {'v','g'}
+    event=lab.fly.controller.observe(rgb,'none');assert event['brain_ms']==1000
+    for k,v in memory.items():np.testing.assert_array_equal(learned_state(b)[k],v)
+
+
+def test_boundary_view_uses_actual_neuron_indices_and_rejects_changed_values(tmp_path):
+    from paperlab.fly_market_activity import attach_boundary_state
+    from paperlab.fly_market_activity_audit import audit_view_boundaries
+    b=refinement_brain();b.reset(keep_memory=True);apply_boundary(b,'gate_voltage_conductance',1,tmp_path/'boundary-01.npz')
+    b=refinement_brain();apply_boundary(b,'gate_voltage_conductance',2,tmp_path/'boundary-02.npz')
+    v={'nodes':[{'id':str(b.ids[i]),'index':i} for i in (1,3,0)],'frames':[{},{}]}
+    attach_boundary_state(v,tmp_path);audit_view_boundaries(v,tmp_path,b.ids)
+    assert v['frames'][1]['activity_state']['before_v']==[2,2,2]
+    assert v['frames'][1]['activity_state']['after_v']==[2,0,0]
+    assert v['frames'][1]['activity_state']['after_g']==[3,0,0]
+    changed=copy.deepcopy(v);changed['frames'][1]['activity_state']['after_v'][0]=0
+    with pytest.raises(ValueError,match='values differ'):audit_view_boundaries(changed,tmp_path,b.ids)
+    changed=copy.deepcopy(v);changed['nodes'][0]['id']='555871'
+    with pytest.raises(ValueError,match='identities'):audit_view_boundaries(changed,tmp_path,b.ids)

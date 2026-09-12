@@ -1859,3 +1859,37 @@ The browser check verifies all 24 boundary views, output counts, exact clocks,
 reset fields, memory identity, aligned gate traces, mobile layout, and clearing
 when a legacy recording is loaded. It blocks model-job submissions. The full
 native reset/replay test and 246 unit/regression tests passed before deployment.
+
+## Isolate voltage and synaptic input
+
+The [second activity protocol](../reports/fly-market-activity-protocol-02.json)
+registers twelve conditions on those same three market06 images. Four reproduce
+the pristine/trained carry and full-reset controls. The remaining eight cross
+pristine/trained memory with resetting only membrane voltage `v`, only the
+synaptic-input state `g`, both globally, or both only at the two annotated gate
+neurons (10527 and 555871). `g` is a native model state, not a calibrated physical
+conductance measurement.
+
+These partial interventions preserve neural time, all other fields and neuron
+values, and all synaptic weights and stored `u/w`. They run only at native
+boundaries where every neuron has been evolved to the current tick. Saved
+before/after arrays and the full neuron identity map let the offline audit check
+the exact two-cell scope independently. The viewer also shows the selected
+neuron's actual boundary voltage and input state; these values describe the
+moment before the image and stay fixed as the within-image cursor moves.
+
+```sh
+uv run python -m paperlab.fly_market_activity pack \
+  --protocol reports/fly-market-activity-protocol-02.json \
+  --reference reports/fly-market-study-06.json \
+  --plan reports/fly-market-study-06-plan.json \
+  --activity-reference reports/fly-market-activity-study-01.json \
+  --out runs/activity-payload-02.json
+uv run python -m paperlab.fly_market_activity cloud \
+  --payload runs/activity-payload-02.json --out runs/activity-study-02
+```
+
+The previous study is pinned by its file hash and all four controls must reproduce
+before narrower conditions run. This is a post hoc mechanism experiment on
+already observed inputs. A reset-induced gate spike does not demonstrate a
+better trading policy; any candidate needs a separate market evaluation.

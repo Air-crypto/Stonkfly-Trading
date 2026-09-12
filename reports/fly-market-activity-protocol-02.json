@@ -1,0 +1,90 @@
+{
+  "schema": 2,
+  "kind": "post_hoc_market_activity_reset",
+  "recorded_at": 1789218920.146156,
+  "market_plan_sha256": "3896dedeacf436b240c3f29e4ebfc656410c868dbeab45ac8c33537b70cbc19a",
+  "reference_report_sha256": "038e6f2c69c00a60ab88d89340cf1f85cc7b75e9a3fc8567e1d284cf90ce01e3",
+  "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+  "arms": {
+    "pristine_carry": {
+      "memory": "pristine",
+      "state_reset": "carry"
+    },
+    "trained_carry": {
+      "memory": "trained",
+      "state_reset": "carry"
+    },
+    "pristine_full": {
+      "memory": "pristine",
+      "state_reset": "full"
+    },
+    "trained_full": {
+      "memory": "trained",
+      "state_reset": "full"
+    },
+    "pristine_voltage": {
+      "memory": "pristine",
+      "state_reset": "voltage"
+    },
+    "trained_voltage": {
+      "memory": "trained",
+      "state_reset": "voltage"
+    },
+    "pristine_conductance": {
+      "memory": "pristine",
+      "state_reset": "conductance"
+    },
+    "trained_conductance": {
+      "memory": "trained",
+      "state_reset": "conductance"
+    },
+    "pristine_voltage_conductance": {
+      "memory": "pristine",
+      "state_reset": "voltage_conductance"
+    },
+    "trained_voltage_conductance": {
+      "memory": "trained",
+      "state_reset": "voltage_conductance"
+    },
+    "pristine_gate_voltage_conductance": {
+      "memory": "pristine",
+      "state_reset": "gate_voltage_conductance"
+    },
+    "trained_gate_voltage_conductance": {
+      "memory": "trained",
+      "state_reset": "gate_voltage_conductance"
+    }
+  },
+  "training_source": "trained_frozen",
+  "test_source": "trained_frozen",
+  "inference": {
+    "learning": false,
+    "reinforcement": "none",
+    "extra_current": 0,
+    "steps": 3
+  },
+  "reset_fields": {
+    "voltage": [
+      "v"
+    ],
+    "conductance": [
+      "g"
+    ],
+    "voltage_conductance": [
+      "v",
+      "g"
+    ],
+    "gate_voltage_conductance": [
+      "v",
+      "g"
+    ]
+  },
+  "reset_timing": "Between observations only; first observation starts from the same fresh dynamics in every arm.",
+  "hypothesis": "The retained gate neurons are hyperpolarized at the failed observation boundary, while their stored intrinsic adaptation is zero. Compare resetting voltage, synaptic current, both fields globally, or both fields only at the two gate neurons. Reproduce pristine/trained carry and full-reset controls before these narrower interventions.",
+  "interpretation": "Post hoc mechanism refinement. Each intervention occurs at a materialized native observation boundary. All other arrays, the neural clock, and all synaptic weights/u/w remain unchanged for partial resets. Twelve fixed conditions, full graph, fixed decoder, no added current, no account or profit calculation. Recovering a reset-induced spike is not evidence of better trading.",
+  "gate_ids": [
+    "10527",
+    "555871"
+  ],
+  "activity_reference_sha256": "585a659e66f48ed70fb6b5cbd527e993e2c6a640fb0dbbf7ea9d61a0aebdc513"
+}
