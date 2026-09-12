@@ -1,0 +1,49 @@
+{
+  "memory-detail-fall": {
+    "schema": 1,
+    "source_view_sha256": "374e71daa313f8f0670d2630fbf053f105fb1af1d09125649262eaa320b151f2",
+    "trace_sha256": {
+      "step-01.npz": "8373e238777ab1c2c901bb2252d8e2e2d4ff7803374df323717af74143ebb8dd",
+      "step-02.npz": "3f99c07cff6c3289d803882f4344fef5e30a021042a6b93e631ce5bd2f4d736b"
+    },
+    "included_observations": [
+      1,
+      2
+    ],
+    "missing_observations": [],
+    "interpretation": "Per-connection u/w copied from verified recorded arrays. Original report, spikes, inputs and weights preserved. No new simulation.",
+    "view_sha256": "e770ee1a0ae1458cb2c09c7395c8ddbd93a4660f036c0db21337405d067ea309"
+  },
+  "memory-detail-market05": {
+    "schema": 1,
+    "source_view_sha256": "42f63951f839a20d13ebfda04aa4b23fa80f138c2b0eb36a492dc71084363734",
+    "trace_sha256": {
+      "step-02.npz": "5de3eda4178b93cd4bdeee4433b0c534bcd1165253fd9733a1ffdb7cafecee12"
+    },
+    "included_observations": [
+      2
+    ],
+    "missing_observations": [
+      1,
+      3
+    ],
+    "interpretation": "Per-connection u/w copied from verified recorded arrays. Original report, spikes, inputs and weights preserved. No new simulation.",
+    "view_sha256": "e11911aeaf1985ec5c39ea1c579a99681844180b61f8eaafcec5a2669dd0f4ba"
+  },
+  "memory-detail-pristine05": {
+    "schema": 1,
+    "source_view_sha256": "9d3b69a0af07601da24756d85047467d8c9236402c21d57df39ef4e2c586ea94",
+    "trace_sha256": {
+      "step-02.npz": "f9c31d2915f09f126c7230cdc721721769354a598412afbed4bb19e7d86d53fe"
+    },
+    "included_observations": [
+      2
+    ],
+    "missing_observations": [
+      1,
+      3
+    ],
+    "interpretation": "Per-connection u/w copied from verified recorded arrays. Original report, spikes, inputs and weights preserved. No new simulation.",
+    "view_sha256": "293d8482a6d755be8a6d89770491a1119c1598187bd17d1e237060b5ff04ead4"
+  }
+}

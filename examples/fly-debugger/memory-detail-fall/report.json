@@ -1,0 +1,130 @@
+{
+  "schema": 1,
+  "source": "synthetic_full_network_assay",
+  "config": {
+    "preset": "fall",
+    "steps": 2,
+    "learning": true,
+    "eta": 0.001,
+    "reinforcement": "none",
+    "view": "original",
+    "news": "none",
+    "neurons": [],
+    "current": 0
+  },
+  "upstream_commit": "78ef3e05ab0fa086032098558d893667068944a0",
+  "graph": {
+    "neurons": 166700,
+    "edges": 25582938,
+    "plastic_edges": 7835
+  },
+  "native_build": {
+    "model": "stonkfly-dual-compartment-v1",
+    "source_sha256": "e2d4d584f4633613277bb1bf6ea7ba20855c01a332ae2e9344ed7782604c8509",
+    "binary_sha256": "9c0768fc4f8e34ba730a31ef04a5de958e7d4276c1552f30ec6f2c2eddbfa1b1",
+    "flags": [
+      "-O3",
+      "-std=c++17",
+      "-shared",
+      "-fPIC"
+    ]
+  },
+  "seconds": 7.1784191569999996,
+  "events": [
+    {
+      "side": "BUY",
+      "left_hz": 30.0,
+      "right_hz": 32.0,
+      "difference_hz": 2.0,
+      "gate_spikes": 28,
+      "cell_ids": {
+        "left": [
+          "10162"
+        ],
+        "right": [
+          "10059"
+        ],
+        "gate": [
+          "10527",
+          "555871"
+        ]
+      },
+      "brain_ms": 500.0,
+      "compute_seconds": 1.1682042410000024,
+      "stimulus": "none",
+      "stimulus_ms": 0.0,
+      "reward_spikes": 0,
+      "aversive_spikes": 27,
+      "KC_spikes": 15,
+      "total_spikes": 368284,
+      "spike_sha256": "019043818fe0ca56aee05f96ff3ac30a38b878ecf9360636b914af907da2fea9",
+      "input_sha256": "5b86970eea650e1c1b4ae5cc8bc6b345915f5caa3536f6bd7081cc6460c10e6b",
+      "memory": {
+        "plastic_edges": 7835,
+        "changed_edges": 5,
+        "mean_efficacy": 0.9999907612800598,
+        "minimum_efficacy": 0.9772769808769226,
+        "sha256": "5d9da4082b2eccb6827c2c58ec375b4d95c5294344e09181117fb54d48916223",
+        "model": "stonkfly-dual-compartment-v1"
+      },
+      "diagnostics": {
+        "loss": null,
+        "backprop_gradient": null,
+        "changed_edges": 5,
+        "weight_delta_l2": 0.5951647758483887,
+        "max_abs_delta": 0.48652076721191406,
+        "efficacy_min": 0.9772769522961436,
+        "efficacy_max": 1.0004329233123093,
+        "clipped_edges": 0
+      }
+    },
+    {
+      "side": "SELL",
+      "left_hz": 30.0,
+      "right_hz": 28.0,
+      "difference_hz": -2.0,
+      "gate_spikes": 11,
+      "cell_ids": {
+        "left": [
+          "10162"
+        ],
+        "right": [
+          "10059"
+        ],
+        "gate": [
+          "10527",
+          "555871"
+        ]
+      },
+      "brain_ms": 1000.0,
+      "compute_seconds": 1.240707405000002,
+      "stimulus": "none",
+      "stimulus_ms": 0.0,
+      "reward_spikes": 0,
+      "aversive_spikes": 23,
+      "KC_spikes": 11,
+      "total_spikes": 378671,
+      "spike_sha256": "54aa417d38d05a06267625184ab02fc695c42eaaef06285c99f9b814633f923d",
+      "input_sha256": "5b86970eea650e1c1b4ae5cc8bc6b345915f5caa3536f6bd7081cc6460c10e6b",
+      "memory": {
+        "plastic_edges": 7835,
+        "changed_edges": 5,
+        "mean_efficacy": 0.9999892711639404,
+        "minimum_efficacy": 0.9759234189987183,
+        "sha256": "d4dad52e25c025565b562e082d561f3a9f20cbbd0333f609c2bbdfddf10b3921",
+        "model": "stonkfly-dual-compartment-v1"
+      },
+      "diagnostics": {
+        "loss": null,
+        "backprop_gradient": null,
+        "changed_edges": 5,
+        "weight_delta_l2": 0.1478976160287857,
+        "max_abs_delta": 0.09470748901367188,
+        "efficacy_min": 0.9759234527816265,
+        "efficacy_max": 1.0,
+        "clipped_edges": 0
+      }
+    }
+  ],
+  "interpretation": "Synthetic mechanics assay, no trading return. No optimizer loss or backprop gradient. Source spike highlights are not a measurement of transmission or causality."
+}

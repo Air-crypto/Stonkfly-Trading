@@ -37,8 +37,10 @@ shares equivalent training checkpoints and audits each separate inference run.
 The comparison now overlays the selected neuron’s voltage and spike bins, plus
 the same connection’s weight. It matches identities and observation times so
 retained memory differences remain visible even when inference is frozen.
+[Stored connection memory](docs/fly-debugger.md#inspect-stored-connection-memory)
+adds the recorded `u` and `w` states behind each weight.
 
-![Restored versus trained memory: paired voltage, spikes, and connection weight](docs/assets/fly-paired-traces.png)
+![Trained versus pristine memory: voltage, spikes, weight, and stored u/w](docs/assets/fly-connection-memory-frozen.png)
 
 The diagnostics have identified concrete limitations:
 

@@ -75,6 +75,11 @@ def test_full_native_trace_is_observational_and_reset_is_reproducible(tmp_path):
     reference=lab.fly.controller.observe(rgb,"none")
     report=lab.run(config,tmp_path/"captured")
     actual=report["events"][0]
+    import json
+    view=json.loads((tmp_path/"captured/view.json").read_text())
+    with np.load(tmp_path/"captured/step-01.npz") as trace:
+        for key in ('u','w'):
+            np.testing.assert_array_equal(view['frames'][0]['plastic_'+key],trace[key][:,view['plastic_selection']])
     assert actual["spike_sha256"]==reference["spike_sha256"]
     assert actual["side"]==reference["side"]
     assert actual["memory"]==reference["memory"]

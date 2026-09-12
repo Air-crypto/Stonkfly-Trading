@@ -353,6 +353,8 @@ class TraceLab:
                     "weight_from_pristine_l2":np.linalg.norm(pristine_delta,axis=1).tolist(),
                     "changed_from_pristine":np.count_nonzero(pristine_delta,axis=1).tolist(),
                     "plastic_weights": weights[:, plastic_selection].tolist(),
+                    "plastic_u": a["u"][:, plastic_selection].tolist(),
+                    "plastic_w": a["w"][:, plastic_selection].tolist(),
                     "plastic_initial": initial[plastic_selection].tolist(),
                     "kc_mean_hz": a["kc"].mean(axis=1).tolist(), "dan_mean_hz": a["dan"].mean(axis=1).tolist(),
                     "memory_u_l2": np.linalg.norm(a["u"], axis=1).tolist(),

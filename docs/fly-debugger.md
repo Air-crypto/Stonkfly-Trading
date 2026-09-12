@@ -1515,3 +1515,70 @@ to the audit command above. It checks each recording's report, bin grid, gate
 identities, and spike sums against the decoder. Estimated compute for this
 assay was $0.0138; the worker ledger reserved $1.2765 against its unchanged $25
 monthly cap afterward. These are internal estimates, not provider billing.
+
+### Inspect stored connection memory
+
+The connection panel now plots the recorded **u** and **w** variables separately
+from the synaptic weight. `u` is the stored learning state; `w` is the filtered
+efficacy deviation. The native rule writes the current weight as its pristine
+weight multiplied by `1 + w`. The displayed weight already includes that factor;
+it must not be multiplied by it again. These are model memory variables, not
+optimizer gradients or evidence of profitable learning.
+
+The [source manifest](../reports/fly-connection-memory-01.json) binds the included
+examples to their original compact views and full NPZ recordings. No simulation
+was rerun to create these examples, and their original reports, decisions,
+inputs and weights were preserved. New cloud/local captures include the memory
+columns automatically after deploying this code.
+
+[Inspect learning within one connection](http://127.0.0.1:8765/?run=memory-detail-fall&step=1&bin=49&edge=4110853).
+In this existing two-observation falling-price assay, edge 4110853
+(18540 → 10704) ended with u = −0.007740 and w = −0.024077. The 0.016337 gap is
+visible alongside the weight trajectory. The filter makes these states move at
+different rates; it is not an unexplained second optimizer.
+
+![Recorded learning state and filtered efficacy within one connection](assets/fly-connection-memory-training.png)
+
+[Compare retained memory with pristine](http://127.0.0.1:8765/?run=memory-detail-market05&step=1&bin=49&edge=8524867&compare=memory-detail-pristine05).
+This is the second test observation from study 05. Edge 8524867 (41787 → 11402)
+has u = 0.056850 and w = 0.060633 in the trained control, versus zero in pristine.
+Both are constant throughout frozen inference. Its weight is 8.166871 versus
+pristine 7.7. The full graph still propagates activity, and the paired neuron
+spikes differ even though the memory plots are flat.
+
+![Nonzero retained memory remains fixed during inference](assets/fly-connection-memory-frozen.png)
+
+Only the second observation of these two market examples was enriched from
+its full recording. Other observations explicitly report memory detail as
+unavailable. Older views do the same; the interface never substitutes zero or
+infers raw u/w from a rounded weight. The falling-price example contains both
+observations. Enrichment provenance is visible in the configuration details.
+
+To add memory detail to an old recording, write a **new** view from its original
+full trace directory:
+
+```sh
+uv run python -m paperlab.fly_trace_memory \
+  --view runs/original/view.json --recordings runs/original \
+  --out runs/enriched/view.json
+```
+
+The command verifies neuron and edge identities, endpoints, time bins, full
+network spike counts, displayed weights and memory norms before copying the
+per-connection arrays. It refuses to overwrite the original view. Use
+`--allow-partial` explicitly if only some original `step-*.npz` files are
+available; the manifest lists included and missing observations. No model data
+or compute is required beyond those saved files. Source NPZ files stay private
+and ignored by Git; the bounded derived views are included for inspection.
+
+The native regression test compares the new columns directly with captured
+arrays and checks that recording/export preserves neural outputs. Browser
+checks cover the moving u/w gap, nonzero frozen memory, pristine controls,
+partial/legacy availability and mobile layout:
+
+```sh
+node scripts/check-fly-memory-view.cjs
+```
+
+As with the paired-trace check, set `FLY_VIEW_URL` and `CHROMIUM_PATH` when needed.
+It uses the included recordings and blocks `/api/run` throughout.
