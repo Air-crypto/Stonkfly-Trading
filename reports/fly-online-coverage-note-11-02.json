@@ -1,0 +1,134 @@
+{
+  "status": "provisional_coverage_gap_explained",
+  "recorded_at": 1789249755.467545,
+  "coverage_report_sha256": "07f505966e260818b5c1bfe3ada24b5416af2d3bda5992352a28c4c9f460af2b",
+  "snapshot_download": {
+    "download_started_at": 1789249666.454242,
+    "download_finished_at": 1789249671.222888,
+    "bytes": 57708544,
+    "snapshot_sha256": "5aae0c1ce70b6bb33bd4509bc52ea9119a1930e109c48e6dff70013772c7b59f"
+  },
+  "findings": [
+    {
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "symbol": "baton",
+      "phase": "development",
+      "row": {
+        "index": 13,
+        "decision_ts": 1789249200,
+        "terminal": false,
+        "quote_ts": 1789249126.6382518,
+        "quote_available": false,
+        "raw_receipt_ts": 1789249126.6382518,
+        "raw_receipt_age_seconds": 73.36174821853638,
+        "raw_rejection": "insufficient_two_sided_activity",
+        "neural_observation_expected": false,
+        "status": "ineligible_quote"
+      },
+      "surrounding_raw_receipts": [
+        {
+          "slot": 29820815,
+          "observation": {
+            "key": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+            "network": "solana",
+            "address": "Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+            "token": "Hg5Ja55T5wESq4vyFoiVCMeHXtGyVA69X2UHq8hgpump",
+            "symbol": "baton",
+            "price": 0.012686009611632519,
+            "liquidity": 501488.8207,
+            "volume5": 16861.9939561169,
+            "buys5": 31,
+            "sells5": 50,
+            "created": 1788985935.0,
+            "observed": 1789248925.006696,
+            "major": false,
+            "source": "geckoterminal_indicative"
+          },
+          "reason": null
+        },
+        {
+          "slot": 29820817,
+          "observation": {
+            "key": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+            "network": "solana",
+            "address": "Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+            "token": "Hg5Ja55T5wESq4vyFoiVCMeHXtGyVA69X2UHq8hgpump",
+            "symbol": "baton",
+            "price": 0.01270386483887726,
+            "liquidity": 504469.8836,
+            "volume5": 1642.2182789563,
+            "buys5": 2,
+            "sells5": 13,
+            "created": 1788985935.0,
+            "observed": 1789249029.1256046,
+            "major": false,
+            "source": "geckoterminal_indicative"
+          },
+          "reason": "insufficient_two_sided_activity"
+        },
+        {
+          "slot": 29820818,
+          "observation": {
+            "key": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+            "network": "solana",
+            "address": "Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+            "token": "Hg5Ja55T5wESq4vyFoiVCMeHXtGyVA69X2UHq8hgpump",
+            "symbol": "baton",
+            "price": 0.01270386483887726,
+            "liquidity": 504469.8836,
+            "volume5": 1642.2182789563,
+            "buys5": 2,
+            "sells5": 13,
+            "created": 1788985935.0,
+            "observed": 1789249126.6382518,
+            "major": false,
+            "source": "geckoterminal_indicative"
+          },
+          "reason": "insufficient_two_sided_activity"
+        },
+        {
+          "slot": 29820820,
+          "observation": {
+            "key": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+            "network": "solana",
+            "address": "Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+            "token": "Hg5Ja55T5wESq4vyFoiVCMeHXtGyVA69X2UHq8hgpump",
+            "symbol": "baton",
+            "price": 0.011706723356507876,
+            "liquidity": 479464.1472,
+            "volume5": 18889.1611236118,
+            "buys5": 46,
+            "sells5": 29,
+            "created": 1788985935.0,
+            "observed": 1789249225.1282747,
+            "major": false,
+            "source": "geckoterminal_indicative"
+          },
+          "reason": null
+        },
+        {
+          "slot": 29820822,
+          "observation": {
+            "key": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+            "network": "solana",
+            "address": "Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+            "token": "Hg5Ja55T5wESq4vyFoiVCMeHXtGyVA69X2UHq8hgpump",
+            "symbol": "baton",
+            "price": 0.011706723356507876,
+            "liquidity": 479464.1472,
+            "volume5": 18889.1611236118,
+            "buys5": 46,
+            "sells5": 29,
+            "created": 1788985935.0,
+            "observed": 1789249329.0628657,
+            "major": false,
+            "source": "geckoterminal_indicative"
+          },
+          "reason": null
+        }
+      ]
+    }
+  ],
+  "eligible_receipt_after_decision_seconds": 25.12827467918396,
+  "interpretation": "At 21:40 UTC baton had a fresh receipt but only two reported five-minute buys, below the required three. Its next eligible receipt arrived after the decision and cannot retroactively fill that slot. This is a market-data eligibility rejection, not a stale-quote failure. Preserve the missing observation and original cohort. Nine future development decisions and all test decisions remain pending in this snapshot; no neural or financial outcome is computed."
+}

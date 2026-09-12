@@ -134,6 +134,20 @@ records seven passing tests for future/past separation, eligibility and gaps,
 missing cohort members, terminal handling, registration/source drift and
 preservation of earlier reports. Reproduce them with
 `uv run --extra dev python -m pytest -q tests/test_fly_online_coverage.py`.
+
+The [second snapshot](../reports/fly-online-coverage-11-02.json), assessed through
+21:46 UTC on September 12, contains 15 usable development observations for ALL
+and 14 for baton. Each still has nine pending development slots; all test slots
+remain pending. This is provisional coverage, not a completed or selected model.
+
+The [raw-receipt explanation](../reports/fly-online-coverage-note-11-02.json)
+preserves baton's skipped 21:40 UTC decision. The last receipt was 73.36 seconds
+old and had sufficient reported liquidity and volume, but only two buys in five
+minutes, below the required three. It was an activity rejection, not a stale
+receipt. The next eligible receipt arrived 25.13 seconds after the decision and
+cannot be used to fill that earlier slot. The original pool, filters, window,
+missing observation, and selection rule are unchanged. Both pools can still reach
+the 18-observation minimum, but neither phase's final coverage is established.
 The coverage check does not create a neural run, seal an experiment, audit news,
 calculate a return, or select a policy.
 
