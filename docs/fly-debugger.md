@@ -2971,3 +2971,77 @@ The script checks 20 saved recordings at 240 selected bins, including reward,
 aversive, neutral and zero/nonzero diagnostic current. It also rejects missing,
 overlong or inconsistent pulse timing and an altered time grid, checks mobile
 layout, and blocks model submissions.
+
+## Add the same recorded connection to paired views
+
+The most-active-cell display is selected independently in each recording. In the
+study 10 baton/current-10 pair, its two original subsets shared no plastic edge.
+The complete native recordings still contained all 7,835 plastic connections.
+The new offline selection exporter adds an explicitly requested edge and any
+missing endpoint to a **new copy** of a frozen study 09/10 view.
+
+![Shared connection and each brain's recorded source activity](assets/fly-market-study-10-connection.png)
+
+[Inspect edge 4110156 and source neuron 18540](http://127.0.0.1:8765/?run=market10-edge4110156-trained&step=1&bin=49&neuron=18540&edge=4110156&compare=market10-edge4110156-pristine)
+after serving the included examples. This is the existing study 10 baton test,
+not another experiment. The trained weight is 4.376049 versus pristine 22; trained
+`u`/`w` are approximately −0.801066/−0.801089. They stay frozen during inference.
+Source neuron 18540 fires 7/3/0 times in the three trained observations versus
+7/6/5 in pristine. These recorded differences do not isolate a causal effect of
+that outgoing edge on its source or prove a trading advantage.
+
+The exporter verifies the audited study, graph/build, pristine and imported
+memory, native endpoint identities, original displayed counts/voltages, all
+frozen weights/u/w, and boundary file hashes. Added data comes from the current
+run's full NPZ arrays. The reference view supplies the edge identity and neuron
+labels; its activity is never copied. Original reports, events, input images and
+recordings remain unchanged. Provenance in the extended view records both source
+view hashes, full-trace and boundary hashes, added IDs and exporter source hash.
+Its summary is [published here](../reports/fly-market-study-10-selection-01.json).
+
+For an authenticated reproduction after downloading/auditing study 10, first
+retrieve its existing full recordings. This helper reads the volume and does not
+submit a model call:
+
+```sh
+python - <<'PY'
+from pathlib import Path
+from paperlab.debugger_cloud import CloudJobs
+root = Path('runs/research-market-10')
+reader = CloudJobs(root)
+for trace in ('pool1-trained_stimulated', 'pool1-pristine_stimulated'):
+    reader.ensure_recordings(root / trace)
+PY
+python -m paperlab.fly_paper_selection \
+  --study runs/research-market-10 \
+  --trace pool1-trained_stimulated --reference pool1-pristine_stimulated \
+  --recordings runs/research-market-10/pool1-trained_stimulated \
+  --edge 4110156 \
+  --out runs/market10-selected/market10-edge4110156-trained/view.json
+python -m paperlab.fly_paper_selection \
+  --study runs/research-market-10 \
+  --trace pool1-pristine_stimulated --reference pool1-pristine_stimulated \
+  --recordings runs/research-market-10/pool1-pristine_stimulated \
+  --edge 4110156 \
+  --out runs/market10-selected/market10-edge4110156-pristine/view.json
+python -m paperlab.debugger serve --out runs/market10-selected
+```
+
+Repeat `--edge` for up to 32 distinct plastic edges present in the reference
+view. Existing outputs are refused. Included extended views need no Modal access
+to display; regenerating them requires the original private full recordings.
+
+Validation covered both actual server-served views, all six observations,
+source-spike highlights, paired weight/u/w charts, boundary state, first-count
+navigation, visible provenance and mobile layout, with no model submissions.
+Twenty-five selection/memory tests include mismatched endpoints, weights,
+voltages, counts, boundaries and duplicate requests. The browser check is:
+
+```sh
+node scripts/check-fly-selection-view.cjs
+```
+
+It defaults to the recorded copies under
+`runs/research-market-10/connection-selection` and the live local viewer on port
+8766. Use `FLY_SELECTION_RECORDINGS`, `FLY_SELECTION_PREFIX` and `FLY_VIEW_URL`
+when serving another location.

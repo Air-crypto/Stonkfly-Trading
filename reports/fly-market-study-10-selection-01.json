@@ -1,0 +1,61 @@
+{
+  "kind": "recorded_connection_selection_extension",
+  "views": {
+    "market10-edge4110156-trained": {
+      "view_sha256": "a8df9421b1c5989e49bd6aa7e2d931ff82a4ff5ae703e2c29ef46a9a9b04845b",
+      "schema": 1,
+      "study_report_sha256": "5faa479dd5f5cc98d46e7a9a1c8f856741b2b632c42229eba97acaebeb42e5da",
+      "source_view_sha256": "c61cb66ea25eb4d14e5cdcfa629bacf07946b2277bd4c752ee8b3b4b2dbdd3ce",
+      "reference_view_sha256": "f961038a65e23f4fced4a6c64c38f0797bdfcecef4f1c782e34047bc646a2f17",
+      "source_sha256": "358fd002e8d5cbde5cacf9b642cd69cce17dd8d9378069462fe46c3954673a16",
+      "requested_edges": [
+        "4110156"
+      ],
+      "added_edges": [
+        "4110156"
+      ],
+      "added_neurons": [
+        "18540"
+      ],
+      "trace_sha256": {
+        "step-01.npz": "ad7b49a48936b234225252104677b1c008705aad238ae07abe4b65aa73de4f40",
+        "step-02.npz": "d1a169f2cd597e1fd5b7c571ab0c47a141b934272d41a6ce15148bc6f5369787",
+        "step-03.npz": "4baa33d3832b905fd2a24b9128ab572301732686e8f68dec9b513e5fdb3c6702"
+      },
+      "boundary_sha256": {
+        "boundary-01.npz": "3a6cc9c95df33496bac79d71f5e0cd450f47df2aa66a9d50dbbc9ba7c796049e",
+        "boundary-02.npz": "24d9803657778227aee62fbdaee480552f3149cbfc527678f56452d1d8692bb7",
+        "boundary-03.npz": "51c2eb1b2bfc292673e504be8ea3721b14c92cfa49b53dbd168c79d4e45ae44b"
+      },
+      "observations": 3,
+      "interpretation": "Selected counts, voltages and weights/u/w come from this run's full recordings. Reference view supplies endpoint labels only. Original events and simulation are unchanged; no inference or new trading result."
+    },
+    "market10-edge4110156-pristine": {
+      "view_sha256": "85d3410ca4cda35a135d3606c58ea9b8d6a39f27079d096bebeaecc21b622a16",
+      "schema": 1,
+      "study_report_sha256": "5faa479dd5f5cc98d46e7a9a1c8f856741b2b632c42229eba97acaebeb42e5da",
+      "source_view_sha256": "f961038a65e23f4fced4a6c64c38f0797bdfcecef4f1c782e34047bc646a2f17",
+      "reference_view_sha256": "f961038a65e23f4fced4a6c64c38f0797bdfcecef4f1c782e34047bc646a2f17",
+      "source_sha256": "358fd002e8d5cbde5cacf9b642cd69cce17dd8d9378069462fe46c3954673a16",
+      "requested_edges": [
+        "4110156"
+      ],
+      "added_edges": [],
+      "added_neurons": [],
+      "trace_sha256": {
+        "step-01.npz": "638cd848b177beca82dac8b752d437974a11f51d304d9e44670b0adc4b7c6e76",
+        "step-02.npz": "aa86c10438c1cc1fdc2c49680adf7ec47e0a32c4ac3a047233df4b15169faed2",
+        "step-03.npz": "5f1c0e77eb24d64ef587ecc3c955511dc1c849468b7bea70a9dbec97ba08e493"
+      },
+      "boundary_sha256": {
+        "boundary-01.npz": "141a5a129c0cf4c7733f1fb61d5962bdc941c021cfddda2316b6570c65e9dfc3",
+        "boundary-02.npz": "dbb3e16a8a6b917c5f4c9ae0dca26609463489be019aecdf13db62a00473c0ec",
+        "boundary-03.npz": "b2c5321c6a68c92247a2d6080c1df27218920a4d8b3ac6b230d06b24cca95145"
+      },
+      "observations": 3,
+      "interpretation": "Selected counts, voltages and weights/u/w come from this run's full recordings. Reference view supplies endpoint labels only. Original events and simulation are unchanged; no inference or new trading result."
+    }
+  },
+  "figure_sha256": "fd3b5cfb8f389b60e252d68c8b055de38f55e045ddfbf748222b17d062c0a05f",
+  "neural_observations": 0
+}

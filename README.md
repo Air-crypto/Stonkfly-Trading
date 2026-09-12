@@ -67,7 +67,11 @@ timestamp matches.
 [Stored connection memory](docs/fly-debugger.md#inspect-stored-connection-memory)
 adds the recorded `u` and `w` states behind each weight.
 
-![Trained versus pristine memory: voltage, spikes, weight, and stored u/w](docs/assets/fly-connection-memory-frozen.png)
+An [explicit connection selection](docs/fly-debugger.md#add-the-same-recorded-connection-to-paired-views)
+can add a missing endpoint from that run's full recording, so different displayed
+subsets do not hide the connection comparison. It runs no new neural simulation.
+
+![Same recorded KC-to-MBON connection in trained and pristine brains](docs/assets/fly-market-study-10-connection.png)
 
 The diagnostics have identified concrete limitations:
 
