@@ -134,3 +134,37 @@ def test_fixed_return_magnitude_reaches_the_full_network_with_weights_frozen(tmp
     assert large["events"][0]["input_sha256"]!=small["events"][0]["input_sha256"]
     assert large["events"][0]["spike_sha256"]!=small["events"][0]["spike_sha256"]
     assert all(r["events"][0]["diagnostics"]["weight_delta_l2"]==0 for r in (original,original_small,large,small))
+
+
+@pytest.mark.parametrize("change", [{"probe_restore":"all"}, {"probe_restore":"bad","probe_steps":1},
+    {"probe_restore":"selected","probe_steps":1}, {"probe_edges":["12"]},
+    {"probe_restore":"selected","probe_steps":1,"probe_edges":["12","12"]},
+    {"probe_restore":"selected","probe_steps":1,"probe_edges":[12]}])
+def test_restoration_configuration_rejects_ambiguous_interventions(change):
+    with pytest.raises(ValueError): Assay(**change)
+
+
+@pytest.mark.skipif(not os.environ.get("FLY_TRACE_DATA"), reason="requires prepared full retained graph")
+def test_restoring_memory_recovers_pristine_response_and_targets_only_selected_edges(tmp_path):
+    lab=TraceLab(Path(os.environ["FLY_TRACE_DATA"]))
+    cfg=Assay(steps=1,probe_steps=1,reinforcement="reward",probe_preset="fall")
+    trained=lab.run(cfg,tmp_path/"trained")
+    restored=lab.run(replace(cfg,probe_restore="all"),tmp_path/"restored")
+    pristine=lab.run(Assay(steps=1,preset="fall",learning=False),tmp_path/"pristine")
+    assert restored["events"][0]["spike_sha256"]==trained["events"][0]["spike_sha256"]
+    assert restored["events"][-1]["spike_sha256"]==pristine["events"][0]["spike_sha256"]
+    assert restored["probe_boundary"]["weight_delta_from_pristine_l2"]==0
+    assert restored["probe_boundary"]["restoration"]["trained_weight_delta_from_pristine_l2"]>0
+    for mode in ("MBON07","MBON11","selected"):
+        ids=(str(lab.brain.circuit["edges"][0]),) if mode=="selected" else ()
+        selected_cfg=replace(cfg,probe_restore=mode,probe_edges=ids)
+        subset=lab.restoration_indices(selected_cfg)
+        lab.run(selected_cfg,tmp_path/mode)
+        untouched=np.ones(len(lab.brain.circuit["edges"]),dtype=bool);untouched[subset]=False
+        with np.load(tmp_path/mode/"step-01.npz") as before, np.load(tmp_path/mode/"step-02.npz") as after:
+            for key,initial in (("weights",lab.brain.baseline_plastic),("u",lab.brain.initial["memory_u"]),
+                                ("w",lab.brain.initial["memory_w"])):
+                assert np.array_equal(before[key][-1][untouched],after[key][0][untouched])
+                assert np.array_equal(after[key][0][subset],initial[subset])
+    with pytest.raises(ValueError,match="retained plastic"):
+        lab.restoration_indices(replace(cfg,probe_restore="selected",probe_edges=("999999999",)))

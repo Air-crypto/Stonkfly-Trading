@@ -733,3 +733,66 @@ the large run, and select observation 4. The input panel identifies the movement
 multiplier and fixed-scale bounds; the comparison table shows different images.
 
 ![Frozen-network response to small and large moves](assets/fly-fixed-return-comparison.png)
+
+## Restore learned connections before a probe
+
+Under **Test retained learning**, set 1–4 frozen probe observations and choose
+**Restore memory before probe**. Keep all memory, restore all 7,835 plastic
+connections, restore KC inputs to MBON07 or MBON11, or supply up to 64 exact
+plastic edge IDs. The connection inspector's **Add this edge to probe restoration**
+button fills the selected-edge control. Arbitrary nonplastic edges are rejected.
+
+Every assay begins pristine. After its training observations, the probe boundary
+resets neural activity, sensory state, and rate traces. Restoration then replaces
+only the chosen connections' weight and efficacy memory (`u`, `w`) with pristine
+values. Other learned memory is retained; the full graph remains present.
+All probe observations freeze weights and memory and remove reinforcement, news,
+and extra current. Purple connections indicate restoration at the boundary,
+not spikes or updates happening during playback. The provenance records exact
+restored IDs and weight/memory hashes before and after intervention.
+
+Compare an unmodified retained-memory run against the same training and probe
+with restoration enabled. A changed response isolates an effect of that memory
+intervention within this model. A return to the pristine response does not prove
+that the pristine response is a good trade.
+
+Reproduce the five-arm falling-cue experiment locally with the prepared graph:
+
+```sh
+uv run python -m paperlab.fly_restore_study runs/restore-new \
+  --fly-data runs/fly-data --out runs/restore-new-summary.json
+```
+
+Omit `--fly-data` to audit an existing experiment without rerunning it. This
+command registers and reports every arm: frozen training, retained neutral
+training, and restoration of all memory, MBON07 inputs, or MBON11 inputs. Each arm
+uses four training observations followed by four identical falling-price probes.
+
+### Restoration results
+
+The [registered protocol](../reports/fly-restoration-protocol-01.json) and
+[complete five-arm report](../reports/fly-restoration-study-01.json) retain every
+result. These controls ran on the same local macOS native build; do not pair their
+spike counts with Linux recordings as though the native builds were identical.
+A separate two-observation deployed Linux check also recovered the corresponding
+previous pristine control exactly after restoring all memory.
+
+| Memory entering the frozen probe | Restored connections | Probe actions | Weight L2 from pristine |
+| --- | ---: | --- | ---: |
+| Frozen training | 0 | BUY, BUY, HOLD, HOLD | 0 |
+| Neutral training retained | 0 | BUY, BUY, BUY, HOLD | 12.005882 |
+| Restore all | 7,835 | BUY, BUY, HOLD, HOLD | 0 |
+| Restore MBON07 inputs | 3,651 | BUY, BUY, BUY, HOLD | 12.005869 |
+| Restore MBON11 inputs | 4,184 | BUY, BUY, HOLD, HOLD | 0.017781 |
+
+Restoring MBON11 inputs recovered all four pristine whole-observation spike-count
+hashes even though a small weight difference remained elsewhere. Restoring MBON07
+inputs left the trained probe actions unchanged. The intervention therefore
+localizes this specific training-induced output difference to MBON11 input memory.
+It does not establish that MBON11 learning is always harmful or that HOLD is correct.
+The hypothesis remains limited to this cue, learning rule, and frozen probe.
+
+Open `restore01-MBON11`, compare `restore01-retained`, and select **probe 3**.
+Purple edges mark the restored subset; the comparison shows HOLD versus BUY with
+identical inputs and no learning during the probe. All five recordings ship in
+`examples/fly-debugger`; full NPZ traces remain local generated artifacts.

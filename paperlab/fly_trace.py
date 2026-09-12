@@ -27,6 +27,8 @@ class Assay:
     probe_preset: str = "rise"
     amplitude: float = 1
     probe_amplitude: float = 1
+    probe_restore: str = "none"
+    probe_edges: tuple[str, ...] = ()
     learning: bool = True
     reinforcement_only: bool = False
     eta: float = .001
@@ -45,6 +47,17 @@ class Assay:
             raise ValueError("Use 0–4 probe observations and at most eight observations in total")
         if self.probe_preset not in ("rise", "fall", "flat", "reversal", "shock"):
             raise ValueError("Unknown probe price preset")
+        if self.probe_restore not in ("none", "all", "MBON07", "MBON11", "selected"):
+            raise ValueError("Unknown probe memory restoration")
+        if not isinstance(self.probe_edges, (tuple, list)) or len(self.probe_edges) > 64 or any(
+                not isinstance(x, str) or not x.isdecimal() for x in self.probe_edges):
+            raise ValueError("Use at most 64 decimal plastic edge IDs")
+        if len(set(self.probe_edges)) != len(self.probe_edges):
+            raise ValueError("Duplicate restoration edge IDs")
+        if (self.probe_restore == "selected") != bool(self.probe_edges):
+            raise ValueError("Selected restoration requires edge IDs; other modes require an empty list")
+        if self.probe_restore != "none" and not self.probe_steps:
+            raise ValueError("Memory restoration requires a frozen probe")
         if type(self.learning) is not bool:
             raise ValueError("learning must be a boolean")
         if type(self.reinforcement_only) is not bool:
@@ -156,11 +169,25 @@ class TraceLab:
         self.types = self.annotation.type.fillna("").to_numpy()
         self.id_index = {str(v): i for i, v in enumerate(self.brain.ids)}
 
+    def restoration_indices(self, config):
+        edges = self.brain.circuit["edges"]
+        if config.probe_restore == "none":
+            return np.array([], dtype=np.int64)
+        if config.probe_restore == "all":
+            return np.arange(len(edges))
+        if config.probe_restore == "selected":
+            lookup = {str(e): i for i, e in enumerate(edges)}
+            if any(e not in lookup for e in config.probe_edges):
+                raise ValueError("Restoration IDs must identify retained plastic connections")
+            return np.array([lookup[e] for e in config.probe_edges], dtype=np.int64)
+        return np.flatnonzero(self.types[self.brain.post[edges]] == config.probe_restore)
+
     def run(self, config, output):
         """Each run starts at pristine native state, independent of previous runs."""
         output = Path(output)
         output.mkdir(parents=True, exist_ok=False)
         b = self.brain
+        restore = self.restoration_indices(config)
         extra = []
         for identity in config.neurons:
             if identity not in self.id_index:
@@ -197,7 +224,23 @@ class TraceLab:
             if not all(np.array_equal(getattr(b,k),v) for k,v in b.initial.items()
                        if k not in ("memory_u","memory_w")) or b.sim_ms != 0:
                 raise AssertionError("Probe must reset neural dynamics and sensory/rate traces")
+            trained_weight_hash = hashlib.sha256(weights.tobytes()).hexdigest()
+            trained_memory_hash = hashlib.sha256(memory[0].tobytes()+memory[1].tobytes()).hexdigest()
+            trained_delta = float(np.linalg.norm(weights-b.baseline_plastic))
+            weights[restore] = b.baseline_plastic[restore]
+            memory[0][restore] = b.initial["memory_u"][restore]
+            memory[1][restore] = b.initial["memory_w"][restore]
+            b.weight[b.circuit["edges"][restore]] = weights[restore]
+            b.memory_u[restore], b.memory_w[restore] = memory[0][restore], memory[1][restore]
+            if not np.array_equal(weights, b.weight[b.circuit["edges"]]) or not all(
+                    np.array_equal(a,v) for a,v in zip(memory,(b.memory_u,b.memory_w))):
+                raise AssertionError("Restoration changed unselected synaptic memory")
             boundary={"after_observation":config.steps,"dynamics_reset":True,
+                      "restoration":{"mode":config.probe_restore,"edge_count":len(restore),
+                          "edge_ids":[str(e) for e in b.circuit["edges"][restore]],
+                          "trained_weight_sha256":trained_weight_hash,
+                          "trained_memory_sha256":trained_memory_hash,
+                          "trained_weight_delta_from_pristine_l2":trained_delta},
                       "weight_sha256":hashlib.sha256(weights.tobytes()).hexdigest(),
                       "memory_sha256":hashlib.sha256(memory[0].tobytes()+memory[1].tobytes()).hexdigest(),
                       "weight_delta_from_pristine_l2":float(np.linalg.norm(weights-b.baseline_plastic)),
@@ -206,14 +249,16 @@ class TraceLab:
             self.fly.controller.s=replace(self.fly.controller.s,learning=False)
             probe=replace(config,preset=config.probe_preset,amplitude=config.probe_amplitude,
                           steps=config.probe_steps,probe_steps=0,
+                          probe_restore="none",probe_edges=(),
                           learning=False,reinforcement="none",neurons=(),current=0,news="none")
             for i,rgb in enumerate(input_frames(probe)):
                 event=self.capture(rgb,"none",output,len(events)+1)
                 event.update(phase="probe",phase_step=i+1,input_preset=probe.preset,input_news="none",
                              input_amplitude=probe.amplitude)
                 events.append(event)
-                if not np.array_equal(weights,b.weight[b.circuit["edges"]]):
-                    raise AssertionError("Frozen probe changed trained weights")
+                if not np.array_equal(weights,b.weight[b.circuit["edges"]]) or not all(
+                        np.array_equal(a,v) for a,v in zip(memory,(b.memory_u,b.memory_w))):
+                    raise AssertionError("Frozen probe changed synaptic memory")
                 print(f"assay probe={i+1}/{config.probe_steps} side={event['side']} "
                       f"spikes={event['total_spikes']} changed={event['diagnostics']['changed_edges']}",flush=True)
         report = {"schema": 1, "source": "synthetic_full_network_assay",
@@ -224,7 +269,11 @@ class TraceLab:
                   "interpretation": "Synthetic mechanics assay, no trading return. No optimizer loss or backprop gradient. "
                   "Source spike highlights are not a measurement of transmission or causality."}
         atomic_json(output / "report.json", report)
-        view = self.export_view(output, report, extra)
+        display_requested = list(extra)
+        if config.probe_restore == "selected":
+            display_requested += b.circuit["pre"][restore].tolist()
+            display_requested += b.post[b.circuit["edges"][restore]].tolist()
+        view = self.export_view(output, report, display_requested)
         atomic_json(output / "view.json", view)
         return report
 

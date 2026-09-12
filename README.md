@@ -76,6 +76,13 @@ is still unproven and the paper trader continues using the original adapter.
 
 ![Retained reward versus neutral training after a neural reset](docs/assets/fly-retention-comparison.png)
 
+The [connection-restoration controls](docs/fly-debugger.md#restore-learned-connections-before-a-probe)
+can undo selected learned memory before a frozen probe. In the included falling-cue
+experiment, restoring MBON11 inputs recovered pristine outputs; restoring MBON07
+inputs did not. This localizes one synthetic effect, without proving better trading.
+
+![Purple edges were restored to pristine memory before the frozen probe](docs/assets/fly-memory-restoration.png)
+
 ## Run
 
 Python 3.12 and a C++ compiler are required. Run from this source checkout so the preserved upstream files are available.
