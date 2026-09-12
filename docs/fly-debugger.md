@@ -2020,3 +2020,17 @@ input IDs. Collector containers are single-use, with a 360-second timeout and
 matching worst-case reservation for the unchanged 240-second collection window;
 the $15 collector cap and $25 worker cap remain unchanged. A hard timeout still
 requires verified recovery; locks never expire merely because they are old.
+
+Check the combined market timeline, observed outputs, selected-neuron boundary
+values and matched control traces from the downloaded recordings with:
+
+```sh
+FLY_VIEW_URL=http://127.0.0.1:8765 FLY_INPUT_RECORDINGS=runs/market08 \
+  node scripts/check-fly-market-input-view.cjs
+```
+
+The check supplies the saved JSON recordings to the real browser UI and blocks
+all model submissions. Before market08 results were available, it passed against
+a full-network synthetic integration fixture containing unavailable quote slots:
+four recordings, sixteen timeline slots and eight observed reset boundaries.
+Synthetic regression outcomes are not market evidence.
