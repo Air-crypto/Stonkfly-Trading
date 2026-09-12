@@ -1,0 +1,121 @@
+{
+  "schema": 1,
+  "kind": "post_hoc_learning_trace_reset",
+  "registered_at": 1789241374.323126,
+  "status": "registered_not_submitted",
+  "purpose": "Test whether cross-image KC/DAN rate history participates in the extra BUY in the original pulse assay, while preserving other neural state and immediate stimulation. Previously inspected historical inputs; not a held-out trading score.",
+  "hypothesis": "Clearing only the active centered-rule rate traces before images 2 and 3 can change online memory updates and the final decoder gate. The frozen-memory reset control must preserve every original spike-count bin because these traces do not feed the neural kernel directly.",
+  "reference_study_sha256": "e2501442a15dfff83b76bd127c21d422f808f1e10428809a2f0ad471ab7ab372",
+  "reference_market_sha256": "e56582789be4ba86003bd253d0115236b44ccdfeec9255e47f13e72148fd2fc3",
+  "reference_pulse_payload_sha256": "1b925fc3b64390fdc85f9eca1ca42d3fd7f04a962f4601617876712e83b5434c",
+  "reference_run_id": "assay-pulse-554b7edebc024ff6b83cdb296225cc82",
+  "reference_artifact_sha256": {
+    "summary.json": "e2501442a15dfff83b76bd127c21d422f808f1e10428809a2f0ad471ab7ab372",
+    "trained_online_recorded/view.json": "cacf1bb15e24573603fbee7a301f2600579651a27c1d98965cf4fcddb1c6c47e",
+    "trained_online_recorded/initial-memory.npz": "b0c5ae3f4170fbaba75ffb73f5e9983d454d34a88d153255b7ef4315fa3e7293",
+    "trained_online_recorded/step-01.npz": "7a0ca6001e718f14ce49ab3897d9569a4d315e0a0369fb7145662797e7b44dbc",
+    "trained_online_recorded/step-02.npz": "a842cb108a464c43d039a04287f9e3cd7c585fb5c1a52aefeeaa33635962b093",
+    "trained_online_recorded/step-03.npz": "54248acabb5d31f2470ec440f68363cf87f62f96091cd76c88c024d9ddc90887",
+    "trained_online_none/view.json": "d3accde32d9399f797b3af4db86c0f2d550c639ea5267c4cec5d2a286788c216",
+    "trained_online_none/initial-memory.npz": "b0c5ae3f4170fbaba75ffb73f5e9983d454d34a88d153255b7ef4315fa3e7293",
+    "trained_online_none/step-01.npz": "7a0ca6001e718f14ce49ab3897d9569a4d315e0a0369fb7145662797e7b44dbc",
+    "trained_online_none/step-02.npz": "1207a806457679ee4be6bf6b3dfaea8c450196181a887fbfa9caf493f292d11c",
+    "trained_online_none/step-03.npz": "378ac3219d59383359c71c0b4dfeb651a22bd5e2ac4071ac80589b26bd388da3",
+    "trained_frozen_recorded/view.json": "396c1bbb6ae947a3047f3f8d6973469e2fba376bf12a885bc8bee16bc0970d20",
+    "trained_frozen_recorded/initial-memory.npz": "b0c5ae3f4170fbaba75ffb73f5e9983d454d34a88d153255b7ef4315fa3e7293",
+    "trained_frozen_recorded/step-01.npz": "0f56b2abd7118c14c661086a394f0ecabc26dea7e1d6d3ecf909a3fa669c0c42",
+    "trained_frozen_recorded/step-02.npz": "d66157252d4577e1dbce2a27bd17b294f2efcba9a5a8e07726e68e228f8e9fc7",
+    "trained_frozen_recorded/step-03.npz": "81797b152d463c3f820e88e0dcca069f703ff548e485ecbc1061cc09b48706e9"
+  },
+  "diagnostic_audit_sha256": "a45ca951fb2ddb028321b159fcc2c88649f360bccdbd18365ed933e2d6cd4be2",
+  "arms": {
+    "trained_online_recorded_carry": {
+      "reference_arm": "trained_online_recorded",
+      "learning": true,
+      "pulses": "recorded",
+      "boundary": "carry"
+    },
+    "trained_online_none_carry": {
+      "reference_arm": "trained_online_none",
+      "learning": true,
+      "pulses": "none",
+      "boundary": "carry"
+    },
+    "trained_frozen_recorded_carry": {
+      "reference_arm": "trained_frozen_recorded",
+      "learning": false,
+      "pulses": "recorded",
+      "boundary": "carry"
+    },
+    "trained_online_recorded_reset_rates": {
+      "reference_arm": "trained_online_recorded",
+      "learning": true,
+      "pulses": "recorded",
+      "boundary": "reset_rates"
+    },
+    "trained_online_none_reset_rates": {
+      "reference_arm": "trained_online_none",
+      "learning": true,
+      "pulses": "none",
+      "boundary": "reset_rates"
+    },
+    "trained_frozen_recorded_reset_rates": {
+      "reference_arm": "trained_frozen_recorded",
+      "learning": false,
+      "pulses": "recorded",
+      "boundary": "reset_rates"
+    }
+  },
+  "training": "Use the same recorded initial trained weights/u/w from pulse study 01, verifying the original memory signature. Every arm starts with fresh native dynamics and zero KC/DAN rate traces.",
+  "inputs": "Exactly the same three sealed market images as pulse study 01. Verify image hashes and retain the original none/aversive/reward pulse sequence in recorded-pulse arms regardless of counterfactual neural actions.",
+  "intervention": {
+    "fields": [
+      "rate_kc",
+      "rate_dan"
+    ],
+    "replacement": 0,
+    "before_observations": [
+      2,
+      3
+    ],
+    "preserved": [
+      "all synaptic weights",
+      "memory_u",
+      "memory_w",
+      "all other dynamic arrays",
+      "neural clock",
+      "pulse schedule",
+      "input images",
+      "fixed decoder",
+      "eta=0.001"
+    ]
+  },
+  "execution_order": "All three carry controls and their full-bin reference checks complete before any reset condition. Publish every condition in the declared order.",
+  "validation": [
+    "Verify the full 166700-neuron, 25582938-edge graph, unchanged native source/binary identity and 7835 plastic edges.",
+    "Original carry controls reproduce all 50 bins of all 166700 neuron counts for each of their three images, plus recorded weights/u/w and rate traces.",
+    "At each boundary save all before/after dynamic arrays and memory, verify only declared rate arrays change, and retain original clock and all weights.",
+    "The first image of every reset arm reproduces its carry control before intervention.",
+    "The frozen reset arm reproduces all three full spike-count recordings and preserves weights/u/w despite rate-trace changes.",
+    "Independently audit saved whole-network counts, fixed decoder outputs, memory updates and all boundary arrays before interpreting results."
+  ],
+  "outcomes": [
+    "Full 10 ms spike-count agreement/differences",
+    "Every decoded action and gate/direction count",
+    "All plastic weight/u/w updates",
+    "Rate-trace boundary changes",
+    "Earliest differing bin when present"
+  ],
+  "interpretation": "Mechanism experiment only. A removed BUY is not automatically a correct trade; no account, fill, return or policy selection is recomputed. Trace removal changes future activity through online memory updates, so the offline algebraic split does not predict its causal effect.",
+  "limits": {
+    "cloud_calls": 1,
+    "neural_observations": 18,
+    "inner_timeout_seconds": 420,
+    "worker_timeout_seconds": 600,
+    "worker_monthly_cap_usd": 25,
+    "collector_monthly_cap_usd": 15,
+    "live_orders": false,
+    "automatic_promotion": false
+  },
+  "recovery": "Write and retain one submission receipt before calling Modal; after an observation timeout reattach that exact call. Do not clear an owning lease or create another run unless authoritative state resolves the original call."
+}

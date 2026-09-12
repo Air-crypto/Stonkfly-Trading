@@ -159,6 +159,14 @@ diagnostic-current interval, separately from neuron firing and weight changes.
 
 ![Recorded reinforcement pulse and selected 10 ms bin](docs/assets/fly-input-timing-01.png)
 
+The [learning-drive inspector](docs/fly-debugger.md#inspect-which-rate-history-drives-an-update)
+separates traces carried from earlier images from traces accumulated during the
+current image. An offline audit reproduced every plastic weight in 450 recorded
+bins. Positive drive can coincide with a falling weight because stored `u/w`
+also affects the update; these are model dynamics, not backprop gradients.
+
+![Recorded learning drive split by earlier and current image traces](docs/assets/fly-credit-origin-01.png)
+
 The [decoder count view](docs/fly-debugger.md#inspect-accumulated-decoder-counts)
 shows how output spikes accumulate. In the examined BUY/SELL reversal, one net
 spike equals the fixed 2 Hz threshold; a count-edit audit separates direction

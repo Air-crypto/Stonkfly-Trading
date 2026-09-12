@@ -3089,3 +3089,133 @@ It defaults to the recorded copies under
 `runs/research-market-10/connection-selection` and the live local viewer on port
 8766. Use `FLY_SELECTION_RECORDINGS`, `FLY_SELECTION_PREFIX` and `FLY_VIEW_URL`
 when serving another location.
+
+## Inspect which rate history drives an update
+
+![Learning drive from recorded earlier and current image traces](assets/fly-credit-origin-01.png)
+
+Choose `credit01-trained_online_recorded`, observation 3, connection **11483030**
+(`63508 → 11402`), and bin **390–400 ms**. The new **Learning drive by trace
+origin** panel shows the amber contribution from traces present before this
+image, the teal contribution accumulated during it, and their white total.
+The time slider and connection selector update both the chart and exact values.
+The panel shows the current run; comparison curves elsewhere retain their usual
+blue/pink meaning.
+
+[Open that recorded connection](http://127.0.0.1:8765/?run=credit01-trained_online_recorded&step=2&bin=39&neuron=63508&edge=11483030).
+With the included recordings served, no graph download, Modal authentication or
+model compute is needed:
+
+```sh
+uv run python -m paperlab.debugger serve --out examples/fly-debugger
+```
+
+At this particular bin, the two components are **+2.835116** and **+3.558005**,
+giving total drive **+6.393120 u/s**, yet the recorded weight changes by
+**−0.004844**. Drive enters the stored `u` state; the filtered `w` state and its
+existing history determine effective weight. A positive instantaneous drive is
+therefore not the same as an immediate increase in weight. These quantities
+are not loss gradients or dollar rewards.
+
+The [complete offline audit](../reports/fly-credit-origin-audit-01.json) uses
+three original conditions from pulse study 01: trained/online/recorded pulses,
+trained/online/no pulses, and trained/frozen/recorded pulses. It verifies all
+**9 observations × 50 bins × 7,835 plastic connections**, including connections
+outside the displayed subset. Prepared graph arrays and annotations are checked
+against upstream locks; all whole-network counts match the original events.
+Starting memory matches each original report, and reconstructed state carries
+between consecutive observations. All recorded float32 weights reproduce
+exactly; the largest `u/w` difference is below **7 × 10⁻¹⁷**. KC and DAN trace
+values reproduce exactly. No new neural observations or cloud jobs ran.
+
+### What the decomposition found
+
+The quantities below integrate absolute drive across all plastic edges and all
+50 bins in the final image. They are aggregate model units, not percentages or
+account returns. Absolute component magnitudes need not add to the total because
+opposing components cancel before the total's absolute value is taken.
+
+| Original condition, final image | Earlier-image component | Current-image component | Total absolute drive | Action / gate spikes |
+|---|---:|---:|---:|---|
+| Online, recorded reward pulse | 390.8899 | 273.8186 | 659.7203 | BUY / 1 |
+| Online, no injected pulse | 260.8450 | 148.2448 | 409.0898 | HOLD / 0 |
+| Frozen, recorded reward pulse | 0 | 0 | 0 | HOLD / 0 |
+
+The recorded-pulse condition has opposing components in 1,143 of 391,750
+edge/bin pairs in that image. Its final 300 ms, after the injected pulse ends,
+accounts for **425.0413 / 659.7203** of total absolute drive, about 64.4%.
+That interval can still contain neuronal firing and rate history; pulse-off
+does not imply learning-off. Even the no-injected-pulse condition has substantial
+drive, because the rule uses actual network DAN activity. The frozen condition
+still updates rate traces but applies no learning drive or memory change.
+
+This is an algebraic explanation of observed updates. It does **not** identify
+which image caused a spike, attribute P&L to a particular action, or predict the
+response after removing a trace. Earlier trace contributions are present in both
+online conditions; the table does not establish them as the cause of the extra
+BUY. None of the audited bins has `u` or `w` at an efficacy bound, so saturation
+does not explain these particular updates.
+
+The actual paper loop executes a previous decision and marks inventory before
+computing reward. The adapter sends that reward's sign during the first 200 ms
+of the next 500 ms image. Neural time advances only through simulated images,
+not five minutes of decay between scheduled quotes. The one-second trace
+constant therefore retains about 60.7% of a trace's boundary contribution after
+one 500 ms image. This motivates a controlled test of learning-trace boundaries;
+it does not establish that clearing them will improve trading.
+
+### Calculation and reproduction
+
+For each 10 ms bin, the active rule uses midpoint KC and DAN rate traces. Split
+each midpoint trace into its decayed value from this image's boundary and the
+remainder accumulated since that boundary. Substituting each part into
+`eta * (KC_rate * mapped_DAN_trace - mapped_DAN_rate * KC_trace)` gives the two
+components. Their sum reproduces the complete drive before filtering/clipping.
+KC/DAN rates come from the full saved spike-count arrays; the contact-derived
+mapping comes from the checksum-verified graph. Default DAN baseline is zero
+for this original assay. The audit independently advances the existing pure
+rate rule and checks every saved state rather than fitting boundary traces to
+the result.
+
+The original recorder did not pin a separate rule-source hash. This report pins
+the local rule used for reconstruction and records its successful agreement with
+all saved arrays; it does not invent a historical source receipt. It also pins
+the original reports, initial memories, full recordings, and exported views.
+
+Regeneration requires the private original pulse-study directory containing
+`summary.json` and each named arm's `view.json`, `initial-memory.npz`, and
+`step-01.npz` through `step-03.npz`, plus the prepared graph:
+
+```sh
+uv run python -m paperlab.fly_credit_audit \
+  --recordings runs/market-pulse-01 \
+  --reference reports/fly-market-study-04.json \
+  --fly-data data/fly --out runs/credit-new
+uv run python -m paperlab.debugger serve --out runs/credit-new
+```
+
+The command refuses existing outputs and preserves original recordings. Its
+generated folder names omit the public `credit01-` prefix. The included viewer
+also works with missing decomposition data: it explicitly displays
+**unavailable** instead of inferring a drive from weights. Browser validation
+checked all nine observations, 45 selected bins, eight malformed/missing-data
+cases, visible provenance and mobile layout, with zero model submissions:
+
+```sh
+node scripts/check-fly-credit-view.cjs
+```
+
+The browser check defaults to port 8766 and public recordings under
+`examples/fly-debugger`; set `FLY_VIEW_URL` to use another local port. Set
+`FLY_CREDIT_SCREENSHOT` to save the illustrated connection panel.
+
+The [next six-condition protocol](../reports/fly-credit-reset-protocol-01.json)
+is registered but **not submitted**. It preserves these three carry controls
+and adds a matching condition that clears only `rate_kc` and `rate_dan` before
+images 2 and 3. Weights, stored `u/w`, other dynamic arrays, clock, images,
+reinforcement and decoder remain unchanged at the intervention boundary. All
+three original controls must reproduce before any intervention runs. The frozen
+reset condition must also preserve full spike counts; it tests whether the
+intervention affects anything beyond the learning rule. All 18 observations
+must be published, including a null or unfavorable result. No market policy
+has been changed or selected by this registration.
