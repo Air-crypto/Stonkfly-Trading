@@ -117,7 +117,12 @@ recovered a gate spike and extra BUY, without an advantage from training. An
 earlier collector outage left one training observation per pool and **zero P&L
 reinforcement**, so this does not evaluate learning from trading rewards.
 
-![All twelve audited activity reset conditions](docs/assets/fly-market-activity-02.png)
+The [activity map](docs/fly-debugger.md#inspect-the-quiet-learned-pathway) explains
+why the ninth test needs further diagnosis: just 3–5 plastic edges had spiking
+sources per observation, and all six recipients stayed silent in every condition.
+Recorded voltages still changed with trained memory.
+
+![Plastic-path activity and silent recipient voltage](docs/assets/fly-paper-activation-09.png)
 
 The [decoder count view](docs/fly-debugger.md#inspect-accumulated-decoder-counts)
 shows how output spikes accumulate. In the examined BUY/SELL reversal, one net

@@ -2522,3 +2522,60 @@ For the development-only action difference, open
 
 These remain indicative, cost-aware DEX simulations on two short windows.
 No live-trading or monthly-profit conclusion follows from this result.
+
+
+### Inspect the quiet learned pathway
+
+![Plastic-path activation across study 09](assets/fly-paper-activation-09.png)
+
+The [activity report](../reports/fly-paper-activation-09.json) reconstructs all
+48 observations from the audited full-neuron count arrays and the verified native
+plastic-edge map. Each source and recipient neuron is counted once in its spike
+total, even if it participates in multiple plastic connections.
+
+Only **3–5 of 7,835 plastic edges** had a spiking source per test observation,
+and **all six plastic recipient neurons emitted zero test spikes** in all four
+conditions. Across the entire test, the active-edge union contains just five
+connections, from source neurons 18540, 21778, 44069 and 520206 into MBON11 cells
+10704 and 11402. All five connections had different weights in the captured
+trained memories. Thus the learned path was sparsely active, not disconnected or
+missing its stored memory. Some development observations activated roughly
+3,000 plastic edges and produced MBON spikes, along with trained/pristine firing
+differences. Greater activity is an observation here, not a profitability target.
+
+The paired voltage recording gives a concrete example. Connection **4110156**,
+from 18540 to 11402, has weight **3.09696** in pool 0's trained memory versus
+**22.0** pristine. Source 18540 fired seven spikes during the first test
+observation. Neuron 11402's sampled voltage changed, but it emitted no spike in
+either condition. This supports a limited mechanism explanation: changed input
+weights can alter subthreshold voltage without changing the network's spiking
+output. It does not prove that an activity boost or threshold change would
+improve trading. The native threshold is −45 mV; samples are saved every 10 ms
+and do not reconstruct within-bin voltage peaks.
+
+![Different memory and voltage with zero recipient spikes](assets/fly-paper-silent-recipient-09.png)
+
+After serving the included recordings,
+[inspect that connection and recipient](http://127.0.0.1:8765/?run=market09-pool0-trained_frozen&step=0&bin=2&neuron=11402&edge=4110156&pristine=1&compare=market09-pool0-pristine_frozen).
+The link selects the 30 ms boundary, where the source spiked, and independently
+shows the recipient's voltage, zero spike count, connection weight and stored
+`u`/`w`. Browser verification confirmed the source-spike highlight and identical
+recorded input prefix with no page errors or model submissions.
+
+Regenerate the map with the private downloaded study arrays and verified native
+mapping, without running the model or contacting Modal:
+
+```sh
+uv run --locked --extra plots python -m paperlab.fly_paper_activation \
+  --study runs/research-market-09 \
+  --mapping runs/reward-exposure-01/memory-map \
+  --out runs/research-market-09/activation-map --figures
+```
+
+Use new output directories for both mapping and activity reports. The analyzer
+checks registration, imported memory, mapping and neuron-ID hashes, and each
+full-count array against its audited event. It also retains source and view-file
+hashes. The current figure specifically requires complete test coverage, silent
+recipients and matching trained/pristine full counts; it refuses to apply that
+interpretation to a different outcome. Seven focused tests cover shared-neuron
+counting, active inputs with silent recipients, and invalid count/mapping data.
