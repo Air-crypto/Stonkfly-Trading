@@ -12,7 +12,7 @@ from paperlab.fly_trace import Assay, Recorder, TraceLab, input_frames
 
 @pytest.mark.parametrize("change", [{"steps":0}, {"steps":9}, {"steps":True}, {"eta":float("nan")},
     {"eta":-.01}, {"eta":.01}, {"current":21}, {"current":1}, {"neurons":["../x"]},
-    {"learning":"false"}, {"preset":"future"}, {"reinforcement":"trade"}, {"view":"hidden_policy"}])
+    {"probe_steps":True}, {"probe_steps":5}, {"steps":8,"probe_steps":1}, {"probe_preset":"unknown"}, {"learning":"false"}, {"preset":"future"}, {"reinforcement":"trade"}, {"view":"hidden_policy"}])
 def test_bounded_assay_configuration(change):
     with pytest.raises((ValueError, TypeError)):
         Assay(**change)
@@ -97,3 +97,25 @@ def test_reinforcement_gate_freezes_neutral_updates_but_keeps_spikes(tmp_path):
     reward=lab.run(replace(cfg,steps=1,reinforcement="reward"),tmp_path/"reward")
     assert reward["events"][0]["diagnostics"]["plasticity_enabled"]
     assert reward["events"][0]["diagnostics"]["changed_edges"]>0
+
+
+@pytest.mark.skipif(not os.environ.get("FLY_TRACE_DATA"), reason="requires prepared full retained graph")
+def test_retention_probe_clears_transients_preserves_memory_and_freezes_updates(tmp_path):
+    lab=TraceLab(Path(os.environ["FLY_TRACE_DATA"]))
+    cfg=Assay(steps=1,probe_steps=1,probe_preset="fall",learning=False)
+    baseline=lab.run(cfg,tmp_path/"baseline")
+    stimulated=lab.run(replace(cfg,reinforcement="reward",news="positive"),tmp_path/"stimulated")
+    reference=lab.run(Assay(preset="fall",steps=1,learning=False),tmp_path/"reference")
+    bp=baseline["events"][-1];sp=stimulated["events"][-1]
+    assert bp["spike_sha256"]==sp["spike_sha256"]==reference["events"][0]["spike_sha256"]
+    assert bp["input_sha256"]==sp["input_sha256"]
+    assert sp["stimulus"]=="none" and sp["input_news"]=="none" and sp["phase"]=="probe"
+    trained=lab.run(replace(cfg,learning=True,reinforcement="reward"),tmp_path/"trained")
+    assert trained["probe_boundary"]["weight_delta_from_pristine_l2"]>0
+    assert trained["events"][-1]["diagnostics"]["weight_delta_l2"]==0
+    assert not trained["events"][-1]["diagnostics"]["plasticity_enabled"]
+    with np.load(tmp_path/"trained/step-01.npz") as a, np.load(tmp_path/"trained/step-02.npz") as b:
+        assert np.array_equal(a["weights"][-1],b["initial_weights"])
+        assert np.array_equal(a["u"][-1],b["u"][-1])
+        assert np.array_equal(a["w"][-1],b["w"][-1])
+        assert b["ms"][0]==10

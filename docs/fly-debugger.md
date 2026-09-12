@@ -95,7 +95,8 @@ uv run python -m paperlab.debugger serve --out runs/custom
 
 ```json
 {
-  "preset": "rise", "steps": 4, "learning": true, "eta": 0.001,
+  "preset": "rise", "steps": 4, "probe_steps": 0, "probe_preset": "rise",
+  "learning": true, "eta": 0.001,
   "reinforcement": "none", "reinforcement_only": false,
   "view": "original", "news": "none",
   "neurons": [], "current": 0
@@ -115,6 +116,42 @@ propagation and KC/DAN rate traces continue. A reward or aversive pulse enables
 the original plasticity rule for that observation. This is an experimental credit
 assignment gate, not a replacement decoder or a validated biological claim. The
 learning panel reports whether plasticity was enabled for each observation.
+
+## Probe retained learning
+
+Expand **Test retained learning** and set 1–4 frozen probe observations. Training
+plus probe observations must total at most eight. Choose the probe's price
+sequence independently from training. The probe resets voltage, adaptation,
+queues, sensory state, and KC/DAN rate traces to the native initial state, while
+retaining plastic weights and efficacy memory. It verifies those invariants
+before proceeding. Probes have no learning, reinforcement pulses, extra current,
+or news, and record exact weight/memory hashes at the boundary.
+
+For example, this config trains on rising synthetic prices with reward pulses,
+then probes falling prices with frozen trained weights:
+
+```json
+{
+  "preset": "rise", "steps": 4, "learning": true, "reinforcement": "reward",
+  "probe_steps": 4, "probe_preset": "fall"
+}
+```
+
+Pass the file to the existing `capture --config` command or enter these settings
+in the Modal form. Every run still starts pristine; this does not edit a deployed
+trader. Use **Highlight weight changes from pristine state** to see retained
+weight deviations during frozen probes. The default shows changes within the
+current observation, which should be zero for a frozen probe. Old recordings
+without the additional arrays disable the pristine-relative view.
+
+Observation labels distinguish training and probe phases. Comparisons align by
+phase and within-phase index, so a shorter training phase cannot shift probe
+pairing. Native binary mismatches are highlighted: same RGB inputs across Mac
+and Linux builds have produced different fixed-decoder outputs. Control build,
+inputs, and reset semantics before attributing differences to learning. The
+full-native test verifies that a frozen stimulated training phase followed by a
+reset probe reproduces the fresh control, and that trained efficacy memory and
+weights survive the reset without further probe updates.
 
 ## What the views mean
 
@@ -403,3 +440,73 @@ container could not reload the volume. Their outcomes were verified before the
 same four inputs were retried with single-use containers; all four retries
 succeeded in distinct containers. No failed scientific outcome was discarded or
 replaced. The baseline from the first successful call was retained.
+
+## Retained-learning results
+
+The [registered retention protocol](../reports/fly-retention-protocol-01.json)
+and [all eight native reports](../reports/fly-retention-study-01.json) separate
+retained memory from immediate stimulation. Every arm receives four rising-chart
+observations. The neural dynamics, sensory adaptation, and rate traces then reset;
+plastic weights and efficacy memory remain. Four rise or fall probes follow with
+learning disabled, no reinforcement, no extra current, and no news. The graph and
+fixed decoder remain unchanged.
+
+| Training | Probe | Retained weight L2 | Probe actions | Different from frozen / neutral |
+| --- | --- | ---: | --- | ---: |
+| Frozen | Rise | 0 | BUY, HOLD, HOLD, HOLD | 0 / 1 |
+| Frozen | Fall | 0 | BUY, SELL, BUY, HOLD | 0 / 0 |
+| Neutral plasticity | Rise | 10.662 | BUY, HOLD, BUY, HOLD | 1 / 0 |
+| Neutral plasticity | Fall | 10.662 | BUY, SELL, BUY, HOLD | 0 / 0 |
+| Reward | Rise | 13.107 | BUY, HOLD, BUY, BUY | 2 / 1 |
+| Reward | Fall | 13.107 | BUY, SELL, SELL, HOLD | 1 / 1 |
+| Aversive | Rise | 17.174 | BUY, HOLD, HOLD, HOLD | 0 / 1 |
+| Aversive | Fall | 17.174 | BUY, SELL, BUY, HOLD | 0 / 0 |
+
+All 32 probes had zero weight updates. Within each training group, the rise/fall
+arms produced identical training spike hashes and identical retained weight and
+efficacy-memory hashes. All arms used the same native binary and graph, with
+identical images for each probe cue. The frozen rising probe reproduced all four
+pristine training spike hashes. Float32 norm reductions differed by about
+0.000002 between the two aversive hosts despite identical array hashes; the audit
+compares hashes for exact memory identity.
+
+The fourth rising probe illustrates the gate's role: reward training produces
+BUY with R−L = 6 Hz and four gate spikes; neutral training produces HOLD with
+R−L = 8 Hz and zero gate spikes. A larger rate difference alone is not a stronger
+buy decision. Aversive training changes the most weights but leaves all eight
+probe actions equal to frozen controls. It still changes neural activity, so
+unchanged actions do not mean unchanged internal dynamics.
+
+These are lasting effects in the implemented model, not evidence that reward
+learned profitable trading. Neutral training already changes behavior; the probe
+sequences are short and deterministic, and their synthetic chart scaling yields
+repeated images within each cue. No trades, fees, unseen market predictions, or
+statistical generalization are tested. The next [counterbalanced protocol](../reports/fly-retention-protocol-02.json)
+uses falling-chart training with the same rise/fall probes and controls to test
+whether reinforcement effects depend on the training cue. No paper policy was
+promoted from this experiment.
+
+In the included viewer, select `retention01-reward_rise` and compare
+`retention01-neutral_rise`. Select **probe 4**, then enable **Highlight weight
+changes from pristine state**. Amber connections and the nonzero L2 show retained
+weights; disable the checkbox to see that updates within the probe are zero.
+The comparison pairs training and probe phases separately. Its configuration
+disclosure identifies the changed experimental factor.
+
+![Frozen probe with retained weight changes and no current updates](assets/fly-retention-diagnostics.png)
+
+![Reward and neutral training compared after reset](assets/fly-retention-comparison.png)
+
+Re-audit downloaded cloud results without running more compute:
+
+```sh
+uv run python -m paperlab.fly_retention_study runs/retention-01 --out reports/fly-retention-study-01.json
+```
+
+The input directory contains the registered `protocol.json`, executed
+`source-hashes.json`, and each `<arm>-result.json` returned by Modal. The audit
+rejects missing arms, altered configs, mismatched builds/images, unreproduced
+training memory, or updates during probing. The test suite also re-audits the
+committed reports without private downloads or cloud access. To reproduce new
+recordings, use the complete configs in the protocol with `capture --config` or
+the Modal form described above; keep all paired controls on the same native build.

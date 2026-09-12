@@ -13,6 +13,7 @@
 <div class="pair"><label>Observations <input name="steps" type="number" min="1" max="8" value="4" required></label><label>Learning rate η <input name="eta" type="number" min="0" max="0.002" step="0.0001" value="0.001" required></label></div>
 <label class="check"><input name="learning" type="checkbox" checked> Enable plasticity</label>
 <label class="check"><input name="reinforcement_only" type="checkbox"> Require reinforcement for updates</label>
+<details><summary>Test retained learning</summary><label>Frozen probe observations <input name="probe_steps" type="number" min="0" max="4" value="0" required></label><label>Probe price sequence <select name="probe_preset"><option value="rise">Steady rise</option><option value="fall">Steady fall</option><option value="flat">Flat</option><option value="reversal">Trend reversal</option><option value="shock">Sudden drop</option></select></label><p>At most 8 observations total. Before probing, reset neural activity and sensory/rate traces while keeping trained weights and efficacy memory. Probes have no learning, reinforcement, extra current, or news.</p></details>
 <label>Engineered reinforcement <select name="reinforcement"><option value="none">None</option><option value="reward">Reward cells</option><option value="aversive">Aversive cells</option><option value="alternating">Alternate reward / aversive</option></select></label>
 <label>Visual input <select name="view"><option value="original">Original chart + news strip</option><option value="price_only">Remove header + news strip</option><option value="blank">Uniform gray</option></select></label>
 <label>Synthetic news <select name="news"><option value="none">No headlines</option><option value="positive">Positive headline</option><option value="negative">Negative headline</option></select></label>
@@ -24,6 +25,7 @@
 <div class="playback"><label>Observation <select id="step"></select></label><button id="play">Play bins</button><label class="scrub">Neural time <output id="time"></output><input id="bin" type="range" min="0" max="49" value="0"></label></div>
 <svg id="network" role="img" aria-label="Grouped view of recorded neurons and their actual directed connections. Use the neuron selector below for keyboard inspection."></svg>
 <div class="legend"><span><i class="active"></i>Neuron spiked / edge source spiked</span><span><i class="changed"></i>Plastic edge changed since observation start</span><span><i></i>Inactive connection</span></div>
+<label class="check"><input id="pristine" type="checkbox"> Highlight weight changes from pristine state (including retained learning)</label>
 <p class="small">Edge activity marks presynaptic spikes. It does not establish transmission or causal influence on a target. Positions are functional groups, not anatomical coordinates.</p>
 <div class="pair"><label>Inspect a displayed neuron <select id="node"></select></label><label>Inspect any retained neuron ID <span class="inline"><input id="lookup" inputmode="numeric" placeholder="Exact body ID"><button id="lookup-button">Inspect</button></span></label></div>
 <p id="neuron-detail" class="readout"></p><div id="neuron-chart"></div>
@@ -32,7 +34,7 @@
 <div class="results">
 <section class="panel"><h2>What the brain saw</h2><img id="input" width="320" height="180" alt="Exact RGB input to the fly"><p id="input-info"></p></section>
 <section class="panel"><h2>Fixed decoder output</h2><p id="decision" class="decision">—</p><dl id="decoder"></dl><p class="small" id="decoder-note">Whole-observation result (500 ms). BUY/SELL are engineered mappings of downstream firing rates; this assay executes no trades.</p></section>
-<section class="panel"><h2>Learning diagnostics</h2><dl id="metrics"></dl><p class="small">The fly has no optimizer loss or backprop gradient. Weight change and trace activity do not establish useful learning.</p></section>
+<section class="panel"><h2>Learning diagnostics</h2><dl id="metrics"></dl><p id="phase-note" class="small"></p><p class="small">The fly has no optimizer loss or backprop gradient. Weight change and trace activity do not establish useful learning.</p></section>
 </div>
 <section class="panel" id="market-panel" hidden><h2>Market decisions & simulated execution</h2><p id="market-coverage"></p><div id="market-timeline" class="table-wrap"></div><p class="small">All decision slots are shown, including unavailable quotes without a neural observation. Fills follow earlier decisions. Equity belongs to this $250 simulated sleeve; unavailable inventory uses the study's stress valuation.</p></section>
 <div class="plots"><section class="panel"><h2>Network spikes</h2><div id="spike-chart"></div></section><section class="panel"><h2>Plastic weight movement</h2><div id="weight-chart"></div></section><section class="panel"><h2>KC & DAN traces</h2><div id="trace-chart"></div></section></div>

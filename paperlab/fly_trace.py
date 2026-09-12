@@ -5,6 +5,7 @@ kernel. Edge highlights mean source spikes, not measured synaptic transmission.
 """
 from dataclasses import asdict, dataclass, replace
 import base64
+import hashlib
 import math
 from pathlib import Path
 import time
@@ -21,6 +22,8 @@ from .news import News
 class Assay:
     preset: str = "rise"
     steps: int = 4
+    probe_steps: int = 0
+    probe_preset: str = "rise"
     learning: bool = True
     reinforcement_only: bool = False
     eta: float = .001
@@ -35,6 +38,10 @@ class Assay:
             raise ValueError("Unknown price preset")
         if type(self.steps) is not int or not 1 <= self.steps <= 8:
             raise ValueError("Use 1–8 observations per assay")
+        if type(self.probe_steps) is not int or not 0 <= self.probe_steps <= 4 or self.steps+self.probe_steps > 8:
+            raise ValueError("Use 0–4 probe observations and at most eight observations in total")
+        if self.probe_preset not in ("rise", "fall", "flat", "reversal", "shock"):
+            raise ValueError("Unknown probe price preset")
         if type(self.learning) is not bool:
             raise ValueError("learning must be a boolean")
         if type(self.reinforcement_only) is not bool:
@@ -171,14 +178,44 @@ class TraceLab:
             b.weights_frozen = not enabled
             self.fly.controller.s = replace(self.fly.controller.s, learning=enabled)
             event = self.capture(rgb, reinforcement, output, i+1, extra, config.current)
+            event.update(phase="training" if config.probe_steps else "assay", phase_step=i+1,
+                         input_preset=config.preset, input_news=config.news)
             events.append(event)
             print(f"assay step={i+1}/{config.steps} side={event['side']} "
                   f"spikes={event['total_spikes']} changed={event['diagnostics']['changed_edges']}", flush=True)
+        boundary = None
+        if config.probe_steps:
+            weights=b.weight[b.circuit["edges"]].copy()
+            memory=(b.memory_u.copy(),b.memory_w.copy())
+            b.reset(keep_memory=True)
+            if not np.array_equal(weights,b.weight[b.circuit["edges"]]) or not all(
+                    np.array_equal(a,v) for a,v in zip(memory,(b.memory_u,b.memory_w))):
+                raise AssertionError("Probe reset changed learned weights or efficacy memory")
+            if not all(np.array_equal(getattr(b,k),v) for k,v in b.initial.items()
+                       if k not in ("memory_u","memory_w")) or b.sim_ms != 0:
+                raise AssertionError("Probe must reset neural dynamics and sensory/rate traces")
+            boundary={"after_observation":config.steps,"dynamics_reset":True,
+                      "weight_sha256":hashlib.sha256(weights.tobytes()).hexdigest(),
+                      "memory_sha256":hashlib.sha256(memory[0].tobytes()+memory[1].tobytes()).hexdigest(),
+                      "weight_delta_from_pristine_l2":float(np.linalg.norm(weights-b.baseline_plastic)),
+                      "probe_learning":False,"probe_reinforcement":"none","probe_extra_current":0}
+            b.weights_frozen=True
+            self.fly.controller.s=replace(self.fly.controller.s,learning=False)
+            probe=replace(config,preset=config.probe_preset,steps=config.probe_steps,probe_steps=0,
+                          learning=False,reinforcement="none",neurons=(),current=0,news="none")
+            for i,rgb in enumerate(input_frames(probe)):
+                event=self.capture(rgb,"none",output,len(events)+1)
+                event.update(phase="probe",phase_step=i+1,input_preset=probe.preset,input_news="none")
+                events.append(event)
+                if not np.array_equal(weights,b.weight[b.circuit["edges"]]):
+                    raise AssertionError("Frozen probe changed trained weights")
+                print(f"assay probe={i+1}/{config.probe_steps} side={event['side']} "
+                      f"spikes={event['total_spikes']} changed={event['diagnostics']['changed_edges']}",flush=True)
         report = {"schema": 1, "source": "synthetic_full_network_assay",
                   "config": asdict(config), "upstream_commit": UPSTREAM_COMMIT,
                   "graph": {"neurons": b.n, "edges": len(b.post), "plastic_edges": len(b.circuit["edges"])},
                   "native_build": b.build, "seconds": time.monotonic() - started,
-                  "events": events,
+                  "events": events,"probe_boundary":boundary,
                   "interpretation": "Synthetic mechanics assay, no trading return. No optimizer loss or backprop gradient. "
                   "Source spike highlights are not a measurement of transmission or causality."}
         atomic_json(output / "report.json", report)
@@ -250,6 +287,7 @@ class TraceLab:
                 weights = a["weights"]
                 initial = a["initial_weights"]
                 all_delta = weights - initial
+                pristine_delta = weights - b.baseline_plastic
                 frames.append({"step": i+1, "event": event,
                     "input_png": base64.b64encode((output / f"input-{i+1:02}.png").read_bytes()).decode(),
                     "times_ms": a["ms"].tolist(), "counts": counts[:, selected].tolist(),
@@ -258,6 +296,8 @@ class TraceLab:
                     "groups": {g: counts[:, indices].sum(axis=1).tolist() for g, indices in groups.items()},
                     "weight_delta_l2": np.linalg.norm(all_delta, axis=1).tolist(),
                     "changed_edges": np.count_nonzero(all_delta, axis=1).tolist(),
+                    "weight_from_pristine_l2":np.linalg.norm(pristine_delta,axis=1).tolist(),
+                    "changed_from_pristine":np.count_nonzero(pristine_delta,axis=1).tolist(),
                     "plastic_weights": weights[:, plastic_selection].tolist(),
                     "plastic_initial": initial[plastic_selection].tolist(),
                     "kc_mean_hz": a["kc"].mean(axis=1).tolist(), "dan_mean_hz": a["dan"].mean(axis=1).tolist(),

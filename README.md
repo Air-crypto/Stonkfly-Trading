@@ -52,6 +52,15 @@ confirms that stimulating the plastic-memory output groups can change the fixed
 decoder with weights frozen. All five controls and runnable recordings are included;
 this demonstrates model sensitivity, not profitable learning.
 
+The [retained-learning experiment](docs/fly-debugger.md#retained-learning-results)
+adds frozen probes after resetting neural activity. Reward training changed three
+of eight probe actions versus frozen controls; neutral training also changed one.
+The debugger separates updates happening now from weights retained from training.
+Select `retention01-reward_rise`, compare `retention01-neutral_rise`, and inspect
+**probe 4**. Both probes have learning disabled.
+
+![Retained reward versus neutral training after a neural reset](docs/assets/fly-retention-comparison.png)
+
 ## Run
 
 Python 3.12 and a C++ compiler are required. Run from this source checkout so the preserved upstream files are available.
