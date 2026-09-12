@@ -2293,3 +2293,30 @@ match, while edge 9976879 (51865 → 10704) has different frozen weights and the
 selected neuron's voltage traces differ. Matching image history does not imply
 identical connection memory. This older recording lacks per-connection `u`/`w`
 arrays; the viewer labels them unavailable instead of inferring values.
+
+
+### See source spikes on changed and restored connections
+
+Edge color describes memory: orange for a changed plastic weight, purple for a
+restored connection. Source activity is now separate: a connection becomes
+thicker and dashed when its presynaptic neuron spikes in the displayed 10 ms bin.
+This remains visible even when a memory color applies. A pale outline identifies
+the selected connection, whose source count is also available in its tooltip.
+The highlight reports a source spike, not measured transmission to the target.
+
+![Changed connection with a recorded source spike](assets/fly-source-spike-changed.png)
+
+[Open this moment](http://127.0.0.1:8765/?run=market08-pool0-trained_frozen&step=0&bin=28&neuron=38549&edge=8022240&pristine=1)
+after starting the included recording viewer. Body 38549 has one source spike
+in the bin ending at 290 ms. The selected edge 8022240 retains its orange
+pristine-relative weight status while its source-activity dashes appear.
+“Link to this moment” now preserves the pristine-weight highlight setting.
+
+![Restored connection with a recorded source spike](assets/fly-source-spike-restored.png)
+
+The older 10704-restoration replay provides a second check: the same source
+spikes in the second observation's bin ending at 540 ms, while the connection
+stays purple. Quiet bins return to solid lines. Browser checks verify these
+states against the saved counts, maintain exactly one selected-edge outline,
+follow the shared link, and check the mobile layout without submitting compute.
+Neither screenshot is a result from the pending paper-memory study 09.

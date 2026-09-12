@@ -47,9 +47,18 @@ function network(f){
  const groups=['visual','KC','DAN','MBON','output','other'].filter(g=>data.nodes.some(n=>n.group===g));positions=Array(data.nodes.length);
  for(const[gidx,g]of groups.entries()){const members=data.nodes.map((n,i)=>n.group===g?i:-1).filter(i=>i>=0);const x=25+(w-50)*gidx/(groups.length-1||1);add('text',{x,y:16,fill:colors[g],'font-size':11,'text-anchor':gidx===0?'start':gidx===groups.length-1?'end':'middle'},g==='visual'?'Visual':g==='output'?'Decoder':g);members.forEach((i,j)=>positions[i]=[x+(j%2?4:-4),40+(h-60)*(j+.5)/members.length]);}
  const pmap=new Map(data.plastic_selection.map((v,i)=>[v,i]));
- const restored=new Set(restoredEdges(f));
- for(const e of data.edges){const [x,y]=positions[e.source],[tx,ty]=positions[e.target],pi=pmap.get(e.plastic_index),changed=pi!==undefined&&Math.abs(f.plastic_weights[bin][pi]-($('pristine').checked?e.weight:f.plastic_initial[pi]))>1e-9,active=f.counts[bin][e.source]>0;
- add('path',{d:`M${x},${y} Q${(x+tx)/2+12},${(y+ty)/2-8} ${tx},${ty}`,fill:'none',stroke:restored.has(String(e.id))?'#c4a1ff':changed?'#ffbf69':active?'#67e8cf':'#35445c',opacity:restored.has(String(e.id))?.85:changed?.65:active?.3:.2,'stroke-width':restored.has(String(e.id))?1.4:changed?1.1:.6});}
+ const restored=new Set(restoredEdges(f)),selected=data.edges.filter(e=>e.plastic_index!==null)[edge];
+ // Keep memory color and source-spike highlighting independent. Draw the selected
+ // connection last so it remains inspectable among overlapping connections.
+ const ordered=selected?[...data.edges.filter(e=>e!==selected),selected]:data.edges;
+ for(const e of ordered){
+  const [x,y]=positions[e.source],[tx,ty]=positions[e.target],pi=pmap.get(e.plastic_index);
+  const changed=pi!==undefined&&Math.abs(f.plastic_weights[bin][pi]-($('pristine').checked?e.weight:f.plastic_initial[pi]))>1e-9,sourceSpikes=f.counts[bin][e.source],active=sourceSpikes>0,isRestored=restored.has(String(e.id));
+  const d=`M${x},${y} Q${(x+tx)/2+12},${(y+ty)/2-8} ${tx},${ty}`;
+  if(e===selected)add('path',{d,fill:'none',stroke:'#e8edf6',opacity:.8,'stroke-width':4.5,'data-selected-edge':e.id,'pointer-events':'none'});
+  const path=add('path',{d,fill:'none',stroke:isRestored?'#c4a1ff':changed?'#ffbf69':active?'#67e8cf':'#35445c',opacity:e===selected?.95:active?.8:isRestored?.85:changed?.65:.2,'stroke-width':e===selected?2:active?1.7:isRestored?1.4:changed?1.1:.6,'stroke-dasharray':active?'4 2':'none','data-edge-id':e.id,'data-source-spikes':sourceSpikes});
+  const title=document.createElementNS(ns,'title');title.textContent=`Edge ${e.id}: ${data.nodes[e.source].id} → ${data.nodes[e.target].id}; source ${sourceSpikes} spikes in this bin${changed?'; weight differs from selected baseline':''}${isRestored?'; restored before replay/probe':''}. Source activity does not establish target transmission.`;path.append(title);
+ }
  data.nodes.forEach((n,i)=>{const[x,y]=positions[i],active=f.counts[bin][i]>0;const circle=add('circle',{cx:x,cy:y,r:active?4.5:2.5,fill:active?'#67e8cf':colors[n.group],opacity:active?1:.6});const title=document.createElementNS(ns,'title');title.textContent=`${n.type} ${n.id}: ${f.counts[bin][i]} spikes`;circle.append(title);if(i===node)add('circle',{cx:x,cy:y,r:7,fill:'none',stroke:'#fff','stroke-width':1.5});});
 }
 function spikeBin(direction){
@@ -63,6 +72,7 @@ function momentLink(){
  const link=$('moment-link');link.hidden=imported||externalNeuron||!runName;if(link.hidden)return;
  const url=new URL(location.href);url.search='';url.searchParams.set('run',runName);url.searchParams.set('step',step);url.searchParams.set('bin',bin);url.searchParams.set('neuron',data.nodes[node].id);
  const selectedEdge=data.edges.filter(e=>e.plastic_index!==null)[edge];if(selectedEdge)url.searchParams.set('edge',selectedEdge.id);
+ if($('pristine').checked)url.searchParams.set('pristine','1');
  if($('compare').value)url.searchParams.set('compare',$('compare').value);link.href=url.href;
 }
 function hasMemory(f,pi){return ['plastic_u','plastic_w'].every(key=>Array.isArray(f[key])&&f[key].length===f.times_ms.length&&f[key].every(row=>Array.isArray(row)&&Number.isFinite(row[pi])));}
@@ -205,6 +215,7 @@ window.addEventListener('resize',()=>draw());refresh().then(async()=>{
   const selectedBin=index('bin',data.frames[step].times_ms.length);if(selectedBin>=0)bin=selectedBin;
   const selectedNode=data.nodes.findIndex(n=>String(n.id)===q.get('neuron'));if(selectedNode>=0){node=selectedNode;$('node').value=node;}
   const selectedEdge=data.edges.filter(e=>e.plastic_index!==null).findIndex(e=>String(e.id)===q.get('edge'));if(selectedEdge>=0){edge=selectedEdge;$('edge').value=edge;}
+  if(q.get('pristine')==='1'&&!$('pristine').disabled)$('pristine').checked=true;
   draw();
  }
  const comparison=q.get('compare');if(comparison&&[...$('compare').options].some(o=>o.value===comparison)){$('compare').value=comparison;await $('compare').onchange({target:$('compare')});}await status(true);}).catch(error);

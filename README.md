@@ -27,7 +27,11 @@ news, neuron stimulation, and selected connection restoration. The simulation
 retains the full graph; the display is a labeled subset with full-neuron lookup
 in generated recordings. Paper accounts remain separate from diagnostic assays.
 
-![Fly circuit debugger highlighting the first gate spike after a dynamics reset](docs/assets/fly-activity-circuit.png)
+![Source spikes remain visible on changed connections in the fly circuit debugger](docs/assets/fly-source-spike-changed.png)
+
+Dashed lines mark source spikes in the current bin. Orange and purple retain the
+connection's weight change or restoration status, and an outline marks the
+selected connection.
 
 After installing below, open the included recordings without model compute:
 
