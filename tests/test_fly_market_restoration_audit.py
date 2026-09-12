@@ -91,3 +91,16 @@ def test_factorial_audit_rejects_wrong_restoration_and_lost_controls(tmp_path,mu
     if mutation=='reference_control':study['reports']['restore_both']['events'][1]['side']='SELL'
     if mutation=='count':study['reports']['trained_frozen']['graph']['plastic_edges']=7
     with pytest.raises(ValueError):audit(study,reference,plan,tmp_path)
+
+
+def test_nine_arm_gate_timing_reconciles_published_recordings():
+    from paperlab.fly_pulse_audit import gate_timing
+    study=json.loads(Path('reports/fly-market-restoration-study-02.json').read_text())
+    views={name:json.loads((Path('examples/fly-debugger')/('marketrestore02-'+name)/'view.json').read_text()) for name in study['protocol']['arms']}
+    timing=gate_timing(study,views,study['protocol']['arms'])
+    assert len(timing['arms'])==9
+    event=timing['arms']['restore_MBON07_10704'][2]
+    assert event['gate_spikes']==1 and event['neurons']['10527']==[{'bin':11,'start_ms':1110.,'end_ms':1120.,'spikes':1}]
+    assert timing['arms']['restore_MBON07'][2]['gate_spikes']==0
+    views.pop('restore_all')
+    with pytest.raises(ValueError,match='Missing timing controls'):gate_timing(study,views,study['protocol']['arms'])

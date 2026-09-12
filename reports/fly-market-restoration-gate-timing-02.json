@@ -1,0 +1,2118 @@
+{
+  "resolution_ms": 10,
+  "arms": {
+    "pristine_frozen": [
+      {
+        "market_decision_ts": 1789212900,
+        "side": "BUY",
+        "gate_spikes": 31,
+        "neurons": {
+          "10527": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 12,
+              "start_ms": 120.0,
+              "end_ms": 130.0,
+              "spikes": 1
+            },
+            {
+              "bin": 14,
+              "start_ms": 140.0,
+              "end_ms": 150.0,
+              "spikes": 1
+            },
+            {
+              "bin": 18,
+              "start_ms": 180.0,
+              "end_ms": 190.0,
+              "spikes": 1
+            },
+            {
+              "bin": 21,
+              "start_ms": 210.0,
+              "end_ms": 220.0,
+              "spikes": 1
+            },
+            {
+              "bin": 24,
+              "start_ms": 240.0,
+              "end_ms": 250.0,
+              "spikes": 1
+            },
+            {
+              "bin": 27,
+              "start_ms": 270.0,
+              "end_ms": 280.0,
+              "spikes": 2
+            },
+            {
+              "bin": 30,
+              "start_ms": 300.0,
+              "end_ms": 310.0,
+              "spikes": 1
+            },
+            {
+              "bin": 34,
+              "start_ms": 340.0,
+              "end_ms": 350.0,
+              "spikes": 1
+            },
+            {
+              "bin": 37,
+              "start_ms": 370.0,
+              "end_ms": 380.0,
+              "spikes": 1
+            },
+            {
+              "bin": 40,
+              "start_ms": 400.0,
+              "end_ms": 410.0,
+              "spikes": 1
+            },
+            {
+              "bin": 42,
+              "start_ms": 420.0,
+              "end_ms": 430.0,
+              "spikes": 1
+            }
+          ],
+          "555871": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 3,
+              "start_ms": 30.0,
+              "end_ms": 40.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 14,
+              "start_ms": 140.0,
+              "end_ms": 150.0,
+              "spikes": 1
+            },
+            {
+              "bin": 15,
+              "start_ms": 150.0,
+              "end_ms": 160.0,
+              "spikes": 1
+            },
+            {
+              "bin": 19,
+              "start_ms": 190.0,
+              "end_ms": 200.0,
+              "spikes": 1
+            },
+            {
+              "bin": 22,
+              "start_ms": 220.0,
+              "end_ms": 230.0,
+              "spikes": 1
+            },
+            {
+              "bin": 24,
+              "start_ms": 240.0,
+              "end_ms": 250.0,
+              "spikes": 1
+            },
+            {
+              "bin": 27,
+              "start_ms": 270.0,
+              "end_ms": 280.0,
+              "spikes": 1
+            },
+            {
+              "bin": 30,
+              "start_ms": 300.0,
+              "end_ms": 310.0,
+              "spikes": 1
+            },
+            {
+              "bin": 32,
+              "start_ms": 320.0,
+              "end_ms": 330.0,
+              "spikes": 1
+            },
+            {
+              "bin": 35,
+              "start_ms": 350.0,
+              "end_ms": 360.0,
+              "spikes": 1
+            },
+            {
+              "bin": 37,
+              "start_ms": 370.0,
+              "end_ms": 380.0,
+              "spikes": 1
+            },
+            {
+              "bin": 40,
+              "start_ms": 400.0,
+              "end_ms": 410.0,
+              "spikes": 1
+            },
+            {
+              "bin": 42,
+              "start_ms": 420.0,
+              "end_ms": 430.0,
+              "spikes": 1
+            }
+          ]
+        }
+      },
+      {
+        "market_decision_ts": 1789213200,
+        "side": "BUY",
+        "gate_spikes": 4,
+        "neurons": {
+          "10527": [
+            {
+              "bin": 2,
+              "start_ms": 520.0,
+              "end_ms": 530.0,
+              "spikes": 1
+            },
+            {
+              "bin": 6,
+              "start_ms": 560.0,
+              "end_ms": 570.0,
+              "spikes": 1
+            },
+            {
+              "bin": 10,
+              "start_ms": 600.0,
+              "end_ms": 610.0,
+              "spikes": 1
+            },
+            {
+              "bin": 44,
+              "start_ms": 940.0,
+              "end_ms": 950.0,
+              "spikes": 1
+            }
+          ],
+          "555871": []
+        }
+      },
+      {
+        "market_decision_ts": 1789213500,
+        "side": "HOLD",
+        "gate_spikes": 0,
+        "neurons": {
+          "10527": [],
+          "555871": []
+        }
+      }
+    ],
+    "trained_frozen": [
+      {
+        "market_decision_ts": 1789212900,
+        "side": "BUY",
+        "gate_spikes": 31,
+        "neurons": {
+          "10527": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 12,
+              "start_ms": 120.0,
+              "end_ms": 130.0,
+              "spikes": 1
+            },
+            {
+              "bin": 14,
+              "start_ms": 140.0,
+              "end_ms": 150.0,
+              "spikes": 1
+            },
+            {
+              "bin": 18,
+              "start_ms": 180.0,
+              "end_ms": 190.0,
+              "spikes": 1
+            },
+            {
+              "bin": 21,
+              "start_ms": 210.0,
+              "end_ms": 220.0,
+              "spikes": 1
+            },
+            {
+              "bin": 24,
+              "start_ms": 240.0,
+              "end_ms": 250.0,
+              "spikes": 1
+            },
+            {
+              "bin": 27,
+              "start_ms": 270.0,
+              "end_ms": 280.0,
+              "spikes": 2
+            },
+            {
+              "bin": 30,
+              "start_ms": 300.0,
+              "end_ms": 310.0,
+              "spikes": 1
+            },
+            {
+              "bin": 34,
+              "start_ms": 340.0,
+              "end_ms": 350.0,
+              "spikes": 1
+            },
+            {
+              "bin": 37,
+              "start_ms": 370.0,
+              "end_ms": 380.0,
+              "spikes": 1
+            },
+            {
+              "bin": 40,
+              "start_ms": 400.0,
+              "end_ms": 410.0,
+              "spikes": 1
+            },
+            {
+              "bin": 42,
+              "start_ms": 420.0,
+              "end_ms": 430.0,
+              "spikes": 1
+            }
+          ],
+          "555871": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 3,
+              "start_ms": 30.0,
+              "end_ms": 40.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 14,
+              "start_ms": 140.0,
+              "end_ms": 150.0,
+              "spikes": 1
+            },
+            {
+              "bin": 15,
+              "start_ms": 150.0,
+              "end_ms": 160.0,
+              "spikes": 1
+            },
+            {
+              "bin": 19,
+              "start_ms": 190.0,
+              "end_ms": 200.0,
+              "spikes": 1
+            },
+            {
+              "bin": 22,
+              "start_ms": 220.0,
+              "end_ms": 230.0,
+              "spikes": 1
+            },
+            {
+              "bin": 24,
+              "start_ms": 240.0,
+              "end_ms": 250.0,
+              "spikes": 1
+            },
+            {
+              "bin": 27,
+              "start_ms": 270.0,
+              "end_ms": 280.0,
+              "spikes": 1
+            },
+            {
+              "bin": 30,
+              "start_ms": 300.0,
+              "end_ms": 310.0,
+              "spikes": 1
+            },
+            {
+              "bin": 32,
+              "start_ms": 320.0,
+              "end_ms": 330.0,
+              "spikes": 1
+            },
+            {
+              "bin": 35,
+              "start_ms": 350.0,
+              "end_ms": 360.0,
+              "spikes": 1
+            },
+            {
+              "bin": 37,
+              "start_ms": 370.0,
+              "end_ms": 380.0,
+              "spikes": 1
+            },
+            {
+              "bin": 40,
+              "start_ms": 400.0,
+              "end_ms": 410.0,
+              "spikes": 1
+            },
+            {
+              "bin": 42,
+              "start_ms": 420.0,
+              "end_ms": 430.0,
+              "spikes": 1
+            }
+          ]
+        }
+      },
+      {
+        "market_decision_ts": 1789213200,
+        "side": "BUY",
+        "gate_spikes": 3,
+        "neurons": {
+          "10527": [
+            {
+              "bin": 2,
+              "start_ms": 520.0,
+              "end_ms": 530.0,
+              "spikes": 1
+            },
+            {
+              "bin": 6,
+              "start_ms": 560.0,
+              "end_ms": 570.0,
+              "spikes": 1
+            },
+            {
+              "bin": 10,
+              "start_ms": 600.0,
+              "end_ms": 610.0,
+              "spikes": 1
+            }
+          ],
+          "555871": []
+        }
+      },
+      {
+        "market_decision_ts": 1789213500,
+        "side": "HOLD",
+        "gate_spikes": 0,
+        "neurons": {
+          "10527": [],
+          "555871": []
+        }
+      }
+    ],
+    "restore_10704": [
+      {
+        "market_decision_ts": 1789212900,
+        "side": "BUY",
+        "gate_spikes": 31,
+        "neurons": {
+          "10527": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 12,
+              "start_ms": 120.0,
+              "end_ms": 130.0,
+              "spikes": 1
+            },
+            {
+              "bin": 14,
+              "start_ms": 140.0,
+              "end_ms": 150.0,
+              "spikes": 1
+            },
+            {
+              "bin": 18,
+              "start_ms": 180.0,
+              "end_ms": 190.0,
+              "spikes": 1
+            },
+            {
+              "bin": 21,
+              "start_ms": 210.0,
+              "end_ms": 220.0,
+              "spikes": 1
+            },
+            {
+              "bin": 24,
+              "start_ms": 240.0,
+              "end_ms": 250.0,
+              "spikes": 1
+            },
+            {
+              "bin": 27,
+              "start_ms": 270.0,
+              "end_ms": 280.0,
+              "spikes": 2
+            },
+            {
+              "bin": 30,
+              "start_ms": 300.0,
+              "end_ms": 310.0,
+              "spikes": 1
+            },
+            {
+              "bin": 34,
+              "start_ms": 340.0,
+              "end_ms": 350.0,
+              "spikes": 1
+            },
+            {
+              "bin": 37,
+              "start_ms": 370.0,
+              "end_ms": 380.0,
+              "spikes": 1
+            },
+            {
+              "bin": 40,
+              "start_ms": 400.0,
+              "end_ms": 410.0,
+              "spikes": 1
+            },
+            {
+              "bin": 42,
+              "start_ms": 420.0,
+              "end_ms": 430.0,
+              "spikes": 1
+            }
+          ],
+          "555871": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 3,
+              "start_ms": 30.0,
+              "end_ms": 40.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 14,
+              "start_ms": 140.0,
+              "end_ms": 150.0,
+              "spikes": 1
+            },
+            {
+              "bin": 15,
+              "start_ms": 150.0,
+              "end_ms": 160.0,
+              "spikes": 1
+            },
+            {
+              "bin": 19,
+              "start_ms": 190.0,
+              "end_ms": 200.0,
+              "spikes": 1
+            },
+            {
+              "bin": 22,
+              "start_ms": 220.0,
+              "end_ms": 230.0,
+              "spikes": 1
+            },
+            {
+              "bin": 24,
+              "start_ms": 240.0,
+              "end_ms": 250.0,
+              "spikes": 1
+            },
+            {
+              "bin": 27,
+              "start_ms": 270.0,
+              "end_ms": 280.0,
+              "spikes": 1
+            },
+            {
+              "bin": 30,
+              "start_ms": 300.0,
+              "end_ms": 310.0,
+              "spikes": 1
+            },
+            {
+              "bin": 32,
+              "start_ms": 320.0,
+              "end_ms": 330.0,
+              "spikes": 1
+            },
+            {
+              "bin": 35,
+              "start_ms": 350.0,
+              "end_ms": 360.0,
+              "spikes": 1
+            },
+            {
+              "bin": 37,
+              "start_ms": 370.0,
+              "end_ms": 380.0,
+              "spikes": 1
+            },
+            {
+              "bin": 40,
+              "start_ms": 400.0,
+              "end_ms": 410.0,
+              "spikes": 1
+            },
+            {
+              "bin": 42,
+              "start_ms": 420.0,
+              "end_ms": 430.0,
+              "spikes": 1
+            }
+          ]
+        }
+      },
+      {
+        "market_decision_ts": 1789213200,
+        "side": "BUY",
+        "gate_spikes": 3,
+        "neurons": {
+          "10527": [
+            {
+              "bin": 2,
+              "start_ms": 520.0,
+              "end_ms": 530.0,
+              "spikes": 1
+            },
+            {
+              "bin": 6,
+              "start_ms": 560.0,
+              "end_ms": 570.0,
+              "spikes": 1
+            },
+            {
+              "bin": 10,
+              "start_ms": 600.0,
+              "end_ms": 610.0,
+              "spikes": 1
+            }
+          ],
+          "555871": []
+        }
+      },
+      {
+        "market_decision_ts": 1789213500,
+        "side": "HOLD",
+        "gate_spikes": 0,
+        "neurons": {
+          "10527": [],
+          "555871": []
+        }
+      }
+    ],
+    "restore_11402": [
+      {
+        "market_decision_ts": 1789212900,
+        "side": "BUY",
+        "gate_spikes": 31,
+        "neurons": {
+          "10527": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 12,
+              "start_ms": 120.0,
+              "end_ms": 130.0,
+              "spikes": 1
+            },
+            {
+              "bin": 14,
+              "start_ms": 140.0,
+              "end_ms": 150.0,
+              "spikes": 1
+            },
+            {
+              "bin": 18,
+              "start_ms": 180.0,
+              "end_ms": 190.0,
+              "spikes": 1
+            },
+            {
+              "bin": 21,
+              "start_ms": 210.0,
+              "end_ms": 220.0,
+              "spikes": 1
+            },
+            {
+              "bin": 24,
+              "start_ms": 240.0,
+              "end_ms": 250.0,
+              "spikes": 1
+            },
+            {
+              "bin": 27,
+              "start_ms": 270.0,
+              "end_ms": 280.0,
+              "spikes": 2
+            },
+            {
+              "bin": 30,
+              "start_ms": 300.0,
+              "end_ms": 310.0,
+              "spikes": 1
+            },
+            {
+              "bin": 34,
+              "start_ms": 340.0,
+              "end_ms": 350.0,
+              "spikes": 1
+            },
+            {
+              "bin": 37,
+              "start_ms": 370.0,
+              "end_ms": 380.0,
+              "spikes": 1
+            },
+            {
+              "bin": 40,
+              "start_ms": 400.0,
+              "end_ms": 410.0,
+              "spikes": 1
+            },
+            {
+              "bin": 42,
+              "start_ms": 420.0,
+              "end_ms": 430.0,
+              "spikes": 1
+            }
+          ],
+          "555871": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 3,
+              "start_ms": 30.0,
+              "end_ms": 40.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 14,
+              "start_ms": 140.0,
+              "end_ms": 150.0,
+              "spikes": 1
+            },
+            {
+              "bin": 15,
+              "start_ms": 150.0,
+              "end_ms": 160.0,
+              "spikes": 1
+            },
+            {
+              "bin": 19,
+              "start_ms": 190.0,
+              "end_ms": 200.0,
+              "spikes": 1
+            },
+            {
+              "bin": 22,
+              "start_ms": 220.0,
+              "end_ms": 230.0,
+              "spikes": 1
+            },
+            {
+              "bin": 24,
+              "start_ms": 240.0,
+              "end_ms": 250.0,
+              "spikes": 1
+            },
+            {
+              "bin": 27,
+              "start_ms": 270.0,
+              "end_ms": 280.0,
+              "spikes": 1
+            },
+            {
+              "bin": 30,
+              "start_ms": 300.0,
+              "end_ms": 310.0,
+              "spikes": 1
+            },
+            {
+              "bin": 32,
+              "start_ms": 320.0,
+              "end_ms": 330.0,
+              "spikes": 1
+            },
+            {
+              "bin": 35,
+              "start_ms": 350.0,
+              "end_ms": 360.0,
+              "spikes": 1
+            },
+            {
+              "bin": 37,
+              "start_ms": 370.0,
+              "end_ms": 380.0,
+              "spikes": 1
+            },
+            {
+              "bin": 40,
+              "start_ms": 400.0,
+              "end_ms": 410.0,
+              "spikes": 1
+            },
+            {
+              "bin": 42,
+              "start_ms": 420.0,
+              "end_ms": 430.0,
+              "spikes": 1
+            }
+          ]
+        }
+      },
+      {
+        "market_decision_ts": 1789213200,
+        "side": "SELL",
+        "gate_spikes": 3,
+        "neurons": {
+          "10527": [
+            {
+              "bin": 2,
+              "start_ms": 520.0,
+              "end_ms": 530.0,
+              "spikes": 1
+            },
+            {
+              "bin": 6,
+              "start_ms": 560.0,
+              "end_ms": 570.0,
+              "spikes": 1
+            },
+            {
+              "bin": 10,
+              "start_ms": 600.0,
+              "end_ms": 610.0,
+              "spikes": 1
+            }
+          ],
+          "555871": []
+        }
+      },
+      {
+        "market_decision_ts": 1789213500,
+        "side": "HOLD",
+        "gate_spikes": 0,
+        "neurons": {
+          "10527": [],
+          "555871": []
+        }
+      }
+    ],
+    "restore_both": [
+      {
+        "market_decision_ts": 1789212900,
+        "side": "BUY",
+        "gate_spikes": 31,
+        "neurons": {
+          "10527": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 12,
+              "start_ms": 120.0,
+              "end_ms": 130.0,
+              "spikes": 1
+            },
+            {
+              "bin": 14,
+              "start_ms": 140.0,
+              "end_ms": 150.0,
+              "spikes": 1
+            },
+            {
+              "bin": 18,
+              "start_ms": 180.0,
+              "end_ms": 190.0,
+              "spikes": 1
+            },
+            {
+              "bin": 21,
+              "start_ms": 210.0,
+              "end_ms": 220.0,
+              "spikes": 1
+            },
+            {
+              "bin": 24,
+              "start_ms": 240.0,
+              "end_ms": 250.0,
+              "spikes": 1
+            },
+            {
+              "bin": 27,
+              "start_ms": 270.0,
+              "end_ms": 280.0,
+              "spikes": 2
+            },
+            {
+              "bin": 30,
+              "start_ms": 300.0,
+              "end_ms": 310.0,
+              "spikes": 1
+            },
+            {
+              "bin": 34,
+              "start_ms": 340.0,
+              "end_ms": 350.0,
+              "spikes": 1
+            },
+            {
+              "bin": 37,
+              "start_ms": 370.0,
+              "end_ms": 380.0,
+              "spikes": 1
+            },
+            {
+              "bin": 40,
+              "start_ms": 400.0,
+              "end_ms": 410.0,
+              "spikes": 1
+            },
+            {
+              "bin": 42,
+              "start_ms": 420.0,
+              "end_ms": 430.0,
+              "spikes": 1
+            }
+          ],
+          "555871": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 3,
+              "start_ms": 30.0,
+              "end_ms": 40.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 14,
+              "start_ms": 140.0,
+              "end_ms": 150.0,
+              "spikes": 1
+            },
+            {
+              "bin": 15,
+              "start_ms": 150.0,
+              "end_ms": 160.0,
+              "spikes": 1
+            },
+            {
+              "bin": 19,
+              "start_ms": 190.0,
+              "end_ms": 200.0,
+              "spikes": 1
+            },
+            {
+              "bin": 22,
+              "start_ms": 220.0,
+              "end_ms": 230.0,
+              "spikes": 1
+            },
+            {
+              "bin": 24,
+              "start_ms": 240.0,
+              "end_ms": 250.0,
+              "spikes": 1
+            },
+            {
+              "bin": 27,
+              "start_ms": 270.0,
+              "end_ms": 280.0,
+              "spikes": 1
+            },
+            {
+              "bin": 30,
+              "start_ms": 300.0,
+              "end_ms": 310.0,
+              "spikes": 1
+            },
+            {
+              "bin": 32,
+              "start_ms": 320.0,
+              "end_ms": 330.0,
+              "spikes": 1
+            },
+            {
+              "bin": 35,
+              "start_ms": 350.0,
+              "end_ms": 360.0,
+              "spikes": 1
+            },
+            {
+              "bin": 37,
+              "start_ms": 370.0,
+              "end_ms": 380.0,
+              "spikes": 1
+            },
+            {
+              "bin": 40,
+              "start_ms": 400.0,
+              "end_ms": 410.0,
+              "spikes": 1
+            },
+            {
+              "bin": 42,
+              "start_ms": 420.0,
+              "end_ms": 430.0,
+              "spikes": 1
+            }
+          ]
+        }
+      },
+      {
+        "market_decision_ts": 1789213200,
+        "side": "BUY",
+        "gate_spikes": 4,
+        "neurons": {
+          "10527": [
+            {
+              "bin": 2,
+              "start_ms": 520.0,
+              "end_ms": 530.0,
+              "spikes": 1
+            },
+            {
+              "bin": 6,
+              "start_ms": 560.0,
+              "end_ms": 570.0,
+              "spikes": 1
+            },
+            {
+              "bin": 10,
+              "start_ms": 600.0,
+              "end_ms": 610.0,
+              "spikes": 1
+            },
+            {
+              "bin": 27,
+              "start_ms": 770.0,
+              "end_ms": 780.0,
+              "spikes": 1
+            }
+          ],
+          "555871": []
+        }
+      },
+      {
+        "market_decision_ts": 1789213500,
+        "side": "HOLD",
+        "gate_spikes": 0,
+        "neurons": {
+          "10527": [],
+          "555871": []
+        }
+      }
+    ],
+    "restore_MBON07": [
+      {
+        "market_decision_ts": 1789212900,
+        "side": "BUY",
+        "gate_spikes": 31,
+        "neurons": {
+          "10527": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 12,
+              "start_ms": 120.0,
+              "end_ms": 130.0,
+              "spikes": 1
+            },
+            {
+              "bin": 14,
+              "start_ms": 140.0,
+              "end_ms": 150.0,
+              "spikes": 1
+            },
+            {
+              "bin": 18,
+              "start_ms": 180.0,
+              "end_ms": 190.0,
+              "spikes": 1
+            },
+            {
+              "bin": 21,
+              "start_ms": 210.0,
+              "end_ms": 220.0,
+              "spikes": 1
+            },
+            {
+              "bin": 24,
+              "start_ms": 240.0,
+              "end_ms": 250.0,
+              "spikes": 1
+            },
+            {
+              "bin": 27,
+              "start_ms": 270.0,
+              "end_ms": 280.0,
+              "spikes": 2
+            },
+            {
+              "bin": 30,
+              "start_ms": 300.0,
+              "end_ms": 310.0,
+              "spikes": 1
+            },
+            {
+              "bin": 34,
+              "start_ms": 340.0,
+              "end_ms": 350.0,
+              "spikes": 1
+            },
+            {
+              "bin": 37,
+              "start_ms": 370.0,
+              "end_ms": 380.0,
+              "spikes": 1
+            },
+            {
+              "bin": 40,
+              "start_ms": 400.0,
+              "end_ms": 410.0,
+              "spikes": 1
+            },
+            {
+              "bin": 42,
+              "start_ms": 420.0,
+              "end_ms": 430.0,
+              "spikes": 1
+            }
+          ],
+          "555871": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 3,
+              "start_ms": 30.0,
+              "end_ms": 40.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 14,
+              "start_ms": 140.0,
+              "end_ms": 150.0,
+              "spikes": 1
+            },
+            {
+              "bin": 15,
+              "start_ms": 150.0,
+              "end_ms": 160.0,
+              "spikes": 1
+            },
+            {
+              "bin": 19,
+              "start_ms": 190.0,
+              "end_ms": 200.0,
+              "spikes": 1
+            },
+            {
+              "bin": 22,
+              "start_ms": 220.0,
+              "end_ms": 230.0,
+              "spikes": 1
+            },
+            {
+              "bin": 24,
+              "start_ms": 240.0,
+              "end_ms": 250.0,
+              "spikes": 1
+            },
+            {
+              "bin": 27,
+              "start_ms": 270.0,
+              "end_ms": 280.0,
+              "spikes": 1
+            },
+            {
+              "bin": 30,
+              "start_ms": 300.0,
+              "end_ms": 310.0,
+              "spikes": 1
+            },
+            {
+              "bin": 32,
+              "start_ms": 320.0,
+              "end_ms": 330.0,
+              "spikes": 1
+            },
+            {
+              "bin": 35,
+              "start_ms": 350.0,
+              "end_ms": 360.0,
+              "spikes": 1
+            },
+            {
+              "bin": 37,
+              "start_ms": 370.0,
+              "end_ms": 380.0,
+              "spikes": 1
+            },
+            {
+              "bin": 40,
+              "start_ms": 400.0,
+              "end_ms": 410.0,
+              "spikes": 1
+            },
+            {
+              "bin": 42,
+              "start_ms": 420.0,
+              "end_ms": 430.0,
+              "spikes": 1
+            }
+          ]
+        }
+      },
+      {
+        "market_decision_ts": 1789213200,
+        "side": "BUY",
+        "gate_spikes": 3,
+        "neurons": {
+          "10527": [
+            {
+              "bin": 2,
+              "start_ms": 520.0,
+              "end_ms": 530.0,
+              "spikes": 1
+            },
+            {
+              "bin": 6,
+              "start_ms": 560.0,
+              "end_ms": 570.0,
+              "spikes": 1
+            },
+            {
+              "bin": 10,
+              "start_ms": 600.0,
+              "end_ms": 610.0,
+              "spikes": 1
+            }
+          ],
+          "555871": []
+        }
+      },
+      {
+        "market_decision_ts": 1789213500,
+        "side": "HOLD",
+        "gate_spikes": 0,
+        "neurons": {
+          "10527": [],
+          "555871": []
+        }
+      }
+    ],
+    "restore_MBON07_10704": [
+      {
+        "market_decision_ts": 1789212900,
+        "side": "BUY",
+        "gate_spikes": 31,
+        "neurons": {
+          "10527": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 12,
+              "start_ms": 120.0,
+              "end_ms": 130.0,
+              "spikes": 1
+            },
+            {
+              "bin": 14,
+              "start_ms": 140.0,
+              "end_ms": 150.0,
+              "spikes": 1
+            },
+            {
+              "bin": 18,
+              "start_ms": 180.0,
+              "end_ms": 190.0,
+              "spikes": 1
+            },
+            {
+              "bin": 21,
+              "start_ms": 210.0,
+              "end_ms": 220.0,
+              "spikes": 1
+            },
+            {
+              "bin": 24,
+              "start_ms": 240.0,
+              "end_ms": 250.0,
+              "spikes": 1
+            },
+            {
+              "bin": 27,
+              "start_ms": 270.0,
+              "end_ms": 280.0,
+              "spikes": 2
+            },
+            {
+              "bin": 30,
+              "start_ms": 300.0,
+              "end_ms": 310.0,
+              "spikes": 1
+            },
+            {
+              "bin": 34,
+              "start_ms": 340.0,
+              "end_ms": 350.0,
+              "spikes": 1
+            },
+            {
+              "bin": 37,
+              "start_ms": 370.0,
+              "end_ms": 380.0,
+              "spikes": 1
+            },
+            {
+              "bin": 40,
+              "start_ms": 400.0,
+              "end_ms": 410.0,
+              "spikes": 1
+            },
+            {
+              "bin": 42,
+              "start_ms": 420.0,
+              "end_ms": 430.0,
+              "spikes": 1
+            }
+          ],
+          "555871": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 3,
+              "start_ms": 30.0,
+              "end_ms": 40.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 14,
+              "start_ms": 140.0,
+              "end_ms": 150.0,
+              "spikes": 1
+            },
+            {
+              "bin": 15,
+              "start_ms": 150.0,
+              "end_ms": 160.0,
+              "spikes": 1
+            },
+            {
+              "bin": 19,
+              "start_ms": 190.0,
+              "end_ms": 200.0,
+              "spikes": 1
+            },
+            {
+              "bin": 22,
+              "start_ms": 220.0,
+              "end_ms": 230.0,
+              "spikes": 1
+            },
+            {
+              "bin": 24,
+              "start_ms": 240.0,
+              "end_ms": 250.0,
+              "spikes": 1
+            },
+            {
+              "bin": 27,
+              "start_ms": 270.0,
+              "end_ms": 280.0,
+              "spikes": 1
+            },
+            {
+              "bin": 30,
+              "start_ms": 300.0,
+              "end_ms": 310.0,
+              "spikes": 1
+            },
+            {
+              "bin": 32,
+              "start_ms": 320.0,
+              "end_ms": 330.0,
+              "spikes": 1
+            },
+            {
+              "bin": 35,
+              "start_ms": 350.0,
+              "end_ms": 360.0,
+              "spikes": 1
+            },
+            {
+              "bin": 37,
+              "start_ms": 370.0,
+              "end_ms": 380.0,
+              "spikes": 1
+            },
+            {
+              "bin": 40,
+              "start_ms": 400.0,
+              "end_ms": 410.0,
+              "spikes": 1
+            },
+            {
+              "bin": 42,
+              "start_ms": 420.0,
+              "end_ms": 430.0,
+              "spikes": 1
+            }
+          ]
+        }
+      },
+      {
+        "market_decision_ts": 1789213200,
+        "side": "BUY",
+        "gate_spikes": 4,
+        "neurons": {
+          "10527": [
+            {
+              "bin": 2,
+              "start_ms": 520.0,
+              "end_ms": 530.0,
+              "spikes": 1
+            },
+            {
+              "bin": 6,
+              "start_ms": 560.0,
+              "end_ms": 570.0,
+              "spikes": 1
+            },
+            {
+              "bin": 10,
+              "start_ms": 600.0,
+              "end_ms": 610.0,
+              "spikes": 1
+            },
+            {
+              "bin": 44,
+              "start_ms": 940.0,
+              "end_ms": 950.0,
+              "spikes": 1
+            }
+          ],
+          "555871": []
+        }
+      },
+      {
+        "market_decision_ts": 1789213500,
+        "side": "BUY",
+        "gate_spikes": 1,
+        "neurons": {
+          "10527": [
+            {
+              "bin": 11,
+              "start_ms": 1110.0,
+              "end_ms": 1120.0,
+              "spikes": 1
+            }
+          ],
+          "555871": []
+        }
+      }
+    ],
+    "restore_MBON07_11402": [
+      {
+        "market_decision_ts": 1789212900,
+        "side": "BUY",
+        "gate_spikes": 31,
+        "neurons": {
+          "10527": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 12,
+              "start_ms": 120.0,
+              "end_ms": 130.0,
+              "spikes": 1
+            },
+            {
+              "bin": 14,
+              "start_ms": 140.0,
+              "end_ms": 150.0,
+              "spikes": 1
+            },
+            {
+              "bin": 18,
+              "start_ms": 180.0,
+              "end_ms": 190.0,
+              "spikes": 1
+            },
+            {
+              "bin": 21,
+              "start_ms": 210.0,
+              "end_ms": 220.0,
+              "spikes": 1
+            },
+            {
+              "bin": 24,
+              "start_ms": 240.0,
+              "end_ms": 250.0,
+              "spikes": 1
+            },
+            {
+              "bin": 27,
+              "start_ms": 270.0,
+              "end_ms": 280.0,
+              "spikes": 2
+            },
+            {
+              "bin": 30,
+              "start_ms": 300.0,
+              "end_ms": 310.0,
+              "spikes": 1
+            },
+            {
+              "bin": 34,
+              "start_ms": 340.0,
+              "end_ms": 350.0,
+              "spikes": 1
+            },
+            {
+              "bin": 37,
+              "start_ms": 370.0,
+              "end_ms": 380.0,
+              "spikes": 1
+            },
+            {
+              "bin": 40,
+              "start_ms": 400.0,
+              "end_ms": 410.0,
+              "spikes": 1
+            },
+            {
+              "bin": 42,
+              "start_ms": 420.0,
+              "end_ms": 430.0,
+              "spikes": 1
+            }
+          ],
+          "555871": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 3,
+              "start_ms": 30.0,
+              "end_ms": 40.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 14,
+              "start_ms": 140.0,
+              "end_ms": 150.0,
+              "spikes": 1
+            },
+            {
+              "bin": 15,
+              "start_ms": 150.0,
+              "end_ms": 160.0,
+              "spikes": 1
+            },
+            {
+              "bin": 19,
+              "start_ms": 190.0,
+              "end_ms": 200.0,
+              "spikes": 1
+            },
+            {
+              "bin": 22,
+              "start_ms": 220.0,
+              "end_ms": 230.0,
+              "spikes": 1
+            },
+            {
+              "bin": 24,
+              "start_ms": 240.0,
+              "end_ms": 250.0,
+              "spikes": 1
+            },
+            {
+              "bin": 27,
+              "start_ms": 270.0,
+              "end_ms": 280.0,
+              "spikes": 1
+            },
+            {
+              "bin": 30,
+              "start_ms": 300.0,
+              "end_ms": 310.0,
+              "spikes": 1
+            },
+            {
+              "bin": 32,
+              "start_ms": 320.0,
+              "end_ms": 330.0,
+              "spikes": 1
+            },
+            {
+              "bin": 35,
+              "start_ms": 350.0,
+              "end_ms": 360.0,
+              "spikes": 1
+            },
+            {
+              "bin": 37,
+              "start_ms": 370.0,
+              "end_ms": 380.0,
+              "spikes": 1
+            },
+            {
+              "bin": 40,
+              "start_ms": 400.0,
+              "end_ms": 410.0,
+              "spikes": 1
+            },
+            {
+              "bin": 42,
+              "start_ms": 420.0,
+              "end_ms": 430.0,
+              "spikes": 1
+            }
+          ]
+        }
+      },
+      {
+        "market_decision_ts": 1789213200,
+        "side": "BUY",
+        "gate_spikes": 3,
+        "neurons": {
+          "10527": [
+            {
+              "bin": 2,
+              "start_ms": 520.0,
+              "end_ms": 530.0,
+              "spikes": 1
+            },
+            {
+              "bin": 6,
+              "start_ms": 560.0,
+              "end_ms": 570.0,
+              "spikes": 1
+            },
+            {
+              "bin": 10,
+              "start_ms": 600.0,
+              "end_ms": 610.0,
+              "spikes": 1
+            }
+          ],
+          "555871": []
+        }
+      },
+      {
+        "market_decision_ts": 1789213500,
+        "side": "HOLD",
+        "gate_spikes": 0,
+        "neurons": {
+          "10527": [],
+          "555871": []
+        }
+      }
+    ],
+    "restore_all": [
+      {
+        "market_decision_ts": 1789212900,
+        "side": "BUY",
+        "gate_spikes": 31,
+        "neurons": {
+          "10527": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 12,
+              "start_ms": 120.0,
+              "end_ms": 130.0,
+              "spikes": 1
+            },
+            {
+              "bin": 14,
+              "start_ms": 140.0,
+              "end_ms": 150.0,
+              "spikes": 1
+            },
+            {
+              "bin": 18,
+              "start_ms": 180.0,
+              "end_ms": 190.0,
+              "spikes": 1
+            },
+            {
+              "bin": 21,
+              "start_ms": 210.0,
+              "end_ms": 220.0,
+              "spikes": 1
+            },
+            {
+              "bin": 24,
+              "start_ms": 240.0,
+              "end_ms": 250.0,
+              "spikes": 1
+            },
+            {
+              "bin": 27,
+              "start_ms": 270.0,
+              "end_ms": 280.0,
+              "spikes": 2
+            },
+            {
+              "bin": 30,
+              "start_ms": 300.0,
+              "end_ms": 310.0,
+              "spikes": 1
+            },
+            {
+              "bin": 34,
+              "start_ms": 340.0,
+              "end_ms": 350.0,
+              "spikes": 1
+            },
+            {
+              "bin": 37,
+              "start_ms": 370.0,
+              "end_ms": 380.0,
+              "spikes": 1
+            },
+            {
+              "bin": 40,
+              "start_ms": 400.0,
+              "end_ms": 410.0,
+              "spikes": 1
+            },
+            {
+              "bin": 42,
+              "start_ms": 420.0,
+              "end_ms": 430.0,
+              "spikes": 1
+            }
+          ],
+          "555871": [
+            {
+              "bin": 2,
+              "start_ms": 20.0,
+              "end_ms": 30.0,
+              "spikes": 1
+            },
+            {
+              "bin": 3,
+              "start_ms": 30.0,
+              "end_ms": 40.0,
+              "spikes": 1
+            },
+            {
+              "bin": 5,
+              "start_ms": 50.0,
+              "end_ms": 60.0,
+              "spikes": 1
+            },
+            {
+              "bin": 8,
+              "start_ms": 80.0,
+              "end_ms": 90.0,
+              "spikes": 1
+            },
+            {
+              "bin": 14,
+              "start_ms": 140.0,
+              "end_ms": 150.0,
+              "spikes": 1
+            },
+            {
+              "bin": 15,
+              "start_ms": 150.0,
+              "end_ms": 160.0,
+              "spikes": 1
+            },
+            {
+              "bin": 19,
+              "start_ms": 190.0,
+              "end_ms": 200.0,
+              "spikes": 1
+            },
+            {
+              "bin": 22,
+              "start_ms": 220.0,
+              "end_ms": 230.0,
+              "spikes": 1
+            },
+            {
+              "bin": 24,
+              "start_ms": 240.0,
+              "end_ms": 250.0,
+              "spikes": 1
+            },
+            {
+              "bin": 27,
+              "start_ms": 270.0,
+              "end_ms": 280.0,
+              "spikes": 1
+            },
+            {
+              "bin": 30,
+              "start_ms": 300.0,
+              "end_ms": 310.0,
+              "spikes": 1
+            },
+            {
+              "bin": 32,
+              "start_ms": 320.0,
+              "end_ms": 330.0,
+              "spikes": 1
+            },
+            {
+              "bin": 35,
+              "start_ms": 350.0,
+              "end_ms": 360.0,
+              "spikes": 1
+            },
+            {
+              "bin": 37,
+              "start_ms": 370.0,
+              "end_ms": 380.0,
+              "spikes": 1
+            },
+            {
+              "bin": 40,
+              "start_ms": 400.0,
+              "end_ms": 410.0,
+              "spikes": 1
+            },
+            {
+              "bin": 42,
+              "start_ms": 420.0,
+              "end_ms": 430.0,
+              "spikes": 1
+            }
+          ]
+        }
+      },
+      {
+        "market_decision_ts": 1789213200,
+        "side": "BUY",
+        "gate_spikes": 4,
+        "neurons": {
+          "10527": [
+            {
+              "bin": 2,
+              "start_ms": 520.0,
+              "end_ms": 530.0,
+              "spikes": 1
+            },
+            {
+              "bin": 6,
+              "start_ms": 560.0,
+              "end_ms": 570.0,
+              "spikes": 1
+            },
+            {
+              "bin": 10,
+              "start_ms": 600.0,
+              "end_ms": 610.0,
+              "spikes": 1
+            },
+            {
+              "bin": 44,
+              "start_ms": 940.0,
+              "end_ms": 950.0,
+              "spikes": 1
+            }
+          ],
+          "555871": []
+        }
+      },
+      {
+        "market_decision_ts": 1789213500,
+        "side": "HOLD",
+        "gate_spikes": 0,
+        "neurons": {
+          "10527": [],
+          "555871": []
+        }
+      }
+    ]
+  },
+  "interpretation": "Recorded gate-spike bins, not exact spike times or evidence of which upstream connection caused a spike. No trading returns recomputed.",
+  "view_sha256": {
+    "pristine_frozen": "4fed1fdc86799a5c3b70cec902c8aebd0f72f75b2b61b7d71e36a85820ecb5bc",
+    "trained_frozen": "284d6e3320e2fa33727d9fe7dd733a36275d22f71f54914d4e142654d3cc1a8e",
+    "restore_10704": "37da78290f9244265b9ba3a46c7a6156a0e049c19e436a2eae342010bef05af6",
+    "restore_11402": "49fba5e74f3572c75abc91cc9967d0e38e4988cc7523544656a11d5b5cc80e73",
+    "restore_both": "494ce4bd480586040503cbf39053f3e8396db593a5d92606074f5a83c9632eba",
+    "restore_MBON07": "c1554d803a32d5ff51e8e943277bc6b9d355886203a1f150e75c63474f442a67",
+    "restore_MBON07_10704": "97d9e2795d4ebe6a2facf88cfdd8f09a15e8cda23425535b97fd7a493ad10c57",
+    "restore_MBON07_11402": "5dea0abb97cdf2c7cd7c9861857e4d05b742d3b384cdae32b193e11b5ef32f75",
+    "restore_all": "8ea8dda8dff3eea16357435b8502ae815314c9303d2564009da9f38a3b9dbbfb"
+  }
+}

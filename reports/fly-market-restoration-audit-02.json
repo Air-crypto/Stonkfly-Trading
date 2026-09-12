@@ -1,0 +1,238 @@
+{
+  "comparisons": {
+    "pristine_frozen": {
+      "actions": [
+        "BUY",
+        "BUY",
+        "HOLD"
+      ],
+      "difference_hz": [
+        8.0,
+        6.0,
+        10.0
+      ],
+      "gate_spikes": [
+        31,
+        4,
+        0
+      ],
+      "matching_pristine_spike_counts": 3,
+      "matching_pristine_actions": 3,
+      "restored_edges": 0
+    },
+    "trained_frozen": {
+      "actions": [
+        "BUY",
+        "BUY",
+        "HOLD"
+      ],
+      "difference_hz": [
+        8.0,
+        2.0,
+        4.0
+      ],
+      "gate_spikes": [
+        31,
+        3,
+        0
+      ],
+      "matching_pristine_spike_counts": 1,
+      "matching_pristine_actions": 3,
+      "restored_edges": 0
+    },
+    "restore_10704": {
+      "actions": [
+        "BUY",
+        "BUY",
+        "HOLD"
+      ],
+      "difference_hz": [
+        8.0,
+        10.0,
+        12.0
+      ],
+      "gate_spikes": [
+        31,
+        3,
+        0
+      ],
+      "matching_pristine_spike_counts": 1,
+      "matching_pristine_actions": 3,
+      "restored_edges": 2048
+    },
+    "restore_11402": {
+      "actions": [
+        "BUY",
+        "SELL",
+        "HOLD"
+      ],
+      "difference_hz": [
+        8.0,
+        -2.0,
+        6.0
+      ],
+      "gate_spikes": [
+        31,
+        3,
+        0
+      ],
+      "matching_pristine_spike_counts": 1,
+      "matching_pristine_actions": 2,
+      "restored_edges": 2136
+    },
+    "restore_both": {
+      "actions": [
+        "BUY",
+        "BUY",
+        "HOLD"
+      ],
+      "difference_hz": [
+        8.0,
+        8.0,
+        8.0
+      ],
+      "gate_spikes": [
+        31,
+        4,
+        0
+      ],
+      "matching_pristine_spike_counts": 1,
+      "matching_pristine_actions": 3,
+      "restored_edges": 4184
+    },
+    "restore_MBON07": {
+      "actions": [
+        "BUY",
+        "BUY",
+        "HOLD"
+      ],
+      "difference_hz": [
+        8.0,
+        6.0,
+        8.0
+      ],
+      "gate_spikes": [
+        31,
+        3,
+        0
+      ],
+      "matching_pristine_spike_counts": 1,
+      "matching_pristine_actions": 3,
+      "restored_edges": 3651
+    },
+    "restore_MBON07_10704": {
+      "actions": [
+        "BUY",
+        "BUY",
+        "BUY"
+      ],
+      "difference_hz": [
+        8.0,
+        8.0,
+        4.0
+      ],
+      "gate_spikes": [
+        31,
+        4,
+        1
+      ],
+      "matching_pristine_spike_counts": 1,
+      "matching_pristine_actions": 2,
+      "restored_edges": 5699
+    },
+    "restore_MBON07_11402": {
+      "actions": [
+        "BUY",
+        "BUY",
+        "HOLD"
+      ],
+      "difference_hz": [
+        8.0,
+        10.0,
+        2.0
+      ],
+      "gate_spikes": [
+        31,
+        3,
+        0
+      ],
+      "matching_pristine_spike_counts": 1,
+      "matching_pristine_actions": 3,
+      "restored_edges": 5787
+    },
+    "restore_all": {
+      "actions": [
+        "BUY",
+        "BUY",
+        "HOLD"
+      ],
+      "difference_hz": [
+        8.0,
+        6.0,
+        10.0
+      ],
+      "gate_spikes": [
+        31,
+        4,
+        0
+      ],
+      "matching_pristine_spike_counts": 3,
+      "matching_pristine_actions": 3,
+      "restored_edges": 7835
+    }
+  },
+  "joint_readout_contrast_hz": [
+    0.0,
+    2.0,
+    -6.0
+  ],
+  "contrast_definition": "trained minus restore_10704 minus restore_11402 plus restore_both, separately for each observation",
+  "both_restoration_matches_pristine_memory": false,
+  "verification": {
+    "reference_controls_reproduced": true,
+    "frozen_reported_memory_preserved": true,
+    "restoration_masks_disjoint_and_complete": true,
+    "all_memory_restorations_audited": true,
+    "all_five_reference_controls_reproduced": true,
+    "full_restoration_reproduces_pristine": true
+  },
+  "interpretation": "Post hoc mechanism study on previously examined inputs. Restoring a neural output does not establish a trading improvement.",
+  "restoring_11402_effect_hz": {
+    "keep_MBON07_keep_10704": [
+      0.0,
+      -4.0,
+      2.0
+    ],
+    "keep_MBON07_restore_10704": [
+      0.0,
+      -2.0,
+      -4.0
+    ],
+    "restore_MBON07_keep_10704": [
+      0.0,
+      4.0,
+      -6.0
+    ],
+    "restore_MBON07_restore_10704": [
+      0.0,
+      -2.0,
+      6.0
+    ]
+  },
+  "effect_definition": "After restoring 11402 minus before, holding the other two restoration choices fixed; one contrast per observation. Deterministic replay contrasts, not population effect estimates.",
+  "checkpoint_sha256": {
+    "plastic-map.npz": "d2cc90d65439b565f1812b00c8a2f2e137c0e1d0fc0013215bb80ffc322274d2",
+    "pristine-memory.npz": "5b1fac5bd0e8cdcabdfccf0ecc17204bf21161d9193c27c54636181a71318e21",
+    "trained-memory.npz": "f38842f21ed33c8a5078fac92b1b523949c754e9209d4bb18f5b6c793b7d821b",
+    "pristine_frozen/initial-memory.npz": "5b1fac5bd0e8cdcabdfccf0ecc17204bf21161d9193c27c54636181a71318e21",
+    "trained_frozen/initial-memory.npz": "f38842f21ed33c8a5078fac92b1b523949c754e9209d4bb18f5b6c793b7d821b",
+    "restore_10704/initial-memory.npz": "84d8950647213b54e68f3f6c6717171483674f7e2cbba3e05587b33374cfde84",
+    "restore_11402/initial-memory.npz": "97a5d24bf554e4d98a6b1e22d7563bc9466071dbb1e4f63f03767735f5d9b6f5",
+    "restore_both/initial-memory.npz": "1e32657dccd9f4cb0aa8a3b0c41f8265a1435e93621114d9b010998a211b4ce9",
+    "restore_MBON07/initial-memory.npz": "fb6edf8548049990a9d556007b2d817cdd9ff195314d29aa54e06847d9eb7e83",
+    "restore_MBON07_10704/initial-memory.npz": "3465d85a156faf619e23a20384fe9f367ab07405b6789d73b035494791636205",
+    "restore_MBON07_11402/initial-memory.npz": "edd9ee609dce58f7af1728180f57817dd82942149db3c28cfadf43fbcb342e5e",
+    "restore_all/initial-memory.npz": "5b1fac5bd0e8cdcabdfccf0ecc17204bf21161d9193c27c54636181a71318e21"
+  },
+  "study_sha256": "2404bacdd08f391a2b4ea5fff2af3306b6fa43d5fcd59a8c6b78ac25563d6414"
+}

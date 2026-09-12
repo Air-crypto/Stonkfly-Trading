@@ -112,11 +112,22 @@ def figure(study):
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     for field in ('study','reference','plan','out'):p.add_argument('--'+field,type=Path,required=True)
-    p.add_argument('--artifacts',type=Path);p.add_argument('--figure',type=Path);a=p.parse_args();study=json.loads(a.study.read_text())
+    p.add_argument('--artifacts',type=Path);p.add_argument('--figure',type=Path)
+    p.add_argument('--recordings',type=Path,help='Directory containing each arm/view.json')
+    p.add_argument('--timing-out',type=Path)
+    a=p.parse_args()
+    if bool(a.recordings)!=bool(a.timing_out):p.error('--recordings and --timing-out must be used together')
+    study=json.loads(a.study.read_text())
     result=audit(study,a.reference.read_text(),json.loads(a.plan.read_text()),a.artifacts)
     result['study_sha256']=hashlib.sha256(a.study.read_bytes()).hexdigest()
     a.out.write_text(json.dumps(result,indent=2)+'\n')
     if a.figure:a.figure.write_text(figure(study))
+    if a.recordings:
+        from .fly_pulse_audit import gate_timing
+        files={name:(a.recordings/name/'view.json').read_bytes() for name in study['protocol']['arms']}
+        timing=gate_timing(study,{name:json.loads(raw) for name,raw in files.items()},study['protocol']['arms'])
+        timing['view_sha256']={name:hashlib.sha256(raw).hexdigest() for name,raw in files.items()}
+        a.timing_out.write_text(json.dumps(timing,indent=2)+'\n')
     print(json.dumps(result['comparisons'],indent=2))
 
 

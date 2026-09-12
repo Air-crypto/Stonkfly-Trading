@@ -1446,3 +1446,72 @@ uv run python -m paperlab.fly_market_restoration_audit \
   --artifacts runs/restoration02/artifacts \
   --out runs/restoration02/audit.json --figure runs/restoration02/figure.svg
 ```
+
+### Three-group restoration results
+
+The [completed nine-condition replay](../reports/fly-market-restoration-study-02.json)
+and [checkpoint audit](../reports/fly-market-restoration-audit-02.json) reproduced
+all five sixth-study reference variants. Every condition retained the full
+166,700-neuron / 25,582,938-edge graph and froze synaptic memory during inference.
+Restoring all 7,835 plastic inputs reproduced pristine memory and all three
+whole-neuron spike-count records. Restoring only both MBON11 cells did not.
+
+![Nine memory combinations on the same recorded images](assets/fly-market-restoration-02.png)
+
+At the 11:40 observation, the effect of restoring 11402 depended on the other
+retained memories. The values below are right-minus-left decoder firing rates;
+the change is after restoring 11402 minus before, with the other choices fixed.
+
+| MBON07 inputs | 10704 inputs | Before restoring 11402 | After | Change |
+| --- | --- | ---: | ---: | ---: |
+| Trained | Trained | +2 Hz (BUY) | −2 Hz (SELL) | −4 Hz |
+| Trained | Pristine | +10 Hz (BUY) | +8 Hz (BUY) | −2 Hz |
+| Pristine | Trained | +6 Hz (BUY) | +10 Hz (BUY) | +4 Hz |
+| Pristine | Pristine | +8 Hz (BUY) | +6 Hz (BUY) | −2 Hz |
+
+For this input and these interventions, the SELL required retaining the learned
+MBON07 and 10704 inputs while restoring 11402. Resetting MBON07 reversed the sign
+of the 11402 restoration's readout effect. Resetting 10704 instead raised the
+starting directional readout enough that restoring 11402 still left a BUY.
+This supports conditional interactions between learned input groups, rather
+than treating one cell's memory as uniformly harmful. It does not identify a
+single responsible synapse or show that the same effect generalizes.
+
+[Compare retained versus restored MBON07](http://127.0.0.1:8765/?run=marketrestore02-restore_11402&step=1&neuron=12859&edge=14797499&compare=marketrestore02-restore_MBON07_11402).
+Both runs restore 11402; the comparison additionally restores MBON07. The
+selected connection is an actual input to body 12859. Its trained weight is
+1.541393 versus pristine 1.65; both remain frozen during the replay.
+
+![MBON07 restoration reverses the paired output](assets/fly-market-restoration-02-comparison.png)
+
+![The corresponding MBON07 neuron and connection traces](assets/fly-market-restoration-02-traces.png)
+
+There is also a distinct gate effect. Restoring MBON07 and 10704 while keeping
+11402 trained produced BUY/BUY/BUY; all other conditions held on the last
+observation. The [27-observation gate audit](../reports/fly-market-restoration-gate-timing-02.json)
+locates the extra spike in gate cell 10527 at the 1,110–1,120 ms neural-time bin,
+110–120 ms into the third observation. The other gate cell, 555871, had no spike
+there. This occurred with frozen weights and no reinforcement; the changed
+starting memory was sufficient in this replay.
+
+[Jump to the extra gate spike](http://127.0.0.1:8765/?run=marketrestore02-restore_MBON07_10704&step=2&bin=11&neuron=10527&compare=marketrestore02-restore_MBON07).
+This pair differs only in restoring 10704. The selected plastic edge in the
+screenshot is 38549 → 10704, not a direct edge into the gate cell. The UI labels
+both endpoints because neuron and connection selections are independent. Spike
+bin alignment is not evidence that this one edge caused the gate spike.
+
+![One extra recorded gate spike after a memory intervention](assets/fly-market-restoration-02-gate.png)
+
+The assay recomputed no accounts, fills, or returns, so the extra BUY has no
+measured profit/loss here. The sixth market test's 11402 benefit remains an
+unselected test-only result. The seventh market comparison keeps its previously
+registered five variants and selection rule. These nine diagnostic conditions
+do not replace that registration or promote a policy.
+
+All nine compact recordings are included under `marketrestore02-{variant}`.
+To reproduce the gate audit from a downloaded cloud result, add
+`--recordings runs/restoration02 --timing-out runs/restoration02/gates.json`
+to the audit command above. It checks each recording's report, bin grid, gate
+identities, and spike sums against the decoder. Estimated compute for this
+assay was $0.0138; the worker ledger reserved $1.2765 against its unchanged $25
+monthly cap afterward. These are internal estimates, not provider billing.

@@ -77,7 +77,7 @@ function pairedTraces(){
  const pi=data.plastic_selection.indexOf(e.plastic_index),oi=paired.data.plastic_selection.indexOf(oe.plastic_index);
  if(!sameEnds||pi<0||oi<0){$('paired-weight').textContent='Connection identity does not reconcile between recordings.';return;}
  chart('paired-weight',xs,series(f.plastic_weights.map(v=>v[pi]),o.plastic_weights.map(v=>v[oi])),`Edge ${e.id}: weight`,bin,'Time in observation (ms)');
- note.textContent+=` Edge ${e.id}: ${num(f.plastic_weights[bin][pi],6)} vs ${num(o.plastic_weights[bin][oi],6)}; current minus comparison ${num(f.plastic_weights[bin][pi]-o.plastic_weights[bin][oi],6)}.`;
+ note.textContent+=` Edge ${e.id} (${data.nodes[e.source].id} → ${data.nodes[e.target].id}): ${num(f.plastic_weights[bin][pi],6)} vs ${num(o.plastic_weights[bin][oi],6)}; current minus comparison ${num(f.plastic_weights[bin][pi]-o.plastic_weights[bin][oi],6)}.`;
 }
 function draw(){if(!data)return;externalNeuron=false;document.querySelector('.legend .changed').parentElement.lastChild.textContent=$('pristine').checked?'Plastic edge differs from pristine state':'Plastic edge changed since observation start';const f=data.frames[step],n=data.nodes[node];bin=Math.min(bin,f.times_ms.length-1);$('bin').max=f.times_ms.length-1;$('bin').value=bin;$('time').textContent=num(f.times_ms[bin])+' ms';network(f);
  document.querySelector('.legend .restored').parentElement.lastChild.textContent=data.report.restoration?'Restored before replay':'Restored before probe';

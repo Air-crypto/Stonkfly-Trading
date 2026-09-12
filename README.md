@@ -63,6 +63,10 @@ The diagnostics have identified concrete limitations:
   found a test-only benefit from restoring 11402: **$1,000.46** versus **$994.18**
   for the other variants. Every variant failed development, so none was promoted.
   The same five-way comparison is registered on the following window.
+- The [nine-condition memory replay](docs/fly-debugger.md#three-group-restoration-results)
+  found that this SELL depends on retaining learned MBON07 and 10704 inputs.
+  Resetting more memory can reverse it or introduce an extra gate-driven BUY.
+  All reference controls reproduced; blanket restoration is not a demonstrated fix.
 
 ![Memory-restoration comparison across training, development, and test](docs/assets/fly-market-study-06.png)
 

@@ -49,14 +49,14 @@ def audit(study, reference_text):
 
 
 
-def gate_timing(study, recordings):
+def gate_timing(study, recordings, expected_arms=ARMS):
     """Locate decoder gate spikes in the published 10 ms recordings.
 
     These are bin boundaries, not exact spike timestamps or a causal path.
     Match each compact recording to its original study report before use.
     """
     result={}
-    if set(recordings)!=set(ARMS):raise ValueError('Missing timing controls')
+    if set(recordings)!=set(expected_arms):raise ValueError('Missing timing controls')
     for name,view in recordings.items():
         if view['report']!=study['reports'][name]:
             raise ValueError('Timing recording differs from study report')

@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="772" viewBox="0 0 1120 772">
+<rect width="1120" height="772" rx="14" fill="#101a2b"/>
+<style>text{font-family:Arial,sans-serif;fill:#e8edf6}.small{font-size:13px;fill:#b2bfd1}</style>
+<text x="28" y="40" font-size="25" class="">Which retained inputs changed the directional readout?</text>
+<text x="28" y="67" font-size="13" class="small">Same three historical market images; frozen inference, no reinforcement, and no recomputed fills.</text>
+<text x="28" y="108" font-size="14" class="">Starting memory / restoration</text>
+<text x="330" y="108" font-size="14" class="">Restored edges</text>
+<text x="510" y="108" font-size="14" class="">11:35 UTC</text>
+<text x="690" y="108" font-size="14" class="">11:40 UTC</text>
+<text x="870" y="108" font-size="14" class="">11:45 UTC</text>
+<path d="M28,179H1090" stroke="#35445c"/>
+<text x="28" y="155" font-size="15" class="">Pristine / frozen</text>
+<text x="330" y="155" font-size="16" class="">0</text>
+<text x="510" y="155" font-size="16" class="">BUY</text>
+<text x="510" y="173" font-size="12" class="small">R−L 8 Hz · gate 31</text>
+<text x="690" y="155" font-size="16" class="">BUY</text>
+<text x="690" y="173" font-size="12" class="small">R−L 6 Hz · gate 4</text>
+<text x="870" y="155" font-size="16" class="">HOLD</text>
+<text x="870" y="173" font-size="12" class="small">R−L 10 Hz · gate 0</text>
+<path d="M28,237H1090" stroke="#35445c"/>
+<text x="28" y="213" font-size="15" class="">Trained / frozen</text>
+<text x="330" y="213" font-size="16" class="">0</text>
+<text x="510" y="213" font-size="16" class="">BUY</text>
+<text x="510" y="231" font-size="12" class="small">R−L 8 Hz · gate 31</text>
+<text x="690" y="213" font-size="16" class="">BUY</text>
+<text x="690" y="231" font-size="12" class="small">R−L 2 Hz · gate 3</text>
+<text x="870" y="213" font-size="16" class="">HOLD</text>
+<text x="870" y="231" font-size="12" class="small">R−L 4 Hz · gate 0</text>
+<path d="M28,295H1090" stroke="#35445c"/>
+<text x="28" y="271" font-size="15" class="">Restore inputs to 10704</text>
+<text x="330" y="271" font-size="16" class="">2,048</text>
+<text x="510" y="271" font-size="16" class="">BUY</text>
+<text x="510" y="289" font-size="12" class="small">R−L 8 Hz · gate 31</text>
+<text x="690" y="271" font-size="16" class="">BUY</text>
+<text x="690" y="289" font-size="12" class="small">R−L 10 Hz · gate 3</text>
+<text x="870" y="271" font-size="16" class="">HOLD</text>
+<text x="870" y="289" font-size="12" class="small">R−L 12 Hz · gate 0</text>
+<path d="M28,353H1090" stroke="#35445c"/>
+<text x="28" y="329" font-size="15" class="">Restore inputs to 11402</text>
+<text x="330" y="329" font-size="16" class="">2,136</text>
+<text x="510" y="329" font-size="16" class="">BUY</text>
+<text x="510" y="347" font-size="12" class="small">R−L 8 Hz · gate 31</text>
+<text x="690" y="329" font-size="16" class="">SELL</text>
+<text x="690" y="347" font-size="12" class="small">R−L -2 Hz · gate 3</text>
+<text x="870" y="329" font-size="16" class="">HOLD</text>
+<text x="870" y="347" font-size="12" class="small">R−L 6 Hz · gate 0</text>
+<path d="M28,411H1090" stroke="#35445c"/>
+<text x="28" y="387" font-size="15" class="">Restore both MBON11 cells</text>
+<text x="330" y="387" font-size="16" class="">4,184</text>
+<text x="510" y="387" font-size="16" class="">BUY</text>
+<text x="510" y="405" font-size="12" class="small">R−L 8 Hz · gate 31</text>
+<text x="690" y="387" font-size="16" class="">BUY</text>
+<text x="690" y="405" font-size="12" class="small">R−L 8 Hz · gate 4</text>
+<text x="870" y="387" font-size="16" class="">HOLD</text>
+<text x="870" y="405" font-size="12" class="small">R−L 8 Hz · gate 0</text>
+<path d="M28,469H1090" stroke="#35445c"/>
+<text x="28" y="445" font-size="15" class="">Restore MBON07</text>
+<text x="330" y="445" font-size="16" class="">3,651</text>
+<text x="510" y="445" font-size="16" class="">BUY</text>
+<text x="510" y="463" font-size="12" class="small">R−L 8 Hz · gate 31</text>
+<text x="690" y="445" font-size="16" class="">BUY</text>
+<text x="690" y="463" font-size="12" class="small">R−L 6 Hz · gate 3</text>
+<text x="870" y="445" font-size="16" class="">HOLD</text>
+<text x="870" y="463" font-size="12" class="small">R−L 8 Hz · gate 0</text>
+<path d="M28,527H1090" stroke="#35445c"/>
+<text x="28" y="503" font-size="15" class="">Restore MBON07 + 10704</text>
+<text x="330" y="503" font-size="16" class="">5,699</text>
+<text x="510" y="503" font-size="16" class="">BUY</text>
+<text x="510" y="521" font-size="12" class="small">R−L 8 Hz · gate 31</text>
+<text x="690" y="503" font-size="16" class="">BUY</text>
+<text x="690" y="521" font-size="12" class="small">R−L 8 Hz · gate 4</text>
+<text x="870" y="503" font-size="16" class="">BUY</text>
+<text x="870" y="521" font-size="12" class="small">R−L 4 Hz · gate 1</text>
+<path d="M28,585H1090" stroke="#35445c"/>
+<text x="28" y="561" font-size="15" class="">Restore MBON07 + 11402</text>
+<text x="330" y="561" font-size="16" class="">5,787</text>
+<text x="510" y="561" font-size="16" class="">BUY</text>
+<text x="510" y="579" font-size="12" class="small">R−L 8 Hz · gate 31</text>
+<text x="690" y="561" font-size="16" class="">BUY</text>
+<text x="690" y="579" font-size="12" class="small">R−L 10 Hz · gate 3</text>
+<text x="870" y="561" font-size="16" class="">HOLD</text>
+<text x="870" y="579" font-size="12" class="small">R−L 2 Hz · gate 0</text>
+<path d="M28,643H1090" stroke="#35445c"/>
+<text x="28" y="619" font-size="15" class="">Restore every plastic input</text>
+<text x="330" y="619" font-size="16" class="">7,835</text>
+<text x="510" y="619" font-size="16" class="">BUY</text>
+<text x="510" y="637" font-size="12" class="small">R−L 8 Hz · gate 31</text>
+<text x="690" y="619" font-size="16" class="">BUY</text>
+<text x="690" y="637" font-size="12" class="small">R−L 6 Hz · gate 4</text>
+<text x="870" y="619" font-size="16" class="">HOLD</text>
+<text x="870" y="637" font-size="12" class="small">R−L 10 Hz · gate 0</text>
+<text x="28" y="707" font-size="13" class="small">Restoration replaces selected incoming weights and efficacy memory with pristine values before replay.</text>
+<text x="28" y="731" font-size="13" class="small">All graph connections remain. Matching controls support mechanism diagnosis, not fresh profitability.</text>
+</svg>
