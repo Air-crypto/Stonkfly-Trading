@@ -67,10 +67,12 @@ def render(report, title="Sealed market replay"):
             text(left,bottom+40,f'{observed}/{len(decisions)} decisions observed',12,'small')
     y=170+len(arms)*155
     selected=report['selection']['selected']
-    text(28,y,'Development selection: '+(LABELS.get(selected,selected) if selected else 'No arm passed the cash and frozen-baseline gate.'),15)
+    no_selection='Trained input reset did not beat cash and all three controls.' if report.get('activity_reset_timing') else 'No arm passed the cash and frozen-baseline gate.'
+    text(28,y,'Development selection: '+(LABELS.get(selected,selected) if selected else no_selection),15)
     text(28,y+24,'Simulated DEX fees/slippage included; hosting excluded. Unavailable inventory uses stress valuation. News disabled.',13,'small')
     text(28,y+45,'Short retrospective experiment; this is not a monthly return estimate or evidence of executable live profit.',13,'small')
-    if report.get('restoration_timing'):text(28,y+67,'Equivalent training recipes share one checkpoint per pool; development and test remain separate.',13,'small')
+    if report.get('activity_reset_timing'):text(28,y+67,'Only trained input reset can qualify. Selection uses development; test outcomes cannot change the choice.',13,'small')
+    elif report.get('restoration_timing'):text(28,y+67,'Equivalent training recipes share one checkpoint per pool; development and test remain separate.',13,'small')
     svg.append('</svg>')
     return '\n'.join(svg)+'\n'
 
