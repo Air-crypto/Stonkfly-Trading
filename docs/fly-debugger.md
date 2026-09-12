@@ -2113,3 +2113,47 @@ The worker's conservative compute estimate for this study was $0.023914, not a
 provider invoice. The next useful training comparison needs recorded trading
 reward exposure; another single-observation plasticity replay would leave that
 question unanswered.
+
+## Compare memory from the running paper traders
+
+The [paper-memory audit](../reports/fly-paper-memory-audit-01.json) preserves the
+two original pools' checkpoints from the 15:40 UTC paper cycle. It independently
+reconstructs each complete assigned history from the captured SQLite ledger:
+82 observations with 35 positive and 41 negative rewards in pool 0; 72 observations
+with 29 positive and 30 negative rewards in pool 1. These are engineered paper
+equity rewards, including simulated costs, not proof of successful learning.
+
+The exporter verifies file hashes, graph IDs and CSR structure, the full model
+configuration, kernel source and flags, every checkpoint array's shape/dtype,
+unchanged nonplastic weights, stored efficacy versus actual plastic weights,
+and the final ledger's weight hash and neural clock. It exports only plastic
+weights and `u`/`w`, with fresh dynamics required for subsequent inference.
+It performs no neural observations and does not restore the cloud checkpoint
+into the local brain. Platform-specific binary identities are retained; source
+and configuration must match for this array-only export.
+
+```sh
+uv run python -m paperlab.fly_paper_memory \
+  --capture runs/reward-exposure-01 \
+  --out runs/reward-exposure-01/verified-export \
+  --fly-data data/fly
+```
+
+The capture directory is private: it contains the ledger, two original full
+checkpoints and their pinned capture metadata. The command refuses to overwrite
+an export. Portable learned-state files also remain private; only their hashes
+and audit are published.
+
+[Study 09](../reports/fly-market-study-09-preregistration.json) registers a future
+development window of **16:30–16:45 UTC**, followed by test at **16:45–17:00 UTC**
+on September 12. Four frozen conditions cross pristine/paper-trained memory with
+carried/reset input state. They preserve the two pools, adverse DEX costs, fixed
+decoder and full graph. All receive identical price images and timestamp-correct
+news features sealed before evaluation. Account balances and neural activity from
+training are not imported; every evaluation phase starts independently.
+
+Either trained condition may qualify if its development equity beats cash and
+both pristine controls. The higher trained result is selected; ties prefer
+carried activity. The choice must be saved before test simulation. The runner
+and scheduled launch for this new protocol are the next implementation step;
+this registration is not evidence that study 09 has executed.
