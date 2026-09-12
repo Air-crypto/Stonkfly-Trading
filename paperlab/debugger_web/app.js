@@ -85,6 +85,8 @@ function edgeMemory(f,pi,e){
 }
 function pairedTraces(){
  const panel=$('paired-traces');panel.hidden=!paired;
+ for(const id of ['first-difference','next-difference']){$(id).disabled=true;delete $(id).dataset.bin;}
+ $('paired-difference-note').textContent='';
  for(const id of ['paired-voltage','paired-spikes','paired-weight','paired-u','paired-w'])$(id).replaceChildren();
  $('paired-memory-note').textContent='';if(!paired)return;
  const f=data.frames[step],o=paired.frames.get(step),note=$('paired-note');
@@ -99,7 +101,8 @@ function pairedTraces(){
  if(f.event.stimulation||o.event.stimulation){
   const applied=e=>e.stimulation?`${e.stimulation.current} to cells ${e.stimulation.target_ids.join(', ')} for ${e.stimulation.duration_ms} ms`:'unrecorded';
   note.textContent+=` Applied diagnostic current: blue ${applied(f.event)}; pink ${applied(o.event)}.`;
-  note.textContent+=` Stored memory: blue ${data.report.config.memory}; pink ${paired.data.report.config.memory}.`;
+  const memory=report=>report.memory_origin??report.config.memory??'unrecorded';
+  note.textContent+=` Stored memory: blue ${memory(data.report)}; pink ${memory(paired.data.report)}.`;
  }
  const history=paired.histories.get(step)||'unverified';
  note.textContent+=` Recorded input prefix: ${history}. This covers the images saved here through this observation, not earlier training or activity resets.`;
@@ -111,6 +114,9 @@ function pairedTraces(){
   chart('paired-voltage',xs,series(f.voltage.map(v=>v[node]),o.voltage.map(v=>v[ni])),`Body ${n.id}: voltage (mV)`,bin,'Time in observation (ms)');
   chart('paired-spikes',xs,series(f.counts.map(v=>v[node]),o.counts.map(v=>v[ni])),`Body ${n.id}: spikes / 10 ms`,bin,'Time in observation (ms)');
   note.textContent+=` Body ${n.id}: ${f.counts[bin][node]} vs ${o.counts[bin][ni]} spikes in this bin.`;
+  const differences=f.counts.flatMap((r,i)=>r[node]!==o.counts[i][ni]?[i]:[]);
+  $('paired-difference-note').textContent=`Selected body ${n.id}: ${differences.length} of ${xs.length} bins have different spike counts. This compares this neuron only; it does not locate the first difference in the full brain or establish a causal path.`;
+  for(const [id,target] of [['first-difference',differences[0]],['next-difference',differences.find(i=>i>bin)]])if(target!==undefined){$(id).dataset.bin=target;$(id).disabled=target===bin;}
  }else $('paired-voltage').textContent=`Body ${n.id} is absent from the comparison's displayed subset.`;
  const e=data.edges.filter(v=>v.plastic_index!==null)[edge];
  const oe=e&&paired.data.edges.find(v=>String(v.id)===String(e.id)&&v.plastic_index!==null);
@@ -194,6 +200,7 @@ $('runs').onchange=e=>loadRun(e.target.value).catch(error);$('refresh').onclick=
 $('play').onclick=()=>{if(timer){clearInterval(timer);timer=null;$('play').textContent='Play bins';return;}if(!data)return;$('play').textContent='Pause';timer=setInterval(()=>{bin++;if(bin>=data.frames[step].times_ms.length){bin=0;step=(step+1)%data.frames.length;$('step').value=step;}draw();},150);};
 $('pristine').onchange=()=>draw();
 $('previous-spike').onclick=()=>jumpSpike(-1);$('next-spike').onclick=()=>jumpSpike(1);
+for(const id of ['first-difference','next-difference'])$(id).onclick=()=>{const target=Number($(id).dataset.bin);if(!paired||!Number.isInteger(target)||target<0||target>=data.frames[step].times_ms.length)return;clearInterval(timer);timer=null;$('play').textContent='Play bins';bin=target;draw();};
 $('network').onclick=e=>{const r=$('network').getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;let best=22;positions.forEach(([nx,ny],i)=>{const d=Math.hypot(x-nx,y-ny);if(d<best){best=d;node=i;}});$('node').value=node;draw();};
 $('lookup-button').onclick=async()=>{try{if(imported)throw new Error('Full-neuron lookup needs the recording server and its NPZ files.');const id=$('lookup').value.trim(),d=await api('/api/neuron?run='+encodeURIComponent(runName)+'&id='+encodeURIComponent(id)),f=d.frames[step];$('neuron-detail').textContent=`Full recording: ${d.id} · ${num(f.counts.reduce((a,b)=>a+b,0))} spikes in observation · ${f.plastic_edges.length} adjacent plastic edges`;chart('neuron-chart',f.times_ms,[{name:'Queried neuron voltage',values:f.voltage,color:'#8fbcff'}],'Voltage (mV)',bin);$('lookup-button').title=JSON.stringify(f.plastic_edges);externalNeuron=true;activityBoundary(data.frames[step],data.nodes.findIndex(n=>String(n.id)===String(d.id)));$('previous-spike').disabled=$('next-spike').disabled=true;momentLink();}catch(e){error(e);}};
 $('import').onchange=async e=>{try{const file=e.target.files[0];if(!file)return;if(file.size>15000000)throw new Error('Trace JSON must be under 15 MB');runName=file.name;imported=true;load(JSON.parse(await file.text()));}catch(e){error(e);}};

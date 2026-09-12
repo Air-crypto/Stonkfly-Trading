@@ -2667,6 +2667,51 @@ uv run --locked --extra plots python -m paperlab.fly_stimulation_figure \
   --out runs/recipient-stimulation-figure
 ```
 
+### Jump to recorded count differences
+
+The [native timing report](../reports/fly-paper-stimulation-timing-01.md) and
+[machine-readable traces](../reports/fly-paper-stimulation-timing-01.json) compare
+every neuron in all 36 previously audited observations. The offline analysis
+verifies each native NPZ against the existing audit's artifact hash before reading
+its 50 time bins. It does not rerun the model or alter the future comparison.
+
+Without extra current, trained and pristine brains match in **every spike-count
+bin**, not only the final count totals. In the first image at current 5 and 10,
+the first differing bin is **30–40 ms** for both pools, and **11402 is its only
+neuron with a different count**. The first differing output-neuron bin arrives
+later: 110–120 ms for ALL, and 140–150 or 150–160 ms for baton. The final first-image
+action remains BUY for both memories. Later images carry earlier activity and
+already differ in the first bin, so those observations cannot identify an
+independent onset from fresh activity.
+
+This identifies 11402 as a useful candidate for a later isolated intervention.
+It does not prove the individual connection causing the action change: voltage
+can differ before counts do, and within-bin order is unobserved. Voltages are
+sampled at bin ends; the displayed maxima can miss actual threshold crossings.
+
+In **Selected neuron & connection across runs**, use **First count difference**
+or **Next count difference**. The buttons inspect only the selected neuron in
+the shared observation, stop playback, and update **Link to this moment**.
+They remain disabled when there is no eligible difference or aligned comparison.
+The full-brain timing findings above come from the native arrays, not from the
+smaller set of neurons exported to the interactive view.
+
+![Paired traces with difference navigation](assets/fly-paper-stimulation-navigation-01.png)
+
+Reproduce the timing report from the downloaded original recordings:
+
+```sh
+python -m paperlab.fly_stimulation_timing \
+  --audit reports/fly-paper-stimulation-audit-01.json \
+  --artifacts runs/recipient-stimulation-01/cloud/artifacts \
+  --out runs/recipient-stimulation-timing
+```
+
+The generated links use the published `stimulation01-*` recordings on port 8766.
+The browser check exercises both target neurons in every matched condition and
+observation, including silent pairs, the last bin, and first/next navigation,
+while blocking model submissions.
+
 ## Tenth market comparison: prospective recipient activation
 
 The [study 10 registration](../reports/fly-market-study-10-preregistration.json)

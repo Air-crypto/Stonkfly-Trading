@@ -47,11 +47,12 @@ const assert=require('node:assert/strict'),fs=require('fs'),path=require('path')
     assert.equal(await page.locator('#time').innerText(),num(e.brain_ms)+' ms');assert.equal(await page.locator('#decoder-path svg').count(),2);boundaries++;
    }
   }
-  for(const [name,v] of views){if(!/-trained_input_reset(?:-development)?$/.test(name))continue;
-   const other=name.replace(/-trained_input_reset(?=-development$|$)/,'-trained_frozen');if(!views.has(other))continue;
+  for(const [name,v] of views){if(!/-trained_(?:input_reset|stimulated)(?:-development)?$/.test(name))continue;
+   const other=name.replace(/-trained_(?:input_reset|stimulated)(?=-development$|$)/,'-trained_frozen');if(!views.has(other))continue;
    await page.goto(`${base}/?run=${name}&step=${v.frames.length-1}&bin=49&neuron=10527&compare=${other}`);
    await page.waitForFunction(()=>document.querySelector('#paired-spikes svg'));assert((await page.locator('#paired-note').innerText()).includes('Input identical: yes'));
    assert((await page.locator('#paired-note').innerText()).includes('Recorded input prefix: identical'));
+   if(v.frames.at(-1).event.stimulation)assert((await page.locator('#paired-note').innerText()).includes(`Stored memory: blue ${v.report.memory_origin}; pink ${views.get(other).report.memory_origin}`));
    if(v.report.memory_origin){await page.locator('#comparison summary').click();assert((await page.locator('#comparison pre').innerText()).includes('training_exposure'));}
   }
   await page.setViewportSize({width:390,height:844});assert(!(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth)));

@@ -133,6 +133,14 @@ no trading improvement or policy promotion is claimed.
 
 ![Frozen memory under controlled recipient stimulation](docs/assets/fly-paper-stimulation-01.png)
 
+The [bin timing analysis](docs/fly-debugger.md#jump-to-recorded-count-differences)
+locates the earliest recorded spike-count difference at cell **11402**, in the
+30–40 ms bin of each first stimulated image. The paired viewer can jump to the
+first or next count difference for the selected neuron; these are 10 ms bins,
+not exact spike times or proof of a causal connection.
+
+![Jump between recorded neuron count differences](docs/assets/fly-paper-stimulation-navigation-01.png)
+
 The [decoder count view](docs/fly-debugger.md#inspect-accumulated-decoder-counts)
 shows how output spikes accumulate. In the examined BUY/SELL reversal, one net
 spike equals the fixed 2 Hz threshold; a count-edit audit separates direction

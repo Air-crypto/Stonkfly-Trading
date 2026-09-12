@@ -33,10 +33,38 @@ const assert=require('node:assert/strict'),fs=require('fs'),path=require('path')
     observations++;
    }
   }
+  let differenceSelections=0;
+  for(const pool of [0,1])for(const current of [0,5,10]){
+   const name=`pool${pool}-trained-current${current}`,other=`pool${pool}-pristine-current${current}`,v=views.get(name),o=views.get(other);
+   await page.goto(`${base}/?run=${name}&compare=${other}`);await page.waitForFunction(()=>document.querySelector('#paired-spikes svg'));
+   for(let step=0;step<3;step++)for(const identity of ['10704','11402']){
+    await page.selectOption('#step',String(step));const ix=v.nodes.findIndex(n=>n.id===identity),oi=o.nodes.findIndex(n=>n.id===identity);
+    await page.selectOption('#node',String(ix));const differences=v.frames[step].counts.flatMap((r,i)=>r[ix]!==o.frames[step].counts[i][oi]?[i]:[]);
+    const note=await page.locator('#paired-difference-note').innerText();assert(note.includes(`${differences.length} of 50 bins`));assert(note.includes(`Selected body ${identity}`));
+    await page.locator('#bin').fill('49');await page.locator('#bin').dispatchEvent('input');
+    assert(await page.locator('#next-difference').isDisabled());
+    if(!differences.length){assert(await page.locator('#first-difference').isDisabled());}
+    else{
+     if(differences[0]!==49)await page.click('#first-difference');
+     assert.equal(Number(await page.locator('#bin').inputValue()),differences[0]);
+     assert(await page.locator('#first-difference').isDisabled());
+     if(differences.length>1){await page.click('#next-difference');assert.equal(Number(await page.locator('#bin').inputValue()),differences[1]);}
+     else assert(await page.locator('#next-difference').isDisabled());
+     const link=new URL(await page.locator('#moment-link').getAttribute('href'));assert.equal(link.searchParams.get('neuron'),identity);assert.equal(link.searchParams.get('compare'),other);
+    }
+    differenceSelections++;
+   }
+  }
   await page.goto(base+'/?run=pool0-trained-current10&step=0&bin=3&neuron=11402&edge=4110156&compare=pool0-pristine-current10&pristine=1');
   await page.waitForFunction(()=>document.querySelector('#paired-spikes svg'));
   assert((await page.locator('#paired-note').innerText()).includes('Input identical: yes'));
   assert((await page.locator('#paired-note').innerText()).includes('Applied diagnostic current: blue 10 to cells 10704, 11402 for 500 ms; pink 10 to cells 10704, 11402 for 500 ms'));
+  // Metadata-only fixture: future paper reports keep memory origin outside config.
+  const fixtureNames=['pool0-trained-current10','pool0-pristine-current10'],originals=fixtureNames.map(n=>views.get(n));
+  fixtureNames.forEach((n,i)=>{const v=structuredClone(originals[i]);delete v.report.config.memory;v.report.memory_origin=i?'pristine':'paper_trained';views.set(n,v);});
+  await page.reload();await page.waitForFunction(()=>document.querySelector('#paired-spikes svg'));
+  assert((await page.locator('#paired-note').innerText()).includes('Stored memory: blue paper_trained; pink pristine'));
+  fixtureNames.forEach((n,i)=>views.set(n,originals[i]));
   if(process.env.FLY_STIMULATION_PUBLISHED){
    await page.unroute('**/api/**');await page.route('**/api/run',r=>{writes++;return r.abort();});
    await page.goto(base+'/?run=stimulation01-pool0-trained-current10&step=0&bin=3&neuron=11402&edge=4110156&pristine=1&compare=stimulation01-pool0-pristine-current10');
@@ -45,6 +73,6 @@ const assert=require('node:assert/strict'),fs=require('fs'),path=require('path')
   }
   if(process.env.FLY_STIMULATION_SCREENSHOT)await page.locator('#paired-traces').screenshot({path:process.env.FLY_STIMULATION_SCREENSHOT});
   await page.setViewportSize({width:390,height:844});assert(!(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth)));
-  assert.deepEqual(errors,[]);assert.equal(writes,0);console.log(JSON.stringify({recordings:views.size,observations,errors,writes}));
+  assert.deepEqual(errors,[]);assert.equal(writes,0);console.log(JSON.stringify({recordings:views.size,observations,differenceSelections,errors,writes}));
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});
