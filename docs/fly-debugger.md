@@ -2840,3 +2840,35 @@ An observation timeout reattaches to that call and never creates another. An
 uncertain submission without a call ID must be reconciled in Modal; it is not
 retried automatically. The original twelve full native control observations
 must remain available in both the cloud volume and the local reference directory.
+
+Once every condition passes the audit, render recipient counts, the changes from
+both-target controls, and all decoded actions without running another model:
+
+```sh
+uv run --locked --extra plots python -m paperlab.fly_recipient_isolation_figure \
+  --audit runs/recipient-isolation-01/cloud/audit.json \
+  --out runs/recipient-isolation-01/figure
+```
+
+Both neurons' spike counts appear even when only one receives direct current;
+network feedback can activate the other neuron. The comparison heatmap counts
+neurons whose **500 ms totals** differ from the same-memory both-target control,
+not differences in exact spike timing. The action matrix includes all twelve
+conditions and three images, without selecting a preferred policy. The figure
+requires all original-control evidence and checks that reported action changes
+and count equality reconcile with the audited rows. Its PNG, SVG, and provenance
+manifest are written to a new directory.
+
+After publishing the audited recordings under `isolation01-*`, the existing
+browser check can inspect this target-isolation format as well:
+
+```sh
+FLY_STIMULATION_RECORDINGS=runs/recipient-isolation-01/cloud \
+FLY_STIMULATION_PUBLISHED=1 \
+FLY_VIEW_URL=http://127.0.0.1:8766 \
+node scripts/check-fly-stimulation-view.cjs
+```
+
+It checks the actual per-observation target list, both recipients, paired count
+navigation, and mobile layout while blocking model submissions. Use
+`FLY_STIMULATION_PREFIX` if the published recording prefix differs.

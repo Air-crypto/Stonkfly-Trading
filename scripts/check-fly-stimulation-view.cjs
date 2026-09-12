@@ -4,6 +4,9 @@ const assert=require('node:assert/strict'),fs=require('fs'),path=require('path')
  const root=process.env.FLY_STIMULATION_RECORDINGS||'runs/recipient-stimulation-01/cloud',views=new Map();
  for(const name of fs.readdirSync(root).filter(n=>/^pool\d+-/.test(n))){const file=path.join(root,name,'view.json');if(fs.existsSync(file))views.set(name,JSON.parse(fs.readFileSync(file)));}
  assert.equal(views.size,12);
+ const isolation=[...views.values()].every(v=>v.report.config.target_set);
+ const conditions=isolation?['both','only_10704','only_11402']:['current0','current5','current10'];
+ const control=isolation?'both':'current10',prefix=process.env.FLY_STIMULATION_PREFIX||(isolation?'isolation01':'stimulation01');
  const browser=await chromium.launch({headless:true,...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{})});
  try{
   const page=await browser.newPage({viewport:{width:1440,height:1050},locale:'en-US'}),errors=[];let writes=0,observations=0;
@@ -23,7 +26,7 @@ const assert=require('node:assert/strict'),fs=require('fs'),path=require('path')
    for(let i=0;i<3;i++){
     await page.selectOption('#step',String(i));const f=v.frames[i],e=f.event;
     assert.equal(await page.locator('#decision').innerText(),e.side);
-    const note=await page.locator('#phase-note').innerText();assert(note.includes(`Diagnostic current ${e.stimulation.current} to cells 10704, 11402 for 500 ms`));assert(note.includes('weights and memory frozen'));assert(note.includes('No fills or returns recomputed'));
+    const note=await page.locator('#phase-note').innerText();assert(note.includes(`Diagnostic current ${e.stimulation.current} to cells ${e.stimulation.target_ids.join(', ')} for 500 ms`));assert(note.includes('weights and memory frozen'));assert(note.includes('No fills or returns recomputed'));
     assert((await page.locator('#input-info').innerText()).includes('news available at quote time'));
     for(const id of ['10704','11402']){
      const ix=v.nodes.findIndex(n=>n.id===id);assert(ix>=0);await page.selectOption('#node',String(ix));
@@ -34,8 +37,8 @@ const assert=require('node:assert/strict'),fs=require('fs'),path=require('path')
    }
   }
   let differenceSelections=0;
-  for(const pool of [0,1])for(const current of [0,5,10]){
-   const name=`pool${pool}-trained-current${current}`,other=`pool${pool}-pristine-current${current}`,v=views.get(name),o=views.get(other);
+  for(const pool of [0,1])for(const condition of conditions){
+   const name=`pool${pool}-trained-${condition}`,other=`pool${pool}-pristine-${condition}`,v=views.get(name),o=views.get(other);
    await page.goto(`${base}/?run=${name}&compare=${other}`);await page.waitForFunction(()=>document.querySelector('#paired-spikes svg'));
    for(let step=0;step<3;step++)for(const identity of ['10704','11402']){
     await page.selectOption('#step',String(step));const ix=v.nodes.findIndex(n=>n.id===identity),oi=o.nodes.findIndex(n=>n.id===identity);
@@ -55,19 +58,19 @@ const assert=require('node:assert/strict'),fs=require('fs'),path=require('path')
     differenceSelections++;
    }
   }
-  await page.goto(base+'/?run=pool0-trained-current10&step=0&bin=3&neuron=11402&edge=4110156&compare=pool0-pristine-current10&pristine=1');
+  await page.goto(base+`/?run=pool0-trained-${control}&step=0&bin=3&neuron=11402&edge=4110156&compare=pool0-pristine-${control}&pristine=1`);
   await page.waitForFunction(()=>document.querySelector('#paired-spikes svg'));
   assert((await page.locator('#paired-note').innerText()).includes('Input identical: yes'));
   assert((await page.locator('#paired-note').innerText()).includes('Applied diagnostic current: blue 10 to cells 10704, 11402 for 500 ms; pink 10 to cells 10704, 11402 for 500 ms'));
   // Metadata-only fixture: future paper reports keep memory origin outside config.
-  const fixtureNames=['pool0-trained-current10','pool0-pristine-current10'],originals=fixtureNames.map(n=>views.get(n));
+  const fixtureNames=[`pool0-trained-${control}`,`pool0-pristine-${control}`],originals=fixtureNames.map(n=>views.get(n));
   fixtureNames.forEach((n,i)=>{const v=structuredClone(originals[i]);delete v.report.config.memory;v.report.memory_origin=i?'pristine':'paper_trained';views.set(n,v);});
   await page.reload();await page.waitForFunction(()=>document.querySelector('#paired-spikes svg'));
   assert((await page.locator('#paired-note').innerText()).includes('Stored memory: blue paper_trained; pink pristine'));
   fixtureNames.forEach((n,i)=>views.set(n,originals[i]));
   if(process.env.FLY_STIMULATION_PUBLISHED){
    await page.unroute('**/api/**');await page.route('**/api/run',r=>{writes++;return r.abort();});
-   await page.goto(base+'/?run=stimulation01-pool0-trained-current10&step=0&bin=3&neuron=11402&edge=4110156&pristine=1&compare=stimulation01-pool0-pristine-current10');
+   await page.goto(base+`/?run=${prefix}-pool0-trained-${control}&step=0&bin=3&neuron=11402&edge=4110156&pristine=1&compare=${prefix}-pool0-pristine-${control}`);
    await page.waitForFunction(()=>document.querySelector('#paired-spikes svg'));
    assert((await page.locator('#paired-note').innerText()).includes('Body 11402: 0 vs 1 spikes in this bin'));
   }
