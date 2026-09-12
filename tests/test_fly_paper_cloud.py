@@ -96,3 +96,33 @@ def test_worker_paper_study_uses_one_existing_budget_reservation(monkeypatch):
     monkeypatch.setattr('paperlab.multi.cycle',lambda *a,**k:pytest.fail('No baseline cycle alongside this study'))
     assert cloud._worker()['status']=='paper_checkpoint_study_completed'
     assert events==['reserve','commit']
+
+
+def test_observer_checks_saved_price_snapshot_before_exposing_results(tmp_path,monkeypatch):
+    import modal
+    from paperlab.fly_paper_cloud import observe
+    s=fixture(tmp_path,monkeypatch);execute_due(*s.args,**s.kwargs)
+    receipt=json.loads((s.root/'cloud-call.json').read_text())
+    sources=json.loads((s.root/'source-hashes.json').read_text())
+    result={'status':'paper_checkpoint_study_completed','run_id':receipt['run_id'],
+            'remote_path':'/state/fly-debugger/'+receipt['run_id'],'report':{'code_sha256':sources}}
+    reads=[]
+    class Volume:
+        def read_file(self,path):
+            reads.append(path)
+            return [(s.args[0]/path.lstrip('/')).read_bytes()]
+    class Call:
+        def get(self,timeout):return result
+    def reject(envelope,path):
+        assert path.name=='universe.db'
+        assert path.read_bytes()==(s.root/'universe.db').read_bytes()
+        raise ValueError('price audit rejected altered fixture')
+    monkeypatch.setattr(modal.Volume,'from_name',lambda *a,**k:Volume())
+    monkeypatch.setattr(modal.FunctionCall,'from_id',lambda *a,**k:Call())
+    monkeypatch.setattr(modal.Function,'from_name',lambda *a,**k:pytest.fail('Read-only observer'))
+    monkeypatch.setattr('paperlab.fly_paper_cloud.audit_prices',reject)
+    monkeypatch.setattr('paperlab.fly_paper_cloud.audit',lambda *a:pytest.fail('Check prices first'))
+    out=tmp_path/'out'
+    with pytest.raises(ValueError,match='price audit rejected'):observe(s.registration,out)
+    assert reads[-1]=='/'+DIRECTORY+'/universe.db'
+    assert not (out/'report.json').exists() and not list(out.glob('pool*'))

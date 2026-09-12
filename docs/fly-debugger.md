@@ -2192,8 +2192,12 @@ and output directory. It has no submission path. A missing claim means the
 scheduled study has not started; inspect the existing worker and collector.
 The observer requires local source hashes to match the executed version.
 
-Before exposing recordings, the audit reconstructs the news vectors from the
-archived published/seen/encoded clocks, replays every simulated fill and account
+Before exposing recordings, the observer downloads the exact saved collector
+snapshot and independently reconstructs the sealed price history, including
+missing-pool markers, rejected quotes and context truncation. It verifies the
+raw snapshot hash and database integrity, and writes `price-audit.json` with
+per-pool development/test coverage. The audit also reconstructs news vectors from
+the archived published/seen/encoded clocks, replays every simulated fill and account
 balance, checks imported connection memory and every saved reset boundary,
 and recomputes the fixed decoder from all 166,700 neuron counts. It also verifies
 the viewer's actual image pixels and checkpoint training-exposure labels.
@@ -2236,3 +2240,21 @@ than replace, the observer's raw-array, price/news and execution audits. It
 rejects a three-phase report instead of inventing a training-account trajectory
 for imported memory. For synthetic regression inputs, pass `--fixture` to mark
 the output prominently; those previews must not be published as market results.
+
+
+The raw-price verification can also be repeated offline, without downloading or
+simulating anything:
+
+```sh
+uv run python -m paperlab.fly_paper_price_audit \
+  --plan runs/research-market-09/plan.json \
+  --archive runs/research-market-09/artifacts/universe.db \
+  --out runs/research-market-09/price-audit.json
+```
+
+It reconstructs history directly from the collector's first receipt per pool per
+minute; the mutable current-pool table cannot substitute a later price. It
+excludes post-endpoint receipts and retains unavailable periods instead of
+replacing disappeared pools. The observer stops before publishing recordings
+when this check fails. This is a local verification addition; it does not alter
+the registered window, model execution, cloud schedule or spending caps.

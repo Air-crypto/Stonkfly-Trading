@@ -8,6 +8,7 @@ from .fly_market_study import signature
 from .fly_paper_inputs import validate
 from .fly_paper_study import SOURCE_FILES,PHASES,trace_name
 from .fly_paper_audit import audit
+from .fly_paper_price_audit import audit_prices
 from .fly_paper_schedule import DIRECTORY
 
 
@@ -42,14 +43,16 @@ def observe(registration,output):
     if result.get('status')!='paper_checkpoint_study_completed' or result.get('run_id')!=receipt['run_id'] or result.get('remote_path')!=base or result['report']['code_sha256']!=sources:
         raise ValueError('Unexpected completed result or executed source')
     artifacts=root/'artifacts'
-    def download(name):
+    def download(name,remote=None):
         path=artifacts/name;path.parent.mkdir(parents=True,exist_ok=True)
         if not path.exists():
             partial=path.with_suffix(path.suffix+'.partial')
             with partial.open('wb') as f:
-                for block in volume.read_file(base.removeprefix('/state')+'/'+name):f.write(block)
+                for block in volume.read_file(remote or base.removeprefix('/state')+'/'+name):f.write(block)
             partial.replace(path)
         return path
+    prices=audit_prices(envelope,download('universe.db','/'+DIRECTORY+'/universe.db'))
+    atomic_json(root/'price-audit.json',prices)
     for name in ('results.json','selection.json','news.db','pristine-memory.npz','initial-dynamics.npz','neuron-ids.npz','imported/audit.json'):download(name)
     raw=json.loads((artifacts/'results.json').read_text())
     for i,key in enumerate(registration['cohort']):
@@ -64,6 +67,8 @@ def observe(registration,output):
                 if events:download(trace+'/view.json')
     report,checked=audit(envelope,result['report'],artifacts)
     report['verification']['code_hashes_match_submission']=True
+    report['verification']['prices_reconstructed_from_snapshot']=True
+    report['price_audit']=prices
     atomic_json(root/'report.json',report);atomic_json(root/'audit.json',checked)
     # Only expose recordings after all input, ledger, memory and boundary audits pass.
     for i,key in enumerate(registration['cohort']):
