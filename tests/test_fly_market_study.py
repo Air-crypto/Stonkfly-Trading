@@ -1,5 +1,6 @@
 from dataclasses import asdict, replace
 import json
+import os
 from types import SimpleNamespace
 import time
 
@@ -7,13 +8,13 @@ import numpy as np
 import pytest
 
 from paperlab.core import Tick
-from paperlab.fly_market_study import ARMS, REINFORCEMENT_ARMS, VISUAL_ARMS, phase, quote_at, seal, seal_followup, signature, validate
+from paperlab.fly_market_study import ARMS, REINFORCEMENT_ARMS, VISUAL_ARMS, INFERENCE_ARMS, phase, quote_at, seal, seal_followup, signature, validate
 from paperlab.universe import Pool, Store
 
 
 def test_sealed_cohort_does_not_select_on_future_returns(tmp_path):
     store=Store(tmp_path/"archive.db")
-    for i in range(180):
+    for i in range(200):
         stamp=1700000100+i*60
         store.add([Pool(f"synthetic:pool{k}","synthetic",f"pool{k}",f"token{k}",f"TEST{k}",
                         1 if i<100 else 1+k*10,100000,10000,20,20,stamp-3600,stamp,
@@ -34,6 +35,12 @@ def test_sealed_cohort_does_not_select_on_future_returns(tmp_path):
     visual=seal_followup(tmp_path/"archive.db",first,tmp_path/"visual.json",phase_steps=2,protocol="visual")
     assert visual["plan"]["arms"]==VISUAL_ARMS and visual["plan"]["schema"]==3
     assert visual["plan"]["start"]==follow["plan"]["start"]
+    frozen=seal_followup(tmp_path/"archive.db",visual,tmp_path/"frozen-inference.json",phase_steps=2,protocol="frozen-inference")
+    assert frozen["plan"]["arms"]==INFERENCE_ARMS and frozen["plan"]["schema"]==4
+    assert "visual_encoding" not in frozen["plan"]
+    bad=json.loads(json.dumps(frozen["plan"]));bad["visual_encoding"]={"view":"fixed_returns"}
+    with pytest.raises(ValueError):validate(bad)
+    assert frozen["plan"]["start"]==visual["plan"]["start"]+1800
     bad=json.loads(json.dumps(visual["plan"]));bad["visual_encoding"]["log_return_knee"] = .1
     with pytest.raises(ValueError):validate(bad)
     bad=json.loads(json.dumps(follow["plan"]));bad["start"]-=300
@@ -57,7 +64,7 @@ def test_phase_uses_next_receipt_fills_and_holds_missing_inventory(monkeypatch):
         seen.append(ticks[index].ts)
         return np.zeros((180,320,3),dtype=np.uint8)
     monkeypatch.setattr(study,"frame",render)
-    b=SimpleNamespace(weight=np.array([1.]),circuit={"edges":np.array([0])},weights_frozen=False,eta=.001)
+    b=SimpleNamespace(memory_u=np.zeros(1),memory_w=np.zeros(1),weight=np.array([1.]),circuit={"edges":np.array([0])},weights_frozen=False,eta=.001)
     from dataclasses import dataclass
     @dataclass
     class Settings:
@@ -89,7 +96,7 @@ def test_reinforcement_gate_obeys_closed_loop_reward_without_substituting_action
     class Settings:
         learning: bool=True
     monkeypatch.setattr(study,"frame",lambda *a:np.zeros((180,320,3),dtype=np.uint8))
-    b=SimpleNamespace(weight=np.array([1.]),circuit={"edges":np.array([0])},weights_frozen=False,eta=.001)
+    b=SimpleNamespace(memory_u=np.zeros(1),memory_w=np.zeros(1),weight=np.array([1.]),circuit={"edges":np.array([0])},weights_frozen=False,eta=.001)
     states=[]
     def observe(rgb,stimulus):
         states.append((controller.s.learning,b.weights_frozen,stimulus))
@@ -103,3 +110,48 @@ def test_reinforcement_gate_obeys_closed_loop_reward_without_substituting_action
     assert result["rows"][0]["event"]["side"]==result["rows"][1]["event"]["side"]=="BUY"
     assert result["rows"][0]["event"]["weight_delta_l2"]==0
     assert result["rows"][1]["event"]["weight_delta_l2"]>0
+
+
+def test_trained_frozen_phase_retains_memory_without_reinforcement(monkeypatch):
+    import paperlab.fly_market_study as study
+    from dataclasses import dataclass
+    @dataclass
+    class Settings:
+        learning: bool=True
+    monkeypatch.setattr(study,'frame',lambda *a:np.zeros((180,320,3),dtype=np.uint8))
+    b=SimpleNamespace(weight=np.array([1.2]),circuit={'edges':np.array([0])},memory_u=np.array([.3]),memory_w=np.array([.2]),weights_frozen=False,eta=.001)
+    states=[]
+    def observe(rgb,stimulus):
+        states.append((controller.s.learning,b.weights_frozen,stimulus))
+        return {'side':'BUY'}
+    controller=SimpleNamespace(s=Settings(),observe=observe)
+    lab=SimpleNamespace(brain=b,fly=SimpleNamespace(controller=controller))
+    ticks=[Tick(1000+i*300,1,1.01) for i in range(3)]
+    result=phase(lab,ticks,1000,2,INFERENCE_ARMS['trained_frozen'],False,time.monotonic()+30)
+    assert states==[(False,True,'none')]*2
+    assert result['initial_memory_sha256']==result['final_memory_sha256']
+    assert b.weight[0]==1.2 and b.memory_u[0]==.3 and b.memory_w[0]==.2
+    def broken(rgb,stimulus):
+        b.memory_u[0]+=.1
+        return {'side':'BUY'}
+    controller.observe=broken
+    with pytest.raises(AssertionError,match='synaptic memory'):
+        phase(lab,ticks,1000,2,INFERENCE_ARMS['trained_frozen'],False,time.monotonic()+30)
+
+
+@pytest.mark.skipif(not os.environ.get('FLY_TRACE_DATA'),reason='requires prepared full retained graph')
+def test_native_market_training_state_survives_frozen_inference(tmp_path):
+    from pathlib import Path
+    from paperlab.fly_trace import TraceLab,synthetic_ticks
+    from paperlab.fly_market_study import learned_state,restore_learned,memory_signature
+    lab=TraceLab(Path(os.environ['FLY_TRACE_DATA']))
+    ticks=synthetic_ticks('fall',3)
+    training=phase(lab,ticks,ticks[99].ts,2,INFERENCE_ARMS['trained_frozen'],True,time.monotonic()+90)
+    state=learned_state(lab.brain)
+    assert np.linalg.norm(state['weights']-lab.brain.baseline_plastic)>0
+    restore_learned(lab.brain,state)
+    inference=phase(lab,ticks,ticks[99].ts,2,INFERENCE_ARMS['trained_frozen'],False,time.monotonic()+90,tmp_path/'trace')
+    assert training['final_memory_sha256']==inference['initial_memory_sha256']==inference['final_memory_sha256']==memory_signature(state)
+    assert all(r['event']['stimulus']=='none' and not r['event']['plasticity_enabled'] for r in inference['rows'] if r['event'])
+    with np.load(tmp_path/'trace/initial-memory.npz') as saved:
+        assert all(np.array_equal(saved[k],v) for k,v in state.items())

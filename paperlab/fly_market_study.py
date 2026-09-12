@@ -41,6 +41,9 @@ VISUAL_ARMS = {
 }
 
 
+INFERENCE_ARMS = {name: ARMS[name] for name in ("pristine_frozen", "trained_frozen", "online_original")}
+
+
 def signature(value):
     return hashlib.sha256(json.dumps(value,sort_keys=True,separators=(",",":"),allow_nan=False).encode()).hexdigest()
 
@@ -88,7 +91,7 @@ def seal(archive, output, phase_steps=3):
 
 
 def validate(plan):
-    protocols = {1: ARMS, 2: REINFORCEMENT_ARMS, 3: VISUAL_ARMS}
+    protocols = {1: ARMS, 2: REINFORCEMENT_ARMS, 3: VISUAL_ARMS, 4: INFERENCE_ARMS}
     if not isinstance(plan,dict) or plan.get("schema") not in protocols or plan.get("arms")!=protocols[plan["schema"]]:
         raise ValueError("Unknown study protocol")
     n=plan.get("phase_steps")
@@ -98,6 +101,8 @@ def validate(plan):
         raise ValueError("Study must retain the declared adverse DEX costs")
     if plan["schema"]==3 and plan.get("visual_encoding")!=encoding("fixed_returns"):
         raise ValueError("Visual protocol must pin the executed sensory transform")
+    if plan["schema"]==4 and "visual_encoding" in plan:
+        raise ValueError("Frozen inference uses the original visual adapter")
     if not 1<=len(plan.get("cohort",[]))<=2 or len(set(plan["cohort"]))!=len(plan["cohort"]):
         raise ValueError("Use one or two unique admitted pools")
     if set(plan["series"])!=set(plan["cohort"]):
@@ -132,7 +137,7 @@ def seal_followup(archive, previous, output, phase_steps=2, protocol="reinforcem
         raise ValueError("Refuse to overwrite a sealed plan")
     if type(phase_steps) is not int or not 2<=phase_steps<=4:
         raise ValueError("Use 2–4 decisions per phase")
-    if protocol not in ("reinforcement", "visual"):
+    if protocol not in ("reinforcement", "visual", "frozen-inference"):
         raise ValueError("Unknown follow-up protocol")
     start=old["start"]+3*old["phase_steps"]*300
     end=start+3*phase_steps*300
@@ -147,15 +152,20 @@ def seal_followup(archive, previous, output, phase_steps=2, protocol="reinforcem
     _,series=read_archive(archive,last)
     if not all(key in series for key in old["cohort"]):
         raise ValueError("Prior cohort fell outside the bounded archive; do not replace it with survivors")
-    plan={**old,"schema":3 if protocol=="visual" else 2,"start":start,"previous_test_end":start,"parent_plan_sha256":previous["sha256"],
+    schema,arms={"reinforcement":(2,REINFORCEMENT_ARMS),"visual":(3,VISUAL_ARMS),"frozen-inference":(4,INFERENCE_ARMS)}[protocol]
+    plan={**old,"schema":schema,"start":start,"previous_test_end":start,"parent_plan_sha256":previous["sha256"],
           "phase_steps":phase_steps,"snapshot_sha256":digest(archive),"snapshot_end":last,
-          "arms":VISUAL_ARMS if protocol=="visual" else REINFORCEMENT_ARMS,
+          "arms":arms,
           "series":{key:[asdict(t) for t in series[key] if t.ts<=end] for key in old["cohort"]},
           "selection":"Same cohort as parent study, regardless of later eligibility or survival. New decision windows start at parent test end.",
           "hypothesis":"Freeze efficacy and weight updates when reinforcement is none; retain neural propagation and rate traces. No decoder or risk-limit change."}
     if protocol=="visual":
         plan["hypothesis"]="Compare fixed return encoding with the unchanged visual adapter, crossed with frozen versus online plasticity. No decoder or risk-limit change."
         plan["visual_encoding"]=encoding("fixed_returns")
+    else:
+        plan.pop("visual_encoding",None)
+        if protocol=="frozen-inference":
+            plan["hypothesis"]="Train on the prior training phase, then freeze weights and omit reinforcement at inference. Compare with pristine frozen and original online behavior; retain the full graph, decoder, cohort and costs."
     validate(plan)
     envelope={"plan":plan,"sha256":signature(plan)}
     atomic_json(output,envelope)
@@ -188,6 +198,7 @@ def phase(lab, ticks, start, steps, arm, learning, deadline, trace_output=None):
     b=lab.brain
     b.weights_frozen=not learning
     b.eta=arm["eta"]
+    initial_memory=learned_state(b)
     lab.fly.controller.s=replace(lab.fly.controller.s,learning=learning)
     broker=Broker(DEX_COSTS)
     news=News(enabled=False)
@@ -195,6 +206,7 @@ def phase(lab, ticks, start, steps, arm, learning, deadline, trace_output=None):
     trace_events=[]; wall_start=time.monotonic()
     if trace_output is not None:
         trace_output.mkdir(parents=True,exist_ok=False)
+        np.savez_compressed(trace_output/"initial-memory.npz",**initial_memory)
     try:
         for step in range(steps+1):
             if time.monotonic()>deadline:
@@ -213,8 +225,13 @@ def phase(lab, ticks, start, steps, arm, learning, deadline, trace_output=None):
                 b.weights_frozen=not enabled
                 lab.fly.controller.s=replace(lab.fly.controller.s,learning=enabled)
                 before=b.weight[b.circuit["edges"]].copy()
+                frozen_memory=learned_state(b) if not enabled else None
                 event=(lab.capture(rgb,stimulus,trace_output,len(trace_events)+1)
                        if trace_output is not None else lab.fly.controller.observe(rgb,stimulus))
+                if frozen_memory is not None:
+                    after_memory=learned_state(b)
+                    if not all(np.array_equal(v,after_memory[k]) for k,v in frozen_memory.items()):
+                        raise AssertionError("Frozen market inference changed synaptic memory")
                 if trace_output is not None:
                     trace_events.append(event)
                     event["market_decision_ts"]=stamp
@@ -235,19 +252,25 @@ def phase(lab, ticks, start, steps, arm, learning, deadline, trace_output=None):
                     "upstream_commit":UPSTREAM_COMMIT,"graph":{"neurons":b.n,"edges":len(b.post),"plastic_edges":len(b.circuit["edges"])},
                     "native_build":b.build,"seconds":time.monotonic()-wall_start,"events":trace_events,
                     "market_timeline":decision_timeline(rows),"visual_encoding":encoding(arm["view"]),
+                    "initial_memory_sha256":memory_signature(initial_memory),"final_memory_sha256":memory_signature(learned_state(b)),
                     "interpretation":"Recorded market replay, isolated paper account. No executable DEX or monthly-return claim."}
             atomic_json(trace_output/"report.json",report)
             atomic_json(trace_output/"view.json",lab.export_view(trace_output,report))
         return {"start":start,"end":start+steps*300,"equity":rows[-1]["equity"],
                 "return_pct":100*(rows[-1]["equity"]/DEX_COSTS.capital-1),"fees":float(broker.fees),
                 "fills":sum(r["fill"]["status"]=="filled" for r in rows),
-                "unavailable_marks":sum(not r["available"] for r in rows),"rows":rows}
+                "unavailable_marks":sum(not r["available"] for r in rows),"rows":rows,
+                "initial_memory_sha256":memory_signature(initial_memory),"final_memory_sha256":memory_signature(learned_state(b))}
     finally:
         news.db.close()
 
 
 def learned_state(brain):
     return {"weights":brain.weight[brain.circuit["edges"]].copy(),"u":brain.memory_u.copy(),"w":brain.memory_w.copy()}
+
+
+def memory_signature(state):
+    return hashlib.sha256(state["weights"].tobytes()+state["u"].tobytes()+state["w"].tobytes()).hexdigest()
 
 
 def restore_learned(brain, state):
@@ -272,6 +295,7 @@ def run(envelope, data, output):
             lab.brain.reset()
             training=phase(lab,ticks,plan["start"],n,arm,arm["train"],deadline)
             state=learned_state(lab.brain);states[key,name]=state
+            np.savez_compressed(root/f"pool{plan['cohort'].index(key)}-{name}-training-memory.npz",**state)
             restore_learned(lab.brain,state)
             development=phase(lab,ticks,plan["start"]+n*300,n,arm,arm["online"],deadline)
             results[key][name]={"training":training,"development":development}
@@ -291,7 +315,7 @@ def run(envelope, data, output):
         for name,arm in arms.items():
             # Learned weights always come from training, not a test-tuned or development-updated state.
             restore_learned(lab.brain,states[key,name])
-            traces=(root/f"pool{plan['cohort'].index(key)}-{name}") if name in ("pristine_frozen","online_original","reinforcement_gated","fixed_returns_frozen","fixed_returns_online") else None
+            traces=(root/f"pool{plan['cohort'].index(key)}-{name}") if name in ("pristine_frozen","trained_frozen","online_original","reinforcement_gated","fixed_returns_frozen","fixed_returns_online") else None
             results[key][name]["test"]=phase(lab,ticks,plan["start"]+2*n*300,n,arm,arm["online"],deadline,traces)
             print(f"market_study test pool={plan['cohort'].index(key)} arm={name} return={results[key][name]['test']['return_pct']:.4f}%",flush=True)
             atomic_json(root/"results.json",results)
@@ -316,7 +340,7 @@ def main():
     sub=parser.add_subparsers(dest="command",required=True)
     s=sub.add_parser("seal");s.add_argument("--archive",required=True);s.add_argument("--out",required=True);s.add_argument("--phase-steps",type=int,default=3)
     f=sub.add_parser("followup");f.add_argument("--archive",required=True);f.add_argument("--previous",required=True);f.add_argument("--out",required=True);f.add_argument("--phase-steps",type=int,default=2)
-    f.add_argument("--protocol",choices=("reinforcement","visual"),default="reinforcement")
+    f.add_argument("--protocol",choices=("reinforcement","visual","frozen-inference"),default="reinforcement")
     r=sub.add_parser("run");r.add_argument("--plan",required=True);r.add_argument("--fly-data",required=True);r.add_argument("--out",required=True)
     a=parser.parse_args()
     if a.command=="seal":

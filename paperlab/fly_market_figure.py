@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 
 PHASES = ("training", "development", "test")
-LABELS = {"pristine_frozen":"Original / frozen", "online_original":"Original / learning",
+LABELS = {"trained_frozen":"Trained / frozen inference", "pristine_frozen":"Original / frozen", "online_original":"Original / learning",
           "fixed_returns_frozen":"Fixed returns / frozen", "fixed_returns_online":"Fixed returns / learning",
           "reinforcement_gated":"Reinforcement gated"}
 

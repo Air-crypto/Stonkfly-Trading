@@ -961,3 +961,28 @@ original online behavior. It retains the prior cohort and costs, uses training
 10:20–10:35, development 10:35–10:50, and test 10:50–11:05 UTC on September 12.
 The test interval had not begun at registration. No outcome or promotion is
 claimed for that pending experiment.
+
+### Trained, frozen inference protocol
+
+The follow-up runner supports `--protocol frozen-inference`: pristine frozen,
+trained frozen, and original online arms. `trained_frozen` learns during the
+training phase and retains that learned memory for development and test. Both
+inference phases disable updates and reinforcement; neither inherits the
+other's neural activity or cash account. Every frozen observation checks weights
+and efficacy memory for unintended changes.
+
+After the registered end time is present in a closed collector snapshot:
+
+```sh
+uv run python -m paperlab.fly_market_study followup \
+  --archive runs/fresh-universe-snapshot.db \
+  --previous reports/fly-market-study-04-plan.json \
+  --phase-steps 3 --protocol frozen-inference --out runs/market05-plan.json
+```
+
+The sealer rejects an incomplete interval and preserves the prior cohort. It
+also removes fixed-encoding metadata when returning to the original adapter.
+The worker now saves each arm's training memory and each traced test phase's
+initial memory. Phase records contain initial/final memory hashes so a trained,
+frozen run can be checked against its training checkpoint. These additions do
+not change the regular paper trader's policy.
