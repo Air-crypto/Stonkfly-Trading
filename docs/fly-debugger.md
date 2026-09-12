@@ -2154,6 +2154,55 @@ training are not imported; every evaluation phase starts independently.
 
 Either trained condition may qualify if its development equity beats cash and
 both pristine controls. The higher trained result is selected; ties prefer
-carried activity. The choice must be saved before test simulation. The runner
-and scheduled launch for this new protocol are the next implementation step;
-this registration is not evidence that study 09 has executed.
+carried activity. The choice must be saved before test simulation. The runner evaluates the closed window once inside the existing scheduled
+worker. Registration and deployment alone do not establish that study 09 has
+executed.
+
+
+### Run and inspect the registered paper-checkpoint comparison
+
+This deployment requires the private, audited `verified-export` memory files
+shown above. They are not included in a public clone. Do not substitute newly
+trained files: the registration pins the original file and array hashes.
+
+```sh
+PAPERLAB_SCHEDULE=1 PAPERLAB_FLY=1 PAPERLAB_UNIVERSE=1 PAPERLAB_PAPER_STUDY=1 \
+  uv run modal deploy cloud.py
+```
+
+The next normal worker after 17:00 UTC that sees a sufficiently recent collector
+snapshot claims study 09 before sealing its prices and news. It uses the existing
+single-writer lease, 600-second outer timeout, 480-second internal deadline and
+$25 worker cap; the $15 collector cap is unchanged. It does not create another
+schedule. A persisted pending, failed or interrupted claim cannot automatically
+launch again. Missing quote slots remain missing in all conditions.
+
+Once the scheduled claim exists, retrieve that exact call and independently audit
+its outputs with this read-only observer:
+
+```sh
+uv run python -m paperlab.fly_paper_cloud \
+  --registration reports/fly-market-study-09-preregistration.json \
+  --out runs/research-market-09
+uv run python -m paperlab.debugger serve --out runs/research-market-09
+```
+
+If the observer reports that the same call is pending, repeat the same command
+and output directory. It has no submission path. A missing claim means the
+scheduled study has not started; inspect the existing worker and collector.
+The observer requires local source hashes to match the executed version.
+
+Before exposing recordings, the audit reconstructs the news vectors from the
+archived published/seen/encoded clocks, replays every simulated fill and account
+balance, checks imported connection memory and every saved reset boundary,
+and recomputes the fixed decoder from all 166,700 neuron counts. It also verifies
+the viewer's actual image pixels and checkpoint training-exposure labels.
+Development and test both have recordings; a wholly unobserved phase has a
+ledger but no invented neural trace. Select a `pool0-trained_input_reset` run and
+compare it with `pool0-trained_frozen`; add `-development` for development.
+
+Validation before cloud execution: 333 unit/integration tests passed with 12
+optional tests skipped. A separate full-network regression passed with 32
+observations, including partial and completely missing phases. Its browser check
+covered 12 recordings and 48 timeline slots with no page errors or model
+submissions. These are synthetic regression fixtures, not study 09 results.

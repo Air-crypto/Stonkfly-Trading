@@ -211,14 +211,15 @@ def decision_timeline(rows):
              "equity": r["equity"]} for r in rows]
 
 
-def phase(lab, ticks, start, steps, arm, learning, deadline, trace_output=None, restoration=None, activity_output=None):
+def phase(lab, ticks, start, steps, arm, learning, deadline, trace_output=None, restoration=None, activity_output=None, news=None):
     b=lab.brain
     b.weights_frozen=not learning
     b.eta=arm["eta"]
     initial_memory=learned_state(b)
     lab.fly.controller.s=replace(lab.fly.controller.s,learning=learning)
     broker=Broker(DEX_COSTS)
-    news=News(enabled=False)
+    owns_news=news is None
+    news=News(enabled=False) if owns_news else news
     pending=None; anchor=DEX_COSTS.capital; unpriced=False; last_quote=0; rows=[]
     trace_events=[]; observations=0; wall_start=time.monotonic()
     if activity_output is not None:
@@ -262,6 +263,7 @@ def phase(lab, ticks, start, steps, arm, learning, deadline, trace_output=None, 
                     trace_events.append(event)
                     event["market_decision_ts"]=stamp
                 event["equity_reward_usd"]=reward if learning else 0
+                if not owns_news:event['news_features']=news.features(t.ts).tolist()
                 event["plasticity_enabled"]=enabled
                 event["weight_delta_l2"]=float(np.linalg.norm(b.weight[b.circuit["edges"]]-before))
                 if event["side"]!="HOLD":
@@ -273,7 +275,7 @@ def phase(lab, ticks, start, steps, arm, learning, deadline, trace_output=None, 
                          "fill":fill,"event":event,"broker":broker.state(),"terminal":step==steps})
         if trace_events:
             report={"schema":1,"source":"sealed_retrospective_market_replay",
-                    "config":{"preset":"market_replay","view":arm["view"],"news":"none","eta":arm["eta"],"learning":learning,
+                    "config":{"preset":"market_replay","view":arm["view"],"news":getattr(news,'label','none'),"eta":arm["eta"],"learning":learning,
                               "reinforcement_only":arm.get("reinforcement_only",False),"restore_post_ids":(restoration or {}).get("post_ids",[])},
                     "upstream_commit":UPSTREAM_COMMIT,"graph":{"neurons":b.n,"edges":len(b.post),"plastic_edges":len(b.circuit["edges"])},
                     "native_build":b.build,"seconds":time.monotonic()-wall_start,"events":trace_events,
@@ -293,7 +295,7 @@ def phase(lab, ticks, start, steps, arm, learning, deadline, trace_output=None, 
                 "unavailable_marks":sum(not r["available"] for r in rows),"rows":rows,"restoration":restoration,
                 "initial_memory_sha256":memory_signature(initial_memory),"final_memory_sha256":memory_signature(learned_state(b))}
     finally:
-        news.db.close()
+        if owns_news:news.db.close()
 
 
 def learned_state(brain):

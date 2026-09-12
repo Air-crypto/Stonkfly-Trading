@@ -10,6 +10,12 @@ the original BTC archive remains available.
 
 The fly is a sparse spiking network, not a transformer. The compact policy is an MLP actor/critic, not an SLM. An optional, separately pinned FinBERT transformer encodes headline sentiment. News features enter the compact policy numerically and the fly through an explicit visual adapter.
 
+The next [registered comparison of paper-trained memory](docs/fly-debugger.md#run-and-inspect-the-registered-paper-checkpoint-comparison)
+uses audited reward-exposed checkpoints, identical timestamped news, and separate
+development/test windows. Its observer checks full-neuron decoder counts, fills,
+and input-state resets before exposing recordings. No improvement is established
+until the registered evaluation is completed and assessed.
+
 ## Inspect the fly
 
 The [interactive circuit debugger](docs/fly-debugger.md) shows recorded spikes,

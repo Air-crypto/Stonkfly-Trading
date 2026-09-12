@@ -21,6 +21,13 @@ const assert=require('node:assert/strict'),fs=require('fs'),path=require('path')
    assert.equal(v.report.source,'sealed_retrospective_market_replay');assert(['carry','conductance'].includes(v.report.config.activity_reset));
    const timeline=v.report.market_timeline,observed=timeline.filter(r=>r.observation==='observed');assert.equal(observed.length,v.frames.length);
    await page.goto(`${base}/?run=${name}`);await page.waitForFunction(name=>document.querySelector('#status').textContent.startsWith('Loaded '+name),name);
+   if(v.report.memory_origin){
+    const note=await page.locator('#phase-note').innerText();
+    assert(note.includes(v.report.evaluation_phase==='development'?'Development evaluation':'Test evaluation'));
+    assert(note.includes(v.report.memory_origin==='paper_trained'?'paper-trained connection memory':'pristine connection memory'));
+    if(v.report.training_exposure){const x=v.report.training_exposure;assert(note.includes(`${num(x.observations)} observations; ${num(x.positive_rewards)} positive and ${num(x.negative_rewards)} negative paper rewards`));}
+    assert((await page.locator('#input-info').innerText()).includes('news available at quote time'));
+   }
    assert(await page.locator('#run').isDisabled());assert(!(await page.locator('#market-panel').isHidden()));
    assert((await page.locator('#market-coverage').innerText()).includes(`${observed.length} / ${timeline.filter(r=>!r.terminal).length}`));
    const rows=await page.locator('#market-timeline tr:has(td)').allInnerTexts();assert.equal(rows.length,timeline.length);
@@ -39,8 +46,8 @@ const assert=require('node:assert/strict'),fs=require('fs'),path=require('path')
     assert.equal(await page.locator('#time').innerText(),num(e.brain_ms)+' ms');assert.equal(await page.locator('#decoder-path svg').count(),2);boundaries++;
    }
   }
-  for(const [name,v] of views){if(!name.endsWith('-trained_input_reset'))continue;
-   const other=name.replace(/-trained_input_reset$/,'-trained_frozen');if(!views.has(other))continue;
+  for(const [name,v] of views){if(!/-trained_input_reset(?:-development)?$/.test(name))continue;
+   const other=name.replace(/-trained_input_reset(?=-development$|$)/,'-trained_frozen');if(!views.has(other))continue;
    await page.goto(`${base}/?run=${name}&step=${v.frames.length-1}&bin=49&neuron=10527&compare=${other}`);
    await page.waitForFunction(()=>document.querySelector('#paired-spikes svg'));assert((await page.locator('#paired-note').innerText()).includes('Input identical: yes'));
   }

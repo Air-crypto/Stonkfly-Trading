@@ -8,6 +8,7 @@ ROOT = Path(__file__).parent
 ENABLED = os.environ.get("PAPERLAB_SCHEDULE") == "1"
 FULL_FLY = os.environ.get("PAPERLAB_FLY", "1") == "1"
 UNIVERSE = os.environ.get("PAPERLAB_UNIVERSE", "0") == "1"
+PAPER_STUDY = os.environ.get('PAPERLAB_PAPER_STUDY') == '1'
 PRODUCT = os.environ.get("PAPERLAB_PRODUCT", "BTC-USD")
 if PRODUCT not in ("BTC-USD", "ETH-USD"):
     raise ValueError("Unsupported product")
@@ -25,6 +26,14 @@ image = (modal.Image.debian_slim(python_version="3.12")
          .add_local_file(ROOT / "reports/fly-market-study-08-preregistration.json", "/opt/paperlab/registered/fly-market-study-08-preregistration.json", copy=True)
          .add_local_file(ROOT / "reports/fly-market-study-07-plan.json", "/opt/paperlab/registered/fly-market-study-07-plan.json", copy=True)
          .env({"PYTHONPATH": "/opt/paperlab", "OMP_NUM_THREADS": "2", "HF_HOME": "/state/huggingface", "PAPERLAB_FINBERT_REVISION": "4556d13015211d73dccd3fdd39d39232506f3e43", "PAPERLAB_PRODUCT": PRODUCT, "PAPERLAB_FLY": "1" if FULL_FLY else "0", "PAPERLAB_UNIVERSE":"1" if UNIVERSE else "0"}))
+
+if PAPER_STUDY:
+    for name in ('fly-market-study-09-preregistration.json','fly-market-study-08-plan.json','fly-market-study-08.json'):
+        image=image.add_local_file(ROOT/'reports'/name,'/opt/paperlab/registered/'+name,copy=True)
+    image=image.add_local_file(ROOT/'reports/fly-paper-memory-audit-01.json','/opt/paperlab/paper-memory-01/audit.json',copy=True)
+    for i in range(2):
+        image=image.add_local_file(ROOT/f'runs/reward-exposure-01/verified-export/pool{i}-memory.npz',f'/opt/paperlab/paper-memory-01/pool{i}-memory.npz',copy=True)
+    image=image.env({'PAPERLAB_PAPER_STUDY':'1'})
 
 
 def exclusive(name, call, *args):
@@ -94,6 +103,13 @@ def _worker(prepare=False,probe=False,diagnostics=False,debug=None):
             settle_budget=lambda: settle('/state/budget.json', reservation, time.time() - reservation['started']))
         if scheduled is not None:
             return scheduled  # Give the bounded study this entire worker invocation.
+        if os.environ.get('PAPERLAB_PAPER_STUDY')=='1':
+            from paperlab.fly_paper_schedule import execute_due as paper_due
+            from paperlab.fly_paper_study import run as paper_run
+            scheduled=paper_due('/state','/discovery','/opt/paperlab/registered','/opt/paperlab/paper-memory-01',
+                call_id=modal.current_function_call_id(),input_id=modal.current_input_id(),commit=volume.commit,
+                run=paper_run,settle_budget=lambda:settle('/state/budget.json',reservation,time.time()-reservation['started']))
+            if scheduled is not None:return scheduled
     if debug is not None:
         from paperlab.cloud_debug import run
         try:
