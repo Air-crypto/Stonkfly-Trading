@@ -1,0 +1,6564 @@
+{
+  "schema": 1,
+  "kind": "post_hoc_output_count_sensitivity",
+  "controller_sha256": "8783a2812408af28c909803763850c69e162a780531d1983dd7a3e83eb72aede",
+  "settings_sha256": "7fc52aca6cba7356f8bfc76bd9a6dbc5d6fdc08611a48b53c56df23796584b4e",
+  "settings_basis": "Retained native defaults, checked against every recorded rate, gate and side; historical reports do not independently record the threshold.",
+  "interpretation": "One spike is added to or removed from one output count after the observation. No neural propagation, plasticity, input, execution, or profit is recomputed. These edits are mathematical counterfactuals, not evidence of actual noise, a causal neural intervention, or profitable threshold tuning. Repeated controls are not independent samples.",
+  "totals": {
+    "observations": 69,
+    "one_spike_sensitive": 29,
+    "side_BUY": 45,
+    "side_HOLD": 22,
+    "side_SELL": 2
+  },
+  "runs": {
+    "market05-pool0-online_original": {
+      "view_sha256": "0e12b0bad9cbb9830da1a610a21374baef68219ef026e4aec60eb8f659f04b58",
+      "settings": {
+        "neural_ms": 500,
+        "decoder_threshold_hz": 2
+      },
+      "observations": [
+        {
+          "observation": 1,
+          "market_decision_ts": 1789210200,
+          "input_sha256": "4ae68001987d9ad818f8c43ec7309f742de6f824e3d656a70b6aa3ea31cdea95",
+          "spike_sha256": "1b04791ed9b408fac865de4a8869ff5764d86bfe207930b4bb4a26686c1791d1",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 30.0,
+            "right_hz": 36.0,
+            "difference_hz": 6.0,
+            "gate_spikes": 23,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 15,
+            "10059": 18,
+            "10527": 13,
+            "555871": 10
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 23,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 4.0,
+              "gate_spikes": 23,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 4.0,
+              "gate_spikes": 23,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 23,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 22,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 24,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 22,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 24,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 2,
+          "market_decision_ts": 1789210500,
+          "input_sha256": "e0b7a9391c01184d738c89cf57d41f8d47f03c008dd83eb9ccc8e9d9788c138b",
+          "spike_sha256": "6b2f2c33913a96a96660c20a24fc905129424c9cc5928c34a9d4bfb9503d28ad",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 28.0,
+            "right_hz": 42.0,
+            "difference_hz": 14.0,
+            "gate_spikes": 1,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 14,
+            "10059": 21,
+            "10527": 1,
+            "555871": 0
+          },
+          "single_spike_changes_action": true,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 16.0,
+              "gate_spikes": 1,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 12.0,
+              "gate_spikes": 1,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 12.0,
+              "gate_spikes": 1,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 16.0,
+              "gate_spikes": 1,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 14.0,
+              "gate_spikes": 0,
+              "action_changed": true
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 14.0,
+              "gate_spikes": 2,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 14.0,
+              "gate_spikes": 2,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 3,
+          "market_decision_ts": 1789210800,
+          "input_sha256": "cfe742d02c12932e87bd69702acecf44c067108d54ed3cc8e6005acba4dd2b07",
+          "spike_sha256": "7c8a02243f1bfa1ba251ea1402ecfb75c68a31e14551226fa5be1a18e985c701",
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 38.0,
+            "right_hz": 44.0,
+            "difference_hz": 6.0,
+            "gate_spikes": 0,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 19,
+            "10059": 22,
+            "10527": 0,
+            "555871": 0
+          },
+          "single_spike_changes_action": true,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 8.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 4.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 4.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 8.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            }
+          ]
+        }
+      ]
+    },
+    "market05-pool0-pristine_frozen": {
+      "view_sha256": "9d3b69a0af07601da24756d85047467d8c9236402c21d57df39ef4e2c586ea94",
+      "settings": {
+        "neural_ms": 500,
+        "decoder_threshold_hz": 2
+      },
+      "observations": [
+        {
+          "observation": 1,
+          "market_decision_ts": 1789210200,
+          "input_sha256": "4ae68001987d9ad818f8c43ec7309f742de6f824e3d656a70b6aa3ea31cdea95",
+          "spike_sha256": "1b04791ed9b408fac865de4a8869ff5764d86bfe207930b4bb4a26686c1791d1",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 30.0,
+            "right_hz": 36.0,
+            "difference_hz": 6.0,
+            "gate_spikes": 23,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 15,
+            "10059": 18,
+            "10527": 13,
+            "555871": 10
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 23,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 4.0,
+              "gate_spikes": 23,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 4.0,
+              "gate_spikes": 23,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 23,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 22,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 24,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 22,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 24,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 2,
+          "market_decision_ts": 1789210500,
+          "input_sha256": "e0b7a9391c01184d738c89cf57d41f8d47f03c008dd83eb9ccc8e9d9788c138b",
+          "spike_sha256": "cb13bf8b9982ded80ed16dde5367397387919cfe9b681ea889b19c80bb7f8808",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 36.0,
+            "right_hz": 40.0,
+            "difference_hz": 4.0,
+            "gate_spikes": 1,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 18,
+            "10059": 20,
+            "10527": 1,
+            "555871": 0
+          },
+          "single_spike_changes_action": true,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 1,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 2.0,
+              "gate_spikes": 1,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 2.0,
+              "gate_spikes": 1,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 1,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 4.0,
+              "gate_spikes": 0,
+              "action_changed": true
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 4.0,
+              "gate_spikes": 2,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 4.0,
+              "gate_spikes": 2,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 3,
+          "market_decision_ts": 1789210800,
+          "input_sha256": "cfe742d02c12932e87bd69702acecf44c067108d54ed3cc8e6005acba4dd2b07",
+          "spike_sha256": "860cf91ec7ebfb476ae297278619c4a2550a0de0d3821955e789a9bb4740647d",
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 28.0,
+            "right_hz": 40.0,
+            "difference_hz": 12.0,
+            "gate_spikes": 0,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 14,
+            "10059": 20,
+            "10527": 0,
+            "555871": 0
+          },
+          "single_spike_changes_action": true,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 14.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 10.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 10.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 14.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 12.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 12.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            }
+          ]
+        }
+      ]
+    },
+    "market05-pool0-trained_frozen": {
+      "view_sha256": "42f63951f839a20d13ebfda04aa4b23fa80f138c2b0eb36a492dc71084363734",
+      "settings": {
+        "neural_ms": 500,
+        "decoder_threshold_hz": 2
+      },
+      "observations": [
+        {
+          "observation": 1,
+          "market_decision_ts": 1789210200,
+          "input_sha256": "4ae68001987d9ad818f8c43ec7309f742de6f824e3d656a70b6aa3ea31cdea95",
+          "spike_sha256": "1b04791ed9b408fac865de4a8869ff5764d86bfe207930b4bb4a26686c1791d1",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 30.0,
+            "right_hz": 36.0,
+            "difference_hz": 6.0,
+            "gate_spikes": 23,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 15,
+            "10059": 18,
+            "10527": 13,
+            "555871": 10
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 23,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 4.0,
+              "gate_spikes": 23,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 4.0,
+              "gate_spikes": 23,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 23,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 22,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 24,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 22,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 24,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 2,
+          "market_decision_ts": 1789210500,
+          "input_sha256": "e0b7a9391c01184d738c89cf57d41f8d47f03c008dd83eb9ccc8e9d9788c138b",
+          "spike_sha256": "8a6d913a07d94694ccf52618a037f1ac33fe8084ae16c5b4bbdaca921849ec03",
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 34.0,
+            "right_hz": 34.0,
+            "difference_hz": 0.0,
+            "gate_spikes": 1,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 17,
+            "10059": 17,
+            "10527": 1,
+            "555871": 0
+          },
+          "single_spike_changes_action": true,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 2.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "SELL",
+              "difference_hz": -2.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "SELL",
+              "difference_hz": -2.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 2.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 0.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 0.0,
+              "gate_spikes": 2,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 0.0,
+              "gate_spikes": 2,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 3,
+          "market_decision_ts": 1789210800,
+          "input_sha256": "cfe742d02c12932e87bd69702acecf44c067108d54ed3cc8e6005acba4dd2b07",
+          "spike_sha256": "8713464a1327374e293f53915f3fa3d4153bc5cd33618a6051580453f390c9fc",
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 34.0,
+            "right_hz": 38.0,
+            "difference_hz": 4.0,
+            "gate_spikes": 0,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 17,
+            "10059": 19,
+            "10527": 0,
+            "555871": 0
+          },
+          "single_spike_changes_action": true,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 6.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 2.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 2.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 6.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 4.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 4.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            }
+          ]
+        }
+      ]
+    },
+    "market05-pool1-online_original": {
+      "view_sha256": "e0360a903d227ae9d7cc925e5e9c10fa14fbd6f01ad41d133f246c2cf1af5dcd",
+      "settings": {
+        "neural_ms": 500,
+        "decoder_threshold_hz": 2
+      },
+      "observations": [
+        {
+          "observation": 1,
+          "market_decision_ts": 1789210500,
+          "input_sha256": "8e2d8682ca87449be77e6320fb025be23476156636d1eb15bf6c680a390dc47d",
+          "spike_sha256": "a07255fb1097438d5ec44f13f63ae5456704e2bfe24a58de8a4bc192a3310a58",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 26.0,
+            "right_hz": 36.0,
+            "difference_hz": 10.0,
+            "gate_spikes": 22,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 13,
+            "10059": 18,
+            "10527": 11,
+            "555871": 11
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 12.0,
+              "gate_spikes": 22,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 22,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 22,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 12.0,
+              "gate_spikes": 22,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 21,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 23,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 21,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 23,
+              "action_changed": false
+            }
+          ]
+        }
+      ]
+    },
+    "market05-pool1-pristine_frozen": {
+      "view_sha256": "21762d1b5c6ba82014e2bcc1c32ba35d2993091290f17b62863554e5d4eb9742",
+      "settings": {
+        "neural_ms": 500,
+        "decoder_threshold_hz": 2
+      },
+      "observations": [
+        {
+          "observation": 1,
+          "market_decision_ts": 1789210500,
+          "input_sha256": "8e2d8682ca87449be77e6320fb025be23476156636d1eb15bf6c680a390dc47d",
+          "spike_sha256": "a07255fb1097438d5ec44f13f63ae5456704e2bfe24a58de8a4bc192a3310a58",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 26.0,
+            "right_hz": 36.0,
+            "difference_hz": 10.0,
+            "gate_spikes": 22,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 13,
+            "10059": 18,
+            "10527": 11,
+            "555871": 11
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 12.0,
+              "gate_spikes": 22,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 22,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 22,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 12.0,
+              "gate_spikes": 22,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 21,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 23,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 21,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 23,
+              "action_changed": false
+            }
+          ]
+        }
+      ]
+    },
+    "market05-pool1-trained_frozen": {
+      "view_sha256": "9f755aa602ebdd84b6e7bc0c75221756c04e6a90a82bd410aca89a1668f62cbe",
+      "settings": {
+        "neural_ms": 500,
+        "decoder_threshold_hz": 2
+      },
+      "observations": [
+        {
+          "observation": 1,
+          "market_decision_ts": 1789210500,
+          "input_sha256": "8e2d8682ca87449be77e6320fb025be23476156636d1eb15bf6c680a390dc47d",
+          "spike_sha256": "a07255fb1097438d5ec44f13f63ae5456704e2bfe24a58de8a4bc192a3310a58",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 26.0,
+            "right_hz": 36.0,
+            "difference_hz": 10.0,
+            "gate_spikes": 22,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 13,
+            "10059": 18,
+            "10527": 11,
+            "555871": 11
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 12.0,
+              "gate_spikes": 22,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 22,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 22,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 12.0,
+              "gate_spikes": 22,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 21,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 23,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 21,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 23,
+              "action_changed": false
+            }
+          ]
+        }
+      ]
+    },
+    "market06-pool0-pristine_frozen": {
+      "view_sha256": "ca0ba89bff9d55dbd3a9cb4cc6d572e28d87a77d547d5f08873709d190fb38e9",
+      "settings": {
+        "neural_ms": 500,
+        "decoder_threshold_hz": 2
+      },
+      "observations": [
+        {
+          "observation": 1,
+          "market_decision_ts": 1789212900,
+          "input_sha256": "78791bb229e4b77c5e790663cacd0f7babda7bc16821f033165b8708aae51430",
+          "spike_sha256": "af5d35ad2a0b1ccaa0a19ef19715fe97007d75b5423590b34ac7ff5dd9e779c0",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 28.0,
+            "right_hz": 36.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 25,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 14,
+            "10059": 18,
+            "10527": 13,
+            "555871": 12
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 25,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 25,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 25,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 25,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 24,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 26,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 24,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 26,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 2,
+          "market_decision_ts": 1789213200,
+          "input_sha256": "e6d833f97b40f4752a6cc69ceb24f2716d2178f3b4bd7c0ba356cbfb03b4ce6f",
+          "spike_sha256": "1fc2d2dff58fccf8fdd416f620eea953d90f290444fb4cc2e6a8600ce0f1b6fc",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 26.0,
+            "right_hz": 36.0,
+            "difference_hz": 10.0,
+            "gate_spikes": 5,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 13,
+            "10059": 18,
+            "10527": 5,
+            "555871": 0
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 12.0,
+              "gate_spikes": 5,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 5,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 5,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 12.0,
+              "gate_spikes": 5,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 6,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 6,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 3,
+          "market_decision_ts": 1789213500,
+          "input_sha256": "5365f392a0f5a248828491043cfebc1bb691dd67ee52a5b6c2f7f8c05edf616f",
+          "spike_sha256": "2016d5a8fd52d281bd915353b04e8bfeaf9c2016a6dd9bacad2c9729f4070a1b",
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 32.0,
+            "right_hz": 32.0,
+            "difference_hz": 0.0,
+            "gate_spikes": 12,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 16,
+            "10059": 16,
+            "10527": 11,
+            "555871": 1
+          },
+          "single_spike_changes_action": true,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 2.0,
+              "gate_spikes": 12,
+              "action_changed": true
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "SELL",
+              "difference_hz": -2.0,
+              "gate_spikes": 12,
+              "action_changed": true
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "SELL",
+              "difference_hz": -2.0,
+              "gate_spikes": 12,
+              "action_changed": true
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 2.0,
+              "gate_spikes": 12,
+              "action_changed": true
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 0.0,
+              "gate_spikes": 11,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 0.0,
+              "gate_spikes": 13,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 0.0,
+              "gate_spikes": 11,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 0.0,
+              "gate_spikes": 13,
+              "action_changed": false
+            }
+          ]
+        }
+      ]
+    },
+    "market06-pool0-restore_10704": {
+      "view_sha256": "f26069fafd5aa7014b9ef466225417acbfaa703e36f88a7b9d2588b446faca4b",
+      "settings": {
+        "neural_ms": 500,
+        "decoder_threshold_hz": 2
+      },
+      "observations": [
+        {
+          "observation": 1,
+          "market_decision_ts": 1789212900,
+          "input_sha256": "78791bb229e4b77c5e790663cacd0f7babda7bc16821f033165b8708aae51430",
+          "spike_sha256": "af5d35ad2a0b1ccaa0a19ef19715fe97007d75b5423590b34ac7ff5dd9e779c0",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 28.0,
+            "right_hz": 36.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 25,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 14,
+            "10059": 18,
+            "10527": 13,
+            "555871": 12
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 25,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 25,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 25,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 25,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 24,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 26,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 24,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 26,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 2,
+          "market_decision_ts": 1789213200,
+          "input_sha256": "e6d833f97b40f4752a6cc69ceb24f2716d2178f3b4bd7c0ba356cbfb03b4ce6f",
+          "spike_sha256": "1fc2d2dff58fccf8fdd416f620eea953d90f290444fb4cc2e6a8600ce0f1b6fc",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 26.0,
+            "right_hz": 36.0,
+            "difference_hz": 10.0,
+            "gate_spikes": 5,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 13,
+            "10059": 18,
+            "10527": 5,
+            "555871": 0
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 12.0,
+              "gate_spikes": 5,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 5,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 5,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 12.0,
+              "gate_spikes": 5,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 6,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 6,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 3,
+          "market_decision_ts": 1789213500,
+          "input_sha256": "5365f392a0f5a248828491043cfebc1bb691dd67ee52a5b6c2f7f8c05edf616f",
+          "spike_sha256": "2016d5a8fd52d281bd915353b04e8bfeaf9c2016a6dd9bacad2c9729f4070a1b",
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 32.0,
+            "right_hz": 32.0,
+            "difference_hz": 0.0,
+            "gate_spikes": 12,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 16,
+            "10059": 16,
+            "10527": 11,
+            "555871": 1
+          },
+          "single_spike_changes_action": true,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 2.0,
+              "gate_spikes": 12,
+              "action_changed": true
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "SELL",
+              "difference_hz": -2.0,
+              "gate_spikes": 12,
+              "action_changed": true
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "SELL",
+              "difference_hz": -2.0,
+              "gate_spikes": 12,
+              "action_changed": true
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 2.0,
+              "gate_spikes": 12,
+              "action_changed": true
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 0.0,
+              "gate_spikes": 11,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 0.0,
+              "gate_spikes": 13,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 0.0,
+              "gate_spikes": 11,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 0.0,
+              "gate_spikes": 13,
+              "action_changed": false
+            }
+          ]
+        }
+      ]
+    },
+    "market06-pool0-restore_11402": {
+      "view_sha256": "565270760c368e55fa3bd60e09ec60fb89d6bf06526db367e618d5c3f488a1c8",
+      "settings": {
+        "neural_ms": 500,
+        "decoder_threshold_hz": 2
+      },
+      "observations": [
+        {
+          "observation": 1,
+          "market_decision_ts": 1789212900,
+          "input_sha256": "78791bb229e4b77c5e790663cacd0f7babda7bc16821f033165b8708aae51430",
+          "spike_sha256": "af5d35ad2a0b1ccaa0a19ef19715fe97007d75b5423590b34ac7ff5dd9e779c0",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 28.0,
+            "right_hz": 36.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 25,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 14,
+            "10059": 18,
+            "10527": 13,
+            "555871": 12
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 25,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 25,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 25,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 25,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 24,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 26,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 24,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 26,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 2,
+          "market_decision_ts": 1789213200,
+          "input_sha256": "e6d833f97b40f4752a6cc69ceb24f2716d2178f3b4bd7c0ba356cbfb03b4ce6f",
+          "spike_sha256": "1fc2d2dff58fccf8fdd416f620eea953d90f290444fb4cc2e6a8600ce0f1b6fc",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 26.0,
+            "right_hz": 36.0,
+            "difference_hz": 10.0,
+            "gate_spikes": 5,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 13,
+            "10059": 18,
+            "10527": 5,
+            "555871": 0
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 12.0,
+              "gate_spikes": 5,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 5,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 5,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 12.0,
+              "gate_spikes": 5,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 6,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 6,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 3,
+          "market_decision_ts": 1789213500,
+          "input_sha256": "5365f392a0f5a248828491043cfebc1bb691dd67ee52a5b6c2f7f8c05edf616f",
+          "spike_sha256": "2016d5a8fd52d281bd915353b04e8bfeaf9c2016a6dd9bacad2c9729f4070a1b",
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 32.0,
+            "right_hz": 32.0,
+            "difference_hz": 0.0,
+            "gate_spikes": 12,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 16,
+            "10059": 16,
+            "10527": 11,
+            "555871": 1
+          },
+          "single_spike_changes_action": true,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 2.0,
+              "gate_spikes": 12,
+              "action_changed": true
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "SELL",
+              "difference_hz": -2.0,
+              "gate_spikes": 12,
+              "action_changed": true
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "SELL",
+              "difference_hz": -2.0,
+              "gate_spikes": 12,
+              "action_changed": true
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 2.0,
+              "gate_spikes": 12,
+              "action_changed": true
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 0.0,
+              "gate_spikes": 11,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 0.0,
+              "gate_spikes": 13,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 0.0,
+              "gate_spikes": 11,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 0.0,
+              "gate_spikes": 13,
+              "action_changed": false
+            }
+          ]
+        }
+      ]
+    },
+    "market06-pool0-restore_both": {
+      "view_sha256": "8848fb970a259acb0dacb2bcbd7ccfe4f2fc5b572d3761483a57520b2528058b",
+      "settings": {
+        "neural_ms": 500,
+        "decoder_threshold_hz": 2
+      },
+      "observations": [
+        {
+          "observation": 1,
+          "market_decision_ts": 1789212900,
+          "input_sha256": "78791bb229e4b77c5e790663cacd0f7babda7bc16821f033165b8708aae51430",
+          "spike_sha256": "af5d35ad2a0b1ccaa0a19ef19715fe97007d75b5423590b34ac7ff5dd9e779c0",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 28.0,
+            "right_hz": 36.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 25,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 14,
+            "10059": 18,
+            "10527": 13,
+            "555871": 12
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 25,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 25,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 25,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 25,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 24,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 26,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 24,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 26,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 2,
+          "market_decision_ts": 1789213200,
+          "input_sha256": "e6d833f97b40f4752a6cc69ceb24f2716d2178f3b4bd7c0ba356cbfb03b4ce6f",
+          "spike_sha256": "1fc2d2dff58fccf8fdd416f620eea953d90f290444fb4cc2e6a8600ce0f1b6fc",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 26.0,
+            "right_hz": 36.0,
+            "difference_hz": 10.0,
+            "gate_spikes": 5,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 13,
+            "10059": 18,
+            "10527": 5,
+            "555871": 0
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 12.0,
+              "gate_spikes": 5,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 5,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 5,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 12.0,
+              "gate_spikes": 5,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 6,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 6,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 3,
+          "market_decision_ts": 1789213500,
+          "input_sha256": "5365f392a0f5a248828491043cfebc1bb691dd67ee52a5b6c2f7f8c05edf616f",
+          "spike_sha256": "2016d5a8fd52d281bd915353b04e8bfeaf9c2016a6dd9bacad2c9729f4070a1b",
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 32.0,
+            "right_hz": 32.0,
+            "difference_hz": 0.0,
+            "gate_spikes": 12,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 16,
+            "10059": 16,
+            "10527": 11,
+            "555871": 1
+          },
+          "single_spike_changes_action": true,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 2.0,
+              "gate_spikes": 12,
+              "action_changed": true
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "SELL",
+              "difference_hz": -2.0,
+              "gate_spikes": 12,
+              "action_changed": true
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "SELL",
+              "difference_hz": -2.0,
+              "gate_spikes": 12,
+              "action_changed": true
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 2.0,
+              "gate_spikes": 12,
+              "action_changed": true
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 0.0,
+              "gate_spikes": 11,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 0.0,
+              "gate_spikes": 13,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 0.0,
+              "gate_spikes": 11,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 0.0,
+              "gate_spikes": 13,
+              "action_changed": false
+            }
+          ]
+        }
+      ]
+    },
+    "market06-pool0-trained_frozen": {
+      "view_sha256": "931432acf56609fe717c09b50e5e18fffbaf83a13e795c0bbb575e5d78a2a414",
+      "settings": {
+        "neural_ms": 500,
+        "decoder_threshold_hz": 2
+      },
+      "observations": [
+        {
+          "observation": 1,
+          "market_decision_ts": 1789212900,
+          "input_sha256": "78791bb229e4b77c5e790663cacd0f7babda7bc16821f033165b8708aae51430",
+          "spike_sha256": "af5d35ad2a0b1ccaa0a19ef19715fe97007d75b5423590b34ac7ff5dd9e779c0",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 28.0,
+            "right_hz": 36.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 25,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 14,
+            "10059": 18,
+            "10527": 13,
+            "555871": 12
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 25,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 25,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 25,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 25,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 24,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 26,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 24,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 26,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 2,
+          "market_decision_ts": 1789213200,
+          "input_sha256": "e6d833f97b40f4752a6cc69ceb24f2716d2178f3b4bd7c0ba356cbfb03b4ce6f",
+          "spike_sha256": "1fc2d2dff58fccf8fdd416f620eea953d90f290444fb4cc2e6a8600ce0f1b6fc",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 26.0,
+            "right_hz": 36.0,
+            "difference_hz": 10.0,
+            "gate_spikes": 5,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 13,
+            "10059": 18,
+            "10527": 5,
+            "555871": 0
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 12.0,
+              "gate_spikes": 5,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 5,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 5,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 12.0,
+              "gate_spikes": 5,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 6,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 6,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 3,
+          "market_decision_ts": 1789213500,
+          "input_sha256": "5365f392a0f5a248828491043cfebc1bb691dd67ee52a5b6c2f7f8c05edf616f",
+          "spike_sha256": "2016d5a8fd52d281bd915353b04e8bfeaf9c2016a6dd9bacad2c9729f4070a1b",
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 32.0,
+            "right_hz": 32.0,
+            "difference_hz": 0.0,
+            "gate_spikes": 12,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 16,
+            "10059": 16,
+            "10527": 11,
+            "555871": 1
+          },
+          "single_spike_changes_action": true,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 2.0,
+              "gate_spikes": 12,
+              "action_changed": true
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "SELL",
+              "difference_hz": -2.0,
+              "gate_spikes": 12,
+              "action_changed": true
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "SELL",
+              "difference_hz": -2.0,
+              "gate_spikes": 12,
+              "action_changed": true
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 2.0,
+              "gate_spikes": 12,
+              "action_changed": true
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 0.0,
+              "gate_spikes": 11,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 0.0,
+              "gate_spikes": 13,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 0.0,
+              "gate_spikes": 11,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 0.0,
+              "gate_spikes": 13,
+              "action_changed": false
+            }
+          ]
+        }
+      ]
+    },
+    "market06-pool1-pristine_frozen": {
+      "view_sha256": "d1edf7498959edefdbf8980d6db2a97183eea130a6600b00396f9f7ac726f385",
+      "settings": {
+        "neural_ms": 500,
+        "decoder_threshold_hz": 2
+      },
+      "observations": [
+        {
+          "observation": 1,
+          "market_decision_ts": 1789212900,
+          "input_sha256": "77bc6b7f69ed101fed1672833465d77c483e36fdbcf80b0281b44f36e1fa9aa7",
+          "spike_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 30.0,
+            "right_hz": 38.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 31,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 15,
+            "10059": 19,
+            "10527": 15,
+            "555871": 16
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 30,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 32,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 30,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 32,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 2,
+          "market_decision_ts": 1789213200,
+          "input_sha256": "0758728838cf369025d4ffbff13f8c1c826722a6a42f9391bc3ea10b98b6a4f2",
+          "spike_sha256": "0416e2063de8ab906de0a0d3ba73380a5ad803723c3cb77e77a16539b59fb066",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 32.0,
+            "right_hz": 38.0,
+            "difference_hz": 6.0,
+            "gate_spikes": 4,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 16,
+            "10059": 19,
+            "10527": 4,
+            "555871": 0
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 4.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 4.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 3,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 5,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 5,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 3,
+          "market_decision_ts": 1789213500,
+          "input_sha256": "c9c6c5e50d923ce6c302246c96b984528b5af0f116894c6b787ca6bf376aadf1",
+          "spike_sha256": "fa079f5d09d6310605a1373a51997124858c9414817330b2b2e823316b521122",
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 34.0,
+            "right_hz": 44.0,
+            "difference_hz": 10.0,
+            "gate_spikes": 0,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 17,
+            "10059": 22,
+            "10527": 0,
+            "555871": 0
+          },
+          "single_spike_changes_action": true,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 12.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 8.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 8.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 12.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            }
+          ]
+        }
+      ]
+    },
+    "market06-pool1-restore_10704": {
+      "view_sha256": "069bc30b4e4a7bcc9f2e81580006f4a16ebe03f67c1aad34ad98b1e45c58f861",
+      "settings": {
+        "neural_ms": 500,
+        "decoder_threshold_hz": 2
+      },
+      "observations": [
+        {
+          "observation": 1,
+          "market_decision_ts": 1789212900,
+          "input_sha256": "77bc6b7f69ed101fed1672833465d77c483e36fdbcf80b0281b44f36e1fa9aa7",
+          "spike_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 30.0,
+            "right_hz": 38.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 31,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 15,
+            "10059": 19,
+            "10527": 15,
+            "555871": 16
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 30,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 32,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 30,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 32,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 2,
+          "market_decision_ts": 1789213200,
+          "input_sha256": "0758728838cf369025d4ffbff13f8c1c826722a6a42f9391bc3ea10b98b6a4f2",
+          "spike_sha256": "aeb0fea767ec091f523ebd885db74a78c528338f7a903eb86925b07a91f7bba5",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 28.0,
+            "right_hz": 38.0,
+            "difference_hz": 10.0,
+            "gate_spikes": 3,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 14,
+            "10059": 19,
+            "10527": 3,
+            "555871": 0
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 12.0,
+              "gate_spikes": 3,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 3,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 3,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 12.0,
+              "gate_spikes": 3,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 2,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 3,
+          "market_decision_ts": 1789213500,
+          "input_sha256": "c9c6c5e50d923ce6c302246c96b984528b5af0f116894c6b787ca6bf376aadf1",
+          "spike_sha256": "4156169681d7c487e46c687388c91f4688e476e45e6686ea547088356d1f92bc",
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 28.0,
+            "right_hz": 40.0,
+            "difference_hz": 12.0,
+            "gate_spikes": 0,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 14,
+            "10059": 20,
+            "10527": 0,
+            "555871": 0
+          },
+          "single_spike_changes_action": true,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 14.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 10.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 10.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 14.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 12.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 12.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            }
+          ]
+        }
+      ]
+    },
+    "market06-pool1-restore_11402": {
+      "view_sha256": "6b9ed0bf66f08e5b8e8d5491ddc92d304722c6e6e3425a436ea46c01da475e05",
+      "settings": {
+        "neural_ms": 500,
+        "decoder_threshold_hz": 2
+      },
+      "observations": [
+        {
+          "observation": 1,
+          "market_decision_ts": 1789212900,
+          "input_sha256": "77bc6b7f69ed101fed1672833465d77c483e36fdbcf80b0281b44f36e1fa9aa7",
+          "spike_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 30.0,
+            "right_hz": 38.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 31,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 15,
+            "10059": 19,
+            "10527": 15,
+            "555871": 16
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 30,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 32,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 30,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 32,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 2,
+          "market_decision_ts": 1789213200,
+          "input_sha256": "0758728838cf369025d4ffbff13f8c1c826722a6a42f9391bc3ea10b98b6a4f2",
+          "spike_sha256": "1ebbc9470797f7517e8067bbc3159aa173b2fb1bc00e546e3f00e00bada92399",
+          "baseline": {
+            "side": "SELL",
+            "left_hz": 36.0,
+            "right_hz": 34.0,
+            "difference_hz": -2.0,
+            "gate_spikes": 3,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 18,
+            "10059": 17,
+            "10527": 3,
+            "555871": 0
+          },
+          "single_spike_changes_action": true,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 0.0,
+              "gate_spikes": 3,
+              "action_changed": true
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "SELL",
+              "difference_hz": -4.0,
+              "gate_spikes": 3,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "SELL",
+              "difference_hz": -4.0,
+              "gate_spikes": 3,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 0.0,
+              "gate_spikes": 3,
+              "action_changed": true
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "SELL",
+              "difference_hz": -2.0,
+              "gate_spikes": 2,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "SELL",
+              "difference_hz": -2.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "SELL",
+              "difference_hz": -2.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 3,
+          "market_decision_ts": 1789213500,
+          "input_sha256": "c9c6c5e50d923ce6c302246c96b984528b5af0f116894c6b787ca6bf376aadf1",
+          "spike_sha256": "3602e2274fbbcb130ff0a38770a0111885c81b39173c2cbafbd4efd754f9c3e1",
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 42.0,
+            "right_hz": 48.0,
+            "difference_hz": 6.0,
+            "gate_spikes": 0,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 21,
+            "10059": 24,
+            "10527": 0,
+            "555871": 0
+          },
+          "single_spike_changes_action": true,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 8.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 4.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 4.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 8.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            }
+          ]
+        }
+      ]
+    },
+    "market06-pool1-restore_both": {
+      "view_sha256": "7acde8778ee3af122e7afaa4a53ebdca5c4165a698cad51c6a2f2662cec3c8c8",
+      "settings": {
+        "neural_ms": 500,
+        "decoder_threshold_hz": 2
+      },
+      "observations": [
+        {
+          "observation": 1,
+          "market_decision_ts": 1789212900,
+          "input_sha256": "77bc6b7f69ed101fed1672833465d77c483e36fdbcf80b0281b44f36e1fa9aa7",
+          "spike_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 30.0,
+            "right_hz": 38.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 31,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 15,
+            "10059": 19,
+            "10527": 15,
+            "555871": 16
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 30,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 32,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 30,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 32,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 2,
+          "market_decision_ts": 1789213200,
+          "input_sha256": "0758728838cf369025d4ffbff13f8c1c826722a6a42f9391bc3ea10b98b6a4f2",
+          "spike_sha256": "d4e93db46bbd9b78d70902b9db108c5bf989fe48d9d3a550369672424c85258a",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 34.0,
+            "right_hz": 42.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 4,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 17,
+            "10059": 21,
+            "10527": 4,
+            "555871": 0
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 3,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 5,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 5,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 3,
+          "market_decision_ts": 1789213500,
+          "input_sha256": "c9c6c5e50d923ce6c302246c96b984528b5af0f116894c6b787ca6bf376aadf1",
+          "spike_sha256": "c37d4f8bc27002b53c9bf508220c54da16de9067a8295733af74de77eac62c3c",
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 40.0,
+            "right_hz": 48.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 0,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 20,
+            "10059": 24,
+            "10527": 0,
+            "555871": 0
+          },
+          "single_spike_changes_action": true,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 10.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 6.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 6.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 10.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            }
+          ]
+        }
+      ]
+    },
+    "market06-pool1-trained_frozen": {
+      "view_sha256": "5302209634603e0299a7123505557b1a263f583a1d80a71413f2f002d8e13e0b",
+      "settings": {
+        "neural_ms": 500,
+        "decoder_threshold_hz": 2
+      },
+      "observations": [
+        {
+          "observation": 1,
+          "market_decision_ts": 1789212900,
+          "input_sha256": "77bc6b7f69ed101fed1672833465d77c483e36fdbcf80b0281b44f36e1fa9aa7",
+          "spike_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 30.0,
+            "right_hz": 38.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 31,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 15,
+            "10059": 19,
+            "10527": 15,
+            "555871": 16
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 30,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 32,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 30,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 32,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 2,
+          "market_decision_ts": 1789213200,
+          "input_sha256": "0758728838cf369025d4ffbff13f8c1c826722a6a42f9391bc3ea10b98b6a4f2",
+          "spike_sha256": "a761c0adc67889c4fed9439ec2aee51526f5aeef5fb9ca299daecfbf92ebf9b6",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 34.0,
+            "right_hz": 36.0,
+            "difference_hz": 2.0,
+            "gate_spikes": 3,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 17,
+            "10059": 18,
+            "10527": 3,
+            "555871": 0
+          },
+          "single_spike_changes_action": true,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 4.0,
+              "gate_spikes": 3,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 0.0,
+              "gate_spikes": 3,
+              "action_changed": true
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 0.0,
+              "gate_spikes": 3,
+              "action_changed": true
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 4.0,
+              "gate_spikes": 3,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 2.0,
+              "gate_spikes": 2,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 2.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 2.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 3,
+          "market_decision_ts": 1789213500,
+          "input_sha256": "c9c6c5e50d923ce6c302246c96b984528b5af0f116894c6b787ca6bf376aadf1",
+          "spike_sha256": "36d9081dd0294519b1d0de9dd83d5eeaf0e916859367d57d2c75d7c8b36efee3",
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 36.0,
+            "right_hz": 40.0,
+            "difference_hz": 4.0,
+            "gate_spikes": 0,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 18,
+            "10059": 20,
+            "10527": 0,
+            "555871": 0
+          },
+          "single_spike_changes_action": true,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 6.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 2.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 2.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 6.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 4.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 4.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            }
+          ]
+        }
+      ]
+    },
+    "marketrestore02-pristine_frozen": {
+      "view_sha256": "4fed1fdc86799a5c3b70cec902c8aebd0f72f75b2b61b7d71e36a85820ecb5bc",
+      "settings": {
+        "neural_ms": 500,
+        "decoder_threshold_hz": 2
+      },
+      "observations": [
+        {
+          "observation": 1,
+          "market_decision_ts": 1789212900,
+          "input_sha256": "77bc6b7f69ed101fed1672833465d77c483e36fdbcf80b0281b44f36e1fa9aa7",
+          "spike_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 30.0,
+            "right_hz": 38.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 31,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 15,
+            "10059": 19,
+            "10527": 15,
+            "555871": 16
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 30,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 32,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 30,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 32,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 2,
+          "market_decision_ts": 1789213200,
+          "input_sha256": "0758728838cf369025d4ffbff13f8c1c826722a6a42f9391bc3ea10b98b6a4f2",
+          "spike_sha256": "0416e2063de8ab906de0a0d3ba73380a5ad803723c3cb77e77a16539b59fb066",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 32.0,
+            "right_hz": 38.0,
+            "difference_hz": 6.0,
+            "gate_spikes": 4,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 16,
+            "10059": 19,
+            "10527": 4,
+            "555871": 0
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 4.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 4.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 3,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 5,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 5,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 3,
+          "market_decision_ts": 1789213500,
+          "input_sha256": "c9c6c5e50d923ce6c302246c96b984528b5af0f116894c6b787ca6bf376aadf1",
+          "spike_sha256": "fa079f5d09d6310605a1373a51997124858c9414817330b2b2e823316b521122",
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 34.0,
+            "right_hz": 44.0,
+            "difference_hz": 10.0,
+            "gate_spikes": 0,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 17,
+            "10059": 22,
+            "10527": 0,
+            "555871": 0
+          },
+          "single_spike_changes_action": true,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 12.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 8.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 8.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 12.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            }
+          ]
+        }
+      ]
+    },
+    "marketrestore02-restore_10704": {
+      "view_sha256": "37da78290f9244265b9ba3a46c7a6156a0e049c19e436a2eae342010bef05af6",
+      "settings": {
+        "neural_ms": 500,
+        "decoder_threshold_hz": 2
+      },
+      "observations": [
+        {
+          "observation": 1,
+          "market_decision_ts": 1789212900,
+          "input_sha256": "77bc6b7f69ed101fed1672833465d77c483e36fdbcf80b0281b44f36e1fa9aa7",
+          "spike_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 30.0,
+            "right_hz": 38.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 31,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 15,
+            "10059": 19,
+            "10527": 15,
+            "555871": 16
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 30,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 32,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 30,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 32,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 2,
+          "market_decision_ts": 1789213200,
+          "input_sha256": "0758728838cf369025d4ffbff13f8c1c826722a6a42f9391bc3ea10b98b6a4f2",
+          "spike_sha256": "aeb0fea767ec091f523ebd885db74a78c528338f7a903eb86925b07a91f7bba5",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 28.0,
+            "right_hz": 38.0,
+            "difference_hz": 10.0,
+            "gate_spikes": 3,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 14,
+            "10059": 19,
+            "10527": 3,
+            "555871": 0
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 12.0,
+              "gate_spikes": 3,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 3,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 3,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 12.0,
+              "gate_spikes": 3,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 2,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 3,
+          "market_decision_ts": 1789213500,
+          "input_sha256": "c9c6c5e50d923ce6c302246c96b984528b5af0f116894c6b787ca6bf376aadf1",
+          "spike_sha256": "4156169681d7c487e46c687388c91f4688e476e45e6686ea547088356d1f92bc",
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 28.0,
+            "right_hz": 40.0,
+            "difference_hz": 12.0,
+            "gate_spikes": 0,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 14,
+            "10059": 20,
+            "10527": 0,
+            "555871": 0
+          },
+          "single_spike_changes_action": true,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 14.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 10.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 10.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 14.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 12.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 12.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            }
+          ]
+        }
+      ]
+    },
+    "marketrestore02-restore_11402": {
+      "view_sha256": "49fba5e74f3572c75abc91cc9967d0e38e4988cc7523544656a11d5b5cc80e73",
+      "settings": {
+        "neural_ms": 500,
+        "decoder_threshold_hz": 2
+      },
+      "observations": [
+        {
+          "observation": 1,
+          "market_decision_ts": 1789212900,
+          "input_sha256": "77bc6b7f69ed101fed1672833465d77c483e36fdbcf80b0281b44f36e1fa9aa7",
+          "spike_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 30.0,
+            "right_hz": 38.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 31,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 15,
+            "10059": 19,
+            "10527": 15,
+            "555871": 16
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 30,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 32,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 30,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 32,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 2,
+          "market_decision_ts": 1789213200,
+          "input_sha256": "0758728838cf369025d4ffbff13f8c1c826722a6a42f9391bc3ea10b98b6a4f2",
+          "spike_sha256": "1ebbc9470797f7517e8067bbc3159aa173b2fb1bc00e546e3f00e00bada92399",
+          "baseline": {
+            "side": "SELL",
+            "left_hz": 36.0,
+            "right_hz": 34.0,
+            "difference_hz": -2.0,
+            "gate_spikes": 3,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 18,
+            "10059": 17,
+            "10527": 3,
+            "555871": 0
+          },
+          "single_spike_changes_action": true,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 0.0,
+              "gate_spikes": 3,
+              "action_changed": true
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "SELL",
+              "difference_hz": -4.0,
+              "gate_spikes": 3,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "SELL",
+              "difference_hz": -4.0,
+              "gate_spikes": 3,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 0.0,
+              "gate_spikes": 3,
+              "action_changed": true
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "SELL",
+              "difference_hz": -2.0,
+              "gate_spikes": 2,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "SELL",
+              "difference_hz": -2.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "SELL",
+              "difference_hz": -2.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 3,
+          "market_decision_ts": 1789213500,
+          "input_sha256": "c9c6c5e50d923ce6c302246c96b984528b5af0f116894c6b787ca6bf376aadf1",
+          "spike_sha256": "3602e2274fbbcb130ff0a38770a0111885c81b39173c2cbafbd4efd754f9c3e1",
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 42.0,
+            "right_hz": 48.0,
+            "difference_hz": 6.0,
+            "gate_spikes": 0,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 21,
+            "10059": 24,
+            "10527": 0,
+            "555871": 0
+          },
+          "single_spike_changes_action": true,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 8.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 4.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 4.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 8.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            }
+          ]
+        }
+      ]
+    },
+    "marketrestore02-restore_MBON07": {
+      "view_sha256": "c1554d803a32d5ff51e8e943277bc6b9d355886203a1f150e75c63474f442a67",
+      "settings": {
+        "neural_ms": 500,
+        "decoder_threshold_hz": 2
+      },
+      "observations": [
+        {
+          "observation": 1,
+          "market_decision_ts": 1789212900,
+          "input_sha256": "77bc6b7f69ed101fed1672833465d77c483e36fdbcf80b0281b44f36e1fa9aa7",
+          "spike_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 30.0,
+            "right_hz": 38.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 31,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 15,
+            "10059": 19,
+            "10527": 15,
+            "555871": 16
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 30,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 32,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 30,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 32,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 2,
+          "market_decision_ts": 1789213200,
+          "input_sha256": "0758728838cf369025d4ffbff13f8c1c826722a6a42f9391bc3ea10b98b6a4f2",
+          "spike_sha256": "896145f5f63f4497279beae9b3fd1feb7a027d58ee1b8d37a6572543872cf565",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 32.0,
+            "right_hz": 38.0,
+            "difference_hz": 6.0,
+            "gate_spikes": 3,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 16,
+            "10059": 19,
+            "10527": 3,
+            "555871": 0
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 3,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 4.0,
+              "gate_spikes": 3,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 4.0,
+              "gate_spikes": 3,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 3,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 2,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 3,
+          "market_decision_ts": 1789213500,
+          "input_sha256": "c9c6c5e50d923ce6c302246c96b984528b5af0f116894c6b787ca6bf376aadf1",
+          "spike_sha256": "bc5f26c018803b429fbc1f9fb952f37bac26d7e385fd31e7c1c98caf2061f930",
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 44.0,
+            "right_hz": 52.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 0,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 22,
+            "10059": 26,
+            "10527": 0,
+            "555871": 0
+          },
+          "single_spike_changes_action": true,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 10.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 6.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 6.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 10.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            }
+          ]
+        }
+      ]
+    },
+    "marketrestore02-restore_MBON07_10704": {
+      "view_sha256": "97d9e2795d4ebe6a2facf88cfdd8f09a15e8cda23425535b97fd7a493ad10c57",
+      "settings": {
+        "neural_ms": 500,
+        "decoder_threshold_hz": 2
+      },
+      "observations": [
+        {
+          "observation": 1,
+          "market_decision_ts": 1789212900,
+          "input_sha256": "77bc6b7f69ed101fed1672833465d77c483e36fdbcf80b0281b44f36e1fa9aa7",
+          "spike_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 30.0,
+            "right_hz": 38.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 31,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 15,
+            "10059": 19,
+            "10527": 15,
+            "555871": 16
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 30,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 32,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 30,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 32,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 2,
+          "market_decision_ts": 1789213200,
+          "input_sha256": "0758728838cf369025d4ffbff13f8c1c826722a6a42f9391bc3ea10b98b6a4f2",
+          "spike_sha256": "1906e6e4afad6ac6fa89bae7af0746198f4e9c789f80c1b9bb6e858a46ebc5e5",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 34.0,
+            "right_hz": 42.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 4,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 17,
+            "10059": 21,
+            "10527": 4,
+            "555871": 0
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 3,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 5,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 5,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 3,
+          "market_decision_ts": 1789213500,
+          "input_sha256": "c9c6c5e50d923ce6c302246c96b984528b5af0f116894c6b787ca6bf376aadf1",
+          "spike_sha256": "c606ddc391bb191ad9392297f3e2f54a12e2b516f087fb91a80329fd2b2f22de",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 40.0,
+            "right_hz": 44.0,
+            "difference_hz": 4.0,
+            "gate_spikes": 1,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 20,
+            "10059": 22,
+            "10527": 1,
+            "555871": 0
+          },
+          "single_spike_changes_action": true,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 1,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 2.0,
+              "gate_spikes": 1,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 2.0,
+              "gate_spikes": 1,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 1,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 4.0,
+              "gate_spikes": 0,
+              "action_changed": true
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 4.0,
+              "gate_spikes": 2,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 4.0,
+              "gate_spikes": 2,
+              "action_changed": false
+            }
+          ]
+        }
+      ]
+    },
+    "marketrestore02-restore_MBON07_11402": {
+      "view_sha256": "5dea0abb97cdf2c7cd7c9861857e4d05b742d3b384cdae32b193e11b5ef32f75",
+      "settings": {
+        "neural_ms": 500,
+        "decoder_threshold_hz": 2
+      },
+      "observations": [
+        {
+          "observation": 1,
+          "market_decision_ts": 1789212900,
+          "input_sha256": "77bc6b7f69ed101fed1672833465d77c483e36fdbcf80b0281b44f36e1fa9aa7",
+          "spike_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 30.0,
+            "right_hz": 38.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 31,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 15,
+            "10059": 19,
+            "10527": 15,
+            "555871": 16
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 30,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 32,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 30,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 32,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 2,
+          "market_decision_ts": 1789213200,
+          "input_sha256": "0758728838cf369025d4ffbff13f8c1c826722a6a42f9391bc3ea10b98b6a4f2",
+          "spike_sha256": "755ba0a92155f27f7291a13c33aca737a95b57649bcfd1f2946de619c75dd294",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 26.0,
+            "right_hz": 36.0,
+            "difference_hz": 10.0,
+            "gate_spikes": 3,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 13,
+            "10059": 18,
+            "10527": 3,
+            "555871": 0
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 12.0,
+              "gate_spikes": 3,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 3,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 3,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 12.0,
+              "gate_spikes": 3,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 2,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 3,
+          "market_decision_ts": 1789213500,
+          "input_sha256": "c9c6c5e50d923ce6c302246c96b984528b5af0f116894c6b787ca6bf376aadf1",
+          "spike_sha256": "4c31c92a92db8b0e2408e2feffe542fc45d268195e0f3e65e875adaaaea4b297",
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 40.0,
+            "right_hz": 42.0,
+            "difference_hz": 2.0,
+            "gate_spikes": 0,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 20,
+            "10059": 21,
+            "10527": 0,
+            "555871": 0
+          },
+          "single_spike_changes_action": true,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 4.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 0.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 0.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 4.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 2.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 2.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            }
+          ]
+        }
+      ]
+    },
+    "marketrestore02-restore_all": {
+      "view_sha256": "8ea8dda8dff3eea16357435b8502ae815314c9303d2564009da9f38a3b9dbbfb",
+      "settings": {
+        "neural_ms": 500,
+        "decoder_threshold_hz": 2
+      },
+      "observations": [
+        {
+          "observation": 1,
+          "market_decision_ts": 1789212900,
+          "input_sha256": "77bc6b7f69ed101fed1672833465d77c483e36fdbcf80b0281b44f36e1fa9aa7",
+          "spike_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 30.0,
+            "right_hz": 38.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 31,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 15,
+            "10059": 19,
+            "10527": 15,
+            "555871": 16
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 30,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 32,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 30,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 32,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 2,
+          "market_decision_ts": 1789213200,
+          "input_sha256": "0758728838cf369025d4ffbff13f8c1c826722a6a42f9391bc3ea10b98b6a4f2",
+          "spike_sha256": "0416e2063de8ab906de0a0d3ba73380a5ad803723c3cb77e77a16539b59fb066",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 32.0,
+            "right_hz": 38.0,
+            "difference_hz": 6.0,
+            "gate_spikes": 4,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 16,
+            "10059": 19,
+            "10527": 4,
+            "555871": 0
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 4.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 4.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 3,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 5,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 5,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 3,
+          "market_decision_ts": 1789213500,
+          "input_sha256": "c9c6c5e50d923ce6c302246c96b984528b5af0f116894c6b787ca6bf376aadf1",
+          "spike_sha256": "fa079f5d09d6310605a1373a51997124858c9414817330b2b2e823316b521122",
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 34.0,
+            "right_hz": 44.0,
+            "difference_hz": 10.0,
+            "gate_spikes": 0,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 17,
+            "10059": 22,
+            "10527": 0,
+            "555871": 0
+          },
+          "single_spike_changes_action": true,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 12.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 8.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 8.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 12.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            }
+          ]
+        }
+      ]
+    },
+    "marketrestore02-restore_both": {
+      "view_sha256": "494ce4bd480586040503cbf39053f3e8396db593a5d92606074f5a83c9632eba",
+      "settings": {
+        "neural_ms": 500,
+        "decoder_threshold_hz": 2
+      },
+      "observations": [
+        {
+          "observation": 1,
+          "market_decision_ts": 1789212900,
+          "input_sha256": "77bc6b7f69ed101fed1672833465d77c483e36fdbcf80b0281b44f36e1fa9aa7",
+          "spike_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 30.0,
+            "right_hz": 38.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 31,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 15,
+            "10059": 19,
+            "10527": 15,
+            "555871": 16
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 30,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 32,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 30,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 32,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 2,
+          "market_decision_ts": 1789213200,
+          "input_sha256": "0758728838cf369025d4ffbff13f8c1c826722a6a42f9391bc3ea10b98b6a4f2",
+          "spike_sha256": "d4e93db46bbd9b78d70902b9db108c5bf989fe48d9d3a550369672424c85258a",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 34.0,
+            "right_hz": 42.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 4,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 17,
+            "10059": 21,
+            "10527": 4,
+            "555871": 0
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 3,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 5,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 5,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 3,
+          "market_decision_ts": 1789213500,
+          "input_sha256": "c9c6c5e50d923ce6c302246c96b984528b5af0f116894c6b787ca6bf376aadf1",
+          "spike_sha256": "c37d4f8bc27002b53c9bf508220c54da16de9067a8295733af74de77eac62c3c",
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 40.0,
+            "right_hz": 48.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 0,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 20,
+            "10059": 24,
+            "10527": 0,
+            "555871": 0
+          },
+          "single_spike_changes_action": true,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 10.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 6.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 6.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 10.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            }
+          ]
+        }
+      ]
+    },
+    "marketrestore02-trained_frozen": {
+      "view_sha256": "284d6e3320e2fa33727d9fe7dd733a36275d22f71f54914d4e142654d3cc1a8e",
+      "settings": {
+        "neural_ms": 500,
+        "decoder_threshold_hz": 2
+      },
+      "observations": [
+        {
+          "observation": 1,
+          "market_decision_ts": 1789212900,
+          "input_sha256": "77bc6b7f69ed101fed1672833465d77c483e36fdbcf80b0281b44f36e1fa9aa7",
+          "spike_sha256": "8990429c208ec3403dd71b2c7095f57631bea33cfcd1f11acb5e6f6e86eb02bb",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 30.0,
+            "right_hz": 38.0,
+            "difference_hz": 8.0,
+            "gate_spikes": 31,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 15,
+            "10059": 19,
+            "10527": 15,
+            "555871": 16
+          },
+          "single_spike_changes_action": false,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 6.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 10.0,
+              "gate_spikes": 31,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 30,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 32,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 30,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 8.0,
+              "gate_spikes": 32,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 2,
+          "market_decision_ts": 1789213200,
+          "input_sha256": "0758728838cf369025d4ffbff13f8c1c826722a6a42f9391bc3ea10b98b6a4f2",
+          "spike_sha256": "a761c0adc67889c4fed9439ec2aee51526f5aeef5fb9ca299daecfbf92ebf9b6",
+          "baseline": {
+            "side": "BUY",
+            "left_hz": 34.0,
+            "right_hz": 36.0,
+            "difference_hz": 2.0,
+            "gate_spikes": 3,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 17,
+            "10059": 18,
+            "10527": 3,
+            "555871": 0
+          },
+          "single_spike_changes_action": true,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 4.0,
+              "gate_spikes": 3,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 0.0,
+              "gate_spikes": 3,
+              "action_changed": true
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 0.0,
+              "gate_spikes": 3,
+              "action_changed": true
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 4.0,
+              "gate_spikes": 3,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": -1,
+              "side": "BUY",
+              "difference_hz": 2.0,
+              "gate_spikes": 2,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 2.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 2.0,
+              "gate_spikes": 4,
+              "action_changed": false
+            }
+          ]
+        },
+        {
+          "observation": 3,
+          "market_decision_ts": 1789213500,
+          "input_sha256": "c9c6c5e50d923ce6c302246c96b984528b5af0f116894c6b787ca6bf376aadf1",
+          "spike_sha256": "36d9081dd0294519b1d0de9dd83d5eeaf0e916859367d57d2c75d7c8b36efee3",
+          "baseline": {
+            "side": "HOLD",
+            "left_hz": 36.0,
+            "right_hz": 40.0,
+            "difference_hz": 4.0,
+            "gate_spikes": 0,
+            "cell_ids": {
+              "left": [
+                "10162"
+              ],
+              "right": [
+                "10059"
+              ],
+              "gate": [
+                "10527",
+                "555871"
+              ]
+            }
+          },
+          "counts_by_body": {
+            "10162": 18,
+            "10059": 20,
+            "10527": 0,
+            "555871": 0
+          },
+          "single_spike_changes_action": true,
+          "edits": [
+            {
+              "body_id": "10162",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 6.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10162",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 2.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": -1,
+              "side": "HOLD",
+              "difference_hz": 2.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10059",
+              "delta_spikes": 1,
+              "side": "HOLD",
+              "difference_hz": 6.0,
+              "gate_spikes": 0,
+              "action_changed": false
+            },
+            {
+              "body_id": "10527",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 4.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            },
+            {
+              "body_id": "555871",
+              "delta_spikes": 1,
+              "side": "BUY",
+              "difference_hz": 4.0,
+              "gate_spikes": 1,
+              "action_changed": true
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

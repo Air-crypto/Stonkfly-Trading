@@ -1582,3 +1582,70 @@ node scripts/check-fly-memory-view.cjs
 
 As with the paired-trace check, set `FLY_VIEW_URL` and `CHROMIUM_PATH` when needed.
 It uses the included recordings and blocks `/api/run` throughout.
+
+## Inspect accumulated decoder counts
+
+The **How the output counts accumulate** panel reconstructs the left DNp20,
+right DNp20, and DNpe017 gate counts from the displayed neurons. Scrubbing the
+observation moves the cursor through these recorded counts. Direction curves
+normalize accumulated counts by the full 500 ms observation; they are not
+instantaneous firing rates or early decisions. Endpoints must reconcile to the
+recorded event. Missing identities, mismatched rates, or an unsupported time grid
+produce an unavailable message instead of an inferred trace.
+
+![Recorded output counts approaching a one-spike direction boundary](assets/fly-decoder-counts.png)
+
+After starting the viewer, open
+[the trained market06 decision](http://127.0.0.1:8765/?run=market06-pool1-trained_frozen&step=1&bin=49).
+The final counts are **17 left / 18 right**, or **34 / 36 Hz**, with three gate
+spikes. One spike on either DNp20 neuron contributes 2 Hz. Compare
+`market06-pool1-restore_11402` at the same observation: the counts are reversed,
+producing SELL at the same fixed threshold.
+
+### Output-count sensitivity audit
+
+Run this offline; it does not load the graph, simulate a network, or submit a
+cloud job:
+
+```sh
+uv run python -m paperlab.fly_decoder_audit \
+  --views examples/fly-debugger/market05-*/view.json \
+          examples/fly-debugger/market06-*/view.json \
+          examples/fly-debugger/marketrestore02-*/view.json \
+  --out runs/decoder-sensitivity.json
+```
+
+The audit compiles the retained `Decoder.decode` method directly from its source
+and reads the retained settings defaults: 500 ms and a 2 Hz threshold. It checks
+all original left/right rates, differences, gate counts, and actions before
+adding or removing one spike from each decoder neuron's final count. A zero count
+cannot lose a spike. Source and input-view hashes are recorded. Historical reports
+do not independently record the threshold, so reproducing their outputs under
+the retained defaults is the stated basis for this calculation.
+
+The [published audit](../reports/fly-decoder-sensitivity-01.json) contains all
+69 observations from the fifth/sixth market tests and the nine-condition
+restoration replay. **29** change action under at least one one-spike edit:
+**10** via the direction neurons and **19** via the gate. Controls and inputs
+repeat across recordings; this is a descriptive audit, not 69 independent samples
+or an estimate of noise probability.
+
+For the market06 trained BUY at 11:40 UTC, adding one left spike or removing one
+right spike produces a tie and HOLD. The restored SELL has the corresponding
+opposite sensitivity. In the restoration replay's extra final BUY, removing the
+single gate spike gives HOLD. These observations distinguish direction-boundary
+and gate-boundary mechanisms, but do not establish that such spike changes occur
+naturally. No upstream causal path, fills, P&L, or alternative threshold is
+simulated. A larger threshold could also discard useful decisions; this audit
+is not a demonstrated trading improvement. The registered seventh market
+comparison remains unchanged.
+
+Browser regression check (requires Playwright and a running recording server):
+
+```sh
+FLY_VIEW_URL=http://127.0.0.1:8765 node scripts/check-fly-decoder-view.cjs
+```
+
+It verifies end rates, intermediate counts, neuron identity remapping, missing
+outputs, inconsistent rates, unsupported time grids, clearing stale charts, and
+mobile layout. It blocks model-job submissions.

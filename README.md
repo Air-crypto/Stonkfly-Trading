@@ -70,6 +70,13 @@ The diagnostics have identified concrete limitations:
   Resetting more memory can reverse it or introduce an extra gate-driven BUY.
   All reference controls reproduced; blanket restoration is not a demonstrated fix.
 
+The [decoder count view](docs/fly-debugger.md#inspect-accumulated-decoder-counts)
+shows how output spikes accumulate. In the examined BUY/SELL reversal, one net
+spike equals the fixed 2 Hz threshold; a count-edit audit separates direction
+and gate sensitivity without claiming a profitable fix.
+
+![Recorded direction and gate counts](docs/assets/fly-decoder-counts.png)
+
 ![Memory-restoration comparison across training, development, and test](docs/assets/fly-market-study-06.png)
 
 [Inspect the restored connections](http://127.0.0.1:8765/?run=marketrestore01-restore_10704&step=1&neuron=10704&compare=marketrestore01-trained_frozen).

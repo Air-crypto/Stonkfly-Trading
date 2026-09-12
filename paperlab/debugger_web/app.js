@@ -93,7 +93,30 @@ function pairedTraces(){
  }else $('paired-memory-note').textContent='Per-connection memory comparison is unavailable for this observation in one or both recordings.';
  note.textContent+=` Edge ${e.id} (${data.nodes[e.source].id} → ${data.nodes[e.target].id}): ${num(f.plastic_weights[bin][pi],6)} vs ${num(o.plastic_weights[bin][oi],6)}; current minus comparison ${num(f.plastic_weights[bin][pi]-o.plastic_weights[bin][oi],6)}.`;
 }
-function draw(){if(!data)return;externalNeuron=false;document.querySelector('.legend .changed').parentElement.lastChild.textContent=$('pristine').checked?'Plastic edge differs from pristine state':'Plastic edge changed since observation start';const f=data.frames[step],n=data.nodes[node];bin=Math.min(bin,f.times_ms.length-1);$('bin').max=f.times_ms.length-1;$('bin').value=bin;$('time').textContent=num(f.times_ms[bin])+' ms';network(f);
+function decoderPath(f){
+ const note=$('decoder-path-note');for(const id of ['decoder-direction-chart','decoder-gate-chart'])$(id).replaceChildren();
+ const groups=f.event.cell_ids,ids=data.nodes.map(n=>String(n.id));
+ const unavailable=reason=>{note.textContent='Decoder count trace unavailable: '+reason;};
+ if(!groups||!['left','right','gate'].every(k=>Array.isArray(groups[k])&&groups[k].length))return unavailable('missing output identities.');
+ const wanted=['left','right','gate'].flatMap(k=>groups[k].map(String));
+ if(new Set(ids).size!==ids.length||new Set(wanted).size!==wanted.length||wanted.some(id=>!ids.includes(id)))return unavailable('missing or ambiguous output neurons.');
+ // Captures use 50 bins of 10 ms. Do not infer a 490 ms observation from last minus first.
+ const start=f.event.brain_ms-500,xs=f.times_ms.map(t=>t-start);
+ if(xs.length!==50||xs.some((x,i)=>Math.abs(x-(i+1)*10)>1e-6))return unavailable('unsupported observation time grid.');
+ if(!Array.isArray(f.counts)||f.counts.length!==xs.length||f.counts.some(row=>!Array.isArray(row)||row.length!==ids.length))return unavailable('invalid count dimensions.');
+ const series={};
+ for(const key of ['left','right','gate']){
+  const columns=groups[key].map(id=>ids.indexOf(String(id)));let total=0;series[key]=[];
+  for(const row of f.counts){const values=columns.map(i=>row[i]);if(values.some(v=>!Number.isInteger(v)||v<0))return unavailable('invalid recorded counts.');total+=values.reduce((a,b)=>a+b,0);series[key].push(key==='gate'?total:total/columns.length/.5);}
+ }
+ if(series.left.length!==xs.length||Math.abs(series.left.at(-1)-f.event.left_hz)>1e-6||Math.abs(series.right.at(-1)-f.event.right_hz)>1e-6||series.gate.at(-1)!==f.event.gate_spikes)return unavailable('counts do not reconcile to the recorded output.');
+ const difference=series.right.map((r,i)=>r-series.left[i]);
+ if(Math.abs(difference.at(-1)-f.event.difference_hz)>1e-6)return unavailable('direction does not reconcile.');
+ note.textContent=`At ${num(xs[bin])} ms: left contribution ${num(series.left[bin])} Hz, right ${num(series.right[bin])} Hz, right − left ${num(difference[bin])} Hz; ${num(series.gate[bin])} gate spikes so far. Final direction: ${num(f.event.difference_hz)} Hz. One spike contributes ${num(2/groups.left.length)} Hz on the left or ${num(2/groups.right.length)} Hz on the right. Left: ${groups.left.join(', ')}; right: ${groups.right.join(', ')}; gate: ${groups.gate.join(', ')}.`;
+ chart('decoder-direction-chart',xs,[{name:'Left contribution (blue)',values:series.left,color:'#8fbcff'},{name:'Right contribution (pink)',values:series.right,color:'#e6a8e8'},{name:'Right − left (green)',values:difference,color:'#67e8cf'}],'Accumulated contribution (Hz)',bin,'Time in observation (ms)');
+ chart('decoder-gate-chart',xs,[{name:'Accumulated gate spikes',values:series.gate,color:'#ffbf69'}],'Gate spikes',bin,'Time in observation (ms)');
+}
+function draw(){if(!data)return;externalNeuron=false;document.querySelector('.legend .changed').parentElement.lastChild.textContent=$('pristine').checked?'Plastic edge differs from pristine state':'Plastic edge changed since observation start';const f=data.frames[step],n=data.nodes[node];bin=Math.min(bin,f.times_ms.length-1);$('bin').max=f.times_ms.length-1;$('bin').value=bin;$('time').textContent=num(f.times_ms[bin])+' ms';network(f);decoderPath(f);
  document.querySelector('.legend .restored').parentElement.lastChild.textContent=data.report.restoration?'Restored before replay':'Restored before probe';
  $('previous-spike').disabled=spikeBin(-1)<0;$('next-spike').disabled=spikeBin(1)<0;momentLink();
  $('neuron-detail').textContent=`${n.type||'Unannotated'} · ${n.id} · ${f.counts[bin][node]} spikes in this bin · ${num(f.voltage[bin][node])} mV`;
