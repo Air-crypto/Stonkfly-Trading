@@ -1,0 +1,165 @@
+{
+  "plan_sha256": "9a74433794537af3db0078a968a406d6e34dc688b799a89c0573056559bbe961",
+  "snapshot_sha256": "0b4c586b51e833ea43b310f695589012e73dc94ce59fa45186c4eef0a5d6e5b4",
+  "observations": [
+    {
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "decision_ts": 1789200300,
+      "observed_ts": 1789200209.1717772,
+      "age_seconds": 90.82822275161743,
+      "provider_observation_rejection": null,
+      "effective_unavailability": null,
+      "volume5_usd": 2749.6433973412,
+      "buys5": 7,
+      "sells5": 19
+    },
+    {
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "decision_ts": 1789200600,
+      "observed_ts": 1789200498.2571874,
+      "age_seconds": 101.7428126335144,
+      "provider_observation_rejection": null,
+      "effective_unavailability": null,
+      "volume5_usd": 8377.2996872249,
+      "buys5": 23,
+      "sells5": 24
+    },
+    {
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "decision_ts": 1789200900,
+      "observed_ts": 1789200815.2398155,
+      "age_seconds": 84.76018452644348,
+      "provider_observation_rejection": null,
+      "effective_unavailability": null,
+      "volume5_usd": 6073.008908532,
+      "buys5": 39,
+      "sells5": 32
+    },
+    {
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "decision_ts": 1789201200,
+      "observed_ts": 1789200815.2398155,
+      "age_seconds": 384.7601845264435,
+      "provider_observation_rejection": null,
+      "effective_unavailability": "stale_observation",
+      "volume5_usd": 6073.008908532,
+      "buys5": 39,
+      "sells5": 32
+    },
+    {
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "decision_ts": 1789201500,
+      "observed_ts": 1789201239.2996066,
+      "age_seconds": 260.70039343833923,
+      "provider_observation_rejection": null,
+      "effective_unavailability": "stale_observation",
+      "volume5_usd": 24226.9333330861,
+      "buys5": 98,
+      "sells5": 49
+    },
+    {
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "decision_ts": 1789201800,
+      "observed_ts": 1789201774.8934624,
+      "age_seconds": 25.106537580490112,
+      "provider_observation_rejection": null,
+      "effective_unavailability": null,
+      "volume5_usd": 9510.992614558,
+      "buys5": 39,
+      "sells5": 39
+    },
+    {
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "decision_ts": 1789202100,
+      "observed_ts": 1789201939.405995,
+      "age_seconds": 160.59400510787964,
+      "provider_observation_rejection": "insufficient_two_sided_activity",
+      "effective_unavailability": "insufficient_two_sided_activity",
+      "volume5_usd": 724.0012685416,
+      "buys5": 4,
+      "sells5": 8
+    },
+    {
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "decision_ts": 1789200300,
+      "observed_ts": 1789200209.1717772,
+      "age_seconds": 90.82822275161743,
+      "provider_observation_rejection": "insufficient_two_sided_activity",
+      "effective_unavailability": "insufficient_two_sided_activity",
+      "volume5_usd": 696.1455695989,
+      "buys5": 5,
+      "sells5": 4
+    },
+    {
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "decision_ts": 1789200600,
+      "observed_ts": 1789200498.2571874,
+      "age_seconds": 101.7428126335144,
+      "provider_observation_rejection": "insufficient_two_sided_activity",
+      "effective_unavailability": "insufficient_two_sided_activity",
+      "volume5_usd": 984.5902327916,
+      "buys5": 3,
+      "sells5": 10
+    },
+    {
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "decision_ts": 1789200900,
+      "observed_ts": 1789200802.3164024,
+      "age_seconds": 97.68359756469727,
+      "provider_observation_rejection": null,
+      "effective_unavailability": null,
+      "volume5_usd": 1241.8105040776,
+      "buys5": 6,
+      "sells5": 11
+    },
+    {
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "decision_ts": 1789201200,
+      "observed_ts": 1789200802.3164024,
+      "age_seconds": 397.68359756469727,
+      "provider_observation_rejection": null,
+      "effective_unavailability": "stale_observation",
+      "volume5_usd": 1241.8105040776,
+      "buys5": 6,
+      "sells5": 11
+    },
+    {
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "decision_ts": 1789201500,
+      "observed_ts": 1789201403.3663714,
+      "age_seconds": 96.63362860679626,
+      "provider_observation_rejection": null,
+      "effective_unavailability": null,
+      "volume5_usd": 2278.2549434606,
+      "buys5": 11,
+      "sells5": 6
+    },
+    {
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "decision_ts": 1789201800,
+      "observed_ts": 1789201774.8934624,
+      "age_seconds": 25.106537580490112,
+      "provider_observation_rejection": "insufficient_two_sided_activity",
+      "effective_unavailability": "insufficient_two_sided_activity",
+      "volume5_usd": 840.4934475512,
+      "buys5": 7,
+      "sells5": 14
+    },
+    {
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "decision_ts": 1789202100,
+      "observed_ts": 1789201947.162141,
+      "age_seconds": 152.83785891532898,
+      "provider_observation_rejection": "insufficient_two_sided_activity",
+      "effective_unavailability": "insufficient_two_sided_activity",
+      "volume5_usd": 520.5280489489,
+      "buys5": 2,
+      "sells5": 3
+    }
+  ],
+  "logged_provider_errors_in_interval": {
+    "429": 14,
+    "TimeoutError": 3
+  },
+  "limitation": "Read-only attribution after study completion. Logged errors may repeat across health snapshots; these counts are not unique requests. Staleness and activity eligibility are separate from neural performance."
+}

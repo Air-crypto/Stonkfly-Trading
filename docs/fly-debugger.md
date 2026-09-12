@@ -317,8 +317,8 @@ Training, development, and test start at 08:05, 08:15, and 08:25 UTC on Septembe
 | Original ongoing plasticity | $996.17 | $1,000.00 | $1,000.00 |
 | Reinforcement-gated plasticity | $996.17 | $1,000.00 | $1,000.00 |
 
-**No variant passed selection.** Development and test produced no fills; missing
-or stale quotes prevented execution. All arms emitted BUY whenever an observation
+**No variant passed selection.** Development and test produced no fills; stale quotes and insufficient
+two-sided activity prevented execution. All arms emitted BUY whenever an observation
 was usable. Each pool had only one usable neural observation during test, so the
 $1,000 endpoints reflect cash remaining unspent, not a learned profitable policy.
 Hosting still subtracts about $0.0046/$0.0093 at the prorated $20/$40 rates.
@@ -338,3 +338,10 @@ alongside P&L before attributing a cash tie to model quality. Do not tune anothe
 variant on either published test interval. The deployed paper policy is unchanged.
 
 ![Gated weights and unavailable market decisions](assets/fly-market-gated.png)
+
+The [snapshot coverage audit](../reports/fly-market-study-02-coverage.json) separates
+these causes: some latest receipts were 261–398 seconds old, exceeding the
+180-second freshness limit; other fresh receipts fell below the declared activity
+threshold. Provider health also logged HTTP 429 responses. These observations
+make collection continuity and activity eligibility distinct debugging targets;
+loosening the trading filter would change the experiment rather than repair data.
