@@ -137,6 +137,14 @@ no trading improvement or policy promotion is claimed.
 
 ![Frozen memory under controlled recipient stimulation](docs/assets/fly-paper-stimulation-01.png)
 
+The [single-recipient test](docs/fly-debugger.md#recipient-isolation-result)
+reproduced all original controls, then stimulated each target separately. Its
+36 audited observations show that the effect depends on the input and memory:
+the same HOLD can come from a neutral direction or a silent gate. It does not
+identify a profitable stimulation target.
+
+![Audited responses when each recipient is stimulated separately](docs/assets/fly-recipient-isolation-01.png)
+
 The [bin timing analysis](docs/fly-debugger.md#jump-to-recorded-count-differences)
 locates the earliest recorded spike-count difference at cell **11402**, in the
 30–40 ms bin of each first stimulated image. The paired viewer can jump to the

@@ -2843,8 +2843,9 @@ Published evidence: [audited report](../reports/fly-market-study-10.json),
 The browser check passed all sixteen recordings, 64 timeline rows and 44 observed
 boundaries with no browser errors or model submissions. This short two-pool test
 rejects fixed dual-recipient stimulation as a demonstrated improvement; it does
-not establish that all activation or learning approaches must fail. The prepared
-single-recipient assay remains a mechanism test, not a profitable-policy claim.
+not establish that all activation or learning approaches must fail. The
+single-recipient assay below tests the mechanism; it does not establish a
+profitable policy.
 
 ## Recipient isolation: test each target separately
 
@@ -2865,13 +2866,12 @@ weight/u/w bin, phase boundaries, images/news and the unchanged full-count decod
 It reports trained-versus-pristine differences within each target set and each
 single-target response versus its corresponding both-target control.
 
-**Submitted after study 10 passed its audit:** revision `3bb976a` was deployed
+**Completed and independently audited:** revision `3bb976a` was deployed
 with all four existing experiment/schedule flags enabled. The saved call is
 `fc-01M2BFRC1XT9M5SMBMZE846CVX`, run
-`assay-recipient-80d38773d0d249b79825927e64d97fdc`. It was still pending when
-observed at **18:59 UTC on September 12, 2026**; no isolation result is claimed
-here. Reattach using the same output directory below rather than submitting
-another experiment.
+`assay-recipient-80d38773d0d249b79825927e64d97fdc`. All 36 observations and 1,800
+native bins passed the local audit on September 12, 2026. Reattach using the same
+output directory below rather than submitting another experiment.
 
 The client verified that study 10's exact owning Modal call had completed; a
 completed receipt with a still-pending call is insufficient. The cloud entrypoint
@@ -2890,8 +2890,7 @@ python -m paperlab.fly_recipient_isolation_cloud pack \
   --out runs/recipient-isolation-01/payload.json
 ```
 
-After study 10 finishes and this revision is deployed, submit once or reattach to
-the saved call using the same directory:
+Resume the saved call using the same directory:
 
 ```sh
 python -m paperlab.fly_recipient_isolation_cloud cloud \
@@ -2936,6 +2935,51 @@ node scripts/check-fly-stimulation-view.cjs
 It checks the actual per-observation target list, both recipients, paired count
 navigation, and mobile layout while blocking model submissions. Use
 `FLY_STIMULATION_PREFIX` if the published recording prefix differs.
+
+### Recipient isolation result
+
+![Audited single-recipient stimulation responses](assets/fly-recipient-isolation-01.png)
+
+Every both-target control reproduced all neurons' counts in every recorded 10 ms
+bin before any single-target run began. The independent audit then checked all
+36 observations, exact current/target arrays, frozen weights/u/w, images/news,
+phase boundaries and fixed-decoder outputs. All twelve `isolation01-*` views are
+published alongside the [full report](../reports/fly-recipient-isolation-study-01.json),
+[independent audit](../reports/fly-recipient-isolation-audit-01.json), and
+[figure provenance](../reports/fly-recipient-isolation-figure-01.json).
+
+| Input pool | Directly stimulated | Pristine actions, images 1/2/3 | Trained actions, images 1/2/3 |
+|---|---|---|---|
+| ALL | Both | BUY / BUY / BUY | BUY / HOLD / BUY |
+| ALL | 10704 only | HOLD / HOLD / HOLD | BUY / BUY / BUY |
+| ALL | 11402 only | BUY / BUY / BUY | BUY / HOLD / BUY |
+| baton | Both | BUY / HOLD / HOLD | BUY / BUY / HOLD |
+| baton | 10704 only | BUY / HOLD / HOLD | SELL / HOLD / HOLD |
+| baton | 11402 only | BUY / SELL / HOLD | HOLD / BUY / BUY |
+
+Stimulating only 11402 preserves ALL's three action labels in both memory
+conditions. It does not reproduce the full neural response. For example,
+[the trained second-image HOLD changes mechanism](http://127.0.0.1:8765/?run=isolation01-pool0-trained-only_11402&step=1&bin=49&neuron=10527&edge=4110156&compare=isolation01-pool0-trained-both):
+both-target stimulation yields direction 0 Hz with eleven gate spikes; 11402
+alone yields direction +8 Hz with zero gate spikes. The output label is HOLD in
+both cases for different reasons. On baton, either single-target condition
+changes the trained action sequence.
+
+A neuron can fire without direct stimulation: on ALL's three images, 10704-only
+stimulation produces 36 spikes at unstimulated 11402 in pristine memory and zero
+in trained memory. The recurrent network and retained state still matter.
+Recipient activation is therefore not a universal mapping to one trading action.
+This assay has no accounts, fills, reinforcement or weight updates; these action
+patterns do not identify a profitable target or overturn study 10's failed
+development gate. Activation alone has not demonstrated a trading improvement;
+the next learning experiment should examine how trading feedback is assigned to
+the connections that produced an earlier action.
+
+The estimated worker compute charge was **$0.024058**, with its reservation ledger
+at $1.901364 of the unchanged $25 cap after settlement. These are estimates, not
+provider bill totals. Browser checks covered all twelve recordings, 36
+observations and 36 paired count-navigation selections, with no errors or model
+submissions. Original controls and source artifacts remain retained.
 
 ## Inspect when current is applied
 

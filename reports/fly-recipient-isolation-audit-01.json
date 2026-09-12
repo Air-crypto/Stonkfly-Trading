@@ -1,0 +1,1194 @@
+{
+  "status": "verified",
+  "protocol": {
+    "schema": 1,
+    "kind": "paper_memory_recipient_isolation",
+    "parent_report_sha256": "01330a25795235efc4256b9c8732b86053aa9b29eaa3d363580cbd12d0aef3ee",
+    "parent_audit_sha256": "14b6a4e341a47e4101c152a5e587c8d3bbfdf540a0701a85c2705dffdec88533",
+    "plan_sha256": "ecb89e2cb48cab07080e5c3437dd1ec3b86bdd71feb4f892190b8ad3603c136b",
+    "reference_run_id": "assay-recipient-be6310b482994ba89722da365fe018c3",
+    "current": 10,
+    "target_sets": {
+      "both": [
+        "10704",
+        "11402"
+      ],
+      "only_10704": [
+        "10704"
+      ],
+      "only_11402": [
+        "11402"
+      ]
+    },
+    "inference": {
+      "learning": false,
+      "reinforcement": "none",
+      "steps": 3,
+      "duration_ms": 500,
+      "state_reset": "carry",
+      "eta": 0.001
+    },
+    "arms": {
+      "pool0-pristine-both": {
+        "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+        "memory": "pristine",
+        "current": 10,
+        "target_ids": [
+          "10704",
+          "11402"
+        ],
+        "target_set": "both"
+      },
+      "pool0-trained-both": {
+        "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+        "memory": "trained",
+        "current": 10,
+        "target_ids": [
+          "10704",
+          "11402"
+        ],
+        "target_set": "both"
+      },
+      "pool1-pristine-both": {
+        "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+        "memory": "pristine",
+        "current": 10,
+        "target_ids": [
+          "10704",
+          "11402"
+        ],
+        "target_set": "both"
+      },
+      "pool1-trained-both": {
+        "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+        "memory": "trained",
+        "current": 10,
+        "target_ids": [
+          "10704",
+          "11402"
+        ],
+        "target_set": "both"
+      },
+      "pool0-pristine-only_10704": {
+        "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+        "memory": "pristine",
+        "current": 10,
+        "target_ids": [
+          "10704"
+        ],
+        "target_set": "only_10704"
+      },
+      "pool0-trained-only_10704": {
+        "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+        "memory": "trained",
+        "current": 10,
+        "target_ids": [
+          "10704"
+        ],
+        "target_set": "only_10704"
+      },
+      "pool1-pristine-only_10704": {
+        "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+        "memory": "pristine",
+        "current": 10,
+        "target_ids": [
+          "10704"
+        ],
+        "target_set": "only_10704"
+      },
+      "pool1-trained-only_10704": {
+        "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+        "memory": "trained",
+        "current": 10,
+        "target_ids": [
+          "10704"
+        ],
+        "target_set": "only_10704"
+      },
+      "pool0-pristine-only_11402": {
+        "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+        "memory": "pristine",
+        "current": 10,
+        "target_ids": [
+          "11402"
+        ],
+        "target_set": "only_11402"
+      },
+      "pool0-trained-only_11402": {
+        "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+        "memory": "trained",
+        "current": 10,
+        "target_ids": [
+          "11402"
+        ],
+        "target_set": "only_11402"
+      },
+      "pool1-pristine-only_11402": {
+        "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+        "memory": "pristine",
+        "current": 10,
+        "target_ids": [
+          "11402"
+        ],
+        "target_set": "only_11402"
+      },
+      "pool1-trained-only_11402": {
+        "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+        "memory": "trained",
+        "current": 10,
+        "target_ids": [
+          "11402"
+        ],
+        "target_set": "only_11402"
+      }
+    },
+    "interpretation": "Post-hoc isolation on the same six previously inspected images. Current 10 to both recipients must reproduce the prior native count bins before either single-recipient intervention. Memory stays frozen. No account, trading returns, training, or automatic policy promotion. This tests the declared intervention, not anatomical causality."
+  },
+  "full_observations_verified": 36,
+  "native_bins_verified": 1800,
+  "controls_verified": [
+    "pool0-pristine-both",
+    "pool0-trained-both",
+    "pool1-pristine-both",
+    "pool1-trained-both"
+  ],
+  "rows": {
+    "pool0-pristine-both": [
+      {
+        "observation": 1,
+        "decision_ts": 1789231500.0,
+        "input_sha256": "f09fe22992725825204d3771399e50f5bb17a961fe0ee7b4269e066ec714b70a",
+        "side": "BUY",
+        "difference_hz": 2,
+        "gate_spikes": 32,
+        "total_spikes": 364031,
+        "recipient_counts": {
+          "10704": 10,
+          "11402": 18
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.422080993652344,
+          "11402": -45.01271438598633
+        },
+        "spike_sha256": "9a875d2970107740c5c341c8e87edc5c44dc055cc13fbe49febffcfef73b77ca"
+      },
+      {
+        "observation": 2,
+        "decision_ts": 1789231800.0,
+        "input_sha256": "f7baa326d95b9e619fe0a0c018f243531fd33954986cf427f0ff342c1a2e51c3",
+        "side": "BUY",
+        "difference_hz": 10,
+        "gate_spikes": 10,
+        "total_spikes": 384609,
+        "recipient_counts": {
+          "10704": 6,
+          "11402": 11
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.42164993286133,
+          "11402": -45.06831741333008
+        },
+        "spike_sha256": "ad8d78384e3fa1234d6611ec6147dd8b9cf00c039c7ce623899815220f776b38"
+      },
+      {
+        "observation": 3,
+        "decision_ts": 1789232100.0,
+        "input_sha256": "04a10b0db7425b23d0ef60b5d6aa0d99aa21fde83ea61e1beb3e2ed038400a37",
+        "side": "BUY",
+        "difference_hz": 2,
+        "gate_spikes": 4,
+        "total_spikes": 388964,
+        "recipient_counts": {
+          "10704": 6,
+          "11402": 8
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.09074401855469,
+          "11402": -45.022911071777344
+        },
+        "spike_sha256": "e80707bee5f070f6d3728538fa6bd1a2fe2549812f1f050d2c75cb6a9af90e10"
+      }
+    ],
+    "pool0-trained-both": [
+      {
+        "observation": 1,
+        "decision_ts": 1789231500.0,
+        "input_sha256": "f09fe22992725825204d3771399e50f5bb17a961fe0ee7b4269e066ec714b70a",
+        "side": "BUY",
+        "difference_hz": 4,
+        "gate_spikes": 33,
+        "total_spikes": 361479,
+        "recipient_counts": {
+          "10704": 12,
+          "11402": 16
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.33502960205078,
+          "11402": -45.05984115600586
+        },
+        "spike_sha256": "e9d8a2b0232d1a06e8393300491aaa13ea7c664faa963cf3528afc01c3d12107"
+      },
+      {
+        "observation": 2,
+        "decision_ts": 1789231800.0,
+        "input_sha256": "f7baa326d95b9e619fe0a0c018f243531fd33954986cf427f0ff342c1a2e51c3",
+        "side": "HOLD",
+        "difference_hz": 0,
+        "gate_spikes": 11,
+        "total_spikes": 382060,
+        "recipient_counts": {
+          "10704": 12,
+          "11402": 7
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.03770065307617,
+          "11402": -45.02279281616211
+        },
+        "spike_sha256": "8ca5a9dbde19cb6ea16f8e65f8681e7287fe371cf8c318ab7406ad772a9ca330"
+      },
+      {
+        "observation": 3,
+        "decision_ts": 1789232100.0,
+        "input_sha256": "04a10b0db7425b23d0ef60b5d6aa0d99aa21fde83ea61e1beb3e2ed038400a37",
+        "side": "BUY",
+        "difference_hz": 12,
+        "gate_spikes": 6,
+        "total_spikes": 448746,
+        "recipient_counts": {
+          "10704": 11,
+          "11402": 20
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.04237365722656,
+          "11402": -45.22531509399414
+        },
+        "spike_sha256": "4a66f72885e1af2b776d40b153dd3cc905ead3c39006b1867934a032adfeb11c"
+      }
+    ],
+    "pool1-pristine-both": [
+      {
+        "observation": 1,
+        "decision_ts": 1789231500.0,
+        "input_sha256": "d30709cb7d84751353125ccd2f1a213376b4ad32a6df3f6334140300759a6b94",
+        "side": "BUY",
+        "difference_hz": 8,
+        "gate_spikes": 20,
+        "total_spikes": 445892,
+        "recipient_counts": {
+          "10704": 19,
+          "11402": 25
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.2829475402832,
+          "11402": -45.339725494384766
+        },
+        "spike_sha256": "510ef73ce87d4c2fdac50f64f7f8c90bba47d2a68a50e412c4d484b3f7532b78"
+      },
+      {
+        "observation": 2,
+        "decision_ts": 1789231800.0,
+        "input_sha256": "c63ad279102e4123fe08be3f39aeddcf642eb0923793e8f685170eca100cba98",
+        "side": "HOLD",
+        "difference_hz": 0,
+        "gate_spikes": 0,
+        "total_spikes": 603772,
+        "recipient_counts": {
+          "10704": 9,
+          "11402": 27
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.15460205078125,
+          "11402": -45.932456970214844
+        },
+        "spike_sha256": "1ee6eb4296c182705e4bc2f7992e2928e1745c265ee18deb181eb82538424640"
+      },
+      {
+        "observation": 3,
+        "decision_ts": 1789232100.0,
+        "input_sha256": "b21f8136058158dcd5093398dc38beaedb6c5b74b1b65b027724610808f303b2",
+        "side": "HOLD",
+        "difference_hz": 4,
+        "gate_spikes": 0,
+        "total_spikes": 605945,
+        "recipient_counts": {
+          "10704": 6,
+          "11402": 18
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -48.42406463623047,
+          "11402": -45.22062301635742
+        },
+        "spike_sha256": "2e2f69d5fffb6f3fffcc083f0c304ffcf610506a01b0e9d97cb3c744b6acecde"
+      }
+    ],
+    "pool1-trained-both": [
+      {
+        "observation": 1,
+        "decision_ts": 1789231500.0,
+        "input_sha256": "d30709cb7d84751353125ccd2f1a213376b4ad32a6df3f6334140300759a6b94",
+        "side": "BUY",
+        "difference_hz": 8,
+        "gate_spikes": 21,
+        "total_spikes": 427399,
+        "recipient_counts": {
+          "10704": 14,
+          "11402": 20
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.09266662597656,
+          "11402": -45.1368293762207
+        },
+        "spike_sha256": "b1dbf6d7784c7908e638370067f4d5c37c89fe84989431bc8a4b224be3857485"
+      },
+      {
+        "observation": 2,
+        "decision_ts": 1789231800.0,
+        "input_sha256": "c63ad279102e4123fe08be3f39aeddcf642eb0923793e8f685170eca100cba98",
+        "side": "BUY",
+        "difference_hz": 6,
+        "gate_spikes": 1,
+        "total_spikes": 601743,
+        "recipient_counts": {
+          "10704": 7,
+          "11402": 0
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.321651458740234,
+          "11402": -54.674583435058594
+        },
+        "spike_sha256": "9f6e5087dbfb3b4293a73b21d183b6aaf73815650c13ebbb1e79c59618bfd804"
+      },
+      {
+        "observation": 3,
+        "decision_ts": 1789232100.0,
+        "input_sha256": "b21f8136058158dcd5093398dc38beaedb6c5b74b1b65b027724610808f303b2",
+        "side": "HOLD",
+        "difference_hz": 14,
+        "gate_spikes": 0,
+        "total_spikes": 615148,
+        "recipient_counts": {
+          "10704": 3,
+          "11402": 4
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.737945556640625,
+          "11402": -47.641902923583984
+        },
+        "spike_sha256": "0af9b09132604b846ed6df7c44329bfcb0ca127290ab3f8baf6bfda2abd3d6ff"
+      }
+    ],
+    "pool0-pristine-only_10704": [
+      {
+        "observation": 1,
+        "decision_ts": 1789231500.0,
+        "input_sha256": "f09fe22992725825204d3771399e50f5bb17a961fe0ee7b4269e066ec714b70a",
+        "side": "HOLD",
+        "difference_hz": 0,
+        "gate_spikes": 22,
+        "total_spikes": 369369,
+        "recipient_counts": {
+          "10704": 20,
+          "11402": 0
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.103416442871094,
+          "11402": -49.198699951171875
+        },
+        "spike_sha256": "827addf67de52ef49c0b1c498538de63ca901ccb6c45ce4df16a439805cacef8"
+      },
+      {
+        "observation": 2,
+        "decision_ts": 1789231800.0,
+        "input_sha256": "f7baa326d95b9e619fe0a0c018f243531fd33954986cf427f0ff342c1a2e51c3",
+        "side": "HOLD",
+        "difference_hz": 0,
+        "gate_spikes": 2,
+        "total_spikes": 507911,
+        "recipient_counts": {
+          "10704": 11,
+          "11402": 20
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.33134078979492,
+          "11402": -50.09072494506836
+        },
+        "spike_sha256": "2c53901f367b9be22197e8e0f664b7e11a839c7453c6f9cfe77ebff61ff0ba88"
+      },
+      {
+        "observation": 3,
+        "decision_ts": 1789232100.0,
+        "input_sha256": "04a10b0db7425b23d0ef60b5d6aa0d99aa21fde83ea61e1beb3e2ed038400a37",
+        "side": "HOLD",
+        "difference_hz": 8,
+        "gate_spikes": 0,
+        "total_spikes": 605266,
+        "recipient_counts": {
+          "10704": 9,
+          "11402": 16
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -48.95038986206055,
+          "11402": -45.48476028442383
+        },
+        "spike_sha256": "0e0a68bf45eccc5c51efd1947e7823745efb3fcc0b915216c711f8ade1865ce0"
+      }
+    ],
+    "pool0-trained-only_10704": [
+      {
+        "observation": 1,
+        "decision_ts": 1789231500.0,
+        "input_sha256": "f09fe22992725825204d3771399e50f5bb17a961fe0ee7b4269e066ec714b70a",
+        "side": "BUY",
+        "difference_hz": 6,
+        "gate_spikes": 32,
+        "total_spikes": 364005,
+        "recipient_counts": {
+          "10704": 18,
+          "11402": 0
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.022708892822266,
+          "11402": -52.0
+        },
+        "spike_sha256": "72dfe70f978f2483189e356dd83188d2b2f7e3822a59a9672ed43f69ee98a720"
+      },
+      {
+        "observation": 2,
+        "decision_ts": 1789231800.0,
+        "input_sha256": "f7baa326d95b9e619fe0a0c018f243531fd33954986cf427f0ff342c1a2e51c3",
+        "side": "BUY",
+        "difference_hz": 2,
+        "gate_spikes": 10,
+        "total_spikes": 382572,
+        "recipient_counts": {
+          "10704": 2,
+          "11402": 0
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.10430145263672,
+          "11402": -54.2052116394043
+        },
+        "spike_sha256": "1e92be4fcba1c43f65271dad1f04980fde4a421966688e7edf0986cba44273f9"
+      },
+      {
+        "observation": 3,
+        "decision_ts": 1789232100.0,
+        "input_sha256": "04a10b0db7425b23d0ef60b5d6aa0d99aa21fde83ea61e1beb3e2ed038400a37",
+        "side": "BUY",
+        "difference_hz": 6,
+        "gate_spikes": 7,
+        "total_spikes": 384543,
+        "recipient_counts": {
+          "10704": 5,
+          "11402": 0
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.03371810913086,
+          "11402": -53.03158187866211
+        },
+        "spike_sha256": "4975923f683a802db8252761fd1f8b5bda8898ddb934bc69457e11ee615d3f93"
+      }
+    ],
+    "pool1-pristine-only_10704": [
+      {
+        "observation": 1,
+        "decision_ts": 1789231500.0,
+        "input_sha256": "d30709cb7d84751353125ccd2f1a213376b4ad32a6df3f6334140300759a6b94",
+        "side": "BUY",
+        "difference_hz": 8,
+        "gate_spikes": 24,
+        "total_spikes": 367132,
+        "recipient_counts": {
+          "10704": 19,
+          "11402": 0
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.136749267578125,
+          "11402": -49.2772331237793
+        },
+        "spike_sha256": "900e392e91cf888764102e07940928e658d796bbcbe6862f2774c334573b43c7"
+      },
+      {
+        "observation": 2,
+        "decision_ts": 1789231800.0,
+        "input_sha256": "c63ad279102e4123fe08be3f39aeddcf642eb0923793e8f685170eca100cba98",
+        "side": "HOLD",
+        "difference_hz": 4,
+        "gate_spikes": 0,
+        "total_spikes": 595083,
+        "recipient_counts": {
+          "10704": 14,
+          "11402": 30
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.45500183105469,
+          "11402": -45.77745819091797
+        },
+        "spike_sha256": "f7dfa4783ffb21868860446c1fccf0ac0e85e6436fa3ebffd85a6571df899d45"
+      },
+      {
+        "observation": 3,
+        "decision_ts": 1789232100.0,
+        "input_sha256": "b21f8136058158dcd5093398dc38beaedb6c5b74b1b65b027724610808f303b2",
+        "side": "HOLD",
+        "difference_hz": 6,
+        "gate_spikes": 0,
+        "total_spikes": 605157,
+        "recipient_counts": {
+          "10704": 9,
+          "11402": 21
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -47.06727981567383,
+          "11402": -45.3842887878418
+        },
+        "spike_sha256": "8101762725451ef387bb99c30590601df070ff638d3e239ed88e12680ba3c01c"
+      }
+    ],
+    "pool1-trained-only_10704": [
+      {
+        "observation": 1,
+        "decision_ts": 1789231500.0,
+        "input_sha256": "d30709cb7d84751353125ccd2f1a213376b4ad32a6df3f6334140300759a6b94",
+        "side": "SELL",
+        "difference_hz": -2,
+        "gate_spikes": 14,
+        "total_spikes": 498087,
+        "recipient_counts": {
+          "10704": 14,
+          "11402": 8
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.130706787109375,
+          "11402": -47.493812561035156
+        },
+        "spike_sha256": "3f65dcaa19aa60b51b1304359407de26fe54c3d82bce7bd280594a3aef944827"
+      },
+      {
+        "observation": 2,
+        "decision_ts": 1789231800.0,
+        "input_sha256": "c63ad279102e4123fe08be3f39aeddcf642eb0923793e8f685170eca100cba98",
+        "side": "HOLD",
+        "difference_hz": 10,
+        "gate_spikes": 0,
+        "total_spikes": 599372,
+        "recipient_counts": {
+          "10704": 2,
+          "11402": 8
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -49.15333557128906,
+          "11402": -46.60223388671875
+        },
+        "spike_sha256": "faf3908a425bbe5cc9bde683e9346a4f1e8252e874fb809600d322d16fc061b4"
+      },
+      {
+        "observation": 3,
+        "decision_ts": 1789232100.0,
+        "input_sha256": "b21f8136058158dcd5093398dc38beaedb6c5b74b1b65b027724610808f303b2",
+        "side": "HOLD",
+        "difference_hz": 4,
+        "gate_spikes": 0,
+        "total_spikes": 604519,
+        "recipient_counts": {
+          "10704": 6,
+          "11402": 5
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -46.801795959472656,
+          "11402": -45.45368194580078
+        },
+        "spike_sha256": "2221e5566a706d8118980a5a2c0027de2192ddc9e10f194d61839e06eb95b1b9"
+      }
+    ],
+    "pool0-pristine-only_11402": [
+      {
+        "observation": 1,
+        "decision_ts": 1789231500.0,
+        "input_sha256": "f09fe22992725825204d3771399e50f5bb17a961fe0ee7b4269e066ec714b70a",
+        "side": "BUY",
+        "difference_hz": 6,
+        "gate_spikes": 28,
+        "total_spikes": 374487,
+        "recipient_counts": {
+          "10704": 0,
+          "11402": 16
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -51.44525146484375,
+          "11402": -45.08894729614258
+        },
+        "spike_sha256": "097a4ec61f068891bbe90939cfebc7bb9cfe17b57e9624c06277b541c6f72ae0"
+      },
+      {
+        "observation": 2,
+        "decision_ts": 1789231800.0,
+        "input_sha256": "f7baa326d95b9e619fe0a0c018f243531fd33954986cf427f0ff342c1a2e51c3",
+        "side": "BUY",
+        "difference_hz": 8,
+        "gate_spikes": 14,
+        "total_spikes": 398564,
+        "recipient_counts": {
+          "10704": 0,
+          "11402": 7
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -52.710025787353516,
+          "11402": -45.34564208984375
+        },
+        "spike_sha256": "75f74d49019d50e586a479a455cfeaabaa739c16f6ff47af2158b0b3793743cf"
+      },
+      {
+        "observation": 3,
+        "decision_ts": 1789232100.0,
+        "input_sha256": "04a10b0db7425b23d0ef60b5d6aa0d99aa21fde83ea61e1beb3e2ed038400a37",
+        "side": "BUY",
+        "difference_hz": 2,
+        "gate_spikes": 12,
+        "total_spikes": 467247,
+        "recipient_counts": {
+          "10704": 11,
+          "11402": 21
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -46.8005256652832,
+          "11402": -45.0050048828125
+        },
+        "spike_sha256": "23f0d62d8954ebb17f3a7ef830f9c548628b20120a1eedfee29af4fb8815c3ad"
+      }
+    ],
+    "pool0-trained-only_11402": [
+      {
+        "observation": 1,
+        "decision_ts": 1789231500.0,
+        "input_sha256": "f09fe22992725825204d3771399e50f5bb17a961fe0ee7b4269e066ec714b70a",
+        "side": "BUY",
+        "difference_hz": 4,
+        "gate_spikes": 24,
+        "total_spikes": 441057,
+        "recipient_counts": {
+          "10704": 8,
+          "11402": 31
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.10293960571289,
+          "11402": -45.03957748413086
+        },
+        "spike_sha256": "49d32997380ee8697d9f92e896881fae72e6ee551908db091f34aa3291cb385c"
+      },
+      {
+        "observation": 2,
+        "decision_ts": 1789231800.0,
+        "input_sha256": "f7baa326d95b9e619fe0a0c018f243531fd33954986cf427f0ff342c1a2e51c3",
+        "side": "HOLD",
+        "difference_hz": 8,
+        "gate_spikes": 0,
+        "total_spikes": 600109,
+        "recipient_counts": {
+          "10704": 4,
+          "11402": 12
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -50.164981842041016,
+          "11402": -47.13261413574219
+        },
+        "spike_sha256": "23dbf90ca3d6d2928ef340509d04a8e427eb67dc0b4db55427e895a1d0fdb401"
+      },
+      {
+        "observation": 3,
+        "decision_ts": 1789232100.0,
+        "input_sha256": "04a10b0db7425b23d0ef60b5d6aa0d99aa21fde83ea61e1beb3e2ed038400a37",
+        "side": "BUY",
+        "difference_hz": 12,
+        "gate_spikes": 1,
+        "total_spikes": 605190,
+        "recipient_counts": {
+          "10704": 4,
+          "11402": 11
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -49.532066345214844,
+          "11402": -46.45640563964844
+        },
+        "spike_sha256": "7c5e4f4fcbc187537b43e3437f2725373b8945c4f801396f74b86c8e12598a86"
+      }
+    ],
+    "pool1-pristine-only_11402": [
+      {
+        "observation": 1,
+        "decision_ts": 1789231500.0,
+        "input_sha256": "d30709cb7d84751353125ccd2f1a213376b4ad32a6df3f6334140300759a6b94",
+        "side": "BUY",
+        "difference_hz": 8,
+        "gate_spikes": 25,
+        "total_spikes": 364190,
+        "recipient_counts": {
+          "10704": 0,
+          "11402": 21
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -52.0,
+          "11402": -45.11897277832031
+        },
+        "spike_sha256": "abb9b431cb0e4eca9af66ef0209d4df24ceba0626a8d141279e9aa85239a5c0a"
+      },
+      {
+        "observation": 2,
+        "decision_ts": 1789231800.0,
+        "input_sha256": "c63ad279102e4123fe08be3f39aeddcf642eb0923793e8f685170eca100cba98",
+        "side": "SELL",
+        "difference_hz": -4,
+        "gate_spikes": 4,
+        "total_spikes": 552453,
+        "recipient_counts": {
+          "10704": 7,
+          "11402": 37
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -45.663639068603516,
+          "11402": -45.158451080322266
+        },
+        "spike_sha256": "826103fc9aa8b8d98bbd57ef49e92c974cd1fafaeb36c1343695369ee3c59af9"
+      },
+      {
+        "observation": 3,
+        "decision_ts": 1789232100.0,
+        "input_sha256": "b21f8136058158dcd5093398dc38beaedb6c5b74b1b65b027724610808f303b2",
+        "side": "HOLD",
+        "difference_hz": 16,
+        "gate_spikes": 0,
+        "total_spikes": 603726,
+        "recipient_counts": {
+          "10704": 2,
+          "11402": 16
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -48.006168365478516,
+          "11402": -47.76603698730469
+        },
+        "spike_sha256": "e63ffb69a2358398df8581feca75fa62c6cd604020d6ad2eda152e457fa26e86"
+      }
+    ],
+    "pool1-trained-only_11402": [
+      {
+        "observation": 1,
+        "decision_ts": 1789231500.0,
+        "input_sha256": "d30709cb7d84751353125ccd2f1a213376b4ad32a6df3f6334140300759a6b94",
+        "side": "HOLD",
+        "difference_hz": 0,
+        "gate_spikes": 19,
+        "total_spikes": 413783,
+        "recipient_counts": {
+          "10704": 5,
+          "11402": 23
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -46.659263610839844,
+          "11402": -45.01466751098633
+        },
+        "spike_sha256": "63da1bc004a1cbd51f2e8065a9103e7a2847aeecfa14af2f7f2ba794509a19f6"
+      },
+      {
+        "observation": 2,
+        "decision_ts": 1789231800.0,
+        "input_sha256": "c63ad279102e4123fe08be3f39aeddcf642eb0923793e8f685170eca100cba98",
+        "side": "BUY",
+        "difference_hz": 12,
+        "gate_spikes": 1,
+        "total_spikes": 613409,
+        "recipient_counts": {
+          "10704": 0,
+          "11402": 3
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -52.50764846801758,
+          "11402": -46.468048095703125
+        },
+        "spike_sha256": "ba2a6463c2966bac940c453901acee05cfb66af47ba6bfee1d09cf6986b574cd"
+      },
+      {
+        "observation": 3,
+        "decision_ts": 1789232100.0,
+        "input_sha256": "b21f8136058158dcd5093398dc38beaedb6c5b74b1b65b027724610808f303b2",
+        "side": "BUY",
+        "difference_hz": 8,
+        "gate_spikes": 4,
+        "total_spikes": 618425,
+        "recipient_counts": {
+          "10704": 2,
+          "11402": 9
+        },
+        "recipient_sampled_voltage_max": {
+          "10704": -46.936561584472656,
+          "11402": -45.86942672729492
+        },
+        "spike_sha256": "489d03c1044ec052fe78f70b27320ad407cf92bc1760ff2a2e7a8c6b8c7675fa"
+      }
+    ]
+  },
+  "comparisons": [
+    {
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "target_set": "both",
+      "pristine": "pool0-pristine-both",
+      "trained": "pool0-trained-both",
+      "changed_neurons": [
+        5739,
+        7829,
+        15752
+      ],
+      "different_actions": [
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "target_set": "both",
+      "pristine": "pool1-pristine-both",
+      "trained": "pool1-trained-both",
+      "changed_neurons": [
+        13318,
+        12765,
+        13148
+      ],
+      "different_actions": [
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "target_set": "only_10704",
+      "pristine": "pool0-pristine-only_10704",
+      "trained": "pool0-trained-only_10704",
+      "changed_neurons": [
+        6913,
+        15997,
+        16724
+      ],
+      "different_actions": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "target_set": "only_10704",
+      "pristine": "pool1-pristine-only_10704",
+      "trained": "pool1-trained-only_10704",
+      "changed_neurons": [
+        15549,
+        14161,
+        12581
+      ],
+      "different_actions": [
+        true,
+        false,
+        false
+      ]
+    },
+    {
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "target_set": "only_11402",
+      "pristine": "pool0-pristine-only_11402",
+      "trained": "pool0-trained-only_11402",
+      "changed_neurons": [
+        14951,
+        16498,
+        16748
+      ],
+      "different_actions": [
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "target_set": "only_11402",
+      "pristine": "pool1-pristine-only_11402",
+      "trained": "pool1-trained-only_11402",
+      "changed_neurons": [
+        14243,
+        15588,
+        13153
+      ],
+      "different_actions": [
+        true,
+        true,
+        true
+      ]
+    }
+  ],
+  "artifact_sha256": {
+    "pool0-pristine-both/step-01.npz": "fe45a849bbf56389cddd57acca08e7e44f775705cd5343d16baa49bd4b65757d",
+    "pool0-pristine-both/current-01.npz": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333",
+    "pool0-pristine-both/boundary-01.npz": "141a5a129c0cf4c7733f1fb61d5962bdc941c021cfddda2316b6570c65e9dfc3",
+    "pool0-pristine-both/step-02.npz": "2ba89c67479546a577048b9f1b5145656784783dda58c4ad6f6a38a336e4157b",
+    "pool0-pristine-both/current-02.npz": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333",
+    "pool0-pristine-both/boundary-02.npz": "5cf897f55f51eaa10d8ef8c01890697aee51dcfb77eca68ecdc04053eee81e5b",
+    "pool0-pristine-both/step-03.npz": "4f8947f40b6a5f4490d5134119ee4cec856015ec4d799b9157829cde71e7df9b",
+    "pool0-pristine-both/current-03.npz": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333",
+    "pool0-pristine-both/boundary-03.npz": "79ec2960cbd61c9f9360fa42cf459d0c6add00686c31ce0591ba2607b121b628",
+    "pool0-pristine-both/view.json": "fb5c788cb7d027e04e1bed8a32d1d531257bffc3fca6a23a5cadf83678e516fd",
+    "pool0-trained-both/step-01.npz": "aa80e12a10b821ea5341e4afe3f7491f848a2f0155c9f45da847339a9956a491",
+    "pool0-trained-both/current-01.npz": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333",
+    "pool0-trained-both/boundary-01.npz": "381f0aa81fdd079d79c80fcd7a8b4dd8ae0f1fd9cf3d594d029b0dbce45028ed",
+    "pool0-trained-both/step-02.npz": "f1668de818bfdcd402e0e087b7d55f55ba5dd04fcc57a548b90b49fbe1c951b4",
+    "pool0-trained-both/current-02.npz": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333",
+    "pool0-trained-both/boundary-02.npz": "56e4202ae83109ae3fed0aca2f3a9106e41e9849c7da6f908e4ef000b2be85ac",
+    "pool0-trained-both/step-03.npz": "fec2ca3dd42018f1e2a0cc91411056041f4cb69376754f5efeaf026dadaa8d0f",
+    "pool0-trained-both/current-03.npz": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333",
+    "pool0-trained-both/boundary-03.npz": "6b637e0243bffc873dce67d84af306cb4640ebba193e798a2dc81445a4c91d11",
+    "pool0-trained-both/view.json": "8101bc457ed4bcdff1824464b6dae34815576e9dee98b3133df039374f01a820",
+    "pool1-pristine-both/step-01.npz": "59bd5198d68eae980dffe0ebfd4eb8be5f33e74f00a4086574b275e02fa79dd9",
+    "pool1-pristine-both/current-01.npz": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333",
+    "pool1-pristine-both/boundary-01.npz": "141a5a129c0cf4c7733f1fb61d5962bdc941c021cfddda2316b6570c65e9dfc3",
+    "pool1-pristine-both/step-02.npz": "f8c597c469e279de7aa5c28262f847048cdf25d4206f936396bdbfe00422df4f",
+    "pool1-pristine-both/current-02.npz": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333",
+    "pool1-pristine-both/boundary-02.npz": "8ab1544560cf54828a8a7a5dc8a2b2353eee8454919599131fe98866b25ff339",
+    "pool1-pristine-both/step-03.npz": "a13520e0886dc829ec3fe19b565123695e096450b7c9267d95392120e2221de2",
+    "pool1-pristine-both/current-03.npz": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333",
+    "pool1-pristine-both/boundary-03.npz": "afd1f46b0f4864d799c789e8a67f3b48e8f8aa3eefd4a78f6229fd129313f29e",
+    "pool1-pristine-both/view.json": "39c5374c6195b523813ba55d032a82516cd8a942a1c85a4d1cf608b44b89a27c",
+    "pool1-trained-both/step-01.npz": "4cf598a1c086e3bf0dbc109d77b27071d9defac4817a3716d4e988e5672a57a0",
+    "pool1-trained-both/current-01.npz": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333",
+    "pool1-trained-both/boundary-01.npz": "3a6cc9c95df33496bac79d71f5e0cd450f47df2aa66a9d50dbbc9ba7c796049e",
+    "pool1-trained-both/step-02.npz": "9332697b1dd8c9b65970ce982ddc3d3575002354a837bf280904fd7dac2490d1",
+    "pool1-trained-both/current-02.npz": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333",
+    "pool1-trained-both/boundary-02.npz": "d6e5c444b2d67693e9b0b6f1bbd6a8fafe497cd1f9d755276d82d8c38a99d7f7",
+    "pool1-trained-both/step-03.npz": "76cbe0773e12c897edec82600ee9341f20cb8d1205f77251a5161f49ab396a4b",
+    "pool1-trained-both/current-03.npz": "cc74e30f031f4f0becbd8b4683256929a2c13a9e87155806dbdf1801629fa333",
+    "pool1-trained-both/boundary-03.npz": "eff2e625430c4a33167509a198ad278e435ecbea33a6ee648e9ab92974fed138",
+    "pool1-trained-both/view.json": "eeda8f6f9be3b0e6967cb1791db3d1da1e6c7b8629f0006f7c64de927f277914",
+    "pool0-pristine-only_10704/step-01.npz": "cdf69bf603122498226269adc5458e188a8dc81fd75e49c6e14cfa04b8f5c838",
+    "pool0-pristine-only_10704/current-01.npz": "edb71872fabaf31c9d02d8cb648dcde968944807d09030a3f371aa1381accf5d",
+    "pool0-pristine-only_10704/boundary-01.npz": "141a5a129c0cf4c7733f1fb61d5962bdc941c021cfddda2316b6570c65e9dfc3",
+    "pool0-pristine-only_10704/step-02.npz": "f286410a9e6cf352c73737f904cb820e16ba2626ff9dd6c32fde8264e94f8836",
+    "pool0-pristine-only_10704/current-02.npz": "edb71872fabaf31c9d02d8cb648dcde968944807d09030a3f371aa1381accf5d",
+    "pool0-pristine-only_10704/boundary-02.npz": "5f55a058314f6f29f591154d29456922b15c65acf4aa15f27b3a26fb23d595ec",
+    "pool0-pristine-only_10704/step-03.npz": "ef833bee9eed6f4f3f025b1e4996d86ca4d7f21bf6994a411929a774c13b6186",
+    "pool0-pristine-only_10704/current-03.npz": "edb71872fabaf31c9d02d8cb648dcde968944807d09030a3f371aa1381accf5d",
+    "pool0-pristine-only_10704/boundary-03.npz": "0e6b32170b3e11260676b0db43d6fd927da91e119fbec3c45a6694e9e3f4befa",
+    "pool0-pristine-only_10704/view.json": "67db16dfa4bfc9ffaba9db528d17443615b281bd4e9010ff9951001c166b6a78",
+    "pool0-trained-only_10704/step-01.npz": "1566e33b8ddd2fff1206bebd9df2e6750d0cbc82f53618201f3716d3a039e197",
+    "pool0-trained-only_10704/current-01.npz": "edb71872fabaf31c9d02d8cb648dcde968944807d09030a3f371aa1381accf5d",
+    "pool0-trained-only_10704/boundary-01.npz": "381f0aa81fdd079d79c80fcd7a8b4dd8ae0f1fd9cf3d594d029b0dbce45028ed",
+    "pool0-trained-only_10704/step-02.npz": "48a2f65fd70644616d9d5fdfdf585ff238ee3a9d3fce2306389e42d9e7a0db81",
+    "pool0-trained-only_10704/current-02.npz": "edb71872fabaf31c9d02d8cb648dcde968944807d09030a3f371aa1381accf5d",
+    "pool0-trained-only_10704/boundary-02.npz": "c7296d62e4662bc4295903f418c31516e5c85eefc7fd8a6b004f8df74df01834",
+    "pool0-trained-only_10704/step-03.npz": "f38aceb0834e775b1d9adaed6ae05110863e4fbbcccc34d0967a45adf8e39b7c",
+    "pool0-trained-only_10704/current-03.npz": "edb71872fabaf31c9d02d8cb648dcde968944807d09030a3f371aa1381accf5d",
+    "pool0-trained-only_10704/boundary-03.npz": "0d6b15d2eed41c8693d4381d16973672be555952c802254792f7f7b227678c44",
+    "pool0-trained-only_10704/view.json": "c712adf351eaa2d2e035efefdaba98d04e452d7878cabfba39350f4fbe1f4f9c",
+    "pool1-pristine-only_10704/step-01.npz": "6e4ed4d31bb69bd6af1190162da149ba4d0379bc3cdfb1336386d55b67079df8",
+    "pool1-pristine-only_10704/current-01.npz": "edb71872fabaf31c9d02d8cb648dcde968944807d09030a3f371aa1381accf5d",
+    "pool1-pristine-only_10704/boundary-01.npz": "141a5a129c0cf4c7733f1fb61d5962bdc941c021cfddda2316b6570c65e9dfc3",
+    "pool1-pristine-only_10704/step-02.npz": "22cef4a8551128badc7b9ee9e1080462d931418c00ce4c7771e912ad82016671",
+    "pool1-pristine-only_10704/current-02.npz": "edb71872fabaf31c9d02d8cb648dcde968944807d09030a3f371aa1381accf5d",
+    "pool1-pristine-only_10704/boundary-02.npz": "c03be425fa44bfd92a9178b6217f30eb16c7f310fb6133ae2d818ac9e1413d0a",
+    "pool1-pristine-only_10704/step-03.npz": "cf1c73065aa4acb6edcee792dda0115dac0731fac564cd2042aa4adae57fb931",
+    "pool1-pristine-only_10704/current-03.npz": "edb71872fabaf31c9d02d8cb648dcde968944807d09030a3f371aa1381accf5d",
+    "pool1-pristine-only_10704/boundary-03.npz": "82e895693c6c9148a1ca0e09891e204d5b1e1eda1d648b7679933321cdeaf9ee",
+    "pool1-pristine-only_10704/view.json": "ee72dd900feaf85489a8ebafba6501d6ceab048f0bb1d263b57f76ba635b6804",
+    "pool1-trained-only_10704/step-01.npz": "b4873832923c9c73fb2e69d1b9b208e55d92b028a22a2866ea031ab8c06ed81a",
+    "pool1-trained-only_10704/current-01.npz": "edb71872fabaf31c9d02d8cb648dcde968944807d09030a3f371aa1381accf5d",
+    "pool1-trained-only_10704/boundary-01.npz": "3a6cc9c95df33496bac79d71f5e0cd450f47df2aa66a9d50dbbc9ba7c796049e",
+    "pool1-trained-only_10704/step-02.npz": "59b29c96ea7705844caab9be1c102e77387fe64c4d0d4309940dbdb868390453",
+    "pool1-trained-only_10704/current-02.npz": "edb71872fabaf31c9d02d8cb648dcde968944807d09030a3f371aa1381accf5d",
+    "pool1-trained-only_10704/boundary-02.npz": "1783500573bcb4e0ff572e4cd0a8945d63af3cdc243aa1c7f7ec6ff62e3da34a",
+    "pool1-trained-only_10704/step-03.npz": "a2eb81a91ced86a43a11bbbc69f47e7415f5653bfba82c371759ae16978c8506",
+    "pool1-trained-only_10704/current-03.npz": "edb71872fabaf31c9d02d8cb648dcde968944807d09030a3f371aa1381accf5d",
+    "pool1-trained-only_10704/boundary-03.npz": "18d158eb23784c891a01be97b6fc5d12e681a6836557f60be6c88c41db2da2c1",
+    "pool1-trained-only_10704/view.json": "227f78a4ef9eadfd00036cf540fe408ba774eda6da7f4fd09c5a58e4fb800985",
+    "pool0-pristine-only_11402/step-01.npz": "95dfbdc632c1d8ce8231b7e77f9f74642dfd92e886caf216e78c617f231b38ab",
+    "pool0-pristine-only_11402/current-01.npz": "6784288071798925abc4444460047a9953b5bdfc6aa5c1f2777aba4879d66bdb",
+    "pool0-pristine-only_11402/boundary-01.npz": "141a5a129c0cf4c7733f1fb61d5962bdc941c021cfddda2316b6570c65e9dfc3",
+    "pool0-pristine-only_11402/step-02.npz": "582513ff2ef064ca267ffe07b6d31cfbd6a258838ba71ee01145d1d5a736d3b7",
+    "pool0-pristine-only_11402/current-02.npz": "6784288071798925abc4444460047a9953b5bdfc6aa5c1f2777aba4879d66bdb",
+    "pool0-pristine-only_11402/boundary-02.npz": "1d1e62f4d5af465d75cf7d1925794ed4e9678bd557a0c3a8f830393220237df9",
+    "pool0-pristine-only_11402/step-03.npz": "3eb804b727da9febecba34fd38eca92da07d5cd4d3ace86dd9c4d67c48cbc0c3",
+    "pool0-pristine-only_11402/current-03.npz": "6784288071798925abc4444460047a9953b5bdfc6aa5c1f2777aba4879d66bdb",
+    "pool0-pristine-only_11402/boundary-03.npz": "c3a36e4830280fb572cbcba3957473e4a42eaabc6980f7d45b0c875bd0915d79",
+    "pool0-pristine-only_11402/view.json": "88a5d8b7038340210313a8efaed357f4413ab98f515f61605a6794c27b29cf63",
+    "pool0-trained-only_11402/step-01.npz": "a436881e3b4862c3d802c8c1e3618037c31f174e09d6e6e62bdd8350897190f0",
+    "pool0-trained-only_11402/current-01.npz": "6784288071798925abc4444460047a9953b5bdfc6aa5c1f2777aba4879d66bdb",
+    "pool0-trained-only_11402/boundary-01.npz": "381f0aa81fdd079d79c80fcd7a8b4dd8ae0f1fd9cf3d594d029b0dbce45028ed",
+    "pool0-trained-only_11402/step-02.npz": "1456a0f0ab2ae9344d405cfe4802658c3e414e6b8fa79e37a739b150b7d2d6fa",
+    "pool0-trained-only_11402/current-02.npz": "6784288071798925abc4444460047a9953b5bdfc6aa5c1f2777aba4879d66bdb",
+    "pool0-trained-only_11402/boundary-02.npz": "5deffafa13d7ee8d792ebb09f68c7d10226c2e64d18d44e8b897cb11a6129d06",
+    "pool0-trained-only_11402/step-03.npz": "9961890934b9fe4f39e81c337dac1e1d6e771da57e3a96f18aafca670aa968d0",
+    "pool0-trained-only_11402/current-03.npz": "6784288071798925abc4444460047a9953b5bdfc6aa5c1f2777aba4879d66bdb",
+    "pool0-trained-only_11402/boundary-03.npz": "5c755af9aca879ff232304b6ba74b821703953fd49c7a11e9de11664539edef2",
+    "pool0-trained-only_11402/view.json": "7d50bf77045db72e86f27f2e13017e5e00dc4ceb2e056b1e9328d4c2d71e2620",
+    "pool1-pristine-only_11402/step-01.npz": "bfe55dfebb641065a61c36e11c20d29996fec737365bef85680037456b1385f7",
+    "pool1-pristine-only_11402/current-01.npz": "6784288071798925abc4444460047a9953b5bdfc6aa5c1f2777aba4879d66bdb",
+    "pool1-pristine-only_11402/boundary-01.npz": "141a5a129c0cf4c7733f1fb61d5962bdc941c021cfddda2316b6570c65e9dfc3",
+    "pool1-pristine-only_11402/step-02.npz": "05215e37fc7b5a234dd17fce8523b58f29d5122b1b7c9a4efdf0326f63c0a387",
+    "pool1-pristine-only_11402/current-02.npz": "6784288071798925abc4444460047a9953b5bdfc6aa5c1f2777aba4879d66bdb",
+    "pool1-pristine-only_11402/boundary-02.npz": "544c4951200976b3f1b522aed72d0e8a777268d582b235df4bf9ac0e544d340f",
+    "pool1-pristine-only_11402/step-03.npz": "7ce9e3f2940ca7c30449beaee7cbe3da8884fa7117ee833e8f39981d874a39ec",
+    "pool1-pristine-only_11402/current-03.npz": "6784288071798925abc4444460047a9953b5bdfc6aa5c1f2777aba4879d66bdb",
+    "pool1-pristine-only_11402/boundary-03.npz": "0161b92b214c1316ccf23ddce410c7d7324977279aa24526a34827818e634d74",
+    "pool1-pristine-only_11402/view.json": "dc04f6703535da3c7231873e8d6965aeb090f4f897b8f4a87a923a228db2aef4",
+    "pool1-trained-only_11402/step-01.npz": "ac01e404b4c7676202e687740157dcda1927f40698be616820179887f5aa4f0c",
+    "pool1-trained-only_11402/current-01.npz": "6784288071798925abc4444460047a9953b5bdfc6aa5c1f2777aba4879d66bdb",
+    "pool1-trained-only_11402/boundary-01.npz": "3a6cc9c95df33496bac79d71f5e0cd450f47df2aa66a9d50dbbc9ba7c796049e",
+    "pool1-trained-only_11402/step-02.npz": "7ad5363bfde751599c42f46c35cd25672b0dbb8dfe6307e849e64a8eae6ea984",
+    "pool1-trained-only_11402/current-02.npz": "6784288071798925abc4444460047a9953b5bdfc6aa5c1f2777aba4879d66bdb",
+    "pool1-trained-only_11402/boundary-02.npz": "0d795daa70e547a07e31457bd1723d7b57c8c8082234b1fc162ff676b3f964b3",
+    "pool1-trained-only_11402/step-03.npz": "4734a050756324466d7bb07d6e135fa298f67e89bbbddfa64c8ea6d3f94af068",
+    "pool1-trained-only_11402/current-03.npz": "6784288071798925abc4444460047a9953b5bdfc6aa5c1f2777aba4879d66bdb",
+    "pool1-trained-only_11402/boundary-03.npz": "a2f2e569c2847173ac44724d2b00941ae90d6d9e50a6153422cf026f15c3c776",
+    "pool1-trained-only_11402/view.json": "59cbebe9c68c2ad9995a718d92163b42f42029f9beb9f2f32f7f22d5eafead21"
+  },
+  "reference_control_artifact_sha256": {
+    "pool0-pristine-current10/step-01.npz": "fe45a849bbf56389cddd57acca08e7e44f775705cd5343d16baa49bd4b65757d",
+    "pool0-pristine-current10/step-02.npz": "2ba89c67479546a577048b9f1b5145656784783dda58c4ad6f6a38a336e4157b",
+    "pool0-pristine-current10/step-03.npz": "4f8947f40b6a5f4490d5134119ee4cec856015ec4d799b9157829cde71e7df9b",
+    "pool0-trained-current10/step-01.npz": "aa80e12a10b821ea5341e4afe3f7491f848a2f0155c9f45da847339a9956a491",
+    "pool0-trained-current10/step-02.npz": "f1668de818bfdcd402e0e087b7d55f55ba5dd04fcc57a548b90b49fbe1c951b4",
+    "pool0-trained-current10/step-03.npz": "fec2ca3dd42018f1e2a0cc91411056041f4cb69376754f5efeaf026dadaa8d0f",
+    "pool1-pristine-current10/step-01.npz": "59bd5198d68eae980dffe0ebfd4eb8be5f33e74f00a4086574b275e02fa79dd9",
+    "pool1-pristine-current10/step-02.npz": "f8c597c469e279de7aa5c28262f847048cdf25d4206f936396bdbfe00422df4f",
+    "pool1-pristine-current10/step-03.npz": "a13520e0886dc829ec3fe19b565123695e096450b7c9267d95392120e2221de2",
+    "pool1-trained-current10/step-01.npz": "4cf598a1c086e3bf0dbc109d77b27071d9defac4817a3716d4e988e5672a57a0",
+    "pool1-trained-current10/step-02.npz": "9332697b1dd8c9b65970ce982ddc3d3575002354a837bf280904fd7dac2490d1",
+    "pool1-trained-current10/step-03.npz": "76cbe0773e12c897edec82600ee9341f20cb8d1205f77251a5161f49ab396a4b"
+  },
+  "isolation_comparisons": [
+    {
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "memory": "pristine",
+      "baseline": "pool0-pristine-both",
+      "variant": "pool0-pristine-only_10704",
+      "changed_neurons": [
+        7406,
+        15695,
+        16569
+      ],
+      "different_actions": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "memory": "pristine",
+      "baseline": "pool0-pristine-both",
+      "variant": "pool0-pristine-only_11402",
+      "changed_neurons": [
+        7420,
+        8201,
+        16373
+      ],
+      "different_actions": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "memory": "trained",
+      "baseline": "pool0-trained-both",
+      "variant": "pool0-trained-only_10704",
+      "changed_neurons": [
+        6390,
+        8130,
+        15608
+      ],
+      "different_actions": [
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "memory": "trained",
+      "baseline": "pool0-trained-both",
+      "variant": "pool0-trained-only_11402",
+      "changed_neurons": [
+        14776,
+        16482,
+        16826
+      ],
+      "different_actions": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "memory": "pristine",
+      "baseline": "pool1-pristine-both",
+      "variant": "pool1-pristine-only_10704",
+      "changed_neurons": [
+        14709,
+        14121,
+        12471
+      ],
+      "different_actions": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "memory": "pristine",
+      "baseline": "pool1-pristine-both",
+      "variant": "pool1-pristine-only_11402",
+      "changed_neurons": [
+        14764,
+        14937,
+        12165
+      ],
+      "different_actions": [
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "memory": "trained",
+      "baseline": "pool1-trained-both",
+      "variant": "pool1-trained-only_10704",
+      "changed_neurons": [
+        14979,
+        12789,
+        12942
+      ],
+      "different_actions": [
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "memory": "trained",
+      "baseline": "pool1-trained-both",
+      "variant": "pool1-trained-only_11402",
+      "changed_neurons": [
+        13402,
+        12999,
+        12220
+      ],
+      "different_actions": [
+        true,
+        false,
+        true
+      ]
+    }
+  ],
+  "interpretation": "Post-hoc isolation on the same six previously inspected images. Current 10 to both recipients must reproduce the prior native count bins before either single-recipient intervention. Memory stays frozen. No account, trading returns, training, or automatic policy promotion. This tests the declared intervention, not anatomical causality."
+}

@@ -1,0 +1,9 @@
+{
+  "audit_sha256": "5f3094c5e55b013a4fde84ee53117dd30af0af4ba5727c57c415dd0f8ca9df28",
+  "source_sha256": "cf611424d018aff649eb5227b205430ba476c5b17cce65b104a3b873aef7816b",
+  "fixture": false,
+  "artifacts": {
+    "png": "66157b942a5f4b11882bbcee26781019cf43fb9417391bc79d5c72d687dfc8b8",
+    "svg": "8a24e298383afd8cf57ed4a1f9af264401d53b8a176123057230fb2fa5637efb"
+  }
+}
