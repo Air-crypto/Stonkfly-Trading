@@ -1,0 +1,216 @@
+{
+  "status": "recorded_view_projections_audited",
+  "parent_audit_sha256": "1cf91421490195a817aa91dcfa8afc0039e1185a03de23a9d687ed3d6176f5ae",
+  "source_sha256": "08f0f24881b1abbf21a214c7aa7b66f5fb2b962e9238e5ba5fd5538839d2435f",
+  "graph_data_sha256": {
+    "graph.npz": "346b8af85a11af13b8324e18669812c1924569e7d1adcb4e6f45cc461a2c344b",
+    "annotations.feather": "2177e246113e4cfbf1e7772ec37c6da1955ff22e8063d0b1f833101f99a9a3b2",
+    "normalized/neurons.feather": "2103b5203d2ba5502c06fb70a4e0b23edcbcf79ed0c344722101941fc289ba2d"
+  },
+  "corrected_existing_visual_edges": 390,
+  "views": {
+    "trained_online_recorded_carry": {
+      "observations": 3,
+      "bins": 150,
+      "selected_neurons": 93,
+      "displayed_connections": 983,
+      "plastic_connections": 55,
+      "all_topology_verified": true,
+      "all_plotted_series_verified": true,
+      "norm_reduction_errors": [
+        {
+          "weight_delta_l2": 1.9381099614079744e-08,
+          "weight_from_pristine_l2": 2.3565892515176046e-08,
+          "memory_u_l2": 0.0,
+          "memory_w_l2": 0.0
+        },
+        {
+          "weight_delta_l2": 6.857101624291317e-07,
+          "weight_from_pristine_l2": 5.80845740394409e-07,
+          "memory_u_l2": 0.0,
+          "memory_w_l2": 0.0
+        },
+        {
+          "weight_delta_l2": 5.90512851950109e-07,
+          "weight_from_pristine_l2": 1.0355029012032446e-06,
+          "memory_u_l2": 0.0,
+          "memory_w_l2": 0.0
+        }
+      ]
+    },
+    "trained_online_none_carry": {
+      "observations": 3,
+      "bins": 150,
+      "selected_neurons": 93,
+      "displayed_connections": 954,
+      "plastic_connections": 54,
+      "all_topology_verified": true,
+      "all_plotted_series_verified": true,
+      "norm_reduction_errors": [
+        {
+          "weight_delta_l2": 1.9381099614079744e-08,
+          "weight_from_pristine_l2": 2.3565892515176046e-08,
+          "memory_u_l2": 0.0,
+          "memory_w_l2": 0.0
+        },
+        {
+          "weight_delta_l2": 4.1349913537658267e-07,
+          "weight_from_pristine_l2": 4.6014389365467423e-07,
+          "memory_u_l2": 0.0,
+          "memory_w_l2": 0.0
+        },
+        {
+          "weight_delta_l2": 3.198213729405097e-07,
+          "weight_from_pristine_l2": 8.628177567970852e-07,
+          "memory_u_l2": 0.0,
+          "memory_w_l2": 0.0
+        }
+      ]
+    },
+    "trained_frozen_recorded_carry": {
+      "observations": 3,
+      "bins": 150,
+      "selected_neurons": 93,
+      "displayed_connections": 981,
+      "plastic_connections": 56,
+      "all_topology_verified": true,
+      "all_plotted_series_verified": true,
+      "norm_reduction_errors": [
+        {
+          "weight_delta_l2": 0.0,
+          "weight_from_pristine_l2": 1.2085157208296948e-08,
+          "memory_u_l2": 0.0,
+          "memory_w_l2": 0.0
+        },
+        {
+          "weight_delta_l2": 0.0,
+          "weight_from_pristine_l2": 1.2085157208296948e-08,
+          "memory_u_l2": 0.0,
+          "memory_w_l2": 0.0
+        },
+        {
+          "weight_delta_l2": 0.0,
+          "weight_from_pristine_l2": 1.2085157208296948e-08,
+          "memory_u_l2": 0.0,
+          "memory_w_l2": 0.0
+        }
+      ]
+    },
+    "trained_online_recorded_reset_rates": {
+      "observations": 3,
+      "bins": 150,
+      "selected_neurons": 93,
+      "displayed_connections": 950,
+      "plastic_connections": 53,
+      "all_topology_verified": true,
+      "all_plotted_series_verified": true,
+      "norm_reduction_errors": [
+        {
+          "weight_delta_l2": 1.9381099614079744e-08,
+          "weight_from_pristine_l2": 2.3565892515176046e-08,
+          "memory_u_l2": 0.0,
+          "memory_w_l2": 0.0
+        },
+        {
+          "weight_delta_l2": 9.14229330017946e-08,
+          "weight_from_pristine_l2": 1.1250449261090978e-07,
+          "memory_u_l2": 0.0,
+          "memory_w_l2": 0.0
+        },
+        {
+          "weight_delta_l2": 1.6898257682029794e-07,
+          "weight_from_pristine_l2": 2.779753822679254e-07,
+          "memory_u_l2": 0.0,
+          "memory_w_l2": 0.0
+        }
+      ]
+    },
+    "trained_online_none_reset_rates": {
+      "observations": 3,
+      "bins": 150,
+      "selected_neurons": 93,
+      "displayed_connections": 960,
+      "plastic_connections": 53,
+      "all_topology_verified": true,
+      "all_plotted_series_verified": true,
+      "norm_reduction_errors": [
+        {
+          "weight_delta_l2": 1.9381099614079744e-08,
+          "weight_from_pristine_l2": 2.3565892515176046e-08,
+          "memory_u_l2": 0.0,
+          "memory_w_l2": 0.0
+        },
+        {
+          "weight_delta_l2": 1.8448031902096318e-07,
+          "weight_from_pristine_l2": 2.0790889943000934e-07,
+          "memory_u_l2": 0.0,
+          "memory_w_l2": 0.0
+        },
+        {
+          "weight_delta_l2": 2.0015631552183777e-07,
+          "weight_from_pristine_l2": 3.281675855504318e-07,
+          "memory_u_l2": 0.0,
+          "memory_w_l2": 0.0
+        }
+      ]
+    },
+    "trained_frozen_recorded_reset_rates": {
+      "observations": 3,
+      "bins": 150,
+      "selected_neurons": 93,
+      "displayed_connections": 981,
+      "plastic_connections": 56,
+      "all_topology_verified": true,
+      "all_plotted_series_verified": true,
+      "norm_reduction_errors": [
+        {
+          "weight_delta_l2": 0.0,
+          "weight_from_pristine_l2": 1.2085157208296948e-08,
+          "memory_u_l2": 0.0,
+          "memory_w_l2": 0.0
+        },
+        {
+          "weight_delta_l2": 0.0,
+          "weight_from_pristine_l2": 1.2085157208296948e-08,
+          "memory_u_l2": 0.0,
+          "memory_w_l2": 0.0
+        },
+        {
+          "weight_delta_l2": 0.0,
+          "weight_from_pristine_l2": 1.2085157208296948e-08,
+          "memory_u_l2": 0.0,
+          "memory_w_l2": 0.0
+        }
+      ]
+    }
+  },
+  "artifact_sha256": {
+    "trained_online_recorded_carry/view.json": "36857c31389e325942dc518f9120d0a728263f0cdf6d41a2f2d73967280c13d7",
+    "trained_online_recorded_carry/step-01.npz": "7a0ca6001e718f14ce49ab3897d9569a4d315e0a0369fb7145662797e7b44dbc",
+    "trained_online_recorded_carry/step-02.npz": "a842cb108a464c43d039a04287f9e3cd7c585fb5c1a52aefeeaa33635962b093",
+    "trained_online_recorded_carry/step-03.npz": "54248acabb5d31f2470ec440f68363cf87f62f96091cd76c88c024d9ddc90887",
+    "trained_online_none_carry/view.json": "1a04c8d60d1eb82c5a01215e3c6ab4e8ef840b03634d36db8dda41a6ed91e5cd",
+    "trained_online_none_carry/step-01.npz": "7a0ca6001e718f14ce49ab3897d9569a4d315e0a0369fb7145662797e7b44dbc",
+    "trained_online_none_carry/step-02.npz": "1207a806457679ee4be6bf6b3dfaea8c450196181a887fbfa9caf493f292d11c",
+    "trained_online_none_carry/step-03.npz": "378ac3219d59383359c71c0b4dfeb651a22bd5e2ac4071ac80589b26bd388da3",
+    "trained_frozen_recorded_carry/view.json": "92f0c56e38f7266007410c6b508df583282bc8d7b81600ec11df0ffef8e7e59c",
+    "trained_frozen_recorded_carry/step-01.npz": "0f56b2abd7118c14c661086a394f0ecabc26dea7e1d6d3ecf909a3fa669c0c42",
+    "trained_frozen_recorded_carry/step-02.npz": "d66157252d4577e1dbce2a27bd17b294f2efcba9a5a8e07726e68e228f8e9fc7",
+    "trained_frozen_recorded_carry/step-03.npz": "81797b152d463c3f820e88e0dcca069f703ff548e485ecbc1061cc09b48706e9",
+    "trained_online_recorded_reset_rates/view.json": "b2a08a266fb9010ab44ec92137adf2cbacc67cadf4fda9f63465328cdecd6e3e",
+    "trained_online_recorded_reset_rates/step-01.npz": "7a0ca6001e718f14ce49ab3897d9569a4d315e0a0369fb7145662797e7b44dbc",
+    "trained_online_recorded_reset_rates/step-02.npz": "614e309281c7b2e2228766d7e3c1ff1c30396fa58ebc4efaf2851983422170f0",
+    "trained_online_recorded_reset_rates/step-03.npz": "3c2dc41c9e2b8f64cb64b5171f5ef938888dd2af228ea46b95aac046a3f07902",
+    "trained_online_none_reset_rates/view.json": "c5149e148f8586d649034826eddf1d82d056ff00539e0ae90689260a088d6ec7",
+    "trained_online_none_reset_rates/step-01.npz": "7a0ca6001e718f14ce49ab3897d9569a4d315e0a0369fb7145662797e7b44dbc",
+    "trained_online_none_reset_rates/step-02.npz": "a3df42f795e07bb1adc0239bd8fca9a1e7e4ec5afd4afa3f447358242ee66bd9",
+    "trained_online_none_reset_rates/step-03.npz": "27c7ae5a572736e4e27bd86a23576e97903b9fd65573d95e3c2a31e397cb551f",
+    "trained_frozen_recorded_reset_rates/view.json": "085d771089ac53418f6db877d568836fc767aff35db97b2befab67cc6290a721",
+    "trained_frozen_recorded_reset_rates/step-01.npz": "0f56b2abd7118c14c661086a394f0ecabc26dea7e1d6d3ecf909a3fa669c0c42",
+    "trained_frozen_recorded_reset_rates/step-02.npz": "b9a3401cff6d348578fe45cecea21520e59dff43408807c9db5d658062f04cbb",
+    "trained_frozen_recorded_reset_rates/step-03.npz": "f44ab903aef6edf730a6d2a7babd2c635ca27637f111d33ea095fcf15eb4ad54"
+  },
+  "neural_observations": 0,
+  "cloud_submissions": 0,
+  "interpretation": "Every displayed connection and plotted series checked against retained full arrays and verified graph data. Source firing is a recorded event, not proof of transmission or a causal effect. No new trajectories, training or return claim."
+}

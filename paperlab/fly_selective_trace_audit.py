@@ -1,15 +1,12 @@
 """Independent full-recording audit for separate KC/DAN reset trajectories."""
-import base64
 import copy
-import io
 import json
 from pathlib import Path
 
 import numpy as np
-from PIL import Image
 
 from .core import digest
-from .fly_credit_audit import graph_arrays, reconstruct, rule_module
+from .fly_credit_audit import reconstruct, rule_module
 from .fly_selective_trace import compare_recording, validate, verify_reference, source_hashes, require_completed_study
 from .fly_market_activity import array_hash
 from .fly_market_activity_audit import DYNAMIC_FIELDS, audit_view_boundaries, read_arrays
@@ -17,6 +14,7 @@ from .fly_market_memory_audit import read_memory
 from .fly_market_pulse import input_sequences
 from .fly_market_study import memory_signature
 from .fly_trace_memory import enrich_frame
+from .fly_view_projection import load_graph, audit_view, audit_image
 
 
 def require(condition, message):
@@ -89,7 +87,8 @@ def audit(study, payload, artifacts, reference_root, data, *, completed_study):
     require(study['controls_verified']==list(parent['protocol']['arms']), 'Missing controls')
     require(study['code_sha256']==source_hashes(), 'Executed source differs')
     require(study['completed_study_sha256']==require_completed_study(completed_study), 'Study 11 release evidence differs')
-    ids, circuit, baseline = graph_arrays(data); rule = rule_module()
+    graph=load_graph(data);ids=graph.ids;circuit=graph.circuit
+    baseline=graph.weight[circuit['edges']].copy();rule=rule_module()
     require(set(study['artifact_sha256'])=={'neuron-ids.npz','circuit.npz','trained-memory.npz',
         'pristine-memory.npz','initial-dynamics.npz','full-weight-reference.npz'}, 'Incomplete root artifact manifest')
     for name, sha in study['artifact_sha256'].items(): require(digest(root/name)==sha, 'Study artifact differs: '+name)
@@ -113,7 +112,7 @@ def audit(study, payload, artifacts, reference_root, data, *, completed_study):
     require(np.array_equal(full_weight,read_arrays(reference_root/'full-weight-reference.npz')['weight']), 'Full weight baseline differs from parent')
     require(np.array_equal(full_weight[circuit['edges']],baseline), 'Reference plastic weights differ')
     seq=input_sequences(plan,market,references['trained_online_recorded_carry']['pool'])['test']
-    lookup={str(v):i for i,v in enumerate(ids)}; outcomes={}; views={}; hashes=dict(study['artifact_sha256'])
+    lookup={str(v):i for i,v in enumerate(ids)}; outcomes={}; views={}; projection_checks={}; hashes=dict(study['artifact_sha256'])
     for name, arm in p['arms'].items():
         folder=root/name; report=study['reports'][name]; original=references.get(name,references[arm['reference_arm']+'_carry'])
         require(report['graph']=={'neurons':166700,'edges':25582938,'plastic_edges':7835}, 'Changed graph size')
@@ -126,6 +125,7 @@ def audit(study, payload, artifacts, reference_root, data, *, completed_study):
         require(report['config']=={'preset':'recorded_market','view':'original','news':'none','eta':.001,
             'memory':'trained','state_reset':arm['boundary'],**arm}, 'Arm configuration differs')
         view=json.loads((folder/'view.json').read_text()); events=report['events']
+        projection_checks[name]=audit_view(view,folder,graph)
         require(len(events)==len(view['frames'])==3 and view['report']==report and
                 [f['event'] for f in view['frames']]==events, 'Mismatched recording report')
         audit_view_boundaries(view,folder,ids); expanded=copy.deepcopy(view)
@@ -135,8 +135,7 @@ def audit(study, payload, artifacts, reference_root, data, *, completed_study):
             require(event['market_decision_ts']==row['decision_ts'] and event['input_sha256']==row['neural']['input_sha256'], 'Changed image/timestamp')
             pulse=row['neural']['stimulus'] if arm['pulses']=='recorded' else 'none'
             require(event['stimulus']==pulse and event['stimulus_ms']==(0 if pulse=='none' else 200), 'Changed pulse')
-            for image in (Image.open(folder/f'input-{i:02}.png'),Image.open(io.BytesIO(base64.b64decode(frame['input_png'])))):
-                require(np.array_equal(np.asarray(image.convert('RGB')),rgb), 'Saved or displayed input differs')
+            audit_image(frame,folder/f'input-{i:02}.png',rgb)
             boundary=event['activity_boundary']; boundary_path=folder/f'boundary-{i:02}.npz'
             full_weight[circuit['edges']]=state['weights']
             audit_boundary(boundary_path,boundary,initial,{k:state[k] for k in memory},arm['boundary'],i,full_weight)
@@ -210,10 +209,12 @@ def audit(study, payload, artifacts, reference_root, data, *, completed_study):
                     rows.append({'observation':i,**compare_arrays(left,right)})
             comparisons.append({'control':control,'intervention':name,'observations':rows})
     result={'status':'selective_trace_audited','protocol':p,'arms':outcomes,'comparisons':comparisons,
+        'view_projections':projection_checks,
         'artifact_sha256':hashes,'code_sha256':study['code_sha256'],'audit_source_sha256':digest(__file__),
         'verification':{'observations':36,'bins':1800,'plastic_edges_per_bin':7835,'all_weights_exact':True,
             'all_six_original_controls_reproduced':True,'all_boundaries_verified':True,'frozen_selective_counts_and_voltage_unchanged':True,
             'all_decoders_reconstructed':True,'rule_rtol':1e-11,'rule_atol':1e-12,
+            'all_displayed_topology_and_series_verified':True,
             'reported_norm_tolerance_float32_ulps':4},'interpretation':p['interpretation']}
     for name,view in views.items():
         view['credit_audit']={'schema':1,'source_sha256':study['code_sha256'],

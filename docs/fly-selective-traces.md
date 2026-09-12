@@ -54,6 +54,43 @@ nonplastic weights, missing state, dtype changes, first-image behavior, and
 refusal to execute before the actual study 11 has completed and been audited.
 These checks do not prove that the new intervention improves learning.
 
+## Check what the debugger draws
+
+The [projection audit](../reports/fly-view-projection-01.json) checks the six
+existing carry/both-reset views against verified graph data and their full
+recordings: 18 observations and 900 bins. Every selected neuron, displayed
+connection, and plotted series passed. This includes nonplastic connection
+endpoints and baseline weights, every edge between selected neurons, population
+and whole-brain spike curves, trace averages, changed-edge counts, and weight
+distance from both the observation start and pristine memory. It also checks
+per-neuron spike totals across the three observations.
+
+The new selective auditor now requires these checks. Its earlier selected-memory
+checks covered spikes and plastic edges but did not cover every aggregate curve
+or nonplastic edge. This was a verification gap; the stronger checks found no
+incorrect values in the six existing views. Float32 norm reductions receive a
+four-ULP rounding allowance; underlying displayed samples must match exactly.
+
+The [regression record](../reports/fly-view-projection-validation-01.json) includes
+wrong-curve and wrong-connection fixtures that previously passed the narrower
+memory-enrichment helper, plus tests for altered images and retimed spikes whose
+whole-observation count totals remain equal. These are deliberate test mutations,
+not observed model failures. The graph check loads data without constructing a
+native simulator or changing the active cloud deployment.
+
+```sh
+uv run --extra dev python -m paperlab.fly_view_projection \
+  --audit reports/fly-credit-reset-audit-01.json \
+  --artifacts runs/credit-reset-01/cloud/artifacts \
+  --fly-data data/fly \
+  --out runs/view-projection-new
+
+# Optional retained-data regression; requires the prepared graph and recordings.
+FLY_CREDIT_RESET_RECORDINGS="$PWD/runs/credit-reset-01/cloud" \
+FLY_TRACE_DATA="$PWD/data/fly" \
+  uv run --extra dev python -m pytest -q tests/test_fly_view_projection.py
+```
+
 ## Reproduce the preflight
 
 This requires the previously downloaded credit-reset cloud artifacts and original

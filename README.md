@@ -200,6 +200,9 @@ The [separate KC/DAN reset follow-up](docs/fly-selective-traces.md) specifies
 24 boundary checks passed against saved native arrays, preserving all other
 state and weights. Native runs and their results are pending; the running cloud
 comparison is unchanged. The guide includes the preflight command and evidence.
+An [additional display audit](docs/fly-selective-traces.md#check-what-the-debugger-draws)
+verified every displayed connection and plotted series in the six existing
+carry/both-reset views against the full recordings and graph data.
 
 The [longer online comparison runner](docs/fly-online-comparison.md) now records
 24 decision slots per condition, with full native-bin audits, independent paper
