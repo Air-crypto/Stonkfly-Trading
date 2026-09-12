@@ -43,11 +43,16 @@ The diagnostics have identified concrete limitations:
   both reference controls and isolated the extra BUY to the combination of
   ongoing plasticity and recorded reinforcement. Starting with earlier trained
   memory did not change those three observations' spike counts or actions.
-- Freezing weights removed that extra BUY in this diagnostic. Whether trained,
-  frozen inference improves fresh market results remains a separate test;
-  no model change has been promoted to the regular paper trader.
+- The [next registered market window](docs/fly-debugger.md#fifth-market-replay-result)
+  rejected freezing as a general fix: trained/frozen ended at **$1,005.41** versus
+  **$1,008.38** for pristine/frozen and online, from separate $1,000 accounts.
+  Saved checkpoints confirmed retained memory; it changed a BUY to HOLD.
+  No arm passed the development gate, and no policy was promoted.
 
-![All eight memory, update, and pulse conditions on identical inputs](docs/assets/fly-market-pulse-01.png)
+![Frozen-inference comparison across training, development, and test](docs/assets/fly-market-study-05.png)
+
+[Inspect the changed market decision](http://127.0.0.1:8765/?run=market05-pool0-trained_frozen&step=1&compare=market05-pool0-pristine_frozen).
+These are indicative DEX marks with fees/slippage, not realized or monthly returns.
 
 After starting the included viewer, [jump to the extra gate spike](http://127.0.0.1:8765/?run=pulse01-trained_online_recorded&step=2&bin=37&neuron=10527&compare=pulse01-trained_frozen_recorded).
 The link selects neuron 10527 at the 1,380 ms bin boundary. Use previous/next

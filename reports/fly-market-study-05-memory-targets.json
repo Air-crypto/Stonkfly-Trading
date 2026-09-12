@@ -1,0 +1,73 @@
+{
+  "trace_sha256": "5de3eda4178b93cd4bdeee4433b0c534bcd1165253fd9733a1ffdb7cafecee12",
+  "view_sha256": "42f63951f839a20d13ebfda04aa4b23fa80f138c2b0eb36a492dc71084363734",
+  "targets": [
+    {
+      "id": "10704",
+      "type": "MBON11",
+      "edges": 2048,
+      "changed_weights": 843,
+      "delta_l2": {
+        "weights": 4.661531744741819,
+        "u": 0.9019470941251367,
+        "w": 0.8043298944779183
+      }
+    },
+    {
+      "id": "11402",
+      "type": "MBON11",
+      "edges": 2136,
+      "changed_weights": 923,
+      "delta_l2": {
+        "weights": 6.440979629751613,
+        "u": 0.8003007002256969,
+        "w": 0.7039738791121305
+      }
+    },
+    {
+      "id": "12859",
+      "type": "MBON07",
+      "edges": 956,
+      "changed_weights": 0,
+      "delta_l2": {
+        "weights": 0.0,
+        "u": 0.0,
+        "w": 0.0
+      }
+    },
+    {
+      "id": "15626",
+      "type": "MBON07",
+      "edges": 882,
+      "changed_weights": 0,
+      "delta_l2": {
+        "weights": 0.0,
+        "u": 0.0,
+        "w": 0.0
+      }
+    },
+    {
+      "id": "18603",
+      "type": "MBON07",
+      "edges": 878,
+      "changed_weights": 0,
+      "delta_l2": {
+        "weights": 0.0,
+        "u": 0.0,
+        "w": 0.0
+      }
+    },
+    {
+      "id": "515338",
+      "type": "MBON07",
+      "edges": 935,
+      "changed_weights": 0,
+      "delta_l2": {
+        "weights": 0.0,
+        "u": 0.0,
+        "w": 0.0
+      }
+    }
+  ],
+  "note": "Descriptive localization only; no target-specific intervention has been tested."
+}

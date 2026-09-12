@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "recorded_at": 1789211660.34895,
+  "kind": "post_hoc_market_memory_restoration",
+  "reference_report_sha256": "91f57c2e6825363134603359887cfa8d17af5463915db5b5cf565df9e19a3105",
+  "market_plan_sha256": "ab9f6fde557e5199ccd888d8d80c12313de4ae070ab126b37a7efe875818f78c",
+  "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+  "training_source": "online_original",
+  "test_source": "trained_frozen",
+  "arms": {
+    "pristine_frozen": {
+      "memory": "pristine",
+      "restore_post_ids": []
+    },
+    "trained_frozen": {
+      "memory": "trained",
+      "restore_post_ids": []
+    },
+    "restore_10704": {
+      "memory": "trained",
+      "restore_post_ids": [
+        "10704"
+      ]
+    },
+    "restore_11402": {
+      "memory": "trained",
+      "restore_post_ids": [
+        "11402"
+      ]
+    },
+    "restore_both": {
+      "memory": "trained",
+      "restore_post_ids": [
+        "10704",
+        "11402"
+      ]
+    }
+  },
+  "inference": {
+    "learning": false,
+    "reinforcement": "none",
+    "extra_current": 0,
+    "steps": 3
+  },
+  "requirements": [
+    "Reconstruct the same original market images and match every recorded input hash.",
+    "Reproduce the reference training spike counts and save its weights and efficacy memory.",
+    "Reset neural dynamics identically before each arm, preserving trained memory except for the declared restoration.",
+    "Restore weights, u, and w on all plastic inputs to the exact named postsynaptic body IDs; preserve the full graph and all other state.",
+    "Match pristine_frozen and trained_frozen reference test spike counts and decoder outputs before interpreting interventions.",
+    "Verify every frozen observation leaves its starting synaptic memory unchanged.",
+    "Record all three observations at 10 ms resolution; retain full traces and compact debugger views."
+  ],
+  "interpretation": "Post hoc causal localization on already examined market inputs. Outputs only: no recomputed account or claimed fresh returns. No automatic policy promotion. A later market evaluation is required for any proposed improvement."
+}

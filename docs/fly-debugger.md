@@ -961,8 +961,8 @@ A [new market comparison](../reports/fly-market-study-05-preregistration.json)
 is registered to test trained-but-frozen inference against pristine frozen and
 original online behavior. It retains the prior cohort and costs, uses training
 10:20–10:35, development 10:35–10:50, and test 10:50–11:05 UTC on September 12.
-The test interval had not begun at registration. No outcome or promotion is
-claimed for that pending experiment.
+The test interval had not begun at registration. The completed result is
+documented below; no arm was promoted.
 
 ### Locate the extra gate spike
 
@@ -1026,3 +1026,102 @@ The worker now saves each arm's training memory and each traced test phase's
 initial memory. Phase records contain initial/final memory hashes so a trained,
 frozen run can be checked against its training checkpoint. These additions do
 not change the regular paper trader's policy.
+
+To verify the saved memory from a completed study, point `--artifacts` at its
+output directory containing `poolN-ARM-training-memory.npz` and
+`poolN-ARM/initial-memory.npz`. This command reads files; it does not run the model:
+
+```sh
+uv run python -m paperlab.fly_market_memory_audit \
+  --plan reports/fly-market-study-05-plan.json \
+  --report reports/fly-market-study-05.json \
+  --artifacts runs/market05-artifacts --out runs/market05-memory-audit.json
+```
+
+The audit compares actual saved arrays, checks the training checkpoint against
+the training result, checks both inference start hashes against that checkpoint,
+and verifies that phases with learning disabled report unchanged memory. It
+reports separate L2 changes for synaptic weights and the two efficacy-memory
+arrays (`u`, `w`). Public audit results contain hashes and aggregate changes;
+private checkpoints stay outside Git. Array equality verifies state transfer,
+not that the learned state improves trading.
+
+
+### Fifth market replay result
+
+The [sealed plan](../reports/fly-market-study-05-plan.json),
+[full ledger and decisions](../reports/fly-market-study-05.json), and
+[checkpoint audit](../reports/fly-market-study-05-memory-audit.json) cover the
+registered September 12 window. All source hashes matched the submitted worker
+code, and the selection was saved before test simulation. The initial download
+was rejected because its actual database observations ended before 11:05 UTC,
+despite a later collector heartbeat. The eventual sealed database covered the
+complete window; cohort, costs, and time boundaries were unchanged.
+
+| Arm | Development equity | Test equity | Test fills | Test fees |
+| --- | ---: | ---: | ---: | ---: |
+| Pristine / frozen | $971.83 | $1,008.38 | 2 | $0.6250 |
+| Trained / frozen | $970.48 | $1,005.41 | 1 | $0.3125 |
+| Original / online | $971.83 | $1,008.38 | 2 | $0.6250 |
+
+Each phase starts with $1,000, including two idle $250 sleeves. Test gains come
+from indicative marks on open pool-0 inventory; no sell realizes those gains.
+Pool 1 remains $250 cash: only one of its three test decisions has an available
+quote, and its BUY is rejected at the next unavailable receipt. Overall there
+are four observed decisions out of six slots. Development includes unavailable
+inventory stress marks, which are not realized sales. Hosting is excluded from
+the table; the bounded cloud call estimated about **$0.0135** compute.
+
+![All phase outcomes from the fifth comparison](assets/fly-market-study-05.png)
+
+No arm beat cash during development, so none was selected. The positive test
+marks do not override that decision. **Trained, frozen inference did not improve
+this fresh window:** it trailed both controls by **$2.974657** at the final mark.
+It also trailed the controls by $1.354644 during development.
+
+The actual training checkpoints explain why this is a retained-memory test:
+
+- Pool 0 training changed **1,766 weights**, with weight-difference L2 **7.950855**,
+  efficacy-memory `u` L2 **1.205815**, and `w` L2 **1.068890** from pristine.
+- Trained/frozen and original/online started inference from identical trained
+  memory. Their saved test-start arrays match their training checkpoints.
+- Frozen inference reports unchanged weights and efficacy memory through both
+  development and test; runtime assertions also checked every frozen observation.
+- Pool 1 training changed only five weights; its single test observation produced
+  the same action and whole-observation spike counts across all three arms.
+
+On pool 0 at **10:55 UTC**, pristine/frozen emitted BUY with right-minus-left
+**4 Hz**; trained/frozen emitted HOLD with **0 Hz**. Both had **one gate spike**.
+Thus this failure differs from the earlier extra-gate-spike case: retained
+memory changed the directional readout while the gate was still open. The
+trained and pristine runs saw identical images and had no reinforcement or
+online updates during this comparison. At 11:00, the resulting extra BUY in the
+pristine account filled; subsequent price appreciation made that added exposure
+beneficial in this window. This does not make extra buying generally beneficial.
+
+![Identical inputs with retained memory changing the directional readout](assets/fly-market-study-05-comparison.png)
+
+Open `market05-pool0-trained_frozen`, compare `market05-pool0-pristine_frozen`,
+and select observation 2, or use [the direct comparison](http://127.0.0.1:8765/?run=market05-pool0-trained_frozen&step=1&compare=market05-pool0-pristine_frozen).
+All six pool/arm recordings are included, including the sparse pool's complete
+execution timeline. The regular paper policy remains unchanged. The next
+mechanism question is which retained plastic connections changed that
+directional readout; reversing one observed action would still require a fresh
+market evaluation before claiming an improvement.
+
+
+The full frozen trace localizes all 1,766 changed weights to the two MBON11
+postsynaptic cells: [843 inputs to body 10704 and 923 to body 11402](../reports/fly-market-study-05-memory-targets.json).
+All weights and efficacy memory on the 3,651 MBON07 inputs match pristine state.
+The mapping uses the trace's actual plastic postsynaptic indices and neuron IDs,
+with cell annotations from its matching viewer recording. Every captured frozen
+memory frame matches the saved training checkpoint. This identifies where
+memory changed, not which individual connection caused the output change.
+
+A [five-arm restoration protocol](../reports/fly-market-restoration-protocol-01.json)
+is registered but has not run: pristine/frozen, trained/frozen, restore inputs
+to 10704, restore inputs to 11402, and restore both. All use the same three market
+images, frozen inference, and no reinforcement. Both original reference controls
+must reproduce before interpreting the intervention. This is a post hoc neural
+diagnostic; any proposed trading improvement still needs a subsequent market
+evaluation.

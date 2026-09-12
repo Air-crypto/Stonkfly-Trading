@@ -1,0 +1,102 @@
+{
+  "plan_sha256": "ab9f6fde557e5199ccd888d8d80c12313de4ae070ab126b37a7efe875818f78c",
+  "checkpoint_sha256": {
+    "pool0-pristine_frozen-training-memory.npz": "5b1fac5bd0e8cdcabdfccf0ecc17204bf21161d9193c27c54636181a71318e21",
+    "pool0-pristine_frozen/initial-memory.npz": "5b1fac5bd0e8cdcabdfccf0ecc17204bf21161d9193c27c54636181a71318e21",
+    "pool0-trained_frozen-training-memory.npz": "e2d0b3268376d71925cd738f712094e824acf0aa61d72cf1bb4bb613fd3b5514",
+    "pool0-trained_frozen/initial-memory.npz": "e2d0b3268376d71925cd738f712094e824acf0aa61d72cf1bb4bb613fd3b5514",
+    "pool0-online_original-training-memory.npz": "e2d0b3268376d71925cd738f712094e824acf0aa61d72cf1bb4bb613fd3b5514",
+    "pool0-online_original/initial-memory.npz": "e2d0b3268376d71925cd738f712094e824acf0aa61d72cf1bb4bb613fd3b5514",
+    "pool1-pristine_frozen-training-memory.npz": "5b1fac5bd0e8cdcabdfccf0ecc17204bf21161d9193c27c54636181a71318e21",
+    "pool1-pristine_frozen/initial-memory.npz": "5b1fac5bd0e8cdcabdfccf0ecc17204bf21161d9193c27c54636181a71318e21",
+    "pool1-trained_frozen-training-memory.npz": "0f4a1f4761750151141a801ea295441ae53a483f4d5b3e1d42df09fe13112d1b",
+    "pool1-trained_frozen/initial-memory.npz": "0f4a1f4761750151141a801ea295441ae53a483f4d5b3e1d42df09fe13112d1b",
+    "pool1-online_original-training-memory.npz": "0f4a1f4761750151141a801ea295441ae53a483f4d5b3e1d42df09fe13112d1b",
+    "pool1-online_original/initial-memory.npz": "0f4a1f4761750151141a801ea295441ae53a483f4d5b3e1d42df09fe13112d1b"
+  },
+  "pools": {
+    "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ": {
+      "pristine_frozen": {
+        "training_memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+        "training_changed_memory": false,
+        "training_delta_l2": {
+          "weights": 0.0,
+          "u": 0.0,
+          "w": 0.0
+        },
+        "training_changed_weights": 0,
+        "development_initial_hash_matches_training": true,
+        "test_checkpoint_matches_training": true,
+        "frozen_inference_reported_memory_unchanged": true
+      },
+      "trained_frozen": {
+        "training_memory_sha256": "4d0027b960796c702dcffe576b0488eebf477d7a2c9b8de0f56a38e9cfa60240",
+        "training_changed_memory": true,
+        "training_delta_l2": {
+          "weights": 7.950855098548264,
+          "u": 1.2058149822350521,
+          "w": 1.0688899857436402
+        },
+        "training_changed_weights": 1766,
+        "development_initial_hash_matches_training": true,
+        "test_checkpoint_matches_training": true,
+        "frozen_inference_reported_memory_unchanged": true
+      },
+      "online_original": {
+        "training_memory_sha256": "4d0027b960796c702dcffe576b0488eebf477d7a2c9b8de0f56a38e9cfa60240",
+        "training_changed_memory": true,
+        "training_delta_l2": {
+          "weights": 7.950855098548264,
+          "u": 1.2058149822350521,
+          "w": 1.0688899857436402
+        },
+        "training_changed_weights": 1766,
+        "development_initial_hash_matches_training": true,
+        "test_checkpoint_matches_training": true,
+        "frozen_inference_reported_memory_unchanged": null
+      }
+    },
+    "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu": {
+      "pristine_frozen": {
+        "training_memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+        "training_changed_memory": false,
+        "training_delta_l2": {
+          "weights": 0.0,
+          "u": 0.0,
+          "w": 0.0
+        },
+        "training_changed_weights": 0,
+        "development_initial_hash_matches_training": true,
+        "test_checkpoint_matches_training": true,
+        "frozen_inference_reported_memory_unchanged": true
+      },
+      "trained_frozen": {
+        "training_memory_sha256": "676441b88ceb77bd76fff79fc3fd69f2664346dddc4a58f2dca5cc9b1b290f75",
+        "training_changed_memory": true,
+        "training_delta_l2": {
+          "weights": 0.13882117349504786,
+          "u": 0.015322174287338869,
+          "w": 0.009590763123480367
+        },
+        "training_changed_weights": 5,
+        "development_initial_hash_matches_training": true,
+        "test_checkpoint_matches_training": true,
+        "frozen_inference_reported_memory_unchanged": true
+      },
+      "online_original": {
+        "training_memory_sha256": "676441b88ceb77bd76fff79fc3fd69f2664346dddc4a58f2dca5cc9b1b290f75",
+        "training_changed_memory": true,
+        "training_delta_l2": {
+          "weights": 0.13882117349504786,
+          "u": 0.015322174287338869,
+          "w": 0.009590763123480367
+        },
+        "training_changed_weights": 5,
+        "development_initial_hash_matches_training": true,
+        "test_checkpoint_matches_training": true,
+        "frozen_inference_reported_memory_unchanged": null
+      }
+    }
+  },
+  "interpretation": "Checkpoint equality verifies saved weights and efficacy memory; it does not prove useful learning or profitable trading."
+}

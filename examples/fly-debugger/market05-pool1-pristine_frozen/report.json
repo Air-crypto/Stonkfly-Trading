@@ -1,0 +1,137 @@
+{
+  "schema": 1,
+  "source": "sealed_retrospective_market_replay",
+  "config": {
+    "preset": "market_replay",
+    "view": "original",
+    "news": "none",
+    "eta": 0.001,
+    "learning": false,
+    "reinforcement_only": false
+  },
+  "upstream_commit": "78ef3e05ab0fa086032098558d893667068944a0",
+  "graph": {
+    "neurons": 166700,
+    "edges": 25582938,
+    "plastic_edges": 7835
+  },
+  "native_build": {
+    "model": "stonkfly-dual-compartment-v1",
+    "source_sha256": "e2d4d584f4633613277bb1bf6ea7ba20855c01a332ae2e9344ed7782604c8509",
+    "binary_sha256": "9c0768fc4f8e34ba730a31ef04a5de958e7d4276c1552f30ec6f2c2eddbfa1b1",
+    "flags": [
+      "-O3",
+      "-std=c++17",
+      "-shared",
+      "-fPIC"
+    ]
+  },
+  "seconds": 4.264334872000006,
+  "events": [
+    {
+      "side": "BUY",
+      "left_hz": 26.0,
+      "right_hz": 36.0,
+      "difference_hz": 10.0,
+      "gate_spikes": 22,
+      "cell_ids": {
+        "left": [
+          "10162"
+        ],
+        "right": [
+          "10059"
+        ],
+        "gate": [
+          "10527",
+          "555871"
+        ]
+      },
+      "brain_ms": 500.0,
+      "compute_seconds": 1.623766136000114,
+      "stimulus": "none",
+      "stimulus_ms": 0.0,
+      "reward_spikes": 0,
+      "aversive_spikes": 67,
+      "KC_spikes": 14,
+      "total_spikes": 377939,
+      "spike_sha256": "a07255fb1097438d5ec44f13f63ae5456704e2bfe24a58de8a4bc192a3310a58",
+      "input_sha256": "8e2d8682ca87449be77e6320fb025be23476156636d1eb15bf6c680a390dc47d",
+      "memory": {
+        "plastic_edges": 7835,
+        "changed_edges": 0,
+        "mean_efficacy": 1.0,
+        "minimum_efficacy": 1.0,
+        "sha256": "9f9c000fb9819eb99c214cc1da747d44e13f009bc4c3454f6b7dfe4ee669acf7",
+        "model": "stonkfly-dual-compartment-v1"
+      },
+      "diagnostics": {
+        "loss": null,
+        "backprop_gradient": null,
+        "plasticity_enabled": false,
+        "changed_edges": 0,
+        "weight_delta_l2": 0.0,
+        "max_abs_delta": 0.0,
+        "efficacy_min": 1.0,
+        "efficacy_max": 1.0,
+        "clipped_edges": 0
+      },
+      "market_decision_ts": 1789210500,
+      "equity_reward_usd": 0,
+      "plasticity_enabled": false,
+      "weight_delta_l2": 0.0
+    }
+  ],
+  "market_timeline": [
+    {
+      "decision_ts": 1789210200,
+      "quote_ts": 1789210118.1479013,
+      "available": false,
+      "terminal": false,
+      "action": null,
+      "observation": "unavailable_quote",
+      "fill_status": "hold",
+      "fill_reason": null,
+      "equity": 250.0
+    },
+    {
+      "decision_ts": 1789210500,
+      "quote_ts": 1789210421.3019686,
+      "available": true,
+      "terminal": false,
+      "action": "BUY",
+      "observation": "observed",
+      "fill_status": "hold",
+      "fill_reason": null,
+      "equity": 250.0
+    },
+    {
+      "decision_ts": 1789210800,
+      "quote_ts": 1789210724.1783082,
+      "available": false,
+      "terminal": false,
+      "action": null,
+      "observation": "unavailable_quote",
+      "fill_status": "rejected",
+      "fill_reason": "unavailable_market",
+      "equity": 250.0
+    },
+    {
+      "decision_ts": 1789211100,
+      "quote_ts": 1789211028.417184,
+      "available": true,
+      "terminal": true,
+      "action": null,
+      "observation": "terminal_mark",
+      "fill_status": "hold",
+      "fill_reason": null,
+      "equity": 250.0
+    }
+  ],
+  "visual_encoding": {
+    "view": "original",
+    "price_scale": "upstream_window_range"
+  },
+  "initial_memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+  "final_memory_sha256": "069a931d914c0dff7e5b12f7875194cf70e1a2291c9bcb1d7f4aff7f7ee1fa7d",
+  "interpretation": "Recorded market replay, isolated paper account. No executable DEX or monthly-return claim."
+}
