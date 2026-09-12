@@ -181,7 +181,12 @@ feedback, and preserved missing-data gaps. A synthetic full-graph check verified
 21 observations across 1,050 bins; the viewer supports the resulting larger
 recordings. The [registered four-hour follow-up](reports/fly-market-study-11-preregistration.json)
 uses separate development and test windows; see the guide for cloud arming and
-execution status. Synthetic validation is not evidence that the intervention earns money.
+execution status. [Cloud arming was verified](reports/fly-online-cloud-arming-11.json)
+at 20:25:47 UTC on September 12, before the 20:35 UTC development start. The
+[read-only observer](docs/fly-online-comparison.md#observe-the-scheduled-experiment)
+reattaches saved calls and audits full recordings into paired debugger views.
+No result from this follow-up is claimed yet. Synthetic validation is not
+evidence that the intervention earns money.
 
 The [decoder count view](docs/fly-debugger.md#inspect-accumulated-decoder-counts)
 shows how output spikes accumulate. In the examined BUY/SELL reversal, one net

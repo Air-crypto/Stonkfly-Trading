@@ -5,8 +5,13 @@ once-only dispatcher is connected after the normal paper cycle. The
 [registration](../reports/fly-market-study-11-preregistration.json), recorded
 September 12, 2026 at 20:17:29 UTC, fixes development at **20:35–22:35 UTC** and
 test at **22:35–00:35 UTC** (ending September 13). In Chicago these are
-3:35–5:35 p.m. and 5:35–7:35 p.m. on September 12. Cloud arming is awaiting
-verification; this registration alone does not prove a deployed job or result.
+3:35–5:35 p.m. and 5:35–7:35 p.m. on September 12. The
+[cloud arming check](../reports/fly-online-cloud-arming-11.json) verified that
+the 20:25 worker committed the exact registration and execution-source hashes
+at **20:25:47 UTC**, before development began. Its owning call
+`fc-01M2BMPXVS3ZSQY2YVD4TN5RM1` completed with `paper_online_collecting`.
+This proves prospective registration in the deployed worker; no study chunk
+had run at that check, and no performance result is claimed.
 The [validation record](../reports/fly-online-validation-01.json) retains the
 native artifact/source hashes and the completed test scope.
 The dispatcher retains owning Modal call/input IDs and persists development
@@ -167,3 +172,56 @@ unchanged until completion. The dispatcher writes receipts and snapshots below
 `chunks/<phase>-pool<index>-<arm>/artifacts`. An absent or timed-out observation
 of a call does not authorize another submission. Fresh data, prospective cloud
 receipts and complete comparison audits are required before reporting a result.
+
+## Observe the scheduled experiment
+
+The observer reads the existing volume and reattaches saved owning calls. It
+does not invoke a worker, resume partial neural state, or submit model compute.
+From a checkout matching the pinned execution sources, with Modal authenticated:
+
+```sh
+uv run --extra cloud python -m paperlab.fly_online_cloud \
+  --registration reports/fly-market-study-11-preregistration.json \
+  --out runs/online-cloud-11
+```
+
+Before the endpoint, this reports the registered collection phase. Afterward,
+it verifies completed chunk summaries and the development-selection receipt.
+An in-flight owning call is reported as pending, including when a completed
+chunk is waiting for its outer worker to return. Repeat the same command to
+observe it again. The last successful observation is saved in `progress.json`
+with an observation timestamp; it is not a continuously refreshed status page.
+
+Once chunks become available, download and independently audit their full
+recordings using the prepared graph:
+
+```sh
+uv run --extra cloud python -m paperlab.fly_online_cloud \
+  --registration reports/fly-market-study-11-preregistration.json \
+  --out runs/online-cloud-11 --audit --fly-data data/fly
+
+uv run python -m paperlab.debugger serve \
+  --out runs/online-cloud-11/views --port 8767
+```
+
+Allow approximately 12–15 GB locally for the full recordings, based on the
+native validation fixture; actual size depends on eligible observations. The
+observer reuses verified downloads and links the full neuron recordings into
+each view without duplicating their data. Repeat the audit command as more
+chunks complete. These local inspection commands can exit while cloud
+collection and scheduled evaluation continue with the laptop closed.
+
+The raw price archive is audited before any neural recording is downloaded.
+Each view is published only after its complete chunk audit passes. The final
+`report.json` requires all sixteen independent audits, matching native builds
+and fresh starting states, and development selection preceding every test
+chunk. Partial audited views are useful for diagnostics; they are not a
+completed comparison. The report retains every condition's development/test
+equity and coverage and never promotes a policy automatically.
+
+In the viewer, select `development-pool0-trained_online_reset_rates` and compare
+it with `development-pool0-trained_online_carry`. Follow the learning-drive
+plot, connection `u/w`, gate spikes and subsequent fills across observations;
+repeat for pool 1 and the separate test phase. The reset clears KC/DAN **firing
+rate traces**, not a learning-rate hyperparameter or stored connection memory.
+Keep the pinned execution sources unchanged until capture and audits finish.

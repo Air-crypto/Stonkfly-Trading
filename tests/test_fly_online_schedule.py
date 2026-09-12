@@ -61,6 +61,8 @@ def setup(tmp_path,monkeypatch):
             'registration':r,'plan_sha256':env['sha256'],'code_sha256':{f:sources['paperlab/'+f] for f in SOURCE_FILES},
             'outcome':{'equity':251 if kw['arm']=='trained_online_reset_rates' else 249,
                 'rows':[{'event':{'synthetic_dispatch_fixture':True}}]*24+[{'event':None}]}}
+        from paperlab.fly_online_study import select_development
+        result['selection']=select_development(envelope,kw['development']) if kw['stage']=='test' else None
         atomic_json(out/'summary.json',result);return result
     kw_current={'call_id':'fc-armed','input_id':'in-armed','commit':lambda:events.append('commit'),
         'run':run,'deadline':time.monotonic()+570,'now':r['development_start']-.5}
