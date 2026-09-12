@@ -3348,3 +3348,124 @@ and published names beginning `creditreset01-` on port 8766. It checks all six
 recordings, 18 observations, boundary labels, drive curves, paired gate counts,
 mobile layout, and blocks every model-submission request. Set `FLY_RESET_ROOT`,
 `FLY_RESET_PREFIX` and `FLY_VIEW_URL` for another served copy.
+
+## Where the trace intervention first changes the network
+
+![First differences across the complete retained neural recordings](assets/fly-credit-divergence-01.png)
+
+The [full-array analysis](../reports/fly-credit-divergence-01.json) reads the
+existing 18 native recordings and checks their hashes against the published
+trace-reset audit. It compares every plastic weight and `u/w` state, every
+sampled neuron voltage, and every neuron count in each 10 ms bin. It requires
+the original decoder and comparison results to reproduce. No new neural run
+or trading simulation is performed.
+
+Every first observation is identical. At the second observation, after the
+first trace reset, the earliest recorded differences are:
+
+| Condition pair | Weight / `u/w` | Sampled voltage | Spike counts |
+|---|---:|---:|---:|
+| Online, recorded pulses | 10 ms | 50 ms | 140 ms |
+| Online, no injected pulses | 40 ms | 50 ms | 100 ms |
+| Frozen, recorded pulses | Identical | Identical | Identical |
+
+Times are the ends of the first differing bins, relative to the second image.
+For example, 10 ms means the 0–10 ms bin; the image begins at 500 ms of native
+time. These samples do not reveal exact within-bin event times. The frozen
+pair also has identical sampled voltages across all three observations,
+extending the earlier count-and-memory check.
+
+In both online pairs, the first weight differences involve these five
+connections, all ending at MBON11 cells:
+
+| Connection | Source neuron | Target neuron |
+|---|---:|---:|
+| 4110156 | 18540 | 11402 |
+| 4110853 | 18540 | 10704 |
+| 4931279 | 21778 | 10704 |
+| 8863131 | 44069 | 10704 |
+| 20309425 | 520206 | 11402 |
+
+The first sampled voltage differences occur in those same two target cells.
+Later spike-count differences spread through the recurrent network. By the
+third image of the recorded-pulse pair, carry has one gate spike and reset has
+none, despite positive directions of +12 Hz and +8 Hz respectively. The fixed
+decoder therefore returns BUY for carry and HOLD for reset.
+
+This ordering locates an early difference worth investigating. It does not
+prove that connection 4110156, or any one of the five connections, mediates the
+later gate change. The two runs have already accumulated different network
+histories by that point. Financial evaluation belongs to the separately
+[registered online comparison](fly-online-comparison.md), which retains its
+original execution sources, data windows and selection rules.
+
+### Inspect an early connection difference
+
+Start the included portable viewer:
+
+```sh
+uv run python -m paperlab.debugger serve --out examples/fly-debugger
+```
+
+Open the [first weight difference](http://127.0.0.1:8765/?run=creditdivergence01-trained_online_recorded_reset_rates&step=1&bin=0&neuron=11402&edge=4110156&compare=creditdivergence01-trained_online_recorded_carry)
+or the [first sampled voltage difference](http://127.0.0.1:8765/?run=creditdivergence01-trained_online_recorded_reset_rates&step=1&bin=4&neuron=11402&edge=4110156&compare=creditdivergence01-trained_online_recorded_carry).
+Connection **4110156** is `18540 → 11402`. Its first differing weights in the
+recorded-pulse pair are **22.247196 with reset versus 22.236349 with carry**.
+The selected neuron's voltage chart and the selected connection's weight and
+`u/w` charts show their separate time courses; the learning-drive inspector
+shows the connection's earlier-image and current-image trace contributions.
+At the first differing voltage sample, neuron 11402 is approximately
+**−57.77764 mV with reset versus −57.78944 mV with carry**. This small initial
+difference can be difficult to see at the full-observation chart scale; the
+full-array report detects it before the later, visually larger divergence.
+
+![Early voltage and connection-memory differences](assets/fly-credit-divergence-first-01.png)
+
+Then jump to the [missing gate spike in image 3](http://127.0.0.1:8765/?run=creditdivergence01-trained_online_recorded_reset_rates&step=2&bin=37&neuron=10527&edge=4110156&compare=creditdivergence01-trained_online_recorded_carry).
+The selected neuron and connection are independent selections, explicitly
+identified by their endpoints. They are not displayed as a direct connection
+to the gate cell.
+
+These two derived views add an early connection absent from the original
+display selection. A graph-matched reference supplies only labels and endpoint
+metadata. All displayed counts, voltages, weights, `u/w`, boundary states and
+learning-drive components come from each run's own retained arrays. The
+extension reconstructs all 7,835 plastic weights in all 300 bins across the
+two views. Full-neuron NPZ files remain outside Git; the selected recordings
+work without them, graph downloads, credentials, or model compute.
+
+### Reproduce the diagnostic analysis
+
+With the retained raw audit and artifacts downloaded by the trace-reset
+observer, use a new output directory:
+
+```sh
+uv run --extra plots python -m paperlab.fly_credit_divergence \
+  --audit runs/credit-reset-01/cloud/audit.json \
+  --artifacts runs/credit-reset-01/cloud/artifacts \
+  --out runs/credit-divergence-new
+uv run python -m paperlab.debugger serve \
+  --out runs/credit-divergence-new/views --port 8766
+```
+
+The command produces PNG/SVG figures, a full-array comparison report, and the
+two extended recordings. Its generated report links use port 8766. The other
+four original control recordings remain in the original output directory or
+the included examples. The analysis refuses to overwrite an earlier output.
+
+Validation and portable-view checks:
+
+```sh
+FLY_CREDIT_RESET_RECORDINGS="$PWD/runs/credit-reset-01/cloud" \
+  uv run --extra dev python -m pytest -q tests/test_fly_credit_divergence.py
+# With the included viewer running on 8765 and Playwright installed:
+FLY_VIEW_URL=http://127.0.0.1:8765 node scripts/check-fly-credit-divergence-view.cjs
+```
+
+The [validation record](../reports/fly-credit-divergence-validation-01.json)
+covers 11 passing checks, including the actual retained arrays and a poisoned
+reference that proves activity is not copied from its labels source. Without
+private recordings, the three retained-data checks explicitly skip. Browser
+validation compares both served views to their portable JSON, visits six
+observations and 30 selected bins, checks displayed counts and weights, and
+verifies the final gate change and mobile layout with model submissions blocked.

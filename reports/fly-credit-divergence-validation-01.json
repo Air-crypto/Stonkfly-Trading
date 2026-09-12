@@ -1,0 +1,85 @@
+{
+  "status": "retained_divergence_and_portable_views_verified",
+  "observed_at": "2026-09-12T21:01:55.628431+00:00",
+  "audit_sha256": "1cf91421490195a817aa91dcfa8afc0039e1185a03de23a9d687ed3d6176f5ae",
+  "retained_analysis": {
+    "observations": 18,
+    "bins": 900,
+    "neurons_per_bin": 166700,
+    "plastic_edges_per_bin": 7835,
+    "original_artifact_hashes_verified": true,
+    "frozen_counts_voltages_and_memory_identical": true
+  },
+  "derived_views": {
+    "recordings": 2,
+    "observations": 6,
+    "reconstructed_learning_bins": 300,
+    "reference_activity_imported": false,
+    "original_recordings_preserved": true
+  },
+  "tests": {
+    "focused": {
+      "passed": 11,
+      "retained_recording_checks": 3
+    },
+    "focused_and_related": {
+      "passed": 52,
+      "seconds": 6.03,
+      "files": [
+        "tests/test_fly_credit_divergence.py",
+        "tests/test_fly_credit_audit.py",
+        "tests/test_fly_trace_memory.py",
+        "tests/test_fly_paper_selection.py"
+      ]
+    },
+    "checks": [
+      "time and identity alignment",
+      "shifted spike timing with equal totals",
+      "positive direction requires gate spike",
+      "retained full-array comparison reproduces prior audit",
+      "poisoned reference activity is not copied",
+      "tampered retained array rejected"
+    ]
+  },
+  "browser": {
+    "server_backend": "recordings",
+    "source_directory": "examples/fly-debugger",
+    "recordings": 2,
+    "observations": 6,
+    "selected_bins": 30,
+    "displayed_counts_and_weights_checked": true,
+    "gate_bin": 37,
+    "gate_reset": 0,
+    "gate_carry": 1,
+    "mobile_horizontal_overflow": false,
+    "page_errors": [],
+    "model_submission_requests": 0,
+    "screenshots_visually_inspected": true
+  },
+  "study_11": {
+    "registration_sha256": "078553e736a666d576337f895133409c5ccc18cda8c1edf1cb60d735fc6dfb25",
+    "pinned_execution_sources_unchanged": true,
+    "deployment_performed": false
+  },
+  "artifact_sha256": {
+    "paperlab/fly_credit_divergence.py": "6430768bd2f74746bd14f8e7cb096df0a6f5871b660dc166e6dd7e4af51b201b",
+    "paperlab/fly_credit_selection.py": "fd4ab3b2640a424289189354c201d4387cb4f4304d5d31719ebf96df371f067c",
+    "tests/test_fly_credit_divergence.py": "d92add7b5865ec845fd9fce5237e6923e365ff3b06d723f345ac0f4e95655981",
+    "scripts/check-fly-credit-divergence-view.cjs": "54a11983f835acbba5e98c38baf68f901f3f500b41bbe874b69ae6747ff3d0c5",
+    "reports/fly-credit-divergence-01.json": "cbbda073648c0c395401fdfdd22b09d7e2b95321447d9730c82f18451ea369e3",
+    "docs/assets/fly-credit-divergence-01.png": "25d294bfcdd866777ec7d51fafd650e832a17c3a8446db4359a2bfa55742dc81",
+    "docs/assets/fly-credit-divergence-01.svg": "ef72724d07a688a8ecd8569eedf2d3c88b0c87ff0b0f60bf464ebd0ab8e7c5fb",
+    "docs/assets/fly-credit-divergence-first-01.png": "94c18b678099b5efa7dc1fc36c40c67dcb926780abb5d5bf83e3126166135d98",
+    "examples/fly-debugger/creditdivergence01-trained_online_recorded_carry/view.json": "ff86493112f9572e15d37bfab8319e2ad59986e38a27b88523e44b4ce033a4bb",
+    "examples/fly-debugger/creditdivergence01-trained_online_recorded_carry/report.json": "2a3b97f9cf8971593d95ce3e69d53dea6997ad8fed8cae60d954f5a3c20c5376",
+    "examples/fly-debugger/creditdivergence01-trained_online_recorded_reset_rates/view.json": "4dda65f861fa15f96a1e71614502d6d0346976a5e677d8abca13170b67048d65",
+    "examples/fly-debugger/creditdivergence01-trained_online_recorded_reset_rates/report.json": "d95400f4e20c0f11b7fd682d4b5bb3346fd648caad64c973f4cf1bccadf71072"
+  },
+  "interpretation": "Read-only analysis of previously audited native recordings. First unequal bins and paired traces do not prove a single-connection causal path or profitable learning. No new model job, policy change, market trade, or cloud redeployment.",
+  "figure_regeneration": {
+    "svg_whitespace_normalized": true,
+    "png_identical_to_visually_inspected_artifact": true,
+    "all_comparison_results_unchanged": true,
+    "derived_view_hashes_unchanged": true
+  }
+}

@@ -175,6 +175,15 @@ market interval, not a profitable policy. Normal paper traders are unchanged.
 
 ![Audited learning-trace reset with all six controls and interventions](docs/assets/fly-credit-reset-01.png)
 
+The [first-divergence analysis](docs/fly-debugger.md#where-the-trace-intervention-first-changes-the-network)
+locates the first differing weights, sampled voltages, and spike counts in those
+same retained recordings. Five connections into MBON11 differ first; the new
+paired views expose one of them with its own spikes, weights, `u/w`, and learning
+drive. A later missing gate spike changes BUY to HOLD. This traces an observed
+mechanism without identifying a single causal connection or claiming a return.
+
+![Recorded weight, voltage, spike-count and gate divergence](docs/assets/fly-credit-divergence-01.png)
+
 The [longer online comparison runner](docs/fly-online-comparison.md) now records
 24 decision slots per condition, with full native-bin audits, independent paper
 feedback, and preserved missing-data gaps. A synthetic full-graph check verified
