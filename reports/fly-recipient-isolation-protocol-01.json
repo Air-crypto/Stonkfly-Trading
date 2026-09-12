@@ -1,0 +1,144 @@
+{
+  "schema": 1,
+  "kind": "paper_memory_recipient_isolation",
+  "parent_report_sha256": "01330a25795235efc4256b9c8732b86053aa9b29eaa3d363580cbd12d0aef3ee",
+  "parent_audit_sha256": "14b6a4e341a47e4101c152a5e587c8d3bbfdf540a0701a85c2705dffdec88533",
+  "plan_sha256": "ecb89e2cb48cab07080e5c3437dd1ec3b86bdd71feb4f892190b8ad3603c136b",
+  "reference_run_id": "assay-recipient-be6310b482994ba89722da365fe018c3",
+  "current": 10,
+  "target_sets": {
+    "both": [
+      "10704",
+      "11402"
+    ],
+    "only_10704": [
+      "10704"
+    ],
+    "only_11402": [
+      "11402"
+    ]
+  },
+  "inference": {
+    "learning": false,
+    "reinforcement": "none",
+    "steps": 3,
+    "duration_ms": 500,
+    "state_reset": "carry",
+    "eta": 0.001
+  },
+  "arms": {
+    "pool0-pristine-both": {
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "memory": "pristine",
+      "current": 10,
+      "target_ids": [
+        "10704",
+        "11402"
+      ],
+      "target_set": "both"
+    },
+    "pool0-trained-both": {
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "memory": "trained",
+      "current": 10,
+      "target_ids": [
+        "10704",
+        "11402"
+      ],
+      "target_set": "both"
+    },
+    "pool1-pristine-both": {
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "memory": "pristine",
+      "current": 10,
+      "target_ids": [
+        "10704",
+        "11402"
+      ],
+      "target_set": "both"
+    },
+    "pool1-trained-both": {
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "memory": "trained",
+      "current": 10,
+      "target_ids": [
+        "10704",
+        "11402"
+      ],
+      "target_set": "both"
+    },
+    "pool0-pristine-only_10704": {
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "memory": "pristine",
+      "current": 10,
+      "target_ids": [
+        "10704"
+      ],
+      "target_set": "only_10704"
+    },
+    "pool0-trained-only_10704": {
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "memory": "trained",
+      "current": 10,
+      "target_ids": [
+        "10704"
+      ],
+      "target_set": "only_10704"
+    },
+    "pool1-pristine-only_10704": {
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "memory": "pristine",
+      "current": 10,
+      "target_ids": [
+        "10704"
+      ],
+      "target_set": "only_10704"
+    },
+    "pool1-trained-only_10704": {
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "memory": "trained",
+      "current": 10,
+      "target_ids": [
+        "10704"
+      ],
+      "target_set": "only_10704"
+    },
+    "pool0-pristine-only_11402": {
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "memory": "pristine",
+      "current": 10,
+      "target_ids": [
+        "11402"
+      ],
+      "target_set": "only_11402"
+    },
+    "pool0-trained-only_11402": {
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "memory": "trained",
+      "current": 10,
+      "target_ids": [
+        "11402"
+      ],
+      "target_set": "only_11402"
+    },
+    "pool1-pristine-only_11402": {
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "memory": "pristine",
+      "current": 10,
+      "target_ids": [
+        "11402"
+      ],
+      "target_set": "only_11402"
+    },
+    "pool1-trained-only_11402": {
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "memory": "trained",
+      "current": 10,
+      "target_ids": [
+        "11402"
+      ],
+      "target_set": "only_11402"
+    }
+  },
+  "interpretation": "Post-hoc isolation on the same six previously inspected images. Current 10 to both recipients must reproduce the prior native count bins before either single-recipient intervention. Memory stays frozen. No account, trading returns, training, or automatic policy promotion. This tests the declared intervention, not anatomical causality."
+}

@@ -2788,3 +2788,55 @@ is served on port 8765 as described above.
 The normal worker writes each invocation to `last-call.json`. A duplicate/old-slot
 skip leaves `latest.json` at the last full portfolio result, preserving its actual
 observation timestamp instead of replacing the portfolio with a skip status.
+
+## Prepared recipient isolation: test each target separately
+
+The [isolation protocol](../reports/fly-recipient-isolation-protocol-01.json)
+follows the native-bin finding at cell 11402. It crosses pristine and paper-trained
+memory with three target sets: both 10704/11402, 10704 alone, and 11402 alone.
+Every stimulated cell receives current 10 throughout each 500 ms image. Both
+pools retain their original three study 09 images, frozen memory and carried
+activity. That is twelve conditions and 36 observations; this is a mechanism
+diagnostic, with no account or returns.
+
+All four **both-target controls run first**. Their complete native count arrays,
+including every neuron in every 10 ms bin, must reproduce the prior stimulation
+recordings before either single-target condition begins. Original control files
+must match their independent audit's hashes before the new graph is loaded.
+The final audit checks current targets and durations, every frozen plastic
+weight/u/w bin, phase boundaries, images/news and the unchanged full-count decoder.
+It reports trained-versus-pristine differences within each target set and each
+single-target response versus its corresponding both-target control.
+
+**Prepared, not submitted:** the source is committed for deployment after study
+10. The client checks that study 10's exact owning Modal call has completed; a
+completed receipt with a still-pending call is insufficient. The cloud entrypoint
+also rejects isolation until the study 10 completion receipt exists. These guards
+leave the registered comparison's code and execution unchanged. The assay uses
+the existing worker lease, timeout, CPU/memory allocation and budget.
+
+Prepare the immutable request without submitting compute:
+
+```sh
+python -m paperlab.fly_recipient_isolation_cloud pack \
+  --paper-payload runs/recipient-stimulation-01/payload.json \
+  --reference reports/fly-paper-stimulation-study-01.json \
+  --audit reports/fly-paper-stimulation-audit-01.json \
+  --receipt runs/recipient-stimulation-01/cloud/cloud-call.json \
+  --out runs/recipient-isolation-01/payload.json
+```
+
+After study 10 finishes and this revision is deployed, submit once or reattach to
+the saved call using the same directory:
+
+```sh
+python -m paperlab.fly_recipient_isolation_cloud cloud \
+  --payload runs/recipient-isolation-01/payload.json \
+  --reference-artifacts runs/recipient-stimulation-01/cloud/artifacts \
+  --out runs/recipient-isolation-01/cloud
+```
+
+An observation timeout reattaches to that call and never creates another. An
+uncertain submission without a call ID must be reconciled in Modal; it is not
+retried automatically. The original twelve full native control observations
+must remain available in both the cloud volume and the local reference directory.

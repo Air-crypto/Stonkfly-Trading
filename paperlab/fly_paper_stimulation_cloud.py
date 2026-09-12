@@ -9,17 +9,30 @@ from .fly_market_study import signature
 from .fly_paper_stimulation import FILES, protocol, run, validate
 
 
-def cloud_run(payload, output):
+def cloud_run(payload, output, *, isolation=False, reference_artifacts=None):
     import modal
-    p, _, _ = validate(payload); root=Path(output); root.mkdir(parents=True,exist_ok=True)
+    if isolation:
+        from .fly_recipient_isolation import FILES as files, validate as validate_isolation
+        if reference_artifacts is None:raise ValueError('Isolation requires original audited control recordings')
+        p, _, parent_audit, _ = validate_isolation(payload)
+        plan_field, expected_status = 'isolation_plan', 'paper_recipient_isolation_completed'
+    else:
+        p, _, _ = validate(payload);files=FILES
+        plan_field, expected_status = 'stimulation_plan', 'paper_stimulation_completed'
+    root=Path(output); root.mkdir(parents=True,exist_ok=True)
     receipt_path=root/'cloud-call.json'
     if not receipt_path.exists():
+        if isolation:
+            from .fly_recipient_isolation_cloud import prior_comparison_complete
+            prior_comparison_complete()
+            from .fly_recipient_isolation import verify_reference_artifacts
+            verify_reference_artifacts(parent_audit, reference_artifacts)
         receipt={'run_id':'assay-recipient-'+uuid.uuid4().hex,'status':'submitting','payload_sha256':signature(payload)}
         atomic_json(receipt_path,receipt)
-        atomic_json(root/'source-hashes.json',{n:digest(Path(__file__).with_name(n)) for n in FILES})
+        atomic_json(root/'source-hashes.json',{n:digest(Path(__file__).with_name(n)) for n in files})
         atomic_json(root/'payload.json',payload)
         call=modal.Function.from_name('fly-paper-lab','worker',environment_name='main').spawn(
-            debug={'run_id':receipt['run_id'],'stimulation_plan':payload})
+            debug={'run_id':receipt['run_id'],plan_field:payload})
         receipt.update(status='pending',call_id=call.object_id); atomic_json(receipt_path,receipt)
     receipt=json.loads(receipt_path.read_text())
     if receipt['payload_sha256']!=signature(payload):raise ValueError('Output belongs to a different payload')
@@ -31,7 +44,7 @@ def cloud_run(payload, output):
     except TimeoutError:
         print('Same call pending; rerun this observer without resubmission.',flush=True);return receipt
     atomic_json(root/'cloud-result.json',result)
-    if result.get('status')!='paper_stimulation_completed' or result.get('run_id')!=receipt['run_id']:
+    if result.get('status')!=expected_status or result.get('run_id')!=receipt['run_id']:
         raise RuntimeError('Unexpected terminal result; no automatic resubmission: '+str(result.get('status')))
     report=result['report']; base='/state/fly-debugger/'+receipt['run_id']
     if report['protocol']!=p or report['code_sha256']!=json.loads((root/'source-hashes.json').read_text()) or result['remote_path']!=base:
@@ -54,8 +67,13 @@ def cloud_run(payload, output):
         for j in range(1,4):
             for file in (f'boundary-{j:02}.npz',f'current-{j:02}.npz',f'step-{j:02}.npz',f'input-{j:02}.png'):
                 download(name+'/'+file)
-    from .fly_paper_stimulation_audit import audit
-    verified=audit(report,payload,root/'artifacts');atomic_json(root/'audit.json',verified)
+    if isolation:
+        from .fly_recipient_isolation_audit import audit
+        verified=audit(report,payload,root/'artifacts',reference_artifacts)
+    else:
+        from .fly_paper_stimulation_audit import audit
+        verified=audit(report,payload,root/'artifacts')
+    atomic_json(root/'audit.json',verified)
     # Expose portable recordings only after every condition passes independent audit.
     for name in p['arms']:
         folder=root/name;folder.mkdir(exist_ok=True)

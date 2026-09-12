@@ -7,10 +7,14 @@ from .fly_trace import Assay, TraceLab
 
 
 def validate_request(request):
-    if not isinstance(request, dict) or set(request) not in ({"run_id", "config"}, {"run_id", "market_plan"}, {"run_id", "pulse_plan"}, {"run_id", "restoration_plan"}, {"run_id", "activity_plan"}, {"run_id", "stimulation_plan"}):
+    if not isinstance(request, dict) or set(request) not in ({"run_id", "config"}, {"run_id", "market_plan"}, {"run_id", "pulse_plan"}, {"run_id", "restoration_plan"}, {"run_id", "activity_plan"}, {"run_id", "stimulation_plan"}, {"run_id", "isolation_plan"}):
         raise ValueError("Expected run_id and assay config")
     if not isinstance(request["run_id"], str) or not re.fullmatch(r"assay-[a-z0-9-]{1,80}", request["run_id"]):
         raise ValueError("Invalid diagnostic run ID")
+    if "isolation_plan" in request:
+        from .fly_recipient_isolation import validate
+        validate(request['isolation_plan'])
+        return request['isolation_plan']
     if "stimulation_plan" in request:
         from .fly_paper_stimulation import validate
         validate(request["stimulation_plan"])
@@ -44,6 +48,15 @@ def validate_request(request):
 def run(request, root, data):
     config = validate_request(request)
     output = Path(root) / request["run_id"]
+    if 'isolation_plan' in request:
+        receipt_path = Path(root).parent/'registered-paper-10/cloud-call.json'
+        if not receipt_path.exists() or json.loads(receipt_path.read_text()).get('status') != 'completed':
+            raise ValueError('Study 10 must finish before recipient isolation')
+        from .fly_recipient_isolation import run as isolation_run
+        report = isolation_run(config, '/opt/paperlab/paper-memory-01',
+            '/state/registered-paper-09/news.db', data, output)
+        return {'status':'paper_recipient_isolation_completed', 'run_id':request['run_id'],
+                'remote_path':str(output), 'report':report}
     if "stimulation_plan" in request:
         from .fly_paper_stimulation import run as stimulation_run
         report = stimulation_run(config, "/opt/paperlab/paper-memory-01",
