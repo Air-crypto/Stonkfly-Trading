@@ -1,5 +1,9 @@
 # Cloud operation and economics
 
+For the newer multi-pool workload and its two bounded schedules, use the
+[memecoin deployment instructions](memecoin-universe.md). The commands and
+single-product details below describe BTC mode (`PAPERLAB_UNIVERSE=0`).
+
 Deployment target: Modal, one scheduled worker, no continuously running laptop. The checked-in schedule is disabled until deployed explicitly. The worker starts every five minutes, samples one BTC-USD book and advances independent fly/compact paper ledgers. RSS is scanned once per 15-minute period; pinned FinBERT loads only when a new headline needs encoding. It persists data and checkpoints on a Modal Volume, then scales down. ETH-USD is supported as a separate experiment; do not change products inside an existing state directory/volume.
 
 ## Deployment

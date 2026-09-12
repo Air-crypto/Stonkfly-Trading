@@ -2,6 +2,12 @@
 
 A paper-only research lab comparing the full Stonkfly spiking fly network with a **247,780-parameter PPO policy**, using market data and timestamped news. No real-order endpoint, wallet or exchange credentials are used.
 
+The [dynamic memecoin experiment](docs/memecoin-universe.md) adds free live launch
+discovery, multi-chain pool sampling, separate $1,000 portfolios, isolated fly
+contexts, and pooled PPO training. Coverage is bounded and DEX fills are explicitly
+indicative simulations. Use `PAPERLAB_UNIVERSE=1` when deploying this experiment;
+the original BTC archive remains available.
+
 The fly is a sparse spiking network, not a transformer. The compact policy is an MLP actor/critic, not an SLM. An optional, separately pinned FinBERT transformer encodes headline sentiment. News features enter the compact policy numerically and the fly through an explicit visual adapter.
 
 ## Run
@@ -33,4 +39,8 @@ Default paper capital is $1,000, with a 50% maximum target allocation and $100 m
 
 `vendor/stonkfly` preserves [nftechie/stonkfly](https://github.com/nftechie/stonkfly) at commit `78ef3e05ab0fa086032098558d893667068944a0`, including its MIT license and third-party notices. This lab imports only its neural/data/display modules; its live trading implementation is not wired into the lab.
 
-**Status:** deployed on Modal with a five-minute paper-data schedule and six-hourly PPO retraining after 400 observations. The new cadence uses a separate forward archive; the original 15-minute experiment is preserved. Closed-candle price context enables earlier paper decisions without adding historical fills or forward-training samples. Full decision, loss, gradient and fly-weight diagnostics are described in [observability](docs/observability.md). Sustained profitability has not been established.
+The original BTC mode supports a five-minute paper-data schedule and six-hourly
+PPO retraining after 400 observations. The multi-pool mode has separate collection,
+eligibility, training gates, and ledgers documented above. Full BTC decision, loss,
+gradient and fly-weight diagnostics are described in [observability](docs/observability.md).
+Sustained profitability has not been established for either experiment.

@@ -51,8 +51,8 @@ def load_policy(path):
     return p, checkpoint
 
 
-def evaluate(policy, ticks, news, costs, start, end, baseline=None):
-    env = Environment(ticks, news, costs, start, end)
+def evaluate(policy, ticks, news, costs, start, end, baseline=None, stride=1):
+    env = Environment(ticks, news, costs, start, end,stride=stride)
     obs, done = env.reset(), False
     rows, fills = [], 0
     while not done:
@@ -64,14 +64,14 @@ def evaluate(policy, ticks, news, costs, start, end, baseline=None):
         elif baseline == "equal_cap_buy_hold":
             # Allocate over the same per-order cap, then keep quantity without rebalancing.
             entry_steps = math.ceil(costs.capital * costs.max_exposure / costs.max_order)
-            action = 2 if env.i < start + entry_steps else None
+            action = 2 if env.i < start + entry_steps*stride else None
         elif baseline == "trend":
             action = 2 if obs[8] > 0 else 0
         else:
             detail = policy.inspect(obs)
             action = detail["action"]
         if action is None:
-            env.i += 1
+            env.i = min(env.i+stride,env.end)
             eq = env.broker.equity(ticks[env.i])
             env.peak = max(env.peak, eq)
             info = {"equity": eq, "drawdown": 1 - eq / env.peak, "fill": {"status": "hold"}, "ts": ticks[env.i].ts}
@@ -88,15 +88,56 @@ def evaluate(policy, ticks, news, costs, start, end, baseline=None):
     return {"return_pct": (eq[-1] / costs.capital - 1) * 100, "max_drawdown_pct": max(r["drawdown"] for r in rows) * 100, "fees": float(env.broker.fees), "fills": fills, "steps": len(rows), "end_equity": float(eq[-1]), "ledger": rows}
 
 
-def train(ticks, news, output, costs=Costs(), steps=8192, seed=7, dataset_sha="unknown"):
-    if len(ticks) < 400 or steps < 128:
+class MultiEnvironment:
+    """Separate chronological episodes; never splice one coin's price into another."""
+    def __init__(self, episodes):
+        self.episodes=episodes
+        self.cursor=-1
+        self.current=episodes[0]
+
+    def __getattr__(self,name):
+        return getattr(self.current,name)
+
+    def reset(self):
+        self.cursor=(self.cursor+1)%len(self.episodes)
+        self.current=self.episodes[self.cursor]
+        return self.current.reset()
+
+    def step(self,action):
+        return self.current.step(action)
+
+
+def pooled_split(series):
+    # Common wall-clock boundaries across all assets prevent cross-asset leakage.
+    times=sorted({t.ts for seq in series.values() for t in seq if t.available})
+    if len(times)<100 or sum(len(seq) for seq in series.values())<400:
+        raise ValueError("Pooled training needs >=400 observations and >=100 distinct timestamps")
+    return times[int(len(times)*.7)],times[int(len(times)*.85)]
+
+
+def train(ticks, news, output, costs=Costs(), steps=8192, seed=7, dataset_sha="unknown", series=None, decision_stride=1):
+    if (series is None and len(ticks) < 400) or steps < 128:
         raise ValueError("Need >=400 ticks and >=128 PPO transitions")
     torch.set_num_threads(2)
     torch.manual_seed(seed)
     np.random.seed(seed)
     random.seed(seed)
     split1, split2 = int(len(ticks) * .7), int(len(ticks) * .85)
-    env = Environment(ticks, news, costs, 63, split1 - 1)
+    if series is None:
+        env = Environment(ticks, news, costs, 63, split1 - 1,stride=decision_stride)
+    else:
+        cutoff1,cutoff2=pooled_split(series)
+        episodes=[]
+        for key,seq in sorted(series.items()):
+            if any(t.product!=key for t in seq) or any(b.ts<=a.ts for a,b in zip(seq,seq[1:])):
+                raise ValueError("Nonchronological or mixed pool episode")
+            end=sum(t.ts<cutoff1 for t in seq)-1
+            if end>63:
+                episodes.append(Environment(seq,news,costs,63,end,stride=decision_stride))
+        if not episodes:
+            raise ValueError("No pre-cutoff pool has sufficient context")
+        env=MultiEnvironment(episodes)
+        dataset_sha=hashlib.sha256(json.dumps({k:[asdict(t) for t in v] for k,v in sorted(series.items())},sort_keys=True).encode()).hexdigest()
     policy = Policy()
     optimizer = torch.optim.Adam(policy.parameters(), lr=3e-4)
     output = Path(output)
@@ -122,10 +163,11 @@ def train(ticks, news, output, costs=Costs(), steps=8192, seed=7, dataset_sha="u
             actions.append(action.item())
             logs.append(distribution.log_prob(action).item())
             values.append(value.item())
-            decision_ts = ticks[env.i].ts
+            decision_ts = env.ticks[env.i].ts
             input_features = obs.tolist()
             obs, reward, done, info = env.step(action.item())
             rollout.append({"transition": completed + len(rollout) + 1, "decision_ts": decision_ts,
+                            "product": env.ticks[env.i].product,
                             "action": action.item(), "probabilities": distribution.probs[0].tolist(),
                             "value": value.item(), "features": input_features, "reward": reward,
                             "done": done, "broker": env.broker.state(), **info})
@@ -202,6 +244,11 @@ def train(ticks, news, output, costs=Costs(), steps=8192, seed=7, dataset_sha="u
     available_news = news.db.execute("SELECT * FROM news ORDER BY id").fetchall()
     news_sha = hashlib.sha256(json.dumps(available_news, separators=(",", ":")).encode()).hexdigest()
     metadata = {"schema": "64-market14-news50-v1", "seed": seed, "steps": completed, "costs": asdict(costs), "dataset_sha256": dataset_sha, "source": ticks[0].source, "product": ticks[0].product, "train_until": ticks[split1 - 1].ts, "validation_until": ticks[split2 - 1].ts, "news_enabled": news.enabled, "news_snapshot_sha256": news_sha, "observations_with_news": sum(bool(news.features(t.ts)[48] > 0) for t in ticks), "parameters": sum(p.numel() for p in policy.parameters())}
+    if series is not None:
+        metadata.update(product="MULTI-DEX",train_until=cutoff1,validation_until=cutoff2,decision_stride=decision_stride,
+                        assets=sorted(series),training_assets=len(episodes),
+                        split_semantics="Strict global wall-clock cutoffs; independent pool episodes",
+                        observations_with_news=sum(bool(news.features(t.ts)[48]>0) for seq in series.values() for t in seq))
     model_path = output / "policy.pt"
     torch.save({**metadata, "model": policy.state_dict()}, model_path.with_suffix(".partial"))
     model_path.with_suffix(".partial").replace(model_path)
@@ -212,7 +259,24 @@ def train(ticks, news, output, costs=Costs(), steps=8192, seed=7, dataset_sha="u
         result["splits"][name] = {}
         for baseline in (None, "cash", "equal_cap_buy_hold", "trend"):
             key = baseline or "ppo"
-            evaluation = evaluate(policy, ticks, news, costs, start, end, baseline)
+            if series is None:
+                evaluation = evaluate(policy, ticks, news, costs, start, end, baseline,stride=decision_stride)
+            else:
+                audits={}
+                low,high=(cutoff1,cutoff2) if name=="validation" else (cutoff2,float("inf"))
+                for asset,seq in sorted(series.items()):
+                    a=max(63,sum(t.ts<low for t in seq))
+                    b=sum(t.ts<high for t in seq)-1
+                    if a<b:
+                        audits[asset]=evaluate(policy,seq,news,costs,a,b,baseline,stride=decision_stride)
+                ledgers={asset:m.pop("ledger") for asset,m in audits.items()}
+                # Equal starting capital per separate audit episode. Do not claim these
+                # independent audits reproduce the four-sleeve deployed portfolio.
+                evaluation={"return_pct":float(np.mean([m["return_pct"] for m in audits.values()])) if audits else 0,
+                            "max_drawdown_pct":max((m["max_drawdown_pct"] for m in audits.values()),default=0),
+                            "fees":sum(m["fees"] for m in audits.values()),"fills":sum(m["fills"] for m in audits.values()),
+                            "assets_evaluated":len(audits),"assets_omitted":len(series)-len(audits),"per_asset":audits,
+                            "aggregation":"Mean independent episode return, not live portfolio P&L","ledger":ledgers}
             atomic_json(output / f"{name}-{key}-ledger.json", evaluation.pop("ledger"))
             result["splits"][name][key] = evaluation
     result["hosting_break_even_monthly_pct"] = {str(cost): cost / costs.capital * 100 for cost in (20, 40, 100)}

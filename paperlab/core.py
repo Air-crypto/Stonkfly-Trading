@@ -31,6 +31,7 @@ class Tick:
     product: str = "BTC-USD"
     source: str = "synthetic"
     received_at: float = 0
+    available: bool = True
 
     def __post_init__(self):
         if not all(math.isfinite(v) for v in (self.ts, self.bid, self.ask, self.volume, self.received_at)):
@@ -82,6 +83,10 @@ class Broker:
         return {"cash": str(self.cash), "qty": str(self.qty), "fees": str(self.fees), "halted": self.halted}
 
     def equity(self, tick):
+        if not tick.available:
+            # DEX inventory without a usable market has zero recoverable value in
+            # the stress mark. It is not silently liquidated or sold at a stale price.
+            return float(self.cash)
         # Bid liquidation value, including the assumed future exit fee and slippage.
         exit_factor = (1 - self.c.fee_bps / 10000) * (1 - self.c.slippage_bps / 10000)
         return float(self.cash + self.qty * Decimal(str(tick.bid * exit_factor)))
@@ -89,6 +94,8 @@ class Broker:
     def execute(self, target, decision_ts, tick):
         if not math.isfinite(target) or not 0 <= target <= self.c.max_exposure:
             raise ValueError("Target outside exposure limit")
+        if not tick.available:
+            return {"status": "rejected", "reason": "unavailable_market"}
         if tick.ts <= decision_ts:
             return {"status": "rejected", "reason": "not_after_decision"}
         if tick.ts - decision_ts > self.c.max_delay:
@@ -148,11 +155,14 @@ def features(ticks, i, broker, news):
 
 
 class Environment:
-    def __init__(self, ticks, news, costs, start, end):
+    def __init__(self, ticks, news, costs, start, end, stride=1):
         self.ticks, self.news, self.costs = ticks, news, costs
         self.start, self.end = start, end
         if not 63 <= start < end < len(ticks):
             raise ValueError("Invalid chronological environment bounds")
+        if not isinstance(stride,int) or not 1<=stride<=5:
+            raise ValueError("Invalid decision stride")
+        self.stride=stride
         self.reset()
 
     def reset(self):
@@ -165,8 +175,9 @@ class Environment:
     def step(self, action):
         previous = self.broker.equity(self.ticks[self.i])
         target = [0, self.costs.max_exposure / 2, self.costs.max_exposure][int(action)]
-        fill = self.broker.execute(target, self.ticks[self.i].ts, self.ticks[self.i + 1])
-        self.i += 1
+        next_i=min(self.i+self.stride,self.end)
+        fill = self.broker.execute(target, self.ticks[self.i].ts, self.ticks[next_i])
+        self.i = next_i
         equity = self.broker.equity(self.ticks[self.i])
         self.peak = max(self.peak, equity)
         dd = 1 - equity / self.peak

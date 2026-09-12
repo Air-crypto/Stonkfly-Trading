@@ -6,7 +6,7 @@ import time
 from .core import atomic_json
 
 
-def reserve(path, full_fly, now=None, seconds=600, limit_override=None, startup_seconds=30):
+def reserve(path, full_fly, now=None, seconds=600, limit_override=None, startup_seconds=30, cpu=None, memory_gib=None):
     import json
     now = time.time() if now is None else now
     path = Path(path)
@@ -19,7 +19,12 @@ def reserve(path, full_fly, now=None, seconds=600, limit_override=None, startup_
             raise ValueError("Override must stay within the authorized monthly budget")
         limit = limit_override
     # Current public CPU/RAM rates with 2x safety factor and 30s startup allowance.
-    rate = 2 * (.0000131 * 2 + .00000222 * (16 if full_fly else 4))
+    cpu = 2 if cpu is None else cpu
+    memory_gib = (16 if full_fly else 4) if memory_gib is None else memory_gib
+    import math
+    if not all(math.isfinite(x) for x in (cpu,memory_gib)) or not 0 < cpu <= 2 or not 0 < memory_gib <= 16:
+        raise ValueError("Invalid budget resource allocation")
+    rate = 2 * (.0000131 * cpu + .00000222 * memory_gib)
     if not 0 <= startup_seconds <= 60 or not 0 < seconds <= 3600:
         raise ValueError("Invalid reservation duration")
     charge = (seconds + startup_seconds) * rate
