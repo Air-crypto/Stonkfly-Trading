@@ -2320,3 +2320,48 @@ stays purple. Quiet bins return to solid lines. Browser checks verify these
 states against the saved counts, maintain exactly one selected-edge outline,
 follow the shared link, and check the mobile layout without submitting compute.
 Neither screenshot is a result from the pending paper-memory study 09.
+
+
+### Map captured paper memory to native recipients
+
+![Paper-trained memory across all six plastic recipients](assets/fly-paper-memory-map-01.png)
+
+The [audited aggregate report](../reports/fly-paper-memory-map-01.json) maps all
+7,835 plastic KC connections to their actual retained-graph recipients. It uses
+the same pinned paper-trained memories as study 09, with 82 and 72 observations
+from the two pool histories. All six recipients have weaker summed input weights;
+MBON11 neuron 11402 has the largest proportional reduction: **3.33%** in pool 0
+and **9.33%** in pool 1. Individual connections moved in both directions, so this
+is not a claim that every weight decreased. The report retains increased/decreased
+counts, efficacy quantiles, weight-difference norms and stored `u`/`w` norms.
+
+The two weight-difference vectors have cosine similarity **0.740**. There are
+3,443 connections changed in both memories; about **65.7%** of those changes have
+the same sign. These are two descriptive histories, not independent evidence of
+generalization. Net weight reduction alone neither identifies the cause of a
+trading error nor justifies restoring a recipient: earlier restoration studies
+failed their development gates. Study 09 evaluates these same captured memories
+on separate later inputs before any further intervention is chosen.
+
+To regenerate the map with the private verified export and retained graph:
+
+```sh
+uv run --locked --extra plots python -m paperlab.fly_paper_memory_map \
+  --registration reports/fly-market-study-09-preregistration.json \
+  --memory runs/reward-exposure-01/verified-export \
+  --fly-data data/fly \
+  --out runs/reward-exposure-01/memory-map --figures
+```
+
+Use a new output directory; existing results cannot be overwritten. The mapper
+checks imported memory against the registration, reconciles every changed edge
+with the training audit, verifies source indices against the complete CSR graph,
+and checks that all weights, dynamics and neural clocks remain unchanged. It
+performs **zero neural observations** and makes no cloud calls. The private
+`plastic-map.npz` preserves source/recipient identities and pristine weights; its
+hash and the generator's source hash are in the aggregate report. Private ledgers
+and checkpoint arrays are not included in Git.
+
+This map does not isolate reward-driven changes from ongoing plasticity, measure
+transmission or downstream firing, or establish profitable learning. The
+figure's axes show model-weight percentages, not financial returns.

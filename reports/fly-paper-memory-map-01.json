@@ -1,0 +1,306 @@
+{
+  "schema": 1,
+  "kind": "verified_paper_memory_map",
+  "registration_sha256": "f70ce594c263ff1a14c2a6ad2949b4661dcdd59d2c97663d0051a17ee4682e2b",
+  "training_audit_sha256": "00477914d03d95cd860f956763687d5c8cb70c06a7c4a75fce539fe2e5c945cd",
+  "source_sha256": "f587aa7c402ccdcae5a64ac45c30e06afd19ec7d35199c1e3b0f055361dddd53",
+  "plastic_map_sha256": "f56f1fb403027b530a3eca44be6205d57e8de873e875e32a7b8dffd80cb8fc4a",
+  "graph": {
+    "neurons": 166700,
+    "edges": 25582938,
+    "plastic_edges": 7835
+  },
+  "pools": {
+    "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ": {
+      "source": {
+        "memory_sha256": "bd571d82a52a281a7d514a33d7a4323356d067b6d1d1e8d2efc5ef54bb38bac7",
+        "memory_file_sha256": "c560ab857b5cfaa4b6c97906803f5a63f75f685f3851c38368d19d8ad9fa9031",
+        "checkpoint_sha256": "c6691896427df3c84434c819c1f3523939f8201154c3aeb5271292bd213bd38a",
+        "last_slot": 5964092,
+        "observations": 82,
+        "positive_rewards": 35,
+        "negative_rewards": 41
+      },
+      "recipients": [
+        {
+          "post_id": "10704",
+          "type": "MBON11",
+          "edges": 2048,
+          "changed": 955,
+          "increased": 319,
+          "decreased": 636,
+          "baseline_weight_sum": 4637.325127631426,
+          "trained_weight_sum": 4603.4730409011245,
+          "net_weight_change_pct": -0.7299916611107182,
+          "weight_delta_l2": 14.483885292268495,
+          "efficacy_quantiles": [
+            0.12784773687763928,
+            0.9847105355728765,
+            1.0,
+            1.0,
+            1.1572017202116853
+          ],
+          "u_l2": 2.4126684202734823,
+          "w_l2": 2.100626628507413
+        },
+        {
+          "post_id": "11402",
+          "type": "MBON11",
+          "edges": 2136,
+          "changed": 1024,
+          "increased": 171,
+          "decreased": 853,
+          "baseline_weight_sum": 6764.175181686878,
+          "trained_weight_sum": 6538.959838047624,
+          "net_weight_change_pct": -3.3295315036930995,
+          "weight_delta_l2": 21.716094396715697,
+          "efficacy_quantiles": [
+            0.14077080379832874,
+            0.9523325324247036,
+            1.0,
+            1.0,
+            1.1275898176127905
+          ],
+          "u_l2": 2.4788986768427637,
+          "w_l2": 2.430380724635258
+        },
+        {
+          "post_id": "12859",
+          "type": "MBON07",
+          "edges": 956,
+          "changed": 414,
+          "increased": 143,
+          "decreased": 271,
+          "baseline_weight_sum": 1549.9000498950481,
+          "trained_weight_sum": 1543.5930388867855,
+          "net_weight_change_pct": -0.4069301764774906,
+          "weight_delta_l2": 1.4298664420141578,
+          "efficacy_quantiles": [
+            0.906924643260803,
+            0.9937373913415009,
+            1.0,
+            1.0,
+            1.1648961378250091
+          ],
+          "u_l2": 0.7427639151237155,
+          "w_l2": 0.7938143472975717
+        },
+        {
+          "post_id": "15626",
+          "type": "MBON07",
+          "edges": 882,
+          "changed": 348,
+          "increased": 101,
+          "decreased": 247,
+          "baseline_weight_sum": 1398.3750439584255,
+          "trained_weight_sum": 1390.6270626485348,
+          "net_weight_change_pct": -0.554070336378307,
+          "weight_delta_l2": 1.1043154154009036,
+          "efficacy_quantiles": [
+            0.9166283700387495,
+            0.9917516205152188,
+            1.0,
+            1.0,
+            1.0856534982669679
+          ],
+          "u_l2": 0.5815408011107518,
+          "w_l2": 0.6310018199607106
+        },
+        {
+          "post_id": "18603",
+          "type": "MBON07",
+          "edges": 878,
+          "changed": 352,
+          "increased": 102,
+          "decreased": 250,
+          "baseline_weight_sum": 1491.8750481903553,
+          "trained_weight_sum": 1482.8539339005947,
+          "net_weight_change_pct": -0.6046829659563784,
+          "weight_delta_l2": 1.2762154500100904,
+          "efficacy_quantiles": [
+            0.9168860930337452,
+            0.9912014334591641,
+            1.0,
+            1.0,
+            1.0855212365613205
+          ],
+          "u_l2": 0.585176767489121,
+          "w_l2": 0.6355172344835349
+        },
+        {
+          "post_id": "515338",
+          "type": "MBON07",
+          "edges": 935,
+          "changed": 415,
+          "increased": 143,
+          "decreased": 272,
+          "baseline_weight_sum": 1840.8500564694405,
+          "trained_weight_sum": 1832.5691921710968,
+          "net_weight_change_pct": -0.44983915280017417,
+          "weight_delta_l2": 1.7002959470164964,
+          "efficacy_quantiles": [
+            0.9077055001862555,
+            0.9930507669928805,
+            1.0,
+            1.0,
+            1.1639808272452608
+          ],
+          "u_l2": 0.7403789870582527,
+          "w_l2": 0.7911623875278183
+        }
+      ]
+    },
+    "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu": {
+      "source": {
+        "memory_sha256": "d51108311964a41133941d0fede8c6f00f38bfd70b1c676e0245a5c056a44eff",
+        "memory_file_sha256": "6f7f6d4c3cb7e73cf0be44bc3f61a401c22039f2b8677f70e11502a645fc5040",
+        "checkpoint_sha256": "575cd3ad2e121dc056bcbce92b5b793fad705421c373888197c2dee8715e13ee",
+        "last_slot": 5964092,
+        "observations": 72,
+        "positive_rewards": 29,
+        "negative_rewards": 30
+      },
+      "recipients": [
+        {
+          "post_id": "10704",
+          "type": "MBON11",
+          "edges": 2048,
+          "changed": 952,
+          "increased": 131,
+          "decreased": 821,
+          "baseline_weight_sum": 4637.325127631426,
+          "trained_weight_sum": 4329.531125295907,
+          "net_weight_change_pct": -6.637317717956265,
+          "weight_delta_l2": 19.37714164947946,
+          "efficacy_quantiles": [
+            0.20136769085867426,
+            0.9116324313850309,
+            1.0,
+            1.0,
+            1.1596881311770277
+          ],
+          "u_l2": 4.820121516967893,
+          "w_l2": 4.691404091783834
+        },
+        {
+          "post_id": "11402",
+          "type": "MBON11",
+          "edges": 2136,
+          "changed": 1016,
+          "increased": 107,
+          "decreased": 909,
+          "baseline_weight_sum": 6764.175181686878,
+          "trained_weight_sum": 6133.183955639601,
+          "net_weight_change_pct": -9.32842821332605,
+          "weight_delta_l2": 35.702439946651765,
+          "efficacy_quantiles": [
+            0.1989112984050404,
+            0.8836361325389884,
+            1.0,
+            1.0,
+            1.1448249785504563
+          ],
+          "u_l2": 5.669621558921312,
+          "w_l2": 5.746482554901346
+        },
+        {
+          "post_id": "12859",
+          "type": "MBON07",
+          "edges": 956,
+          "changed": 414,
+          "increased": 174,
+          "decreased": 240,
+          "baseline_weight_sum": 1549.9000498950481,
+          "trained_weight_sum": 1544.4265564084053,
+          "net_weight_change_pct": -0.3531513846337044,
+          "weight_delta_l2": 1.1066300927864763,
+          "efficacy_quantiles": [
+            0.8728315831484024,
+            0.9998146115034501,
+            1.0,
+            1.0,
+            1.072019264605401
+          ],
+          "u_l2": 0.582638934262094,
+          "w_l2": 0.5816210215075683
+        },
+        {
+          "post_id": "15626",
+          "type": "MBON07",
+          "edges": 882,
+          "changed": 342,
+          "increased": 138,
+          "decreased": 204,
+          "baseline_weight_sum": 1398.3750439584255,
+          "trained_weight_sum": 1394.3598113656044,
+          "net_weight_change_pct": -0.28713560143744216,
+          "weight_delta_l2": 0.9219970089229264,
+          "efficacy_quantiles": [
+            0.8768563730747836,
+            1.0,
+            1.0,
+            1.0,
+            1.0808189807765278
+          ],
+          "u_l2": 0.533985193698406,
+          "w_l2": 0.5358611686180106
+        },
+        {
+          "post_id": "18603",
+          "type": "MBON07",
+          "edges": 878,
+          "changed": 346,
+          "increased": 138,
+          "decreased": 208,
+          "baseline_weight_sum": 1491.8750481903553,
+          "trained_weight_sum": 1487.5480499267578,
+          "net_weight_change_pct": -0.2900375784718793,
+          "weight_delta_l2": 1.0136967188628616,
+          "efficacy_quantiles": [
+            0.8767741728528159,
+            1.0,
+            1.0,
+            1.0,
+            1.0807958614004967
+          ],
+          "u_l2": 0.5345802160107543,
+          "w_l2": 0.5366720680078708
+        },
+        {
+          "post_id": "515338",
+          "type": "MBON07",
+          "edges": 935,
+          "changed": 415,
+          "increased": 174,
+          "decreased": 241,
+          "baseline_weight_sum": 1840.8500564694405,
+          "trained_weight_sum": 1834.5772624015808,
+          "net_weight_change_pct": -0.34075529649004754,
+          "weight_delta_l2": 1.251707052956865,
+          "efficacy_quantiles": [
+            0.8734222010644896,
+            0.9996079925740691,
+            1.0,
+            1.0,
+            1.0716427889737217
+          ],
+          "u_l2": 0.5768350917021358,
+          "w_l2": 0.5760981179999257
+        }
+      ]
+    }
+  },
+  "between_pool_memory": {
+    "weight_delta_cosine": 0.7396583455805924,
+    "changed_in_both": 3443,
+    "same_sign_fraction_when_both_changed": 0.656985187336625,
+    "interpretation": "Aligned stored weight differences across two pool histories; not a causal reward effect or evidence of generalization."
+  },
+  "verification": {
+    "imported_memories_match_registration": true,
+    "recipients_reconcile_to_graph": true,
+    "all_weights_and_dynamics_unchanged": true,
+    "neural_observations": 0
+  },
+  "interpretation": "Descriptive map of stored KC-to-MBON weights after observed paper reward exposure. It does not isolate reward-driven changes from ongoing plasticity, measure firing or imply profitable learning."
+}

@@ -19,6 +19,13 @@ until the registered evaluation is completed and assessed. An optional
 shows matched training effects, fees and missing observations from the audited
 report.
 
+The [captured training-memory map](docs/fly-debugger.md#map-captured-paper-memory-to-native-recipients)
+shows net weaker KC inputs at all six plastic recipients, with the largest
+reduction at MBON11 neuron 11402. This locates stored changes; their effect on
+trading is being tested separately.
+
+![Audited paper-trained connection changes by native recipient](docs/assets/fly-paper-memory-map-01.png)
+
 ## Inspect the fly
 
 The [interactive circuit debugger](docs/fly-debugger.md) shows recorded spikes,
