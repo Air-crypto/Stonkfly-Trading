@@ -148,6 +148,14 @@ receipt. The next eligible receipt arrived 25.13 seconds after the decision and
 cannot be used to fill that earlier slot. The original pool, filters, window,
 missing observation, and selection rule are unchanged. Both pools can still reach
 the 18-observation minimum, but neither phase's final coverage is established.
+
+At 22:06 UTC, a [subsequent snapshot](../reports/fly-online-coverage-milestone-11-01.json)
+contained **19 usable development slots for ALL and 18 for baton**. Both have
+accumulated the required minimum count. All previously assessed rows, including
+baton's rejection, are unchanged. Each pool still has five pending development
+decisions and 24 pending test decisions, so the phase coverage gate remains
+pending. This establishes data availability only; it does not select a model or
+replace the final sealed-input, news, native-state, and ledger audits.
 The coverage check does not create a neural run, seal an experiment, audit news,
 calculate a return, or select a policy.
 

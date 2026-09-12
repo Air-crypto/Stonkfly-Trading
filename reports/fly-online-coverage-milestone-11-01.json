@@ -1,0 +1,90 @@
+{
+  "status": "minimum_development_count_accumulated",
+  "observed_at": 1789250883.5222988,
+  "coverage_report_sha256": "33ee3e409b88ae7b08432f553c63549db18cf6681fb0c34b6f2139c2d558639b",
+  "snapshot_sha256": "f72a55f1bbf4bfefdfeb056ddb144415238b85611db848c50281bef7d9de81e1",
+  "snapshot_download": {
+    "started_at": 1789250824.3162692,
+    "finished_at": 1789250829.5557618,
+    "bytes": 58671104,
+    "sha256": "f72a55f1bbf4bfefdfeb056ddb144415238b85611db848c50281bef7d9de81e1"
+  },
+  "snapshot_end": 1789250777.8051298,
+  "assessed_through": 1789250760,
+  "registration_sha256": "078553e736a666d576337f895133409c5ccc18cda8c1edf1cb60d735fc6dfb25",
+  "arming_evidence_sha256": "e508c087f61c403ff0849c79d9177476358f58c10ddd595b547f9c57c4970217",
+  "coverage_source_sha256": "6f986a11d6a2869739c3af523d41ce660449be9f40766d28ed0ddb12ede82ca9",
+  "execution_sources_match_arming": true,
+  "earlier_assessed_rows_unchanged": true,
+  "pools": {
+    "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ": {
+      "symbol": "ALL",
+      "development": {
+        "observed": 19,
+        "missing": 0,
+        "pending": 5,
+        "minimum_observations": 18,
+        "maximum_possible_observations": 24,
+        "coverage_gate": "pending"
+      },
+      "test": {
+        "observed": 0,
+        "missing": 0,
+        "pending": 24,
+        "minimum_observations": 18,
+        "maximum_possible_observations": 24,
+        "coverage_gate": "pending"
+      },
+      "retained_missing_rows": []
+    },
+    "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu": {
+      "symbol": "baton",
+      "development": {
+        "observed": 18,
+        "missing": 1,
+        "pending": 5,
+        "minimum_observations": 18,
+        "maximum_possible_observations": 23,
+        "coverage_gate": "pending"
+      },
+      "test": {
+        "observed": 0,
+        "missing": 0,
+        "pending": 24,
+        "minimum_observations": 18,
+        "maximum_possible_observations": 24,
+        "coverage_gate": "pending"
+      },
+      "retained_missing_rows": [
+        {
+          "index": 13,
+          "decision_ts": 1789249200,
+          "terminal": false,
+          "quote_ts": 1789249126.6382518,
+          "quote_available": false,
+          "raw_receipt_ts": 1789249126.6382518,
+          "raw_receipt_age_seconds": 73.36174821853638,
+          "raw_rejection": "insufficient_two_sided_activity",
+          "neural_observation_expected": false,
+          "status": "ineligible_quote"
+        }
+      ]
+    }
+  },
+  "neural_observations_computed": 0,
+  "observer_summary": {
+    "observed_calls": [
+      "fc-01M2BSVRY8ANZVPSMWVH5S099V",
+      "fc-01M2BT52T9WR256G940PEDYAT0",
+      "fc-01M2BTE3XFXJBZJX1D1K8ARP93"
+    ],
+    "completed_calls": [
+      "fc-01M2BSVRY8ANZVPSMWVH5S099V",
+      "fc-01M2BT52T9WR256G940PEDYAT0"
+    ],
+    "ended_at": 1789250790.004266,
+    "submissions": 0,
+    "deployment_changes": 0
+  },
+  "interpretation": "Both fixed pools have accumulated at least 18 usable development slots in this snapshot. Each still has five future development decisions and 24 future test decisions. The coverage gate remains pending until the phase is complete; final sealed inputs, news and native/ledger audits are still required. The previous rejected baton slot is unchanged. No model performance or selection is established."
+}
