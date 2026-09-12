@@ -1,0 +1,52 @@
+{
+  "capture_sha256": "f601e10f7fb830f82bdfb5ba228635eb41c21745afc50ec25b0d4acc4e633503",
+  "ledger_sha256": "4b90f6694ec42b2ca0a0daa06e18125e1cdc9c90ca857482da846bf19858fc20",
+  "source_sha256": "ac8b91d018a823f3dc526d27ac1326359009fdd593f315b70f208174fcc6e548",
+  "pools": {
+    "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ": {
+      "observations": 82,
+      "gap_resets": 5,
+      "reward_sum": -1.2994495274385258,
+      "prior_inventory_revaluation_sum": 16.757390087707478,
+      "execution_mark_effect_sum": -18.056839615146004,
+      "negative_rewards": 41,
+      "execution_crossed_negative_deadband": 2,
+      "reward_magnitude_quantiles": [
+        0.0,
+        1.4416435857805183,
+        3.450105535294213,
+        7.206845733240506,
+        19.268037328863187
+      ]
+    },
+    "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu": {
+      "observations": 72,
+      "gap_resets": 12,
+      "reward_sum": 24.381167594295476,
+      "prior_inventory_revaluation_sum": 37.648218420853794,
+      "execution_mark_effect_sum": -13.267050826558318,
+      "negative_rewards": 30,
+      "execution_crossed_negative_deadband": 4,
+      "reward_magnitude_quantiles": [
+        0.0,
+        0.3361871257872977,
+        2.696034213104113,
+        4.842694959086501,
+        22.80256456542196
+      ]
+    }
+  },
+  "verification": {
+    "paper_fills_and_states_replayed": true,
+    "delivered_rewards_reconstructed": true,
+    "gap_resets_excluded_from_decomposition": true,
+    "neural_observations": 0
+  },
+  "interpretation": "Recorded reward decomposition for the original cash-starting sleeves. Prior inventory revaluation plus execution mark effect equals delivered reward outside gap resets. Execution mark effect includes the modeled liquidation reserve, not only charged fees. These reward sums omit reset intervals and are not total account returns or an isolated causal effect of the learning rule.",
+  "code_sha256": {
+    "core.py": "c13a32ba4d2336a0ffdee1cfdd3ab551a292d45fa358fc07959bbff0824a219f",
+    "multi.py": "5ea7ad4f7522475707f4a15eefe094750007a2814f72caad9bea0a9c8076d475",
+    "fly.py": "4935f43219ab63d19fa2cc04b36a5612307a4cf44a016b0af2c8f0d69e4a5fea",
+    "fly_paper_memory.py": "f644c93acf1804b914a67d0cabe3bec3be1c65951b4fdb201b17962caad929ba"
+  }
+}

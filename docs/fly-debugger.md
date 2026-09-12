@@ -2402,3 +2402,51 @@ source hashes are saved with the comparison. These derived checks do not replace
 the observer's raw-price, news, checkpoint, full-neuron and broker audits.
 An unchanged BUY/HOLD/SELL sequence does not imply unchanged firing; a changed
 signal does not by itself establish better execution or profitability.
+
+
+### Audit what the paper-training reward contains
+
+The [captured reward decomposition](../reports/fly-paper-reward-components-01.json)
+replays all **154 observed steps and 77 filled orders** from the same two
+checkpoint histories. For every eligible step it reconstructs broker cash,
+quantity, fees, the recorded fill, liquidatable equity and delivered reward.
+It also reconstructs zero reward after a missing-inventory gap. The original
+cohort starts with $250 cash per sleeve; this script is scoped to that capture.
+
+| Captured history | Prior inventory revaluation | Execution mark effect | Delivered reward sum | Gap resets |
+|---|---:|---:|---:|---:|
+| Pool 0, 82 observations | +$16.7574 | −$18.0568 | −$1.2994 | 5 |
+| Pool 1, 72 observations | +$37.6482 | −$13.2671 | +$24.3812 | 12 |
+
+The first two columns exclude reset intervals and sum to delivered reward.
+These are **not total account returns**: reset intervals intentionally do not
+produce rewards. The execution mark effect includes modeled entry friction and
+the liquidation reserve for held inventory, so it is not interchangeable with
+charged fees. Execution pushed otherwise neutral/positive reward below the
+negative one-cent threshold on 2 and 4 steps, respectively. Most negative reward
+steps already included adverse inventory revaluation.
+
+The current adapter maps changes above $0.01 to `reward`, below −$0.01 to
+`aversive`, and the rest to `none`. Both non-neutral categories use the configured
+200 ms, current-20 pulse on their respective cell sets during the next image's
+500 ms observation. Reward magnitude is discarded. Median absolute recorded
+rewards were $3.45 and $2.70; maxima were $19.27 and $22.80. This motivates testing
+credit assignment and magnitude sensitivity, but does not establish that either
+is the cause of worse trading or that changing it would help. The registered
+study 09 keeps its original training checkpoints and inference protocol.
+
+To repeat this audit using the private original capture:
+
+```sh
+uv run python scripts/audit-fly-paper-rewards.py \
+  --capture runs/reward-exposure-01 \
+  --out runs/reward-exposure-01/reward-components.json
+```
+
+The script rejects an existing output, checks database integrity and hashes,
+reconstructs the complete pinned exposure, and never loads the neural graph or
+calls Modal. Do not use Python's `-O` mode; the script explicitly rejects it so
+its reconciliation assertions remain enabled. Validation also altered a filled
+price and recomputed the ledger hash: broker replay still rejected it before
+writing a report. Detailed per-step rows remain private; the published aggregate
+retains capture, ledger, script and relevant implementation hashes.

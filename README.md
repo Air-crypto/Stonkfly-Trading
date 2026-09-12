@@ -69,6 +69,10 @@ adds the recorded `u` and `w` states behind each weight.
 
 The diagnostics have identified concrete limitations:
 
+The [paper reward audit](docs/fly-debugger.md#audit-what-the-paper-training-reward-contains)
+separates inventory revaluation from execution friction and verifies gap resets.
+The current fly receives reward sign, with a fixed pulse that discards magnitude.
+
 - The original chart can render small and large percentage moves identically.
   An experimental fixed return encoding preserves the distinction but failed
   the [fourth market comparison](docs/fly-debugger.md#fourth-market-replay-result).
