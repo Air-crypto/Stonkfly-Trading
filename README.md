@@ -250,6 +250,23 @@ differ, despite identical chart/news images; neither arm trains during replay.
 
 ![Audited development equity, exposure and decoder decisions](docs/assets/fly-online-controls-equity-11.png)
 
+The [first recovered online condition](reports/fly-online-carry-result-11.json)
+also passed its full 1,200-bin audit. It ended at **$225.26**, with three fills,
+versus the frozen trained control's $207.32 and six fills. Its connection memory
+changed, and every update was reconstructed. This is a smaller loss in one
+development window; the full two-pool comparison and test results remain pending.
+The [paired debugger view](http://127.0.0.1:8766/?run=online11r02-development-pool0-trained_online_carry&compare=online11-development-pool0-trained_frozen&step=2&bin=43&neuron=10527&edge=8022240&pristine=1)
+shows one differing gate spike alongside recorded connection weight and `u/w`.
+
+![Audited online and frozen neural traces](docs/assets/fly-online-learning-pair-11.png)
+
+All four [ALL development conditions](reports/fly-online-all-development-11.json)
+are now independently audited: pristine **$205.28**, trained frozen **$207.32**,
+online carry **$225.26**, and online rate reset **$234.33**, each starting at $250.
+Reset loses least in this window; all four remain below cash. This completes
+four of sixteen condition audits. The second pool and held-out evaluation remain
+pending, with no strategy selected or promoted.
+
 The [full-window diagnostic figures](docs/fly-online-comparison.md#compare-the-full-financial-and-neural-timelines)
 align decisions, later fills, gate spikes, weight movement and learning history,
 with links back to matched circuit recordings. This preview is explicitly

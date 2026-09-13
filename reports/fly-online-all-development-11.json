@@ -1,0 +1,75 @@
+{
+  "status": "all_development_pool0_conditions_audited",
+  "plan_sha256": "3f0e3cf8e5a1187ff5bf4ed4cc128e8c3457c1a14ae02fd899d3e8548709f045",
+  "amendment_version": 2,
+  "initial_equity_per_condition": 250,
+  "results": [
+    {
+      "arm": "pristine_frozen",
+      "equity": 205.27832713867951,
+      "return_pct": -17.88866914452819,
+      "fees": 1.6473295596582938,
+      "fills": 6,
+      "observations": 24,
+      "native_bins": 1200,
+      "projection_report_sha256": "7f1ad7c943a46f91a131006a7a9ea6c351b3034a380374aa1c871e463da861e4",
+      "summary_sha256": "9e4afe8d66af581c5f7eccd3b796ea391a79cd03fe920daef6a58fb9eea15708"
+    },
+    {
+      "arm": "trained_frozen",
+      "equity": 207.3178081591549,
+      "return_pct": -17.07287673633804,
+      "fees": 1.7783201042861503,
+      "fills": 6,
+      "observations": 24,
+      "native_bins": 1200,
+      "projection_report_sha256": "63286011b0da229bd5401879451e86530d132da6fed15d90a9e4e7a086c0c9b6",
+      "summary_sha256": "bba74f991d4e03df264377b7a68848023ff58169457ef3a023b2532b6fc68dca"
+    },
+    {
+      "arm": "trained_online_carry",
+      "equity": 225.2559565480359,
+      "return_pct": -9.89761738078564,
+      "fees": 0.9375,
+      "fills": 3,
+      "observations": 24,
+      "native_bins": 1200,
+      "projection_report_sha256": "4a4ae0165bb9aca7887174b5f303ee40a3946946c491c9856f7f12a8b25a5b8f",
+      "summary_sha256": "5b6df27a888dc53762770142339b7204f004b2246c5485636c86e086ca9212de"
+    },
+    {
+      "arm": "trained_online_reset_rates",
+      "equity": 234.33009561783064,
+      "return_pct": -6.267961752867746,
+      "fees": 1.8335949094652852,
+      "fills": 6,
+      "observations": 24,
+      "native_bins": 1200,
+      "projection_report_sha256": "3e160552ac04e95c99ffaf8bc8b891e41d26f326b23beb1d58a38429d790956f",
+      "summary_sha256": "304c4366b560a3afe3011fd071677a1724ddcc4a514e77b86207e601147b4d84"
+    }
+  ],
+  "same_native_binary_and_fresh_state": true,
+  "all_24_images_identical_across_arms": true,
+  "carry_reset_first_observation_arrays_identical": {
+    "ms": true,
+    "counts": true,
+    "voltage": true,
+    "weights": true,
+    "kc": true,
+    "dan": true,
+    "u": true,
+    "w": true,
+    "initial_weights": true,
+    "neuron_ids": true,
+    "plastic_edges": true,
+    "plastic_pre": true,
+    "plastic_post": true
+  },
+  "audited_conditions": 4,
+  "study_conditions": 16,
+  "development_selection": null,
+  "hosting_included": false,
+  "full_study_complete": false,
+  "interpretation": "All four conditions lose money on ALL in development. Reset rates loses least in this window. These partial results cannot select a strategy before the second pool and held-out tests; no policy promotion."
+}

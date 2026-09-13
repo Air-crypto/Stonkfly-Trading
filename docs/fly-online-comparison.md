@@ -618,6 +618,47 @@ owning call, unchanged source signature and $0.0536312 worst-case reservation fo
 that capture. This receipt proves input validation and dispatch; completed
 recordings and their independent audits are still needed for a result.
 
+The [first recovered result](../reports/fly-online-carry-result-11.json) and the
+rate-reset condition have since completed their full independent audits. All
+four ALL development conditions now have 24 observations and 1,200 native bins
+each. Their [combined evidence](../reports/fly-online-all-development-11.json)
+verifies identical native binaries, fresh initial dynamics, full graph references
+and all 24 chart/news images. The carry/reset pair also has identical arrays for
+every field of its first observation, before any reset intervention occurs.
+
+| ALL development condition | Ending equity from $250 | Return | Fills |
+|---|---:|---:|---:|
+| Pristine, frozen | $205.28 | −17.89% | 6 |
+| Previously trained, frozen | $207.32 | −17.07% | 6 |
+| Online learning, carry rate history | $225.26 | −9.90% | 3 |
+| Online learning, reset rate history | $234.33 | −6.27% | 6 |
+
+The carry version makes three BUY decisions and no SELL decisions. Reset makes
+four BUY and two SELL decisions, all of which fill in the simulation. Its first
+SELL decision has left/right output rates of 42/40 Hz and one gate spike; the
+fixed decoder maps that to SELL. This is a measured behavioral change under the
+registered intervention, not a change to the decoder. Both versions still lose
+money, and resetting both rate histories does not identify which history is
+responsible for the later differences.
+
+The [carry projection](../reports/fly-online-carry-projection-11.json) and
+[reset projection](../reports/fly-online-reset-projection-11.json) retain the full
+artifact and audit hashes. Their views are installed as
+`online11r02-development-pool0-trained_online_carry` and
+`online11r02-development-pool0-trained_online_reset_rates` in the local debugger.
+No development selection is allowed until all eight development conditions
+finish. These four audited conditions are one quarter of the full comparison,
+and do not establish held-out or monthly profitability.
+
+At the [first different decision](http://127.0.0.1:8766/?run=online11r02-development-pool0-trained_online_reset_rates&compare=online11r02-development-pool0-trained_online_carry&step=1&bin=39&neuron=10527&edge=8022240&pristine=1),
+reset issues SELL while carry issues HOLD. The
+[browser check](../reports/fly-online-reset-browser-11.json) verified the recorded
+action, paired timestamps and reset-phase description with model submissions
+blocked. Selected neurons and connections remain independent inspections; their
+aligned traces do not establish a direct anatomical path.
+
+![First different decision in the audited reset and carry comparison](assets/fly-online-reset-pair-11.png)
+
 ## Compare the full financial and neural timelines
 
 After the observer has written its fully audited `report.json`, export the

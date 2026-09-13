@@ -1,0 +1,11 @@
+{
+  "status": "audited_recovery_view_checked",
+  "url": "http://127.0.0.1:8766/?run=online11r02-development-pool0-trained_online_reset_rates&compare=online11r02-development-pool0-trained_online_carry&step=1&bin=39&neuron=10527&edge=8022240&pristine=1",
+  "step": 1,
+  "bin": 39,
+  "neuron": "10527",
+  "edge": 8022240,
+  "phase": "Development evaluation: paper-trained connection memory, updated online using this phase’s paper equity feedback. Fresh neural activity at phase start; only KC/DAN rate traces cleared before each later image; other activity and memory carried forward. Training exposure: 82 observations; 35 positive and 41 negative paper rewards. Simulated fills; this does not establish profitable learning.",
+  "writes": 0,
+  "errors": []
+}
