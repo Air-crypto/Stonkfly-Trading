@@ -176,6 +176,42 @@ def test_budget_pause_preserves_parent(tmp_path):
     assert s['next_at']>1789324000
 
 
+def test_cadence_change_preserves_pending_and_uses_six_hour_spacing(tmp_path):
+    from paperlab.solana_service import configure_cadence
+    c=service(tmp_path,dispatch=lambda *_:'call',poll=lambda _:None,commit=lambda:None,now=1000)
+    pending=deepcopy(c['pending']);parent=c['parent']
+    changed=configure_cadence(tmp_path,'six_hour',commit=lambda:None,now=1100,start_now=True)
+    assert changed['pending']==pending and changed['parent']==parent
+    atomic_json(tmp_path/'solana-live'/pending['run_id']/'completed.json',dict(status='completed',paper_only=True))
+    c=service(tmp_path,dispatch=lambda *_:pytest.fail('Duplicate dispatch'),
+              poll=lambda _:dict(status='completed'),commit=lambda:None,now=2000)
+    assert c['next_at']==22600 and c['pending'] is None
+    changed=configure_cadence(tmp_path,'six_hour',commit=lambda:None,now=2100,start_now=True)
+    assert changed['next_at']==2100 and changed['parent']==pending['run_id']
+    assert changed['completed_windows']==1 and len(changed['cadence_changes'])==2
+    c=service(tmp_path,dispatch=lambda *_:'call2',poll=lambda _:None,commit=lambda:None,now=2100)
+    assert c['status']=='dispatched' and c['pending']['call_id']=='call2'
+
+
+def test_cadence_change_cannot_bypass_budget_or_disabled_state(tmp_path):
+    from paperlab.solana_service import configure_cadence
+    service(tmp_path,dispatch=lambda *_:'call',poll=lambda _:None,commit=lambda:None,now=1789323000)
+    service(tmp_path,dispatch=lambda *_:'unexpected',poll=lambda _:dict(status='budget_stopped'),
+            commit=lambda:None,now=1789324000)
+    # The next scheduled tick changes the display status but must preserve the pause.
+    c=service(tmp_path,dispatch=lambda *_:pytest.fail('Budget pause bypassed'),
+              poll=lambda _:None,commit=lambda:None,now=1789324100)
+    path=tmp_path/'solana-online/control.json';before=path.read_bytes()
+    with pytest.raises(ValueError,match='budget pause'):
+        configure_cadence(tmp_path,'six_hour',commit=lambda:None,now=1789324200,start_now=True)
+    assert path.read_bytes()==before
+    c['enabled']=False;atomic_json(path,c)
+    with pytest.raises(ValueError,match='Disabled'):
+        configure_cadence(tmp_path,'six_hour',commit=lambda:None,now=1789324300,start_now=True)
+    with pytest.raises(ValueError,match='Unknown cadence'):
+        configure_cadence(tmp_path,'hourly',commit=lambda:None)
+
+
 def test_unavailable_and_dust_holdings_park_without_resetting_losses():
     from paperlab.solana_online import update_active
     p=Portfolio(state());p.execute('a',.025,99,tick('a'),{'a':tick('a')})

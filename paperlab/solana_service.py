@@ -8,8 +8,40 @@ SEED = 'solana-live-14-next-next'
 
 
 def next_delay(mode):
-    if mode not in ('paced', 'consecutive'): raise ValueError('Unknown cadence')
-    return 12*3600 if mode == 'paced' else 0
+    delays = {'paced': 12*3600, 'six_hour': 6*3600, 'consecutive': 0}
+    if mode not in delays: raise ValueError('Unknown cadence')
+    return delays[mode]
+
+
+def configure_cadence(root, mode, *, commit, now=None, start_now=False):
+    """Caller must hold the coordinator lease; preserve all safety pauses/state."""
+    from .core import atomic_json
+    delay = next_delay(mode)
+    now = time.time() if now is None else now
+    path = Path(root)/'solana-online/control.json'
+    control = json.loads(path.read_text())
+    previous_mode = control['mode']
+    previous_next_at = control['next_at']
+    if not control['enabled']:
+        raise ValueError('Disabled service requires review before cadence changes')
+    # A budget pause is sticky even after a scheduled tick replaces its status.
+    budget_pause = control.get('budget_paused_until', 0)
+    if control.get('status') == 'budget_paused_until_next_month':
+        budget_pause = max(budget_pause, previous_next_at)
+    if budget_pause > now:
+        raise ValueError('Cadence change cannot bypass a budget pause')
+    if not control.get('pending'):
+        if control.get('status') != 'waiting_for_budget_paced_window':
+            raise ValueError('Idle service must be reconciled before cadence changes')
+        control['next_at'] = now if start_now else max(
+            now, previous_next_at-next_delay(previous_mode)+delay)
+    control['mode'] = mode
+    control.setdefault('cadence_changes', []).append(dict(
+        at=now, previous_mode=previous_mode, mode=mode,
+        previous_next_at=previous_next_at, next_at=control['next_at'],
+        start_now=start_now, pending_preserved=bool(control.get('pending'))))
+    atomic_json(path, control); commit()
+    return control
 
 
 def service(root, *, dispatch, poll, commit, now=None, mode='paced'):
@@ -38,7 +70,9 @@ def service(root, *, dispatch, poll, commit, now=None, mode='paced'):
             control['pending'] = None
             dt = datetime.fromtimestamp(now, timezone.utc)
             month = datetime(dt.year+int(dt.month==12), dt.month%12+1, 1, tzinfo=timezone.utc)
-            control['next_at'] = month.timestamp(); return save('budget_paused_until_next_month')
+            control['next_at'] = month.timestamp()
+            control['budget_paused_until'] = month.timestamp()
+            return save('budget_paused_until_next_month')
         if outcome.get('status') != 'completed' or not completed.exists():
             control['enabled'] = False; return save('failed_requires_review')
         result = json.loads(completed.read_text())

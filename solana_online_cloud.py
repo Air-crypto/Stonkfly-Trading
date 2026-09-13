@@ -64,3 +64,17 @@ def _coordinate():
     result=service('/state',dispatch=lambda run_id,parent:worker.spawn(run_id,parent).object_id,
                    poll=poll,commit=volume.commit,mode=MODE)
     print(json.dumps(result),flush=True);return result
+
+
+@app.function(image=image, volumes={'/state':volume}, cpu=(.125,.125), memory=(512,512),
+              timeout=60, max_containers=1, min_containers=0, retries=0, single_use_containers=True)
+def set_cadence(mode: str, start_now: bool=False):
+    """Explicit operator action, serialized with scheduled dispatch."""
+    return exclusive('solana-online-coordinator', _set_cadence, mode, start_now)
+
+
+def _set_cadence(mode, start_now):
+    from paperlab.solana_service import configure_cadence
+    volume.reload()
+    configure_cadence('/state', mode, commit=volume.commit, start_now=start_now)
+    return _coordinate()

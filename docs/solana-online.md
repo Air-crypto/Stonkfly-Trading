@@ -49,6 +49,7 @@ The lightweight coordinator is scheduled in Modal every fifteen minutes. It
 starts a detached, at-most-fifteen-minute training window when due and records
 its immutable run ID and call ID before it can dispatch another. Default cadence
 is twelve hours between window starts, approximately two windows per day.
+The current operator-selected `six_hour` mode doubles this to four windows daily.
 The worker resumes checkpoints, optimizer/RNG state and all account records.
 The read-only `python -m paperlab.solana_online_audit <downloaded-run-directory>`
 reconstructs recorded fills and available portfolio marks independently.
@@ -64,7 +65,11 @@ The full worker shares the existing $25/month ledger and stops reservations at
 75% ($18.75). Each twenty-minute hard timeout reserves about $0.319; successful
 fifteen-minute windows have recently settled near $0.242 under the conservative
 2x margin and 3x nonpreemptible rate estimate. Two windows daily are approximately
-$14.50 per thirty days in that ledger. This is an estimate, not the provider invoice.
+$14.50 per thirty days in that ledger. Four daily windows would cost approximately
+$29 if uninterrupted, so `six_hour` mode can exhaust the unchanged $18.75
+reservation threshold before month-end and pause until the next UTC month.
+Other workers sharing this ledger also consume this allowance. This is an
+estimate, not the provider invoice.
 The low-resource coordinator has an approximately $0.99/month compute bound at
 its full scheduled timeout, including a 2x pricing margin. Existing collector and
 provider budget settings are unchanged; neither free credits nor future profits
@@ -89,12 +94,17 @@ PAPERLAB_FLY=1 PAPERLAB_UNIVERSE=1 PAPERLAB_SCHEDULE=0 \
 
 # Read-only status: /state/solana-online/control.json identifies the current run.
 uv run --extra cloud python -m paperlab.solana_watch solana-online-YYYYMMDD-HHMMSS
+
+# Explicit cadence change under the coordinator lease, and start a window now.
+# Never retries an uncertain dispatch or overrides a loss/failure/budget pause.
+uv run --extra cloud python -c "import modal; print(modal.Function.from_name('fly-paper-solana-online', 'set_cadence').remote('six_hour', start_now=True))"
 ```
 
 To stop dispatch, set `enabled` false in the durable control JSON under the
 coordinator lease, then remove `PAPERLAB_ONLINE_SCHEDULE=1` and redeploy to remove
 scheduler wakeups. Do not clear a live writer lease or reuse a run ID. A cadence
-change must update the durable control's `mode` (`paced` or `consecutive`); an
+change uses the `set_cadence` function to update the durable control's `mode`
+(`paced`, `six_hour` or `consecutive`) and append a change record; an
 environment change alone cannot overwrite a running service's stored policy.
 
 ## Remaining evaluation
