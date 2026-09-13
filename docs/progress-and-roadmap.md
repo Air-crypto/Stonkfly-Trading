@@ -27,6 +27,12 @@ trade or learning hypothesis.
 - [x] Complete study 11: 16 conditions, 360 neural observations and 18,000 bins,
   with reconstructed accounts, inputs, feedback and plasticity. Every condition
   lost money; none passed development. No policy was promoted.
+- [x] Reconcile its 400 account marks into price exposure, fees, spread,
+  slippage, terminal exit allowance and missing-quote deductions. In test,
+  reset's +$2.48 midpoint component was outweighed by $17.55 in costs;
+  it filled 20 trades versus pristine's 10. See the
+  [loss breakdown](fly-loss-attribution.md). This is a fixed-fill diagnosis,
+  not a profitable alternative backtest.
 - [x] Explain concrete mechanisms: retained firing histories can update a
   currently quiet source connection; selective history resets can magnify
   updates; a lower learning rate can still create an extra gate spike and BUY.

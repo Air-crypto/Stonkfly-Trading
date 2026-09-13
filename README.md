@@ -47,6 +47,14 @@ receipts, audits, costs and two disclosed recovery amendments. The original
 failed third condition and preempted partial recording remain preserved and
 excluded; six completed recordings were reused.
 
+The [loss breakdown](docs/fly-loss-attribution.md) reconciles all 400 account
+marks. In test, reset had a **+$2.48 midpoint component**, but **$17.55 of
+execution and terminal exit costs**, leaving **−$15.07**. It filled 20 trades,
+versus 10 for pristine frozen. This identifies turnover/cost awareness as a
+candidate for a fresh experiment; it does not establish a profitable strategy.
+
+![Audited price exposure and execution cost breakdown](docs/assets/fly-loss-attribution-11.png)
+
 ## Inspect the fly
 
 The [interactive debugger](docs/fly-debugger.md) connects recorded activity to the
