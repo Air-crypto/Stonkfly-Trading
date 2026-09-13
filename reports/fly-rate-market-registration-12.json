@@ -1,0 +1,88 @@
+{
+  "schema": 4,
+  "kind": "paper_checkpoint_comparison",
+  "study": "12",
+  "arms": {
+    "pristine_frozen": {
+      "memory": "pristine",
+      "activity_reset": "carry",
+      "eta": 0.001,
+      "learning": false
+    },
+    "trained_frozen": {
+      "memory": "paper_trained",
+      "activity_reset": "carry",
+      "eta": 0.001,
+      "learning": false
+    },
+    "trained_online_carry": {
+      "memory": "paper_trained",
+      "activity_reset": "carry",
+      "eta": 0.001,
+      "learning": true
+    },
+    "trained_online_low_eta": {
+      "memory": "paper_trained",
+      "activity_reset": "carry",
+      "eta": 0.0001,
+      "learning": true
+    }
+  },
+  "phase_steps": 24,
+  "decision_seconds": 300,
+  "costs": {
+    "capital": 250.0,
+    "fee_bps": 125,
+    "slippage_bps": 100,
+    "max_exposure": 0.5,
+    "max_order": 25,
+    "max_spread_bps": 150,
+    "max_delay": 420,
+    "loss_stop": 0.2
+  },
+  "hypothesis": "Reducing the online learning rate from 0.001 to 0.0001 while retaining both KC and DAN histories improves fresh cost-aware paper outcomes relative to the original rate, frozen trained memory and pristine frozen memory. Smaller updates alone are not success.",
+  "inference_protocol": "Use the pinned current-cohort checkpoint export for all paper_trained arms and native initial memory for pristine_frozen. Start each pool, arm and phase with fresh dynamics, its declared weights/u/w, a new $250 account and no pending order. Keep $500 idle per arm so total starting capital is $1000. Development accounts and learned memory do not flow into test. Retain both KC and DAN histories between eligible observations. Keep the full graph, original image adapter, 500 ms observation, fixed decoder and 200 ms dopamine pulse at current 20. Frozen arms receive no learning or reinforcement. Online arms receive their own equity change after execution of the preceding decision, zero across unpriced gaps: above $0.01 gives reward, below -$0.01 gives aversive, otherwise none. Learning stays enabled without an injected pulse. Only the candidate uses eta 0.0001; the other arms use 0.001. No extra current or partial state reset is applied. Missing, repeated and terminal quotes do not advance the brain. Sealing, reconstruction and simulation run in fresh Python processes with PYTHONHASHSEED=0 before startup.",
+  "selection_rule": "The sole candidate is trained_online_low_eta. Require at least 18 of 24 eligible observations in each development pool and identical coverage across all four arms. Select only when candidate aggregate development equity strictly exceeds all three controls and $1000 plus $40/month hosting prorated to two hours on a 30-day month, by more than 1e-9. Equity includes the declared execution costs. Persist selection after all eight development chunks and before any test chunk. Run and report all eight test chunks regardless of selection, including turnover, fees, missing marks and coverage. Insufficient test coverage is inconclusive. Never reselect from test or automatically promote a policy. Two-hour results are not monthly return estimates.",
+  "news_protocol": "Use the unchanged market-frame adapter and 50-dimensional news features reconstructed at each selected quote timestamp. Include only revisions whose published, seen and encoded clocks are no later than that timestamp. Seal the feature vectors and news snapshot hash before model evaluation. All four arms receive identical images; never fetch headlines during simulation.",
+  "cohort_policy": "Choose two distinct contracts from the currently assigned Solana fly paper sleeves. Require a current eligible quote, at least 64 historical eligible observations, at least 18 eligible observations in the last 24 completed five-minute slots, a versioned checkpoint, and complete recorded positive and negative reward exposure. Rank eligible candidates by descending current five-minute volume, then pool key. Do not use return, equity, fees or reward magnitude for ranking. Freeze the cohort, ledger and checkpoint bytes before any new evaluation registration. This is a current Solana pool sample, not an exhaustive or verified memecoin classification. Preserve missing pools in later evaluation.",
+  "python_hash_seed": "0",
+  "execution_protocol": "Witness the exact registration and pin execution sources in the cloud before development starts. Seal the complete four-hour price/news snapshot before any capture. Use a separate non-preemptible worker with two CPUs, 8 GiB, 600 seconds, no retries and at most one complete pool/arm/phase per call. Run capture and news sealing in fresh seed-zero subprocesses; bound neural work to 480 seconds. Use the shared worker lease and $25 monthly worker ledger, its 75% stop threshold and the existing 2x margin. Reserve 610 seconds at 3x CPU/RAM pricing before each call and account for metadata calls in a $3 study compute allowance. Save a durable owning call/input before every chunk. Never retry or skip a claimed, failed or uncertain chunk. Complete eight development chunks and persist ledger-replayed selection before any test chunk. Reject source or registration drift. Publish only after independent price, news, account and full-bin audits. Stop the temporary app after verified completion; no policy promotion. Compute estimates are not provider invoices.",
+  "recorded_at": 1789277933.273678,
+  "development_start": 1789279200.0,
+  "test_start": 1789286400.0,
+  "end": 1789293600.0,
+  "training_cutoff": 1789276500,
+  "checkpoint_capture_at": 1789276500.0509593,
+  "parent_end": 1789259700,
+  "cohort": [
+    "solana:2AXXcN6oN9bBT5owwmTH53C7QHUXvhLeu718Kqt8rvY2",
+    "solana:zxTpi4BtaWX3mgdAPoezkMD1hxx8CdeCfrqXMWvSCLX"
+  ],
+  "source_memories": {
+    "solana:2AXXcN6oN9bBT5owwmTH53C7QHUXvhLeu718Kqt8rvY2": {
+      "memory_sha256": "40a5269e3d71a339c5526e7b2929d2f198744669f502bea15dc2ca6372450feb",
+      "memory_file_sha256": "ca5a392864644963cd2d3381bd2c4b15c7b29f2e48572c3a4dbad3c736740509",
+      "checkpoint_sha256": "e3b37f1036590682a3eb2c3eab1e162aa01838d5b29a688232cffb724f050ba5",
+      "last_slot": 5964254,
+      "observations": 214,
+      "positive_rewards": 85,
+      "negative_rewards": 116
+    },
+    "solana:zxTpi4BtaWX3mgdAPoezkMD1hxx8CdeCfrqXMWvSCLX": {
+      "memory_sha256": "d0044aa1e164e4fb4479c8b83a2374293fc2404e613765cc7ae4278b61cf2e5d",
+      "memory_file_sha256": "4e947e022340ff90203c7e3ddec3096aab65dd71fcae68b4595bac32e479b8f8",
+      "checkpoint_sha256": "2c6c22926a294e9e5b5acd5bdb4e8a915493a184d224bde514f52f5c85b512f8",
+      "last_slot": 5964254,
+      "observations": 214,
+      "positive_rewards": 92,
+      "negative_rewards": 111
+    }
+  },
+  "preparation_source_sha256": "c02c4b7aacfe59719f80e156f3ef21571662ed60430be0d4fd28f30e90c4d6e5",
+  "training_audit_sha256": "f5756cf38ef9d7bec95849724ddfc56dd939e33fe864df4235e4b6fef9e10fff",
+  "capture_result_sha256": "186992a657747e27502f9fe49160567bfc7dd7ce0ba8817e5711182ccc82a845",
+  "cohort_selection_sha256": "34ba4aa0b5ec02c1e7d595cdeb5977457de61d584c45b22e0c1586e78f48ee26",
+  "checkpoint_array_audit_sha256": "dcb38c57267ceac4706379921771c77a63ba913a2ec9e476578a3e92eadf5102",
+  "parent_report_sha256": "cf50aab9f231d8654e150ca5936bdd02b1646d37981c88d21ff1d8571c130a4c",
+  "mechanism_audit_sha256": "259e64f3313c86d667a7301d6027f8fb46cca662fa023c270df70fbbd2f932c1"
+}

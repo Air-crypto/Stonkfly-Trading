@@ -42,6 +42,19 @@ SELECTION = ('The sole candidate is trained_online_low_eta. Require at least 18 
     'chunks regardless of selection, including turnover, fees, missing marks and coverage. '
     'Insufficient test coverage is inconclusive. Never reselect from test or automatically '
     'promote a policy. Two-hour results are not monthly return estimates.')
+EXECUTION = ('Witness the exact registration and pin execution sources in the cloud before '
+    'development starts. Seal the complete four-hour price/news snapshot before any capture. '
+    'Use a separate non-preemptible worker with two CPUs, 8 GiB, 600 seconds, no retries and '
+    'at most one complete pool/arm/phase per call. Run capture and news sealing in fresh '
+    'seed-zero subprocesses; bound neural work to 480 seconds. Use the shared worker lease '
+    'and $25 monthly worker ledger, its 75% stop threshold and the existing 2x margin. '
+    'Reserve 610 seconds at 3x CPU/RAM pricing before each call and account for metadata '
+    'calls in a $3 study compute allowance. Save a durable owning call/input before every '
+    'chunk. Never retry or skip a claimed, failed or uncertain chunk. Complete eight '
+    'development chunks and persist ledger-replayed selection before any test chunk. '
+    'Reject source or registration drift. Publish only after independent price, news, '
+    'account and full-bin audits. Stop the temporary app after verified completion; no '
+    'policy promotion. Compute estimates are not provider invoices.')
 
 
 def chunk_order():
@@ -71,10 +84,11 @@ def validate_registration(r,audit):
     fixed={'schema':4,'kind':'paper_checkpoint_comparison','study':STUDY,'arms':ARMS,
            'phase_steps':PHASE_STEPS,'decision_seconds':300,'costs':asdict(DEX_COSTS),
            'hypothesis':HYPOTHESIS,'inference_protocol':INFERENCE,'selection_rule':SELECTION,
-           'news_protocol':NEWS,'cohort_policy':COHORT_POLICY,'python_hash_seed':'0'}
+           'news_protocol':NEWS,'cohort_policy':COHORT_POLICY,'python_hash_seed':'0',
+           'execution_protocol':EXECUTION}
     if any(r.get(k)!=v for k,v in fixed.items()):raise ValueError('Registered rate comparison design differs')
     for key in ('parent_report_sha256','mechanism_audit_sha256','training_audit_sha256',
-                'capture_result_sha256','cohort_selection_sha256'):
+                'capture_result_sha256','cohort_selection_sha256','checkpoint_array_audit_sha256'):
         value=r.get(key)
         if not isinstance(value,str) or len(value)!=64 or any(c not in '0123456789abcdef' for c in value):
             raise ValueError('Missing pinned rate comparison provenance')

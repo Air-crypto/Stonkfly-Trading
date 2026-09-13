@@ -147,11 +147,12 @@ not make this fixed decoder less active, and no policy was promoted.
 
 ![Lower-rate outcomes across all five conditions](docs/assets/fly-learning-scale-01.png)
 
-The [fresh market comparison preparation](docs/fly-rate-market.md) has exported
-and independently checked current RAY and STONK paper memories. The prior cohort
-had become sparse. The new comparison rules are tested, but its future market
-window is not registered yet. Exporting a checkpoint does not establish improved
-learning or returns.
+The [fresh market comparison](docs/fly-rate-market.md) uses independently
+checked RAY and STONK paper memories. Study 12 now has 91 passing checks and a
+06:00–10:00 UTC window on September 13: two hours of development, then two
+hours of test data. Cloud deployment and its prospective witness are pending.
+It will compare both learning rates against frozen controls, including fees
+and turnover. No improved trading result has been established.
 
 Open all twelve paired recordings from the included 3.75 MB archive:
 

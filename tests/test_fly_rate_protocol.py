@@ -6,7 +6,7 @@ import pytest
 
 from paperlab.fly_paper_protocol import MEMORY_FIELDS, NEWS
 from paperlab.fly_rate_protocol import (ARMS,CANDIDATE,COHORT_POLICY,HYPOTHESIS,INFERENCE,
-    SELECTION,HOSTING_ALLOCATION,chunk_order,chunk_name,development_choice,validate_registration)
+    SELECTION,EXECUTION,HOSTING_ALLOCATION,chunk_order,chunk_name,development_choice,validate_registration)
 from paperlab.multi import DEX_COSTS
 
 
@@ -17,12 +17,12 @@ def fixture():
     r={'schema':4,'kind':'paper_checkpoint_comparison','study':'12','arms':copy.deepcopy(ARMS),
        'phase_steps':24,'decision_seconds':300,'costs':asdict(DEX_COSTS),'hypothesis':HYPOTHESIS,
        'inference_protocol':INFERENCE,'selection_rule':SELECTION,'news_protocol':NEWS,
-       'cohort_policy':COHORT_POLICY,'python_hash_seed':'0','recorded_at':1800010,
+       'cohort_policy':COHORT_POLICY,'python_hash_seed':'0','execution_protocol':EXECUTION,'recorded_at':1800010,
        'development_start':1800300,'test_start':1807500,'end':1814700,'training_cutoff':1800000,
        'checkpoint_capture_at':1800001,'parent_end':1790000,'cohort':list(audit['pools']),
        'source_memories':{k:{f:v[f] for f in MEMORY_FIELDS} for k,v in audit['pools'].items()}}
     r.update({k:'d'*64 for k in ('parent_report_sha256','mechanism_audit_sha256',
-        'training_audit_sha256','capture_result_sha256','cohort_selection_sha256')})
+        'training_audit_sha256','capture_result_sha256','cohort_selection_sha256','checkpoint_array_audit_sha256')})
     return r,audit
 
 

@@ -1,14 +1,21 @@
-# Preparing a fresh market comparison of learning rates
+# Fresh market comparison of learning rates
 
 The [lower-rate neural assay](fly-learning-rate.md) reduced later weight movement
 but introduced an extra BUY. It did not establish better trading. The next
 comparison must measure fresh account outcomes and turnover after execution
 costs, with a development decision saved before the test phase.
 
+The [study 12 registration](../reports/fly-rate-market-registration-12.json) now
+fixes development at **06:00–08:00 UTC** and test at **08:00–10:00 UTC** on
+September 13, 2026. Cloud deployment and a witness before 06:00 are still pending.
+The [market preflight record](../reports/fly-rate-market-preflight-12.json)
+contains the 91 passing checks, execution source hashes and observed shared
+budget. No study 12 market observations have been simulated yet.
+
 ## Checkpoint preparation
 
-**Checkpoint capture and array audit are complete; no new market window is
-registered yet.** The [execution record](../reports/fly-rate-checkpoint-execution-12.json)
+**Checkpoint capture and array audit are complete.** The
+[execution record](../reports/fly-rate-checkpoint-execution-12.json)
 preserves the owning call, executed sources, selected cohort, independent audit
 and stopped temporary app. The [preflight record](../reports/fly-rate-checkpoint-preflight-12.json)
 retains the original 25 tests and the observed coverage of the old cohort.
@@ -103,7 +110,7 @@ uv run python -m paperlab.fly_rate_checkpoint_audit \
   --out runs/rate-checkpoint-12-array-audit-new.json
 ```
 
-## Comparison rules ready for the next registration
+## Registered comparison rules
 
 `paperlab/fly_rate_protocol.py` now defines four arms: pristine frozen, trained
 frozen, trained online at eta 0.001, and trained online at eta 0.0001. All retain
@@ -119,14 +126,69 @@ cost. Selection is saved before any test condition; test data cannot reselect
 the candidate. Every test arm is reported, including fees, turnover and missing
 marks. Insufficient test coverage is inconclusive.
 
-These rules have validation functions and 12 tests, including rejection of a
-stale hypothesis, changed rate, altered cohort, late registration and mismatched
-training cutoff. The complete current checkpoint/protocol/array test suite has
-43 passing tests. The market input sealer, runner integration and future cloud
-registration still need to be completed before evaluation starts.
+The runner, sealer, ledger replay and independent auditors are implemented in
+separate study 12 modules. Its 91 passing checks cover changed rates, altered
+cohorts, late registration, input and account corruption, fresh-process news
+seeding, source drift, budget limits and interrupted captures. A saved selection
+receipt must follow every development completion and precede every test claim.
+The original studies and their recorded results remain unchanged.
 
-The eventual market registration will pin the completed capture and its source
-hashes, all comparison arms, future windows, costs and selection rules. Newly
+The registration pins the completed capture and its source hashes, all
+comparison arms, future windows, costs and selection rules. Newly
 exported memory is still memory trained at eta 0.001; using eta 0.0001 afterward
 tests a lower online learning rate, not retraining the starting memory at that
 rate. No policy is promoted by exporting a checkpoint.
+
+## Cloud collection and capture
+
+The main app collects live quotes and news during the four-hour window. Once
+the endpoint is present in its snapshot, a dedicated temporary worker seals
+the inputs and replays them chronologically. This is a prospective replay of
+fresh data; the experiment does not submit trades during collection. The
+existing main paper trader continues separately.
+
+The study worker wakes every five minutes, at minutes 2, 7, 12 and so on. It
+uses the shared worker lease, so an overlapping main call or study call skips
+instead of writing concurrently. Each complete pool/arm/phase runs once in a
+new non-preemptible container with two CPUs and 8 GiB. The 600-second call
+contains one seed-zero subprocess with at most 480 seconds for neural capture.
+Sixteen complete conditions and independent audits follow collection; results
+are not expected exactly at 10:00 UTC.
+
+Every claim is committed before capture. An interrupted, failed or uncertain
+claim halts further work and is never automatically retried. Both source
+hashes and the registration must still match the cloud witness. All metadata
+and capture calls share a $3 compute allowance within the existing $25 worker
+ledger, 75% stop threshold and 2× margin. Non-preemptible CPU/RAM pricing is
+accounted at 3×, with a $0.1608936 maximum reservation per call. These are
+compute estimates; provider billing also includes other resources.
+
+Inspect existing cloud state without creating a call:
+
+```sh
+uv run --extra cloud python -m paperlab.fly_rate_cloud status \
+  --out runs/rate-market-status-12.json
+```
+
+Reproduce the checks without constructing or running a native brain locally:
+
+```sh
+PYTHONHASHSEED=0 uv run --extra dev --extra cloud python -m pytest -q \
+  tests/test_fly_rate_protocol.py tests/test_fly_rate_pipeline.py \
+  tests/test_fly_learning_scale_credit.py tests/test_fly_rate_schedule.py \
+  tests/test_fly_rate_runtime.py tests/test_fly_rate_cloud.py
+```
+
+The original preparation and deployment commands were:
+
+```sh
+uv run --extra cloud python -m paperlab.fly_rate_cloud prepare \
+  --start 1789279200 --out runs/rate-market-preflight-12/prepared.json
+PAPERLAB_FLY=1 PAPERLAB_UNIVERSE=1 \
+  uv run --extra cloud modal deploy rate_market_cloud.py --env main
+```
+
+`prepare` refuses an existing registration/reference or a start less than ten
+minutes in the future. The committed registration is historical evidence, not
+a command to start a new comparison. No result from this comparison will
+automatically promote the lower rate to the main trader.
