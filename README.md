@@ -59,6 +59,12 @@ Follow a concrete [gate-spike → BUY → delayed fill → cost example](docs/fl
 or inspect the [complete reset decision-to-fill tables](docs/fly-trade-trace-11.md).
 BUY denotes an exposure target; some BUY targets generate rebalance sales.
 
+The [simple market references](docs/market-baselines.md) add another check:
+one capped purchase per pool finished study 11 test at **$1,002.33**, and a
+constant exposure target at **$1,007.61**. Both lost during development. These
+descriptive baselines have different exposure and were added after the experiment;
+they do not change its selection result or establish a profitable replacement.
+
 ## Inspect the fly
 
 The [interactive debugger](docs/fly-debugger.md) connects recorded activity to the

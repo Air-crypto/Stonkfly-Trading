@@ -53,6 +53,11 @@ unchanged. A subsequent rule needs a prospective registration, fresh development
 and test windows, equal-cost controls, and a net-outcome acceptance gate. No
 variant has been selected or promoted from this postmortem.
 
+The later [simple-reference comparison](market-baselines.md) also found that
+holding and constant exposure beat the fly in test, while losing in development.
+That makes position timing and exposure important alongside costs; reducing
+turnover alone is not a demonstrated solution.
+
 ## From gate spikes to execution costs
 
 The [decision-to-fill trace](fly-trade-trace-11.md) links every reset observation

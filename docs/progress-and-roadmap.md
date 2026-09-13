@@ -37,6 +37,11 @@ trade or learning hypothesis.
   to their originating decisions. Inspect a single-gate BUY against the raw
   recording and paired browser view; distinguish BUY exposure targets from
   actual purchases or rebalance sales.
+- [x] Add descriptive cash, one-entry holding and constant-target references.
+  Both exposure references beat the fly variants in study 11 test but lost in
+  development. This keeps the diagnosis focused on decision timing and exposure
+  as well as costs. These [post-experiment references](market-baselines.md) are
+  not new registered selection arms or evidence of generalization.
 - [x] Explain concrete mechanisms: retained firing histories can update a
   currently quiet source connection; selective history resets can magnify
   updates; a lower learning rate can still create an extra gate spike and BUY.
@@ -108,7 +113,10 @@ memecoin; the indexer can also return pools that are not memecoins.
 
 2. **Choose the next change from the failed trades.** Distinguish trading costs
    and excessive turnover, poor directional decisions, reward timing, and data
-   gaps. If coverage is inadequate, fix collection first. If extra gated trades
+   gaps. Compare notional turnover and exposure, not fill count alone: the
+   constant-target reference had more test fills than reset but less notional
+   turnover and a better outcome. If coverage is inadequate, fix collection
+   first. If extra gated trades
    drive losses, test a cost-aware abstention/readout rule. If updates consistently
    hurt an otherwise useful readout, test reward alignment or a constrained
    learning rule. Register one change and its acceptance rule before collecting
