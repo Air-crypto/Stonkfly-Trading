@@ -14,9 +14,37 @@ A separately pinned FinBERT transformer can encode headline sentiment; those
 features enter the compact policy numerically and the fly through a visual adapter.
 The [dynamic memecoin experiment](docs/memecoin-universe.md) discovers current and
 new launches and samples DEX pools. Coverage is bounded; it does not trade every
-Solana token. The controlled comparison below uses two fixed pools, ALL and baton.
+Solana token. The latest controlled comparison uses two fixed pools, RAY and STONK.
 
 ## Latest completed comparison
+
+[Study 12](docs/fly-rate-result-12.md) completed **16 independently audited
+conditions, 372 neural observations and 18,600 recorded bins**. Reducing the
+online learning rate from 0.001 to 0.0001 produced smaller updates but did not
+pass development selection. Every fly variant lost money in both phases.
+
+| Fly condition | Development equity | Held-out test equity |
+| --- | ---: | ---: |
+| Pristine frozen | $982.51 | $978.38 |
+| Trained frozen | $978.84 | $979.66 |
+| Online eta 0.001 | $981.73 | $981.14 |
+| Online eta 0.0001 | $979.25 | $980.41 |
+
+Each arm and phase starts with a fresh $1,000. Execution and terminal exit
+costs are included; hosting is excluded. Sharp interim dips are missing-quote
+stress marks, not observed crashes. No policy was promoted.
+
+![Study 12 account outcomes, costs and weight updates](docs/assets/fly-rate-comparison-12.png)
+
+The [first changed action](docs/fly-rate-result-12.md#inspect-the-first-changed-action)
+links one recorded gate spike to a SELL, a later BUY and their execution costs.
+Its [paired portable recordings and reproduction steps](docs/fly-rate-result-12.md)
+are included. The study app is stopped; the separate paper-lab deployment was
+retained. The study compute ledger accounted for about $0.91, not a provider invoice.
+
+![First action divergence between learning rates](docs/assets/fly-rate-case-12.png)
+
+## Previous comparison: study 11
 
 [Study 11](docs/fly-online-comparison.md#final-audited-result) completed all sixteen
 conditions with **360 audited neural observations and 18,000 recorded bins**.
@@ -175,13 +203,11 @@ not make this fixed decoder less active, and no policy was promoted.
 
 ![Lower-rate outcomes across all five conditions](docs/assets/fly-learning-scale-01.png)
 
-The [fresh market comparison](docs/fly-rate-market.md) uses independently
-checked RAY and STONK paper memories. Study 12 now has 91 passing checks and a
-06:00–10:00 UTC window on September 13: two hours of development, then two
-hours of test data. Its dedicated cloud worker is deployed and the registration
-was witnessed before the window starts. It will compare both learning rates
-against frozen controls, including fees and turnover. Capture and audits follow
-collection; no improved trading result has been established.
+The [fresh market comparison](docs/fly-rate-result-12.md) then tested both rates
+against frozen controls using independently checked RAY and STONK paper memories.
+Study 12 completed its registered 06:00–10:00 UTC window on September 13 and all
+16 full audits. The lower-rate candidate failed selection; no policy was promoted.
+Its [registration and execution history](docs/fly-rate-market.md) remain preserved.
 
 Open all twelve paired recordings from the included 3.75 MB archive:
 

@@ -1,0 +1,159 @@
+{
+  "status": "study_12_completed_audited_and_temporary_app_stopped",
+  "report_sha256": "cd90f9bebdaa06c7b1ab14d2913619ac464ced9660f8462809c40d7a0c20ed31",
+  "diagnostic_sha256": "d2a882bff6babc31595ae0d9ad737978ae4a69ff2bf0db6b1ad48f08a062a42d",
+  "case_sha256": "2d2fa2e65e261456f0fe4da48c9ea45d67e5587a8a59ae6e002438bcfcf4e480",
+  "baselines_sha256": "de448268dd7cff186e87d4186534c316551ff22e258793209789eb66c60ff604",
+  "evidence_archive": {
+    "path": "reports/fly-rate-evidence-12.zip",
+    "sha256": "5746a3ec5ca92a12f98e32bcb5b87e7a99eef3cae2f0948c6c01404c540f3d0c",
+    "members": {
+      "audit/audits/development-pool0-pristine_frozen.json": "a4ec2921f515f6d3290facaaae4cb1cd42b9387d243520910c366ad9e814fe8a",
+      "audit/audits/development-pool0-trained_frozen.json": "80449f6a70b9ee69d11f79f8ef361fed31bf35a08d3be737cd8033246e12f7ec",
+      "audit/audits/development-pool0-trained_online_carry.json": "f38e2b73423be0414d9032d09084d8ad71865c044f6dc5703a5176c9b92a7995",
+      "audit/audits/development-pool0-trained_online_low_eta.json": "53fdb991facc7f26dad00dbcd193f0c5e5b2c6cb801ead9c6d5c0c2d3f1f27ab",
+      "audit/audits/development-pool1-pristine_frozen.json": "95860234baad4a038e1897780706d73e3d9d3cc05a2116d8c8341b1002226941",
+      "audit/audits/development-pool1-trained_frozen.json": "b329886985af5b2e9d2fac8a388b6b04ba2bb94089dccd72688fd6a3432f1a60",
+      "audit/audits/development-pool1-trained_online_carry.json": "f893fe05150476d9b993fd9f6468b08b37590e7122494f226e9d28e7716a6979",
+      "audit/audits/development-pool1-trained_online_low_eta.json": "717ab681207b18919618f2ac2771c8cf85171812276be6a5fa49725b094c2be5",
+      "audit/audits/test-pool0-pristine_frozen.json": "fdfcd9eb2500de52674abf8e957d237ff62648af2409228b1e8dfad76ac75384",
+      "audit/audits/test-pool0-trained_frozen.json": "b4fd67c8df994184b834331eef672dd68bfd48f9bacc112c7fdc3dd4867e581a",
+      "audit/audits/test-pool0-trained_online_carry.json": "9962109a37761513e76c9746ea8324cb701814db0b52545b8efc27b542efa833",
+      "audit/audits/test-pool0-trained_online_low_eta.json": "012001668d4b29b89c839f239981e0a9c842a136746ff615643cf0edf13da1bd",
+      "audit/audits/test-pool1-pristine_frozen.json": "e61201723d37c49cc4273768f573c0b11d4f17087be580e694f8ad28ec542100",
+      "audit/audits/test-pool1-trained_frozen.json": "194f1c774a0b30a95058fc7a7f2f1b860f99b8f7602c9eed4cca902759b1b3a3",
+      "audit/audits/test-pool1-trained_online_carry.json": "b954ff317750d167b91f7b50b755307f9ef18b699d9234394b0d6bd31698f62b",
+      "audit/audits/test-pool1-trained_online_low_eta.json": "14267483b4049fde1e970c36a66abf52b412e3f9a7971584075157c353b61f61",
+      "audit/price-audit.json": "b3edf4dfc11ec3f13c9cecd31838dfcc86a8339cfc98a1ee1c33099811b95e85",
+      "audit/projections/development-pool0-pristine_frozen.json": "242ffcd130f1011b6d92f5debb66b92e65de1cbb35372802b6ae00f0bc4247ef",
+      "audit/projections/development-pool0-trained_frozen.json": "6f762cd70264af4f106d0481be4d30d9523b4fb5e6eb795b27dc51f0f1267861",
+      "audit/projections/development-pool0-trained_online_carry.json": "fb7564febcab669c937703aebed8877f2b32ba3b7afe984879ba0693e30878e1",
+      "audit/projections/development-pool0-trained_online_low_eta.json": "b91035d498334d814fa5813e8607a57f3f1a6c3fba6c728c843c82829c38a68d",
+      "audit/projections/development-pool1-pristine_frozen.json": "855a02c7c49134dc5a7ad9f0026695888d407a6337de4cc447e1720791e3b3e4",
+      "audit/projections/development-pool1-trained_frozen.json": "0f862ed9f4c9eefe542699ae72ee2a5d9ed42b266b2453e33eb49df74a0c9cff",
+      "audit/projections/development-pool1-trained_online_carry.json": "c63972d4941cc70e79d6a723516e3d874ef295130d7ffec86fd01efdd266234b",
+      "audit/projections/development-pool1-trained_online_low_eta.json": "4be65737a7f214cf9d799dfb2c10aec4249d8e1754a3532826bbeb141d47ff1a",
+      "audit/projections/test-pool0-pristine_frozen.json": "c0a00550d7161976346e64501ba39ad5619247eb5a582caf6f146812b42f49a5",
+      "audit/projections/test-pool0-trained_frozen.json": "1ee96db1b4f257bc897dfe9413eb6b1ffeca10d7b70df325946ab076aa2847c8",
+      "audit/projections/test-pool0-trained_online_carry.json": "54b7e5117f81f1f3e1ae005f31bf23c918116cfd30d556fd57006bfd6eb17056",
+      "audit/projections/test-pool0-trained_online_low_eta.json": "6a41e4152ffcbe0d0534cdb8da0b30c1dc49b874533e157ebc80821316cebc80",
+      "audit/projections/test-pool1-pristine_frozen.json": "e63b6b96fdf9fbc7472fba0457af6b0d51cb5abea97aa9d976760f2e7e41c623",
+      "audit/projections/test-pool1-trained_frozen.json": "2c8754733e47993dabea20ff49c2f2ca1d735fd07a51f669958f2ea1b284fa81",
+      "audit/projections/test-pool1-trained_online_carry.json": "ef27f7afcd7412a2ae5eeda3105c2038a21792b798952f634b6e6bbaa5c3cc08",
+      "audit/projections/test-pool1-trained_online_low_eta.json": "e80eac6e57505b9496ba8b9a6c5446e1a3c9ae717a435f2bda7abd52b3839c55",
+      "audit/report.json": "cd90f9bebdaa06c7b1ab14d2913619ac464ced9660f8462809c40d7a0c20ed31",
+      "baselines.json": "de448268dd7cff186e87d4186534c316551ff22e258793209789eb66c60ff604",
+      "recordings/chunks/development-pool0-pristine_frozen/summary.json": "518e55224523e9b23bf118f7a1e99e980729d6784c5148deacf685cfa1fed253",
+      "recordings/chunks/development-pool0-trained_frozen/summary.json": "adf0a71e5ee90de449462c66349b979320c3926e96e5ea1f56d3787e1253cd66",
+      "recordings/chunks/development-pool0-trained_online_carry/summary.json": "8a4395c7be0c495d516cd126b7d68f5fb46d5f28f46a4c1ccb89b170ee5c5f61",
+      "recordings/chunks/development-pool0-trained_online_low_eta/summary.json": "f8f67254387c29b0c2385768c7f88efc7db0e8783f1c9d76f7fd9c8486852496",
+      "recordings/chunks/development-pool1-pristine_frozen/summary.json": "ed504e645e9c1a8cfa7fc2b6c8584238a238d0405cd6597cb8ae38355b37029a",
+      "recordings/chunks/development-pool1-trained_frozen/summary.json": "0681cfbacc939223da747e7c6e646321a0436ccbc5ce2afd3243818e686bd7d0",
+      "recordings/chunks/development-pool1-trained_online_carry/summary.json": "dcebb1b8d898774469ec4672a0cea0b0af21c349aaee71c83686cb16a9554930",
+      "recordings/chunks/development-pool1-trained_online_low_eta/summary.json": "3dd2c082489793a31be3475fc6edd29f09e6f58c85fef5c295ab291e492597bf",
+      "recordings/chunks/test-pool0-pristine_frozen/summary.json": "12c471cce3abe39c6bc8b617a14cc24d834e2860351b37f5a4cad620d7200348",
+      "recordings/chunks/test-pool0-trained_frozen/summary.json": "47db792cc8811a8f90b84baa4bda1e523de35a08d8ac15eb302639818b27717f",
+      "recordings/chunks/test-pool0-trained_online_carry/summary.json": "9148a53db7a6e647664442f28345d7f27380a4d07b979baa18ee92a76fbd22d0",
+      "recordings/chunks/test-pool0-trained_online_low_eta/summary.json": "50e216159ec3b5f149adb05f3f05227a70b00e9daeb89fdf8a3bd44477d40375",
+      "recordings/chunks/test-pool1-pristine_frozen/summary.json": "ac4a330dd6d44fceb1dcd1ed28ef78a2e7c2434a82320e621de334bb31ff46c0",
+      "recordings/chunks/test-pool1-trained_frozen/summary.json": "d70839941462b51115183a972e2c533e40214f0df8a36395c4e8bbfba83d9f33",
+      "recordings/chunks/test-pool1-trained_online_carry/summary.json": "7a68d5a8453d6168d97732c2b37adc5977420180f0259b4ea3ae5cb87a6dfb26",
+      "recordings/chunks/test-pool1-trained_online_low_eta/summary.json": "eddfd9c5f6b19958f5dfda3ab02ebc8b0fa241c61c7366d960dda012664e155b",
+      "recordings/plan.json": "76cc9715b1d1d7649b2a4fa7f4e9d070a1de0870a8b3aa641d549728e87b985c",
+      "recordings/receipts/development-pool0-pristine_frozen-completed.json": "7923df58b74703b577378b88009bbbdcb90683ea2ccc2d5d501c45b76b8ad182",
+      "recordings/receipts/development-pool0-trained_frozen-completed.json": "8b365417194fd35c52f6c93f8607a9d7351dd58ad4fc7a678091eae61f92775f",
+      "recordings/receipts/development-pool0-trained_online_carry-completed.json": "e7a1caa281c39f6ee175e90f0fc3d878d7d64a033ab83a56de1ad8819d38ff53",
+      "recordings/receipts/development-pool0-trained_online_low_eta-completed.json": "48e75175c3ab4753f7ab1a2cece8c05ebf0afa1fbcc0b0b474d265d678d101f2",
+      "recordings/receipts/development-pool1-pristine_frozen-completed.json": "a3ef60e1551bea266a66cd10172ee7d144601031989752fbe4643f13c7d2a815",
+      "recordings/receipts/development-pool1-trained_frozen-completed.json": "5819f8da1bb50d5b63df73f3df12485f15263a600b3de125c27bc8e041895656",
+      "recordings/receipts/development-pool1-trained_online_carry-completed.json": "97af3e705a4df207984619ae9a5b65fd9ee21940cf7cfa577f663b8f9183b25a",
+      "recordings/receipts/development-pool1-trained_online_low_eta-completed.json": "2ca4a8f4436dd7e83678ad697e364fe01dbe5e39c02c66ca40597d33e10b111c",
+      "recordings/receipts/test-pool0-pristine_frozen-completed.json": "b9969d75687c8cf9df22228361764fef605218d7c15d34ca595de78886c41923",
+      "recordings/receipts/test-pool0-trained_frozen-completed.json": "b10d3b29693888af90dbb97f3a0450deb50b66d8d89b29a9e1af2cb196abd20b",
+      "recordings/receipts/test-pool0-trained_online_carry-completed.json": "9f5d8db9ca83423b95585847cf3cabf629f95da1af6e47b27419f05b5a268c39",
+      "recordings/receipts/test-pool0-trained_online_low_eta-completed.json": "db3c4b8febc8d76e8c3ec794a9d1964f8afc8a45358462aba33266a25371c3c5",
+      "recordings/receipts/test-pool1-pristine_frozen-completed.json": "7f1d5f452c7021fc9ee629f923a6cb64487598287f807713c19c1c325d6c3d1b",
+      "recordings/receipts/test-pool1-trained_frozen-completed.json": "d507a60d9d7f974fc110e5b9af2c887fe1c02d0e11e5a275677e2a23386c2d5d",
+      "recordings/receipts/test-pool1-trained_online_carry-completed.json": "b9684030c0e2f4b4cd710afbb221478ad5f9f157dfe767586f3af6bb5576db9f",
+      "recordings/receipts/test-pool1-trained_online_low_eta-completed.json": "0dca391f97829f2829182ade19b36dcfbe4c25aac584bd9fe1aedb2e3b1ed25c"
+    }
+  },
+  "portable_views": {
+    "path": "reports/fly-rate-views-12.zip",
+    "sha256": "e15d631430874151629d63a6b3df090f1dc23792949e9d55e84fca05846a0581",
+    "members": {
+      "development-pool0-trained_online_carry/report.json": "481264898b20f6d489b4fe797c09f78b47e0bf02baea34a4142820572ff07b57",
+      "development-pool0-trained_online_carry/view.json": "55a054c5eec6724c1270db81ed0faa7d65390112fd1cb717abfe8bee2028d2f6",
+      "development-pool0-trained_online_low_eta/report.json": "555742d307c4dc98a4ba6848356a2d9a7ddd28dac41e739c73c6314cc8ca47c5",
+      "development-pool0-trained_online_low_eta/view.json": "dead2dba72e2f109c69e95e689ce22fac6573344eb3552b017a0b8e47f4334ff"
+    }
+  },
+  "cloud_closure": {
+    "observed_at": 1789302741.662551,
+    "apps": [
+      {
+        "app_id": "ap-iago8vyn3jufBrB1dxuogO",
+        "description": "fly-paper-lab",
+        "state": "deployed",
+        "tasks": "1",
+        "created_at": "2026-09-11 21:19:32-05:00",
+        "stopped_at": null
+      },
+      {
+        "app_id": "ap-7sLGhhrGH7wsM458fmf0XY",
+        "description": "fly-paper-rate-market-12",
+        "state": "stopped",
+        "tasks": "0",
+        "created_at": "2026-09-13 00:42:08-05:00",
+        "stopped_at": "2026-09-13 07:31:50-05:00"
+      }
+    ],
+    "cloud_submissions": 0
+  },
+  "budget": {
+    "estimated_compute_usd": 0.0038505071551322933,
+    "monthly_reserved_usd": 4.5887282720074785,
+    "monthly_limit_usd": 25,
+    "provider_bill": false,
+    "reserved_usd": 0.1608936,
+    "study_accounted_usd": 0.9066407692758178,
+    "study_allowance_usd": 3.0,
+    "nonpreemptible": true,
+    "price_multiplier": 3
+  },
+  "all_67_frozen_sources_unchanged": true,
+  "new_neural_observations_during_analysis": 0,
+  "cloud_submissions_during_analysis": 0,
+  "policy_promoted": false,
+  "interpretation": "Complete full-array, ledger, input and projection audits passed. The compact evidence archive reproduces diagnostics from those audits; it omits raw neural recordings and databases and is not a substitute for repeating the full audit. Portable views retain only their displayed subset. The budget is a conservative compute ledger, not a provider invoice.",
+  "diagnostic_reproduction": {
+    "evidence_members": 68,
+    "all_archive_members_verified": true,
+    "diagnostic_json_byte_identical": true,
+    "sha256": "d2a882bff6babc31595ae0d9ad737978ae4a69ff2bf0db6b1ad48f08a062a42d",
+    "fresh_dependency_install": false
+  },
+  "browser_case": {
+    "method": "CUA accessibility and screenshot inspection, compared with full recorded arrays",
+    "url": "http://127.0.0.1:8772/?run=development-pool0-trained_online_low_eta&compare=development-pool0-trained_online_carry&step=3&bin=28&neuron=10527&edge=8022240",
+    "all_16_audited_runs_listed": true,
+    "current_action": "SELL",
+    "comparison_action": "HOLD",
+    "neuron_10527_spikes_at_bin_28": [
+      1,
+      0
+    ],
+    "edge_8022240_displayed_weights_at_bin_28": [
+      1.303077,
+      1.450877
+    ],
+    "neuron_and_edge_are_independent_selections": true,
+    "new_assays_submitted": 0
+  },
+  "diagnostic_checks": {
+    "tests": 45,
+    "passed": 45,
+    "command": "PYTHONHASHSEED=0 MPLCONFIGDIR=/tmp/fly-mpl python -m pytest tests/test_fly_rate_report.py tests/test_fly_loss_attribution.py tests/test_fly_trade_trace.py tests/test_market_baselines.py -q",
+    "synthetic_unit_tests_are_not_market_results": true
+  }
+}

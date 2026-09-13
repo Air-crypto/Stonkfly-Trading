@@ -7,9 +7,10 @@ change completes an instrumentation task; it does not complete the trading
 improvement task.
 
 **The debugger is implemented. Effective learning and profitable trading remain
-unproven.** The next decision gate is an improvement in account outcomes on
-fresh data. Additional neural diagnostics should resolve a specific failed
-trade or learning hypothesis.
+unproven.** Study 12's lower-rate candidate failed the fresh-data comparison.
+The next change should address economically useful decisions, not pursue smaller
+updates as an outcome. Additional neural diagnostics should resolve a specific
+failed trade or learning hypothesis.
 
 ## Completed
 
@@ -52,6 +53,13 @@ trade or learning hypothesis.
 - [x] Register and deploy study 12 before its future market window. It compares
   pristine frozen, trained frozen, online eta 0.001 and online eta 0.0001, with
   separate $1,000 accounts per arm and phase.
+- [x] Finish all 16 study 12 captures and independent full-array audits: 372
+  observations, 18,600 bins and 400 account marks. Lower eta failed selection;
+  all arms lost in both phases. Publish the [results and loss diagnosis](fly-rate-result-12.md).
+- [x] Trace its first changed action from raw counts into SELL and later BUY
+  fills; verify the paired browser view and publish portable recordings.
+- [x] Stop the completed temporary study app after verifying its idle worker.
+  Its conservative compute ledger accounted for $0.90664 against a $3 allowance.
 
 The [debugger guide](fly-debugger.md), [completed financial comparison](fly-online-comparison.md),
 [learning-rate assay](fly-learning-rate.md) and [study 12 deployment record](../reports/fly-rate-market-execution-12.json)
@@ -60,21 +68,20 @@ matches the [completed full/portable browser check](../reports/fly-learning-scal
 
 ## In progress
 
-- [ ] Complete study 12's **06:00–08:00 UTC development** and **08:00–10:00 UTC
-  test** collection on September 13 (1–5 a.m. Chicago time overall). The cloud
-  witness was verified at 05:43:24 UTC. Collection is followed by chronological
-  simulation, not by live orders during that window.
-- [ ] Capture all 16 complete pool/arm/phase conditions, then independently
-  audit their prices, news, trades, feedback, learning bins and displayed curves.
-- [ ] Publish the results, paired debugger views and cost/turnover comparison;
-  stop the temporary study app after verified completion.
+- [ ] Specify one cost-aware action/readout change using the audited first
+  SELL–BUY divergence. Include timing and exposure: lower eta's development
+  loss worsened mainly through costs, but its test loss worsened through the
+  fixed-fill midpoint component despite almost unchanged friction.
+- [ ] Test its mechanics on retained development examples, then preregister
+  a fresh comparison against unchanged controls and cash. Existing study 11/12
+  results are now diagnostic data, not a new untouched test set.
+- [ ] Require improvement after costs on new data before broadening or promoting
+  the candidate. A rule that merely stays in cash has not established profitable learning.
 
 The [results workflow](fly-rate-market.md#download-audit-and-inspect-the-completed-comparison)
-is implemented and tested. It reads existing calls, downloads hash-matching
-recordings and builds audited views without constructing a local brain. Its
-implementation checks are not study 12 performance results. Completion time
-depends on coverage and cloud calls after 10:00 UTC; it is not promised at the
-collection endpoint.
+downloaded and audited every study 12 condition without constructing a local
+brain. The [completion record](../reports/fly-rate-completion-12.json) preserves
+the archive hashes, stopped study app and separate retained paper-lab deployment.
 
 ## Important gaps
 
@@ -105,11 +112,10 @@ memecoin; the indexer can also return pools that are not memecoins.
 
 ## Roadmap and decision gates
 
-1. **Finish the registered comparison.** Preserve its current sources and
-   cohort. Reconstruct all 16 results, retain missing observations, and report
-   every arm. Development selection is fixed before any test simulation. Low
-   coverage makes the result inconclusive; it does not permit replacing a pool
-   retrospectively. A favorable two-pool result only earns replication.
+1. **Completed gate: study 12.** All 16 conditions passed their audits and
+   coverage threshold. Development selection preceded every test simulation;
+   no candidate was selected. Preserve its sources, missing observations and
+   failed hypothesis. Do not turn the best test arm into a selected winner.
 
 2. **Choose the next change from the failed trades.** Distinguish trading costs
    and excessive turnover, poor directional decisions, reward timing, and data

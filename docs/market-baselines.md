@@ -43,6 +43,14 @@ versus reset's 20 fills trading **$450.34**. Position timing, size, costs and
 terminal inventory all matter. The next experiment should evaluate net outcomes,
 not optimize for fewer spikes, fewer fills or smaller weight updates alone.
 
+## Study 12
+
+The same references on [study 12's sealed prices](../reports/market-baselines-12.json)
+lost in both phases: one-entry holding ended at $996.35 in development and
+$995.63 in test; constant target ended at $981.82 and $978.56. All four fly
+variants also lost. These remain descriptive comparisons with differing exposure,
+not new selection arms. See the [full result and diagnosis](fly-rate-result-12.md).
+
 ## Reproduce
 
 The [baseline report](../reports/market-baselines-11.json) retains all 300

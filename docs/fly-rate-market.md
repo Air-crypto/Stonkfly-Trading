@@ -1,5 +1,11 @@
 # Fresh market comparison of learning rates
 
+**Completed and independently audited.** [Study 12 results](fly-rate-result-12.md)
+cover all 16 conditions, 372 observations and 18,600 bins. The lower-rate
+candidate failed selection, and all arms lost money in both phases. The temporary
+study app is stopped; the separate paper-lab deployment was retained. The
+following sections preserve the registration, preparation and execution workflow.
+
 The [lower-rate neural assay](fly-learning-rate.md) reduced later weight movement
 but introduced an extra BUY. It did not establish better trading. The next
 comparison must measure fresh account outcomes and turnover after execution
@@ -11,10 +17,10 @@ September 13, 2026. The cloud witness was saved at **05:43:24 UTC**, before
 development. Its exact registration bytes, all 67 execution source hashes and
 owning call/input were independently read back and verified. The
 [deployment record](../reports/fly-rate-market-execution-12.json) retains this
-evidence. The temporary app and main paper app are both deployed.
+evidence. Both apps were deployed at the initial witness check.
 The [market preflight record](../reports/fly-rate-market-preflight-12.json)
 contains the 91 passing checks, execution source hashes and observed shared
-budget. No study 12 market observations have been simulated yet.
+budget. No study 12 market observations had been simulated at that preflight.
 
 The first metadata call settled to a $0.00303 compute estimate; the shared
 worker ledger stood at $3.34372. It only armed the future experiment. Its $3
@@ -150,19 +156,19 @@ rate. No policy is promoted by exporting a checkpoint.
 
 ## Cloud collection and capture
 
-The main app collects live quotes and news during the four-hour window. Once
+During this completed study, the main app collected live quotes and news during the four-hour window. Once
 the endpoint is present in its snapshot, a dedicated temporary worker seals
 the inputs and replays them chronologically. This is a prospective replay of
 fresh data; the experiment does not submit trades during collection. The
 existing main paper trader continues separately.
 
-The study worker wakes every five minutes, at minutes 2, 7, 12 and so on. It
+The study worker was scheduled every five minutes, at minutes 2, 7, 12 and so on. It
 uses the shared worker lease, so an overlapping main call or study call skips
 instead of writing concurrently. Each complete pool/arm/phase runs once in a
 new non-preemptible container with two CPUs and 8 GiB. The 600-second call
 contains one seed-zero subprocess with at most 480 seconds for neural capture.
-Sixteen complete conditions and independent audits follow collection; results
-are not expected exactly at 10:00 UTC.
+Sixteen complete conditions and independent audits followed collection. The
+temporary study schedule has since been stopped after verified completion.
 
 Every claim is committed before capture. An interrupted, failed or uncertain
 claim halts further work and is never automatically retried. Both source
@@ -276,8 +282,8 @@ uv run --extra cloud python -m paperlab.debugger serve --backend modal \
 Visit <http://127.0.0.1:8772>. Viewing the recordings requires no new model run;
 the Modal backend keeps any separately requested input assay off the laptop.
 The complete-recording links use local hard links to the verified download.
-This workflow prepares result inspection; it does not claim the pending study
-has already produced audited trading results.
+The workflow has now produced the [completed audited results](fly-rate-result-12.md).
+Passing the audit establishes recording and accounting consistency, not profitability.
 
 The [results preflight record](../reports/fly-rate-results-preflight-12.json)
 preserves the 42 passing orchestration/transfer checks and the real read-only
