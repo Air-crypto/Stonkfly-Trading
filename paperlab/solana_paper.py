@@ -68,14 +68,16 @@ class Readout:
         self.rng=np.random.default_rng(seed); self.updates=0
     def values(self,x):
         with self.torch.no_grad(): return self.model(self.torch.tensor(x)).numpy().astype(float)
-    def choose(self,x):
+    def choose(self,x,allowed_actions=(0,1)):
+        if not allowed_actions or any(a not in (0,1) for a in allowed_actions): raise ValueError('Invalid action mask')
         q=self.values(x); explore=bool(self.rng.random()<.10)
-        action=int(self.rng.integers(2)) if explore else int(np.argmax(q))
-        return action,{'q_values':q.tolist(),'exploration':explore,'epsilon':.10}
-    def update(self,previous,x,reward,elapsed):
+        action=int(self.rng.choice(allowed_actions)) if explore else max(allowed_actions,key=lambda a:q[a])
+        return action,{'q_values':q.tolist(),'exploration':explore,'epsilon':.10,'allowed_actions':list(allowed_actions)}
+    def update(self,previous,x,reward,elapsed,allowed_actions=(0,1)):
+        if not allowed_actions or any(a not in (0,1) for a in allowed_actions): raise ValueError('Invalid action mask')
         torch=self.torch; before=torch.cat([p.detach().flatten() for p in self.model.parameters()]).clone()
         clipped=float(np.clip(reward/25,-1,1)); discount=.95**(elapsed/5)
-        with torch.no_grad(): target=clipped+discount*self.model(torch.tensor(x)).max()
+        with torch.no_grad(): target=clipped+discount*self.model(torch.tensor(x))[list(allowed_actions)].max()
         estimate=self.model(torch.tensor(previous['x']))[previous['action']]
         loss=torch.nn.functional.smooth_l1_loss(estimate,target)
         self.optimizer.zero_grad(); loss.backward()

@@ -37,10 +37,19 @@ def _run(run_id, parent):
     atomic_json(root/'owner.json',dict(call_id=modal.current_function_call_id(),parent=parent,
         run_id=run_id,at=time.time(),reservation=reservation,paper_only=True,source_sha256={
             n:digest('/opt/paperlab/'+n) for n in ('solana_online_cloud.py','paperlab/solana_online.py',
-                                                'paperlab/solana_events.py','paperlab/solana_service.py')}))
+                                                'paperlab/solana_events.py','paperlab/solana_service.py',
+                                                'paperlab/solana_paper.py','paperlab/solana_online_audit.py','paperlab/budget.py')}))
     volume.commit()
     try:
         result=run(root,'/state/fly-data',state/'solana-live'/parent,seconds=900,commit=volume.commit)
+        from paperlab.solana_online_audit import audit
+        result['account_audit']=audit(json.loads((root/'opening.json').read_text()),
+            [json.loads(line) for line in (root/'decisions.jsonl').read_text().splitlines()])
+        result['training_health']=('learning_from_paper_execution' if result['fills'] and result['nonzero_reward_updates']
+            else 'updates_without_execution_rewards' if result['new_readout_updates'] else 'no_learning_updates')
+        from decimal import Decimal
+        if Decimal(result['entry_budget_usd'])<Decimal('1.05') and not result['tradable_positions']:
+            result['training_health']='risk_capacity_exhausted'
         result['budget']=settle(state/'budget.json',reservation,time.time()-reservation['started'])
         atomic_json(root/'completed.json',result);volume.commit();return result
     except BaseException as exc:

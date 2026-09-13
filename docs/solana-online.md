@@ -33,13 +33,30 @@ and has no claim of convergence or profitable trading.
 
 Held inventory is never erased or replaced with fresh cash. Unavailable holdings
 after two minutes and sub-dollar dust move to a parked, still-tracked list; they
-retain cash flows and risk allocation and can reenter when usable. Flat tokens leave
+retain cash flows and quantities and can reenter when usable. Flat tokens leave
 the active queue after two minutes of unusable data or twenty minutes of token age;
 retired tokens are not readmitted. This prevents picking the same apparently
-successful token repeatedly. Acquisition cost, including fees, is capped at $100
-across all holdings, with a $25 order cap and the existing account loss stop.
-Unavailable holdings retain their quantities and risk allocation, with zero
-stress liquidation value. The inherited position's initial risk reserve is
+successful token repeatedly.
+
+The September 13 allocation repair (`quarantined_inventory_cash_floor_v1`) replaces
+the blanket $100 open-cost reservation that blocked trading behind unquotable holdings.
+After two minutes without a usable quote on a healthy feed, held inventory is
+quarantined from the tradable acquisition-cost allowance. A feed outage alone
+cannot trigger quarantine. Quantities, basis, cash flows, cash, and all past fees
+remain unchanged, with zero stress liquidation value until a valid quote returns.
+Recovery immediately restores that inventory's acquisition-cost reservation.
+Quarantine is not a sale, a debt release, a cash refill, or a confirmed rug label.
+
+New entries are sized at execution to at most $2.50 acquisition cost per mint,
+including fees, and clipped to both the $100 tradable cost allowance and cash above
+$902 (the original $900 account loss stop plus a $2 buffer). The legacy inventory
+remains in the account; its acquisition cost is not included in that $100 allowance
+while quarantined. Aggregate historical open basis can therefore exceed $100.
+Existing holdings can still be sold in $25-notional chunks, and LONG holds an
+existing lot. No buy can replenish or evade the preserved account loss budget.
+Infeasible flat-to-long actions are masked from sampling and bootstrap targets;
+rejected/expired orders do not earn Q-learning credit as executed experiences.
+The inherited position's initial risk reserve is
 conservatively approximated by legacy net cash spent; it is not a reconstructed
 FIFO cost basis. Exact swap execution and sellability are still unverified.
 
@@ -60,9 +77,19 @@ Collection pauses between windows; the laptop can be off throughout.
 
 The coordinator confirms the previous Modal call terminated before treating a
 published completion file as resumable. An ambiguous dispatch, crashed worker,
-invalid result, paper account loss stop, or storage cap disables further dispatch pending review. Busy
+invalid result, paper account loss stop, exhausted entry capacity with no tradable
+holdings, or storage cap disables further dispatch pending review. Busy
 shared writers are retried at the next scheduled check. There is no blind crash
 retry. Budget exhaustion defers the next attempt until the following UTC month.
+
+Every completed new window independently audits its delayed fills, cash, inventory,
+basis, fees, available valuation marks, and entry risk allowances. It records
+`training_health`, nonzero reward updates, dropped rejected-order credit, and the
+audit result alongside loss/gradient diagnostics. `learning_from_paper_execution`
+means there were fills and nonzero reward updates, not that performance improved.
+Zero-reward updates are labeled explicitly. The coordinator propagates these
+diagnostics into its durable control record; Codex also has an hourly follow-up
+to check for stalls or failures when the local app is available.
 
 The user authorized a $100 total monthly ceiling on September 13, 2026 and chose
 to pause at the budget limit. The online worker now has an $85 allocation in the

@@ -33,17 +33,52 @@ def test_single_cash_account_and_cashflow_rewards():
     assert Portfolio(p.state()).state()==p.state()
 
 
-def test_missing_position_keeps_inventory_and_risk_and_blocks_new_risk():
-    p=Portfolio(state())
-    for m in ('a','b','c','d'):
-        t=tick(m);p.execute(m,.025,99,t,{k:tick(k) for k in ('a','b','c','d')})
-    quantities={m:x['qty'] for m,x in p.positions.items()}
-    before=p.state();t=tick('e')
-    f=p.execute('e',.025,99,t,{'e':t})
-    assert f['status']=='rejected' and f['reason']=='aggregate_acquisition_cost_cap'
-    assert p.cash==Decimal(before['cash'])
-    assert all(p.positions[m]['qty']==q for m,q in quantities.items())
-    assert p.equity({})==float(p.cash)
+def locked_state():
+    return dict(cash='912.9515687621246',fees='5.3208408645',halted=False,
+                positions={'old':dict(qty='100',basis='99.24406717085564',cash_flow='-87.0484312378754')})
+
+
+def test_quarantine_preserves_loss_and_caps_new_entries_and_recovery():
+    from paperlab.solana_online import update_active
+    p=Portfolio(locked_state());before=p.state();t=tick('new')
+    assert p.execute('new',.025,99,t,{'new':t})['reason']=='entry_risk_budget'
+    created=dict(timestamp=900,received=901);active={'old':created};watched=dict(active);inactive={};retired=set()
+    update_active(active,watched,retired,inactive,p,{}, {},1000)
+    update_active(active,watched,retired,inactive,p,{}, {},1119)
+    assert not p.quarantined
+    update_active(active,watched,retired,inactive,p,{}, {},1120)
+    assert p.quarantined=={'old'} and p.cash==Decimal(before['cash'])
+    assert p.state()['positions']['old']==before['positions']['old']
+    assert p.entry_budget()==p.cash-902
+    for m in ('a','b','c','d','e'):
+        t=tick(m,1121);cash=p.cash;f=p.execute(m,.025,1120,t,{m:t})
+        assert p.cash>=902 and cash-p.cash<=Decimal('2.50')
+    assert p.entry_budget()<Decimal('1.05') and p.allowed_actions('another')==(0,)
+    assert p.positions['old']['qty']==100 and p.positions['old']['basis']==Decimal(before['positions']['old']['basis'])
+    restored=Portfolio(p.state());assert restored.quarantined=={'old'} and restored.cash==p.cash
+    # A recovered quote restores old acquisition risk; no inventory or loss is erased.
+    update_active(active,watched,retired,inactive,p,{'old':{'created':created}},{'old':tick('old',1130)},1130)
+    assert not p.quarantined and p.entry_budget()==0
+    assert p.execute('old',0,1129,tick('old',1130),{'old':tick('old',1130)})['side']=='SELL'
+
+
+def test_feed_outage_does_not_quarantine_and_loss_stop_cannot_be_reopened():
+    from paperlab.solana_online import update_active
+    p=Portfolio(locked_state());created=dict(timestamp=900,received=901)
+    active={'old':created};watched=dict(active);inactive={'old':1000}
+    update_active(active,watched,set(),inactive,p,{}, {},2000,connected=False)
+    assert not p.quarantined and not inactive
+    p.quarantined.add('old');p.cash=Decimal(899)
+    assert p.execute('new',.025,2000,tick('new',2001),{'new':tick('new',2001)})['reason']=='loss_stop'
+    assert p.halted and p.entry_budget()==0
+
+
+def test_masked_head_cannot_choose_or_bootstrap_blocked_buy():
+    h=Readout();x=np.zeros(FEATURES,dtype=np.float32)
+    for _ in range(30):assert h.choose(x,allowed_actions=(0,))[0]==0
+    q=h.values(x)
+    u=h.update(dict(x=x,action=0),x,0,5,allowed_actions=(0,))
+    assert u['target']==pytest.approx(.95*q[0],abs=1e-7)
 
 
 def test_later_fill_and_fee_accounting_independent_of_broker():
@@ -98,8 +133,20 @@ class FakeFly:
     def save(self,path):Path(path).write_bytes(b'fake test checkpoint')
 
 
-def test_cloud_entry_logic_rotates_launches_and_restores_account(tmp_path):
+@pytest.mark.parametrize('locked,reject_all',[(False,False),(True,False),(True,True)])
+def test_cloud_entry_logic_rotates_launches_and_restores_account(tmp_path,monkeypatch,locked,reject_all):
     clock=Clock();parent=make_parent(tmp_path)
+    if locked:
+        saved=json.loads((parent/'online-state.json').read_text());saved['portfolio']=locked_state()
+        saved['active']={'old':dict(mint='old',timestamp=900,received=901)}
+        atomic_json(parent/'online-state.json',saved)
+    calls=[0]
+    def choose_actions(self,x,allowed_actions=(0,1)):
+        action=int(calls[0]%12<6 and 1 in allowed_actions);calls[0]+=1
+        return action,dict(test_policy=True,allowed_actions=list(allowed_actions))
+    monkeypatch.setattr(Readout,'choose',choose_actions)
+    if reject_all:
+        monkeypatch.setattr(Portfolio,'execute',lambda *args:dict(status='rejected',reason='entry_risk_budget'))
     class FakeFeed:
         def __init__(self,root):self.lock=threading.Lock();self.pinned_mints=set();self.accepted={}
         def accept(self,created):self.accepted[created['mint']]=created
@@ -113,19 +160,28 @@ def test_cloud_entry_logic_rotates_launches_and_restores_account(tmp_path):
                     token_program=TOKEN,is_mayhem_mode=False)
                 trades=[dict(received=clock()-6+i,timestamp=clock()-6+i,is_buy=bool(i%2),
                     mint=m,quote_mint=SOL,mayhem_mode=False,signature=str(clock())+m+str(i),log_index=i,
-                    virtual_sol_reserves=100_000_000_000,virtual_token_reserves=1_000_000_000_000,
+                    virtual_sol_reserves=int(100_000_000_000*(1+.03*np.sin((clock()-1000)/15))),virtual_token_reserves=1_000_000_000_000,
                     real_sol_reserves=50_000_000_000,sol_amount=1000000) for i in range(6)]
                 out[m]=dict(created=created,trades=trades,complete=False)
             return out
-    result=run(tmp_path/'run','unused',parent,seconds=150,fly_factory=FakeFly,feed_factory=FakeFeed,
+    result=run(tmp_path/'run','unused',parent,seconds=300,fly_factory=FakeFly,feed_factory=FakeFeed,
         clock=clock,sleep=clock.sleep,fx_fetch=lambda:100)
     rows=[json.loads(x) for x in (tmp_path/'run/decisions.jsonl').read_text().splitlines()]
     assert result['status']=='completed' and result['active_tokens']==3
     assert {r['neural']['mint'] for r in rows if r['neural']}=={'a','b','c'}
-    assert result['readout_updates']>42 and result['new_readout_updates']==result['readout_updates']-42
+    assert result['new_readout_updates']==result['readout_updates']-42
+    if reject_all:
+        assert result['new_readout_updates']==0 and result['rejected_order_credit_dropped']>0
+    else:
+        assert result['new_readout_updates']>0 and result['nonzero_reward_updates']>0 and result['fills']>0
+        assert {e['fill']['side'] for r in rows for e in r['executions'] if e['fill']['status']=='filled'}=={'BUY','SELL'}
+    if locked:
+        assert result['portfolio']['positions']['old']==locked_state()['positions']['old']
+        assert 'old' in result['portfolio']['quarantined']
     assert all(r['neural']['learning_diagnostics']['equity_reward_usd']==0 for r in rows if r['neural'] and r['neural']['switched_token'])
     # Reconstruct all shared-account fills using Decimal rather than calling Portfolio/Broker.
-    cash=Decimal(1000);qty={};fees=Decimal(0)
+    opening=json.loads((tmp_path/'run/opening.json').read_text())['portfolio']
+    cash=Decimal(opening['cash']);qty={m:Decimal(p['qty']) for m,p in opening['positions'].items()};fees=Decimal(opening['fees'])
     for r in rows:
         for e in r['executions']:
             f=e['fill'];m=e['mint']
@@ -261,3 +317,12 @@ def test_scheduler_pauses_on_paper_loss_stop(tmp_path):
     c=service(tmp_path,dispatch=lambda *_:'must-not-dispatch',poll=lambda _:dict(status='completed'),
               commit=lambda:None,now=2000)
     assert not c['enabled'] and c['status']=='paper_loss_stop_requires_review'
+
+
+def test_scheduler_does_not_burn_compute_when_no_risk_capacity_remains(tmp_path):
+    c=service(tmp_path,dispatch=lambda *_:'call',poll=lambda _:None,commit=lambda:None,now=1000)
+    atomic_json(tmp_path/'solana-live'/c['pending']['run_id']/'completed.json',
+        dict(status='completed',paper_only=True,training_health='risk_capacity_exhausted',portfolio={'halted':False}))
+    c=service(tmp_path,dispatch=lambda *_:pytest.fail('Risk stop bypassed'),poll=lambda _:dict(status='completed'),
+              commit=lambda:None,now=2000)
+    assert not c['enabled'] and c['status']=='training_risk_capacity_requires_review'

@@ -1,5 +1,6 @@
 """Shared paper portfolio and cross-launch online learning, cloud propagation only."""
 from collections import Counter
+from dataclasses import replace
 from decimal import Decimal
 from pathlib import Path
 import json
@@ -12,6 +13,9 @@ from .solana_paper import COSTS, Readout, inputs, prior_state, tick_for
 
 MAX_ACTIVE = 8
 MAX_RISK_USD = Decimal('100')
+MAX_ENTRY_DEBIT_USD = Decimal('2.50')
+CASH_FLOOR_USD = Decimal('902')  # Original $900 loss stop plus a $2 execution buffer.
+MIN_ENTRY_DEBIT_USD = Decimal('1.05')
 
 
 class Portfolio:
@@ -21,6 +25,8 @@ class Portfolio:
         self.fees = Decimal(state['fees'])
         self.halted = bool(state.get('halted', False))
         self.positions = {m: {k: Decimal(v) for k, v in p.items()} for m, p in state['positions'].items()}
+        self.quarantined = set(state.get('quarantined', []))
+        if not self.quarantined <= self.positions.keys(): raise ValueError('Unknown quarantined inventory')
         if self.cash < 0 or any(p['qty'] < 0 or p['basis'] < 0 for p in self.positions.values()):
             raise ValueError('Invalid portfolio')
 
@@ -28,7 +34,7 @@ class Portfolio:
         return self.positions.setdefault(mint, dict(qty=Decimal(0), basis=Decimal(0), cash_flow=Decimal(0)))
 
     def state(self):
-        return dict(cash=str(self.cash), fees=str(self.fees), halted=self.halted,
+        return dict(cash=str(self.cash), fees=str(self.fees), halted=self.halted, quarantined=sorted(self.quarantined),
                     positions={m: {k: str(v) for k, v in p.items()} for m, p in self.positions.items()})
 
     def view(self, mint):
@@ -45,14 +51,39 @@ class Portfolio:
     def equity(self, quotes):
         return float(self.cash) + sum(self.value(m, quotes.get(m)) for m in self.positions)
 
+    def entry_budget(self, mint=None):
+        """Quarantine changes allocation only; it never restores cash, basis, or equity."""
+        active_basis = sum(p['basis'] for m,p in self.positions.items() if m not in self.quarantined)
+        room = min(MAX_RISK_USD-active_basis, self.cash-CASH_FLOOR_USD)
+        if mint is not None: room = min(room, MAX_ENTRY_DEBIT_USD-self.position(mint)['basis'])
+        return max(Decimal(0), room) if not self.halted else Decimal(0)
+
+    def allowed_actions(self, mint):
+        return (0,1) if self.position(mint)['qty'] or self.entry_budget(mint)>=MIN_ENTRY_DEBIT_USD else (0,)
+
+    def target(self, mint, action, tick):
+        if action == 0: return 0.
+        # LONG holds an existing lot; it does not repeatedly request more blocked exposure.
+        if self.position(mint)['qty']:
+            return min(COSTS.max_exposure, float(self.position(mint)['qty'])*tick.mid/self.view(mint).equity(tick))
+        return COSTS.max_exposure
+
     def execute(self, mint, target, issued, tick, quotes):
         if self.equity(quotes) <= 900: self.halted = True
         b = self.view(mint); before = b.cash; before_qty = b.qty
+        requested = Decimal(str(b.equity(tick)*target/tick.mid))-b.qty
+        buying = requested*Decimal(str(tick.mid)) >= 1
+        budget = self.entry_budget(mint)
+        if buying and not self.halted:
+            if budget < MIN_ENTRY_DEBIT_USD:
+                return dict(status='rejected', reason='entry_risk_budget', entry_budget_usd=str(budget))
+            # Re-size on the actual later receipt, with fees inside the debit allowance.
+            b.c = replace(COSTS, max_order=float(budget/Decimal('1.0125'))*.999999)
         fill = b.execute(target, issued, tick)
         if fill['status'] != 'filled': return fill
         p = self.position(mint); debit = before - b.cash
-        if fill['side'] == 'BUY' and sum(v['basis'] for v in self.positions.values()) + debit > MAX_RISK_USD:
-            return dict(status='rejected', reason='aggregate_acquisition_cost_cap')
+        if fill['side'] == 'BUY' and debit > budget:
+            return dict(status='rejected', reason='entry_risk_budget')
         p['basis'] = p['basis'] + debit if fill['side'] == 'BUY' else p['basis'] * b.qty / before_qty
         p['qty'] = b.qty; p['cash_flow'] += b.cash - before
         self.cash = b.cash; self.fees = b.fees; self.halted |= b.halted
@@ -85,9 +116,18 @@ def choose(candidates, current, burst, visits):
 
 
 
-def update_active(active, watched, retired, inactive, portfolio, snapshots, quotes, now):
-    """Park unavailable/dust holdings without releasing cash or acquisition-cost risk."""
+def update_active(active, watched, retired, inactive, portfolio, snapshots, quotes, now, connected=True):
+    """Quarantine unavailable holdings after healthy-feed observation; retain the entire ledger."""
     removed = []; admitted = []
+    if not connected:
+        inactive.clear(); return admitted, removed
+    for m in quotes: portfolio.quarantined.discard(m)
+    # Include parked/watched inventory on subsequent windows, not just active tokens.
+    for m in watched:
+        if m in quotes: inactive.pop(m, None)
+        elif portfolio.position(m)['qty']:
+            inactive.setdefault(m, now)
+            if now-inactive[m] >= 120: portfolio.quarantined.add(m)
     for m in list(active):
         qty = portfolio.position(m)['qty']; t = quotes.get(m)
         if t: inactive.pop(m, None)
@@ -130,10 +170,12 @@ def run(root, data, parent, *, seconds=900, commit=lambda: None, fly_factory=Non
     atomic_json(root/'started.json', dict(at=started, deadline=deadline, paper_only=True,
         max_active_tokens=MAX_ACTIVE, shared_capital=1000, interval_seconds=5, parent=str(parent),
         coverage='Pump launches received during this window; bounded admission, not every token',
-        max_aggregate_acquisition_cost_usd=100, news_enabled=False))
+        risk_policy='quarantined_inventory_cash_floor_v1', max_tradable_acquisition_cost_usd=100,
+        max_new_position_debit_usd=2.5, minimum_cash_after_buy_usd=902, news_enabled=False))
     commit()
     fly = None; current = None; burst = 0; visits = {}; contexts = {}; inactive = {}
-    rows = trained = fills = overruns = 0; status = 'collecting'; next_step = started; next_fx = 0.
+    rows = trained = fills = overruns = nonzero_rewards = rejected_credit = 0
+    status = 'collecting'; next_step = started; next_fx = 0.
     fx = fx_seen = 0.; reasons = Counter(); snapshots = {}; quotes = {}
     def fetch_fx():
         r = requests.get('https://api.coinbase.com/v2/prices/SOL-USD/spot', timeout=4)
@@ -166,7 +208,7 @@ def run(root, data, parent, *, seconds=900, commit=lambda: None, fly_factory=Non
                 if reason is None and t: quotes[m] = t
                 else: rejected[m] = reason or 'missing_quote'
             admissions, removals = update_active(active, watched, retired, inactive,
-                                                  portfolio, snapshots, quotes, now)
+                                                  portfolio, snapshots, quotes, now, connected=connected)
             for m in removals: contexts.pop(m, None)  # Pending orders and credit expire; inventory stays.
             with feed.lock: feed.pinned_mints = set(watched)
             if len(watched) > 128: status = 'capacity_stopped'; break
@@ -186,9 +228,11 @@ def run(root, data, parent, *, seconds=900, commit=lambda: None, fly_factory=Non
                     fill = portfolio.execute(m, c['pending']['target'], c['pending']['issued'], t, quotes)
                     executions.append(dict(mint=m, tick=t.__dict__, fill=fill))
                     fills += fill['status'] == 'filled'
+                    if fill['status']=='rejected' and fill.get('reason')!='not_after_decision':
+                        c['previous']=None; rejected_credit+=1
                     if fill.get('reason') != 'not_after_decision': c['pending'] = None
                 c['ticks'].append(t); c['ticks'] = c['ticks'][-100:]
-                if len(c['ticks']) >= 12: fresh.append(m)
+                if len(c['ticks']) >= 12 and c['pending'] is None: fresh.append(m)
             neural = None; learning = None; decision = None
             picked, next_burst = choose(fresh, current, burst, visits)
             if picked and deadline-clock() > 30:
@@ -211,11 +255,13 @@ def run(root, data, parent, *, seconds=900, commit=lambda: None, fly_factory=Non
                                          delta if not switched and continuous else 0., native_path)
                     x = inputs(c['ticks'], snapshots[m], portfolio.view(m), neural, now)
                     x[10] = max(-5., min(5., contribution/25))
+                    allowed = portfolio.allowed_actions(m)
                     if c['previous'] is not None:
-                        learning = head.update(c['previous'], x, delta, t.ts-c['previous']['ts'])
-                    action, prediction = head.choose(x); issued = clock()
+                        learning = head.update(c['previous'], x, delta, t.ts-c['previous']['ts'], allowed_actions=allowed)
+                        nonzero_rewards += abs(delta)>1e-12
+                    action, prediction = head.choose(x, allowed_actions=allowed); issued = clock()
                     if issued-t.received_at <= 15 and c['pending'] is None:
-                        c['pending'] = dict(target=(0., .025)[action], issued=issued)
+                        c['pending'] = dict(target=portfolio.target(m,action,t), issued=issued)
                         c['previous'] = dict(x=x, action=action, ts=t.ts)
                         decision = dict(mint=m, action=action, issued=issued, target=c['pending']['target'])
                     else: c['previous'] = None
@@ -234,6 +280,8 @@ def run(root, data, parent, *, seconds=900, commit=lambda: None, fly_factory=Non
                 unavailable_positions=[m for m,p in portfolio.positions.items() if p['qty'] and m not in quotes],
                 feed=health, neural_observations=trained, readout_updates=head.updates,
                 new_readout_updates=head.updates-opening_updates, fills=fills, overruns=overruns,
+                risk_policy='quarantined_inventory_cash_floor_v1', entry_budget_usd=str(portfolio.entry_budget()),
+                nonzero_reward_updates=nonzero_rewards, rejected_order_credit_dropped=rejected_credit,
                 step_seconds=elapsed, skip_reasons=dict(reasons))
             ledger.write(json.dumps(row, allow_nan=False)+'\n'); ledger.flush()
             atomic_json(root/'latest.json', row); rows += 1
@@ -254,6 +302,10 @@ def run(root, data, parent, *, seconds=900, commit=lambda: None, fly_factory=Non
     result = dict(status=status, started=started, ended=clock(), steps=rows, paper_only=True,
         neural_observations=trained, readout_updates=head.updates, new_readout_updates=head.updates-opening_updates,
         fills=fills, active_tokens=len(active), portfolio=portfolio.state(),
+        risk_policy='quarantined_inventory_cash_floor_v1', entry_budget_usd=str(portfolio.entry_budget()),
+        nonzero_reward_updates=nonzero_rewards, rejected_order_credit_dropped=rejected_credit,
+        tradable_positions=[m for m,p in portfolio.positions.items() if p['qty'] and portfolio.value(m,quotes.get(m))>=1],
+        unavailable_positions=[m for m,p in portfolio.positions.items() if p['qty'] and m not in quotes],
         equity_stress_usd=portfolio.equity(quotes), skip_reasons=dict(reasons), feed=feed.health(),
         profitable_learning_proven=False)
     atomic_json(root/'result.json', result); commit(); return result
