@@ -216,7 +216,8 @@ def test_exhausted_shared_budget_prevents_capture(snapshot,monkeypatch):
     assert result=={'status':'budget_stopped'} and not (state/DIRECTORY).exists()
 
 
-def test_observer_uses_same_handle_after_timeout(tmp_path,monkeypatch):
+@pytest.mark.parametrize('builtin_timeout',[False,True])
+def test_observer_uses_same_handle_after_timeout(tmp_path,monkeypatch,builtin_timeout):
     import modal
     from paperlab.fly_rate_checkpoint_cloud import observe
     atomic_json(tmp_path/'request.json',{})
@@ -224,7 +225,8 @@ def test_observer_uses_same_handle_after_timeout(tmp_path,monkeypatch):
     seen=[]
     class Call:
         def get(self,timeout):
-            assert timeout==50;raise modal.exception.TimeoutError()
+            assert timeout==50
+            raise (TimeoutError if builtin_timeout else modal.exception.TimeoutError)()
     def from_id(value):seen.append(value);return Call()
     monkeypatch.setattr(modal.FunctionCall,'from_id',from_id)
     for _ in range(2):assert observe(tmp_path)['status']=='pending'

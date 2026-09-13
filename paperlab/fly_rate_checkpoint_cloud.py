@@ -109,8 +109,10 @@ def verify_download(root, result):
                     or not np.array_equal(z['memory_u'],state['u'])
                     or not np.array_equal(z['memory_w'],state['w'])):
                 raise ValueError('Exported memory does not match its saved checkpoint')
+    executed=json.loads((a/'request.json').read_text())['source_sha256']
     report={'status':'checkpoint_download_and_selection_verified', 'call_id':result['call_id'],
-            'cohort':capture['cohort'], 'source_sha256':source_hashes(),
+            'cohort':capture['cohort'], 'executed_source_sha256':executed,
+            'verification_source_sha256':digest(__file__),
             'artifact_sha256':result['artifact_sha256'], 'native_constructions_local':0,
             'neural_observations':0, 'policy_promoted':False,
             'scope':'Local receipt, cohort, exposure and u/w verification; full graph/configuration '
@@ -125,7 +127,7 @@ def observe(root):
     if (root/'cloud-result.json').exists(): result=json.loads((root/'cloud-result.json').read_text())
     else:
         try: result=modal.FunctionCall.from_id(receipt['call_id']).get(timeout=50)
-        except modal.exception.TimeoutError:
+        except (TimeoutError, modal.exception.TimeoutError):
             return {'status':'pending','call_id':receipt['call_id'],'action':'Observe this same call again; do not resubmit.'}
         terminal_result(result, request, receipt);atomic_json(root/'cloud-result.json',result)
     terminal_result(result, request, receipt)

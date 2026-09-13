@@ -1,0 +1,48 @@
+{
+  "status": "design_functions_ready_no_market_registration",
+  "created_at": 1789276789.717671,
+  "study": "12",
+  "arms": {
+    "pristine_frozen": {
+      "memory": "pristine",
+      "activity_reset": "carry",
+      "eta": 0.001,
+      "learning": false
+    },
+    "trained_frozen": {
+      "memory": "paper_trained",
+      "activity_reset": "carry",
+      "eta": 0.001,
+      "learning": false
+    },
+    "trained_online_carry": {
+      "memory": "paper_trained",
+      "activity_reset": "carry",
+      "eta": 0.001,
+      "learning": true
+    },
+    "trained_online_low_eta": {
+      "memory": "paper_trained",
+      "activity_reset": "carry",
+      "eta": 0.0001,
+      "learning": true
+    }
+  },
+  "hypothesis": "Reducing the online learning rate from 0.001 to 0.0001 while retaining both KC and DAN histories improves fresh cost-aware paper outcomes relative to the original rate, frozen trained memory and pristine frozen memory. Smaller updates alone are not success.",
+  "inference_protocol": "Use the pinned current-cohort checkpoint export for all paper_trained arms and native initial memory for pristine_frozen. Start each pool, arm and phase with fresh dynamics, its declared weights/u/w, a new $250 account and no pending order. Keep $500 idle per arm so total starting capital is $1000. Development accounts and learned memory do not flow into test. Retain both KC and DAN histories between eligible observations. Keep the full graph, original image adapter, 500 ms observation, fixed decoder and 200 ms dopamine pulse at current 20. Frozen arms receive no learning or reinforcement. Online arms receive their own equity change after execution of the preceding decision, zero across unpriced gaps: above $0.01 gives reward, below -$0.01 gives aversive, otherwise none. Learning stays enabled without an injected pulse. Only the candidate uses eta 0.0001; the other arms use 0.001. No extra current or partial state reset is applied. Missing, repeated and terminal quotes do not advance the brain. Sealing, reconstruction and simulation run in fresh Python processes with PYTHONHASHSEED=0 before startup.",
+  "selection_rule": "The sole candidate is trained_online_low_eta. Require at least 18 of 24 eligible observations in each development pool and identical coverage across all four arms. Select only when candidate aggregate development equity strictly exceeds all three controls and $1000 plus $40/month hosting prorated to two hours on a 30-day month, by more than 1e-9. Equity includes the declared execution costs. Persist selection after all eight development chunks and before any test chunk. Run and report all eight test chunks regardless of selection, including turnover, fees, missing marks and coverage. Insufficient test coverage is inconclusive. Never reselect from test or automatically promote a policy. Two-hour results are not monthly return estimates.",
+  "phase_steps": 24,
+  "phase_seconds": 7200,
+  "planned_conditions": 16,
+  "hosting_allocation_per_phase_usd": 0.1111111111111111,
+  "protocol_source_sha256": "89869b70d3734dfe2d52f82528b1ec9811e8792e424a619d7213f481b827fa51",
+  "training_audit_sha256": "f5756cf38ef9d7bec95849724ddfc56dd939e33fe864df4235e4b6fef9e10fff",
+  "checkpoint_array_audit_sha256": "dcb38c57267ceac4706379921771c77a63ba913a2ec9e476578a3e92eadf5102",
+  "remaining": [
+    "Implement and validate study 12 input sealing and complete phase capture/audit integration.",
+    "Pin execution sources and register future windows in cloud before development starts."
+  ],
+  "market_window_registered": false,
+  "new_neural_observations": 0,
+  "policy_promoted": false
+}

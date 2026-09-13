@@ -1,0 +1,3396 @@
+{
+  "status": "checkpoint_exported_array_audited_and_app_stopped",
+  "observed_at": 1789276789.714977,
+  "call": {
+    "status": "submitted",
+    "call_id": "fc-01M2CJW6V4381X2SW7EW8EE095",
+    "submitted_at": 1789276330.8976471,
+    "request_sha256": "c7b2c892f3983c5b7c670dd1fc6c470f9b987288913f9eee511b1007a8b59940"
+  },
+  "terminal_claim": {
+    "status": "completed",
+    "call_id": "fc-01M2CJW6V4381X2SW7EW8EE095",
+    "input_id": "in-01M2CJW6VGE1CBSWAQSF3132DG:1789276330891-0",
+    "claimed_at": 1789276337.0336075,
+    "request_sha256": "c7b2c892f3983c5b7c670dd1fc6c470f9b987288913f9eee511b1007a8b59940",
+    "reserved_usd": 0.1608936,
+    "source_sha256": {
+      "cloud.py": "eee4683216d811b21b72948cc0a48b6731e66a747f984dc77cf1ffd2420265bb",
+      "paperlab/budget.py": "02b7ba058c12c9166fd432465d68e0187f6aba16fb60212e261eeecf26805f3f",
+      "paperlab/core.py": "c13a32ba4d2336a0ffdee1cfdd3ab551a292d45fa358fc07959bbff0824a219f",
+      "paperlab/fly.py": "4935f43219ab63d19fa2cc04b36a5612307a4cf44a016b0af2c8f0d69e4a5fea",
+      "paperlab/fly_activation_protocol.py": "47150d63c39d2a12aabbe04ff0d7c5a3f77f2f6f05905656ba11970e669d8ccd",
+      "paperlab/fly_credit_audit.py": "5a9260b232fb827e7e266278933753899b3b26887fe9826f48017769b08a5f73",
+      "paperlab/fly_credit_reset_audit.py": "39a06c9502501150d19e779ea12081b622504638477714fa74277beb67f40501",
+      "paperlab/fly_market_activity.py": "d805504fcae6f303dc8b96d2b3321c4db6638d8163c035af07f8f537d6930e3f",
+      "paperlab/fly_market_activity_audit.py": "46042fad9113bafea192937dcca0a01f2f6901ea11b430793b4f1e17e3391ff2",
+      "paperlab/fly_market_memory_audit.py": "3d11d00bc6643d6f7a5efa0fe9db009a8c13526d4aa30e222179cf628be8ad3b",
+      "paperlab/fly_market_pulse.py": "070824d264ed8b615bd7535ad0613c31e6ec5c5cc91ee4a2ad7d8d66c4cb53b4",
+      "paperlab/fly_market_restoration.py": "8351610e09fdba46251cb44c61510509e1c46e1ade58dfbd880848e85878d1a2",
+      "paperlab/fly_market_study.py": "3432a2db341f99d5ced2d03db5f4812d39067022ea8f2f28be99227bf1f70bb9",
+      "paperlab/fly_online_audit.py": "26c6fdf96e3d7d18f35f9891d017fc6c0250df7ee12d0809bc43391e563f7c6a",
+      "paperlab/fly_online_protocol.py": "2f01ef48bb69ac1149d9ea4f1529410a5e3e869a5ace02d8fa2b6e516e258d65",
+      "paperlab/fly_online_study.py": "368f3078dd5d96dede1b8dd56d4bd5574f42dcb4420720a0040e959d1d0a3ea5",
+      "paperlab/fly_paper_audit.py": "3cb98eeaf2e4d68ef569a8e2f5dc50bf214882d5dcd699648dd12de5de55d41b",
+      "paperlab/fly_paper_inputs.py": "514f622194eea7f44f8417b5a028928e4454c80d38ecdbf2757638193cfcfaa9",
+      "paperlab/fly_paper_memory.py": "f644c93acf1804b914a67d0cabe3bec3be1c65951b4fdb201b17962caad929ba",
+      "paperlab/fly_paper_price_audit.py": "6603b60bcaa6fa7fd91f26764d2361bc351399c5b955b971ed5768ec8b9561ed",
+      "paperlab/fly_paper_protocol.py": "3c9a341a9c117cf68f298cce4346c19d05b7d0aeade719cf2d064a338ece105f",
+      "paperlab/fly_paper_stimulation.py": "85072fc69a321b5d378fcde43d8485e4b8b09735e7ea5257eb05f79ec7ebd4b7",
+      "paperlab/fly_paper_study.py": "e58f3abbad26c1c27eccb134580d95e7fac139b27180f11ea14e69f9f885190e",
+      "paperlab/fly_rate_checkpoint.py": "d6eb7b9e044f174b2dede5d513a697e66da0b67988ed9880bba876d5e849c5fd",
+      "paperlab/fly_rate_checkpoint_cloud.py": "b4558bd991e1cbaa15afff015ee52532d6bb2923b2b69fa3e0ea547c1a87de9a",
+      "paperlab/fly_recording_download.py": "52f4389f3cf050dabff76bf2c21e9800c31d678646356063706645a94887d882",
+      "paperlab/fly_trace.py": "1b3a299d8423835a5abf1a2e3fd9a985f51a6280d2e2cd707aa47dd16e1575b1",
+      "paperlab/fly_trace_memory.py": "263b0c9181a8b6d3651c6481a48c076d387680e8c08f17631fb1dcdc8dd5178f",
+      "paperlab/fly_visual.py": "8d543c2ac60011e1bc80d676e488772ff331d3b0410ff9217b3ce440e497904b",
+      "paperlab/multi.py": "5ea7ad4f7522475707f4a15eefe094750007a2814f72caad9bea0a9c8076d475",
+      "paperlab/news.py": "b35fd73eed9051ff7c92972ec4f245c52c462bee61b986c5b777217d87a04058",
+      "paperlab/universe.py": "d495650516e7ef03376c1c83d965b659f76c809c8931b34e160b2c265b426d0d",
+      "rate_checkpoint_cloud.py": "0f992e2e34bd0fa4184ac8d44741b6babf14a38de844828be3d10bbdc94a0f0e",
+      "vendor/stonkfly/stonkfly/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "vendor/stonkfly/stonkfly/__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+      "vendor/stonkfly/stonkfly/actions.py": "f46e192aec5597178cb6de7e8f32a9f61fd60be58ea57ba40cde259a41063697",
+      "vendor/stonkfly/stonkfly/broker.py": "d9fb0ae801b8572fd7709a65e6e25aaf9c7a54922a372b182db3ba16c15edca4",
+      "vendor/stonkfly/stonkfly/cli.py": "f9b01f958681369bc6f4a34cb96ec613aadfa93469edbb831f839892fd77dffb",
+      "vendor/stonkfly/stonkfly/config.py": "7fc52aca6cba7356f8bfc76bd9a6dbc5d6fdc08611a48b53c56df23796584b4e",
+      "vendor/stonkfly/stonkfly/data.py": "d52d695d0d416900745fbcaafca74810b000e02ddcbff7434f5891923e172504",
+      "vendor/stonkfly/stonkfly/display.py": "58507e7404d79ffc84a81010515268a969c636916ef2fd0c73f0aa55f6d959df",
+      "vendor/stonkfly/stonkfly/ledger.py": "96df6dc502e7ca5c94b9b31cbf8622416528333233ef7f22467279f57f05cbce",
+      "vendor/stonkfly/stonkfly/market.py": "3ec3d67cb9e8bbc5b660350fa61ff9578b0b7e161e87931ba0d5021cea4f1413",
+      "vendor/stonkfly/stonkfly/neural/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "vendor/stonkfly/stonkfly/neural/brain.py": "895d0bcab7e03e859547e516905edc39fd2af4bb7ff7a7bf67d819bc15ac8c4d",
+      "vendor/stonkfly/stonkfly/neural/circuit.py": "e9ed5d237c7c01fbaf80f75cec75f5f9f2e33965461e3480813ade78597f6c45",
+      "vendor/stonkfly/stonkfly/neural/common.py": "e7986a92827c79e9da59c8ce7f7e8df262d188a5a93a173e37b1cd1c011aadfe",
+      "vendor/stonkfly/stonkfly/neural/connectome.py": "cd9ceb396ca9b408eb7beafe8abd0894d5c5e13aa63c9ec23ffbc55526f11d18",
+      "vendor/stonkfly/stonkfly/neural/controller.py": "8783a2812408af28c909803763850c69e162a780531d1983dd7a3e83eb72aede",
+      "vendor/stonkfly/stonkfly/neural/kernel.cpp": "e2d4d584f4633613277bb1bf6ea7ba20855c01a332ae2e9344ed7782604c8509",
+      "vendor/stonkfly/stonkfly/neural/prepare.py": "38a2821a8ee26fed74d88146931f77331038d6c2a69c4be8f885705630d130f3",
+      "vendor/stonkfly/stonkfly/neural/rule.py": "3c80680450c3b73042e332bd7ce8289d7d74d8695c60e7ac19eefd9759d95c44",
+      "vendor/stonkfly/stonkfly/neural/sensory.py": "46ba99fd966e251a3422f77fdd27a78fe45aa45f9fd14e498e3c5e578566f7ac",
+      "vendor/stonkfly/stonkfly/neural/state.py": "de3dac9f37f7c12546124383410e1ac0e720459e2f8e636d3fa155dce6a7d220",
+      "vendor/stonkfly/stonkfly/neural/transmitters.py": "b1c1b080da44bdeaf498cdce3504134c1cf070b875f84a4007f16002b2956f93",
+      "vendor/stonkfly/stonkfly/neural/visual.py": "65c9639ab7fb6c5d77f83f297c4d82cf8b7a068957bd78e1da957b3f9aeae952",
+      "vendor/stonkfly/stonkfly/reinforcement.py": "b883bd2fd70a2f7aeb8b0cacb0f42f649e28a7cbfd7b81dd99a0b95a4a3db4ad",
+      "vendor/stonkfly/stonkfly/risk.py": "902467f4f1e269fa0cfef856795f3b5adbfccf056bde03df797ba45492197aaa",
+      "vendor/stonkfly/tests/test_execution.py": "da3ca0c676d74314b6300bd523e1671c4fb5ebab4a53c508f44812668ea9ec4d",
+      "vendor/stonkfly/tests/test_market.py": "b10e5d5d64ade0e18543e6648aa10362788089bec21a81afcf57520293933a59",
+      "vendor/stonkfly/tests/test_neural.py": "5ffd41312d1f6bb96876b73fee9b06ceb5d7820d6f97cc1e27f08e4e4f5b0907"
+    },
+    "completed_at": 1789276509.6936452,
+    "result_sha256": "186992a657747e27502f9fe49160567bfc7dd7ce0ba8817e5711182ccc82a845"
+  },
+  "app": {
+    "app_id": "ap-0qqMUFKtw2aiAegpZU38iJ",
+    "description": "fly-paper-rate-checkpoint-12",
+    "state": "stopped",
+    "tasks": "0",
+    "created_at": "2026-09-13 00:11:27-05:00",
+    "stopped_at": "2026-09-13 00:16:19-05:00"
+  },
+  "main_app": {
+    "app_id": "ap-iago8vyn3jufBrB1dxuogO",
+    "description": "fly-paper-lab",
+    "state": "deployed",
+    "tasks": "1",
+    "created_at": "2026-09-11 21:19:32-05:00",
+    "stopped_at": null
+  },
+  "executed_source_sha256": {
+    "cloud.py": "eee4683216d811b21b72948cc0a48b6731e66a747f984dc77cf1ffd2420265bb",
+    "paperlab/budget.py": "02b7ba058c12c9166fd432465d68e0187f6aba16fb60212e261eeecf26805f3f",
+    "paperlab/core.py": "c13a32ba4d2336a0ffdee1cfdd3ab551a292d45fa358fc07959bbff0824a219f",
+    "paperlab/fly.py": "4935f43219ab63d19fa2cc04b36a5612307a4cf44a016b0af2c8f0d69e4a5fea",
+    "paperlab/fly_activation_protocol.py": "47150d63c39d2a12aabbe04ff0d7c5a3f77f2f6f05905656ba11970e669d8ccd",
+    "paperlab/fly_credit_audit.py": "5a9260b232fb827e7e266278933753899b3b26887fe9826f48017769b08a5f73",
+    "paperlab/fly_credit_reset_audit.py": "39a06c9502501150d19e779ea12081b622504638477714fa74277beb67f40501",
+    "paperlab/fly_market_activity.py": "d805504fcae6f303dc8b96d2b3321c4db6638d8163c035af07f8f537d6930e3f",
+    "paperlab/fly_market_activity_audit.py": "46042fad9113bafea192937dcca0a01f2f6901ea11b430793b4f1e17e3391ff2",
+    "paperlab/fly_market_memory_audit.py": "3d11d00bc6643d6f7a5efa0fe9db009a8c13526d4aa30e222179cf628be8ad3b",
+    "paperlab/fly_market_pulse.py": "070824d264ed8b615bd7535ad0613c31e6ec5c5cc91ee4a2ad7d8d66c4cb53b4",
+    "paperlab/fly_market_restoration.py": "8351610e09fdba46251cb44c61510509e1c46e1ade58dfbd880848e85878d1a2",
+    "paperlab/fly_market_study.py": "3432a2db341f99d5ced2d03db5f4812d39067022ea8f2f28be99227bf1f70bb9",
+    "paperlab/fly_online_audit.py": "26c6fdf96e3d7d18f35f9891d017fc6c0250df7ee12d0809bc43391e563f7c6a",
+    "paperlab/fly_online_protocol.py": "2f01ef48bb69ac1149d9ea4f1529410a5e3e869a5ace02d8fa2b6e516e258d65",
+    "paperlab/fly_online_study.py": "368f3078dd5d96dede1b8dd56d4bd5574f42dcb4420720a0040e959d1d0a3ea5",
+    "paperlab/fly_paper_audit.py": "3cb98eeaf2e4d68ef569a8e2f5dc50bf214882d5dcd699648dd12de5de55d41b",
+    "paperlab/fly_paper_inputs.py": "514f622194eea7f44f8417b5a028928e4454c80d38ecdbf2757638193cfcfaa9",
+    "paperlab/fly_paper_memory.py": "f644c93acf1804b914a67d0cabe3bec3be1c65951b4fdb201b17962caad929ba",
+    "paperlab/fly_paper_price_audit.py": "6603b60bcaa6fa7fd91f26764d2361bc351399c5b955b971ed5768ec8b9561ed",
+    "paperlab/fly_paper_protocol.py": "3c9a341a9c117cf68f298cce4346c19d05b7d0aeade719cf2d064a338ece105f",
+    "paperlab/fly_paper_stimulation.py": "85072fc69a321b5d378fcde43d8485e4b8b09735e7ea5257eb05f79ec7ebd4b7",
+    "paperlab/fly_paper_study.py": "e58f3abbad26c1c27eccb134580d95e7fac139b27180f11ea14e69f9f885190e",
+    "paperlab/fly_rate_checkpoint.py": "d6eb7b9e044f174b2dede5d513a697e66da0b67988ed9880bba876d5e849c5fd",
+    "paperlab/fly_rate_checkpoint_cloud.py": "b4558bd991e1cbaa15afff015ee52532d6bb2923b2b69fa3e0ea547c1a87de9a",
+    "paperlab/fly_recording_download.py": "52f4389f3cf050dabff76bf2c21e9800c31d678646356063706645a94887d882",
+    "paperlab/fly_trace.py": "1b3a299d8423835a5abf1a2e3fd9a985f51a6280d2e2cd707aa47dd16e1575b1",
+    "paperlab/fly_trace_memory.py": "263b0c9181a8b6d3651c6481a48c076d387680e8c08f17631fb1dcdc8dd5178f",
+    "paperlab/fly_visual.py": "8d543c2ac60011e1bc80d676e488772ff331d3b0410ff9217b3ce440e497904b",
+    "paperlab/multi.py": "5ea7ad4f7522475707f4a15eefe094750007a2814f72caad9bea0a9c8076d475",
+    "paperlab/news.py": "b35fd73eed9051ff7c92972ec4f245c52c462bee61b986c5b777217d87a04058",
+    "paperlab/universe.py": "d495650516e7ef03376c1c83d965b659f76c809c8931b34e160b2c265b426d0d",
+    "rate_checkpoint_cloud.py": "0f992e2e34bd0fa4184ac8d44741b6babf14a38de844828be3d10bbdc94a0f0e",
+    "vendor/stonkfly/stonkfly/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "vendor/stonkfly/stonkfly/__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+    "vendor/stonkfly/stonkfly/actions.py": "f46e192aec5597178cb6de7e8f32a9f61fd60be58ea57ba40cde259a41063697",
+    "vendor/stonkfly/stonkfly/broker.py": "d9fb0ae801b8572fd7709a65e6e25aaf9c7a54922a372b182db3ba16c15edca4",
+    "vendor/stonkfly/stonkfly/cli.py": "f9b01f958681369bc6f4a34cb96ec613aadfa93469edbb831f839892fd77dffb",
+    "vendor/stonkfly/stonkfly/config.py": "7fc52aca6cba7356f8bfc76bd9a6dbc5d6fdc08611a48b53c56df23796584b4e",
+    "vendor/stonkfly/stonkfly/data.py": "d52d695d0d416900745fbcaafca74810b000e02ddcbff7434f5891923e172504",
+    "vendor/stonkfly/stonkfly/display.py": "58507e7404d79ffc84a81010515268a969c636916ef2fd0c73f0aa55f6d959df",
+    "vendor/stonkfly/stonkfly/ledger.py": "96df6dc502e7ca5c94b9b31cbf8622416528333233ef7f22467279f57f05cbce",
+    "vendor/stonkfly/stonkfly/market.py": "3ec3d67cb9e8bbc5b660350fa61ff9578b0b7e161e87931ba0d5021cea4f1413",
+    "vendor/stonkfly/stonkfly/neural/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "vendor/stonkfly/stonkfly/neural/brain.py": "895d0bcab7e03e859547e516905edc39fd2af4bb7ff7a7bf67d819bc15ac8c4d",
+    "vendor/stonkfly/stonkfly/neural/circuit.py": "e9ed5d237c7c01fbaf80f75cec75f5f9f2e33965461e3480813ade78597f6c45",
+    "vendor/stonkfly/stonkfly/neural/common.py": "e7986a92827c79e9da59c8ce7f7e8df262d188a5a93a173e37b1cd1c011aadfe",
+    "vendor/stonkfly/stonkfly/neural/connectome.py": "cd9ceb396ca9b408eb7beafe8abd0894d5c5e13aa63c9ec23ffbc55526f11d18",
+    "vendor/stonkfly/stonkfly/neural/controller.py": "8783a2812408af28c909803763850c69e162a780531d1983dd7a3e83eb72aede",
+    "vendor/stonkfly/stonkfly/neural/kernel.cpp": "e2d4d584f4633613277bb1bf6ea7ba20855c01a332ae2e9344ed7782604c8509",
+    "vendor/stonkfly/stonkfly/neural/prepare.py": "38a2821a8ee26fed74d88146931f77331038d6c2a69c4be8f885705630d130f3",
+    "vendor/stonkfly/stonkfly/neural/rule.py": "3c80680450c3b73042e332bd7ce8289d7d74d8695c60e7ac19eefd9759d95c44",
+    "vendor/stonkfly/stonkfly/neural/sensory.py": "46ba99fd966e251a3422f77fdd27a78fe45aa45f9fd14e498e3c5e578566f7ac",
+    "vendor/stonkfly/stonkfly/neural/state.py": "de3dac9f37f7c12546124383410e1ac0e720459e2f8e636d3fa155dce6a7d220",
+    "vendor/stonkfly/stonkfly/neural/transmitters.py": "b1c1b080da44bdeaf498cdce3504134c1cf070b875f84a4007f16002b2956f93",
+    "vendor/stonkfly/stonkfly/neural/visual.py": "65c9639ab7fb6c5d77f83f297c4d82cf8b7a068957bd78e1da957b3f9aeae952",
+    "vendor/stonkfly/stonkfly/reinforcement.py": "b883bd2fd70a2f7aeb8b0cacb0f42f649e28a7cbfd7b81dd99a0b95a4a3db4ad",
+    "vendor/stonkfly/stonkfly/risk.py": "902467f4f1e269fa0cfef856795f3b5adbfccf056bde03df797ba45492197aaa",
+    "vendor/stonkfly/tests/test_execution.py": "da3ca0c676d74314b6300bd523e1671c4fb5ebab4a53c508f44812668ea9ec4d",
+    "vendor/stonkfly/tests/test_market.py": "b10e5d5d64ade0e18543e6648aa10362788089bec21a81afcf57520293933a59",
+    "vendor/stonkfly/tests/test_neural.py": "5ffd41312d1f6bb96876b73fee9b06ceb5d7820d6f97cc1e27f08e4e4f5b0907"
+  },
+  "request_file_sha256": "c17fe056a069ad6219747b2dacbdc969fae20f05a920cf04804a0f029e20bd3d",
+  "cloud_result_sha256": "186992a657747e27502f9fe49160567bfc7dd7ce0ba8817e5711182ccc82a845",
+  "cohort_selection": {
+    "policy": "Choose two distinct contracts from the currently assigned Solana fly paper sleeves. Require a current eligible quote, at least 64 historical eligible observations, at least 18 eligible observations in the last 24 completed five-minute slots, a versioned checkpoint, and complete recorded positive and negative reward exposure. Rank eligible candidates by descending current five-minute volume, then pool key. Do not use return, equity, fees or reward magnitude for ranking. Freeze the cohort, ledger and checkpoint bytes before any new evaluation registration. This is a current Solana pool sample, not an exhaustive or verified memecoin classification. Preserve missing pools in later evaluation.",
+    "selected_at": 1789276342.020257,
+    "candidates": [
+      {
+        "sleeve": 0,
+        "pool": "robinhood:0x7e271c400427ecb727f5fbb27dec69254bce7c4219e95e3535d0ed128f79648a",
+        "symbol": "INU",
+        "eligible_slots": 11,
+        "context": 102,
+        "reasons": [
+          "not_solana",
+          "insufficient_two_sided_activity",
+          "sparse_recent_coverage",
+          "unverified_exposure: Checkpoint lacks both positive and negative trading-reward exposure"
+        ],
+        "network": "robinhood",
+        "token": "0x63ee32ac3077d1fbd8a77ebba2a6ed4b8e9c1e18",
+        "quote_ts": 1789276296.3003337,
+        "volume5": 43.4860197825,
+        "coverage": [
+          {
+            "decision_ts": 1789269000,
+            "quote_ts": 1789268949.1669521,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789269300,
+            "quote_ts": 1789269204.34265,
+            "eligible": false
+          },
+          {
+            "decision_ts": 1789269600,
+            "quote_ts": 1789269506.7484207,
+            "eligible": false
+          },
+          {
+            "decision_ts": 1789269900,
+            "quote_ts": 1789269895.5661702,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789270200,
+            "quote_ts": 1789270182.3284743,
+            "eligible": false
+          },
+          {
+            "decision_ts": 1789270500,
+            "quote_ts": 1789270484.1971276,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789270800,
+            "quote_ts": 1789270723.599059,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789271100,
+            "quote_ts": 1789271080.40925,
+            "eligible": false
+          },
+          {
+            "decision_ts": 1789271400,
+            "quote_ts": 1789271380.8196332,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789271700,
+            "quote_ts": 1789271679.0354085,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789272000,
+            "quote_ts": 1789271973.4267666,
+            "eligible": false
+          },
+          {
+            "decision_ts": 1789272300,
+            "quote_ts": 1789272210.8800685,
+            "eligible": false
+          },
+          {
+            "decision_ts": 1789272600,
+            "quote_ts": 1789272453.1507196,
+            "eligible": false
+          },
+          {
+            "decision_ts": 1789272900,
+            "quote_ts": 1789272869.9565022,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789273200,
+            "quote_ts": 1789273064.3664737,
+            "eligible": false
+          },
+          {
+            "decision_ts": 1789273500,
+            "quote_ts": 1789273452.9197145,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789273800,
+            "quote_ts": 1789273728.3727956,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789274100,
+            "quote_ts": 1789274088.4706366,
+            "eligible": false
+          },
+          {
+            "decision_ts": 1789274400,
+            "quote_ts": 1789274373.4453518,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789274700,
+            "quote_ts": 1789274656.3415115,
+            "eligible": false
+          },
+          {
+            "decision_ts": 1789275000,
+            "quote_ts": 1789274938.836177,
+            "eligible": false
+          },
+          {
+            "decision_ts": 1789275300,
+            "quote_ts": 1789275227.7080476,
+            "eligible": false
+          },
+          {
+            "decision_ts": 1789275600,
+            "quote_ts": 1789275508.6185675,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789275900,
+            "quote_ts": 1789275894.926504,
+            "eligible": false
+          }
+        ]
+      },
+      {
+        "sleeve": 1,
+        "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+        "symbol": "baton",
+        "eligible_slots": 24,
+        "context": 719,
+        "reasons": [],
+        "network": "solana",
+        "token": "Hg5Ja55T5wESq4vyFoiVCMeHXtGyVA69X2UHq8hgpump",
+        "quote_ts": 1789276303.884554,
+        "volume5": 5195.1302401396,
+        "coverage": [
+          {
+            "decision_ts": 1789269000,
+            "quote_ts": 1789268913.0927114,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789269300,
+            "quote_ts": 1789269211.6494691,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789269600,
+            "quote_ts": 1789269513.2048311,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789269900,
+            "quote_ts": 1789269805.6683896,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789270200,
+            "quote_ts": 1789270189.844881,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789270500,
+            "quote_ts": 1789270491.757864,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789270800,
+            "quote_ts": 1789270731.1739006,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789271100,
+            "quote_ts": 1789271087.6573787,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789271400,
+            "quote_ts": 1789271388.2665677,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789271700,
+            "quote_ts": 1789271686.4554358,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789272000,
+            "quote_ts": 1789271868.299276,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789272300,
+            "quote_ts": 1789272218.4675713,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789272600,
+            "quote_ts": 1789272460.6602094,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789272900,
+            "quote_ts": 1789272877.354727,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789273200,
+            "quote_ts": 1789273071.9431803,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789273500,
+            "quote_ts": 1789273460.4724422,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789273800,
+            "quote_ts": 1789273735.8859298,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789274100,
+            "quote_ts": 1789274095.2353585,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789274400,
+            "quote_ts": 1789274379.9568055,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789274700,
+            "quote_ts": 1789274663.0843136,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789275000,
+            "quote_ts": 1789274944.8506627,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789275300,
+            "quote_ts": 1789275234.116986,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789275600,
+            "quote_ts": 1789275515.1760306,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789275900,
+            "quote_ts": 1789275804.8063219,
+            "eligible": true
+          }
+        ],
+        "observations": 212,
+        "positive_rewards": 92,
+        "negative_rewards": 99
+      },
+      {
+        "sleeve": 2,
+        "pool": "solana:2AXXcN6oN9bBT5owwmTH53C7QHUXvhLeu718Kqt8rvY2",
+        "symbol": "RAY",
+        "eligible_slots": 24,
+        "context": 737,
+        "reasons": [],
+        "network": "solana",
+        "token": "4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R",
+        "quote_ts": 1789276303.884554,
+        "volume5": 112277.943381809,
+        "coverage": [
+          {
+            "decision_ts": 1789269000,
+            "quote_ts": 1789268913.0927114,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789269300,
+            "quote_ts": 1789269211.6494691,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789269600,
+            "quote_ts": 1789269513.2048311,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789269900,
+            "quote_ts": 1789269805.6683896,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789270200,
+            "quote_ts": 1789270189.844881,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789270500,
+            "quote_ts": 1789270491.757864,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789270800,
+            "quote_ts": 1789270731.1739006,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789271100,
+            "quote_ts": 1789271087.6573787,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789271400,
+            "quote_ts": 1789271388.2665677,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789271700,
+            "quote_ts": 1789271686.4554358,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789272000,
+            "quote_ts": 1789271868.299276,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789272300,
+            "quote_ts": 1789272218.4675713,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789272600,
+            "quote_ts": 1789272460.6602094,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789272900,
+            "quote_ts": 1789272877.354727,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789273200,
+            "quote_ts": 1789273071.9431803,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789273500,
+            "quote_ts": 1789273460.4724422,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789273800,
+            "quote_ts": 1789273735.8859298,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789274100,
+            "quote_ts": 1789274095.2353585,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789274400,
+            "quote_ts": 1789274379.9568055,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789274700,
+            "quote_ts": 1789274663.0843136,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789275000,
+            "quote_ts": 1789274944.8506627,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789275300,
+            "quote_ts": 1789275234.116986,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789275600,
+            "quote_ts": 1789275515.1760306,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789275900,
+            "quote_ts": 1789275804.8063219,
+            "eligible": true
+          }
+        ],
+        "observations": 214,
+        "positive_rewards": 85,
+        "negative_rewards": 116
+      },
+      {
+        "sleeve": 3,
+        "pool": "solana:zxTpi4BtaWX3mgdAPoezkMD1hxx8CdeCfrqXMWvSCLX",
+        "symbol": "STONK",
+        "eligible_slots": 23,
+        "context": 740,
+        "reasons": [],
+        "network": "solana",
+        "token": "6GmAFSYs4gk3FDao5FzzySQpPZaWsa4rUJHacpMpUNgx",
+        "quote_ts": 1789276303.884554,
+        "volume5": 77941.1751048839,
+        "coverage": [
+          {
+            "decision_ts": 1789269000,
+            "quote_ts": 1789268913.0927114,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789269300,
+            "quote_ts": 1789269211.6494691,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789269600,
+            "quote_ts": 1789269513.2048311,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789269900,
+            "quote_ts": 1789269805.6683896,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789270200,
+            "quote_ts": 1789270189.844881,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789270500,
+            "quote_ts": 1789270491.757864,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789270800,
+            "quote_ts": 1789270731.1739006,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789271100,
+            "quote_ts": 1789271087.6573787,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789271400,
+            "quote_ts": 1789271388.2665677,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789271700,
+            "quote_ts": 1789271686.4554358,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789272000,
+            "quote_ts": 1789271868.299276,
+            "eligible": false
+          },
+          {
+            "decision_ts": 1789272300,
+            "quote_ts": 1789272218.4675713,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789272600,
+            "quote_ts": 1789272460.6602094,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789272900,
+            "quote_ts": 1789272877.354727,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789273200,
+            "quote_ts": 1789273071.9431803,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789273500,
+            "quote_ts": 1789273460.4724422,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789273800,
+            "quote_ts": 1789273735.8859298,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789274100,
+            "quote_ts": 1789274095.2353585,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789274400,
+            "quote_ts": 1789274379.9568055,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789274700,
+            "quote_ts": 1789274663.0843136,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789275000,
+            "quote_ts": 1789274944.8506627,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789275300,
+            "quote_ts": 1789275234.116986,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789275600,
+            "quote_ts": 1789275515.1760306,
+            "eligible": true
+          },
+          {
+            "decision_ts": 1789275900,
+            "quote_ts": 1789275804.8063219,
+            "eligible": true
+          }
+        ],
+        "observations": 214,
+        "positive_rewards": 92,
+        "negative_rewards": 111
+      }
+    ],
+    "selected": [
+      {
+        "key": "solana:2AXXcN6oN9bBT5owwmTH53C7QHUXvhLeu718Kqt8rvY2",
+        "sleeve": 2,
+        "assigned": 1789202108.8824587,
+        "remote_checkpoint": "/state/meme-pools-v1/fly-2-5964254.npz",
+        "events": [
+          {
+            "slot": 5964007,
+            "reward": 0.0,
+            "brain_ms": 500.0,
+            "memory_sha256": "a78e15c56e37be890bd0784fcbd0466ca235a5b83c2b17797c6075ee5b1319d6"
+          },
+          {
+            "slot": 5964009,
+            "reward": 0.0,
+            "brain_ms": 1000.0,
+            "memory_sha256": "8e6c1c89509ae538e4bbc6c4efbd61271a653a8d0e9855edeed1ba890808e6c0"
+          },
+          {
+            "slot": 5964013,
+            "reward": 0.0,
+            "brain_ms": 1500.0,
+            "memory_sha256": "f852aa2559b2d7c7a1418b92cc8caa06990d1ac6b070ae0ed7472a3a177deb20"
+          },
+          {
+            "slot": 5964014,
+            "reward": -1.3546438599083785,
+            "brain_ms": 2000.0,
+            "memory_sha256": "02a88dbb8c60a5a21dae95cd3ed6bb97154ff7bb2565be9f6323baf05bb76d02"
+          },
+          {
+            "slot": 5964015,
+            "reward": -0.10238592904934762,
+            "brain_ms": 2500.0,
+            "memory_sha256": "95200a912720ee76bcba3e0c32da1e3638be8046e7e78abadcddfb1748d091e0"
+          },
+          {
+            "slot": 5964017,
+            "reward": 0.04465603777012461,
+            "brain_ms": 3000.0,
+            "memory_sha256": "e8a70cb6c5cb046e775bf239f6762a3b2100e78bc426507cf785103a7b9bcd03"
+          },
+          {
+            "slot": 5964019,
+            "reward": 0.045897545179172994,
+            "brain_ms": 3500.0,
+            "memory_sha256": "4753fd56378dd5f103b522920d59abedc7867e0ecf2907bbf87b8d5225e5e588"
+          },
+          {
+            "slot": 5964020,
+            "reward": -0.13620648541333935,
+            "brain_ms": 4000.0,
+            "memory_sha256": "c19090b21ddf8d88be6040fb45daaccc9c560f35279a9452fbbe1035e7c77c1b"
+          },
+          {
+            "slot": 5964021,
+            "reward": 0.010327490534905337,
+            "brain_ms": 4500.0,
+            "memory_sha256": "0557dba784d72be97ec22e7288f4a7b4445de9546329457aee6785446aebc211"
+          },
+          {
+            "slot": 5964022,
+            "reward": -0.09652389746725021,
+            "brain_ms": 5000.0,
+            "memory_sha256": "215ece3bb8c0118a4f670f36da05e8ebbe769d4da871d9e9167b0425a59cde6f"
+          },
+          {
+            "slot": 5964023,
+            "reward": -0.07413072147613775,
+            "brain_ms": 5500.0,
+            "memory_sha256": "26cc877cf5e820f314d554605bfdc3e01926a8abf5852ad9024336ffc66c7b6d"
+          },
+          {
+            "slot": 5964024,
+            "reward": 0.050455491792803286,
+            "brain_ms": 6000.0,
+            "memory_sha256": "c68217241ed9efb337b790b767f08e424b23bc90c90f428726573bd454622765"
+          },
+          {
+            "slot": 5964025,
+            "reward": 0.10329581897462958,
+            "brain_ms": 6500.0,
+            "memory_sha256": "174f69f5e033ea4fab0534b2dd7a2912f6d6dc5210272d07c61cc665b57d2c45"
+          },
+          {
+            "slot": 5964026,
+            "reward": -0.0008385289061436652,
+            "brain_ms": 7000.0,
+            "memory_sha256": "082cd69df364050439698d18afbd0add8adc2750a5128d3f58ae07389b1b37cc"
+          },
+          {
+            "slot": 5964027,
+            "reward": 0.0814940231789194,
+            "brain_ms": 7500.0,
+            "memory_sha256": "9f9a9827ac88afc569ea341ebe386f51bd0fadf949ddfb2105c81dd92c2a69d5"
+          },
+          {
+            "slot": 5964028,
+            "reward": -0.09205243271841823,
+            "brain_ms": 8000.0,
+            "memory_sha256": "834ddfdb4bf49c5c4711675005c1a3a7788574fbb49b452ad81e8d76171ab932"
+          },
+          {
+            "slot": 5964029,
+            "reward": -0.02315235545535188,
+            "brain_ms": 8500.0,
+            "memory_sha256": "2d1481de69bbe9cebdb16f730e63b89fdad6ddb087f379383d644ec1244314cb"
+          },
+          {
+            "slot": 5964030,
+            "reward": -0.03319691276522008,
+            "brain_ms": 9000.0,
+            "memory_sha256": "f19a2e2eb09d86d91d96aa4c5aca924f0c3636eb5f75bccde0ec0a8b58088038"
+          },
+          {
+            "slot": 5964031,
+            "reward": -1.3065121449410526,
+            "brain_ms": 9500.0,
+            "memory_sha256": "2cb8b28dc7320cd9ccf01b42f9be851457c7c5b6b77e5bdda76b3128f2c76499"
+          },
+          {
+            "slot": 5964032,
+            "reward": 0.05166046591284612,
+            "brain_ms": 10000.0,
+            "memory_sha256": "0afa012eecc09c63804c85a06cc6ee485d000c02d57fb85cae22b552ef8e155c"
+          },
+          {
+            "slot": 5964033,
+            "reward": 0.07920616334388342,
+            "brain_ms": 10500.0,
+            "memory_sha256": "5a41a6f5bddb706acbf8524eb0fbaa3217129fbb01460e9ac2478d334b504bb8"
+          },
+          {
+            "slot": 5964034,
+            "reward": -0.2349576961507296,
+            "brain_ms": 11000.0,
+            "memory_sha256": "c69f92a07f438def619cb0e17bdc18793eccd77ee8d73da885b17b456e54a4ab"
+          },
+          {
+            "slot": 5964035,
+            "reward": -0.03192676471977052,
+            "brain_ms": 11500.0,
+            "memory_sha256": "84df66f05170e6a80ae30f7a6122d90caafcce4cc902723afceb492120b1ab7e"
+          },
+          {
+            "slot": 5964036,
+            "reward": -0.18607376350817617,
+            "brain_ms": 12000.0,
+            "memory_sha256": "5616041eaf5d1dbdab9b2a6c47df9743c8a9fd4e8bb3c91e6030671282222782"
+          },
+          {
+            "slot": 5964037,
+            "reward": 0.1424529002972008,
+            "brain_ms": 12500.0,
+            "memory_sha256": "b013430fa2722c3d61d3241f6e1d041247ac05a0b5cf6cceef9e5004d7a7c55a"
+          },
+          {
+            "slot": 5964038,
+            "reward": -0.07019930706519517,
+            "brain_ms": 13000.0,
+            "memory_sha256": "9c357aa808f16c50374eeab2481ce7c8821b09d8783be9592c66850a6ef07fe2"
+          },
+          {
+            "slot": 5964039,
+            "reward": 0.03214456664048271,
+            "brain_ms": 13500.0,
+            "memory_sha256": "760a355acad790c2245d18c6ce0079f021f980dd594819012d3574043cb89c97"
+          },
+          {
+            "slot": 5964040,
+            "reward": -0.3718280896558781,
+            "brain_ms": 14000.0,
+            "memory_sha256": "6ba01b98ce5dbb0b90852cadb966579aa077cba58a090c6400fabda02d428414"
+          },
+          {
+            "slot": 5964041,
+            "reward": -0.6452067865464528,
+            "brain_ms": 14500.0,
+            "memory_sha256": "c85c971a79e6c02adbbc8e071b7d6ecc0b2aa7c140069b402dec5429dea03a39"
+          },
+          {
+            "slot": 5964042,
+            "reward": -0.992704112371797,
+            "brain_ms": 15000.0,
+            "memory_sha256": "68030767e62f46991d6ee315c5922db9e7237738546242be922337416ac83651"
+          },
+          {
+            "slot": 5964043,
+            "reward": -0.2279338239280264,
+            "brain_ms": 15500.0,
+            "memory_sha256": "c5e7c82ce38048c834fd21f7721874c19c78ff1ac81069080e869eae14744156"
+          },
+          {
+            "slot": 5964044,
+            "reward": -0.08001760768070199,
+            "brain_ms": 16000.0,
+            "memory_sha256": "d9cc29011f86f8911c60c14ff8914ec0619df2c28a09fe0110b25a2e11b148a3"
+          },
+          {
+            "slot": 5964045,
+            "reward": 0.737714777072938,
+            "brain_ms": 16500.0,
+            "memory_sha256": "6cc8f3c922c3d9f84c3c9fad6563ff7fe1cfa2c2814fbc6e54644fe1e8e3c87b"
+          },
+          {
+            "slot": 5964046,
+            "reward": -0.5020839772248848,
+            "brain_ms": 17000.0,
+            "memory_sha256": "787298d1262e3f3dd0306e67603c1a6c321e1fad2acc8f0acb61826063601bd2"
+          },
+          {
+            "slot": 5964047,
+            "reward": -0.3614151834306938,
+            "brain_ms": 17500.0,
+            "memory_sha256": "292fa8ac281e111dc6f4109acdaeaab357ea0921079e8b9117647c847e7737d9"
+          },
+          {
+            "slot": 5964048,
+            "reward": -0.3698787458858419,
+            "brain_ms": 18000.0,
+            "memory_sha256": "985aa0eed71c12229594066b1d95f5ce25fce91a23131f0c8e6cd8e69af2654b"
+          },
+          {
+            "slot": 5964049,
+            "reward": -0.2619998730181976,
+            "brain_ms": 18500.0,
+            "memory_sha256": "3fbfea7d015febf8e37d0806631145650a8d2b4ccaccf03ea9461f5bd562a710"
+          },
+          {
+            "slot": 5964050,
+            "reward": 0.533382346702723,
+            "brain_ms": 19000.0,
+            "memory_sha256": "ccd62bb6a733c67da92de7c015851901285c67f5fdb8154b67b026de4b771510"
+          },
+          {
+            "slot": 5964051,
+            "reward": 0.07631253168750618,
+            "brain_ms": 19500.0,
+            "memory_sha256": "dc5a05694be627f5d4dd31fa71ae26439243e435ce42436356894e2e50e2527c"
+          },
+          {
+            "slot": 5964052,
+            "reward": -1.554135581974009,
+            "brain_ms": 20000.0,
+            "memory_sha256": "10cbbbc172e4f987fa276a6cba8a1b5f4fc72c023396f55c50063885b554791a"
+          },
+          {
+            "slot": 5964053,
+            "reward": -0.13732121581304568,
+            "brain_ms": 20500.0,
+            "memory_sha256": "c4c46247cd01515bba55b9f8004ace4cb332c47c1f8a04e6e5300697920c3f23"
+          },
+          {
+            "slot": 5964055,
+            "reward": 0,
+            "brain_ms": 21000.0,
+            "memory_sha256": "59ded0153ea6b8f5a84f6fdb0569290502fec8bdbbc302f393cf6bb3204b7184"
+          },
+          {
+            "slot": 5964056,
+            "reward": -0.5114694331097951,
+            "brain_ms": 21500.0,
+            "memory_sha256": "4e7ce6d0d97f207dd01f77cb4f266d270ce397a8d54dce6fcb7476a55aa57286"
+          },
+          {
+            "slot": 5964057,
+            "reward": -0.06395742148791328,
+            "brain_ms": 22000.0,
+            "memory_sha256": "c9fb96b1f5b34111898dcd782f358abaecdb553d1a36b1523a1c37bfd6a8f72f"
+          },
+          {
+            "slot": 5964058,
+            "reward": 0.3642757632184441,
+            "brain_ms": 22500.0,
+            "memory_sha256": "6a85b33a4b7ea46292fd3bd411f19b67adc38a8ab3fb4169cb59146a556e5cb3"
+          },
+          {
+            "slot": 5964059,
+            "reward": -0.6493488791039113,
+            "brain_ms": 23000.0,
+            "memory_sha256": "5fad6bb663336d4fd367761108fd0095f0d97576c67a414408202b564dc02c90"
+          },
+          {
+            "slot": 5964060,
+            "reward": 0.22750745134720773,
+            "brain_ms": 23500.0,
+            "memory_sha256": "87e9602a02a2087f67740af208b0ed77cd801a1b04bb65b41dd25e0c71dec88d"
+          },
+          {
+            "slot": 5964061,
+            "reward": -0.6732108500576999,
+            "brain_ms": 24000.0,
+            "memory_sha256": "624400caa19fa1609dd4401b84599fa320fc59c5b7d90494f53dc86fe465a9c4"
+          },
+          {
+            "slot": 5964062,
+            "reward": 0.10995731464748815,
+            "brain_ms": 24500.0,
+            "memory_sha256": "70178da23ad4b9242a59f96cb443619e8a138a1204333c419746970a5897a1c8"
+          },
+          {
+            "slot": 5964063,
+            "reward": -0.8886625260735173,
+            "brain_ms": 25000.0,
+            "memory_sha256": "0cd8245e5da1c0fd514f396fb8fdcb889393b7dd2d13dd551eec099988bac86f"
+          },
+          {
+            "slot": 5964064,
+            "reward": -0.5327042954333479,
+            "brain_ms": 25500.0,
+            "memory_sha256": "fcd7e62b46a2316386f0e2c52f6e1d945d5e191711e4f3bc63d1e507f6fd9eb9"
+          },
+          {
+            "slot": 5964065,
+            "reward": 0.4462220152720988,
+            "brain_ms": 26000.0,
+            "memory_sha256": "d4a869059b2f12a57faa126d84956c825ffa132747a9d69368a6fe877cc4ff5e"
+          },
+          {
+            "slot": 5964066,
+            "reward": -0.3382712094925182,
+            "brain_ms": 26500.0,
+            "memory_sha256": "56be2e93eedfa1f7552405c395884ff48bf86be8ced0f2b52a6397557b1c50f8"
+          },
+          {
+            "slot": 5964067,
+            "reward": 0.6910495780785766,
+            "brain_ms": 27000.0,
+            "memory_sha256": "16d8cfb7629b174e302de24c870bf50cbad4309a3d86f5a20555a78c738562f9"
+          },
+          {
+            "slot": 5964068,
+            "reward": -0.6105793575930818,
+            "brain_ms": 27500.0,
+            "memory_sha256": "b361f23779b796cf6f06cd41959d66fa2dd2749daf3341acd7275fa2a58c07aa"
+          },
+          {
+            "slot": 5964069,
+            "reward": 0.2550160616195001,
+            "brain_ms": 28000.0,
+            "memory_sha256": "17932c902478a1fc02be09c5b4d94548fc74326700810806922795a2f77e63f0"
+          },
+          {
+            "slot": 5964070,
+            "reward": -0.16119386632112764,
+            "brain_ms": 28500.0,
+            "memory_sha256": "fa806b83880c08c4e1ce866bfb57c8b07a56be785983e55839e11825e2779966"
+          },
+          {
+            "slot": 5964071,
+            "reward": -0.1823880534359148,
+            "brain_ms": 29000.0,
+            "memory_sha256": "b93af9b62e51bbff6e3001a60fbff72506f3377d66ac7b7314cf8270d84f71fb"
+          },
+          {
+            "slot": 5964072,
+            "reward": 0.38665818198956003,
+            "brain_ms": 29500.0,
+            "memory_sha256": "e74f8e4dd4afe0005d96aec9c177bc3c46db314e69a45324cbb2a35ca7d044a5"
+          },
+          {
+            "slot": 5964073,
+            "reward": 0.28115854473850277,
+            "brain_ms": 30000.0,
+            "memory_sha256": "71423c824256755e5aef69fbc734f364be33745693354df05c67a10465a30a40"
+          },
+          {
+            "slot": 5964074,
+            "reward": -0.04081779439974298,
+            "brain_ms": 30500.0,
+            "memory_sha256": "b2b7508b2a43e92d909de50a479c649011ff8a1eaedb5377392b1f8840984f6a"
+          },
+          {
+            "slot": 5964075,
+            "reward": -1.61570053225239,
+            "brain_ms": 31000.0,
+            "memory_sha256": "34c8a855ac9bfd2fc961bf564214be5e441b661eadd9bb5beaf556cfe39d93ac"
+          },
+          {
+            "slot": 5964083,
+            "reward": 0,
+            "brain_ms": 31500.0,
+            "memory_sha256": "e4911fb48eccb7dbc7d2a4390740943841303358475d6b5a173e052a8e595ae6"
+          },
+          {
+            "slot": 5964084,
+            "reward": 0.196046291253964,
+            "brain_ms": 32000.0,
+            "memory_sha256": "e820d747280178de838b3c1699384e6639dd50692af8d8213db71e68c5055ab7"
+          },
+          {
+            "slot": 5964085,
+            "reward": 0.03790839430212145,
+            "brain_ms": 32500.0,
+            "memory_sha256": "06cf73be7f8bb7ff6544eacc9b79bb06ce775b8f5f057c54714dc89fd1a7dc3a"
+          },
+          {
+            "slot": 5964086,
+            "reward": 0.23650046878208286,
+            "brain_ms": 33000.0,
+            "memory_sha256": "522a87b93ce83783570b16368bbb646ba0c54ec59b0031d8275ae330fb52fc79"
+          },
+          {
+            "slot": 5964087,
+            "reward": 0.329912452903784,
+            "brain_ms": 33500.0,
+            "memory_sha256": "94fd448f3d4ca61be23986a3a2f01b9b5bb33c3215cbee68c11e2fbd4a9e4247"
+          },
+          {
+            "slot": 5964088,
+            "reward": -0.7314032235495347,
+            "brain_ms": 34000.0,
+            "memory_sha256": "cac323fed48b38da129f1984e2f22cdce8462204ebb6ddcfd4916de5812a6ae6"
+          },
+          {
+            "slot": 5964089,
+            "reward": -0.36942311719599275,
+            "brain_ms": 34500.0,
+            "memory_sha256": "425c17c2fa104fb6c22f6e52c86a99283fc78fdbc9d842798f6e1c339ca74846"
+          },
+          {
+            "slot": 5964090,
+            "reward": -1.5143335903339903,
+            "brain_ms": 35000.0,
+            "memory_sha256": "059f6c903b12be55a8d9fb384e9c4ea96876b1ec400bb33bad9cfb11d3509c7a"
+          },
+          {
+            "slot": 5964092,
+            "reward": 0.7171568100754655,
+            "brain_ms": 35500.0,
+            "memory_sha256": "b60ecbddf3e9d64ccfffb752d26a255a7d912c1fabbd0a1b7cc0e7ed3b897be7"
+          },
+          {
+            "slot": 5964093,
+            "reward": -1.1740410311341805,
+            "brain_ms": 36000.0,
+            "memory_sha256": "aa988ea382855bfa470f3892d4d3ee1513bcc7ac096760574e54ede153b72889"
+          },
+          {
+            "slot": 5964094,
+            "reward": -0.24305942024750493,
+            "brain_ms": 36500.0,
+            "memory_sha256": "363fb4d051367348659efb112a2bdbb58a2c6da2be9d4322993e843402699885"
+          },
+          {
+            "slot": 5964100,
+            "reward": 0,
+            "brain_ms": 37000.0,
+            "memory_sha256": "5111ed74fcaa535325e07aa88deece4f14502930c159886a954f4f67756fd8b1"
+          },
+          {
+            "slot": 5964101,
+            "reward": -0.10438300446048743,
+            "brain_ms": 37500.0,
+            "memory_sha256": "85345d9331604ce96288a9919b921efca893e03f8d71a208b43858dfdbf5cf29"
+          },
+          {
+            "slot": 5964102,
+            "reward": 0.08144356332306302,
+            "brain_ms": 38000.0,
+            "memory_sha256": "3df0c6d4a07b40b31f4234cee3369ab4c28f566772141ae24a35f3a5b85405df"
+          },
+          {
+            "slot": 5964103,
+            "reward": -0.23137871595764636,
+            "brain_ms": 38500.0,
+            "memory_sha256": "5d3a174d97177af8bc103ba67e014a9db71fd34acad9356d60fa22f4abbece94"
+          },
+          {
+            "slot": 5964104,
+            "reward": -0.5859822223437732,
+            "brain_ms": 39000.0,
+            "memory_sha256": "1966c1805295c5b6ce2aa763f8bf2e32adc78f260b5973cc8f1acf1608c1f83c"
+          },
+          {
+            "slot": 5964105,
+            "reward": -0.24901249365237277,
+            "brain_ms": 39500.0,
+            "memory_sha256": "58a3b00fbb4e5dd402f99b3b495a7a89418e9f90949987e9b11861d4ceda913f"
+          },
+          {
+            "slot": 5964106,
+            "reward": 0.6598104778542506,
+            "brain_ms": 40000.0,
+            "memory_sha256": "67ff7f1a4de10e5c213048d72b02275e17ae2d182e585f63b5819838c1a95904"
+          },
+          {
+            "slot": 5964107,
+            "reward": -0.31294020603371564,
+            "brain_ms": 40500.0,
+            "memory_sha256": "afb04854882554ef7bd2d9a0bb635d606dde305d912f9e26220c2c4f207ca859"
+          },
+          {
+            "slot": 5964108,
+            "reward": 0.07679188079205801,
+            "brain_ms": 41000.0,
+            "memory_sha256": "f59942c5d33139fb6b9a78cf4f8d099b483227a72732d0b0f81a49d2b96b54a8"
+          },
+          {
+            "slot": 5964110,
+            "reward": -0.40353035133512094,
+            "brain_ms": 41500.0,
+            "memory_sha256": "36b41f8f307f3804bc6f9919e99c031769465ecaec24cf1a809faf1829549cbc"
+          },
+          {
+            "slot": 5964111,
+            "reward": -0.4002989717933758,
+            "brain_ms": 42000.0,
+            "memory_sha256": "a5d8dfd5869244432c6bb5402fd9ad7f2348bc3ca353e2128d98f36adc05ae92"
+          },
+          {
+            "slot": 5964112,
+            "reward": -0.1477354466549059,
+            "brain_ms": 42500.0,
+            "memory_sha256": "c76a2a1e3995685057fb04c2a48748f5043cf425fd7add114f9ec8d3b73aa4aa"
+          },
+          {
+            "slot": 5964113,
+            "reward": -0.057175281205502415,
+            "brain_ms": 43000.0,
+            "memory_sha256": "f6bc6f722062997d9bdc71bebb04c7a6a024a9fad4f74408e2ada63afc6ef59c"
+          },
+          {
+            "slot": 5964114,
+            "reward": -0.026041981479153264,
+            "brain_ms": 43500.0,
+            "memory_sha256": "aeba2ca3820757cd3363716f3433796d5f453c147197a547842655960e9a318d"
+          },
+          {
+            "slot": 5964115,
+            "reward": 0.03686651996812884,
+            "brain_ms": 44000.0,
+            "memory_sha256": "d4e899472746e05399bb141089d62676b43dc4df87261b34480e3347a9aff0a4"
+          },
+          {
+            "slot": 5964118,
+            "reward": 0.7756458058243823,
+            "brain_ms": 44500.0,
+            "memory_sha256": "2be42e1f9bca73f4e5174673016b445339e1515ff90a0c226cf451af9e4faa94"
+          },
+          {
+            "slot": 5964119,
+            "reward": 0.8860708122631991,
+            "brain_ms": 45000.0,
+            "memory_sha256": "d50e627d4592b29ea8e7e16783661e829af7f9f8a7201a2e60dc7dc380b61512"
+          },
+          {
+            "slot": 5964120,
+            "reward": -1.5802732281487124,
+            "brain_ms": 45500.0,
+            "memory_sha256": "fdafd17c85036fa8b8970c2da2d6e078e1d94d8384cfea6e544d901922ae5ec7"
+          },
+          {
+            "slot": 5964121,
+            "reward": 0.36424767157882343,
+            "brain_ms": 46000.0,
+            "memory_sha256": "7f3e8c4e70ca37f7f984e545fa62263e67bcfab5e8534ea9935d78df0c952599"
+          },
+          {
+            "slot": 5964122,
+            "reward": -0.08119318280262178,
+            "brain_ms": 46500.0,
+            "memory_sha256": "48aba569616ccb3165cc76400d62df10c85f4ddab08fb5e8b43f74f09ed4fc42"
+          },
+          {
+            "slot": 5964123,
+            "reward": -0.8993318459937996,
+            "brain_ms": 47000.0,
+            "memory_sha256": "d91100ebf395dbe17a73d4f333833096d5df675da7a69cde58d7c8039e5eb47b"
+          },
+          {
+            "slot": 5964124,
+            "reward": -0.21901947309754632,
+            "brain_ms": 47500.0,
+            "memory_sha256": "8fea1474f4834e7ea02d28726deae93676cabd139e9a52c71dbd70bf2e40334d"
+          },
+          {
+            "slot": 5964125,
+            "reward": -1.7789581597628512,
+            "brain_ms": 48000.0,
+            "memory_sha256": "3cd8444f41988f0da854dce499a1b281d9115e7d12135b1948c8deb1e354a038"
+          },
+          {
+            "slot": 5964126,
+            "reward": -0.20249721517922126,
+            "brain_ms": 48500.0,
+            "memory_sha256": "70081d8d62b9bf0995a3814dcac75f97fe4be9d86cdac66a46cb7e054d1ff0ac"
+          },
+          {
+            "slot": 5964127,
+            "reward": 0.3965712074699752,
+            "brain_ms": 49000.0,
+            "memory_sha256": "4ba4105b4f3c3571a9872a55043abef1945bc16684bb283f01d3f1e0d3c57cd8"
+          },
+          {
+            "slot": 5964128,
+            "reward": 0.4416792251380457,
+            "brain_ms": 49500.0,
+            "memory_sha256": "01a8df688b245a40f3152b1cfc0bf46260f58db9ec02422a6df293b145202a1b"
+          },
+          {
+            "slot": 5964130,
+            "reward": -0.3456085381993148,
+            "brain_ms": 50000.0,
+            "memory_sha256": "66fedb265b9d981dc6197ae04a31dfac28e9d181743a17f6391952ddc4d406db"
+          },
+          {
+            "slot": 5964131,
+            "reward": 0.6730030678331786,
+            "brain_ms": 50500.0,
+            "memory_sha256": "579f03070ce0452d8b92768e3a30b72feb332fafed2e0491c4246a69d7c21d60"
+          },
+          {
+            "slot": 5964132,
+            "reward": 0.2533886071949496,
+            "brain_ms": 51000.0,
+            "memory_sha256": "66bd046b3411fd404972387860d08adb74b44c329c61b040596972eb54b7bfb6"
+          },
+          {
+            "slot": 5964133,
+            "reward": -0.2255741072247588,
+            "brain_ms": 51500.0,
+            "memory_sha256": "0725ff8c78f707b4a54e51d2e825cd15088d9d33b69911437514b3fba37c4058"
+          },
+          {
+            "slot": 5964134,
+            "reward": 0.874749575824552,
+            "brain_ms": 52000.0,
+            "memory_sha256": "34b7cc1bc8265e8a6f4f0a5687081ed96b6c1c5f022ff89c8c21f2900713ffa7"
+          },
+          {
+            "slot": 5964135,
+            "reward": 0.9308420094130838,
+            "brain_ms": 52500.0,
+            "memory_sha256": "e459c08bc90b6ddcc2bdd76b25dac9a8172b8831bff62d7cc392a63abcc95284"
+          },
+          {
+            "slot": 5964136,
+            "reward": 0.24800865426510654,
+            "brain_ms": 53000.0,
+            "memory_sha256": "e07817818423d7d2644478679a91105dd1e1eac2a7cc1ca3eae707ea758b6a74"
+          },
+          {
+            "slot": 5964137,
+            "reward": -0.49052366996323826,
+            "brain_ms": 53500.0,
+            "memory_sha256": "de625ffcd11da7a0cadfd6a4c92f3e1c56c19c55f1a8d3b32e90d57802195160"
+          },
+          {
+            "slot": 5964138,
+            "reward": -0.21093167868903606,
+            "brain_ms": 54000.0,
+            "memory_sha256": "55e39d71d50a871bcb43aac9f769a083f8a36ae7df35aa8a5215cc7bcdb8a9be"
+          },
+          {
+            "slot": 5964139,
+            "reward": -0.0196618756385476,
+            "brain_ms": 54500.0,
+            "memory_sha256": "01a96542d4e32919c0213fd71e7dc28e60e087429a2e70ff61ed7260a9bd2c93"
+          },
+          {
+            "slot": 5964140,
+            "reward": -0.8054717497923605,
+            "brain_ms": 55000.0,
+            "memory_sha256": "cf1c7bf076dfa4bed446af41b661fd5de65741de29b149219d44f21ad71e350b"
+          },
+          {
+            "slot": 5964141,
+            "reward": -0.2484490193756983,
+            "brain_ms": 55500.0,
+            "memory_sha256": "76d9a77c77db636926c6f9092a9b2f1fc26a25f0b441db2f3f4fb2f3a4866bd4"
+          },
+          {
+            "slot": 5964142,
+            "reward": -0.6416806967154116,
+            "brain_ms": 56000.0,
+            "memory_sha256": "cd9a9b74350eb82530e9c2073c1dc1f97c7fdd5ebc36fabafe631e144bf79147"
+          },
+          {
+            "slot": 5964143,
+            "reward": 0.7292595357442622,
+            "brain_ms": 56500.0,
+            "memory_sha256": "6f3e45741d09c94cca4cbc3683aa1c02929d2f2d463924aa1ceef51555314f62"
+          },
+          {
+            "slot": 5964144,
+            "reward": -0.1931036897940146,
+            "brain_ms": 57000.0,
+            "memory_sha256": "c81389aa67c7871a04c26b7ebdd701b4c3c5f11b3191d77967d8722fd214a747"
+          },
+          {
+            "slot": 5964145,
+            "reward": -0.14022266798522764,
+            "brain_ms": 57500.0,
+            "memory_sha256": "da8587bd63b14becac6106bc40fa52779d583fdf0b26657959bbb1896015dbdc"
+          },
+          {
+            "slot": 5964146,
+            "reward": 0.9010943626684877,
+            "brain_ms": 58000.0,
+            "memory_sha256": "60a13e7094548cb9af01b8bd703b20d443050fe3b19fa392d1f0efc890239510"
+          },
+          {
+            "slot": 5964147,
+            "reward": -0.24127643931365128,
+            "brain_ms": 58500.0,
+            "memory_sha256": "3e0dea7884c6794f883300544b3fce225ffc9fa427381de05aee464e1789388a"
+          },
+          {
+            "slot": 5964148,
+            "reward": 0.2311709901460972,
+            "brain_ms": 59000.0,
+            "memory_sha256": "06e17e82c87384560ad43fd711116a8c94ef4977953fd927109604935522515c"
+          },
+          {
+            "slot": 5964149,
+            "reward": -0.6415839930757841,
+            "brain_ms": 59500.0,
+            "memory_sha256": "2dc7b2531d0c3ba02423ae37435d5b5997ac2cb784edbe51e90c8a2a98fafc30"
+          },
+          {
+            "slot": 5964150,
+            "reward": -0.3951136278297156,
+            "brain_ms": 60000.0,
+            "memory_sha256": "35e24d8ecbb10c9ec0f8b3ded956084aae78dcceea472f4c3be082849157abfd"
+          },
+          {
+            "slot": 5964151,
+            "reward": 0.2245350229064229,
+            "brain_ms": 60500.0,
+            "memory_sha256": "943177f6b4542af5538eb26d08e3baad9854cbc224e034d7072e4676f8f98e4a"
+          },
+          {
+            "slot": 5964152,
+            "reward": 0.05475702511387226,
+            "brain_ms": 61000.0,
+            "memory_sha256": "70bb4638bdc6ecd56804a510f05de0fc4a5198ca45ee8aeaa884ff38f252ae3d"
+          },
+          {
+            "slot": 5964154,
+            "reward": 0,
+            "brain_ms": 61500.0,
+            "memory_sha256": "66378244d33a9d216298b05125619ed055f94e0c6f8b9387e954bc8765dd7e29"
+          },
+          {
+            "slot": 5964155,
+            "reward": 0.36296627604045284,
+            "brain_ms": 62000.0,
+            "memory_sha256": "4f3c310d7de88c03a309ae25a44cc3b19ffc5f4204c06ffc3fc97ba5b8ef3545"
+          },
+          {
+            "slot": 5964156,
+            "reward": -0.672347977920623,
+            "brain_ms": 62500.0,
+            "memory_sha256": "b6bdcc693f7958355bf086ddc9ae711f5820da0123d01edff7281e6e125feb3a"
+          },
+          {
+            "slot": 5964157,
+            "reward": -0.4193123222358395,
+            "brain_ms": 63000.0,
+            "memory_sha256": "3a57805346848c62fc41ce53436898d437662d07fd9babb91e7459b78200d6bf"
+          },
+          {
+            "slot": 5964158,
+            "reward": 0.8598529995396405,
+            "brain_ms": 63500.0,
+            "memory_sha256": "ff10d5c9018297d730880f80d43004b2220d1c0759ba4fcb127b392c1f5fcc1d"
+          },
+          {
+            "slot": 5964159,
+            "reward": -0.8503000887108954,
+            "brain_ms": 64000.0,
+            "memory_sha256": "172603b58e3a265d285fc2bf4dfb17b9cec0c94c47a601a8129fe3666a70060f"
+          },
+          {
+            "slot": 5964160,
+            "reward": 0.1950681086102577,
+            "brain_ms": 64500.0,
+            "memory_sha256": "8b4b5cacaa47699eb9d4bb5d5530d72ffc88b27b024f1be9631e5e6ef3779761"
+          },
+          {
+            "slot": 5964161,
+            "reward": -0.19626427050641837,
+            "brain_ms": 65000.0,
+            "memory_sha256": "8eada26c12c88f6217cb6a51aec10450d4e86cf7d95e0a90688f94aa06dce763"
+          },
+          {
+            "slot": 5964162,
+            "reward": 0.329443132671031,
+            "brain_ms": 65500.0,
+            "memory_sha256": "6b06938c792daa0b44f46972eeaf8cac759ef5cab4d0dde090dc0c2aac8041c7"
+          },
+          {
+            "slot": 5964163,
+            "reward": 0.2713126970114388,
+            "brain_ms": 66000.0,
+            "memory_sha256": "e186c23aa22c6f5f1fa8d9c57f04e9de4138ad3c0893accf27b33aafe325928e"
+          },
+          {
+            "slot": 5964164,
+            "reward": 0.08461223343857682,
+            "brain_ms": 66500.0,
+            "memory_sha256": "d6ba5232e3fd572fa791f734a6f43d5b53731c16dedf711e466f264208bd6124"
+          },
+          {
+            "slot": 5964165,
+            "reward": 0.0004916667233203498,
+            "brain_ms": 67000.0,
+            "memory_sha256": "046e1f9f07f42aaf6f6a328671bf36c5155be5bad51c4753b2b383830b887439"
+          },
+          {
+            "slot": 5964166,
+            "reward": 0.019258016171335157,
+            "brain_ms": 67500.0,
+            "memory_sha256": "f10c6fb107f0350b25c3ff714027ef9c37079ef4f8609d9aca464478291ade3c"
+          },
+          {
+            "slot": 5964167,
+            "reward": -0.3494687965913954,
+            "brain_ms": 68000.0,
+            "memory_sha256": "a0e17b35b5540d317c43f22bb9cf62410999bfa0aa278b5dae8c3df443078743"
+          },
+          {
+            "slot": 5964168,
+            "reward": 0.04922578700717395,
+            "brain_ms": 68500.0,
+            "memory_sha256": "6e077a3b13e577d8cdd8db2cc67aa0f3e2f4f4af5ba4ef1b5da8d7697228e3ca"
+          },
+          {
+            "slot": 5964169,
+            "reward": -0.22460959765865596,
+            "brain_ms": 69000.0,
+            "memory_sha256": "d42f26ec09358bd736b31a6e67e73b555bad27506bea4df8b39cacb462e78f1a"
+          },
+          {
+            "slot": 5964170,
+            "reward": 0.3569642414747136,
+            "brain_ms": 69500.0,
+            "memory_sha256": "c7523bde7ba51b6b3bd4abf0202128324da4ab40e06d16c1ad23f13ccf785d4f"
+          },
+          {
+            "slot": 5964171,
+            "reward": -0.20630994942607117,
+            "brain_ms": 70000.0,
+            "memory_sha256": "6b8d3c9abfc1643989ee861f20692b99649db68aafe9dee86e0a7fb8f3571c27"
+          },
+          {
+            "slot": 5964172,
+            "reward": 0.06986961084416521,
+            "brain_ms": 70500.0,
+            "memory_sha256": "86fe67060bc9a9db381e3415d5eb45f8b69ce1a88b29cdf98f157739d0796f30"
+          },
+          {
+            "slot": 5964173,
+            "reward": 0.22318727580858422,
+            "brain_ms": 71000.0,
+            "memory_sha256": "69714a55243c3c7b8f90527757586e3d14f7ffc175998ffe4bc4fc80508c5174"
+          },
+          {
+            "slot": 5964174,
+            "reward": -0.3591132341328489,
+            "brain_ms": 71500.0,
+            "memory_sha256": "fa3fcb32fa583e711c26e4d87cdf5b2b2b261ddd3b4de75715da05e8e9d35117"
+          },
+          {
+            "slot": 5964175,
+            "reward": 0.2787562757376634,
+            "brain_ms": 72000.0,
+            "memory_sha256": "554acf66d2c56224a00c105e7286b5b5a96c3a962a3f6869bc065db54add5e36"
+          },
+          {
+            "slot": 5964176,
+            "reward": 0.12018875786162653,
+            "brain_ms": 72500.0,
+            "memory_sha256": "be9ce26bc1c461f88b72f4b3575bf69402ae1ab45cf7003e464d2e2b0d7ba9ae"
+          },
+          {
+            "slot": 5964177,
+            "reward": -0.0519937536795112,
+            "brain_ms": 73000.0,
+            "memory_sha256": "3008e242126a5026958b0ee6c08359b8054490018532d38f387c02b2720bc4f1"
+          },
+          {
+            "slot": 5964178,
+            "reward": 0.08722669580569686,
+            "brain_ms": 73500.0,
+            "memory_sha256": "eadfd01a8befa7d4ba5ef06c60dfb501615774346949b20d21d2de674e4224fa"
+          },
+          {
+            "slot": 5964179,
+            "reward": -0.2879145679185342,
+            "brain_ms": 74000.0,
+            "memory_sha256": "baa0ec49b439e63aab2e12c01e3787bffdcbfc55c86bc0b4033e407c2f3e5dd8"
+          },
+          {
+            "slot": 5964180,
+            "reward": -0.061643421022751,
+            "brain_ms": 74500.0,
+            "memory_sha256": "602edcbd2835426b71b14976a086dda36a62d66ee8f9182b50b9dce1e207c6cf"
+          },
+          {
+            "slot": 5964181,
+            "reward": -0.02457809725464699,
+            "brain_ms": 75000.0,
+            "memory_sha256": "83f5011dde337cc4339fc817730b5f7047c00cdc55ceeedefaf3659e8f7c794b"
+          },
+          {
+            "slot": 5964182,
+            "reward": -0.3699374555928898,
+            "brain_ms": 75500.0,
+            "memory_sha256": "92022a1e71ba07fb110a313e321f427c56bd23b393f998c4948d01de04589a57"
+          },
+          {
+            "slot": 5964183,
+            "reward": 0.6544020714323153,
+            "brain_ms": 76000.0,
+            "memory_sha256": "6905955744edc5696330ff30a8062ca1b3881844e5ccbe152c510caedea62748"
+          },
+          {
+            "slot": 5964184,
+            "reward": 0.3036236951149931,
+            "brain_ms": 76500.0,
+            "memory_sha256": "3615190ed68d2ebd44a6d30650892a3ca6f1e89a836bd0ff93255a78f7b9b646"
+          },
+          {
+            "slot": 5964186,
+            "reward": 0,
+            "brain_ms": 77000.0,
+            "memory_sha256": "f1349063230dbc8998c3110edc83fc2a5616d2b8745110b3a56027c5a9c0c92f"
+          },
+          {
+            "slot": 5964187,
+            "reward": 0.06507489335453442,
+            "brain_ms": 77500.0,
+            "memory_sha256": "c4fd0612d6efee58fb7dd9d0d4ed187e2be5394c091779d27df9b4a2a6ffd130"
+          },
+          {
+            "slot": 5964188,
+            "reward": -1.5055851065004617,
+            "brain_ms": 78000.0,
+            "memory_sha256": "55f4200d6cb019be3d2649607e0e6edb03d9e818ed40d106f2d3c9b28c74e62b"
+          },
+          {
+            "slot": 5964189,
+            "reward": -0.06189261215604347,
+            "brain_ms": 78500.0,
+            "memory_sha256": "5e3d01b917d6f89338faea471673ca0f88b5d6ddf331f2b4fc19e785378f0e22"
+          },
+          {
+            "slot": 5964190,
+            "reward": 0.2816603565836715,
+            "brain_ms": 79000.0,
+            "memory_sha256": "a41fa4074c5077dbebfd4a7b8c97ea47ae45195387b3f1f0b139ddd9307641a5"
+          },
+          {
+            "slot": 5964191,
+            "reward": 0.6373854512406183,
+            "brain_ms": 79500.0,
+            "memory_sha256": "807f695e687198345ee8e776642706f1f38fe898705ecaad31ba04117752c275"
+          },
+          {
+            "slot": 5964192,
+            "reward": 0.004618142514914325,
+            "brain_ms": 80000.0,
+            "memory_sha256": "2ff937ef24f94f1c964c10d6bc928d0ca676e146c7bed351442ac81a9f4fa379"
+          },
+          {
+            "slot": 5964193,
+            "reward": -0.4920801818130087,
+            "brain_ms": 80500.0,
+            "memory_sha256": "a0c73e81cda850d6fa2f8555378a27afb164f3a7e1605b1b205e79b57d52c469"
+          },
+          {
+            "slot": 5964194,
+            "reward": -0.5162834365665105,
+            "brain_ms": 81000.0,
+            "memory_sha256": "546a78c7284382b8a9fb2a1bdc9fefbce8e4a571db0b5bcf39180b1649f2ed7c"
+          },
+          {
+            "slot": 5964195,
+            "reward": -0.35643367693504047,
+            "brain_ms": 81500.0,
+            "memory_sha256": "61456ebb44d3ac121497da2ebd8a2e0d8fbfe09323f498a9a2311bd1c8ada2b1"
+          },
+          {
+            "slot": 5964196,
+            "reward": -1.1839544511294093,
+            "brain_ms": 82000.0,
+            "memory_sha256": "4e0d574520adf98ea8d020c623b61ed046056386a049681c766435cc24dae65b"
+          },
+          {
+            "slot": 5964197,
+            "reward": 1.3257069535906112,
+            "brain_ms": 82500.0,
+            "memory_sha256": "6347de80fe07ea9cf5e1e7f3e80ebe4a40b0e2fbd87a398979efb74773bf5565"
+          },
+          {
+            "slot": 5964198,
+            "reward": 0.6639003049099301,
+            "brain_ms": 83000.0,
+            "memory_sha256": "1a9704af309d36dcdeaa8fa161c9800125745be029728a856f0baa25da939544"
+          },
+          {
+            "slot": 5964199,
+            "reward": -1.4921104977277935,
+            "brain_ms": 83500.0,
+            "memory_sha256": "bee6c421fe706defe959f5ab6d304d9c9db5014b4133bf52865c58e186c3265c"
+          },
+          {
+            "slot": 5964200,
+            "reward": -0.5045964631584638,
+            "brain_ms": 84000.0,
+            "memory_sha256": "ec6b4fc1b860cceaed62229312bf358bb2a33d8b6869dac2185dd9b6db70be95"
+          },
+          {
+            "slot": 5964201,
+            "reward": -0.05207518065373051,
+            "brain_ms": 84500.0,
+            "memory_sha256": "deb96a1c2672972527340b407ddc3e6eee3a31eda478a730e0ada16cce7fd918"
+          },
+          {
+            "slot": 5964202,
+            "reward": 0.45889818479770383,
+            "brain_ms": 85000.0,
+            "memory_sha256": "0f832b27bfbe09a6a948ff5d0f97dd724fdb98a4d7f6035b98df0fb12c41a421"
+          },
+          {
+            "slot": 5964203,
+            "reward": -0.29050134914524506,
+            "brain_ms": 85500.0,
+            "memory_sha256": "3810c06d47f5643cbdf3918c573258986f4a7ee1249d84ac1457dc6cdc4a156b"
+          },
+          {
+            "slot": 5964204,
+            "reward": -0.43397240675381,
+            "brain_ms": 86000.0,
+            "memory_sha256": "dbc4dafe34ca0b91b8ae91ac3d2887ac867e546288dcd3cb1d4e12b191d74f56"
+          },
+          {
+            "slot": 5964205,
+            "reward": 0.47966487395675017,
+            "brain_ms": 86500.0,
+            "memory_sha256": "6319fb7dc49446c4e17daa42086a6de259a598e9b2043e792ee9c3f7bd53c2b0"
+          },
+          {
+            "slot": 5964206,
+            "reward": -0.017198261746784738,
+            "brain_ms": 87000.0,
+            "memory_sha256": "7c26c64e447ad656532819517d46bcc5bff343f6b134517a253fb5586cb68cbb"
+          },
+          {
+            "slot": 5964207,
+            "reward": -0.6660543972884909,
+            "brain_ms": 87500.0,
+            "memory_sha256": "442391b99b01afb3ab312c1014988b5317d792688e319202a169a730a48658a5"
+          },
+          {
+            "slot": 5964208,
+            "reward": 1.1101176888128634,
+            "brain_ms": 88000.0,
+            "memory_sha256": "276f4cef07c5fe4be677d1a12ab5bfcf6bff172ce59e75e59997d3db009f8c49"
+          },
+          {
+            "slot": 5964209,
+            "reward": 1.5952600011967775,
+            "brain_ms": 88500.0,
+            "memory_sha256": "bca0a717626cf740daaff9be753bf19d22de5b57f36a0df3bd6705fa06ecdc59"
+          },
+          {
+            "slot": 5964210,
+            "reward": -0.5648163105096273,
+            "brain_ms": 89000.0,
+            "memory_sha256": "2cd6bdd314b12463f640cb46f82292e2df3f3a7439c325d50dd94a03c949107f"
+          },
+          {
+            "slot": 5964211,
+            "reward": -0.841408684727412,
+            "brain_ms": 89500.0,
+            "memory_sha256": "23ee73bf3d1fcd6fa72196d44f397dd870f864ccea086a61fe83f52ad8f8ea1e"
+          },
+          {
+            "slot": 5964212,
+            "reward": -0.4413468139789245,
+            "brain_ms": 90000.0,
+            "memory_sha256": "c43587ba0a1f59ec2f294b24e4245070aa5a0e6076e3663e6638f3f47495d382"
+          },
+          {
+            "slot": 5964213,
+            "reward": 0.025413531723501137,
+            "brain_ms": 90500.0,
+            "memory_sha256": "0c4ba5d22461b77b85051e81f9ba95706e460908b8a77441cee9923768b7d6ed"
+          },
+          {
+            "slot": 5964214,
+            "reward": -0.06012376215215909,
+            "brain_ms": 91000.0,
+            "memory_sha256": "6a9e919e665157184457cd525d56cc89f438b2cbf3bba9022aa17380f11eab1e"
+          },
+          {
+            "slot": 5964215,
+            "reward": 0.05946825572689818,
+            "brain_ms": 91500.0,
+            "memory_sha256": "9c43fcfcc7dff7c69cef02fba5c28ee2a465e3c22a9799f8e739c07c97729e06"
+          },
+          {
+            "slot": 5964216,
+            "reward": -0.5263606561965162,
+            "brain_ms": 92000.0,
+            "memory_sha256": "09405b37a950a762969e923148c9dd4284e85b2554e306cc663999decb916653"
+          },
+          {
+            "slot": 5964217,
+            "reward": -1.9998520108315176,
+            "brain_ms": 92500.0,
+            "memory_sha256": "bea74b42aeb676d7442361ecca9217446fbf9eec6a8256f62891163b51d8e55c"
+          },
+          {
+            "slot": 5964218,
+            "reward": -0.8432898114830891,
+            "brain_ms": 93000.0,
+            "memory_sha256": "d4473589cac53f065a2f022b706151b726fe0121511368e9f2692eaeb955f1e8"
+          },
+          {
+            "slot": 5964219,
+            "reward": -0.7392536457882102,
+            "brain_ms": 93500.0,
+            "memory_sha256": "d36c94c44a0880ac6581d556a5eb0a4a7541ca0ec2fd7156e2d9feffbd80438e"
+          },
+          {
+            "slot": 5964220,
+            "reward": 0.09648675276943663,
+            "brain_ms": 94000.0,
+            "memory_sha256": "bdd1d60567a70cabf66803aab903758c34dc672153fd7cd1d51df1390b46ce0c"
+          },
+          {
+            "slot": 5964221,
+            "reward": -0.6512039090209498,
+            "brain_ms": 94500.0,
+            "memory_sha256": "c610bf230a0fc7c42c9ac14be8ae7e572c12c1f8c7b1aa36df9d8a624cf7c4b0"
+          },
+          {
+            "slot": 5964222,
+            "reward": -0.04807002729970122,
+            "brain_ms": 95000.0,
+            "memory_sha256": "7325e6df5aaf9c28103da246a623edc38ae96f4bf053982a57455df70d4fe226"
+          },
+          {
+            "slot": 5964224,
+            "reward": 0,
+            "brain_ms": 95500.0,
+            "memory_sha256": "aae8743a145cc23a16647b65c1b61fcfb28c430d2080dc9097a3a982658f3bd0"
+          },
+          {
+            "slot": 5964229,
+            "reward": -0.21284540528165508,
+            "brain_ms": 96000.0,
+            "memory_sha256": "522436b60a1c91dd64d5e849ad9bce9d96f0062bcef5519a136a3a01a53f9cbb"
+          },
+          {
+            "slot": 5964230,
+            "reward": 0.11302844559040182,
+            "brain_ms": 96500.0,
+            "memory_sha256": "c1b7d66a0c3f6a4d3bd5faaacc3e613fc1ed3690ca1f9d90b1626b3adc90bdd5"
+          },
+          {
+            "slot": 5964231,
+            "reward": 0.045097508774063044,
+            "brain_ms": 97000.0,
+            "memory_sha256": "19114cfcec05164df6286b66cef20d4847d1cea14559ef34357a26d31c38bf17"
+          },
+          {
+            "slot": 5964232,
+            "reward": 0.2518960555144645,
+            "brain_ms": 97500.0,
+            "memory_sha256": "834ad6087c21304e6f315c22175c1fa0a4795caa5131944bfb51e8ff2a3b390c"
+          },
+          {
+            "slot": 5964233,
+            "reward": -0.1085430869948425,
+            "brain_ms": 98000.0,
+            "memory_sha256": "872c508a65a189d456ecf3440bc242a7790edb8ddc8d2003ad96060c9dec3df8"
+          },
+          {
+            "slot": 5964234,
+            "reward": 0.7451354212007573,
+            "brain_ms": 98500.0,
+            "memory_sha256": "0132ba9ebdbca8449a7180b0f14a23e336cfa16090ebc6c606dd670ce91b6ffb"
+          },
+          {
+            "slot": 5964235,
+            "reward": -0.9974655330755127,
+            "brain_ms": 99000.0,
+            "memory_sha256": "c6d42a25feb00547a1d36d0f2c5c9e5fbaa7dfea1fd846598de9f2844aad4f6e"
+          },
+          {
+            "slot": 5964236,
+            "reward": -0.45761002565367903,
+            "brain_ms": 99500.0,
+            "memory_sha256": "7386a036efdacb0fb44ae4e24e6f02e143ee7ad40e2144a8ff83c18082713389"
+          },
+          {
+            "slot": 5964237,
+            "reward": 0.5509564167130634,
+            "brain_ms": 100000.0,
+            "memory_sha256": "29274ee1fa6fa03d25198d8391d69089453a344ac4424f9ada738f4566d22f5c"
+          },
+          {
+            "slot": 5964238,
+            "reward": -0.44680448279714824,
+            "brain_ms": 100500.0,
+            "memory_sha256": "44ae00dc4d3449374561f709652331b5de6dacb99b074f67891f873d00671d13"
+          },
+          {
+            "slot": 5964239,
+            "reward": -0.7085226740897781,
+            "brain_ms": 101000.0,
+            "memory_sha256": "581765c58665d2a4316c8ac23336d7d8700683fc1b74517d630e7a2c03b74e5f"
+          },
+          {
+            "slot": 5964240,
+            "reward": 0.3439398397241291,
+            "brain_ms": 101500.0,
+            "memory_sha256": "883a8bcb988909005325c55ef69a9ba01d277f59c4e3b0d731ca92874b8337f6"
+          },
+          {
+            "slot": 5964241,
+            "reward": 0.8093623826172518,
+            "brain_ms": 102000.0,
+            "memory_sha256": "8de284818959a58196348955e2b48da96573b36c67dbbe89722eb448bc1acdec"
+          },
+          {
+            "slot": 5964242,
+            "reward": -0.15305908773436272,
+            "brain_ms": 102500.0,
+            "memory_sha256": "363d06d67c20ead71debd16517047305e7418455b3ff8b72d87ac07a9aaecc8a"
+          },
+          {
+            "slot": 5964243,
+            "reward": -0.2605666087401346,
+            "brain_ms": 103000.0,
+            "memory_sha256": "de63533cfa9bf4a00b8f88936f4cd5c811fc47da8d8a47aceb065a465067bba5"
+          },
+          {
+            "slot": 5964244,
+            "reward": 0.5201320432789487,
+            "brain_ms": 103500.0,
+            "memory_sha256": "eb034b0d48db1c747b88573a7d613d5882b7ec1b79bc4dd331f6603e57a5d652"
+          },
+          {
+            "slot": 5964246,
+            "reward": -0.016097314539536,
+            "brain_ms": 104000.0,
+            "memory_sha256": "b46e6b615cc49dbe5e6594a93a068c191ae1e939c7c38e6b2a01076d368f29da"
+          },
+          {
+            "slot": 5964247,
+            "reward": 1.4054114448130122,
+            "brain_ms": 104500.0,
+            "memory_sha256": "4bf1e04a216ab528cebd5f4cffd9f7e33e4f7d8c5ff2d273d15cb26eb59096f6"
+          },
+          {
+            "slot": 5964250,
+            "reward": 0,
+            "brain_ms": 105000.0,
+            "memory_sha256": "5f87e16fbad10685df958336fb4ccf21c3dedcef2d0468e022095967ed66eb0e"
+          },
+          {
+            "slot": 5964251,
+            "reward": 0.20210258554197935,
+            "brain_ms": 105500.0,
+            "memory_sha256": "f32fb4d090c72e685911ba5331e12e01ab80aaff6251928d2991441f80143f2c"
+          },
+          {
+            "slot": 5964252,
+            "reward": 2.1604282154168573,
+            "brain_ms": 106000.0,
+            "memory_sha256": "ee744ba838f66a9d43d514e69e997a553cd4a7b0cf40da4fa434843cc92448ad"
+          },
+          {
+            "slot": 5964253,
+            "reward": -0.20483999243128892,
+            "brain_ms": 106500.0,
+            "memory_sha256": "f35949e783d8cdab204a0a555165780df0119d552417a8781005a8a8ed83358a"
+          },
+          {
+            "slot": 5964254,
+            "reward": 1.3163069298995822,
+            "brain_ms": 107000.0,
+            "memory_sha256": "f824aee4159b901070ce3fd300bb93e1a813dd6f674d260e63e0481bc4c126b4"
+          }
+        ],
+        "observations": 214
+      },
+      {
+        "key": "solana:zxTpi4BtaWX3mgdAPoezkMD1hxx8CdeCfrqXMWvSCLX",
+        "sleeve": 3,
+        "assigned": 1789202715.2316813,
+        "remote_checkpoint": "/state/meme-pools-v1/fly-3-5964254.npz",
+        "events": [
+          {
+            "slot": 5964009,
+            "reward": 0.0,
+            "brain_ms": 500.0,
+            "memory_sha256": "16c0e5530bc3cf34fa6b4406529845abd7353d22a82baacc627760b2bb727c9d"
+          },
+          {
+            "slot": 5964013,
+            "reward": 0.0,
+            "brain_ms": 1000.0,
+            "memory_sha256": "71e0ca9e367b708cf2bb2b8850c38891fa05f60a95278073046f90d25c93073c"
+          },
+          {
+            "slot": 5964014,
+            "reward": -1.3546438599083785,
+            "brain_ms": 1500.0,
+            "memory_sha256": "c6f23b6ec9089d6dea18913fd7b742a8d080bb430007e7c04a0d83854804fac5"
+          },
+          {
+            "slot": 5964015,
+            "reward": -1.7183103546355483,
+            "brain_ms": 2000.0,
+            "memory_sha256": "70b2cd7eba835795c85c0eca0f6cda40810a265f5cfe037d42b629541a94af02"
+          },
+          {
+            "slot": 5964017,
+            "reward": -0.8587491073413105,
+            "brain_ms": 2500.0,
+            "memory_sha256": "ee6aa51559aea772b2cc4c8ccdd0d6839f2e2c76f9d6bbadd27642edebf370fc"
+          },
+          {
+            "slot": 5964019,
+            "reward": 0.4089516403635116,
+            "brain_ms": 3000.0,
+            "memory_sha256": "dd14e9d50d01a453fe0f57f7f5e7ccffe7b768b09cec0814914be4feb8265368"
+          },
+          {
+            "slot": 5964020,
+            "reward": -1.3009725216779486,
+            "brain_ms": 3500.0,
+            "memory_sha256": "cacf3874014fb4dc55dd41efc58700fc751b616b5aea59ef2190d28a37a262de"
+          },
+          {
+            "slot": 5964021,
+            "reward": -0.3260502544528663,
+            "brain_ms": 4000.0,
+            "memory_sha256": "498a687c7bb78fb628ca204954146cd4c540a6d65ac18f3f66aa90cbee80ff54"
+          },
+          {
+            "slot": 5964022,
+            "reward": -1.0471191857516544,
+            "brain_ms": 4500.0,
+            "memory_sha256": "8e172bd9a687a680b7a952582da5ed034f3cde489f229ba32fbe41820b4d7489"
+          },
+          {
+            "slot": 5964023,
+            "reward": -0.5757735453728969,
+            "brain_ms": 5000.0,
+            "memory_sha256": "178fa57829fce9e311d5b0579a16bbeade102cc6f16085126dc5a12595e44234"
+          },
+          {
+            "slot": 5964024,
+            "reward": -0.9084793020018083,
+            "brain_ms": 5500.0,
+            "memory_sha256": "b9cb249c39b401d83c357bc54ed6704160bbb7174491f6c899990fb8cdb65145"
+          },
+          {
+            "slot": 5964025,
+            "reward": 0.9316840978755181,
+            "brain_ms": 6000.0,
+            "memory_sha256": "b4374597ae5340e0e2c2cad1e908c73d914283befa8de55f02ccef850370131f"
+          },
+          {
+            "slot": 5964026,
+            "reward": 1.3523454502505103,
+            "brain_ms": 6500.0,
+            "memory_sha256": "0b4457259f6f04dd7178437a2195c176ad0b13081acfdaea0f9cd258fabfd81f"
+          },
+          {
+            "slot": 5964027,
+            "reward": 0.03265114346172027,
+            "brain_ms": 7000.0,
+            "memory_sha256": "f898ebea2e1588d7230a28c5b1153000a0f2e5caa9de6529b60709b0f4e932e7"
+          },
+          {
+            "slot": 5964028,
+            "reward": -0.09137294316968791,
+            "brain_ms": 7500.0,
+            "memory_sha256": "6db1a7700b8630abe7d26536b0025e01405b65b2db8b9f0fa3969bfb37c95842"
+          },
+          {
+            "slot": 5964029,
+            "reward": 0.13749318397691468,
+            "brain_ms": 8000.0,
+            "memory_sha256": "a454286d8cabde82da444893f8d132f2d40993d5a15dead593f930140e1a60c4"
+          },
+          {
+            "slot": 5964030,
+            "reward": -1.5689201031171933,
+            "brain_ms": 8500.0,
+            "memory_sha256": "af8eaea3500d739d59c8f416eaddea5b52076e0a0d6781184f6091a376684bc8"
+          },
+          {
+            "slot": 5964031,
+            "reward": -1.5804311654966625,
+            "brain_ms": 9000.0,
+            "memory_sha256": "b50b96b075818d263c5ea63a4005ccc39d98d0de881fcda93638a6c2e02dd687"
+          },
+          {
+            "slot": 5964032,
+            "reward": 0.07729516507345124,
+            "brain_ms": 9500.0,
+            "memory_sha256": "f6c8c3cdc9c458d80a085e4a35b17fdf5d19653499080e5ef5a210f95cf36e32"
+          },
+          {
+            "slot": 5964033,
+            "reward": -1.1559242741888625,
+            "brain_ms": 10000.0,
+            "memory_sha256": "636ccdf6c41ef0be59b592755e50cc1832b535d4050dae7c40c77172b7f0f1f8"
+          },
+          {
+            "slot": 5964034,
+            "reward": -1.4550873330275067,
+            "brain_ms": 10500.0,
+            "memory_sha256": "c7fe9114718b64a2bebefdf2d33f29fc0563ba2b7860155edb130350db28acf1"
+          },
+          {
+            "slot": 5964035,
+            "reward": 0.8919298192197971,
+            "brain_ms": 11000.0,
+            "memory_sha256": "8a8d15603eaecd378a447fa7259a2094517e3311f42b6a9d91d3797b54cea388"
+          },
+          {
+            "slot": 5964036,
+            "reward": 0.6609265620598137,
+            "brain_ms": 11500.0,
+            "memory_sha256": "0f7460f1bd8abc0d04f2e12d00df68e110b6b04757d2f914ab4fff985def6c5c"
+          },
+          {
+            "slot": 5964037,
+            "reward": -0.35462537141106054,
+            "brain_ms": 12000.0,
+            "memory_sha256": "f00bb75cf60f2e5ab4819155e37f304a06c08debc239566e628fd30f52a06a5e"
+          },
+          {
+            "slot": 5964038,
+            "reward": -0.9662442203348576,
+            "brain_ms": 12500.0,
+            "memory_sha256": "2b72f60f6d3ef359e33714db517c3b7d2929598cb706a42dcbe97929bed62fe8"
+          },
+          {
+            "slot": 5964040,
+            "reward": 0,
+            "brain_ms": 13000.0,
+            "memory_sha256": "4181f01183c7c971ba08d4212e85d3872c3cdb2d708ea429b1ab3eb1eb0134cb"
+          },
+          {
+            "slot": 5964041,
+            "reward": -0.5539666277639697,
+            "brain_ms": 13500.0,
+            "memory_sha256": "1b42133f0a8b14e552649b72a73fc01ce4bcb680f72b26d5a488a6f2ede06d86"
+          },
+          {
+            "slot": 5964042,
+            "reward": 0.5437634261332391,
+            "brain_ms": 14000.0,
+            "memory_sha256": "6a86e049f26a202b700cbbe6271887f0208438e38725d05ea4034b8a403b6662"
+          },
+          {
+            "slot": 5964043,
+            "reward": -0.28164559603837347,
+            "brain_ms": 14500.0,
+            "memory_sha256": "6eaa70de4b0f9639d931359e0699cb999465b75201f6f8876f757c097ddfc079"
+          },
+          {
+            "slot": 5964044,
+            "reward": 0.011195312296621296,
+            "brain_ms": 15000.0,
+            "memory_sha256": "d744d39ed85230187eb550cfcd1d6bf094296e2461847bfb0fa0c83c5fc7b1d9"
+          },
+          {
+            "slot": 5964045,
+            "reward": 1.6527763187741584,
+            "brain_ms": 15500.0,
+            "memory_sha256": "30f68a0b6bdb1984d34b246e400e2ddd9c7193d9380aea9215c1b03939aeaa88"
+          },
+          {
+            "slot": 5964046,
+            "reward": -0.4693357737915278,
+            "brain_ms": 16000.0,
+            "memory_sha256": "13bbc374a319483ce8b8f8456d06e68342219f81ee613fc323937ae7870f2649"
+          },
+          {
+            "slot": 5964047,
+            "reward": 1.446794879797494,
+            "brain_ms": 16500.0,
+            "memory_sha256": "1f5c7031f5cead358c90b1015da4b2c8dd11c11413701e1c91f3dfe543000c3f"
+          },
+          {
+            "slot": 5964048,
+            "reward": -0.3845206546405109,
+            "brain_ms": 17000.0,
+            "memory_sha256": "c291eeae62d3aea8e4652019c569f89487227e00fc8481b9c1cf327e985877a2"
+          },
+          {
+            "slot": 5964049,
+            "reward": 1.0238528733365229,
+            "brain_ms": 17500.0,
+            "memory_sha256": "8f7a8135689e4e84157673065aad81448cddc879823fc321cb338f663cf2d70c"
+          },
+          {
+            "slot": 5964050,
+            "reward": 0.23235159985028986,
+            "brain_ms": 18000.0,
+            "memory_sha256": "e20fc1e74c54e4ca58a394cfe4e985b351b104c94eb55f75f42a53c37c585466"
+          },
+          {
+            "slot": 5964051,
+            "reward": 0.5255626366839294,
+            "brain_ms": 18500.0,
+            "memory_sha256": "64bf850a3b38abffac9ffb4149f1121698cc2c09b54d233aff003688e0249bae"
+          },
+          {
+            "slot": 5964052,
+            "reward": 1.6666889347300469,
+            "brain_ms": 19000.0,
+            "memory_sha256": "1811edeb292acd24407ec089a082c7a6a06a69f68bd4c421fce7bf8ee45a502d"
+          },
+          {
+            "slot": 5964053,
+            "reward": 1.2530349497697557,
+            "brain_ms": 19500.0,
+            "memory_sha256": "a0e809493da3c8fbc6330ce9993111d15d97e5d0b6090b78e66e335030df1698"
+          },
+          {
+            "slot": 5964054,
+            "reward": -0.2280194325122693,
+            "brain_ms": 20000.0,
+            "memory_sha256": "cc7e1f853793c1ace5afc0cfc76146e7fdbda0b00bdf26cb8f95db3368ce8c57"
+          },
+          {
+            "slot": 5964055,
+            "reward": 1.272563135963594,
+            "brain_ms": 20500.0,
+            "memory_sha256": "cd02e562cbc1797c5d3a9c65999dc76d90070d71c68c2859bc191ebe3a13c54d"
+          },
+          {
+            "slot": 5964056,
+            "reward": -1.2033860432203198,
+            "brain_ms": 21000.0,
+            "memory_sha256": "3c271e3572e6e048512b12c2503f7407235af7b5ab63ee18e2f9465a66732896"
+          },
+          {
+            "slot": 5964057,
+            "reward": 0.7493261215062716,
+            "brain_ms": 21500.0,
+            "memory_sha256": "72e6f6f407493980623e38210b67dbedb4f524b300ef76547a0c06048cb310d2"
+          },
+          {
+            "slot": 5964058,
+            "reward": 0.4449299069585493,
+            "brain_ms": 22000.0,
+            "memory_sha256": "686645036e602bd1a83d75fc72d62fc64feec4cf4e6157a5592a82983c96da01"
+          },
+          {
+            "slot": 5964059,
+            "reward": -0.581511823013642,
+            "brain_ms": 22500.0,
+            "memory_sha256": "c21b2773fe816867995a817057dbc62072a360c2719511a980ef7e71321b19f5"
+          },
+          {
+            "slot": 5964060,
+            "reward": 0.40457028155600483,
+            "brain_ms": 23000.0,
+            "memory_sha256": "3c2d3e2b637433ece09b229416b65aac50a74cc4c5423e6bde2a197dad2303dd"
+          },
+          {
+            "slot": 5964061,
+            "reward": 1.1924054210653878,
+            "brain_ms": 23500.0,
+            "memory_sha256": "504543e132fd8a733d3da16b897d00ac64307dd2797f918dbe03de9b2a3038b4"
+          },
+          {
+            "slot": 5964062,
+            "reward": 1.5289012394018755,
+            "brain_ms": 24000.0,
+            "memory_sha256": "0b637e0c9606d5796d63e27f5306733516ce9cccb251ff7dfb92e1f778438d87"
+          },
+          {
+            "slot": 5964063,
+            "reward": 1.5538452866393015,
+            "brain_ms": 24500.0,
+            "memory_sha256": "8b8cf28055bcd4242a2efc6dc7b169f5ff6087a917882ca82293c0b2915176f4"
+          },
+          {
+            "slot": 5964064,
+            "reward": 0.24328443685897128,
+            "brain_ms": 25000.0,
+            "memory_sha256": "6a7db723ea3126811c506d7e404d1872cf724198300477d0d176beb97931f4d1"
+          },
+          {
+            "slot": 5964065,
+            "reward": -2.0025818677473524,
+            "brain_ms": 25500.0,
+            "memory_sha256": "c22c615c9e218fa4936b20d03c7df9bd84d2c0aca8ddcc8fa3b630276fd0ef6d"
+          },
+          {
+            "slot": 5964066,
+            "reward": -0.384029599676893,
+            "brain_ms": 26000.0,
+            "memory_sha256": "5a52700b0b3a9a4b1333f906346b3a3aee2edee18aac9dd943f43c049acb5f2a"
+          },
+          {
+            "slot": 5964067,
+            "reward": -0.38961850457670266,
+            "brain_ms": 26500.0,
+            "memory_sha256": "09c8fcbbba531ab1d44027108e059ba3626d2eec5edc6414c0627433727fbfdb"
+          },
+          {
+            "slot": 5964068,
+            "reward": -1.3095868173988947,
+            "brain_ms": 27000.0,
+            "memory_sha256": "cf1e163818adfe436384b94b42d7fb5f3bf151b61b0d78deabe196e5a7d5fb55"
+          },
+          {
+            "slot": 5964069,
+            "reward": 0.6652512021195491,
+            "brain_ms": 27500.0,
+            "memory_sha256": "5c324e16315fd519d4e485e7446f1d3393623591d50899b3ee4319281a6ed1c0"
+          },
+          {
+            "slot": 5964070,
+            "reward": -0.12603577842099867,
+            "brain_ms": 28000.0,
+            "memory_sha256": "2496b6a3229806c08c30004b0692ebce6bde7670940554ed600c5cf5d29b20e4"
+          },
+          {
+            "slot": 5964071,
+            "reward": 1.0001442485124699,
+            "brain_ms": 28500.0,
+            "memory_sha256": "04648943665ec48b6d716d20faa66fee0c955e767141ffbef169a9047f48b0fc"
+          },
+          {
+            "slot": 5964072,
+            "reward": 0.09969946457985657,
+            "brain_ms": 29000.0,
+            "memory_sha256": "e2cd57b0be6560aeee6be79a6f9cb2e9e837a5d4257d0ea7fcf1eec1edf59e4a"
+          },
+          {
+            "slot": 5964073,
+            "reward": -0.9017295957817169,
+            "brain_ms": 29500.0,
+            "memory_sha256": "3ab7f362a1cbce526b4c8420987d9d1ce384863ba4d6122864ea248cb0e6921e"
+          },
+          {
+            "slot": 5964074,
+            "reward": 0.4868047770139867,
+            "brain_ms": 30000.0,
+            "memory_sha256": "10abf539f289803b72bd7ab979c6f7440b59436bd53e0ec8bd98a5a0064cec7c"
+          },
+          {
+            "slot": 5964075,
+            "reward": 0.7563270356979217,
+            "brain_ms": 30500.0,
+            "memory_sha256": "2ce609b5f8ac6de84a632589b132b917759e2605b96d2ef7303f644d79417054"
+          },
+          {
+            "slot": 5964083,
+            "reward": 0,
+            "brain_ms": 31000.0,
+            "memory_sha256": "3bc76fed49c1d207f47db1b93f5985cd86c9a0ec651db39b0729a9ebc189a823"
+          },
+          {
+            "slot": 5964084,
+            "reward": -1.1167938768880674,
+            "brain_ms": 31500.0,
+            "memory_sha256": "48e376792fe40f47ef9a3227b12b5496968b22293209765b41e319f4bbf93f05"
+          },
+          {
+            "slot": 5964085,
+            "reward": -2.159209582230318,
+            "brain_ms": 32000.0,
+            "memory_sha256": "2bd6e7d87973f70c6d4fe99d311e3b7eb49fa833a91fe003da7d42eace096f33"
+          },
+          {
+            "slot": 5964086,
+            "reward": -0.7144546005802965,
+            "brain_ms": 32500.0,
+            "memory_sha256": "8cfd307e6a6aac20e86e1fda17a093adb10dcca4af5c8c5a13019aa1d9fdebd8"
+          },
+          {
+            "slot": 5964087,
+            "reward": -2.2313613378981927,
+            "brain_ms": 33000.0,
+            "memory_sha256": "a707bcef43e591c4cd5a0d7adb82ee3a69913127629c6ac6111ccfa9110d85c5"
+          },
+          {
+            "slot": 5964088,
+            "reward": -1.513982150490989,
+            "brain_ms": 33500.0,
+            "memory_sha256": "fe11d63d9ad36414975daa5e19057d1fb18c775c21a0b7d78960201be4243d21"
+          },
+          {
+            "slot": 5964089,
+            "reward": -1.6441312868352043,
+            "brain_ms": 34000.0,
+            "memory_sha256": "628896fdf2acebb02011cd49c2eaaddbc822ccfd33d9f58c3a0b51c49dfa6d5e"
+          },
+          {
+            "slot": 5964090,
+            "reward": 0.5562698509139636,
+            "brain_ms": 34500.0,
+            "memory_sha256": "f887ab2bc564ec26b991c6305c491d2ce651bc8443a6065101a7dc06cd89bcd0"
+          },
+          {
+            "slot": 5964092,
+            "reward": 1.8740575804257844,
+            "brain_ms": 35000.0,
+            "memory_sha256": "375536b387b9d4410bec2a0c7745963c43b207e89578c1ad7a3774876fce53fc"
+          },
+          {
+            "slot": 5964093,
+            "reward": 2.472011497485056,
+            "brain_ms": 35500.0,
+            "memory_sha256": "c0e0a779050b34693c4646907bc1a83f25471e1a9853dcee9a9872007d1bcbd6"
+          },
+          {
+            "slot": 5964094,
+            "reward": 1.2841297394266462,
+            "brain_ms": 36000.0,
+            "memory_sha256": "fe1d2f1c7d1bf1ac78bb81e6d84c37e902cfcc59e4a6654d88cf8024c060478c"
+          },
+          {
+            "slot": 5964100,
+            "reward": 0,
+            "brain_ms": 36500.0,
+            "memory_sha256": "f51c46e0a0acd8e87e5e3d31c3c1ea4b33a6e6575e45dd41f314fb4f28710c00"
+          },
+          {
+            "slot": 5964101,
+            "reward": -0.015646779579640224,
+            "brain_ms": 37000.0,
+            "memory_sha256": "3a631dcdd6b70ab2553ecca3d45b73a0ef117bcc7f034a3a77d9aaf7414fd224"
+          },
+          {
+            "slot": 5964102,
+            "reward": -1.2669892345079745,
+            "brain_ms": 37500.0,
+            "memory_sha256": "a8502c15bf35797986e862f6a88a3ce3b289296263f70e3177ce2df8b05717c8"
+          },
+          {
+            "slot": 5964103,
+            "reward": -1.1985621598027763,
+            "brain_ms": 38000.0,
+            "memory_sha256": "77431a71c75d6ee9f92873debd9a4421911224c04a533822b6ee20d6f4fd941e"
+          },
+          {
+            "slot": 5964104,
+            "reward": 0.25144864315407744,
+            "brain_ms": 38500.0,
+            "memory_sha256": "48352e9f084a3f61f810e18e430c86ef177f54fcc8270b24496863f9c17eeea1"
+          },
+          {
+            "slot": 5964105,
+            "reward": -0.6819920117827962,
+            "brain_ms": 39000.0,
+            "memory_sha256": "19ea4bd9f7a2008719544cca6d3ccbea423a2349210283af99d8a0cd7cfd6cd9"
+          },
+          {
+            "slot": 5964106,
+            "reward": -1.1677039504425295,
+            "brain_ms": 39500.0,
+            "memory_sha256": "4b968fa0ffc7487b044a2161e91c49922980272bdde1486388aefee0bd27a303"
+          },
+          {
+            "slot": 5964107,
+            "reward": 0.2660018529086301,
+            "brain_ms": 40000.0,
+            "memory_sha256": "51e848fc7ee02f3766cd4120f887d7533a8708a4e9f007d089da1e651e79d000"
+          },
+          {
+            "slot": 5964108,
+            "reward": -0.0017611736224125707,
+            "brain_ms": 40500.0,
+            "memory_sha256": "8d725653e8e2b745b695ca08305df2b5b5d785d0d23631dd6fcb493c9b484422"
+          },
+          {
+            "slot": 5964110,
+            "reward": -2.2692349743785485,
+            "brain_ms": 41000.0,
+            "memory_sha256": "bebbf06696ea3ee4ab73d777847013eb73beb55e632409218dfa294ed2aeacec"
+          },
+          {
+            "slot": 5964111,
+            "reward": -2.103252195156898,
+            "brain_ms": 41500.0,
+            "memory_sha256": "f946aebdfaf9ce21bce0c792e6cc45f1f9db89c7919b53010908496ee22cf746"
+          },
+          {
+            "slot": 5964112,
+            "reward": -1.2278981331108696,
+            "brain_ms": 42000.0,
+            "memory_sha256": "5656b7ae2e31c0297f452ccd0748858baf0f0733ed628645c220d66ba937a298"
+          },
+          {
+            "slot": 5964113,
+            "reward": -2.3462606438863247,
+            "brain_ms": 42500.0,
+            "memory_sha256": "874bde9010687e047a69992b835405ff3898dd7312ab89a4057edc6246988b2d"
+          },
+          {
+            "slot": 5964114,
+            "reward": -1.743828474917649,
+            "brain_ms": 43000.0,
+            "memory_sha256": "8c9a1ae4d84c8ff1ccfd6891bc617fd054fb07e764c8f6834b6a65af77a2dc27"
+          },
+          {
+            "slot": 5964115,
+            "reward": -1.872785209867402,
+            "brain_ms": 43500.0,
+            "memory_sha256": "2ff60c77936c498e9d2adedbcaf4697f1efb59c20b44a403c42c6a554dd2a9b7"
+          },
+          {
+            "slot": 5964118,
+            "reward": 0.5136950180218491,
+            "brain_ms": 44000.0,
+            "memory_sha256": "e18183cad47632c1bd5c8e1da0ac535f10854682a0faec3d104c054955792708"
+          },
+          {
+            "slot": 5964119,
+            "reward": -0.1572182992997,
+            "brain_ms": 44500.0,
+            "memory_sha256": "3c6d52a931055fdb88f179803b4649ae6c732b341870ac183f81f39d8ac2803a"
+          },
+          {
+            "slot": 5964120,
+            "reward": -0.004223763926631818,
+            "brain_ms": 45000.0,
+            "memory_sha256": "05514df353a8946a05924c0cf3004d31eb5de7fbeb2aaa2a036a4bb93599eb39"
+          },
+          {
+            "slot": 5964121,
+            "reward": 0.15617999659485804,
+            "brain_ms": 45500.0,
+            "memory_sha256": "a663eb7ee2eac584504a3ee7c0608d5c3e6d29337abcaa2bffcc26fc6e2790be"
+          },
+          {
+            "slot": 5964122,
+            "reward": -1.6059656383144159,
+            "brain_ms": 46000.0,
+            "memory_sha256": "d46f2d71c80e04b9ad2f656973c10b36379ffe45e36bc038a6872cca4dfc562c"
+          },
+          {
+            "slot": 5964123,
+            "reward": -1.0081963136402692,
+            "brain_ms": 46500.0,
+            "memory_sha256": "de8eb6c8b8b8a3b856e6b912d19a752fda6ee256df53da765190cf0b7b91fe0d"
+          },
+          {
+            "slot": 5964124,
+            "reward": 1.0531721376070777,
+            "brain_ms": 47000.0,
+            "memory_sha256": "4a09fe86cab4067f123355fd1a0ec61c4817a669355e14c8b635e7ee8bcf8f68"
+          },
+          {
+            "slot": 5964125,
+            "reward": 0.6828754849063898,
+            "brain_ms": 47500.0,
+            "memory_sha256": "567000d8865b4b66fc92991decff3377e837481e2370dfb606ca8510d04db365"
+          },
+          {
+            "slot": 5964126,
+            "reward": -0.22753075578091853,
+            "brain_ms": 48000.0,
+            "memory_sha256": "ec5fb73120f8487506f7e58d1282e65984407519503b5b756a0e956a4d998fa2"
+          },
+          {
+            "slot": 5964127,
+            "reward": 0.6239532040852396,
+            "brain_ms": 48500.0,
+            "memory_sha256": "b47a6aee064c42b737ebccf6647c04e02216fd0f92fb2505e5c32cf193c68a94"
+          },
+          {
+            "slot": 5964128,
+            "reward": 0.16860024933376394,
+            "brain_ms": 49000.0,
+            "memory_sha256": "9497141550e7907a5a58aed8954815853d34872937db7844dd70f810a66a0882"
+          },
+          {
+            "slot": 5964130,
+            "reward": 4.8542292540522,
+            "brain_ms": 49500.0,
+            "memory_sha256": "8a248943ba7e2147a6c86a2daaca246a345287bbf135f1f6039bf68988625104"
+          },
+          {
+            "slot": 5964131,
+            "reward": -0.5405364022746824,
+            "brain_ms": 50000.0,
+            "memory_sha256": "84b1683e815618917f2f064429623ba8713bb405e2d94369a2e44fd829ef049b"
+          },
+          {
+            "slot": 5964132,
+            "reward": 0.6552117269841631,
+            "brain_ms": 50500.0,
+            "memory_sha256": "25595cea7b1b18949a0379483d0df1a0e3873db41875e74275c70e8e16e781a8"
+          },
+          {
+            "slot": 5964133,
+            "reward": -0.07117224754480844,
+            "brain_ms": 51000.0,
+            "memory_sha256": "bed7502382f2617e9df5a9f779f1c4943f125847093e96aa8483a1f00b39182b"
+          },
+          {
+            "slot": 5964134,
+            "reward": -1.4427892193757543,
+            "brain_ms": 51500.0,
+            "memory_sha256": "c7c41f9196d5f74299dc013602f1033171f4f4eb7bf74aae85b4ee5b1ad4f0ad"
+          },
+          {
+            "slot": 5964135,
+            "reward": -1.9301487735729381,
+            "brain_ms": 52000.0,
+            "memory_sha256": "41bd2ce40463709db0f417ad3643cc856c809c30622d7721fb461840ccf0fc61"
+          },
+          {
+            "slot": 5964136,
+            "reward": -0.20294012060284672,
+            "brain_ms": 52500.0,
+            "memory_sha256": "9c3c5342bdf35b904b2e60f0c2e5b072ba259b82327f83eb6000b7099e5e4518"
+          },
+          {
+            "slot": 5964137,
+            "reward": 0.06816508260408227,
+            "brain_ms": 53000.0,
+            "memory_sha256": "704b1494e5a4058c222c361f8e6977a22596c6431b482133ca688e832d1a586f"
+          },
+          {
+            "slot": 5964138,
+            "reward": -0.1321510331118816,
+            "brain_ms": 53500.0,
+            "memory_sha256": "962b28dad8f7b917c6b3d4c0c788cddeda6d20f857c362ec9d878634df7ffec8"
+          },
+          {
+            "slot": 5964139,
+            "reward": -0.16599586973643454,
+            "brain_ms": 54000.0,
+            "memory_sha256": "884a5e5477dff5c510e44209377c5acdfa1eca27d72badd165cf434abc2d9c5e"
+          },
+          {
+            "slot": 5964140,
+            "reward": -1.0254448571465673,
+            "brain_ms": 54500.0,
+            "memory_sha256": "fcb01c576313dceb168a2ce5fe3c4b262547aae08dab80e70bf6c679f1f110d7"
+          },
+          {
+            "slot": 5964141,
+            "reward": -0.718275274695344,
+            "brain_ms": 55000.0,
+            "memory_sha256": "b475de80c1dcf6af6c909e44d773df9270345c462f4a47f1c4c38e58d3c9d6e5"
+          },
+          {
+            "slot": 5964142,
+            "reward": -0.6765601631531979,
+            "brain_ms": 55500.0,
+            "memory_sha256": "b6e3c6cc86320c1eee55ad93d114cc1c54cc98c01e855c0c4272058b3ae8e136"
+          },
+          {
+            "slot": 5964143,
+            "reward": 0.4846552621698095,
+            "brain_ms": 56000.0,
+            "memory_sha256": "ab568719c1e1351745e199d61aa2202d4c2ba39796df5f2bb5a94b9745bdad32"
+          },
+          {
+            "slot": 5964144,
+            "reward": 0.19133755635095895,
+            "brain_ms": 56500.0,
+            "memory_sha256": "2b8f6d9f353c5c55d9ef442acbcd6f00b16ed1ffd982787473aedc21d5b19607"
+          },
+          {
+            "slot": 5964145,
+            "reward": 0.22848080419706207,
+            "brain_ms": 57000.0,
+            "memory_sha256": "702ee188337afeccb8a481fe1722f2549c5fb1e325688764734b07d70ea714f1"
+          },
+          {
+            "slot": 5964146,
+            "reward": -0.8121960042186629,
+            "brain_ms": 57500.0,
+            "memory_sha256": "93446edee36ca4767e0ba18337944fa9b0ba5acc5b77484ed20c6b865c5ae095"
+          },
+          {
+            "slot": 5964147,
+            "reward": 2.014254429273052,
+            "brain_ms": 58000.0,
+            "memory_sha256": "250704d582afede09f084c3b835e1da529511b26d2c794535436dd4a1adb8a19"
+          },
+          {
+            "slot": 5964148,
+            "reward": 1.3902709259712367,
+            "brain_ms": 58500.0,
+            "memory_sha256": "f42ceae4f42421656bb129adbf52e6c3fc9a63fedab5adf85c9209b6b0ceceb1"
+          },
+          {
+            "slot": 5964149,
+            "reward": -0.00785922450447174,
+            "brain_ms": 59000.0,
+            "memory_sha256": "b6fa57b8df9ce8a4283d23f220e9c7157702ac872537d2fb71b9c7e0455973cc"
+          },
+          {
+            "slot": 5964150,
+            "reward": -0.6223455804227456,
+            "brain_ms": 59500.0,
+            "memory_sha256": "28ae31be035ff5ac750a7c0e10500566d12424dd87afe7bcb7e27922e6942b9e"
+          },
+          {
+            "slot": 5964151,
+            "reward": -0.3111200434993293,
+            "brain_ms": 60000.0,
+            "memory_sha256": "8b87e9523333dfd793ccf1ccc96fc6b599b392feea8256a1f7b9c531d4a4977b"
+          },
+          {
+            "slot": 5964152,
+            "reward": 1.0988034864213603,
+            "brain_ms": 60500.0,
+            "memory_sha256": "8ee323a2f2070ded21fbb3557159e409b7c241655a79144460a2a0e6a59b0b0d"
+          },
+          {
+            "slot": 5964153,
+            "reward": -0.8973176534066738,
+            "brain_ms": 61000.0,
+            "memory_sha256": "d9e365705686a7a300b13e6647f2cd70311e9142dc1e95a2506c8cceefc569c7"
+          },
+          {
+            "slot": 5964154,
+            "reward": -0.2639094497576764,
+            "brain_ms": 61500.0,
+            "memory_sha256": "0bb82dec370dc2a31b9fa1b0713a03f1724e536cb279a589d96a347d72d9854d"
+          },
+          {
+            "slot": 5964155,
+            "reward": 0.6895675291222858,
+            "brain_ms": 62000.0,
+            "memory_sha256": "3139c4bba610b640436a1bf451ede93f073c4aba0ccdac5efd92731d47d8731d"
+          },
+          {
+            "slot": 5964156,
+            "reward": -2.0373914324040356,
+            "brain_ms": 62500.0,
+            "memory_sha256": "432e82e04b9d6375debd1ee26791246939c410f2005f3cf06bcec6395d84bd1c"
+          },
+          {
+            "slot": 5964157,
+            "reward": -0.08898901697421024,
+            "brain_ms": 63000.0,
+            "memory_sha256": "ecd167c88b893d14beef8099a81516cb8920c5906b1902ff64fc709884d4470d"
+          },
+          {
+            "slot": 5964158,
+            "reward": 0.054762648504691924,
+            "brain_ms": 63500.0,
+            "memory_sha256": "35c69bfa2ebdb873f2062d7333e1e3188534834b3f82dc0661c54b04ffe90a82"
+          },
+          {
+            "slot": 5964159,
+            "reward": 1.7030535646284477,
+            "brain_ms": 64000.0,
+            "memory_sha256": "8e0b05fae679012812005d07b9998a94577b99ad57f086c5207f71c4bbf5f491"
+          },
+          {
+            "slot": 5964160,
+            "reward": 0.4637710772062178,
+            "brain_ms": 64500.0,
+            "memory_sha256": "5a119132bb578800491a808ac659d0459a81d9729c9f98906fa1f1f6a3a1e95e"
+          },
+          {
+            "slot": 5964161,
+            "reward": -0.08887401556444274,
+            "brain_ms": 65000.0,
+            "memory_sha256": "8f1bb0588c46e960f4eabdb79e7a8b41ace3d98ce00946d8f17da478bd2ecf37"
+          },
+          {
+            "slot": 5964162,
+            "reward": 0.5713382065054873,
+            "brain_ms": 65500.0,
+            "memory_sha256": "2da3c451e3441e8299a3277a97ea22d10214d385df92df4258f35f2eec88a1fe"
+          },
+          {
+            "slot": 5964163,
+            "reward": 0.23109379798864893,
+            "brain_ms": 66000.0,
+            "memory_sha256": "690fbf4429b8013b37fdb0984df13b3421f51eadd265ed4142125807ac665191"
+          },
+          {
+            "slot": 5964164,
+            "reward": 1.7119585977793292,
+            "brain_ms": 66500.0,
+            "memory_sha256": "a4be019ab64cf7f4df75be08f15008535636922e037f8a3b47be4ecd2a3beb77"
+          },
+          {
+            "slot": 5964165,
+            "reward": 0.9165237927431917,
+            "brain_ms": 67000.0,
+            "memory_sha256": "276e6db404c22ed40a06a7cae033830faa581c937bb052e414e581b14c619ce5"
+          },
+          {
+            "slot": 5964166,
+            "reward": 1.1044702912299442,
+            "brain_ms": 67500.0,
+            "memory_sha256": "b130566598bd64916c94aecb3f1faf8fd1ead5a01eff5f5e88917f648bef9902"
+          },
+          {
+            "slot": 5964167,
+            "reward": -0.2368373807627222,
+            "brain_ms": 68000.0,
+            "memory_sha256": "19060c1e95a4e9e08d22e703d6c5b26c0be4ba4cace1f376b28c83073998d46e"
+          },
+          {
+            "slot": 5964168,
+            "reward": -0.2548729787407069,
+            "brain_ms": 68500.0,
+            "memory_sha256": "60d17957644de9db0ab087eaf08e6fdf36c3437c295bb0273a51a66231ecc954"
+          },
+          {
+            "slot": 5964169,
+            "reward": -0.9258136355935846,
+            "brain_ms": 69000.0,
+            "memory_sha256": "f012c7d74cb951e503336584043159ce762a291fba65803d07fcc700e4566f5f"
+          },
+          {
+            "slot": 5964170,
+            "reward": -0.3746630364523753,
+            "brain_ms": 69500.0,
+            "memory_sha256": "34b02e01aee4b227fff877666e1e395aec8ef4f1a91a11f104904f83c4e04693"
+          },
+          {
+            "slot": 5964171,
+            "reward": 0.021320968859299683,
+            "brain_ms": 70000.0,
+            "memory_sha256": "e982e0181b8cdaa090f934053d7323e3b1b9eacb1b42b255ab8ffb7a8b3feeab"
+          },
+          {
+            "slot": 5964172,
+            "reward": 0.5048941527914224,
+            "brain_ms": 70500.0,
+            "memory_sha256": "ed613995a8eae433b803f83f4f72f6ae75a74877c75f89d0901ec074721feebb"
+          },
+          {
+            "slot": 5964173,
+            "reward": -0.2101155891453459,
+            "brain_ms": 71000.0,
+            "memory_sha256": "75291d85fa94db20906e810c63352165f1ad51b8ab5538e8800a9db3724a72cb"
+          },
+          {
+            "slot": 5964174,
+            "reward": -1.3776073690289934,
+            "brain_ms": 71500.0,
+            "memory_sha256": "ddf231b4f183e4aa3fc335083af7e6db23719ba34fb5ced539c1b17c00d3ad65"
+          },
+          {
+            "slot": 5964175,
+            "reward": -0.7141049998840003,
+            "brain_ms": 72000.0,
+            "memory_sha256": "954ff2d60741d0518e63234098e747139aae0126eed2c1d7ffcc8ce66b4f319f"
+          },
+          {
+            "slot": 5964176,
+            "reward": 1.1458959821521262,
+            "brain_ms": 72500.0,
+            "memory_sha256": "86a47da255dfdc718bff346b30713655a4b40e6952aa7ec3902189a63ba11fef"
+          },
+          {
+            "slot": 5964177,
+            "reward": 2.1545383690858557,
+            "brain_ms": 73000.0,
+            "memory_sha256": "36e2be0074b072acbe905c03dc1c4942b36292496dae156d0839be4b025a3260"
+          },
+          {
+            "slot": 5964178,
+            "reward": 1.2081567546813403,
+            "brain_ms": 73500.0,
+            "memory_sha256": "63812ed618d024a5d4a71858f312314958cabe9d3cef1b14ddfee53826a62005"
+          },
+          {
+            "slot": 5964179,
+            "reward": 1.6776379843131224,
+            "brain_ms": 74000.0,
+            "memory_sha256": "b10ff7ce954b613289ce70b4c5504473e34345c9a9cdace25018dc34566d4933"
+          },
+          {
+            "slot": 5964180,
+            "reward": 2.1082974832232253,
+            "brain_ms": 74500.0,
+            "memory_sha256": "8a6050d43e1ebec87ae48f29445a2c9ae44b5a33852c0fceffa2d24038fe9cd7"
+          },
+          {
+            "slot": 5964181,
+            "reward": 1.2268748120475834,
+            "brain_ms": 75000.0,
+            "memory_sha256": "3887c784ccc209c21b4e5054fa44fc664b02d5c40984fe832ba95bc831e7027a"
+          },
+          {
+            "slot": 5964182,
+            "reward": -1.486902859257981,
+            "brain_ms": 75500.0,
+            "memory_sha256": "53f935be1757bee5825101019bf95e841dffea9e57046747b39a2092ac24187b"
+          },
+          {
+            "slot": 5964183,
+            "reward": -0.2338102145337757,
+            "brain_ms": 76000.0,
+            "memory_sha256": "b801eb4bdd48350e14e121f9e723d6ac6399fa1a649aac77b4e1c87a70d295ae"
+          },
+          {
+            "slot": 5964184,
+            "reward": -0.38404374444954215,
+            "brain_ms": 76500.0,
+            "memory_sha256": "c036934b0404b2ae31c60fab06579075518dc6d89c520204ed5b1fbd6f833300"
+          },
+          {
+            "slot": 5964185,
+            "reward": -0.25490061781385975,
+            "brain_ms": 77000.0,
+            "memory_sha256": "3b7e48d4df2218331a324afc505a6541c0757af9864f4530c2990342223cde8c"
+          },
+          {
+            "slot": 5964186,
+            "reward": 1.7140850144749038,
+            "brain_ms": 77500.0,
+            "memory_sha256": "d255a7c2c2eff6cd7b815b4b53d8f13a08b1e146e16e6deae3651724fb792627"
+          },
+          {
+            "slot": 5964187,
+            "reward": 1.4755810382543473,
+            "brain_ms": 78000.0,
+            "memory_sha256": "8c214d4251e57fb2c1554ee48fd23bd8da496fb1e8ac5d22de148e2f6c82e451"
+          },
+          {
+            "slot": 5964188,
+            "reward": 0.10182685740284114,
+            "brain_ms": 78500.0,
+            "memory_sha256": "d0013a8675766ee4e3b51415831f04d09165850ec5ccee5e2a77faf136c0f41b"
+          },
+          {
+            "slot": 5964189,
+            "reward": 0.07258525154375661,
+            "brain_ms": 79000.0,
+            "memory_sha256": "8838985e3b7b510c9b82b3751c775a7c7cc3a5f4f58be0456805103f1c33bf57"
+          },
+          {
+            "slot": 5964190,
+            "reward": 0.6934855848149084,
+            "brain_ms": 79500.0,
+            "memory_sha256": "16231fc2c210e608e9a05d09e3f031e55496796200e495807bcf75cd9aea4e10"
+          },
+          {
+            "slot": 5964191,
+            "reward": 0.3335474706899788,
+            "brain_ms": 80000.0,
+            "memory_sha256": "2e2257f0a7be865848e0bad44c72592de4082f898fbbea5d989f0f48ca10943c"
+          },
+          {
+            "slot": 5964192,
+            "reward": -0.5800270206099469,
+            "brain_ms": 80500.0,
+            "memory_sha256": "204cafed5174166e7ad837bac69dc29590961b4ee5894b9f3c74b9f21a29adfe"
+          },
+          {
+            "slot": 5964193,
+            "reward": 0.0651340699611751,
+            "brain_ms": 81000.0,
+            "memory_sha256": "b3d8ca612d4fb6a0e2339f04e27358a651e8c8f795270cadc7547a8fd6101025"
+          },
+          {
+            "slot": 5964194,
+            "reward": 0.11127982479200682,
+            "brain_ms": 81500.0,
+            "memory_sha256": "c45c519e31e33fa5d0b98cab1e205c3d79785a00ee2f7b423b97f39ed42bf188"
+          },
+          {
+            "slot": 5964195,
+            "reward": 0.38356429342545084,
+            "brain_ms": 82000.0,
+            "memory_sha256": "5ed244d1ccf20e3e54d42ebc86a2b09cf8cfa9ff6324dc7b224668997b170cd4"
+          },
+          {
+            "slot": 5964196,
+            "reward": -1.4481292366372145,
+            "brain_ms": 82500.0,
+            "memory_sha256": "43407e70ee839745890269f1774d178f8255f7763a5a320c23b9b2695764ca31"
+          },
+          {
+            "slot": 5964197,
+            "reward": -2.8238419070970338,
+            "brain_ms": 83000.0,
+            "memory_sha256": "a7ed44c8bce874209507ab667bc96bfca7025664afd243f9f9a91410093692f1"
+          },
+          {
+            "slot": 5964198,
+            "reward": -0.46582391931121947,
+            "brain_ms": 83500.0,
+            "memory_sha256": "2cdde74db8111b440e49a61bb2d50ae22ef04e0f6a91e6dfd02f7f94b1c87edb"
+          },
+          {
+            "slot": 5964199,
+            "reward": -0.2641276415823768,
+            "brain_ms": 84000.0,
+            "memory_sha256": "317a6344598033c4d4c20004ee3a2db3e7093bec882ea24ad193d41b9f4fea6f"
+          },
+          {
+            "slot": 5964200,
+            "reward": -1.5540906296962191,
+            "brain_ms": 84500.0,
+            "memory_sha256": "d6cbc677a18f1110c3d735caf88b69478c0e61ae6fcebcec9d542c727d870f57"
+          },
+          {
+            "slot": 5964201,
+            "reward": -0.020213544309314102,
+            "brain_ms": 85000.0,
+            "memory_sha256": "88ec1bf268d4bd9f76ec33414193d146d8d7049a696c808f54ded81c2585a43e"
+          },
+          {
+            "slot": 5964202,
+            "reward": -0.22587755924666908,
+            "brain_ms": 85500.0,
+            "memory_sha256": "50e4957cb26517c2432893bec21e5ac1d1fdce7a424ea522b86e0f58b192d74a"
+          },
+          {
+            "slot": 5964203,
+            "reward": -0.02296419986916476,
+            "brain_ms": 86000.0,
+            "memory_sha256": "ad6f21540e0740a1aec9f95fa7ec41970d96a122af9500df998ec5e2176a29b0"
+          },
+          {
+            "slot": 5964204,
+            "reward": -1.1405908610401525,
+            "brain_ms": 86500.0,
+            "memory_sha256": "53a4cb8ecc5a0ec6592433c26455bb294eca50345c00434bf64e269760659568"
+          },
+          {
+            "slot": 5964205,
+            "reward": 0.08288978357964538,
+            "brain_ms": 87000.0,
+            "memory_sha256": "43360a4643612c0e25f7f0649f280893b5bb33433e19e4836c541fe41baf7de4"
+          },
+          {
+            "slot": 5964206,
+            "reward": -0.01432347476486484,
+            "brain_ms": 87500.0,
+            "memory_sha256": "68bd403cd3ad70cea4ad19d63fde0702b258ffd8ac54273fe54db84984cc5648"
+          },
+          {
+            "slot": 5964207,
+            "reward": 0.5507470011977489,
+            "brain_ms": 88000.0,
+            "memory_sha256": "6a3466955a9d03a36bfaf69f26e5c39e2224549ef054b9333e882273df228dac"
+          },
+          {
+            "slot": 5964208,
+            "reward": -1.0995155206237257,
+            "brain_ms": 88500.0,
+            "memory_sha256": "bb0cfe68264be1023e1fb91c35244979273711c570aa22d587041d0fcc09c6cc"
+          },
+          {
+            "slot": 5964209,
+            "reward": -0.7870413149206854,
+            "brain_ms": 89000.0,
+            "memory_sha256": "c3a98c15e02bc510fac457659d5ce1fd3dbb50677f2c05da6fa932e55028c510"
+          },
+          {
+            "slot": 5964210,
+            "reward": 0.35686534906932366,
+            "brain_ms": 89500.0,
+            "memory_sha256": "13d3a227ba42345f5cd7fbcd1528989b5578466dfb834f329c8d891a424d84fe"
+          },
+          {
+            "slot": 5964211,
+            "reward": -1.5700785821963166,
+            "brain_ms": 90000.0,
+            "memory_sha256": "0e0f13511c58ec80b85067b6bbc753bd82d05e7ca5fa86388be7ccbfd2888362"
+          },
+          {
+            "slot": 5964212,
+            "reward": -1.173268530455374,
+            "brain_ms": 90500.0,
+            "memory_sha256": "96b7209d182bd1890a71ea58f053b2e58ab46566e2faef0278d82e8363a00181"
+          },
+          {
+            "slot": 5964213,
+            "reward": -0.3349614511107859,
+            "brain_ms": 91000.0,
+            "memory_sha256": "e25e875e41a13ad20c40c5e87154e8802d9d6ff697c732c3fb0f41cf34aa4bae"
+          },
+          {
+            "slot": 5964214,
+            "reward": -0.2271908143860628,
+            "brain_ms": 91500.0,
+            "memory_sha256": "41dacae2e09df69bd5e98972fdcb64472a6293792bde572b9a02c67c8027bc11"
+          },
+          {
+            "slot": 5964215,
+            "reward": 0.19766152341901488,
+            "brain_ms": 92000.0,
+            "memory_sha256": "98ca82452b162d5f96bb25295891a5366b0d5688f8ab753e3ac55731d6bbfda4"
+          },
+          {
+            "slot": 5964216,
+            "reward": -0.6303875838225395,
+            "brain_ms": 92500.0,
+            "memory_sha256": "5b7b8ea29e87a060723c064dde9857c39b0334e8e0c3d2e151c825eb01d7f339"
+          },
+          {
+            "slot": 5964217,
+            "reward": -1.8211829155399357,
+            "brain_ms": 93000.0,
+            "memory_sha256": "b759a76af9c42fae9012224c4063e6b4673e03307eef233e12bc3db1794b4546"
+          },
+          {
+            "slot": 5964218,
+            "reward": -0.8849277424820912,
+            "brain_ms": 93500.0,
+            "memory_sha256": "3434ca6f01a58596caee4e204dabd0e5ce787f04d8bf718d451273dc376b3270"
+          },
+          {
+            "slot": 5964219,
+            "reward": -0.6159670416000438,
+            "brain_ms": 94000.0,
+            "memory_sha256": "71aba322039e091ee45288f0259a24c5e0dcc7341f616187e1a30cacf8abb092"
+          },
+          {
+            "slot": 5964220,
+            "reward": -0.5845868734480462,
+            "brain_ms": 94500.0,
+            "memory_sha256": "83690b5fa6d43e3a71badaf03e682de1374d709712bd0da458cc8f3fcb53a766"
+          },
+          {
+            "slot": 5964221,
+            "reward": 0.13279150657723449,
+            "brain_ms": 95000.0,
+            "memory_sha256": "ed64dccce3e82ee5584789f24f173c184588c67c6c8b531cee894276d355aea6"
+          },
+          {
+            "slot": 5964222,
+            "reward": -0.8183892029706215,
+            "brain_ms": 95500.0,
+            "memory_sha256": "6985b87522852b80e742ef2aa9ed87dd3d6932c3daf3a03f7c2c58ddedb84422"
+          },
+          {
+            "slot": 5964224,
+            "reward": 0,
+            "brain_ms": 96000.0,
+            "memory_sha256": "b47d45f6eb3663d83a068201aff8e009d08248c516954b17b90c587da4db3bcd"
+          },
+          {
+            "slot": 5964229,
+            "reward": 2.605713856843778,
+            "brain_ms": 96500.0,
+            "memory_sha256": "acfb5c9bbbe24842b566daaa4332ea857af124ea2072cdf8a068142605c51f20"
+          },
+          {
+            "slot": 5964230,
+            "reward": 0.4656667793574627,
+            "brain_ms": 97000.0,
+            "memory_sha256": "366a489d543b3887e71d015ae39212b6c2ef9ff607e5d27237c013e74cdd36c8"
+          },
+          {
+            "slot": 5964231,
+            "reward": 0.047630584881261484,
+            "brain_ms": 97500.0,
+            "memory_sha256": "a188b07f741ec7774c7a83f22fb1eafb3618b41184556435f7c54efc4af2d21a"
+          },
+          {
+            "slot": 5964232,
+            "reward": -0.17398908379627187,
+            "brain_ms": 98000.0,
+            "memory_sha256": "5058a7edffe19eb164dac070bb488cd5a8d116b3db688be548445dac4c49ac90"
+          },
+          {
+            "slot": 5964233,
+            "reward": 0.8783940258988423,
+            "brain_ms": 98500.0,
+            "memory_sha256": "6c636b3f19406b1cf04bce5c4cdb8d190d5533bd0ff50499813fa2836a4c6e56"
+          },
+          {
+            "slot": 5964234,
+            "reward": -1.125937860300013,
+            "brain_ms": 99000.0,
+            "memory_sha256": "efc286909c05fd18fed6c913903b78a1e242261daf6c8bef319bbb929c700942"
+          },
+          {
+            "slot": 5964235,
+            "reward": -1.358887203035664,
+            "brain_ms": 99500.0,
+            "memory_sha256": "730d9d704e79a93f773b49f7687096aac803f63bf4915e488d57be284e8535c4"
+          },
+          {
+            "slot": 5964236,
+            "reward": 0.1153470892519124,
+            "brain_ms": 100000.0,
+            "memory_sha256": "af20d4321665f6e6be955c8713168215d5e1120c970e2d50fb3e86c7d7286121"
+          },
+          {
+            "slot": 5964237,
+            "reward": 0.643167338229631,
+            "brain_ms": 100500.0,
+            "memory_sha256": "0d558bd6791113aea335b0222433a2f3f420a020fa945ce52b4e9e91fe64ae57"
+          },
+          {
+            "slot": 5964238,
+            "reward": -0.6106379843562877,
+            "brain_ms": 101000.0,
+            "memory_sha256": "5a4612e6f7800f5faedd91710f3464d270aa4dd7bfa40c50694eb40a2232868e"
+          },
+          {
+            "slot": 5964239,
+            "reward": 0.022587381320931854,
+            "brain_ms": 101500.0,
+            "memory_sha256": "0746456f2c9d084aba17e098f99b79fa381f8b852cd022a4e9edd41f7af48a80"
+          },
+          {
+            "slot": 5964241,
+            "reward": 0,
+            "brain_ms": 102000.0,
+            "memory_sha256": "20a1647e12e7c2a63ff261a3d8e64a78bb9bd6aac8fbc8ba2c062d64cd5f7b7e"
+          },
+          {
+            "slot": 5964242,
+            "reward": 3.1349939895286525,
+            "brain_ms": 102500.0,
+            "memory_sha256": "17a4e07ddf15d730cd151efdaf7cbb016e2112806214a580495daf22a597cb2c"
+          },
+          {
+            "slot": 5964243,
+            "reward": 1.2235293547660433,
+            "brain_ms": 103000.0,
+            "memory_sha256": "0b9f5d0ab597f22ed0b0f7768ffa0a0285c29a5b3a46db90532e96224e6c5b4c"
+          },
+          {
+            "slot": 5964244,
+            "reward": -0.6292099974948826,
+            "brain_ms": 103500.0,
+            "memory_sha256": "3b41f26ee62dc2254de559c08323b1771961c1479c829a8c8093cd4dd1ca5e2c"
+          },
+          {
+            "slot": 5964246,
+            "reward": -0.19956206703170665,
+            "brain_ms": 104000.0,
+            "memory_sha256": "4989cbe2b102e965bd3ac3e178e162dbde0361a5a824d3b2f5020afd3d696678"
+          },
+          {
+            "slot": 5964247,
+            "reward": 1.1039045020850722,
+            "brain_ms": 104500.0,
+            "memory_sha256": "a12f754b461f6746696f5ddc6bcd288facfcde869a62f3f38653f51153215037"
+          },
+          {
+            "slot": 5964250,
+            "reward": 0,
+            "brain_ms": 105000.0,
+            "memory_sha256": "d2032df52f5d33cb6f82989bf729a5f84f65bf78503610a3eb583d1f98d3121a"
+          },
+          {
+            "slot": 5964251,
+            "reward": -0.5450622949635431,
+            "brain_ms": 105500.0,
+            "memory_sha256": "c7264f7a604812bef23bde9725c4ce66a06da0c45123f57f1db8b6017cbeb08e"
+          },
+          {
+            "slot": 5964252,
+            "reward": -1.4022230395270583,
+            "brain_ms": 106000.0,
+            "memory_sha256": "5e2108340ce096bb2c0b723d2b19b1621472fcf8b8bdbb4d85deb7f0311d3482"
+          },
+          {
+            "slot": 5964253,
+            "reward": -1.5615524571371964,
+            "brain_ms": 106500.0,
+            "memory_sha256": "fad0dbbb5b9a8109e2d5f219d7c1416d7d9c90f8166b16da7892501dcabc262c"
+          },
+          {
+            "slot": 5964254,
+            "reward": -2.189666097856218,
+            "brain_ms": 107000.0,
+            "memory_sha256": "496e0847a7604dee77adbc4795098b01bfbf511b2cec4dce94bfc78375682805"
+          }
+        ],
+        "observations": 214
+      }
+    ],
+    "cohort": [
+      "solana:2AXXcN6oN9bBT5owwmTH53C7QHUXvhLeu718Kqt8rvY2",
+      "solana:zxTpi4BtaWX3mgdAPoezkMD1hxx8CdeCfrqXMWvSCLX"
+    ]
+  },
+  "training_audit_sha256": "f5756cf38ef9d7bec95849724ddfc56dd939e33fe864df4235e4b6fef9e10fff",
+  "independent_array_audit_sha256": "dcb38c57267ceac4706379921771c77a63ba913a2ec9e476578a3e92eadf5102",
+  "download": {
+    "status": "all_artifacts_downloaded_and_hash_verified",
+    "files": 10,
+    "bytes": 97714672,
+    "seconds": 6.885287082986906,
+    "read_timeout_seconds": 90,
+    "maximum_read_attempts": 3,
+    "concurrent_files": 4,
+    "retries": [],
+    "new_neural_observations": 0,
+    "cloud_submissions": 0,
+    "source_sha256": "52f4389f3cf050dabff76bf2c21e9800c31d678646356063706645a94887d882"
+  },
+  "budget": {
+    "estimated_compute_usd": 0.048284558585700986,
+    "monthly_reserved_usd": 3.3165290731619272,
+    "monthly_limit_usd": 25,
+    "provider_bill": false,
+    "reserved_usd": 0.1608936,
+    "nonpreemptible": true,
+    "price_multiplier": 3
+  },
+  "artifact_sha256": {
+    "capture/capture.json": "15d3aec3dadaae8801d79e34b3baa018ca2aaf3f126bd0c650bce8f410f793c3",
+    "capture/paper.db": "77c32a7893917498d7e66b229dd02846b1a789e7fd970f21f7ec910d30742e1b",
+    "capture/pool0-paper-checkpoint.npz": "e3b37f1036590682a3eb2c3eab1e162aa01838d5b29a688232cffb724f050ba5",
+    "capture/pool1-paper-checkpoint.npz": "2c6c22926a294e9e5b5acd5bdb4e8a915493a184d224bde514f52f5c85b512f8",
+    "export/audit.json": "f5756cf38ef9d7bec95849724ddfc56dd939e33fe864df4235e4b6fef9e10fff",
+    "export/pool0-memory.npz": "ca5a392864644963cd2d3381bd2c4b15c7b29f2e48572c3a4dbad3c736740509",
+    "export/pool1-memory.npz": "4e947e022340ff90203c7e3ddec3096aab65dd71fcae68b4595bac32e479b8f8",
+    "request.json": "c17fe056a069ad6219747b2dacbdc969fae20f05a920cf04804a0f029e20bd3d",
+    "selection.json": "34ba4aa0b5ec02c1e7d595cdeb5977457de61d584c45b22e0c1586e78f48ee26",
+    "universe.db": "6481a030d8dfd2b7be1878d0dca231ea2e0125b88ee2068c057527b2395a147a"
+  },
+  "archive": {
+    "files": 8,
+    "bytes": 247536,
+    "sha256": "330c64a42f591bd7e89f2ad3f7d769e62c6ce96aaf9deab8e0915cd84aa00d82",
+    "members": {
+      "audit.json": "f5756cf38ef9d7bec95849724ddfc56dd939e33fe864df4235e4b6fef9e10fff",
+      "pool0-memory.npz": "ca5a392864644963cd2d3381bd2c4b15c7b29f2e48572c3a4dbad3c736740509",
+      "pool1-memory.npz": "4e947e022340ff90203c7e3ddec3096aab65dd71fcae68b4595bac32e479b8f8",
+      "selection.json": "34ba4aa0b5ec02c1e7d595cdeb5977457de61d584c45b22e0c1586e78f48ee26",
+      "capture.json": "15d3aec3dadaae8801d79e34b3baa018ca2aaf3f126bd0c650bce8f410f793c3",
+      "cloud-result.json": "186992a657747e27502f9fe49160567bfc7dd7ce0ba8817e5711182ccc82a845",
+      "verification.json": "a76c722a6a418afcdd873537cc5a0f467300c6b6acdab52b9698c611c8c3188a",
+      "array-audit.json": "dcb38c57267ceac4706379921771c77a63ba913a2ec9e476578a3e92eadf5102"
+    },
+    "exact_member_bytes_verified": true
+  },
+  "observer_fix": {
+    "first_observation": "Built-in TimeoutError escaped; the cloud call remained live with one runner/input and matching lease owner.",
+    "live_state_sha256": "72e91fcaceb4e99a26dbada0b6f0512beac157338aff25c6a3a175d9a3beb11e",
+    "original_observer_log_sha256": "479a8d2fbe1dcc569152eb63ace2831736bcf55965d32fc6890d17c3d7eb969b",
+    "changed_sources": {
+      "paperlab/fly_rate_checkpoint_cloud.py": {
+        "executed": "b4558bd991e1cbaa15afff015ee52532d6bb2923b2b69fa3e0ea547c1a87de9a",
+        "current": "c2a717b31e2e228da72db0c2211ddf5025ab471d5a1705145b812ea111129baf"
+      }
+    },
+    "scope": "Local timeout handling and explicit separation of executed and verification sources. Deployed capture image unchanged; exactly one cloud submission."
+  },
+  "validation": {
+    "passed": 43,
+    "junit_sha256": "af6167ccc2e82499380f4523af27d9dd8e03dff4c1b3cb8df3c2d8c457a08291",
+    "log_sha256": "d0d681ef0eacef049fb7a05ef25bd6d82405e741d51dcd7cf13d3c6f663549b1",
+    "source_sha256": {
+      "paperlab/fly_rate_checkpoint_cloud.py": "c2a717b31e2e228da72db0c2211ddf5025ab471d5a1705145b812ea111129baf",
+      "paperlab/fly_rate_protocol.py": "89869b70d3734dfe2d52f82528b1ec9811e8792e424a619d7213f481b827fa51",
+      "paperlab/fly_rate_checkpoint_audit.py": "e1160dff2ae14ee4d6ddff4e67d31e1ea474c7bf109e95a17c24b447c3958625",
+      "tests/test_fly_rate_checkpoint.py": "838aef421995d2c672877ea369c3bbdb4d43072432885e482b85ff86a3514f8d",
+      "tests/test_fly_rate_protocol.py": "9f5f6571f60976b28da292f1c8d0c7de424b4e95f83caebf5852286ff280560d",
+      "tests/test_fly_rate_checkpoint_audit.py": "042b32f89e43f3436ff234320c4312bdef277ab4dd898ef2634f420fc3b2ea75"
+    }
+  },
+  "native_reference_constructions_cloud": 1,
+  "native_constructions_local": 0,
+  "neural_observations": 0,
+  "paper_orders": 0,
+  "market_window_registered": false,
+  "policy_promoted": false,
+  "provider_bill": false
+}

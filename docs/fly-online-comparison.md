@@ -79,9 +79,11 @@ FLY_VIEW_CHECK_OUT=runs/online-complete-browser-new \
   node scripts/check-fly-completed-online-view.cjs
 ```
 
-The [next selective assay](fly-selective-traces.md) can now pass the real-study
-completion gate. It tests KC-only and DAN-only resets on historical inputs;
-its native execution and any later prospective financial test remain separate.
+The subsequent [selective assay](fly-selective-traces.md) and
+[lower-rate assay](fly-learning-rate.md) are now complete. They tested historical
+inputs and do not add unseen financial evidence. The
+[next market comparison preparation](fly-rate-market.md) has captured new
+checkpoints; its future evaluation window is not yet registered.
 
 The study 11 runner and offline auditor are implemented and tested, and the
 once-only dispatcher is connected after the normal paper cycle. The

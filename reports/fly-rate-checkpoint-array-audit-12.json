@@ -1,0 +1,50 @@
+{
+  "status": "rate_checkpoint_arrays_audited",
+  "call_id": "fc-01M2CJW6V4381X2SW7EW8EE095",
+  "cloud_result_sha256": "186992a657747e27502f9fe49160567bfc7dd7ce0ba8817e5711182ccc82a845",
+  "training_audit_sha256": "f5756cf38ef9d7bec95849724ddfc56dd939e33fe864df4235e4b6fef9e10fff",
+  "cohort_selection_verified": [
+    "solana:2AXXcN6oN9bBT5owwmTH53C7QHUXvhLeu718Kqt8rvY2",
+    "solana:zxTpi4BtaWX3mgdAPoezkMD1hxx8CdeCfrqXMWvSCLX"
+  ],
+  "graph_sha256": "346b8af85a11af13b8324e18669812c1924569e7d1adcb4e6f45cc461a2c344b",
+  "pools": {
+    "solana:2AXXcN6oN9bBT5owwmTH53C7QHUXvhLeu718Kqt8rvY2": {
+      "plastic_edges": 7835,
+      "nonplastic_edges": 25575103,
+      "changed_weights": 3546,
+      "delta_l2": {
+        "weights": 65.9272356671786,
+        "u": 13.708112972104654,
+        "w": 13.886658197302362
+      },
+      "graph_ids_sha256": "6b6b40c3bddf84b1281ef0b18db06927c2bf61c5f4cb32a4219ec9b7839dc2e5",
+      "graph_ptr_sha256": "a29aa0296125a5daa972c12d17711360d01a1209cd9cd9d7ccb1f6959224bcaf",
+      "graph_post_sha256": "4cc5e857d3481f433576f35ddb8d580cc33cf8e22b6651fa03e08cde5d956d90",
+      "plastic_edges_sha256": "153a1a6192bc7056b90bbfc757b56cb9580ca786a187583cc2cc652e1e3abe8f"
+    },
+    "solana:zxTpi4BtaWX3mgdAPoezkMD1hxx8CdeCfrqXMWvSCLX": {
+      "plastic_edges": 7835,
+      "nonplastic_edges": 25575103,
+      "changed_weights": 3571,
+      "delta_l2": {
+        "weights": 68.65104681160689,
+        "u": 13.8765085581115,
+        "w": 14.026928949067596
+      },
+      "graph_ids_sha256": "6b6b40c3bddf84b1281ef0b18db06927c2bf61c5f4cb32a4219ec9b7839dc2e5",
+      "graph_ptr_sha256": "a29aa0296125a5daa972c12d17711360d01a1209cd9cd9d7ccb1f6959224bcaf",
+      "graph_post_sha256": "4cc5e857d3481f433576f35ddb8d580cc33cf8e22b6651fa03e08cde5d956d90",
+      "plastic_edges_sha256": "153a1a6192bc7056b90bbfc757b56cb9580ca786a187583cc2cc652e1e3abe8f"
+    }
+  },
+  "source_sha256": {
+    "paperlab/fly_rate_checkpoint_audit.py": "e1160dff2ae14ee4d6ddff4e67d31e1ea474c7bf109e95a17c24b447c3958625",
+    "paperlab/fly_rate_checkpoint_cloud.py": "c2a717b31e2e228da72db0c2211ddf5025ab471d5a1705145b812ea111129baf",
+    "paperlab/fly_credit_audit.py": "5a9260b232fb827e7e266278933753899b3b26887fe9826f48017769b08a5f73"
+  },
+  "native_constructions": 0,
+  "neural_observations": 0,
+  "cloud_submissions": 0,
+  "interpretation": "All plastic exports and nonplastic full-checkpoint weights reconcile against the locked graph, with original visual-adapter corrections. This proves checkpoint integrity, not profitable learning."
+}

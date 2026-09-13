@@ -1,0 +1,206 @@
+{
+  "schema": 1,
+  "capture_sha256": "15d3aec3dadaae8801d79e34b3baa018ca2aaf3f126bd0c650bce8f410f793c3",
+  "export_source_sha256": "f644c93acf1804b914a67d0cabe3bec3be1c65951b4fdb201b17962caad929ba",
+  "ledger_sha256": "77c32a7893917498d7e66b229dd02846b1a789e7fd970f21f7ec910d30742e1b",
+  "captured_at": 1789276500.0509593,
+  "graph": {
+    "neurons": 166700,
+    "edges": 25582938,
+    "plastic_edges": 7835
+  },
+  "export_build": {
+    "model": "stonkfly-dual-compartment-v1",
+    "source_sha256": "e2d4d584f4633613277bb1bf6ea7ba20855c01a332ae2e9344ed7782604c8509",
+    "binary_sha256": "9c0768fc4f8e34ba730a31ef04a5de958e7d4276c1552f30ec6f2c2eddbfa1b1",
+    "flags": [
+      "-O3",
+      "-std=c++17",
+      "-shared",
+      "-fPIC"
+    ]
+  },
+  "pools": {
+    "solana:2AXXcN6oN9bBT5owwmTH53C7QHUXvhLeu718Kqt8rvY2": {
+      "checkpoint_sha256": "e3b37f1036590682a3eb2c3eab1e162aa01838d5b29a688232cffb724f050ba5",
+      "source_metadata": {
+        "model": "stonkfly-dual-compartment-v1",
+        "build": {
+          "model": "stonkfly-dual-compartment-v1",
+          "source_sha256": "e2d4d584f4633613277bb1bf6ea7ba20855c01a332ae2e9344ed7782604c8509",
+          "binary_sha256": "9c0768fc4f8e34ba730a31ef04a5de958e7d4276c1552f30ec6f2c2eddbfa1b1",
+          "flags": [
+            "-O3",
+            "-std=c++17",
+            "-shared",
+            "-fPIC"
+          ]
+        },
+        "eta": 0.001,
+        "parameters": {
+          "trace_kc_seconds": 1.0,
+          "trace_dan_seconds": 1.0,
+          "memory_decay_seconds": 1800.0,
+          "weight_filter_seconds": 0.05,
+          "minimum_fraction": 0.1,
+          "maximum_fraction": 2.0,
+          "maximum_rate_bin_ms": 10.0,
+          "source": "https://doi.org/10.1038/s41586-024-07819-w",
+          "interpretation": "Candidate KC adaptation/rest plus a baseline-centered anti-Hebbian rate-rule extension to two compartments. No fitted DAN/MBON background current; lamina bias is a display proxy. Gain, trace constants and transfer to this graph remain unvalidated assumptions.",
+          "neural_dt_ms": 0.1,
+          "modulator_delivery_trace_ms": 100.0,
+          "kc_rest_mV": -60.0,
+          "kc_adaptation_jump_mV": 8.0,
+          "kc_adaptation_tau_ms": 200.0
+        },
+        "cursor": 1070000,
+        "weights_frozen": false,
+        "total_spikes": 130040146,
+        "graph_ids_sha256": "6b6b40c3bddf84b1281ef0b18db06927c2bf61c5f4cb32a4219ec9b7839dc2e5",
+        "graph_ptr_sha256": "a29aa0296125a5daa972c12d17711360d01a1209cd9cd9d7ccb1f6959224bcaf",
+        "graph_post_sha256": "4cc5e857d3481f433576f35ddb8d580cc33cf8e22b6651fa03e08cde5d956d90",
+        "plastic_edges_sha256": "153a1a6192bc7056b90bbfc757b56cb9580ca786a187583cc2cc652e1e3abe8f",
+        "configuration_sha256": {
+          "initial_weight": "40a2e78d7299197d24ba03a24c94a8e1cd0eb45a653d69f001fc3acee2fdc779",
+          "modulation_mask": "914dcf25dae442aecbcf27565f7bc8be76ea8254e7fbc944f2efe6e2413e6d5a",
+          "rule": {
+            "trace_kc_seconds": 1.0,
+            "trace_dan_seconds": 1.0,
+            "memory_decay_seconds": 1800.0,
+            "weight_filter_seconds": 0.05,
+            "minimum_fraction": 0.1,
+            "maximum_fraction": 2.0,
+            "maximum_rate_bin_ms": 10.0,
+            "source": "https://doi.org/10.1038/s41586-024-07819-w",
+            "interpretation": "Centered rate-rule adaptation on existing individual edges, not an exact reproduction of the published nine-unit model. Equal trace constants, efficacy bounds, gain and 50 ms weight filter require calibration."
+          },
+          "rule_sha256": "3c80680450c3b73042e332bd7ce8289d7d74d8695c60e7ac19eefd9759d95c44",
+          "tonic": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+          "dan_baseline_hz": "b707241545a346265aab1ffb32ff64b55bf8f8dc1b56a46ef33ce3d15db11d33",
+          "rest": "275bd935e4f1a56cbc2ca22b8f258f1cef511894f42f531e9a52476dd7b02946",
+          "adaptation_jump": 8.0,
+          "adaptation_tau": 200.0,
+          "retina": "5ec145156d998f582e5d8f08c4174e10f7f853d34745118adab8589f192d04b4",
+          "uv": "51f7dafd4355a06176418e22373ffcdf5bc066f75050da6dcbaaaccbad55a714",
+          "lamina": "22d6fa8ac7aa40700d09394aea1cf35226711d2efc78bc716882920ba180e47e",
+          "sugar": "89b057c7b57d5e783f608815b4219b17b54c812c3fa229bcb78b1cafa30d37a1",
+          "pre": "9e364eea0c28019aff530a75fe8d8638ad2ff248da95dfb9f33ba949d96b3f6e",
+          "gain": "8812f77147564eed2e911bb15cf1eb63834874ef1f2472bfbc3d7fd6dcfe14f1",
+          "kc_mask": "43e6ed840af2d547a3ae5848155e639f6e2abf60d5b7caa83c4298a3fb64c617",
+          "dan_index": "8a5540030b37fb7abfd3217a1713964e7f5b1e25604252b0f8849d27852f0c83",
+          "r8": "27c803c738f86c0509cabc57269e265bac832d8b4477773688e59a14d671f0ff",
+          "r8_uv": "e567b93a289fa467ec1096295c4682dce0dfd4f7d92844159f7eb4a380e22719",
+          "r8_channel": "350fc24c7884470b78254805a557e57bf12b89b71ea8a32af2f4929e951555ae",
+          "corrected_edges": "64916a520f2d1e7daf30bfd027a67d53ceb0f8270097b17c0635572ce2db658d"
+        }
+      },
+      "memory_sha256": "40a5269e3d71a339c5526e7b2929d2f198744669f502bea15dc2ca6372450feb",
+      "observations": 214,
+      "positive_rewards": 85,
+      "negative_rewards": 116,
+      "neutral_rewards": 13,
+      "first_slot": 5964007,
+      "last_slot": 5964254,
+      "last_brain_ms": 107000.0,
+      "exposure_sha256": "b57d9b40ef516d7c0f0e79efa8412bd8ed324281fbab85a267287b5a1dd9af0b",
+      "changed_weights": 3546,
+      "delta_l2": {
+        "weights": 65.92723566717858,
+        "u": 13.708112972104656,
+        "w": 13.886658197302362
+      },
+      "memory_file_sha256": "ca5a392864644963cd2d3381bd2c4b15c7b29f2e48572c3a4dbad3c736740509"
+    },
+    "solana:zxTpi4BtaWX3mgdAPoezkMD1hxx8CdeCfrqXMWvSCLX": {
+      "checkpoint_sha256": "2c6c22926a294e9e5b5acd5bdb4e8a915493a184d224bde514f52f5c85b512f8",
+      "source_metadata": {
+        "model": "stonkfly-dual-compartment-v1",
+        "build": {
+          "model": "stonkfly-dual-compartment-v1",
+          "source_sha256": "e2d4d584f4633613277bb1bf6ea7ba20855c01a332ae2e9344ed7782604c8509",
+          "binary_sha256": "9c0768fc4f8e34ba730a31ef04a5de958e7d4276c1552f30ec6f2c2eddbfa1b1",
+          "flags": [
+            "-O3",
+            "-std=c++17",
+            "-shared",
+            "-fPIC"
+          ]
+        },
+        "eta": 0.001,
+        "parameters": {
+          "trace_kc_seconds": 1.0,
+          "trace_dan_seconds": 1.0,
+          "memory_decay_seconds": 1800.0,
+          "weight_filter_seconds": 0.05,
+          "minimum_fraction": 0.1,
+          "maximum_fraction": 2.0,
+          "maximum_rate_bin_ms": 10.0,
+          "source": "https://doi.org/10.1038/s41586-024-07819-w",
+          "interpretation": "Candidate KC adaptation/rest plus a baseline-centered anti-Hebbian rate-rule extension to two compartments. No fitted DAN/MBON background current; lamina bias is a display proxy. Gain, trace constants and transfer to this graph remain unvalidated assumptions.",
+          "neural_dt_ms": 0.1,
+          "modulator_delivery_trace_ms": 100.0,
+          "kc_rest_mV": -60.0,
+          "kc_adaptation_jump_mV": 8.0,
+          "kc_adaptation_tau_ms": 200.0
+        },
+        "cursor": 1070000,
+        "weights_frozen": false,
+        "total_spikes": 130755102,
+        "graph_ids_sha256": "6b6b40c3bddf84b1281ef0b18db06927c2bf61c5f4cb32a4219ec9b7839dc2e5",
+        "graph_ptr_sha256": "a29aa0296125a5daa972c12d17711360d01a1209cd9cd9d7ccb1f6959224bcaf",
+        "graph_post_sha256": "4cc5e857d3481f433576f35ddb8d580cc33cf8e22b6651fa03e08cde5d956d90",
+        "plastic_edges_sha256": "153a1a6192bc7056b90bbfc757b56cb9580ca786a187583cc2cc652e1e3abe8f",
+        "configuration_sha256": {
+          "initial_weight": "40a2e78d7299197d24ba03a24c94a8e1cd0eb45a653d69f001fc3acee2fdc779",
+          "modulation_mask": "914dcf25dae442aecbcf27565f7bc8be76ea8254e7fbc944f2efe6e2413e6d5a",
+          "rule": {
+            "trace_kc_seconds": 1.0,
+            "trace_dan_seconds": 1.0,
+            "memory_decay_seconds": 1800.0,
+            "weight_filter_seconds": 0.05,
+            "minimum_fraction": 0.1,
+            "maximum_fraction": 2.0,
+            "maximum_rate_bin_ms": 10.0,
+            "source": "https://doi.org/10.1038/s41586-024-07819-w",
+            "interpretation": "Centered rate-rule adaptation on existing individual edges, not an exact reproduction of the published nine-unit model. Equal trace constants, efficacy bounds, gain and 50 ms weight filter require calibration."
+          },
+          "rule_sha256": "3c80680450c3b73042e332bd7ce8289d7d74d8695c60e7ac19eefd9759d95c44",
+          "tonic": "59bc68b376b730245aa0a6187794bf1b8bb5cf893925f731adc6d454c4034d10",
+          "dan_baseline_hz": "b707241545a346265aab1ffb32ff64b55bf8f8dc1b56a46ef33ce3d15db11d33",
+          "rest": "275bd935e4f1a56cbc2ca22b8f258f1cef511894f42f531e9a52476dd7b02946",
+          "adaptation_jump": 8.0,
+          "adaptation_tau": 200.0,
+          "retina": "5ec145156d998f582e5d8f08c4174e10f7f853d34745118adab8589f192d04b4",
+          "uv": "51f7dafd4355a06176418e22373ffcdf5bc066f75050da6dcbaaaccbad55a714",
+          "lamina": "22d6fa8ac7aa40700d09394aea1cf35226711d2efc78bc716882920ba180e47e",
+          "sugar": "89b057c7b57d5e783f608815b4219b17b54c812c3fa229bcb78b1cafa30d37a1",
+          "pre": "9e364eea0c28019aff530a75fe8d8638ad2ff248da95dfb9f33ba949d96b3f6e",
+          "gain": "8812f77147564eed2e911bb15cf1eb63834874ef1f2472bfbc3d7fd6dcfe14f1",
+          "kc_mask": "43e6ed840af2d547a3ae5848155e639f6e2abf60d5b7caa83c4298a3fb64c617",
+          "dan_index": "8a5540030b37fb7abfd3217a1713964e7f5b1e25604252b0f8849d27852f0c83",
+          "r8": "27c803c738f86c0509cabc57269e265bac832d8b4477773688e59a14d671f0ff",
+          "r8_uv": "e567b93a289fa467ec1096295c4682dce0dfd4f7d92844159f7eb4a380e22719",
+          "r8_channel": "350fc24c7884470b78254805a557e57bf12b89b71ea8a32af2f4929e951555ae",
+          "corrected_edges": "64916a520f2d1e7daf30bfd027a67d53ceb0f8270097b17c0635572ce2db658d"
+        }
+      },
+      "memory_sha256": "d0044aa1e164e4fb4479c8b83a2374293fc2404e613765cc7ae4278b61cf2e5d",
+      "observations": 214,
+      "positive_rewards": 92,
+      "negative_rewards": 111,
+      "neutral_rewards": 11,
+      "first_slot": 5964009,
+      "last_slot": 5964254,
+      "last_brain_ms": 107000.0,
+      "exposure_sha256": "4e4c142ab7c143babd3c08aba88ce37a27d332d2183e10bb69a3b57b0a034075",
+      "changed_weights": 3571,
+      "delta_l2": {
+        "weights": 68.65104681160683,
+        "u": 13.8765085581115,
+        "w": 14.026928949067594
+      },
+      "memory_file_sha256": "4e947e022340ff90203c7e3ddec3096aab65dd71fcae68b4595bac32e479b8f8"
+    }
+  },
+  "interpretation": "Verified paper-trading reward exposure, not profitable learning. Only plastic weights/u/w are exported. Inference must start with fresh dynamics. Historical prices, news, inventory and other activity state are not imported."
+}
