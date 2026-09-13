@@ -49,7 +49,8 @@ The lightweight coordinator is scheduled in Modal every fifteen minutes. It
 starts a detached, at-most-fifteen-minute training window when due and records
 its immutable run ID and call ID before it can dispatch another. Default cadence
 is twelve hours between window starts, approximately two windows per day.
-The current operator-selected `six_hour` mode doubles this to four windows daily.
+The current operator-selected `hourly` mode targets twenty-four windows daily,
+with the next due start handled by the fifteen-minute coordinator check.
 The worker resumes checkpoints, optimizer/RNG state and all account records.
 The read-only `python -m paperlab.solana_online_audit <downloaded-run-directory>`
 reconstructs recorded fills and available portfolio marks independently.
@@ -61,13 +62,17 @@ invalid result, paper account loss stop, or storage cap disables further dispatc
 shared writers are retried at the next scheduled check. There is no blind crash
 retry. Budget exhaustion defers the next attempt until the following UTC month.
 
-The full worker shares the existing $25/month ledger and stops reservations at
-75% ($18.75). Each twenty-minute hard timeout reserves about $0.319; successful
+The user authorized a $100 total monthly ceiling on September 13, 2026 and chose
+to pause at the budget limit. The online worker now has an $85 allocation in the
+existing shared worker ledger and stops new reservations at 75% ($63.75).
+Previous spend remains counted; $15 is allocated to collector/other overhead,
+and the retained safety margin leaves additional room for scheduler/storage.
+Other experiments retain their existing lower limits. Each twenty-minute hard
+timeout reserves about $0.319; successful
 fifteen-minute windows have recently settled near $0.242 under the conservative
-2x margin and 3x nonpreemptible rate estimate. Two windows daily are approximately
-$14.50 per thirty days in that ledger. Four daily windows would cost approximately
-$29 if uninterrupted, so `six_hour` mode can exhaust the unchanged $18.75
-reservation threshold before month-end and pause until the next UTC month.
+2x margin and 3x nonpreemptible rate estimate. Hourly windows would cost about
+$175 per thirty days if uninterrupted, so this cadence intentionally pauses
+before month-end when its reservation threshold is exhausted, resuming next UTC month.
 Other workers sharing this ledger also consume this allowance. This is an
 estimate, not the provider invoice.
 The low-resource coordinator has an approximately $0.99/month compute bound at
@@ -95,16 +100,16 @@ PAPERLAB_FLY=1 PAPERLAB_UNIVERSE=1 PAPERLAB_SCHEDULE=0 \
 # Read-only status: /state/solana-online/control.json identifies the current run.
 uv run --extra cloud python -m paperlab.solana_watch solana-online-YYYYMMDD-HHMMSS
 
-# Explicit cadence change under the coordinator lease, and start a window now.
+# Explicit cadence change under the coordinator lease; preserve the current window.
 # Never retries an uncertain dispatch or overrides a loss/failure/budget pause.
-uv run --extra cloud python -c "import modal; print(modal.Function.from_name('fly-paper-solana-online', 'set_cadence').remote('six_hour', start_now=True))"
+uv run --extra cloud python -c "import modal; print(modal.Function.from_name('fly-paper-solana-online', 'set_cadence').remote('hourly'))"
 ```
 
 To stop dispatch, set `enabled` false in the durable control JSON under the
 coordinator lease, then remove `PAPERLAB_ONLINE_SCHEDULE=1` and redeploy to remove
 scheduler wakeups. Do not clear a live writer lease or reuse a run ID. A cadence
 change uses the `set_cadence` function to update the durable control's `mode`
-(`paced`, `six_hour` or `consecutive`) and append a change record; an
+(`paced`, `six_hour`, `hourly` or `consecutive`) and append a change record; an
 environment change alone cannot overwrite a running service's stored policy.
 
 ## Remaining evaluation

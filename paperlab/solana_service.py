@@ -8,7 +8,7 @@ SEED = 'solana-live-14-next-next'
 
 
 def next_delay(mode):
-    delays = {'paced': 12*3600, 'six_hour': 6*3600, 'consecutive': 0}
+    delays = {'paced': 12*3600, 'six_hour': 6*3600, 'hourly': 3600, 'consecutive': 0}
     if mode not in delays: raise ValueError('Unknown cadence')
     return delays[mode]
 

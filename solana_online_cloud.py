@@ -28,7 +28,9 @@ def _run(run_id, parent):
         raise ValueError('Invalid immutable run or parent id')
     volume.reload(); state=Path('/state'); root=state/'solana-live'/run_id
     if root.exists(): raise ValueError('Never restart an existing window')
-    reservation=reserve(state/'budget.json',True,seconds=3600,startup_seconds=30,memory_gib=8,limit_override=25)
+    # $85 shared worker allocation + $15 for collector/overhead; retain 25% margin.
+    reservation=reserve(state/'budget.json',True,seconds=3600,startup_seconds=30,memory_gib=8,
+                        limit_override=85,authorized_monthly_limit=100)
     if reservation is None:return dict(status='budget_stopped')
     reservation['rate']*=3;reservation['startup_seconds']=10
     root.mkdir(parents=True)

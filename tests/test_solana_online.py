@@ -176,17 +176,18 @@ def test_budget_pause_preserves_parent(tmp_path):
     assert s['next_at']>1789324000
 
 
-def test_cadence_change_preserves_pending_and_uses_six_hour_spacing(tmp_path):
+@pytest.mark.parametrize('mode,delay',[('six_hour',21600),('hourly',3600)])
+def test_cadence_change_preserves_pending_and_uses_requested_spacing(tmp_path,mode,delay):
     from paperlab.solana_service import configure_cadence
     c=service(tmp_path,dispatch=lambda *_:'call',poll=lambda _:None,commit=lambda:None,now=1000)
     pending=deepcopy(c['pending']);parent=c['parent']
-    changed=configure_cadence(tmp_path,'six_hour',commit=lambda:None,now=1100,start_now=True)
+    changed=configure_cadence(tmp_path,mode,commit=lambda:None,now=1100,start_now=True)
     assert changed['pending']==pending and changed['parent']==parent
     atomic_json(tmp_path/'solana-live'/pending['run_id']/'completed.json',dict(status='completed',paper_only=True))
     c=service(tmp_path,dispatch=lambda *_:pytest.fail('Duplicate dispatch'),
               poll=lambda _:dict(status='completed'),commit=lambda:None,now=2000)
-    assert c['next_at']==22600 and c['pending'] is None
-    changed=configure_cadence(tmp_path,'six_hour',commit=lambda:None,now=2100,start_now=True)
+    assert c['next_at']==1000+delay and c['pending'] is None
+    changed=configure_cadence(tmp_path,mode,commit=lambda:None,now=2100,start_now=True)
     assert changed['next_at']==2100 and changed['parent']==pending['run_id']
     assert changed['completed_windows']==1 and len(changed['cadence_changes'])==2
     c=service(tmp_path,dispatch=lambda *_:'call2',poll=lambda _:None,commit=lambda:None,now=2100)
@@ -209,7 +210,28 @@ def test_cadence_change_cannot_bypass_budget_or_disabled_state(tmp_path):
     with pytest.raises(ValueError,match='Disabled'):
         configure_cadence(tmp_path,'six_hour',commit=lambda:None,now=1789324300,start_now=True)
     with pytest.raises(ValueError,match='Unknown cadence'):
-        configure_cadence(tmp_path,'hourly',commit=lambda:None)
+        configure_cadence(tmp_path,'unknown',commit=lambda:None)
+
+
+def test_hourly_worker_budget_uses_revised_authorization_and_preserves_spend(tmp_path):
+    from paperlab.budget import reserve
+    from datetime import datetime,timezone
+    path=tmp_path/'budget.json'
+    now=datetime(2026,10,1,tzinfo=timezone.utc).timestamp()
+    atomic_json(path,{'first_month':'2026-09','months':{'2026-09':6.74,'2026-10':63.5}})
+    args=dict(now=now,seconds=3600,startup_seconds=30,memory_gib=8,
+              limit_override=85,authorized_monthly_limit=100)
+    assert reserve(path,True,**args) is None
+    saved=json.loads(path.read_text());assert saved['months']['2026-09']==6.74
+    saved['months']['2026-10']=6.74;atomic_json(path,saved)
+    r=reserve(path,True,**args)
+    assert r['limit']==85 and r['reserve']==pytest.approx(.3191496)
+    assert json.loads(path.read_text())['months']['2026-10']==pytest.approx(6.74+r['reserve'])
+    for invalid in [101,0,-1,float('nan'),float('inf')]:
+        with pytest.raises(ValueError,match='Monthly authorization'):
+            reserve(path,True,authorized_monthly_limit=invalid)
+    with pytest.raises(ValueError,match='Override'):
+        reserve(path,True,authorized_monthly_limit=100,limit_override=101)
 
 
 def test_unavailable_and_dust_holdings_park_without_resetting_losses():
