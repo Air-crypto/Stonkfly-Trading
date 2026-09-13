@@ -104,6 +104,11 @@ Diagnostic assays remain separate from paper accounts and policy promotion.
 
 ## Reproduce the financial and learning charts
 
+The loss breakdown, decision-to-fill trace and simple-baseline report generators
+[reproduced their published JSON byte for byte from a clean committed snapshot](reports/analysis-reproduction-2026-09-13.json).
+All 28 targeted tests passed there using the existing Python environment. This
+checks committed inputs and code; it is not a fresh dependency-installation test.
+
 The included [evidence archive](reports/fly-online-evidence-11.zip) contains 51
 exact report, plan, summary, audit and receipt files, compressed to about 1.7 MB.
 No graph download, credential or new model run is needed to regenerate all five

@@ -1,0 +1,30 @@
+{
+  "status": "clean_checkout_analysis_reproduced",
+  "git_commit": "9078a8f434e7889179dfc45867ea780101341e8c",
+  "checks": [
+    {
+      "module": "fly_loss_attribution",
+      "report": "fly-loss-attribution-11.json",
+      "sha256": "ff4f886d06faf7ca99e8b62672a049aa79b78ec91a5ad35f76ce23da8d797985",
+      "byte_identical": true
+    },
+    {
+      "module": "fly_trade_trace",
+      "report": "fly-trade-trace-11.json",
+      "sha256": "609c8f0e450f87d68a85630010d63b0af21d0257018cd5dbc3820c6ca0cc237f",
+      "byte_identical": true
+    },
+    {
+      "module": "market_baselines",
+      "report": "market-baselines-11.json",
+      "sha256": "17fd771b652c25426bb465e716d8eb8f74018f7bd29400383723482bd0ba04cb",
+      "byte_identical": true
+    }
+  ],
+  "tests": 28,
+  "new_neural_observations": 0,
+  "cloud_submissions": 0,
+  "note": "Used the existing installed Python environment with imports forced to the clean committed checkout; this verifies committed inputs and commands, not a fresh dependency installation.",
+  "imports_verified_from_clean_checkout": true,
+  "scope": "Three public report generators and 28 targeted tests; no fresh dependency installation, neural model execution or cloud submission."
+}
