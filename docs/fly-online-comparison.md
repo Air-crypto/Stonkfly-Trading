@@ -1,5 +1,12 @@
 # Longer online learning comparison
 
+**Current capture status:** six conditions are fully recorded and independently
+audited. Recovery 02 was preempted during condition seven and its schedule was
+stopped. A separate non-preemptible completion amendment retains those six
+recordings and captures ten conditions from fresh starts. No complete comparison,
+development selection or held-out result is available. See the
+[preemption and completion record](#complete-after-provider-preemption).
+
 The study 11 runner and offline auditor are implemented and tested, and the
 once-only dispatcher is connected after the normal paper cycle. The
 [registration](../reports/fly-market-study-11-preregistration.json), recorded
@@ -575,7 +582,9 @@ PAPERLAB_FLY=1 PAPERLAB_UNIVERSE=1 PAPERLAB_PAPER_STUDY=1 \
   PAPERLAB_ONLINE_STUDY=1 uv run --extra cloud modal deploy recovery_cloud.py
 ```
 
-This deploys only the separate recovery app. Stop that temporary app after its
+This historical command deploys only the separate recovery app. Recovery 02 is
+now stopped after preemption; do not redeploy it to retry its claimed condition.
+Stop that temporary app after its
 captures are complete. The normal main app remains deployed independently.
 
 The first recovery deployment failed during import because `cloud.py` was not
@@ -714,3 +723,96 @@ uv run --extra dev --extra plots pytest -q tests/test_fly_online_figure.py \
 The rendered files appear under
 `runs/online-figure-validation/test_render_produces_all_five_0/figures`.
 Use a fresh `--basetemp` directory to preserve previous validation evidence.
+
+## Complete after provider preemption
+
+At **03:05:03 UTC on September 13**, Modal reported that the recovery 02
+container had been preempted. Its child process was interrupted while saving a
+boundary array for `development-pool1-trained_online_carry`. The platform
+restarted the same input, which returned `writer_busy`; the saved original
+receipt remained `claimed`. There was no complete summary, selection or
+held-out capture. The exact call, logs, partial inventory and stopped-app
+confirmation are preserved in the
+[preemption report](../reports/fly-online-recovery-preemption-11.json).
+The main paper lab remained deployed.
+
+Six conditions have complete full-bin and plotted-series audits. Each account
+started at $250; these are development results, including simulated execution
+costs, before hosting:
+
+| Pool | Pristine frozen | Trained frozen | Online carry | Online rate reset |
+|---|---:|---:|---:|---:|
+| ALL | $205.28 | $207.32 | $225.26 | $234.33 |
+| baton | $241.46 | $235.54 | Incomplete | Pending |
+
+The [six retained audit reports](../reports/online-completion-retained/) pin the
+exact summaries and native audits. Both baton controls contain 23 observations
+and 1,150 native bins. The missing market slot remains missing. The online ALL
+arms lose less in this window; all six completed accounts lost money, and trained
+frozen memory performs worse on baton. No profitable or general learning benefit
+has been established.
+
+The [completion protocol](../reports/fly-online-completion-protocol-11.json)
+uses `fly-paper-completion-11` and the separate
+`/state/registered-paper-11-completion-01` directory. It retains the first six
+complete conditions and excludes the interrupted arrays entirely. Ten new
+conditions each start with the original specified memory, fresh neural activity
+and fresh account; nothing resumes from the partial seventh recording.
+Original sealed inputs, all 56 model execution files, and the prior recovery
+sources remain unchanged. This is a second disclosed amendment, not an
+uninterrupted original run.
+
+[Modal documents](https://modal.com/docs/guide/preemption) automatic same-input
+restarts after preemption even for functions that do not request application
+retries. Its `nonpreemptible=True` CPU option carries a 3× CPU/RAM multiplier.
+The completion worker uses that option with two CPUs, 8 GiB, a 600-second timeout,
+no retries and the shared worker lease. Each condition reserves **$0.1608936**,
+including the 3× price, a further 2× safety factor and ten seconds of startup.
+Ten worst-case reservations total **$1.608936**, below the separate $2 allowance.
+The existing $25 monthly worker cap and 75% stop threshold still apply. This
+ledger estimates compute; it is not a provider invoice or an all-in storage bill.
+
+The cloud reference preflight checks all six prior receipts/summaries and audits,
+both earlier failures, original source hashes, and exact reconstruction of all
+49 news vectors before any new claim. From the original prepared checkout:
+
+```sh
+PAPERLAB_FLY=1 PAPERLAB_UNIVERSE=1 PAPERLAB_PAPER_STUDY=1 \
+  PAPERLAB_ONLINE_STUDY=1 uv run --extra cloud modal run --env main \
+  completion_cloud.py::check_reference
+
+PAPERLAB_FLY=1 PAPERLAB_UNIVERSE=1 PAPERLAB_PAPER_STUDY=1 \
+  PAPERLAB_ONLINE_STUDY=1 uv run --extra cloud modal deploy completion_cloud.py --env main
+```
+
+A claimed, failed or incomplete completion condition stops advancement. Do not
+clear its receipt or resubmit its work after a timeout. Inspect the saved call.
+Stop the temporary completion app after all captures finish; the main trader and
+collector are separate.
+
+The offline finalizer accepts all sixteen completed recordings only after their
+full audits and exact owning call results are saved. It rehashes all arrays and
+cached audit/view files, preserves receipt bytes, checks both amendments and the
+3× accounting, reconstructs prices and selection, and installs `report.json` last.
+Missing captures fail before publication. With the saved directories and audits:
+
+```sh
+uv run python -m paperlab.fly_recovery_report \
+  --original runs/online-cloud-11 --recovery runs/online-recovery-02 \
+  --completion runs/online-completion-01 \
+  --control-projections runs/online-first-projection-11 runs/online-second-projection-11 \
+  --evidence reports --price-archive runs/online-sealed-input-audit-11/universe.db \
+  --out runs/online-complete-audit-11
+
+uv run python -m paperlab.fly_online_figure \
+  --root runs/online-complete-audit-11 --out runs/online-complete-figures-11
+```
+
+These commands do not run a model or submit cloud work. The recovery directory
+must retain exact `original-failed-receipt.json` and
+`previous-recovery-halt.json` bytes from the stopped attempts. Each observed
+namespace uses `receipts/`, `call-results/`, `chunks/`, and `projections/`; each
+projection contains the existing `audit.json`, `view.json` and `report.json`.
+A successful finalization is labeled `paper_online_completion_audited`, and all
+figures identify the amendment. Synthetic wiring tests remain visibly synthetic
+and cannot pass the subsequent experiment's real-study gate.

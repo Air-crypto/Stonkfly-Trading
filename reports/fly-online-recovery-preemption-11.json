@@ -1,0 +1,51 @@
+{
+  "status": "recovery_02_preempted_incomplete",
+  "observed_at": 1789269330.0792189,
+  "provider_event": "Container terminated due to preemption",
+  "receipt": {
+    "status": "claimed",
+    "chunk": "development-pool1-trained_online_carry",
+    "call_id": "fc-01M2CBDW75C671PEWCXC4AFKQ6",
+    "input_id": "in-01M2CBDW7FZPDT200X69366302:1789268521228-0",
+    "claimed_at": 1789268528.3026493,
+    "plan_sha256": "3f0e3cf8e5a1187ff5bf4ed4cc128e8c3457c1a14ae02fd899d3e8548709f045",
+    "source_sha256": "5862a6aebfe9db84c39d94564a230eb8f7bf8e5703bbf19ddaf64d246f529dc0",
+    "amendment_sha256": "320545aff0322bf91aac4af7f391df2f515fbd89eff99c85655f32348d1e249d",
+    "remote_path": "/state/registered-paper-11-recovery-02/chunks/development-pool1-trained_online_carry/artifacts",
+    "reserved_usd": 0.0536312,
+    "dispatch": "separate-recovery-worker-shared-lease"
+  },
+  "receipt_sha256": "74d99e7c27a040704a857ccd21f8ec1b76bd29baba0e2b66cac87965506b7aac",
+  "terminal_result": {
+    "status": "writer_busy",
+    "writer": "worker"
+  },
+  "logs_sha256": "306747129de068768d022bee863eeff5be91bf090fecc0d7b29240bde0628be5",
+  "partial_inventory_sha256": "d24a11a0dd2dab017a3583c0f57fff619000aee85697ccb3003053dd8022f188",
+  "partial_entries": 102,
+  "complete_summary_present": false,
+  "development_selection_present": false,
+  "recovery_app_stopped": true,
+  "stopped_app": {
+    "app_id": "ap-anesYfTVKw2otqvYXknhvz",
+    "description": "fly-paper-recovery-11",
+    "state": "stopped",
+    "tasks": "0",
+    "created_at": "2026-09-12 21:43:03-05:00",
+    "stopped_at": "2026-09-12 22:12:32-05:00"
+  },
+  "main_app_state": "deployed",
+  "main_app_id": "ap-iago8vyn3jufBrB1dxuogO",
+  "lease_at_inspection": null,
+  "completed_conditions": 6,
+  "worker_budget": {
+    "first_month": "2026-09",
+    "months": {
+      "2026-09": 2.6036620464114604
+    }
+  },
+  "provider_bill": false,
+  "interpretation": "Recovery 02 condition seven was interrupted before a complete summary. Six conditions remain audited. No full comparison, held-out result or selection. Preserve partial recording; any new capture must have separate amendment provenance.",
+  "provider_documentation": "https://modal.com/docs/guide/preemption",
+  "nonpreemptible_price_multiplier": 3
+}

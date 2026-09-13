@@ -1,0 +1,24 @@
+{
+  "status": "completion_reference_verified",
+  "plan_sha256": "3f0e3cf8e5a1187ff5bf4ed4cc128e8c3457c1a14ae02fd899d3e8548709f045",
+  "original_sources": 56,
+  "retained_conditions": 6,
+  "news": {
+    "news_snapshot_sha256": "0d591226bf2740d8d02cfebeed64a06d9603a8e81c23db72dd8439807e1fffa6",
+    "vectors_reconstructed": 49
+  },
+  "new_neural_observations": 0,
+  "archive_writes": 0,
+  "call_id": "fc-01M2CCB5MNKZPR4MQ2NPXEXD0P",
+  "input_id": "in-01M2CCB5MQ1B7M039PGQWGSZ6P:1789269481112-0",
+  "protocol_sha256": "24e12606eaba9e3112dc820ef0ce9f815ef3b4836046cbf6c6f76be08b4aeb4f",
+  "log_sha256": "d6471c4f0bfc594157c3d0c54d92211f8bbffc4c14492de78271e2434d7e26af",
+  "completion_tests": {
+    "passed": 8,
+    "junit_sha256": "cf3564f52d36dab23eca9464a3ae3ee4ecb4a18fd427852bd59096ea0d15d560"
+  },
+  "prior_recovery_tests": {
+    "passed": 14
+  },
+  "independent_new_cloud_capture_started": false
+}

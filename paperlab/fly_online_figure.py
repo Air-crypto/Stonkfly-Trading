@@ -33,7 +33,8 @@ def evidence(root):
     read=lambda path:json.loads((root/path).read_text())
     report=read('report.json');envelope=read('plan.json');p=validate(envelope);r=p['registration']
     names=[chunk_name(*c) for c in chunk_order()]
-    if (report.get('status')!='paper_online_study_audited' or report.get('audited') is not True
+    if (report.get('status') not in ('paper_online_study_audited', 'paper_online_recovery_audited',
+            'paper_online_completion_audited') or report.get('audited') is not True
             or r['study']!='11' or report['registration']!=r or report['plan_sha256']!=envelope['sha256']
             or any(report.get('verification',{}).get(k) is not True for k in CHECKS)
             or report['verification'].get('distinct_completed_worker_calls')!=16
@@ -110,6 +111,11 @@ def evidence(root):
         raise ValueError('Figure aggregate or development selection differs')
     validate_selection_receipt(selection,report['selection_receipt'],receipts)
     if len({v['call_id'] for v in receipts.values()})!=16:raise ValueError('Chunk worker calls are not distinct')
+    if report['status'] in ('paper_online_recovery_audited', 'paper_online_completion_audited'):
+        from .fly_recovery_report import verify
+        verify(root,report,envelope,summaries,receipts)
+    elif 'recovery' in report:
+        raise ValueError('Amended recovery cannot be relabeled as the original completed study')
     panels={}
     for stage in PHASES:
         for arm in ARMS:
@@ -148,7 +154,8 @@ def render(root, output):
         fig.subplots_adjust(left=.085,right=.975,top=.79,bottom=.18,hspace=.32,wspace=.2)
         title='SYNTHETIC FIXTURE — comparison layout only' if fixture else 'Does resetting learning traces improve paper trading?'
         fig.text(.04,.955,title,fontsize=20,weight='bold')
-        fig.text(.04,.918,'Four conditions · two pools · separate $1,000 development and test accounts',fontsize=12)
+        amended=report['status'] in ('paper_online_recovery_audited', 'paper_online_completion_audited')
+        fig.text(.04,.918,('Amended recovery · ' if amended else '')+'Four conditions · two pools · separate $1,000 development and test accounts',fontsize=12)
         handles=[];bounds=[v-1000 for panel in panels.values() for v in panel['equity']]+[0]
         pad=max(1,max(bounds)-min(bounds))*.15
         for j,stage in enumerate(PHASES):
@@ -183,7 +190,7 @@ def render(root, output):
                 fig,axes=plt.subplots(5,1,figsize=(14,13),sharex=True,
                     gridspec_kw={'height_ratios':[1.6,1,1,1,1]},facecolor=background)
                 fig.subplots_adjust(left=.115,right=.975,top=.835,bottom=.135,hspace=.23)
-                title=('SYNTHETIC FIXTURE · ' if fixture else '')+f'Pool {pool} · {stage}: decisions, fills and learning'
+                title=('SYNTHETIC FIXTURE · ' if fixture else 'Amended recovery · ' if amended else '')+f'Pool {pool} · {stage}: decisions, fills and learning'
                 fig.text(.04,.967,title,fontsize=18,weight='bold')
                 fig.text(.04,.935,'▲ / ▼: BUY / SELL fills processed at this slot. B / H / S: new BUY / HOLD / SELL decisions. ×: no neural observation.',color=muted)
                 fig.text(.04,.913,'BUY targets 50% exposure and can rebalance by selling. Red × on equity: an unavailable quote with a conservative stress mark.',fontsize=9.5,color=muted)
@@ -221,7 +228,8 @@ def render(root, output):
                 fig.text(.04,.04,('Synthetic diagnostics and prices; no market result. ' if fixture else '')+report['registration']['cohort'][pool],fontsize=9,color=muted)
                 save(fig,f'{stage}-pool{pool}')
     paired=[];links=['# Online trace comparison'+(' — synthetic fixture' if fixture else ''),'',
-        'Synthetic diagnostics and prices; no market result.' if fixture else 'Completed audited study 11 recordings.',
+        'Synthetic diagnostics and prices; no market result.' if fixture else
+            'Completed audited study 11 recordings'+(' from the disclosed recovery amendment.' if amended else '.'),
         '', 'Start the debugger with `--out <study-root>/views --port 8767` before opening these links.',
         'Each link matches the same observed market slot. Fills execute earlier decisions; a BUY target may cause a rebalance SELL.',
         '', '| Phase / pool | UTC | New decision: carry / reset | Gate spikes: carry / reset | Earlier fills: carry / reset | Paired trace |',

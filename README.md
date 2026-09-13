@@ -264,8 +264,18 @@ All four [ALL development conditions](reports/fly-online-all-development-11.json
 are now independently audited: pristine **$205.28**, trained frozen **$207.32**,
 online carry **$225.26**, and online rate reset **$234.33**, each starting at $250.
 Reset loses least in this window; all four remain below cash. This completes
-four of sixteen condition audits. The second pool and held-out evaluation remain
-pending, with no strategy selected or promoted.
+four of sixteen condition audits. The two baton frozen controls are also audited:
+pristine **$241.46**, trained frozen **$235.54**, from $250 each. That makes six
+completed audits; previously trained memory does not help consistently across coins.
+
+Modal [preempted recovery 02](reports/fly-online-recovery-preemption-11.json)
+while recording condition seven. Its incomplete arrays and claimed receipt are
+preserved, and that temporary schedule was stopped. The separate
+[non-preemptible completion amendment](reports/fly-online-completion-protocol-11.json)
+retains the six completed recordings and starts ten conditions fresh, with the
+3× CPU/RAM price included in a conservative **$2 additional compute allowance**.
+No development selection or held-out result exists yet. See the
+[completion run steps](docs/fly-online-comparison.md#complete-after-provider-preemption).
 
 The [full-window diagnostic figures](docs/fly-online-comparison.md#compare-the-full-financial-and-neural-timelines)
 align decisions, later fills, gate spikes, weight movement and learning history,
