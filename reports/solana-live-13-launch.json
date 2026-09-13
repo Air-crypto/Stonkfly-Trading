@@ -1,0 +1,111 @@
+{
+  "status": "cloud_collecting_training_not_yet_verified",
+  "recorded_at": 1789317788.447037,
+  "reference_repository": "https://github.com/Air-crypto/solid-octo-engine",
+  "reference_commit": "ef7bb562c0fa5820e4f8f6969cc5a12833e1263a",
+  "call": {
+    "call_id": "fc-01M2DTADCF907CW63FN1ZY7Z7V",
+    "run_id": "solana-live-13",
+    "dispatched_at": 1789317690.806049,
+    "seconds": 900,
+    "paper_only": true
+  },
+  "cloud_files": {
+    "owner.json": {
+      "call_id": "fc-01M2DTADCF907CW63FN1ZY7Z7V",
+      "input_id": "in-01M2DTADCRRB8SXQXB26CC5WHJ:1789317690799-0",
+      "run_id": "solana-live-13",
+      "probe": false,
+      "at": 1789317693.4375234,
+      "source_sha256": {
+        "solana_cloud.py": "87687fdd854370180cba3a6da7562bc33d46024de21337339a7f79d262022186",
+        "paperlab/solana_events.py": "54f085a065b2d6b5336f462eea5435e2add86b82c9169d66e57927c4079acdeb",
+        "paperlab/solana_paper.py": "b9c96a3a8310696124c67a774e2e7d3cf38c8f59c1cc7e1c93b875a347e153fa",
+        "paperlab/solana_schema/pump_events.json": "9852929e009b9f45a0c617e2a0171319d9f26b896cac69206012725029ee7155"
+      },
+      "reservation": {
+        "month": "2026-09",
+        "reserve": 0.3191496,
+        "rate": 0.00026376,
+        "limit": 25,
+        "started": 1789317693.334837,
+        "startup_seconds": 10
+      }
+    },
+    "started.json": {
+      "at": 1789317694.1857479,
+      "deadline": 1789318594.1857479,
+      "paper_only": true,
+      "interval_seconds": 5,
+      "native_learning": true,
+      "readout_learning": true,
+      "capital": 1000,
+      "costs": {
+        "capital": 1000,
+        "fee_bps": 125,
+        "slippage_bps": 100,
+        "max_exposure": 0.025,
+        "max_order": 25,
+        "max_spread_bps": 110,
+        "max_delay": 15,
+        "loss_stop": 0.1
+      },
+      "max_selected_tokens": 1,
+      "cohort": "first causally eligible newly observed Pump.fun Solana launch; no replacement",
+      "evaluation": "online training pilot, not a held-out profitability test",
+      "news_enabled": false
+    },
+    "latest.json": {
+      "event": "solana_paper_step",
+      "at": 1789317744.9582107,
+      "step": 10,
+      "mint": null,
+      "status": "collecting",
+      "reason": "waiting_for_eligible_launch",
+      "quote_available": false,
+      "tick": null,
+      "equity_stress_usd": 1000.0,
+      "cash_baseline_usd": 1000,
+      "one_entry_hold_equity_usd": 1000.0,
+      "broker": {
+        "cash": "1000",
+        "qty": "0",
+        "fees": "0",
+        "halted": false
+      },
+      "fill": {
+        "status": "hold"
+      },
+      "pending": null,
+      "neural": null,
+      "feed": {
+        "notifications": 9275,
+        "events": 1649,
+        "duplicates": 0,
+        "decode_errors": 0,
+        "connections": 1,
+        "overflow": 0,
+        "last_message": 1789317744.764338,
+        "last_event": 1789317744.763163,
+        "status": "connected"
+      },
+      "tracked_launches": 18,
+      "neural_observations": 0,
+      "readout_updates": 0,
+      "skipped_steps": 0,
+      "step_seconds": 0.00026679039001464844,
+      "target_interval_seconds": 5,
+      "paper_only": true,
+      "overruns": 0
+    }
+  },
+  "local_feed_probe": {
+    "duration_seconds": 30,
+    "events": 1152,
+    "launches": 7,
+    "decode_errors": 0
+  },
+  "tests_passed": 15,
+  "paper_only": true,
+  "heldout_evaluation": false
+}

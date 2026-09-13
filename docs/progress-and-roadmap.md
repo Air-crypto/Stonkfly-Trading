@@ -68,7 +68,14 @@ matches the [completed full/portable browser check](../reports/fly-learning-scal
 
 ## In progress
 
-- [ ] Specify one cost-aware action/readout change using the audited first
+- [x] Implement a [Solana launch pilot](solana-live.md) with confirmed on-chain
+  events, five-second observation targets, native fly plasticity and a trainable
+  entry/exit readout. Preserve malformed/rejected/missing data and apply delayed,
+  cost-inclusive paper execution. A live decoder check and 15 targeted tests pass.
+- [ ] Verify actual cloud native training, readout updates, fills and achieved
+  cadence before enabling ongoing cross-window training. The deployed pilot has
+  no recurring schedule; it is bounded to 15 minutes and $25 maximum exposure.
+- [ ] Complete the cost-aware action/readout experiment using the audited first
   SELL–BUY divergence. Include timing and exposure: lower eta's development
   loss worsened mainly through costs, but its test loss worsened through the
   fixed-fill midpoint component despite almost unchanged friction.
@@ -87,9 +94,10 @@ the archive hashes, stopped study app and separate retained paper-lab deployment
 
 - [ ] Establish that learning improves trading on unseen data. Study 11 did
   not establish this, and a smaller update in the neural assay is insufficient.
-- [ ] Validate the decision rule and reward timing. The fly currently uses a
-  fixed BUY/SELL/HOLD readout; only its configured 7,835 plastic connections
-  learn, not all approximately 25.6 million graph connections.
+- [ ] Validate the decision rule and reward timing. The older studies use a
+  fixed BUY/SELL/HOLD readout; the Solana pilot adds a trainable head. Native
+  plasticity still updates its configured 7,835 connections, not all
+  approximately 25.6 million graph connections.
 - [ ] Demonstrate generalization across more pools and separate dates, with
   compact PPO and simple cash/holding baselines evaluated under the same rules.
 - [ ] Measure whether news improves decisions beyond price-only inputs. The

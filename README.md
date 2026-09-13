@@ -16,6 +16,13 @@ The [dynamic memecoin experiment](docs/memecoin-universe.md) discovers current a
 new launches and samples DEX pools. Coverage is bounded; it does not trade every
 Solana token. The latest controlled comparison uses two fixed pools, RAY and STONK.
 
+The new [Solana live pilot](docs/solana-live.md) subscribes directly to confirmed
+Pump.fun launch/trade events and targets five-second observations. It trains the
+native fly plus a small entry/exit readout using $1,000 paper cash and at most $25
+exposure. This is a bounded cloud training pilot, not a completed performance
+comparison or coverage of every Solana token. See the guide for logs, limits and
+status commands.
+
 ## Latest completed comparison
 
 [Study 12](docs/fly-rate-result-12.md) completed **16 independently audited

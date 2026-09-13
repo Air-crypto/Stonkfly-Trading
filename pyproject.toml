@@ -23,7 +23,7 @@ paperlab = "paperlab.cli:main"
 include = ["paperlab*"]
 
 [tool.setuptools.package-data]
-paperlab = ["debugger_web/*.html", "debugger_web/*.css", "debugger_web/*.js"]
+paperlab = ["debugger_web/*.html", "debugger_web/*.css", "debugger_web/*.js", "solana_schema/*.json"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
