@@ -208,3 +208,58 @@ PAPERLAB_FLY=1 PAPERLAB_UNIVERSE=1 \
 minutes in the future. The committed registration is historical evidence, not
 a command to start a new comparison. No result from this comparison will
 automatically promote the lower rate to the main trader.
+
+## Download, audit and inspect the completed comparison
+
+`paperlab.fly_rate_results` is a read-only results workflow. It checks the exact
+registration and source manifest, reattaches the saved owning calls, and
+requires a matching completed call result before transferring a recording.
+It reconstructs raw prices before downloading the larger neural arrays. Reads
+have bounded deadlines; interrupted reads never become new model submissions.
+Repeated downloads reuse verified files and reject changed evidence.
+
+```sh
+uv run --extra cloud python -m paperlab.fly_rate_results observe \
+  --registration reports/fly-rate-market-registration-12.json \
+  --out runs/rate-results-12 --download
+```
+
+Before capture completes, this reports the current phase and completed/downloaded
+counts. The phase follows the registered clock; actual quote coverage is checked
+from the sealed data. It does not wait for hours or start the cloud worker. Once all 16 calls,
+artifacts and the cloud aggregate are present, it reports `downloaded_pending_audit`.
+
+The following audit requires the retained graph data. It uses array reconstruction
+only, with a fresh seed-zero process for timestamped news, and never constructs
+or propagates a native brain locally:
+
+```sh
+PYTHONHASHSEED=0 uv run python -m paperlab.fly_rate_results audit \
+  --registration reports/fly-rate-market-registration-12.json \
+  --root runs/rate-results-12 --fly-data ../fly-data --out runs/rate-audit-12
+```
+
+The audit refuses partial comparisons or an existing output directory. It
+rechecks receipts, call results, artifact hashes, selection timing, accounts,
+news and all recorded learning bins, then checks each debugger projection.
+It writes the final report only after every condition passes. Synthetic fixtures
+stay labeled as validation, and missing test coverage stays inconclusive.
+
+Open the resulting views and full-neuron recordings:
+
+```sh
+uv run --extra cloud python -m paperlab.debugger serve --backend modal \
+  --out runs/rate-audit-12/views --port 8772
+```
+
+Visit <http://127.0.0.1:8772>. Viewing the recordings requires no new model run;
+the Modal backend keeps any separately requested input assay off the laptop.
+The complete-recording links use local hard links to the verified download.
+This workflow prepares result inspection; it does not claim the pending study
+has already produced audited trading results.
+
+The [results preflight record](../reports/fly-rate-results-preflight-12.json)
+preserves the 42 passing orchestration/transfer checks and the real read-only
+arming-call verification. The 33 reader/audit checks passed again after switching
+call observation to Modal's asynchronous API; the nine shared transfer checks
+were unchanged. Mocked native-audit wiring remains labeled as a fixture.

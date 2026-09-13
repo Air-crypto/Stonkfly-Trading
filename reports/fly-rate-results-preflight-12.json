@@ -1,0 +1,76 @@
+{
+  "status": "rate_results_workflow_preflight_and_live_read_verified",
+  "recorded_at": 1789279173.0963252,
+  "sources": {
+    "paperlab/fly_rate_results.py": "a59f6d413224a71dea65693dd333196109706db19b4926028b21f02f6e2bdfea",
+    "tests/test_fly_rate_results.py": "9f51fd3b90fda151a5fd639cd9e8a7564b4d825e4e24a7b7fe70dd0350058523",
+    "paperlab/fly_recording_download.py": "52f4389f3cf050dabff76bf2c21e9800c31d678646356063706645a94887d882",
+    "tests/test_fly_recording_download.py": "ca8220e355a55f9a5f1881c283d57e7ae228f9cb13dd25b833120859a450010d"
+  },
+  "tests": {
+    "unique_checks": 42,
+    "combined_passed": 42,
+    "async_reader_recheck_passed": 33,
+    "unchanged_transfer_checks": 9,
+    "failed": 0,
+    "junit_sha256": {
+      "final-tests.xml": "7d2d5c32a8b7a16f1d3666e2b5ba1c94d2ba236c0c2c381600e472c57bf41922",
+      "async-tests.xml": "056d08b5f1b1446e1b4d3676c746e090bcc210f19121215f446d98c38658ff8e"
+    },
+    "logs_sha256": {
+      "final-tests.log": "93da03b273c7821c14b7b981d0fc52266a775506a3b8f02fbcf2fb0fa7a77d50",
+      "async-tests.log": "d26e707b4db99e52cfd8928977203f3751f8b85cba5d222cb8fe8b475ead6821"
+    },
+    "coverage": [
+      "Exact cloud ownership and prospective registration",
+      "Polling timeouts versus execution timeout or expired output",
+      "Changed source, path, clock and chunk-order rejection",
+      "Raw price audit before large recording reads",
+      "Cancelled reads and preserved downloaded bytes",
+      "All sixteen conditions and selection timing before report publication",
+      "Full-audit and projection wiring; corrupt or incomplete checks cannot publish a completed report"
+    ],
+    "native_audit_wiring_is_mocked": true,
+    "fixture_accounts_and_raw_price_audit_are_real": true,
+    "new_native_constructions": 0,
+    "cloud_submissions": 0
+  },
+  "live_reader": {
+    "progress": {
+      "observed_at": 1789279047.894408,
+      "completed_chunks": 0,
+      "downloaded_chunks": 0,
+      "total_chunks": 16,
+      "cloud_submissions": 0,
+      "new_neural_observations": 0,
+      "development_start": 1789279200.0,
+      "test_start": 1789286400.0,
+      "end": 1789293600.0,
+      "status": "waiting_for_development"
+    },
+    "arming_call_id": "fc-01M2CMN8PMKMQYXJ67C89TEPHA",
+    "arming_input_id": "in-01M2CMN8PXDH7H9K8B81FTQ7V4:1789278200564-0",
+    "returned_status": "paper_rate_collecting",
+    "source_manifest_unchanged": 67,
+    "reader_submitted_calls": 0,
+    "log_sha256": "3de297acee3579eb1f4e9fc4ab03f4e8befb46dff133bd9bf0140216ab1a5691",
+    "pinned_file_sha256": {
+      "armed.json": "fd99bf5f8b6cbb7981c448415a38817b71ded881d93a34eeceff54e782aff1b4",
+      "preregistration.json": "a3f085de4053f35ff4944d806bc3f43ee592e54351a26b649f87d7b875efc6e0",
+      "source-hashes.json": "f9bb184f9809cb3b746beee9e92e2935a1a926fe87f6cd59963e15ee9a463807",
+      "arming-call-result.json": "7c4334393b7db67d8d01276133fb17616143c151ad5067b7343c0daa976a0a39"
+    }
+  },
+  "goal_reconciliation": {
+    "path": "docs/progress-and-roadmap.md",
+    "sha256": "c2b4ab752aadd4ea0f61b78dcad33986b0fb5fcbd83a327816ffe308d65e0ef3",
+    "debugger_implemented": true,
+    "current_debugger_matches_completed_browser_audit": true,
+    "profitable_improvement_established": false,
+    "current_market_results_complete": false
+  },
+  "deployment_unchanged": true,
+  "market_policy_promoted": false,
+  "provider_bill": false,
+  "interpretation": "The result reader and complete-audit coordinator are ready. These implementation checks and the real arming-call read are not new neural trajectories or trading results. Study 12 still requires fresh data, all sixteen cloud captures and independent full-recording audits."
+}

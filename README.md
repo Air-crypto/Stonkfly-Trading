@@ -4,6 +4,11 @@ A paper-only research lab comparing the full **166,700-neuron Stonkfly network**
 with a **247,780-parameter PPO policy**, using market data and timestamped news.
 There is no real-order endpoint, wallet, or exchange credential in this lab.
 
+See the [goal checklist and roadmap](docs/progress-and-roadmap.md) for completed
+work, the current experiment and the remaining evidence needed to establish
+better trading. The debugger is implemented; effective learning is still being
+tested.
+
 The fly is a sparse spiking network. The compact policy is an MLP actor/critic.
 A separately pinned FinBERT transformer can encode headline sentiment; those
 features enter the compact policy numerically and the fly through a visual adapter.
