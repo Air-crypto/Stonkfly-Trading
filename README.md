@@ -251,8 +251,8 @@ For a locked install, use `uv sync --locked --python 3.12 --all-extras`. The loc
 
 ```sh
 python3.12 -m venv .venv
-.venv/bin/pip install -e '.[dev,cloud,news,export]'
-.venv/bin/python -m pytest -q
+.venv/bin/pip install -e '.[dev,cloud,plots,news,export]'
+PYTHONHASHSEED=0 .venv/bin/python -m pytest -q
 .venv/bin/paperlab fetch --product BTC-USD --days 14 --out data/btc.jsonl
 .venv/bin/paperlab news --db data/news.db
 .venv/bin/paperlab train --data data/btc.jsonl --news-db data/news.db --steps 8192 --out runs/ppo
