@@ -1,7 +1,7 @@
 {
-  "version": 1,
-  "created_at": 1789266968.251605,
-  "policy": "Amended recovery after the original third chunk failed before neural construction. Preserve all original receipts, sealed inputs and the first two independently audited controls. Use PYTHONHASHSEED=0 and require exact reconstruction of every original news vector. Run the remaining fourteen original conditions once, in their original order, in a separate namespace. Keep all 56 original execution sources, full graph, decoder, reward, learning settings and costs unchanged. Persist original-rule development selection before any test capture. Never retry a claimed or failed chunk. Use the shared worker lease and budget with two CPUs, 8 GiB, 600 seconds, no platform retries, a $25 worker monthly cap and at most $0.80 additional conservative reserved compute. Publish only with separate amendment provenance and independent full-recording audits; no policy promotion.",
+  "version": 2,
+  "created_at": 1789267338.287349,
+  "policy": "Amended recovery after the original third chunk failed before neural construction. Preserve all original receipts, sealed inputs and the first two independently audited controls. Start verification and capture in fresh Python subprocesses with PYTHONHASHSEED=0 in the environment before interpreter startup; verify the seed fingerprint and exact reconstruction of every original news vector. Preserve the halted image-environment recovery in its original namespace. Run the remaining fourteen original conditions once, in their original order, in a separate namespace. Keep all 56 original execution sources, full graph, decoder, reward, learning settings and costs unchanged. Persist original-rule development selection before any test capture. Never retry a claimed or failed chunk. Use the shared worker lease and budget with two CPUs, 8 GiB, 600 seconds, no platform retries, a $25 worker monthly cap and at most $0.80 additional conservative reserved compute. Publish only with separate amendment provenance and independent full-recording audits; no policy promotion.",
   "seed": "0",
   "plan_sha256": "3f0e3cf8e5a1187ff5bf4ed4cc128e8c3457c1a14ae02fd899d3e8548709f045",
   "original_sources_sha256": "5862a6aebfe9db84c39d94564a230eb8f7bf8e5703bbf19ddaf64d246f529dc0",
@@ -19,12 +19,14 @@
     }
   },
   "code_sha256": {
-    "paperlab/fly_online_recovery.py": "296f0792e1b290b5c8645cede5cc4f3343bb7343c70599a3bc6ba63f00337174",
-    "recovery_cloud.py": "f9eac62079b3c427527a12d43a9c65af53ce9dd1d8231f8a4934062e0c811bb7"
+    "paperlab/fly_online_recovery.py": "c18070f70aa17771d1addf10b8ac59778169599f2d8666f27b8f9d7d11d03586",
+    "recovery_cloud.py": "b3c25d26991e5e6a2e97d43ef26a896e8fb6be62930df548c5bcbb8a05da1ea0"
   },
   "evidence_sha256": {
     "fly-online-failure-11.json": "7104cfee39959b5d4f5938e32fed2439003c6113e19ecf31144069e7aab1aab5",
     "fly-online-control-first-11.json": "7f1ad7c943a46f91a131006a7a9ea6c351b3034a380374aa1c871e463da861e4",
-    "fly-online-control-second-11.json": "63286011b0da229bd5401879451e86530d132da6fed15d90a9e4e7a086c0c9b6"
+    "fly-online-control-second-11.json": "63286011b0da229bd5401879451e86530d132da6fed15d90a9e4e7a086c0c9b6",
+    "fly-news-process-probe-11.json": "9278ed2a6782e740b3e51a170ad927c436e0831fdafe45fc839653ebb9c1c3df",
+    "fly-online-recovery-preflight-failure-11.json": "797d7c3e0ac92313a329a39663db779f92400a0128b99372dfb2f1828524142c"
   }
 }

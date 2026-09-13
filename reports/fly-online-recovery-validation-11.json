@@ -1,5 +1,5 @@
 {
-  "status": "recovery_exact_input_preflight_passed",
+  "status": "subprocess_recovery_preflight_passed",
   "news": {
     "news_snapshot_sha256": "0d591226bf2740d8d02cfebeed64a06d9603a8e81c23db72dd8439807e1fffa6",
     "vectors_reconstructed": 49
@@ -10,16 +10,9 @@
   "cloud_submissions": 0,
   "dispatch_tests": {
     "passed": 14,
-    "junit_sha256": "79a62d8f614c90360baf7b3fefdf9159b4f10fe5995c81aefc5855649167e909"
+    "junit_sha256": "c2648d403ac44c2c9fcc701dabcb63dafa6976b1a6db7d15f311229d6484d884"
   },
-  "protocol_file_sha256": "8918c2c5ee26f27700673466492e24bd4fd2c0a24c25de453a1f39eb5b94c7d6",
-  "cloud_status": "corrected_image_deployed_import_check_passed",
-  "startup_failure_report_sha256": "3ce54f1c29fac47abd423f7df8738fbaab7c60c51f53014779a8d66d30c3f245",
-  "cloud_import_check_log_sha256": "e5b85b5a5e97faa7dd0de8161b0a4180f516ba16448dcc363971ec372b073c8c",
-  "failed_plain_shell_build": {
-    "error": "ModuleNotFoundError: No module named modal",
-    "log_sha256": "3bc816b37eb7dbb4e8ab52749a66c57d632f1b9c2adc44c1e5a1e6c50a9cb1f8",
-    "new_neural_observations": 0,
-    "resolution": "Use the Modal function build runtime, which injects the SDK, for the import check."
-  }
+  "protocol_file_sha256": "e72488706d138dea0f0c4e2b74e497dddd81bfd9606c83bd3b25d628a32fa0b4",
+  "cloud_status": "subprocess_amendment_not_yet_deployed",
+  "seed_initialization_probe_sha256": "9278ed2a6782e740b3e51a170ad927c436e0831fdafe45fc839653ebb9c1c3df"
 }

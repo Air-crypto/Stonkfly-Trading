@@ -1,0 +1,21 @@
+{
+  "status": "recovery_preflight_failed_no_neural_claim",
+  "halt": {
+    "status": "halted",
+    "call_id": "fc-01M2CA028WVPM75W83NSWJXASM",
+    "input_id": "in-01M2CA0296X6X3S70CRVFZW88R:1789267020103-0",
+    "at": 1789267024.4042337,
+    "error_type": "ValueError",
+    "error": "Sealed news differs from timestamp-eligible archived revisions"
+  },
+  "halt_sha256": "35a40fc13abc0dfef11a77c11322850649293ffe68db9ca423e6c2205acd99b4",
+  "terminal_call": {
+    "status": "terminal_exception",
+    "error_type": "ValueError",
+    "error": "Sealed news differs from timestamp-eligible archived revisions"
+  },
+  "previous_protocol_sha256": "8918c2c5ee26f27700673466492e24bd4fd2c0a24c25de453a1f39eb5b94c7d6",
+  "directory": "registered-paper-11-recovery-01",
+  "new_neural_observations": 0,
+  "resolution": "A fresh subprocess sets the hash seed before interpreter startup and exactly reconstructs all sealed news vectors."
+}

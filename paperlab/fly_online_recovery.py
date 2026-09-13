@@ -6,6 +6,8 @@ fourteen fresh chunks have separate owners, with no automatic retry or resume.
 import json
 import os
 from pathlib import Path
+import subprocess
+import sys
 import time
 
 from .budget import reserve, settle
@@ -16,10 +18,12 @@ from .fly_online_schedule import DIRECTORY as ORIGINAL, aggregate, source_hashes
 from .fly_online_study import SOURCE_FILES, run_chunk, select_development
 from .fly_paper_inputs import audit_news, validate
 
-DIRECTORY = 'registered-paper-11-recovery-01'
+DIRECTORY = 'registered-paper-11-recovery-02'
 POLICY = ('Amended recovery after the original third chunk failed before neural construction. '
     'Preserve all original receipts, sealed inputs and the first two independently audited controls. '
-    'Use PYTHONHASHSEED=0 and require exact reconstruction of every original news vector. '
+    'Start verification and capture in fresh Python subprocesses with PYTHONHASHSEED=0 in the environment '
+    'before interpreter startup; verify the seed fingerprint and exact reconstruction of every original news vector. '
+    'Preserve the halted image-environment recovery in its original namespace. '
     'Run the remaining fourteen original conditions once, in their original order, in a separate namespace. '
     'Keep all 56 original execution sources, full graph, decoder, reward, learning settings and costs unchanged. '
     'Persist original-rule development selection before any test capture. Never retry a claimed or failed chunk. '
@@ -37,14 +41,15 @@ def validate_protocol(p):
     require(set(p) == {'version', 'created_at', 'policy', 'seed', 'plan_sha256',
         'original_sources_sha256', 'failed_receipt_sha256', 'controls',
         'code_sha256', 'evidence_sha256'}, 'Recovery protocol fields differ')
-    require(p['version'] == 1 and p['seed'] == '0' and p['policy'] == POLICY,
+    require(p['version'] == 2 and p['seed'] == '0' and p['policy'] == POLICY,
         'Recovery changes the fixed amendment')
     require(list(p['controls']) == [chunk_name(*c) for c in chunk_order()[:2]],
         'Recovery must reuse exactly the first two controls')
     require(set(p['code_sha256']) == {'paperlab/fly_online_recovery.py', 'recovery_cloud.py'},
         'Recovery source manifest differs')
     require(set(p['evidence_sha256']) == {'fly-online-failure-11.json',
-        'fly-online-control-first-11.json', 'fly-online-control-second-11.json'},
+        'fly-online-control-first-11.json', 'fly-online-control-second-11.json',
+        'fly-news-process-probe-11.json', 'fly-online-recovery-preflight-failure-11.json'},
         'Recovery evidence manifest differs')
     hashes = [p[k] for k in ('plan_sha256', 'original_sources_sha256', 'failed_receipt_sha256')]
     hashes += list(p['code_sha256'].values()) + list(p['evidence_sha256'].values())
@@ -59,14 +64,56 @@ def validate_protocol(p):
     return p
 
 
+def fresh_news_audit(envelope, archive):
+    script = '''
+import json,sys
+from paperlab.fly_paper_inputs import audit_news
+assert hash('fly-news-seed-probe') == 7584921261715552910, 'Seed was not applied before interpreter startup'
+print(json.dumps(audit_news(json.load(sys.stdin), sys.argv[1])))
+'''
+    child = subprocess.run([sys.executable, '-c', script, str(archive)],
+        input=json.dumps(envelope), capture_output=True, text=True, check=True, timeout=30,
+        env={**os.environ, 'PYTHONHASHSEED':'0'})
+    return json.loads(child.stdout)
+
+
+def run_seeded_chunk(envelope, memory, news, data, output, *, stage, pool_index, arm,
+                     development=None, seconds=480):
+    require(seconds == 480, 'Use the original fixed chunk compute limit')
+    output = Path(output)
+    atomic_json(output.parent/'inputs.json', envelope)
+    script = ("assert hash('fly-news-seed-probe') == 7584921261715552910, 'Seed initialization differs'; "
+        'from paperlab.fly_online_study import main; main()')
+    command = [sys.executable, '-c', script, '--plan', str(output.parent/'inputs.json'),
+        '--memory', str(memory), '--news', str(news), '--fly-data', str(data), '--out', str(output),
+        '--stage', stage, '--pool', str(pool_index), '--arm', arm]
+    if development is not None:
+        atomic_json(output.parent/'development-inputs.json', development)
+        command += ['--development', str(output.parent/'development-inputs.json')]
+    subprocess.run(command, check=True, timeout=510, env={**os.environ, 'PYTHONHASHSEED':'0'})
+    return json.loads((output/'summary.json').read_text())
+
+
 def verify_reference(p, original, specifications, evidence, code_root):
     validate_protocol(p)
-    require(os.environ.get('PYTHONHASHSEED') == '0', 'Start a fresh interpreter with PYTHONHASHSEED=0')
     original, specifications, evidence, code_root = map(Path, (original, specifications, evidence, code_root))
     for name, sha in p['code_sha256'].items():
         require(digest(code_root/name) == sha, 'Recovery source changed: '+name)
     for name, sha in p['evidence_sha256'].items():
         require(digest(evidence/name) == sha, 'Recovery evidence changed: '+name)
+    prior = json.loads((evidence/'fly-online-recovery-preflight-failure-11.json').read_text())
+    prior_root = original.parent/'registered-paper-11-recovery-01'
+    require(digest(prior_root/'halt.json') == prior['halt_sha256']
+        and json.loads((prior_root/'halt.json').read_text()) == prior['halt']
+        and prior['terminal_call']['status'] == 'terminal_exception'
+        and not (prior_root/'protocol.json').exists() and not (prior_root/'chunks').exists(),
+        'Preserve the previous preflight failure without neural claims')
+    probe = json.loads((evidence/'fly-news-process-probe-11.json').read_text())
+    require(probe['fresh_seed0_child']['hash_probe'] == 7584921261715552910
+        and probe['fresh_seed0_child']['differing_vectors'] == 0
+        and probe['parent']['differing_vectors'] > 0
+        and probe['new_neural_observations'] == 0 and probe['archive_writes'] == 0,
+        'Cloud seed-initialization evidence differs')
     envelope = json.loads((original/'plan.json').read_text()); validate(envelope)
     require(envelope['sha256'] == p['plan_sha256'], 'Original sealed plan changed')
     sources = json.loads((original/'source-hashes.json').read_text())
@@ -97,7 +144,7 @@ def verify_reference(p, original, specifications, evidence, code_root):
             and projection['projection']['all_topology_verified']
             and projection['projection']['all_plotted_series_verified'], 'Control audit differs')
     # This exact audit happens before a new chunk or native brain can be created.
-    news = audit_news(envelope, original/'news.db')
+    news = fresh_news_audit(envelope, original/'news.db')
     return envelope, sources, news
 
 
@@ -136,7 +183,7 @@ def retained_chunks(p, envelope, sources, original, root):
 
 
 def execute(state, specifications, evidence, code_root, *, call_id, input_id, commit,
-            run=run_chunk):
+            run=run_seeded_chunk):
     state = Path(state); root = state/DIRECTORY; original = state/ORIGINAL
     if (root/'halt.json').exists():
         return {'status':'recovery_halted', 'receipt':json.loads((root/'halt.json').read_text())}
@@ -151,7 +198,8 @@ def execute(state, specifications, evidence, code_root, *, call_id, input_id, co
     else:
         atomic_json(saved, p)
         atomic_json(root/'input-check.json', {'news':news, 'seed':'0', 'call_id':call_id,
-            'input_id':input_id, 'checked_at':time.time(), 'original_inputs_changed':False})
+            'input_id':input_id, 'checked_at':time.time(), 'original_inputs_changed':False,
+            'interpreter_start':'fresh-subprocess', 'verified_hash_probe':7584921261715552910})
         commit()
     completed, receipts, condition, unresolved = retained_chunks(p, envelope, sources, original, root)
     if unresolved:

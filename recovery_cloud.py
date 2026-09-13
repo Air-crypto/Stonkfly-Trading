@@ -20,7 +20,8 @@ image = (image.env({'PYTHONHASHSEED':'0'})
     .add_local_file(ROOT/'cloud.py', '/opt/paperlab/cloud.py', copy=True)
     .add_local_file(ROOT/'recovery_cloud.py', '/opt/paperlab/recovery_cloud.py', copy=True)
     .add_local_file(ROOT/'reports/fly-online-recovery-protocol-11.json', '/opt/paperlab/recovery/protocol.json', copy=True))
-for name in ('fly-online-failure-11.json', 'fly-online-control-first-11.json', 'fly-online-control-second-11.json'):
+for name in ('fly-online-failure-11.json', 'fly-online-control-first-11.json', 'fly-online-control-second-11.json',
+             'fly-news-process-probe-11.json', 'fly-online-recovery-preflight-failure-11.json'):
     image = image.add_local_file(ROOT/'reports'/name, '/opt/paperlab/recovery/'+name, copy=True)
 image = image.run_function(_verify_import, cpu=.125, memory=256, timeout=60)
 

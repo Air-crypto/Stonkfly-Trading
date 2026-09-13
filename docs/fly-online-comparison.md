@@ -545,10 +545,10 @@ uv run --extra plots python scripts/plot-fly-study-controls.py \
 
 The [recovery amendment](../reports/fly-online-recovery-protocol-11.json) retains
 the original failed attempt and its two audited controls. A separate temporary
-Modal app, `fly-paper-recovery-11`, starts fresh interpreters with
-`PYTHONHASHSEED=0`, verifies all 56 original execution sources and the exact
+Modal app, `fly-paper-recovery-11`, launches fresh Python subprocesses with
+`PYTHONHASHSEED=0` before interpreter startup, verifies all 56 original execution sources and the exact
 sealed news vectors, then captures the remaining fourteen conditions in order.
-It writes only to `registered-paper-11-recovery-01` and the shared budget ledger.
+It writes only to `registered-paper-11-recovery-02` and the shared budget ledger.
 The main deployed paper-trading app and its original study receipts are unchanged.
 
 Each recovery call uses the existing worker lease, two CPUs, 8 GiB, a 600-second
@@ -589,9 +589,27 @@ passes using only the declared Python files. The active amendment changes only
 its packaging source pin and creation time; all original study inputs and
 execution sources remain unchanged.
 The [validation record](../reports/fly-online-recovery-validation-11.json) includes
-14 passing dispatch/import tests and the successful Modal import-check build.
+14 passing dispatch/import tests and the fresh-subprocess input check.
 That check uses a Modal build function because the platform injects its SDK into
 function containers; a plain image-shell command does not have that SDK.
+
+The image-environment attempt then halted during news verification, before a
+protocol or neural condition was claimed. The
+[halt evidence](../reports/fly-online-recovery-preflight-failure-11.json) and
+[its protocol](../reports/fly-online-recovery-protocol-11-image-env.json) remain
+separate from the active version 2 amendment. A
+[read-only cloud probe](../reports/fly-news-process-probe-11.json) compared the
+worker and a fresh subprocess in the same container. Both report seed environment
+value `0`, but their actual string hashes differ. The worker mismatches 13 news
+vectors; the child matches all 49 exactly. This demonstrates that checking the
+environment variable alone does not verify the worker interpreter's hash seed.
+
+Version 2 verifies a seed fingerprint in a fresh child before running the original
+news audit or capture CLI. It retains the failed version 1 directory and verifies
+that it contains no neural claims. Its original study inputs, model, trading
+rules and 56 source pins stay unchanged; only execution initialization and the
+recovery namespace change. The parent owns the same durable cloud lease and
+budget while its child runs. Child failures or timeouts leave a failed claim.
 
 ## Compare the full financial and neural timelines
 
