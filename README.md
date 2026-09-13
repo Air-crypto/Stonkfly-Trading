@@ -120,11 +120,28 @@ a connection whose source is currently silent. Removing KC history reproduces
 the first different weight update in two recorded examples; that one-bin
 calculation does not determine later full-network behavior.
 
-The next [selective KC/DAN assay](docs/fly-selective-traces.md) tests each history
-separately across twelve full-network conditions. Its unscheduled Modal worker
-is running after passing the actual completed-study gate. Audited selective results and
-any subsequent prospective financial test remain pending. No profitable fix is
-claimed from changed spikes or weights alone.
+The [selective KC/DAN assay](docs/fly-selective-traces.md) is now complete:
+**12 conditions, 36 observations and 1,800 bins independently audited**. With
+recorded pulses, either single-trace reset removes the third-image BUY, but
+produces much larger weight movement than resetting both. KC-only initially
+matches the both-reset weights, then diverges after 50 ms of image 2. That
+confirms why the earlier one-bin calculation was insufficient. No selective
+reset is promoted; changing a decision is not evidence of improving a trade.
+
+![Every audited selective-reset condition and its decisions](docs/assets/fly-selective-01-matrix.png)
+
+Open all twelve paired recordings from the included 3.75 MB archive:
+
+```sh
+python3 -m zipfile -e reports/fly-selective-views-01.zip runs/selective-views
+uv run python -m paperlab.debugger serve --out runs/selective-views --port 8768
+```
+
+Visit <http://127.0.0.1:8768>. The archive contains audited selected-neuron and
+connection curves; arbitrary full-neuron lookup requires the separately retained
+arrays. The [guide](docs/fly-selective-traces.md#inspect-or-reproduce-the-result)
+includes exact comparison links and chart commands. The completed temporary
+assay app is stopped; the scheduled paper lab remains separate.
 
 ## Run
 

@@ -1,0 +1,1552 @@
+{
+  "status": "selective_full_and_portable_views_checked",
+  "source_sha256": "fb526eeb92c42eabd8cbada06194e9bdd60681ab9da7ac4cf6808990a067c73d",
+  "app_js_sha256": "68b69ffb5252d9aba72cbb6c2ec06f89d9d5e6a38882b048c1761dd66be022a0",
+  "checks": {
+    "full": {
+      "report_sha256": "845b7a12cb7079547ef971fd57dedfa69597a60a44d0e7be2976cc614a1950d4",
+      "status": "selective_views_checked",
+      "served_views": 12,
+      "observations": 36,
+      "selected_bins": 84,
+      "full_neuron_lookups": 12,
+      "explicit_missing_recording_responses": 0,
+      "checks": [
+        {
+          "name": "trained_online_recorded_carry",
+          "compare": "trained_online_recorded_reset_rates",
+          "step": 0,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_recorded_carry",
+          "compare": "trained_online_recorded_reset_rates",
+          "step": 0,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_recorded_carry",
+          "compare": "trained_online_recorded_reset_rates",
+          "step": 1,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_carry",
+          "compare": "trained_online_recorded_reset_rates",
+          "step": 1,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_carry",
+          "compare": "trained_online_recorded_reset_rates",
+          "step": 2,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_recorded_carry",
+          "compare": "trained_online_recorded_reset_rates",
+          "step": 2,
+          "bin": 37,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_recorded_carry",
+          "compare": "trained_online_recorded_reset_rates",
+          "step": 2,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_none_carry",
+          "compare": "trained_online_none_reset_rates",
+          "step": 0,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_none_carry",
+          "compare": "trained_online_none_reset_rates",
+          "step": 0,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_none_carry",
+          "compare": "trained_online_none_reset_rates",
+          "step": 1,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_carry",
+          "compare": "trained_online_none_reset_rates",
+          "step": 1,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_carry",
+          "compare": "trained_online_none_reset_rates",
+          "step": 2,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_carry",
+          "compare": "trained_online_none_reset_rates",
+          "step": 2,
+          "bin": 37,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_carry",
+          "compare": "trained_online_none_reset_rates",
+          "step": 2,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_carry",
+          "compare": "trained_frozen_recorded_reset_rates",
+          "step": 0,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_frozen_recorded_carry",
+          "compare": "trained_frozen_recorded_reset_rates",
+          "step": 0,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_frozen_recorded_carry",
+          "compare": "trained_frozen_recorded_reset_rates",
+          "step": 1,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_carry",
+          "compare": "trained_frozen_recorded_reset_rates",
+          "step": 1,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_carry",
+          "compare": "trained_frozen_recorded_reset_rates",
+          "step": 2,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_carry",
+          "compare": "trained_frozen_recorded_reset_rates",
+          "step": 2,
+          "bin": 37,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_carry",
+          "compare": "trained_frozen_recorded_reset_rates",
+          "step": 2,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_reset_rates",
+          "compare": "trained_online_recorded_carry",
+          "step": 0,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_recorded_reset_rates",
+          "compare": "trained_online_recorded_carry",
+          "step": 0,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_recorded_reset_rates",
+          "compare": "trained_online_recorded_carry",
+          "step": 1,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_reset_rates",
+          "compare": "trained_online_recorded_carry",
+          "step": 1,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_reset_rates",
+          "compare": "trained_online_recorded_carry",
+          "step": 2,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_reset_rates",
+          "compare": "trained_online_recorded_carry",
+          "step": 2,
+          "bin": 37,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_reset_rates",
+          "compare": "trained_online_recorded_carry",
+          "step": 2,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_reset_rates",
+          "compare": "trained_online_none_carry",
+          "step": 0,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_none_reset_rates",
+          "compare": "trained_online_none_carry",
+          "step": 0,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_none_reset_rates",
+          "compare": "trained_online_none_carry",
+          "step": 1,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_reset_rates",
+          "compare": "trained_online_none_carry",
+          "step": 1,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_reset_rates",
+          "compare": "trained_online_none_carry",
+          "step": 2,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_reset_rates",
+          "compare": "trained_online_none_carry",
+          "step": 2,
+          "bin": 37,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_reset_rates",
+          "compare": "trained_online_none_carry",
+          "step": 2,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_rates",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 0,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_rates",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 0,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_rates",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 1,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_rates",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 1,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_rates",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 2,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_rates",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 2,
+          "bin": 37,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_rates",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 2,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_reset_kc",
+          "compare": "trained_online_recorded_carry",
+          "step": 0,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_recorded_reset_kc",
+          "compare": "trained_online_recorded_carry",
+          "step": 0,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_recorded_reset_kc",
+          "compare": "trained_online_recorded_carry",
+          "step": 1,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_reset_kc",
+          "compare": "trained_online_recorded_carry",
+          "step": 1,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_reset_kc",
+          "compare": "trained_online_recorded_carry",
+          "step": 2,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_reset_kc",
+          "compare": "trained_online_recorded_carry",
+          "step": 2,
+          "bin": 37,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_reset_kc",
+          "compare": "trained_online_recorded_carry",
+          "step": 2,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_reset_kc",
+          "compare": "trained_online_none_carry",
+          "step": 0,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_none_reset_kc",
+          "compare": "trained_online_none_carry",
+          "step": 0,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_none_reset_kc",
+          "compare": "trained_online_none_carry",
+          "step": 1,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_reset_kc",
+          "compare": "trained_online_none_carry",
+          "step": 1,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_reset_kc",
+          "compare": "trained_online_none_carry",
+          "step": 2,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_reset_kc",
+          "compare": "trained_online_none_carry",
+          "step": 2,
+          "bin": 37,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_reset_kc",
+          "compare": "trained_online_none_carry",
+          "step": 2,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_kc",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 0,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_kc",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 0,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_kc",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 1,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_kc",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 1,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_kc",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 2,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_kc",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 2,
+          "bin": 37,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_kc",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 2,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_reset_dan",
+          "compare": "trained_online_recorded_carry",
+          "step": 0,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_recorded_reset_dan",
+          "compare": "trained_online_recorded_carry",
+          "step": 0,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_recorded_reset_dan",
+          "compare": "trained_online_recorded_carry",
+          "step": 1,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_reset_dan",
+          "compare": "trained_online_recorded_carry",
+          "step": 1,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_reset_dan",
+          "compare": "trained_online_recorded_carry",
+          "step": 2,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_reset_dan",
+          "compare": "trained_online_recorded_carry",
+          "step": 2,
+          "bin": 37,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_reset_dan",
+          "compare": "trained_online_recorded_carry",
+          "step": 2,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_reset_dan",
+          "compare": "trained_online_none_carry",
+          "step": 0,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_none_reset_dan",
+          "compare": "trained_online_none_carry",
+          "step": 0,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_none_reset_dan",
+          "compare": "trained_online_none_carry",
+          "step": 1,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_reset_dan",
+          "compare": "trained_online_none_carry",
+          "step": 1,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_reset_dan",
+          "compare": "trained_online_none_carry",
+          "step": 2,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_reset_dan",
+          "compare": "trained_online_none_carry",
+          "step": 2,
+          "bin": 37,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_reset_dan",
+          "compare": "trained_online_none_carry",
+          "step": 2,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_dan",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 0,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_dan",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 0,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_dan",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 1,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_dan",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 1,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_dan",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 2,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_dan",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 2,
+          "bin": 37,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_dan",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 2,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        }
+      ],
+      "model_submissions": 0,
+      "errors": [],
+      "mobile_overflow": false
+    },
+    "portable": {
+      "report_sha256": "2a58f3b71feb6b1f270dc1951967adfe67d43060d90c5cd62778e9995c13d227",
+      "status": "selective_views_checked",
+      "served_views": 12,
+      "observations": 36,
+      "selected_bins": 84,
+      "full_neuron_lookups": 0,
+      "explicit_missing_recording_responses": 12,
+      "checks": [
+        {
+          "name": "trained_online_recorded_carry",
+          "compare": "trained_online_recorded_reset_rates",
+          "step": 0,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_recorded_carry",
+          "compare": "trained_online_recorded_reset_rates",
+          "step": 0,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_recorded_carry",
+          "compare": "trained_online_recorded_reset_rates",
+          "step": 1,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_carry",
+          "compare": "trained_online_recorded_reset_rates",
+          "step": 1,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_carry",
+          "compare": "trained_online_recorded_reset_rates",
+          "step": 2,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_recorded_carry",
+          "compare": "trained_online_recorded_reset_rates",
+          "step": 2,
+          "bin": 37,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_recorded_carry",
+          "compare": "trained_online_recorded_reset_rates",
+          "step": 2,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_none_carry",
+          "compare": "trained_online_none_reset_rates",
+          "step": 0,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_none_carry",
+          "compare": "trained_online_none_reset_rates",
+          "step": 0,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_none_carry",
+          "compare": "trained_online_none_reset_rates",
+          "step": 1,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_carry",
+          "compare": "trained_online_none_reset_rates",
+          "step": 1,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_carry",
+          "compare": "trained_online_none_reset_rates",
+          "step": 2,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_carry",
+          "compare": "trained_online_none_reset_rates",
+          "step": 2,
+          "bin": 37,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_carry",
+          "compare": "trained_online_none_reset_rates",
+          "step": 2,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_carry",
+          "compare": "trained_frozen_recorded_reset_rates",
+          "step": 0,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_frozen_recorded_carry",
+          "compare": "trained_frozen_recorded_reset_rates",
+          "step": 0,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_frozen_recorded_carry",
+          "compare": "trained_frozen_recorded_reset_rates",
+          "step": 1,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_carry",
+          "compare": "trained_frozen_recorded_reset_rates",
+          "step": 1,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_carry",
+          "compare": "trained_frozen_recorded_reset_rates",
+          "step": 2,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_carry",
+          "compare": "trained_frozen_recorded_reset_rates",
+          "step": 2,
+          "bin": 37,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_carry",
+          "compare": "trained_frozen_recorded_reset_rates",
+          "step": 2,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_reset_rates",
+          "compare": "trained_online_recorded_carry",
+          "step": 0,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_recorded_reset_rates",
+          "compare": "trained_online_recorded_carry",
+          "step": 0,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_recorded_reset_rates",
+          "compare": "trained_online_recorded_carry",
+          "step": 1,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_reset_rates",
+          "compare": "trained_online_recorded_carry",
+          "step": 1,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_reset_rates",
+          "compare": "trained_online_recorded_carry",
+          "step": 2,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_reset_rates",
+          "compare": "trained_online_recorded_carry",
+          "step": 2,
+          "bin": 37,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_reset_rates",
+          "compare": "trained_online_recorded_carry",
+          "step": 2,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_reset_rates",
+          "compare": "trained_online_none_carry",
+          "step": 0,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_none_reset_rates",
+          "compare": "trained_online_none_carry",
+          "step": 0,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_none_reset_rates",
+          "compare": "trained_online_none_carry",
+          "step": 1,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_reset_rates",
+          "compare": "trained_online_none_carry",
+          "step": 1,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_reset_rates",
+          "compare": "trained_online_none_carry",
+          "step": 2,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_reset_rates",
+          "compare": "trained_online_none_carry",
+          "step": 2,
+          "bin": 37,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_reset_rates",
+          "compare": "trained_online_none_carry",
+          "step": 2,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_rates",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 0,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_rates",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 0,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_rates",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 1,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_rates",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 1,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_rates",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 2,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_rates",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 2,
+          "bin": 37,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_rates",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 2,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_reset_kc",
+          "compare": "trained_online_recorded_carry",
+          "step": 0,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_recorded_reset_kc",
+          "compare": "trained_online_recorded_carry",
+          "step": 0,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_recorded_reset_kc",
+          "compare": "trained_online_recorded_carry",
+          "step": 1,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_reset_kc",
+          "compare": "trained_online_recorded_carry",
+          "step": 1,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_reset_kc",
+          "compare": "trained_online_recorded_carry",
+          "step": 2,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_reset_kc",
+          "compare": "trained_online_recorded_carry",
+          "step": 2,
+          "bin": 37,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_reset_kc",
+          "compare": "trained_online_recorded_carry",
+          "step": 2,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_reset_kc",
+          "compare": "trained_online_none_carry",
+          "step": 0,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_none_reset_kc",
+          "compare": "trained_online_none_carry",
+          "step": 0,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_none_reset_kc",
+          "compare": "trained_online_none_carry",
+          "step": 1,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_reset_kc",
+          "compare": "trained_online_none_carry",
+          "step": 1,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_reset_kc",
+          "compare": "trained_online_none_carry",
+          "step": 2,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_reset_kc",
+          "compare": "trained_online_none_carry",
+          "step": 2,
+          "bin": 37,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_reset_kc",
+          "compare": "trained_online_none_carry",
+          "step": 2,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_kc",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 0,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_kc",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 0,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_kc",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 1,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_kc",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 1,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_kc",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 2,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_kc",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 2,
+          "bin": 37,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_kc",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 2,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_reset_dan",
+          "compare": "trained_online_recorded_carry",
+          "step": 0,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_recorded_reset_dan",
+          "compare": "trained_online_recorded_carry",
+          "step": 0,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_recorded_reset_dan",
+          "compare": "trained_online_recorded_carry",
+          "step": 1,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_reset_dan",
+          "compare": "trained_online_recorded_carry",
+          "step": 1,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_reset_dan",
+          "compare": "trained_online_recorded_carry",
+          "step": 2,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_reset_dan",
+          "compare": "trained_online_recorded_carry",
+          "step": 2,
+          "bin": 37,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_recorded_reset_dan",
+          "compare": "trained_online_recorded_carry",
+          "step": 2,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_reset_dan",
+          "compare": "trained_online_none_carry",
+          "step": 0,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_none_reset_dan",
+          "compare": "trained_online_none_carry",
+          "step": 0,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_online_none_reset_dan",
+          "compare": "trained_online_none_carry",
+          "step": 1,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_reset_dan",
+          "compare": "trained_online_none_carry",
+          "step": 1,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_reset_dan",
+          "compare": "trained_online_none_carry",
+          "step": 2,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_reset_dan",
+          "compare": "trained_online_none_carry",
+          "step": 2,
+          "bin": 37,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_online_none_reset_dan",
+          "compare": "trained_online_none_carry",
+          "step": 2,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_dan",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 0,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_dan",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 0,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "BUY"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_dan",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 1,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_dan",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 1,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_dan",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 2,
+          "bin": 0,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_dan",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 2,
+          "bin": 37,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        },
+        {
+          "name": "trained_frozen_recorded_reset_dan",
+          "compare": "trained_frozen_recorded_carry",
+          "step": 2,
+          "bin": 49,
+          "neuron": "10527",
+          "edge": 10516644,
+          "action": "HOLD"
+        }
+      ],
+      "model_submissions": 0,
+      "errors": [],
+      "mobile_overflow": false
+    }
+  },
+  "screenshots_sha256": {
+    "fly-selective-01-reset_kc-pair.png": "bd9d7a99783b624f557e7e748ba3cf0225e6691bdc0875a8fee08ff3d246b389",
+    "fly-selective-01-reset_dan-pair.png": "9dbf0697ef7684a6e5e42e5d7ac23dd91b5da49b353922e2b8b65d7186b7ef56",
+    "fly-selective-01-reset_rates-pair.png": "f8956f71fede9896f24d9a31ac31480326bb12a315704e7059a7f5af91b9e689"
+  }
+}

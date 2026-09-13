@@ -1,12 +1,97 @@
 # Separate KC and dopamine trace resets
 
-**Status at 04:22 UTC on September 13, 2026: the one-off native assay is running.**
-Study 11 completed all sixteen recording audits, its real evidence gate passed,
-and its temporary completion app was stopped. The
-[execution record](../reports/fly-selective-execution-01.json) verifies the new
-unscheduled worker and durable claim for call `fc-01M2CFZMKK47PAV05S2QKSJ09D`.
-Capture completion, independent audit and the new paired-view checks remain
-pending. No selective-reset action or return is claimed here.
+**Completed and independently audited on September 13, 2026.** All twelve
+conditions finished in the original call `fc-01M2CFZMKK47PAV05S2QKSJ09D`:
+36 observations, 1,800 bins, and all six original controls reproduced. The
+[execution record](../reports/fly-selective-execution-01.json) preserves the
+once-only claim, completed-study gate and terminal evidence. The temporary app
+was stopped after audit; the scheduled paper lab remains deployed. This assay's
+conservative compute estimate was $0.07512, against a $0.16089 reservation.
+These are internal estimates, not a verified provider bill.
+
+## What changed
+
+With recorded reinforcement pulses, resetting either KC or DAN history removes
+the extra BUY on the third image. However, neither reproduces the complete
+both-reset trajectory, and each produces larger late weight movement:
+
+| Boundary operation | Third decision | Gate spikes | Direction | Image 3 weight movement L2 |
+| --- | --- | ---: | ---: | ---: |
+| Carry both | BUY | 1 | +12 Hz | 8.4765 |
+| Reset both | HOLD | 0 | +8 Hz | 3.3418 |
+| Reset KC only | HOLD | 0 | +6 Hz | 19.6743 |
+| Reset DAN only | HOLD | 0 | 0 Hz | 17.9639 |
+
+These norms measure changes across 7,835 plastic weights during image 3, not
+loss gradients. The same increased late movement occurs without injected pulses.
+All frozen controls retain identical recorded counts, sampled voltages and
+connection memory. Every condition is shown below, including unchanged decisions.
+
+![All twelve audited conditions](assets/fly-selective-01-matrix.png)
+
+The KC-only and both-reset weights agree through the first four bins of image 2,
+then first differ in the bin ending at 50 ms. Their sampled voltages first differ
+at 70 ms and full-neuron counts at 140 ms. DAN-only versus carry has the same
+first-difference times for that image. The first-bin reconstruction was correct,
+but it did not predict the later recurrent trajectory. These are bin ends, not
+exact spike times or proof that a particular edge caused the decision change.
+
+![Selective resets diverge from the both-reset trajectory](assets/fly-selective-01-trajectories.png)
+
+Clearing one history leaves the other term in the learning rule. It changes both
+subsequent activity and accumulated `u/w`; it is not a selective removal of
+unhelpful credit. No memory saturation occurred in these recorded online bins.
+The current evidence does **not** justify selecting either single-trace reset.
+This historical assay recomputes no trades, feedback or accounts, so it provides
+no financial ranking of the resets. Study 11's prospective both-reset candidate
+also failed its development criterion. A smaller update is not itself evidence
+of better learning; any next candidate needs a fresh cost-aware comparison.
+
+## Inspect or reproduce the result
+
+The [full audit](../reports/fly-selective-audit-01.json) contains every condition,
+rule reconstruction, paired difference series and artifact hash. The
+[figure record](../reports/fly-selective-figures-01.json) records the plotted data
+and source hashes. Recreate both charts without graph data, credentials or a model:
+
+```sh
+uv run --extra plots python -m paperlab.fly_selective_trace_figure \
+  --audit reports/fly-selective-audit-01.json --out runs/selective-figures
+```
+
+The [portable archive](../reports/fly-selective-views-01.zip) contains twelve
+expanded views, their reports, the independent audit and saved-call receipt:
+26 files compressed to 3.75 MB. The installed views exactly match the audited
+local receipt. It omits the 1.13 GB of full arrays, which remain in the original
+cloud volume and local `artifacts/` directory. The archive transports audited
+evidence; it does not replace a new audit of those full recordings.
+
+```sh
+python3 -m zipfile -e reports/fly-selective-views-01.zip runs/selective-views
+uv run python -m paperlab.debugger serve --out runs/selective-views --port 8768
+```
+
+After starting the server, inspect image 3 at the original carry gate spike:
+
+- [KC-only versus carry](http://127.0.0.1:8768/?run=trained_online_recorded_reset_kc&compare=trained_online_recorded_carry&step=2&bin=37&neuron=10527&edge=10516644&pristine=1).
+- [DAN-only versus carry](http://127.0.0.1:8768/?run=trained_online_recorded_reset_dan&compare=trained_online_recorded_carry&step=2&bin=37&neuron=10527&edge=10516644&pristine=1).
+- [KC-only versus both reset, image 2](http://127.0.0.1:8768/?run=trained_online_recorded_reset_kc&compare=trained_online_recorded_reset_rates&step=1&bin=4&neuron=11402&edge=10516644&pristine=1).
+
+![KC-only versus carry at the original gate spike](assets/fly-selective-01-reset_kc-pair.png)
+
+Neuron 10527 and edge 10516644 (55850 → 11402) are independent selections. Their
+aligned plots do not establish a causal path between that edge and the gate.
+The browser checks covered all 12 views, 36 observations, 84 selected bins,
+12 full-neuron lookups and mobile layout, with no script errors or model writes.
+The separately extracted public archive is checked with explicit missing-array
+responses for full-neuron lookup; its selected curves remain available.
+
+Full local lookup uses the verified `step-*.npz` recordings in each view folder.
+The original observer installed JSON views; verified hard links from `artifacts/`
+make these arrays available locally without copying or constructing the network.
+Neither read-only server has model execution enabled.
+
+## Registered question
 
 The [first-drive reconstruction](fly-debugger.md#why-a-quiet-source-connection-can-still-update)
 found that earlier KC activity accounts for the first differing weight updates
@@ -29,7 +114,7 @@ initial trained memory as the completed credit-reset assay.
 
 Each row is tested with learning plus recorded pulses, learning without injected
 pulses, and frozen memory plus recorded pulses: **12 conditions, 36 observations,
-and 1,800 recorded ten-millisecond bins**. Those are planned counts. All six prior
+and 1,800 recorded ten-millisecond bins**. All counts are now verified. All six prior
 conditions must reproduce their complete count, sampled-voltage, weight, memory,
 and rate recordings before either new intervention runs. Every first image starts
 from identical dynamics. The frozen selective conditions must retain every
@@ -38,9 +123,9 @@ recorded count and voltage sample as well as unchanged connection memory.
 The runner saves all boundary arrays and full-network recordings. Its independent
 auditor reconstructs the plasticity rule and fixed decoder, checks continuity
 between observations, and compares each new condition against both controls.
-The output is designed for the existing paired debugger, including memory-drive
-curves and first-difference navigation. End-to-end native execution, its audit,
-and browser verification with the new recordings are still pending.
+The output is installed in the paired debugger, including memory-drive curves
+and first-difference navigation. Native execution, its independent audit and
+browser verification of the new recordings are complete.
 
 ## What has been checked
 
@@ -170,12 +255,12 @@ cannot be packed or unpacked. No native model is constructed.
 uv run --extra dev python -m pytest -q tests/test_fly_study_evidence_bundle.py
 ```
 
-## Prepared cloud bridge
+## Completed cloud bridge
 
 `paperlab.fly_selective_trace_cloud` now prepares the completed-study bundle,
 submits through a separate unscheduled worker, resumes its saved call, downloads the full
 recordings, runs the independent auditor and writes all twelve comparison views.
-**The worker is deployed and its first call is running.** Activation followed
+**The worker completed its one call and has been stopped.** Activation followed
 study 11 capture and all independent audits. None of that study's 56 pinned
 execution files changed while preparing this bridge; its two amendments and
 unsuccessful receipts remain preserved.
@@ -188,7 +273,7 @@ at that point cannot cause a second submission. Later invocations with a saved
 call ID only observe that call. A 50-second observation timeout leaves the call
 pending, rather than restarting it.
 
-The future worker adapter validates the same bundle and request source hashes,
+The worker adapter validates the same bundle and request source hashes,
 checks the original 84 parent artifacts, and commits a persistent claim before
 constructing the native model. That claim is shared across output run IDs and
 remains after a failure or timeout. All 175 output files, including twelve sets
@@ -214,9 +299,9 @@ Neural capture and transport responses are simulated in bridge tests; separate
 tests retain the production release gate and reject incomplete and synthetic
 studies before native execution or submission. No test starts a cloud call.
 The [validation record](../reports/fly-selective-cloud-bridge-validation-01.json)
-records 83 passing checks across the bridge and related modules, with one optional
-retained-recording check skipped; native execution and browser checks of its new
-recordings remain pending.
+records the earlier 83 passing checks across the bridge and related modules, with
+one optional retained-recording check skipped. The subsequent native and browser
+checks are recorded in the completed execution record.
 
 ```sh
 uv run --extra dev python -m pytest -q \
@@ -224,7 +309,7 @@ uv run --extra dev python -m pytest -q \
   tests/test_fly_selective_trace.py tests/test_fly_study_evidence_bundle.py
 ```
 
-## Next execution step
+## Cloud execution and saved-call recovery
 
 The completed-study gate passed before deploying `selective_cloud.py`. It
 defines `fly-paper-selective-01` with no schedule, one
@@ -252,8 +337,9 @@ PAPERLAB_FLY=1 PAPERLAB_UNIVERSE=1 \
   uv run --extra cloud modal deploy selective_cloud.py --env main
 ```
 
-Once that activation is verified, use a new output directory for the single
-submission and the same directory for every subsequent observation:
+The single allowed submission has completed. The command below uses the saved
+output and checks its completed receipt; a new output directory must not be used
+to retry this already claimed assay:
 
 ```sh
 uv run python -m paperlab.fly_selective_trace_cloud \
