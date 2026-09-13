@@ -135,7 +135,7 @@ Modal job:
 
 ```sh
 uv run --extra dev python -m paperlab.fly_study_evidence_bundle pack \
-  --study runs/online-cloud-11 \
+  --study runs/online-complete-audit-11 \
   --out runs/study-11-completed-evidence.json
 
 # Retain the bundle_sha256 printed above as the expected transfer identity.
@@ -165,9 +165,9 @@ uv run --extra dev python -m pytest -q tests/test_fly_study_evidence_bundle.py
 ## Prepared cloud bridge
 
 `paperlab.fly_selective_trace_cloud` now prepares the completed-study bundle,
-submits through the existing worker, resumes its saved call, downloads the full
+submits through a separate unscheduled worker, resumes its saved call, downloads the full
 recordings, runs the independent auditor and writes all twelve comparison views.
-**This bridge is not connected to the deployed worker yet.** Its activation must
+**This worker has not been deployed yet.** Its activation must
 wait for study 11 capture and independent audits; none of that study's 56 pinned
 execution files or the cloud deployment changed while preparing this bridge.
 
@@ -217,16 +217,30 @@ uv run --extra dev python -m pytest -q \
 
 ## Next execution step
 
-After the actual study 11 finishes and passes its independent audits, connect
-the `selective_plan` request in `cloud_debug.validate_request` to the new bridge's
-validator and route execution to `run_request`. Supply the actual Modal call ID,
-input ID and volume commit callback from within the existing worker lease and
-budget reservation. Package `fly-first-drive-01.json` and the unchanged study 11
-registration under `/opt/paperlab/reports/`, where the native runner's validation
-expects them. Test this route and deployment before submission. Retain the $25
-worker and $15 collector monthly reservation caps and the 420-second inner bound.
-These activation edits are deliberately pending; the current deployed worker
-does not accept `selective_plan`.
+After the actual study 11 finishes and passes its independent audits, deploy
+`selective_cloud.py`. It defines `fly-paper-selective-01` with no schedule, one
+2-CPU/8-GiB container, a 600-second timeout and a non-preemptible allocation.
+It uses the original `worker` lease and $25 budget ledger; the main trader and
+$15 collector configuration stay unchanged. The 420-second inner assay bound
+and persistent once-only claim remain in force. Its image packages both required
+validation reports and checks execution-source availability during the build.
+
+This allocation follows the provider preemption observed during study 11 and
+Modal's [non-preemptible CPU pricing](https://modal.com/docs/guide/preemption). It
+budgets the 3× CPU/RAM price with the existing 2× margin: at most **$0.1608936**
+reserved for the 610-second allowance, then settled using measured duration.
+The original 36-observation protocol and its completed-study gate are unchanged.
+This is a compute estimate; the provider invoice remains authoritative. The
+[worker validation record](../reports/fly-selective-worker-validation-01.json)
+covers resource limits, reservation before capture, failed-claim retention and
+refusal to reserve again for an already claimed assay. No deployment or native
+submission occurred in those tests.
+
+```sh
+# Only after the actual complete study has passed its recording audits:
+PAPERLAB_FLY=1 PAPERLAB_UNIVERSE=1 \
+  uv run --extra cloud modal deploy selective_cloud.py --env main
+```
 
 Once that activation is verified, use a new output directory for the single
 submission and the same directory for every subsequent observation:
@@ -235,7 +249,7 @@ submission and the same directory for every subsequent observation:
 uv run python -m paperlab.fly_selective_trace_cloud \
   --payload runs/selective-trace-preflight-01/payload.json \
   --reference-recordings runs/credit-reset-01/cloud/artifacts \
-  --completed-study runs/online-cloud-11 \
+  --completed-study runs/online-complete-audit-11 \
   --fly-data data/fly --out runs/selective-trace-01/cloud
 ```
 

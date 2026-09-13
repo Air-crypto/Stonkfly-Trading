@@ -179,10 +179,11 @@ def fixture_result(req, volume):
     return {'status': 'selective_trace_completed', 'run_id': req['run_id'], 'remote_path': base,
             'report': report, 'artifact_sha256': hashes, 'request_sha256': signature(req),
             'call_id': 'fc-selective-once', 'input_id': 'in-selective-once',
-            'budget': {'monthly_limit_usd': 25, 'estimated_compute_usd': 0.01, 'provider_bill': False}}
+            'budget': {'monthly_limit_usd': 25, 'estimated_compute_usd': 0.01, 'provider_bill': False,
+                       'nonpreemptible': True, 'price_multiplier': 3, 'reserved_usd': .1608936}}
 
 
-@pytest.mark.parametrize('change', ['identity', 'path', 'request', 'source', 'study', 'cap', 'extra_file', 'missing_file'])
+@pytest.mark.parametrize('change', ['identity', 'path', 'request', 'source', 'study', 'cap', 'extra_file', 'missing_file', 'pricing'])
 def test_wrong_terminal_evidence_is_not_downloaded_or_restarted(transport, cloud, tmp_path, change):
     root = tmp_path/'out'; invoke(transport, root)
     req = json.loads((root/'request.json').read_text()); result = fixture_result(req, cloud.volume)
@@ -193,6 +194,7 @@ def test_wrong_terminal_evidence_is_not_downloaded_or_restarted(transport, cloud
     elif change == 'study': result['report']['completed_study_sha256'] = '0'*64
     elif change == 'cap': result['budget']['monthly_limit_usd'] = 100
     elif change == 'extra_file': result['artifact_sha256']['../../escape'] = '0'*64
+    elif change == 'pricing': result['budget']['price_multiplier'] = 1
     else: del result['artifact_sha256']['circuit.npz']
     cloud.result = result
     with pytest.raises(ValueError): invoke(transport, root)

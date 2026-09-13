@@ -1,8 +1,8 @@
 """Prepared bridge for the post-study selective assay; not deployed during study 11.
 
-The future cloud_debug route must call run_request under the existing worker
-lease and reserved budget. A saved local call and a persistent cloud claim each
-prevent retrying an uncertain native execution.
+The unscheduled selective worker shares the existing worker lease and budget.
+A saved local call and a persistent cloud claim each prevent retrying an
+uncertain native execution.
 """
 import argparse
 import asyncio
@@ -20,12 +20,14 @@ from .fly_selective_trace import source_hashes, validate, verify_reference, run 
 from .fly_selective_trace_audit import audit
 from .fly_study_evidence_bundle import pack, unpack
 from .fly_recording_download import transfer_files
+from .budget import reserve, settle
 
 REFERENCE_RUN = 'assay-credit-d4cef30fe9bc46be8d13da36a12135b9'
 CLAIM = 'selective-trace-01-claim.json'
 INPUTS = 'fly-selective-inputs'
 ROOT_ARTIFACTS = ('initial-dynamics.npz', 'trained-memory.npz', 'pristine-memory.npz',
                   'full-weight-reference.npz', 'neuron-ids.npz', 'circuit.npz')
+APP_NAME = 'fly-paper-selective-01'
 
 
 def artifact_names(protocol):
@@ -70,6 +72,38 @@ def exclusive_json(path, value):
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open('x') as stream:
         stream.write(json.dumps(value, indent=2, allow_nan=False)+'\n')
+
+
+def run_budgeted_request(request, state, data, *, call_id, input_id, commit):
+    """Called only inside the shared lease by the non-preemptible worker."""
+    validate_request(request)
+    state = Path(state); root = state/'fly-debugger'; plan = request['selective_plan']
+    if not call_id or not input_id:
+        raise ValueError('The worker must supply its actual Modal call and input IDs')
+    if (root/CLAIM).exists() or (root/request['run_id']).exists():
+        raise ValueError('Selective assay already claimed; inspect its existing call')
+    # Reject incomplete evidence before reserving compute or constructing a model.
+    check_bundle(state/INPUTS/(plan['bundle_sha256']+'.json'),
+                 plan['bundle_sha256'], plan['study_report_sha256'])
+    reservation = reserve(state/'budget.json', True, seconds=1800,
+                          startup_seconds=30, memory_gib=8, limit_override=25)
+    if reservation is None:
+        return {'status': 'budget_stopped'}
+    # 610 seconds at 3x provider price, retaining the budget module's 2x margin.
+    reservation['rate'] *= 3
+    reservation['startup_seconds'] = 10
+    commit()
+    try:
+        result = run_request(request, root, data, call_id=call_id, input_id=input_id, commit=commit)
+        result['budget'] = {**settle(state/'budget.json', reservation,
+            time.time()-reservation['started']), 'reserved_usd': reservation['reserve'],
+            'nonpreemptible': True, 'price_multiplier': 3}
+        atomic_json(root/request['run_id']/'cloud-result.json', result)
+        commit()
+        return result
+    except BaseException:
+        commit()  # Preserve the worst-case reservation and any claim after failure.
+        raise
 
 
 def run_request(request, root, data, *, call_id, input_id, commit):
@@ -121,7 +155,10 @@ def terminal_result(result, request, receipt):
             or report.get('protocol') != protocol
             or report.get('code_sha256') != request['selective_plan']['source_sha256']
             or report.get('completed_study_sha256') != request['selective_plan']['study_report_sha256']
-            or result.get('budget', {}).get('monthly_limit_usd') != 25):
+            or result.get('budget', {}).get('monthly_limit_usd') != 25
+            or result['budget'].get('nonpreemptible') is not True
+            or result['budget'].get('price_multiplier') != 3
+            or not 0 < result['budget'].get('reserved_usd', 0) <= .1608936):
         raise ValueError('Terminal result, budget, ownership or executed evidence differs; do not resubmit')
     hashes = result.get('artifact_sha256')
     if not isinstance(hashes, dict) or set(hashes) != set(artifact_names(protocol)):
@@ -137,10 +174,11 @@ def download(volume, base, root, hashes):
 
 
 def idle_worker(modal):
-    function = modal.Function.from_name('fly-paper-lab', 'worker', environment_name='main')
+    function = modal.Function.from_name(APP_NAME, 'worker', environment_name='main')
+    main = modal.Function.from_name('fly-paper-lab', 'worker', environment_name='main')
     owner = modal.Dict.from_name('fly-paper-lab-writers', environment_name='main').get('worker')
-    stats = function.get_current_stats()
-    if owner is not None or stats.num_total_runners or stats.num_running_inputs or stats.backlog:
+    stats = [fn.get_current_stats() for fn in (function, main)]
+    if owner is not None or any(s.num_total_runners or s.num_running_inputs or s.backlog for s in stats):
         raise RuntimeError('Worker has active work; no selective assay submitted')
     volume = modal.Volume.from_name('fly-paper-lab-state', environment_name='main')
     try:

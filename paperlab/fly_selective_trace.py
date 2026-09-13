@@ -33,7 +33,8 @@ NEW_FILES = ('paperlab/fly_selective_trace.py', 'paperlab/fly_selective_trace_au
              'paperlab/fly_credit_divergence.py','paperlab/fly_view_projection.py',
              'paperlab/fly_study_evidence_bundle.py', 'paperlab/fly_selective_trace_cloud.py',
              'paperlab/fly_recovery_report.py', 'paperlab/fly_online_recovery.py',
-             'paperlab/fly_online_completion.py', 'paperlab/fly_recording_download.py')
+             'paperlab/fly_online_completion.py', 'paperlab/fly_recording_download.py',
+             'selective_cloud.py', 'cloud.py', 'paperlab/budget.py')
 
 
 def source_hashes():
