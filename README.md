@@ -1,48 +1,66 @@
 # Stonkfly Trading
 
-A paper-only research lab comparing the full Stonkfly spiking fly network with a **247,780-parameter PPO policy**, using market data and timestamped news. No real-order endpoint, wallet or exchange credentials are used.
+A paper-only research lab comparing the full **166,700-neuron Stonkfly network**
+with a **247,780-parameter PPO policy**, using market data and timestamped news.
+There is no real-order endpoint, wallet, or exchange credential in this lab.
 
-The [dynamic memecoin experiment](docs/memecoin-universe.md) adds free live launch
-discovery, multi-chain pool sampling, separate $1,000 portfolios, isolated fly
-contexts, and pooled PPO training. Coverage is bounded and DEX fills are explicitly
-indicative simulations. Use `PAPERLAB_UNIVERSE=1` when deploying this experiment;
-the original BTC archive remains available.
+The fly is a sparse spiking network. The compact policy is an MLP actor/critic.
+A separately pinned FinBERT transformer can encode headline sentiment; those
+features enter the compact policy numerically and the fly through a visual adapter.
+The [dynamic memecoin experiment](docs/memecoin-universe.md) discovers current and
+new launches and samples DEX pools. Coverage is bounded; it does not trade every
+Solana token. The controlled comparison below uses two fixed pools, ALL and baton.
 
-The fly is a sparse spiking network, not a transformer. The compact policy is an MLP actor/critic, not an SLM. An optional, separately pinned FinBERT transformer encodes headline sentiment. News features enter the compact policy numerically and the fly through an explicit visual adapter.
+## Latest completed comparison
 
-The [tenth market comparison](docs/fly-debugger.md#tenth-market-comparison-result)
-completed with fully audited prices, timestamped news, fills and neural counts.
-Trained and pristine models both ended test at **$997.93** without added current,
-or **$994.25** with fixed recipient stimulation, from separate $1,000 accounts.
-Stimulation exposed more memory-dependent neural behavior but did not improve
-this test. No condition passed development; no policy was promoted.
+[Study 11](docs/fly-online-comparison.md#final-audited-result) completed all sixteen
+conditions with **360 audited neural observations and 18,000 recorded bins**.
+Those observations repeat 90 eligible asset/time slots across four variants.
+Each variant starts development and held-out test with a fresh $1,000 account:
+two $250 pool allocations plus $500 idle cash.
 
-![Audited recipient activation comparison, with separate development and test](docs/assets/fly-market-study-10.png)
+| Fly condition | Development equity | Held-out test equity |
+| --- | ---: | ---: |
+| Pristine memory, frozen | $946.73 | $986.34 |
+| Paper-trained memory, frozen | $942.86 | $976.36 |
+| Paper-trained memory, online updates | $964.45 | $972.13 |
+| Online updates, reset KC/DAN rate histories | $972.03 | $984.93 |
 
-The [decision comparison](docs/fly-debugger.md#compare-neural-decisions-with-later-fills)
-separates current neural signals from fills executing earlier decisions, with
-links to each paired trace.
+**No condition passed development, and no policy was promoted.** Reset reduced
+losses relative to online carry in both phases, but trailed pristine frozen in
+test. All aggregate results lost money. Simulated adverse fees, spread and
+slippage are included; hosting is excluded. Two pools and four hours do not
+establish monthly profitability.
 
-The [captured training-memory map](docs/fly-debugger.md#map-captured-paper-memory-to-native-recipients)
-shows net weaker KC inputs at all six plastic recipients, with the largest
-reduction at MBON11 neuron 11402. This locates stored changes; their effect on
-trading is being tested separately.
+![Complete audited development and held-out equity comparison](docs/assets/fly-online-11-comparison.png)
 
-![Audited paper-trained connection changes by native recipient](docs/assets/fly-paper-memory-map-01.png)
+Red crosses mark missing quotes: the affected inventory is valued at $0 as a
+stress mark. Those downward spikes are not observed price crashes. Gaps remain
+missing in neural plots and do not generate fabricated learning observations.
+The [result record](reports/fly-online-result-11.json) preserves the input hashes,
+receipts, audits, costs and two disclosed recovery amendments. The original
+failed third condition and preempted partial recording remain preserved and
+excluded; six completed recordings were reused.
 
 ## Inspect the fly
 
-The [interactive circuit debugger](docs/fly-debugger.md) shows recorded spikes,
-voltages, connection updates, and fixed decoder outputs. Test synthetic prices,
-news, neuron stimulation, and selected connection restoration. The simulation
-retains the full graph; the display is a labeled subset with full-neuron lookup
-in generated recordings. Paper accounts remain separate from diagnostic assays.
+The [interactive debugger](docs/fly-debugger.md) connects recorded activity to the
+model's fixed BUY/SELL/HOLD decoder. It provides:
 
-![Source spikes remain visible on changed connections in the fly circuit debugger](docs/assets/fly-source-spike-changed.png)
+- Neuron spikes, membrane voltage, input timing and accumulated decoder counts.
+- Connection weights and stored `u/w`, separately from source firing highlights.
+- Paired recordings matched by neuron, connection and market timestamp, with
+  first/next differences and shareable links to a selected observation and bin.
+- Full-neuron lookup from retained arrays, plus controlled tests of synthetic
+  prices, news, neuron stimulation and selected connection restoration.
 
-Dashed lines mark source spikes in the current bin. Orange and purple retain the
-connection's weight change or restoration status, and an outline marks the
-selected connection.
+The simulation retains the complete graph; the displayed circuit is a labeled
+subset. A highlighted weight update is not proof that its source just fired,
+and synchronized plots do not establish a causal pathway.
+
+![Source firing and changed connection weights in the circuit debugger](docs/assets/fly-source-spike-changed.png)
+
+![Held-out reset and carry recordings: spikes, voltage, weights and stored memory](docs/assets/fly-online-11-test-pool0-pair.png)
 
 After installing below, open the included recordings without model compute:
 
@@ -50,277 +68,63 @@ After installing below, open the included recordings without model compute:
 uv run python -m paperlab.debugger serve --out examples/fly-debugger
 ```
 
-Visit <http://127.0.0.1:8765>. With Modal deployed and authenticated, use
-`uv run python -m paperlab.debugger serve --backend modal --out runs/cloud-debugger`
-to run new synthetic assays and inspect full cloud traces. See the guide for
-[controlled market replays](docs/fly-debugger.md#separate-market-memory-updates-and-reinforcement),
-source verification, saved-call recovery, and run steps.
-The [registered market runner](docs/fly-debugger.md#evaluate-restoration-on-a-new-market-window)
-shares equivalent training checkpoints and audits each separate inference run.
+Visit <http://127.0.0.1:8765>. To submit new bounded synthetic assays to an
+already deployed and authenticated Modal worker, use:
 
-The comparison now overlays the selected neuron’s voltage and spike bins, plus
-the same connection’s weight. It matches identities and observation times so
-retained memory differences remain visible even when inference is frozen.
-[Recorded input-history matching](docs/fly-debugger.md#distinguish-a-matching-image-from-matching-recorded-history)
-distinguishes the current image from preceding inputs and excludes ambiguous
-timestamp matches.
-[Stored connection memory](docs/fly-debugger.md#inspect-stored-connection-memory)
-adds the recorded `u` and `w` states behind each weight.
+```sh
+uv run python -m paperlab.debugger serve --backend modal --out runs/cloud-debugger
+```
 
-An [explicit connection selection](docs/fly-debugger.md#add-the-same-recorded-connection-to-paired-views)
-can add a missing endpoint from that run's full recording, so different displayed
-subsets do not hide the connection comparison. It runs no new neural simulation.
+The [debugger guide](docs/fly-debugger.md) documents controls, full cloud traces,
+saved-call recovery, controlled market replays and all earlier experiments.
+Diagnostic assays remain separate from paper accounts and policy promotion.
 
-![Same recorded KC-to-MBON connection in trained and pristine brains](docs/assets/fly-market-study-10-connection.png)
+## Reproduce the financial and learning charts
 
-The diagnostics have identified concrete limitations:
+The included [evidence archive](reports/fly-online-evidence-11.zip) contains 51
+exact report, plan, summary, audit and receipt files, compressed to about 1.7 MB.
+No graph download, credential or new model run is needed to regenerate all five
+PNG/SVG figures:
 
-The [paper reward audit](docs/fly-debugger.md#audit-what-the-paper-training-reward-contains)
-separates inventory revaluation from execution friction and verifies gap resets.
-The current fly receives reward sign, with a fixed pulse that discards magnitude.
+```sh
+python3 -m zipfile -e reports/fly-online-evidence-11.zip runs/study-11-evidence
+uv run --extra plots python -m paperlab.fly_online_figure \
+  --root runs/study-11-evidence --out runs/study-11-figures
+```
 
-- The original chart can render small and large percentage moves identically.
-  An experimental fixed return encoding preserves the distinction but failed
-  the [fourth market comparison](docs/fly-debugger.md#fourth-market-replay-result).
-- In that study, original training mode produced an extra BUY that cost $1.35
-  relative to frozen on the pool with fresh quotes. The
-  [eight-arm replay](docs/fly-debugger.md#market-pulse-factorial-results) reproduced
-  both reference controls and isolated the extra BUY to the combination of
-  ongoing plasticity and recorded reinforcement. Starting with earlier trained
-  memory did not change those three observations' spike counts or actions.
-- The [next registered market window](docs/fly-debugger.md#fifth-market-replay-result)
-  rejected freezing as a general fix: trained/frozen ended at **$1,005.41** versus
-  **$1,008.38** for pristine/frozen and online, from separate $1,000 accounts.
-  Saved checkpoints confirmed retained memory; it changed a BUY to HOLD.
-  No arm passed the development gate, and no policy was promoted.
-- A [controlled restoration replay](docs/fly-debugger.md#market-restoration-results)
-  recovered the missing BUY by restoring either MBON11 cell's incoming memory.
-  Restoring both reproduced all three pristine spike-count records. These are
-  mechanism results. The [sixth market test](docs/fly-debugger.md#sixth-market-replay-result)
-  found a test-only benefit from restoring 11402: **$1,000.46** versus **$994.18**
-  for the other variants. Every variant failed development, so none was promoted.
-  The [seventh comparison](docs/fly-debugger.md#seventh-market-replay-result)
-  ended at **$996.86 for all five variants**; none passed development. Four of
-  six test slots were observed, and all their full spike-count records matched.
-- The [nine-condition memory replay](docs/fly-debugger.md#three-group-restoration-results)
-  found that this SELL depends on retaining learned MBON07 and 10704 inputs.
-  Resetting more memory can reverse it or introduce an extra gate-driven BUY.
-  All reference controls reproduced; blanket restoration is not a demonstrated fix.
+Use new output directories to preserve earlier evidence. The plotter verifies
+all sixteen audit/receipt relationships and the original development selection
+before rendering. The archive transports existing audits; repeating the raw
+neural audit requires the separately retained full recordings and graph data.
 
-The [twelve-condition activity comparison](docs/fly-debugger.md#voltage-and-synaptic-input-results)
-found that clearing synaptic input between images recovered **five final gate
-spikes** while retaining a trained-versus-pristine firing difference. Resetting
-only the two gate cells failed for the trained model; global voltage resets made
-all three trained/pristine spike-count records identical. These are mechanism
-results, with no fills or P&L; no reset policy has been promoted.
+![Held-out ALL decisions, later fills, gate activity and connection updates](docs/assets/fly-online-11-test-pool0.png)
 
-The [eighth market comparison](docs/fly-debugger.md#eighth-market-replay-result)
-then rejected input reset: trained/reset failed development and tied pristine/reset
-at **$1,000.98** in test, below trained/carry at **$1,001.14**. Clearing input
-recovered a gate spike and extra BUY, without an advantage from training. An
-earlier collector outage left one training observation per pool and **zero P&L
-reinforcement**, so this does not evaluate learning from trading rewards.
+Each panel separates new decisions from fills executing earlier decisions.
+Weight movement is a recorded plasticity update, not an optimizer loss or
+backprop gradient. The learning-history share is an algebraic decomposition,
+not causal credit. [All 90 paired steps](docs/fly-online-paired-steps-11.md) link
+back to the complete-recording viewer; its setup requires the retained arrays
+as described in the [comparison guide](docs/fly-online-comparison.md).
 
-The [activity map](docs/fly-debugger.md#inspect-the-quiet-learned-pathway) explains
-why the ninth test needs further diagnosis: just 3–5 plastic edges had spiking
-sources per observation, and all six recipients stayed silent in every condition.
-Recorded voltages still changed with trained memory.
+## What the debugging has established
 
-![Plastic-path activity and silent recipient voltage](docs/assets/fly-paper-activation-09.png)
+Stored paper training changed the incoming weights of all six plastic
+recipients, but those recipients often remained silent. Controlled stimulation
+exposed memory-dependent firing and decisions without demonstrating better
+trading. The [recipient activity and stimulation results](docs/fly-debugger.md#inspect-the-quiet-learned-pathway)
+retain every control and outcome.
 
-The [recipient-stimulation experiment](docs/fly-debugger.md#recipient-stimulation-result)
-then reproduced all unstimulated controls and exposed a threshold effect:
-moderate current activated pristine recipients while trained recipients stayed
-silent; stronger current activated both and produced different neural decisions.
-All 36 observations were audited. This explains when stored memory affects output;
-no trading improvement or policy promotion is claimed.
+The [learning-drive reconstruction](docs/fly-debugger.md#why-a-quiet-source-connection-can-still-update)
+then found that current DAN activity can combine with old KC activity to update
+a connection whose source is currently silent. Removing KC history reproduces
+the first different weight update in two recorded examples; that one-bin
+calculation does not determine later full-network behavior.
 
-![Frozen memory under controlled recipient stimulation](docs/assets/fly-paper-stimulation-01.png)
-
-The [single-recipient test](docs/fly-debugger.md#recipient-isolation-result)
-reproduced all original controls, then stimulated each target separately. Its
-36 audited observations show that the effect depends on the input and memory:
-the same HOLD can come from a neutral direction or a silent gate. It does not
-identify a profitable stimulation target.
-
-![Audited responses when each recipient is stimulated separately](docs/assets/fly-recipient-isolation-01.png)
-
-The [bin timing analysis](docs/fly-debugger.md#jump-to-recorded-count-differences)
-locates the earliest recorded spike-count difference at cell **11402**, in the
-30–40 ms bin of each first stimulated image. The paired viewer can jump to the
-first or next count difference for the selected neuron; these are 10 ms bins,
-not exact spike times or proof of a causal connection.
-
-![Jump between recorded neuron count differences](docs/assets/fly-paper-stimulation-navigation-01.png)
-
-The [input timing strip](docs/fly-debugger.md#inspect-when-current-is-applied)
-shows whether the selected bin falls inside a recorded reinforcement pulse or
-diagnostic-current interval, separately from neuron firing and weight changes.
-
-![Recorded reinforcement pulse and selected 10 ms bin](docs/assets/fly-input-timing-01.png)
-
-The [learning-drive inspector](docs/fly-debugger.md#inspect-which-rate-history-drives-an-update)
-separates traces carried from earlier images from traces accumulated during the
-current image. An offline audit reproduced every plastic weight in 450 recorded
-bins. Positive drive can coincide with a falling weight because stored `u/w`
-also affects the update; these are model dynamics, not backprop gradients.
-
-![Recorded learning drive split by earlier and current image traces](docs/assets/fly-credit-origin-01.png)
-
-The [learning-trace intervention](docs/fly-debugger.md#learning-trace-reset-result)
-then removed the extra historical BUY by clearing only KC/DAN rate traces
-between images. All controls reproduced; the frozen reset preserved every spike
-count. The 18-observation audit identifies a mechanism worth testing on a fresh
-market interval, not a profitable policy. Normal paper traders are unchanged.
-
-![Audited learning-trace reset with all six controls and interventions](docs/assets/fly-credit-reset-01.png)
-
-The [first-divergence analysis](docs/fly-debugger.md#where-the-trace-intervention-first-changes-the-network)
-locates the first differing weights, sampled voltages, and spike counts in those
-same retained recordings. Five connections into MBON11 differ first; the new
-paired views expose one of them with its own spikes, weights, `u/w`, and learning
-drive. A later missing gate spike changes BUY to HOLD. This traces an observed
-mechanism without identifying a single causal connection or claiming a return.
-The [state-difference controls](docs/fly-debugger.md#navigate-recorded-state-differences)
-jump to the first or next unequal voltage, weight, or `u/w` sample for the
-selected neuron and connection, with signed differences at the current cursor.
-
-![Recorded weight, voltage, spike-count and gate divergence](docs/assets/fly-credit-divergence-01.png)
-
-The [first-update reconstruction](docs/fly-debugger.md#why-a-quiet-source-connection-can-still-update)
-identifies carried KC activity as the immediate term behind those first weight
-differences. A connection can update while its source is silent: current DAN
-spikes combine with earlier KC activity. One-bin substitutions isolate this
-effect; they do not establish the outcome of a full alternative training run.
-
-![Recorded contributors to the earliest connection updates](docs/assets/fly-first-drive-01.png)
-
-The [separate KC/DAN reset follow-up](docs/fly-selective-traces.md) specifies
-12 full-network conditions to test the later effects of those histories. Its
-24 boundary checks passed against saved native arrays, preserving all other
-state and weights. Native runs and their results are pending; the running cloud
-comparison is unchanged. The guide includes the preflight command and evidence.
-The [completed-study evidence handoff](docs/fly-selective-traces.md#carry-the-completed-study-evidence)
-preserves all 51 audit and receipt files for the later cloud assay; it refuses
-incomplete or synthetic evidence. Study 11 has not yet produced that bundle.
-The [prepared cloud bridge](docs/fly-selective-traces.md#prepared-cloud-bridge)
-adds saved-call recovery, verified recording downloads and audited comparison
-views. Its worker activation is pending the current study's completion and audits;
-preparing it has not launched a new native experiment.
-An [additional display audit](docs/fly-selective-traces.md#check-what-the-debugger-draws)
-verified every displayed connection and plotted series in the six existing
-carry/both-reset views against the full recordings and graph data.
-
-The [longer online comparison runner](docs/fly-online-comparison.md) now records
-24 decision slots per condition, with full native-bin audits, independent paper
-feedback, and preserved missing-data gaps. A synthetic full-graph check verified
-21 observations across 1,050 bins; the viewer supports the resulting larger
-recordings. The [registered four-hour follow-up](reports/fly-market-study-11-preregistration.json)
-uses separate development and test windows; see the guide for cloud arming and
-execution status. [Cloud arming was verified](reports/fly-online-cloud-arming-11.json)
-at 20:25:47 UTC on September 12, before the 20:35 UTC development start. The
-[read-only observer](docs/fly-online-comparison.md#observe-the-scheduled-experiment)
-reattaches saved calls and audits full recordings into paired debugger views.
-Its optional watcher waits for all sixteen captures before running the full
-audit once; stopping the local watcher leaves cloud work running.
-The original attempt stopped at its third condition; see the
-[failure and amended recovery](docs/fly-online-comparison.md#recover-the-news-audit-failure).
-Two completed controls passed their full recording audits. These partial
-development results do not establish an improvement or profitable strategy.
-The guide includes a [dated registration clarification](docs/fly-online-comparison.md#registration-description-clarification)
-and a [provisional quote-coverage check](docs/fly-online-comparison.md#check-coverage-before-the-window-closes).
-The original registration, execution files and failure receipts are preserved.
-The [complete-window quote check](reports/fly-online-window-coverage-11.json)
-covers the 7:35 p.m. CDT endpoint on September 12. ALL has 24 development and
-21 test observations; baton has 23 and 22. All four combinations meet the
-18-observation minimum, with six missing slots preserved and both final quotes
-eligible. The [worker-sealed inputs](reports/fly-online-sealed-inputs-11.json)
-passed independent reconstruction of all 100 decision/valuation slots and 49
-timestamp-eligible news vectors. A later process exposed a hash-order-dependent
-rounding error in news reconstruction. Fixed-seed reconstruction matches the
-sealed vectors exactly; the recovery keeps the original model inputs.
-
-The [two audited development controls](reports/fly-online-failure-11.json) each
-cover 24 decisions and 1,200 native time bins on ALL. From $250, pristine finished
-at **$205.28**, and previously trained, frozen memory at **$207.32**, including
-simulated trading costs and excluding hosting. Both lost money. Five decisions
-differ, despite identical chart/news images; neither arm trains during replay.
-
-![Audited trained control at the first differing decision](docs/assets/fly-online-controls-11.png)
-
-![Audited development equity, exposure and decoder decisions](docs/assets/fly-online-controls-equity-11.png)
-
-The [first recovered online condition](reports/fly-online-carry-result-11.json)
-also passed its full 1,200-bin audit. It ended at **$225.26**, with three fills,
-versus the frozen trained control's $207.32 and six fills. Its connection memory
-changed, and every update was reconstructed. This is a smaller loss in one
-development window; the full two-pool comparison and test results remain pending.
-The [paired debugger view](http://127.0.0.1:8766/?run=online11r02-development-pool0-trained_online_carry&compare=online11-development-pool0-trained_frozen&step=2&bin=43&neuron=10527&edge=8022240&pristine=1)
-shows one differing gate spike alongside recorded connection weight and `u/w`.
-
-![Audited online and frozen neural traces](docs/assets/fly-online-learning-pair-11.png)
-
-All four [ALL development conditions](reports/fly-online-all-development-11.json)
-are now independently audited: pristine **$205.28**, trained frozen **$207.32**,
-online carry **$225.26**, and online rate reset **$234.33**, each starting at $250.
-Reset loses least in this window; all four remain below cash. This completes
-four of sixteen condition audits. The two baton frozen controls are also audited:
-pristine **$241.46**, trained frozen **$235.54**, from $250 each. That makes six
-completed audits; previously trained memory does not help consistently across coins.
-
-Modal [preempted recovery 02](reports/fly-online-recovery-preemption-11.json)
-while recording condition seven. Its incomplete arrays and claimed receipt are
-preserved, and that temporary schedule was stopped. The separate
-[non-preemptible completion amendment](reports/fly-online-completion-protocol-11.json)
-retains the six completed recordings and starts ten conditions fresh, with the
-3× CPU/RAM price included in a conservative **$2 additional compute allowance**.
-Both new baton development captures are now independently audited: online carry
-**$239.20**, rate reset **$237.70**. The
-[complete development audit](reports/fly-online-development-result-11.json)
-covers **188 observations and 9,400 native bins** across all eight conditions.
-These replay 47 eligible asset/time slots across four variants.
-It puts reset at **$972.03 combined from $1,000**, the best development total but below
-cash, so the profit requirement fails. Held-out results remain pending. See the
-[completion run steps](docs/fly-online-comparison.md#complete-after-provider-preemption).
-
-![Six audited development conditions, including the missing baton quote](docs/assets/fly-online-development-six-11.png)
-
-The [full-neuron comparison](reports/fly-online-development-divergence-11.json)
-finds a different early response in each pool: after the second image's reset,
-ALL changes 879 weights in the first recorded bin, while baton changes five.
-Baton's second observation keeps identical spike counts and its BUY decision;
-its first action difference appears later. Changing connection memory alone
-does not establish a better trading policy.
-
-![Audited baton reset and carry traces at their first differing decision](docs/assets/fly-online-baton-reset-pair-11.png)
-
-The [full-window diagnostic figures](docs/fly-online-comparison.md#compare-the-full-financial-and-neural-timelines)
-align decisions, later fills, gate spikes, weight movement and learning history,
-with links back to matched circuit recordings. This preview is explicitly
-synthetic; the cloud comparison still needs its complete data and audits.
-The [full-phase display check](docs/fly-online-comparison.md#check-full-phase-plots-against-the-recordings)
-verified all 1,050 bins and 967 displayed connections in the retained synthetic
-run against its full recordings, with no new neural computation.
-
-![Synthetic validation of longer trading and learning timelines](docs/assets/fly-online-diagnostics-validation-01.png)
-
-The [decoder count view](docs/fly-debugger.md#inspect-accumulated-decoder-counts)
-shows how output spikes accumulate. In the examined BUY/SELL reversal, one net
-spike equals the fixed 2 Hz threshold; a count-edit audit separates direction
-and gate sensitivity without claiming a profitable fix.
-
-![Recorded direction and gate counts](docs/assets/fly-decoder-counts.png)
-
-![Input-reset comparison with all four conditions and missing training observations](docs/assets/fly-market-study-08.png)
-
-[Inspect the restored connections](http://127.0.0.1:8765/?run=marketrestore01-restore_10704&step=1&neuron=10704&compare=marketrestore01-trained_frozen).
-These are indicative DEX marks with fees/slippage, not realized or monthly returns.
-
-After starting the included viewer, [jump to the extra gate spike](http://127.0.0.1:8765/?run=pulse01-trained_online_recorded&step=2&bin=37&neuron=10527&compare=pulse01-trained_frozen_recorded).
-The link selects neuron 10527 at the 1,380 ms bin boundary. Use previous/next
-spike buttons and the moment link to inspect and share any displayed neuron.
-The guide retains earlier experiments, all outcomes, and their limitations.
-These visualizations diagnose the model; they do not demonstrate profitable trading.
+The next [selective KC/DAN assay](docs/fly-selective-traces.md) tests each history
+separately across twelve full-network conditions. Its worker is prepared and
+its completed-study gate is now satisfied. Native selective trajectories and
+any subsequent prospective financial test remain pending. No profitable fix is
+claimed from changed spikes or weights alone.
 
 ## Run
 

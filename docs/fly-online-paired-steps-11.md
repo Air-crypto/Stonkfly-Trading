@@ -1,0 +1,99 @@
+# Online trace comparison
+
+Completed audited study 11 recordings from the disclosed recovery amendment.
+
+Start the debugger with `--out <study-root>/views --port 8767` before opening these links.
+Each link matches the same observed market slot. Fills execute earlier decisions; a BUY target may cause a rebalance SELL.
+
+| Phase / pool | UTC | New decision: carry / reset | Gate spikes: carry / reset | Earlier fills: carry / reset | Paired trace |
+| --- | --- | --- | --- | --- | --- |
+| development / 0 | 20:35 | BUY / BUY | 23 / 23 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool0-trained_online_reset_rates&step=0&bin=49&neuron=10527&compare=development-pool0-trained_online_carry) |
+| development / 0 | 20:40 | HOLD / SELL | 0 / 1 | BUY / BUY | [Inspect](http://127.0.0.1:8767/?run=development-pool0-trained_online_reset_rates&step=1&bin=49&neuron=10527&compare=development-pool0-trained_online_carry) |
+| development / 0 | 20:45 | HOLD / HOLD | 0 / 0 | hold / SELL | [Inspect](http://127.0.0.1:8767/?run=development-pool0-trained_online_reset_rates&step=2&bin=49&neuron=10527&compare=development-pool0-trained_online_carry) |
+| development / 0 | 20:50 | HOLD / BUY | 0 / 1 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool0-trained_online_reset_rates&step=3&bin=49&neuron=10527&compare=development-pool0-trained_online_carry) |
+| development / 0 | 20:55 | HOLD / HOLD | 0 / 0 | hold / BUY | [Inspect](http://127.0.0.1:8767/?run=development-pool0-trained_online_reset_rates&step=4&bin=49&neuron=10527&compare=development-pool0-trained_online_carry) |
+| development / 0 | 21:00 | HOLD / HOLD | 1 / 0 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool0-trained_online_reset_rates&step=5&bin=49&neuron=10527&compare=development-pool0-trained_online_carry) |
+| development / 0 | 21:05 | HOLD / HOLD | 0 / 0 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool0-trained_online_reset_rates&step=6&bin=49&neuron=10527&compare=development-pool0-trained_online_carry) |
+| development / 0 | 21:10 | HOLD / HOLD | 0 / 0 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool0-trained_online_reset_rates&step=7&bin=49&neuron=10527&compare=development-pool0-trained_online_carry) |
+| development / 0 | 21:15 | HOLD / HOLD | 0 / 0 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool0-trained_online_reset_rates&step=8&bin=49&neuron=10527&compare=development-pool0-trained_online_carry) |
+| development / 0 | 21:20 | HOLD / BUY | 0 / 1 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool0-trained_online_reset_rates&step=9&bin=49&neuron=10527&compare=development-pool0-trained_online_carry) |
+| development / 0 | 21:25 | HOLD / HOLD | 0 / 0 | hold / BUY | [Inspect](http://127.0.0.1:8767/?run=development-pool0-trained_online_reset_rates&step=10&bin=49&neuron=10527&compare=development-pool0-trained_online_carry) |
+| development / 0 | 21:30 | BUY / HOLD | 1 / 0 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool0-trained_online_reset_rates&step=11&bin=49&neuron=10527&compare=development-pool0-trained_online_carry) |
+| development / 0 | 21:35 | HOLD / SELL | 0 / 1 | BUY / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool0-trained_online_reset_rates&step=12&bin=49&neuron=10527&compare=development-pool0-trained_online_carry) |
+| development / 0 | 21:40 | HOLD / HOLD | 0 / 0 | hold / SELL | [Inspect](http://127.0.0.1:8767/?run=development-pool0-trained_online_reset_rates&step=13&bin=49&neuron=10527&compare=development-pool0-trained_online_carry) |
+| development / 0 | 21:45 | HOLD / HOLD | 0 / 0 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool0-trained_online_reset_rates&step=14&bin=49&neuron=10527&compare=development-pool0-trained_online_carry) |
+| development / 0 | 21:50 | HOLD / HOLD | 0 / 0 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool0-trained_online_reset_rates&step=15&bin=49&neuron=10527&compare=development-pool0-trained_online_carry) |
+| development / 0 | 21:55 | HOLD / HOLD | 0 / 0 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool0-trained_online_reset_rates&step=16&bin=49&neuron=10527&compare=development-pool0-trained_online_carry) |
+| development / 0 | 22:00 | HOLD / HOLD | 0 / 0 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool0-trained_online_reset_rates&step=17&bin=49&neuron=10527&compare=development-pool0-trained_online_carry) |
+| development / 0 | 22:05 | HOLD / HOLD | 0 / 0 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool0-trained_online_reset_rates&step=18&bin=49&neuron=10527&compare=development-pool0-trained_online_carry) |
+| development / 0 | 22:10 | BUY / HOLD | 2 / 0 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool0-trained_online_reset_rates&step=19&bin=49&neuron=10527&compare=development-pool0-trained_online_carry) |
+| development / 0 | 22:15 | HOLD / HOLD | 0 / 0 | BUY / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool0-trained_online_reset_rates&step=20&bin=49&neuron=10527&compare=development-pool0-trained_online_carry) |
+| development / 0 | 22:20 | HOLD / HOLD | 0 / 0 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool0-trained_online_reset_rates&step=21&bin=49&neuron=10527&compare=development-pool0-trained_online_carry) |
+| development / 0 | 22:25 | HOLD / HOLD | 0 / 0 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool0-trained_online_reset_rates&step=22&bin=49&neuron=10527&compare=development-pool0-trained_online_carry) |
+| development / 0 | 22:30 | HOLD / BUY | 0 / 2 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool0-trained_online_reset_rates&step=23&bin=49&neuron=10527&compare=development-pool0-trained_online_carry) |
+| development / 1 | 20:35 | BUY / BUY | 31 / 31 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool1-trained_online_reset_rates&step=0&bin=49&neuron=10527&compare=development-pool1-trained_online_carry) |
+| development / 1 | 20:40 | BUY / BUY | 9 / 9 | BUY / BUY | [Inspect](http://127.0.0.1:8767/?run=development-pool1-trained_online_reset_rates&step=1&bin=49&neuron=10527&compare=development-pool1-trained_online_carry) |
+| development / 1 | 20:45 | HOLD / HOLD | 0 / 0 | BUY / BUY | [Inspect](http://127.0.0.1:8767/?run=development-pool1-trained_online_reset_rates&step=2&bin=49&neuron=10527&compare=development-pool1-trained_online_carry) |
+| development / 1 | 20:50 | HOLD / SELL | 0 / 1 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool1-trained_online_reset_rates&step=3&bin=49&neuron=10527&compare=development-pool1-trained_online_carry) |
+| development / 1 | 20:55 | HOLD / HOLD | 0 / 0 | hold / SELL | [Inspect](http://127.0.0.1:8767/?run=development-pool1-trained_online_reset_rates&step=4&bin=49&neuron=10527&compare=development-pool1-trained_online_carry) |
+| development / 1 | 21:00 | HOLD / HOLD | 0 / 0 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool1-trained_online_reset_rates&step=5&bin=49&neuron=10527&compare=development-pool1-trained_online_carry) |
+| development / 1 | 21:05 | HOLD / HOLD | 0 / 0 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool1-trained_online_reset_rates&step=6&bin=49&neuron=10527&compare=development-pool1-trained_online_carry) |
+| development / 1 | 21:10 | HOLD / HOLD | 0 / 0 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool1-trained_online_reset_rates&step=7&bin=49&neuron=10527&compare=development-pool1-trained_online_carry) |
+| development / 1 | 21:15 | HOLD / HOLD | 0 / 0 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool1-trained_online_reset_rates&step=8&bin=49&neuron=10527&compare=development-pool1-trained_online_carry) |
+| development / 1 | 21:20 | HOLD / HOLD | 0 / 0 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool1-trained_online_reset_rates&step=9&bin=49&neuron=10527&compare=development-pool1-trained_online_carry) |
+| development / 1 | 21:25 | HOLD / BUY | 0 / 1 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool1-trained_online_reset_rates&step=10&bin=49&neuron=10527&compare=development-pool1-trained_online_carry) |
+| development / 1 | 21:30 | HOLD / HOLD | 0 / 0 | hold / BUY | [Inspect](http://127.0.0.1:8767/?run=development-pool1-trained_online_reset_rates&step=11&bin=49&neuron=10527&compare=development-pool1-trained_online_carry) |
+| development / 1 | 21:35 | HOLD / HOLD | 0 / 0 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool1-trained_online_reset_rates&step=12&bin=49&neuron=10527&compare=development-pool1-trained_online_carry) |
+| development / 1 | 21:45 | BUY / HOLD | 1 / 0 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool1-trained_online_reset_rates&step=13&bin=49&neuron=10527&compare=development-pool1-trained_online_carry) |
+| development / 1 | 21:50 | HOLD / HOLD | 0 / 0 | BUY / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool1-trained_online_reset_rates&step=14&bin=49&neuron=10527&compare=development-pool1-trained_online_carry) |
+| development / 1 | 21:55 | HOLD / BUY | 0 / 1 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool1-trained_online_reset_rates&step=15&bin=49&neuron=10527&compare=development-pool1-trained_online_carry) |
+| development / 1 | 22:00 | HOLD / HOLD | 0 / 0 | hold / BUY | [Inspect](http://127.0.0.1:8767/?run=development-pool1-trained_online_reset_rates&step=16&bin=49&neuron=10527&compare=development-pool1-trained_online_carry) |
+| development / 1 | 22:05 | HOLD / BUY | 0 / 1 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool1-trained_online_reset_rates&step=17&bin=49&neuron=10527&compare=development-pool1-trained_online_carry) |
+| development / 1 | 22:10 | HOLD / HOLD | 0 / 0 | hold / BUY | [Inspect](http://127.0.0.1:8767/?run=development-pool1-trained_online_reset_rates&step=18&bin=49&neuron=10527&compare=development-pool1-trained_online_carry) |
+| development / 1 | 22:15 | HOLD / HOLD | 0 / 0 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool1-trained_online_reset_rates&step=19&bin=49&neuron=10527&compare=development-pool1-trained_online_carry) |
+| development / 1 | 22:20 | BUY / HOLD | 1 / 0 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool1-trained_online_reset_rates&step=20&bin=49&neuron=10527&compare=development-pool1-trained_online_carry) |
+| development / 1 | 22:25 | HOLD / HOLD | 0 / 1 | BUY / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool1-trained_online_reset_rates&step=21&bin=49&neuron=10527&compare=development-pool1-trained_online_carry) |
+| development / 1 | 22:30 | HOLD / HOLD | 0 / 0 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=development-pool1-trained_online_reset_rates&step=22&bin=49&neuron=10527&compare=development-pool1-trained_online_carry) |
+| test / 0 | 22:35 | HOLD / HOLD | 18 / 18 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=test-pool0-trained_online_reset_rates&step=0&bin=49&neuron=10527&compare=test-pool0-trained_online_carry) |
+| test / 0 | 22:40 | HOLD / BUY | 0 / 2 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=test-pool0-trained_online_reset_rates&step=1&bin=49&neuron=10527&compare=test-pool0-trained_online_carry) |
+| test / 0 | 22:45 | SELL / HOLD | 1 / 0 | hold / BUY | [Inspect](http://127.0.0.1:8767/?run=test-pool0-trained_online_reset_rates&step=2&bin=49&neuron=10527&compare=test-pool0-trained_online_carry) |
+| test / 0 | 22:50 | HOLD / HOLD | 0 / 0 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=test-pool0-trained_online_reset_rates&step=3&bin=49&neuron=10527&compare=test-pool0-trained_online_carry) |
+| test / 0 | 22:55 | HOLD / HOLD | 0 / 0 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=test-pool0-trained_online_reset_rates&step=4&bin=49&neuron=10527&compare=test-pool0-trained_online_carry) |
+| test / 0 | 23:00 | BUY / HOLD | 2 / 0 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=test-pool0-trained_online_reset_rates&step=5&bin=49&neuron=10527&compare=test-pool0-trained_online_carry) |
+| test / 0 | 23:05 | BUY / HOLD | 1 / 0 | BUY / hold | [Inspect](http://127.0.0.1:8767/?run=test-pool0-trained_online_reset_rates&step=6&bin=49&neuron=10527&compare=test-pool0-trained_online_carry) |
+| test / 0 | 23:10 | BUY / HOLD | 1 / 0 | BUY / hold | [Inspect](http://127.0.0.1:8767/?run=test-pool0-trained_online_reset_rates&step=7&bin=49&neuron=10527&compare=test-pool0-trained_online_carry) |
+| test / 0 | 23:15 | BUY / BUY | 1 / 1 | BUY / hold | [Inspect](http://127.0.0.1:8767/?run=test-pool0-trained_online_reset_rates&step=8&bin=49&neuron=10527&compare=test-pool0-trained_online_carry) |
+| test / 0 | 23:20 | BUY / HOLD | 1 / 0 | BUY / BUY | [Inspect](http://127.0.0.1:8767/?run=test-pool0-trained_online_reset_rates&step=9&bin=49&neuron=10527&compare=test-pool0-trained_online_carry) |
+| test / 0 | 23:30 | BUY / BUY | 1 / 1 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=test-pool0-trained_online_reset_rates&step=10&bin=49&neuron=10527&compare=test-pool0-trained_online_carry) |
+| test / 0 | 23:35 | HOLD / SELL | 0 / 4 | BUY / BUY | [Inspect](http://127.0.0.1:8767/?run=test-pool0-trained_online_reset_rates&step=11&bin=49&neuron=10527&compare=test-pool0-trained_online_carry) |
+| test / 0 | 23:40 | BUY / SELL | 1 / 1 | hold / SELL | [Inspect](http://127.0.0.1:8767/?run=test-pool0-trained_online_reset_rates&step=12&bin=49&neuron=10527&compare=test-pool0-trained_online_carry) |
+| test / 0 | 23:50 | BUY / HOLD | 1 / 0 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=test-pool0-trained_online_reset_rates&step=13&bin=49&neuron=10527&compare=test-pool0-trained_online_carry) |
+| test / 0 | 23:55 | BUY / SELL | 2 / 2 | BUY / hold | [Inspect](http://127.0.0.1:8767/?run=test-pool0-trained_online_reset_rates&step=14&bin=49&neuron=10527&compare=test-pool0-trained_online_carry) |
+| test / 0 | 00:00 | BUY / BUY | 1 / 1 | SELL / SELL | [Inspect](http://127.0.0.1:8767/?run=test-pool0-trained_online_reset_rates&step=15&bin=49&neuron=10527&compare=test-pool0-trained_online_carry) |
+| test / 0 | 00:05 | BUY / BUY | 2 / 4 | hold / BUY | [Inspect](http://127.0.0.1:8767/?run=test-pool0-trained_online_reset_rates&step=16&bin=49&neuron=10527&compare=test-pool0-trained_online_carry) |
+| test / 0 | 00:10 | HOLD / HOLD | 0 / 0 | SELL / BUY | [Inspect](http://127.0.0.1:8767/?run=test-pool0-trained_online_reset_rates&step=17&bin=49&neuron=10527&compare=test-pool0-trained_online_carry) |
+| test / 0 | 00:15 | BUY / SELL | 1 / 2 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=test-pool0-trained_online_reset_rates&step=18&bin=49&neuron=10527&compare=test-pool0-trained_online_carry) |
+| test / 0 | 00:20 | BUY / HOLD | 1 / 1 | BUY / SELL | [Inspect](http://127.0.0.1:8767/?run=test-pool0-trained_online_reset_rates&step=19&bin=49&neuron=10527&compare=test-pool0-trained_online_carry) |
+| test / 0 | 00:30 | HOLD / BUY | 0 / 2 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=test-pool0-trained_online_reset_rates&step=20&bin=49&neuron=10527&compare=test-pool0-trained_online_carry) |
+| test / 1 | 22:35 | BUY / BUY | 21 / 21 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=test-pool1-trained_online_reset_rates&step=0&bin=49&neuron=10527&compare=test-pool1-trained_online_carry) |
+| test / 1 | 22:40 | BUY / HOLD | 1 / 0 | BUY / BUY | [Inspect](http://127.0.0.1:8767/?run=test-pool1-trained_online_reset_rates&step=1&bin=49&neuron=10527&compare=test-pool1-trained_online_carry) |
+| test / 1 | 22:45 | HOLD / HOLD | 0 / 0 | BUY / hold | [Inspect](http://127.0.0.1:8767/?run=test-pool1-trained_online_reset_rates&step=2&bin=49&neuron=10527&compare=test-pool1-trained_online_carry) |
+| test / 1 | 22:50 | HOLD / BUY | 0 / 1 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=test-pool1-trained_online_reset_rates&step=3&bin=49&neuron=10527&compare=test-pool1-trained_online_carry) |
+| test / 1 | 22:55 | BUY / HOLD | 1 / 0 | hold / BUY | [Inspect](http://127.0.0.1:8767/?run=test-pool1-trained_online_reset_rates&step=4&bin=49&neuron=10527&compare=test-pool1-trained_online_carry) |
+| test / 1 | 23:00 | HOLD / BUY | 0 / 1 | BUY / hold | [Inspect](http://127.0.0.1:8767/?run=test-pool1-trained_online_reset_rates&step=5&bin=49&neuron=10527&compare=test-pool1-trained_online_carry) |
+| test / 1 | 23:05 | HOLD / BUY | 0 / 1 | hold / BUY | [Inspect](http://127.0.0.1:8767/?run=test-pool1-trained_online_reset_rates&step=6&bin=49&neuron=10527&compare=test-pool1-trained_online_carry) |
+| test / 1 | 23:10 | HOLD / HOLD | 0 / 0 | hold / BUY | [Inspect](http://127.0.0.1:8767/?run=test-pool1-trained_online_reset_rates&step=7&bin=49&neuron=10527&compare=test-pool1-trained_online_carry) |
+| test / 1 | 23:15 | SELL / SELL | 1 / 1 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=test-pool1-trained_online_reset_rates&step=8&bin=49&neuron=10527&compare=test-pool1-trained_online_carry) |
+| test / 1 | 23:20 | HOLD / BUY | 0 / 1 | SELL / SELL | [Inspect](http://127.0.0.1:8767/?run=test-pool1-trained_online_reset_rates&step=9&bin=49&neuron=10527&compare=test-pool1-trained_online_carry) |
+| test / 1 | 23:30 | BUY / BUY | 1 / 1 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=test-pool1-trained_online_reset_rates&step=10&bin=49&neuron=10527&compare=test-pool1-trained_online_carry) |
+| test / 1 | 23:35 | HOLD / SELL | 0 / 1 | BUY / BUY | [Inspect](http://127.0.0.1:8767/?run=test-pool1-trained_online_reset_rates&step=11&bin=49&neuron=10527&compare=test-pool1-trained_online_carry) |
+| test / 1 | 23:40 | HOLD / BUY | 0 / 1 | hold / SELL | [Inspect](http://127.0.0.1:8767/?run=test-pool1-trained_online_reset_rates&step=12&bin=49&neuron=10527&compare=test-pool1-trained_online_carry) |
+| test / 1 | 23:45 | BUY / BUY | 1 / 1 | hold / BUY | [Inspect](http://127.0.0.1:8767/?run=test-pool1-trained_online_reset_rates&step=13&bin=49&neuron=10527&compare=test-pool1-trained_online_carry) |
+| test / 1 | 23:50 | HOLD / BUY | 0 / 1 | BUY / BUY | [Inspect](http://127.0.0.1:8767/?run=test-pool1-trained_online_reset_rates&step=14&bin=49&neuron=10527&compare=test-pool1-trained_online_carry) |
+| test / 1 | 23:55 | HOLD / HOLD | 0 / 2 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=test-pool1-trained_online_reset_rates&step=15&bin=49&neuron=10527&compare=test-pool1-trained_online_carry) |
+| test / 1 | 00:00 | HOLD / HOLD | 0 / 0 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=test-pool1-trained_online_reset_rates&step=16&bin=49&neuron=10527&compare=test-pool1-trained_online_carry) |
+| test / 1 | 00:05 | HOLD / HOLD | 0 / 0 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=test-pool1-trained_online_reset_rates&step=17&bin=49&neuron=10527&compare=test-pool1-trained_online_carry) |
+| test / 1 | 00:15 | HOLD / BUY | 0 / 1 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=test-pool1-trained_online_reset_rates&step=18&bin=49&neuron=10527&compare=test-pool1-trained_online_carry) |
+| test / 1 | 00:20 | HOLD / BUY | 0 / 2 | hold / BUY | [Inspect](http://127.0.0.1:8767/?run=test-pool1-trained_online_reset_rates&step=19&bin=49&neuron=10527&compare=test-pool1-trained_online_carry) |
+| test / 1 | 00:25 | SELL / HOLD | 1 / 0 | hold / hold | [Inspect](http://127.0.0.1:8767/?run=test-pool1-trained_online_reset_rates&step=20&bin=49&neuron=10527&compare=test-pool1-trained_online_carry) |
+| test / 1 | 00:30 | HOLD / BUY | 0 / 1 | SELL / hold | [Inspect](http://127.0.0.1:8767/?run=test-pool1-trained_online_reset_rates&step=21&bin=49&neuron=10527&compare=test-pool1-trained_online_carry) |

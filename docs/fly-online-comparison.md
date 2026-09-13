@@ -1,12 +1,87 @@
 # Longer online learning comparison
 
-**Current capture status:** all eight development conditions are captured and
-independently audited: 188 observations and 9,400 native bins. Recovery 02 was
-preempted during condition seven and its schedule was
-stopped. A separate non-preemptible completion amendment retains six recordings
-and captures ten conditions from fresh starts. The saved development totals fail
-the profit requirement; no held-out result is available. See the
-[preemption and completion record](#complete-after-provider-preemption).
+**Final status:** all sixteen conditions are captured and independently audited:
+360 observations and 18,000 native bins. The amended completion report passed
+its full evidence gate, and the temporary completion app was stopped at
+04:12:56 UTC on September 13. The main paper app remains deployed. No condition
+passed development, and no policy was promoted. The
+[preemption and completion record](#complete-after-provider-preemption) retains
+both amendments and the unsuccessful attempts.
+
+## Final audited result
+
+The [complete result record](../reports/fly-online-result-11.json) covers the two
+fixed pools, ALL and baton. Each arm and phase starts with separate $1,000 paper
+capital: $250 per pool and $500 idle. Simulated execution costs are included;
+hosting is excluded from equity.
+
+| Condition | Development equity | Test equity | Test fills | Test fees |
+| --- | ---: | ---: | ---: | ---: |
+| Pristine frozen | $946.73 | $986.34 | 10 | $3.08 |
+| Trained frozen | $942.86 | $976.36 | 14 | $4.34 |
+| Trained online carry | $964.45 | $972.13 | 16 | $3.95 |
+| Trained online rate reset | $972.03 | $984.93 | 20 | $5.63 |
+
+Reset improves over online carry by $7.58 in development and $12.80 in test.
+It still loses $27.97 and $15.07 respectively, and trails pristine frozen by
+$1.41 in test. Its saved development selection was null before the first test
+capture; the held-out result does not change that decision. Previously trained
+frozen memory also trails pristine in both phases. These results do not prove
+that training is always harmful or that trace reset is a profitable fix.
+
+![Complete audited financial comparison](assets/fly-online-11-comparison.png)
+
+The 360 neural observations replay **90 unique eligible asset/time slots** across
+four arms: 47 development and 43 test slots. Six missing quotes remain explicit.
+Red crosses mark zero-valued inventory stress marks for an unavailable pool,
+not an observed market crash. No gap advances the brain or invents feedback.
+The two-hour phases do not establish monthly returns.
+
+All 18,000 bins passed independent ledger, feedback, image/news, boundary,
+plasticity and decoder reconstruction. The full projection audits verified
+displayed topology and plotted series. Finalization rehashed all retained arrays
+and checked distinct owning calls, selection timing, sealed inputs, identical
+native builds, the two amendments and their budget accounting. The ten new
+completion captures settled to a **$0.44795 conservative compute estimate**,
+within the $2 allowance; this is not the provider invoice.
+
+The [51-file evidence archive](../reports/fly-online-evidence-11.zip) contains the
+exact complete report, plan, price audit, sixteen chunk summaries, sixteen
+independent audits and sixteen completed receipts. Its SHA-256 is
+`e4dc0ca9be058e55e5dde4b2edad11a5170573b547ef37de2554a9aac1af570d`.
+It is about 1.7 MB compressed, with 10.4 MB of decoded JSON. Regenerate all five
+financial/learning PNG/SVG figures without the graph or a model call:
+
+```sh
+python3 -m zipfile -e reports/fly-online-evidence-11.zip runs/study-11-evidence
+uv run --extra plots python -m paperlab.fly_online_figure \
+  --root runs/study-11-evidence --out runs/study-11-figures
+```
+
+The archive transports existing independent audits. Repeating those audits from
+raw neural arrays requires the separately retained recordings and graph data.
+Use fresh output paths. With the complete recordings installed by the finalizer,
+the [90 paired-step links](fly-online-paired-steps-11.md) open matched observations
+in the read-only viewer on port 8767.
+
+![Held-out ALL neural and trading timeline](assets/fly-online-11-test-pool0.png)
+
+The completed-view browser check compared all sixteen served views to their
+audited JSON and inspected twelve selected observations across all four
+carry/reset pairs. Decision, phase, spike count, memory, timestamp links and
+mobile layout checks passed with model submissions blocked and no JavaScript
+errors. Reproduce it with the complete viewer running:
+
+```sh
+FLY_STUDY_ROOT=runs/online-complete-audit-11 \
+FLY_VIEW_URL=http://127.0.0.1:8767 \
+FLY_VIEW_CHECK_OUT=runs/online-complete-browser-new \
+  node scripts/check-fly-completed-online-view.cjs
+```
+
+The [next selective assay](fly-selective-traces.md) can now pass the real-study
+completion gate. It tests KC-only and DAN-only resets on historical inputs;
+its native execution and any later prospective financial test remain separate.
 
 The study 11 runner and offline auditor are implemented and tested, and the
 once-only dispatcher is connected after the normal paper cycle. The

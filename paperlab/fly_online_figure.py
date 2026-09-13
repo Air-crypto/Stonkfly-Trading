@@ -147,7 +147,7 @@ def render(root, output):
         plt.close(fig)
     def decorate(ax):
         ax.set_facecolor('#172237');ax.grid(alpha=.12);ax.yaxis.set_major_locator(MaxNLocator(5))
-    with plt.rc_context({'font.size':10,'font.family':'DejaVu Sans','text.color':foreground,
+    with plt.rc_context({'font.size':10,'font.family':'DejaVu Sans','text.color':foreground,'text.parse_math':False,
             'axes.labelcolor':foreground,'axes.titlecolor':foreground,'xtick.color':muted,
             'ytick.color':muted,'axes.edgecolor':'#52617a','svg.fonttype':'none'}):
         fig,axes=plt.subplots(2,2,figsize=(14,9),gridspec_kw={'height_ratios':[2,1]},facecolor=background)
@@ -181,7 +181,7 @@ def render(root, output):
         fig.legend(handles=handles,loc='upper center',bbox_to_anchor=(.52,.886),ncols=2,frameon=False,labelcolor=foreground)
         selected=report['selection']['selected']
         fig.text(.04,.12,'Development gate: '+('candidate failed.' if selected is None else 'trace-reset candidate passed; no automatic promotion.'),fontsize=12)
-        fig.text(.04,.085,'Red ×: unavailable pool quote, conservatively marked. Green dotted line: cash plus the $0.1111 hosting allocation.',color=muted)
+        fig.text(.04,.085,'Red ×: missing quote; affected inventory valued at $0, not an observed crash. Green: cash + $0.1111 hosting.',color=muted)
         fig.text(.04,.055,'Test cannot change development selection. Indicative DEX fills; two pools and four hours do not establish monthly profitability.',color=muted)
         fig.text(.04,.025,('Synthetic diagnostics and prices; no market result. ' if fixture else '')+'Plan: '+report['plan_sha256'][:24]+'…',fontsize=9,color=muted)
         save(fig,'comparison')
@@ -193,7 +193,7 @@ def render(root, output):
                 title=('SYNTHETIC FIXTURE · ' if fixture else 'Amended recovery · ' if amended else '')+f'Pool {pool} · {stage}: decisions, fills and learning'
                 fig.text(.04,.967,title,fontsize=18,weight='bold')
                 fig.text(.04,.935,'▲ / ▼: BUY / SELL fills processed at this slot. B / H / S: new BUY / HOLD / SELL decisions. ×: no neural observation.',color=muted)
-                fig.text(.04,.913,'BUY targets 50% exposure and can rebalance by selling. Red × on equity: an unavailable quote with a conservative stress mark.',fontsize=9.5,color=muted)
+                fig.text(.04,.913,'BUY targets 50% exposure and can rebalance by selling. Red ×: missing quote; inventory valued at $0, not an observed crash.',fontsize=9.5,color=muted)
                 heat=[];handles=[]
                 for k,arm in enumerate(ARMS):
                     rows=lanes[chunk_name(stage,pool,arm)]['rows'];xs=np.arange(25)*5

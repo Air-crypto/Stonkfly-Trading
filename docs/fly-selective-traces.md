@@ -128,10 +128,15 @@ gate requires the actual study 11 registration, all completed audits and an ende
 window; synthetic fixtures cannot pass. A completed negative result can pass
 this handoff, since it authorizes a later mechanism test, not a policy promotion.
 
-**No real completion bundle exists yet.** Study 11 is still collecting. These
-commands become usable only after the observer has produced its final audited
-report. They perform local file operations and do not upload, deploy or submit a
-Modal job:
+**The actual study 11 completion bundle passed its gate on September 13, 2026.**
+All sixteen recording audits are complete, with 360 observations and 18,000 bins.
+The [result and evidence archive](fly-online-comparison.md#final-audited-result)
+preserve the failed development outcome and both disclosed amendments. The
+51-file native-assay bundle has report SHA-256
+`e707f1b783d19a790e11cd635a04ecf716cb33539bfdb4fe1c6ee2a4bb9efdba` and
+bundle SHA-256 `c81d685e587e258f8702102aa6da702c3b7f5c7ea6112349f47d48ecf769fbc8`.
+These commands perform local file operations and do not upload, deploy or submit
+a Modal job:
 
 ```sh
 uv run --extra dev python -m paperlab.fly_study_evidence_bundle pack \

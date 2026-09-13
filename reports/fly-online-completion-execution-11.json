@@ -1,13 +1,13 @@
 {
-  "status": "held_out_capture_running",
-  "observed_at": 1789272176.9627898,
+  "status": "completed_audited_and_temporary_app_stopped",
+  "observed_at": 1789272974.836992,
   "app": {
     "app_id": "ap-53YtObJ53DMnzH3wG3xfH1",
     "description": "fly-paper-completion-11",
-    "state": "deployed",
-    "tasks": "1",
+    "state": "stopped",
+    "tasks": "0",
     "created_at": "2026-09-12 22:19:34-05:00",
-    "stopped_at": null
+    "stopped_at": "2026-09-12 23:12:56-05:00"
   },
   "first_claim": {
     "status": "claimed",
@@ -26,7 +26,7 @@
   },
   "call_state": "completed",
   "retained_conditions": 6,
-  "new_completed_conditions": 8,
+  "new_completed_conditions": 10,
   "protocol_sha256": "24e12606eaba9e3112dc820ef0ce9f815ef3b4836046cbf6c6f76be08b4aeb4f",
   "cloud_preflight_sha256": "6bc744799809ac9f390f3928c15336ecd1e46ceb3b580ee532ace5e88e132a33",
   "deploy_log_sha256": "750fae00eca4a55e781e5cbb68da9eae21abcb65123d69ad177cfa3d142d8c24",
@@ -150,22 +150,8 @@
     "fees": 1.875,
     "fills": 6
   },
-  "active_receipt": {
-    "status": "claimed",
-    "chunk": "test-pool1-trained_online_carry",
-    "call_id": "fc-01M2CEVR1PFMFJ67704980SGQJ",
-    "input_id": "in-01M2CEVR1ZMCVZX2W6B1AJE8GA:1789272121433-0",
-    "claimed_at": 1789272126.328576,
-    "plan_sha256": "3f0e3cf8e5a1187ff5bf4ed4cc128e8c3457c1a14ae02fd899d3e8548709f045",
-    "source_sha256": "5862a6aebfe9db84c39d94564a230eb8f7bf8e5703bbf19ddaf64d246f529dc0",
-    "amendment_sha256": "aa569672b4e724355fd601c08aae6e217c866f7b7d2b81d0a1c5315436743e38",
-    "remote_path": "/state/registered-paper-11-completion-01/chunks/test-pool1-trained_online_carry/artifacts",
-    "reserved_usd": 0.1608936,
-    "dispatch": "nonpreemptible-completion-worker-shared-lease",
-    "nonpreemptible": true,
-    "price_multiplier": 3
-  },
-  "active_call_state": "call_pending",
+  "active_receipt": null,
+  "active_call_state": "all_capture_calls_completed",
   "first_recording_audit": "passed",
   "cloud_selection": {
     "plan_sha256": "3f0e3cf8e5a1187ff5bf4ed4cc128e8c3457c1a14ae02fd899d3e8548709f045",
@@ -226,10 +212,10 @@
   },
   "selection_precedes_first_test_claim": true,
   "completed_conditions": 8,
-  "independently_audited_conditions": 14,
+  "independently_audited_conditions": 16,
   "development_full_audit_sha256": "907d5e6353c885dbee7e672b9ae1ac98ddd52c325ea8310e0e69bc2ba86a3b6e",
   "second_recording_audit": "passed",
-  "captured_conditions": 14,
+  "captured_conditions": 16,
   "independent_audits": {
     "development-pool0-pristine_frozen": {
       "projection_sha256": "7f1ad7c943a46f91a131006a7a9ea6c351b3034a380374aa1c871e463da861e4",
@@ -328,10 +314,49 @@
       "call_id": "fc-01M2CEJJVFZTKYWGE364BE8GQD",
       "observations": 22,
       "native_bins": 1100
+    },
+    "test-pool1-trained_online_carry": {
+      "projection_sha256": "c6b6bf28b06be975cc8d91ddef97662cc616b09d6d431ac056443f2fa1c74100",
+      "audit_sha256": "e515ff65c7af079a7f1dff7c295bfa4cdf2702e809900609ecdde36b3d77740e",
+      "call_id": "fc-01M2CEVR1PFMFJ67704980SGQJ",
+      "observations": 22,
+      "native_bins": 1100
+    },
+    "test-pool1-trained_online_reset_rates": {
+      "projection_sha256": "1b00d8d43d04e5fb0407ac9f21f1e53332888cf9bf107ed57d939242cb0b690e",
+      "audit_sha256": "77670d9b15520d97ecb23f24e97953a050cae57a539ffbeb2e89826554dce6eb",
+      "call_id": "fc-01M2CF4X12WGQP4NYCR38484Q0",
+      "observations": 22,
+      "native_bins": 1100
     }
   },
-  "audited_neural_observations": 316,
-  "audited_native_bins": 15800,
+  "audited_neural_observations": 360,
+  "audited_native_bins": 18000,
   "selective_worker": "prepared_not_deployed",
-  "selective_worker_validation_sha256": "5b3c8e5b9b85e100b6c90a4020685fe79cb3e1267274ff736bf33be527691c81"
+  "selective_worker_validation_sha256": "5b3c8e5b9b85e100b6c90a4020685fe79cb3e1267274ff736bf33be527691c81",
+  "final_report_sha256": "e707f1b783d19a790e11cd635a04ecf716cb33539bfdb4fe1c6ee2a4bb9efdba",
+  "result_report_sha256": "cf50aab9f231d8654e150ca5936bdd02b1646d37981c88d21ff1d8571c130a4c",
+  "evidence_archive": {
+    "path": "reports/fly-online-evidence-11.zip",
+    "sha256": "e4dc0ca9be058e55e5dde4b2edad11a5170573b547ef37de2554a9aac1af570d",
+    "files": 51,
+    "compressed_bytes": 1724202,
+    "uncompressed_bytes": 10402811,
+    "report_sha256": "e707f1b783d19a790e11cd635a04ecf716cb33539bfdb4fe1c6ee2a4bb9efdba",
+    "scope": "Exact report, sealed plan, price audit, sixteen summaries, sixteen independent audits and sixteen completed-call receipts. Full native arrays are retained separately; this archive is sufficient to regenerate the financial/learning figures without model compute."
+  },
+  "main_app": {
+    "app_id": "ap-iago8vyn3jufBrB1dxuogO",
+    "description": "fly-paper-lab",
+    "state": "deployed",
+    "tasks": "1",
+    "created_at": "2026-09-11 21:19:32-05:00",
+    "stopped_at": null
+  },
+  "completion_compute": {
+    "reserved_total_usd": 1.608936,
+    "settled_estimate_usd": 0.44794953939033505,
+    "allowance_usd": 2,
+    "provider_bill": false
+  }
 }
