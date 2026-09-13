@@ -5,7 +5,8 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    # The full seeded suite takes ~14 minutes on hosted runners, before setup.
+    timeout-minutes: 25
     env:
       # Sealed news features require this value before Python starts.
       PYTHONHASHSEED: '0'
