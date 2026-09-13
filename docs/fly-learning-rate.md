@@ -1,6 +1,9 @@
 # Retain both traces and reduce update strength
 
-**Prepared; native execution is pending.** The [registered protocol](../reports/fly-learning-scale-protocol-01.json)
+**The single native call is running as of 04:52 UTC, September 13, 2026.**
+The [execution record](../reports/fly-learning-scale-execution-01.json) verifies
+its durable claim and active worker. Capture completion and the independent
+audit remain pending. The [registered protocol](../reports/fly-learning-scale-protocol-01.json)
 tests `eta = 0.0001` against the original `0.001`, retaining both KC and DAN
 rate histories. The [memory reconstruction](fly-selective-traces.md#why-the-single-resets-move-weights-more)
 motivates this choice: removing just one history leaves a large one-sided
