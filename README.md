@@ -150,9 +150,10 @@ not make this fixed decoder less active, and no policy was promoted.
 The [fresh market comparison](docs/fly-rate-market.md) uses independently
 checked RAY and STONK paper memories. Study 12 now has 91 passing checks and a
 06:00–10:00 UTC window on September 13: two hours of development, then two
-hours of test data. Cloud deployment and its prospective witness are pending.
-It will compare both learning rates against frozen controls, including fees
-and turnover. No improved trading result has been established.
+hours of test data. Its dedicated cloud worker is deployed and the registration
+was witnessed before the window starts. It will compare both learning rates
+against frozen controls, including fees and turnover. Capture and audits follow
+collection; no improved trading result has been established.
 
 Open all twelve paired recordings from the included 3.75 MB archive:
 

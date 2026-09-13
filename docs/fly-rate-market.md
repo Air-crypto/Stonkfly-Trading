@@ -7,10 +7,19 @@ costs, with a development decision saved before the test phase.
 
 The [study 12 registration](../reports/fly-rate-market-registration-12.json) now
 fixes development at **06:00–08:00 UTC** and test at **08:00–10:00 UTC** on
-September 13, 2026. Cloud deployment and a witness before 06:00 are still pending.
+September 13, 2026. The cloud witness was saved at **05:43:24 UTC**, before
+development. Its exact registration bytes, all 67 execution source hashes and
+owning call/input were independently read back and verified. The
+[deployment record](../reports/fly-rate-market-execution-12.json) retains this
+evidence. The temporary app and main paper app are both deployed.
 The [market preflight record](../reports/fly-rate-market-preflight-12.json)
 contains the 91 passing checks, execution source hashes and observed shared
 budget. No study 12 market observations have been simulated yet.
+
+The first metadata call settled to a $0.00303 compute estimate; the shared
+worker ledger stood at $3.34372. It only armed the future experiment. Its $3
+study allowance, $25 shared worker limit and provider-billing distinction
+remain in force.
 
 ## Checkpoint preparation
 
@@ -162,6 +171,13 @@ and capture calls share a $3 compute allowance within the existing $25 worker
 ledger, 75% stop threshold and 2× margin. Non-preemptible CPU/RAM pricing is
 accounted at 3×, with a $0.1608936 maximum reservation per call. These are
 compute estimates; provider billing also includes other resources.
+
+The initial image build failed before any study call: Modal serialized the
+entrypoint into `/root`, while the registered files were uploaded to
+`/opt/paperlab`. An explicit cloud project path fixed the import. Seven affected
+runtime tests passed again, and the subsequent real cloud build verified the
+entrypoint, pinned reference files and execution manifest. No registration had
+been witnessed before this fix, and no neural capture was retried.
 
 Inspect existing cloud state without creating a call:
 
