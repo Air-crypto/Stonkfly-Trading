@@ -752,6 +752,19 @@ arms lose less in this window; all six completed accounts lost money, and traine
 frozen memory performs worse on baton. No profitable or general learning benefit
 has been established.
 
+![Six audited development conditions](assets/fly-online-development-six-11.png)
+
+The large temporary dip on baton marks a missing quote: the account's remaining
+inventory is conservatively valued at zero for that slot. It is not an executed
+sale or evidence of that price trading. The figure labels it explicitly. To
+rebuild this partial figure from the retained recordings without running a model:
+
+```sh
+uv run python scripts/plot-fly-partial-development.py \
+  --original runs/online-cloud-11 --recovery runs/online-recovery-02 \
+  --out runs/online-six-figure
+```
+
 The [completion protocol](../reports/fly-online-completion-protocol-11.json)
 uses `fly-paper-completion-11` and the separate
 `/state/registered-paper-11-completion-01` directory. It retains the first six

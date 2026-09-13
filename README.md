@@ -277,6 +277,8 @@ retains the six completed recordings and starts ten conditions fresh, with the
 No development selection or held-out result exists yet. See the
 [completion run steps](docs/fly-online-comparison.md#complete-after-provider-preemption).
 
+![Six audited development conditions, including the missing baton quote](docs/assets/fly-online-development-six-11.png)
+
 The [full-window diagnostic figures](docs/fly-online-comparison.md#compare-the-full-financial-and-neural-timelines)
 align decisions, later fills, gate spikes, weight movement and learning history,
 with links back to matched circuit recordings. This preview is explicitly
