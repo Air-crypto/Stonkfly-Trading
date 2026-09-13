@@ -218,6 +218,27 @@ It reconstructs raw prices before downloading the larger neural arrays. Reads
 have bounded deadlines; interrupted reads never become new model submissions.
 Repeated downloads reuse verified files and reject changed evidence.
 
+To wait for the existing cloud work, run the optional local observer:
+
+```sh
+uv run --extra cloud python -m paperlab.fly_rate_watch \
+  --registration reports/fly-rate-market-registration-12.json \
+  --out runs/rate-results-12
+```
+
+It checks every five minutes for up to six hours and emits changed milestones.
+It stops when all recordings are captured, when a saved condition needs
+inspection, or when the observer reaches its own deadline. Three consecutive
+read timeouts also stop the observer; they do not establish a cloud failure.
+It rejects duplicate watchers on the same output and never submits, restarts,
+downloads large recordings or changes cloud work. `watch.json` records its last
+check; use the actual process status to determine whether it is still running.
+This observer runs on the laptop, while collection and model execution remain
+in Modal. Closing the observer does not stop those cloud jobs. Thirteen tests
+cover its waiting, timeout, ownership and attention boundaries.
+
+When it reports `observer_ready`, download the verified recordings:
+
 ```sh
 uv run --extra cloud python -m paperlab.fly_rate_results observe \
   --registration reports/fly-rate-market-registration-12.json \
