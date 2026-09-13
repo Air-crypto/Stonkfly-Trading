@@ -1,9 +1,12 @@
 # Separate KC and dopamine trace resets
 
-**Status on September 12, 2026: specified and checked against saved boundary
-arrays; native trajectories have not been run.** The current study 11 deployment
-and its pinned sources are unchanged. No selective-reset action or return is
-claimed here.
+**Status at 04:22 UTC on September 13, 2026: the one-off native assay is running.**
+Study 11 completed all sixteen recording audits, its real evidence gate passed,
+and its temporary completion app was stopped. The
+[execution record](../reports/fly-selective-execution-01.json) verifies the new
+unscheduled worker and durable claim for call `fc-01M2CFZMKK47PAV05S2QKSJ09D`.
+Capture completion, independent audit and the new paired-view checks remain
+pending. No selective-reset action or return is claimed here.
 
 The [first-drive reconstruction](fly-debugger.md#why-a-quiet-source-connection-can-still-update)
 found that earlier KC activity accounts for the first differing weight updates
@@ -172,9 +175,10 @@ uv run --extra dev python -m pytest -q tests/test_fly_study_evidence_bundle.py
 `paperlab.fly_selective_trace_cloud` now prepares the completed-study bundle,
 submits through a separate unscheduled worker, resumes its saved call, downloads the full
 recordings, runs the independent auditor and writes all twelve comparison views.
-**This worker has not been deployed yet.** Its activation must
-wait for study 11 capture and independent audits; none of that study's 56 pinned
-execution files or the cloud deployment changed while preparing this bridge.
+**The worker is deployed and its first call is running.** Activation followed
+study 11 capture and all independent audits. None of that study's 56 pinned
+execution files changed while preparing this bridge; its two amendments and
+unsuccessful receipts remain preserved.
 
 The local receipt distinguishes preparation from paid submission. An interrupted
 bundle upload can resume using the same content hash. Before submitting, the
@@ -222,8 +226,8 @@ uv run --extra dev python -m pytest -q \
 
 ## Next execution step
 
-After the actual study 11 finishes and passes its independent audits, deploy
-`selective_cloud.py`. It defines `fly-paper-selective-01` with no schedule, one
+The completed-study gate passed before deploying `selective_cloud.py`. It
+defines `fly-paper-selective-01` with no schedule, one
 2-CPU/8-GiB container, a 600-second timeout and a non-preemptible allocation.
 It uses the original `worker` lease and $25 budget ledger; the main trader and
 $15 collector configuration stay unchanged. The 420-second inner assay bound
@@ -239,7 +243,8 @@ This is a compute estimate; the provider invoice remains authoritative. The
 [worker validation record](../reports/fly-selective-worker-validation-01.json)
 covers resource limits, reservation before capture, failed-claim retention and
 refusal to reserve again for an already claimed assay. No deployment or native
-submission occurred in those tests.
+submission occurred in those tests. The subsequent deployment completed its
+real build import/source-availability check before the single native submission.
 
 ```sh
 # Only after the actual complete study has passed its recording audits:

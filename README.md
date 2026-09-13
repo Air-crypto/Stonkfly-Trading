@@ -121,8 +121,8 @@ the first different weight update in two recorded examples; that one-bin
 calculation does not determine later full-network behavior.
 
 The next [selective KC/DAN assay](docs/fly-selective-traces.md) tests each history
-separately across twelve full-network conditions. Its worker is prepared and
-its completed-study gate is now satisfied. Native selective trajectories and
+separately across twelve full-network conditions. Its unscheduled Modal worker
+is running after passing the actual completed-study gate. Audited selective results and
 any subsequent prospective financial test remain pending. No profitable fix is
 claimed from changed spikes or weights alone.
 
