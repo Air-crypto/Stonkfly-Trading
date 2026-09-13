@@ -1,0 +1,15 @@
+{
+  "status": "selected_trade_view_checked",
+  "url": "http://127.0.0.1:8767/?run=test-pool1-trained_online_reset_rates&compare=test-pool1-trained_online_carry&step=3&bin=43&neuron=10527",
+  "case_sha256": "19d419830730963e1e7f79a241fa8b5a5bda27dea8d017d482c876b304bca3f6",
+  "screenshot_sha256": "cd6d55df0495839965c1db686043922cc719b8b46cff10fce5e6c486109d19b1",
+  "script_sha256": "29424400809857c724997bea9ec1275b3607d3f03f4cc47f9e51a2f74d65a58b",
+  "current_action": "BUY",
+  "comparison_action": "HOLD",
+  "current_gate_bin_count": 1,
+  "comparison_gate_bin_count": 0,
+  "bin": 43,
+  "observation": 3,
+  "model_submissions": 0,
+  "errors": []
+}

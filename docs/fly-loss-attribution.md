@@ -53,6 +53,46 @@ unchanged. A subsequent rule needs a prospective registration, fresh development
 and test windows, equal-cost controls, and a net-outcome acceptance gate. No
 variant has been selected or promoted from this postmortem.
 
+## From gate spikes to execution costs
+
+The [decision-to-fill trace](fly-trade-trace-11.md) links every reset observation
+to its next execution slot and paired debugger view. The machine-readable
+[trace report](../reports/fly-trade-trace-11.json) covers all four variants:
+**360 decisions and 100 fills**, with every ledger replayed. It separates
+feedback received before a decision from the costs of that decision's later fill.
+
+In test, 16 reset fills followed decisions where pristine held; those fills
+incurred $9.60 in execution costs. This is not $9.60 of avoidable loss: skipping
+them would change inventory, later rewards and later decisions. Reset had 20
+fills overall versus pristine's 10, including different trades in other slots.
+
+Thirteen of reset's 20 test fills followed exactly one gate spike. Pristine also
+had seven single-gate fills out of ten. Gate count is not a calibrated estimate
+of return or confidence, so these counts do not justify simply raising the gate
+threshold. A subsequent test must measure the net value of trades it suppresses.
+
+One concrete case is baton at **22:50 UTC September 12**. Reset had left/right
+rates **42/44 Hz** and one gate spike, while carry had **34/42 Hz** and no gate
+spikes. The fixed decoder therefore produced BUY versus HOLD. Pristine also
+held. The reset BUY filled at **22:53:47 UTC**, incurring **$0.6832** in paid
+fees, execution spread and slippage, before any future exit allowance.
+
+The [raw-recording check](../reports/fly-trade-case-11.json) matches both original
+recording hashes and all 50 bins for the four decoder neurons. Reset's gate
+neuron 10527 fired once in bin 43, ending 440 ms into that observation; carry's
+gate neurons never fired. The [browser check](../reports/fly-trade-case-browser-11.json)
+confirmed the paired bin, BUY output and execution timeline with submissions
+disabled. Inspect the [paired moment](http://127.0.0.1:8767/?run=test-pool1-trained_online_reset_rates&compare=test-pool1-trained_online_carry&step=3&bin=43&neuron=10527)
+on the study 11 debugger. The displayed connection is an independently selected
+example, not a proven cause of the gate spike.
+
+![The gate spike and paired stored connection memory for the baton trade](assets/fly-trade-case-11.png)
+
+A separate execution detail prevents misdiagnosis: BUY is a **50% exposure
+target**, not an unconditional purchase. In test, two carry BUY targets and one
+reset BUY target produced rebalance SELL fills. These are consistent with the
+existing broker rule. They are not reversed orders or a proposed rule change.
+
 ## Verification and reproduction
 
 The [attribution report](../reports/fly-loss-attribution-11.json) retains every
@@ -70,6 +110,9 @@ python3 -m zipfile -e reports/fly-online-evidence-11.zip runs/study-11-evidence
 uv run --extra plots python -m paperlab.fly_loss_attribution \
   --root runs/study-11-evidence --out runs/study-11-losses --plot
 uv run --extra dev python -m pytest tests/test_fly_loss_attribution.py -q
+uv run python -m paperlab.fly_trade_trace \
+  --root runs/study-11-evidence --out runs/study-11-trades
+uv run --extra dev python -m pytest tests/test_fly_trade_trace.py -q
 ```
 
 Reuse an already extracted, unchanged evidence directory when available. Choose

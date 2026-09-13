@@ -55,6 +55,10 @@ candidate for a fresh experiment; it does not establish a profitable strategy.
 
 ![Audited price exposure and execution cost breakdown](docs/assets/fly-loss-attribution-11.png)
 
+Follow a concrete [gate-spike → BUY → delayed fill → cost example](docs/fly-loss-attribution.md#from-gate-spikes-to-execution-costs),
+or inspect the [complete reset decision-to-fill tables](docs/fly-trade-trace-11.md).
+BUY denotes an exposure target; some BUY targets generate rebalance sales.
+
 ## Inspect the fly
 
 The [interactive debugger](docs/fly-debugger.md) connects recorded activity to the

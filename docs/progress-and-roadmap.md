@@ -33,6 +33,10 @@ trade or learning hypothesis.
   it filled 20 trades versus pristine's 10. See the
   [loss breakdown](fly-loss-attribution.md). This is a fixed-fill diagnosis,
   not a profitable alternative backtest.
+- [x] Link all 360 decisions to their later execution slots and all 100 fills
+  to their originating decisions. Inspect a single-gate BUY against the raw
+  recording and paired browser view; distinguish BUY exposure targets from
+  actual purchases or rebalance sales.
 - [x] Explain concrete mechanisms: retained firing histories can update a
   currently quiet source connection; selective history resets can magnify
   updates; a lower learning rate can still create an extra gate spike and BUY.
