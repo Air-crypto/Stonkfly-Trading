@@ -1,0 +1,76 @@
+{
+  "status": "bounded_read_transfers_verified",
+  "source_sha256": "3095a41ff855228c6c6c28ead5ea36b2d25ae9bd3be39aba400cd77f5439da3e",
+  "tests": {
+    "passed": 8,
+    "junit_sha256": "d790dd21d2b8fbc95ec9af9f1f6bc2bf0802375752a76f46c5f81cc78f073a85"
+  },
+  "previous_transfer": "Task-owned read-only downloader terminated after two partial files stopped advancing for more than eight minutes. All 105 verified files preserved.",
+  "records": {
+    "development-pool1-trained_online_carry": {
+      "status": "all_artifacts_downloaded_and_hash_verified",
+      "chunk": "development-pool1-trained_online_carry",
+      "call_id": "fc-01M2CCJFZVBYCTRGTGZ6FEXKS3",
+      "files": 107,
+      "bytes": 870683140,
+      "seconds": 32.495334875013214,
+      "read_timeout_seconds": 90,
+      "maximum_read_attempts": 3,
+      "concurrent_files": 4,
+      "retries": [],
+      "new_neural_observations": 0,
+      "cloud_submissions": 0,
+      "source_sha256": "3095a41ff855228c6c6c28ead5ea36b2d25ae9bd3be39aba400cd77f5439da3e"
+    },
+    "development-pool1-trained_online_reset_rates": {
+      "status": "all_artifacts_downloaded_and_hash_verified",
+      "chunk": "development-pool1-trained_online_reset_rates",
+      "call_id": "fc-01M2CCVMYQEAN47T6NC5PBN794",
+      "files": 107,
+      "bytes": 860035275,
+      "seconds": 154.69077879199176,
+      "read_timeout_seconds": 90,
+      "maximum_read_attempts": 3,
+      "concurrent_files": 4,
+      "retries": [
+        {
+          "file": "trace/step-17.npz",
+          "attempt": 1,
+          "reason": "read_timeout"
+        },
+        {
+          "file": "trace/step-23.npz",
+          "attempt": 1,
+          "reason": "read_timeout"
+        }
+      ],
+      "new_neural_observations": 0,
+      "cloud_submissions": 0,
+      "source_sha256": "3095a41ff855228c6c6c28ead5ea36b2d25ae9bd3be39aba400cd77f5439da3e"
+    },
+    "test-pool0-pristine_frozen": {
+      "status": "all_artifacts_downloaded_and_hash_verified",
+      "chunk": "test-pool0-pristine_frozen",
+      "call_id": "fc-01M2CD4T1B5NMFMJPM42FEC2K4",
+      "files": 101,
+      "bytes": 720025314,
+      "seconds": 194.62491987500107,
+      "read_timeout_seconds": 90,
+      "maximum_read_attempts": 3,
+      "concurrent_files": 4,
+      "retries": [
+        {
+          "file": "trace/step-09.npz",
+          "attempt": 1,
+          "reason": "read_timeout"
+        }
+      ],
+      "new_neural_observations": 0,
+      "cloud_submissions": 0,
+      "source_sha256": "3095a41ff855228c6c6c28ead5ea36b2d25ae9bd3be39aba400cd77f5439da3e"
+    }
+  },
+  "new_neural_observations": 0,
+  "model_calls_retried": 0,
+  "interpretation": "Bounded reads completed stalled downloads and handled fresh file timeouts by repeating only artifact reads. Every published file matches its capture manifest."
+}

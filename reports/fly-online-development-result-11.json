@@ -1,0 +1,166 @@
+{
+  "status": "all_eight_development_conditions_audited",
+  "plan_sha256": "3f0e3cf8e5a1187ff5bf4ed4cc128e8c3457c1a14ae02fd899d3e8548709f045",
+  "conditions": {
+    "development-pool0-pristine_frozen": {
+      "summary_sha256": "9e4afe8d66af581c5f7eccd3b796ea391a79cd03fe920daef6a58fb9eea15708",
+      "audit_sha256": "8d1e76870fe5ed432ddefc1bf1cf6e6abb81811cddcb8c0ae5f5e2d5297dd2bf",
+      "projection_sha256": "7f1ad7c943a46f91a131006a7a9ea6c351b3034a380374aa1c871e463da861e4",
+      "receipt_sha256": "84903f2fbfe0403076fbc02ca8375ac063a4b5e05ecf0fe8a554cdc8d1c2385b",
+      "call_id": "fc-01M2C39V45W38QYAE6GYGE5STM",
+      "observations": 24,
+      "bins": 1200,
+      "equity": 205.27832713867951,
+      "fees": 1.6473295596582938,
+      "fills": 6
+    },
+    "development-pool0-trained_frozen": {
+      "summary_sha256": "bba74f991d4e03df264377b7a68848023ff58169457ef3a023b2532b6fc68dca",
+      "audit_sha256": "ac7538d9e3be35a9d9e47f2234a30110d21f6d7c2e90fe36e66ae21f6d9c4e00",
+      "projection_sha256": "63286011b0da229bd5401879451e86530d132da6fed15d90a9e4e7a086c0c9b6",
+      "receipt_sha256": "26d9a12be6a47b07b0c6be0190b8285912b0528ec941f4b36b291ae59fa6c6b4",
+      "call_id": "fc-01M2C3K020R8KA2RVEECYHXZWY",
+      "observations": 24,
+      "bins": 1200,
+      "equity": 207.3178081591549,
+      "fees": 1.7783201042861503,
+      "fills": 6
+    },
+    "development-pool0-trained_online_carry": {
+      "summary_sha256": "5b6df27a888dc53762770142339b7204f004b2246c5485636c86e086ca9212de",
+      "audit_sha256": "30d9a11849e4821d0bb100014102e4ecbd0d4c1ee91420b996d3d55f8bfdc801",
+      "projection_sha256": "4a4ae0165bb9aca7887174b5f303ee40a3946946c491c9856f7f12a8b25a5b8f",
+      "receipt_sha256": "66b2130b32e36221f83d6760d121de91e1ce2b8db9bd3c0d4956cf5d074316e5",
+      "call_id": "fc-01M2CAEPMFKKVA7MTNM361HY24",
+      "observations": 24,
+      "bins": 1200,
+      "equity": 225.2559565480359,
+      "fees": 0.9375,
+      "fills": 3
+    },
+    "development-pool0-trained_online_reset_rates": {
+      "summary_sha256": "304c4366b560a3afe3011fd071677a1724ddcc4a514e77b86207e601147b4d84",
+      "audit_sha256": "a0b27a28872ac1856739935cca9be4df34226029fa05d5e618b2b1eefb129188",
+      "projection_sha256": "3e160552ac04e95c99ffaf8bc8b891e41d26f326b23beb1d58a38429d790956f",
+      "receipt_sha256": "27cfde1180f4123bab5a0261bc0e7d639603093cc39d1bfb80d958dd6303fa79",
+      "call_id": "fc-01M2CAJC61TNYQ17Z1MPMA4GX2",
+      "observations": 24,
+      "bins": 1200,
+      "equity": 234.33009561783064,
+      "fees": 1.8335949094652852,
+      "fills": 6
+    },
+    "development-pool1-pristine_frozen": {
+      "summary_sha256": "18148cc9890e8542e53632ac1611b02731971a4abe3566d7f2dad1038fb4a083",
+      "audit_sha256": "77a9fe1b52039ff24596d20a0f2dc02f3db4051da340c8f8e022b2d27a321caf",
+      "projection_sha256": "0a35a72b5fb5419f80ca25f9f2070d25f77611ca390135b4275405a3db6aa26d",
+      "receipt_sha256": "7a00bf333f31cf363d990a41b9c5e8e50eca12da91398248768c10e19e047b9a",
+      "call_id": "fc-01M2CAVHS9WKMXS1KDBA28XYPA",
+      "observations": 23,
+      "bins": 1150,
+      "equity": 241.45599940950936,
+      "fees": 0.9375,
+      "fills": 3
+    },
+    "development-pool1-trained_frozen": {
+      "summary_sha256": "3c71a8b072e0e7dbc0d1b9a1822f09682f2d3e59601a69fdde017033dda65ebc",
+      "audit_sha256": "106996b930acbf5cc94dcca834383ff74c6f3481092e64a9ed5da1a5e139a288",
+      "projection_sha256": "77caa836c13bb451f84ec5d20db5db923f403a8f88042645aed5b2bcf479dea2",
+      "receipt_sha256": "9d2168cea78f8c748d3ff1609d667f1a024925b182ce8376b651a5ad1cf01d19",
+      "call_id": "fc-01M2CB4PXNE9YTRYV2T69J9S8F",
+      "observations": 23,
+      "bins": 1150,
+      "equity": 235.5446070914172,
+      "fees": 1.5854708909782442,
+      "fills": 6
+    },
+    "development-pool1-trained_online_carry": {
+      "summary_sha256": "32036d3d414317d1c72a0b238aa11e33b994fa8819d2130ced859b23d17ff0c8",
+      "audit_sha256": "0a8487fdc2d24193331daa3311e571931c8be8c0fc3949884b48a04ebd7e1291",
+      "projection_sha256": "3eaa222e5e1baa364dbfe908e6bbe5023e71599bde9f7fde0d6e43d2cb0bd985",
+      "receipt_sha256": "6543270a4f3ec13007780a04ba0a2e04a4fb86e7a943f62fce2d1462cceb3abe",
+      "call_id": "fc-01M2CCJFZVBYCTRGTGZ6FEXKS3",
+      "observations": 23,
+      "bins": 1150,
+      "equity": 239.1966532044607,
+      "fees": 1.25,
+      "fills": 4
+    },
+    "development-pool1-trained_online_reset_rates": {
+      "summary_sha256": "7d0717890cd7c9540063cf14e572ed993ae4fd3f05595450a2273e0fd1222231",
+      "audit_sha256": "14ba66da591fe40202b08ab219a7c894b6f3ce784c7f8761b0045d2f66ad008f",
+      "projection_sha256": "21af10a65056855be63a9cdc37b31b88a41e00ea36fbd7dd88f6d2076d787797",
+      "receipt_sha256": "f3bb0796d45a29df3f77c91e6fdb35e021895c365965e93c2209e0d557f9293a",
+      "call_id": "fc-01M2CCVMYQEAN47T6NC5PBN794",
+      "observations": 23,
+      "bins": 1150,
+      "equity": 237.69890870304707,
+      "fees": 1.875,
+      "fills": 6
+    }
+  },
+  "selection": {
+    "plan_sha256": "3f0e3cf8e5a1187ff5bf4ed4cc128e8c3457c1a14ae02fd899d3e8548709f045",
+    "selected": null,
+    "development_equity": {
+      "pristine_frozen": 946.7343265481888,
+      "trained_frozen": 942.8624152505721,
+      "trained_online_carry": 964.4526097524965,
+      "trained_online_reset_rates": 972.0290043208778
+    },
+    "development_observations": {
+      "pristine_frozen": [
+        24,
+        23
+      ],
+      "trained_frozen": [
+        24,
+        23
+      ],
+      "trained_online_carry": [
+        24,
+        23
+      ],
+      "trained_online_reset_rates": [
+        24,
+        23
+      ]
+    },
+    "cash_equity": 1000,
+    "hosting_allocation_usd": 0.1111111111111111,
+    "development_chunk_sha256": {
+      "development-pool0-pristine_frozen": "aba8c89a7d5fff4cb63827e47a2c5e6c804d7919b06f16dfa567e9ec34d249ae",
+      "development-pool0-trained_frozen": "56685231ce51e6c446426d1b9425d144e64901a735152241374d3de5d1a647ee",
+      "development-pool0-trained_online_carry": "0ae4cbfad25fe7f90d7586c304e7d2b5deb7786e1cf2d5b08947d3d521a6a446",
+      "development-pool0-trained_online_reset_rates": "f78b7608181b663b67bbb828989b2c943700d27e25023315f7abd122cda517b1",
+      "development-pool1-pristine_frozen": "df84c3d1ab5fe58044c9fc359b5713ff95800a4cd518c11a1d43b6d53ec0c7e8",
+      "development-pool1-trained_frozen": "3906384dae0c668a8d228de1a6f6e89b9636ba9e3ae734e70712369ec4f80d11",
+      "development-pool1-trained_online_carry": "b22efc9826be15cb271d1fdea76bd9d09a13418c5fbcd70538f3103461c2b62f",
+      "development-pool1-trained_online_reset_rates": "7c3ad12a58f5763f3ff50ba1d1d968742e8d0e87ab256cc4d03bfa41d2a19cd4"
+    },
+    "test_simulated_before_selection": false
+  },
+  "selection_receipt": {
+    "selected_at": 1789270325.3668854,
+    "call_id": "fc-01M2CD4T1B5NMFMJPM42FEC2K4",
+    "input_id": "in-01M2CD4T1KNDP6A1ZM3CXVR9AE:1789270321227-0",
+    "selection_sha256": "9145985b2afb4f1743e580accf067aca50206c30bf1e531c3a91fb7ba623f1ed",
+    "development_chunk_sha256": {
+      "development-pool0-pristine_frozen": "aba8c89a7d5fff4cb63827e47a2c5e6c804d7919b06f16dfa567e9ec34d249ae",
+      "development-pool0-trained_frozen": "56685231ce51e6c446426d1b9425d144e64901a735152241374d3de5d1a647ee",
+      "development-pool0-trained_online_carry": "0ae4cbfad25fe7f90d7586c304e7d2b5deb7786e1cf2d5b08947d3d521a6a446",
+      "development-pool0-trained_online_reset_rates": "f78b7608181b663b67bbb828989b2c943700d27e25023315f7abd122cda517b1",
+      "development-pool1-pristine_frozen": "df84c3d1ab5fe58044c9fc359b5713ff95800a4cd518c11a1d43b6d53ec0c7e8",
+      "development-pool1-trained_frozen": "3906384dae0c668a8d228de1a6f6e89b9636ba9e3ae734e70712369ec4f80d11",
+      "development-pool1-trained_online_carry": "b22efc9826be15cb271d1fdea76bd9d09a13418c5fbcd70538f3103461c2b62f",
+      "development-pool1-trained_online_reset_rates": "7c3ad12a58f5763f3ff50ba1d1d968742e8d0e87ab256cc4d03bfa41d2a19cd4"
+    }
+  },
+  "observations": 188,
+  "unique_asset_time_slots": 47,
+  "native_bins": 9400,
+  "held_out_results": false,
+  "policy_promoted": false,
+  "source_sha256": "4e1643e7dd046ed9d5ea826b0905e08f4b6661c01e8d8a31582b55a893361818",
+  "interpretation": "All eight development recordings and their independent full-bin audits reconcile. The 188 neural observations repeat 47 eligible asset/time slots across four conditions, not 188 independent market observations. Reset has the highest development equity but remains below cash plus hosting, so no candidate is selected. Held-out results remain separate."
+}

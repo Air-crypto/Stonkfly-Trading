@@ -274,13 +274,25 @@ preserved, and that temporary schedule was stopped. The separate
 [non-preemptible completion amendment](reports/fly-online-completion-protocol-11.json)
 retains the six completed recordings and starts ten conditions fresh, with the
 3× CPU/RAM price included in a conservative **$2 additional compute allowance**.
-Both new baton development captures have now returned: online carry **$239.20**,
-rate reset **$237.70**. Their full artifact audits are pending. The saved ledgers
-put reset at **$972.03 combined from $1,000**, the best development total but below
+Both new baton development captures are now independently audited: online carry
+**$239.20**, rate reset **$237.70**. The
+[complete development audit](reports/fly-online-development-result-11.json)
+covers **188 observations and 9,400 native bins** across all eight conditions.
+These replay 47 eligible asset/time slots across four variants.
+It puts reset at **$972.03 combined from $1,000**, the best development total but below
 cash, so the profit requirement fails. Held-out results remain pending. See the
 [completion run steps](docs/fly-online-comparison.md#complete-after-provider-preemption).
 
 ![Six audited development conditions, including the missing baton quote](docs/assets/fly-online-development-six-11.png)
+
+The [full-neuron comparison](reports/fly-online-development-divergence-11.json)
+finds a different early response in each pool: after the second image's reset,
+ALL changes 879 weights in the first recorded bin, while baton changes five.
+Baton's second observation keeps identical spike counts and its BUY decision;
+its first action difference appears later. Changing connection memory alone
+does not establish a better trading policy.
+
+![Audited baton reset and carry traces at their first differing decision](docs/assets/fly-online-baton-reset-pair-11.png)
 
 The [full-window diagnostic figures](docs/fly-online-comparison.md#compare-the-full-financial-and-neural-timelines)
 align decisions, later fills, gate spikes, weight movement and learning history,

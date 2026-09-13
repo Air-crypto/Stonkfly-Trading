@@ -166,7 +166,7 @@
     "price_multiplier": 3
   },
   "active_call_state": "call_pending",
-  "first_recording_audit": "pending_download",
+  "first_recording_audit": "passed",
   "cloud_selection": {
     "plan_sha256": "3f0e3cf8e5a1187ff5bf4ed4cc128e8c3457c1a14ae02fd899d3e8548709f045",
     "selected": null,
@@ -226,5 +226,7 @@
   },
   "selection_precedes_first_test_claim": true,
   "completed_conditions": 8,
-  "independently_audited_conditions": 6
+  "independently_audited_conditions": 10,
+  "development_full_audit_sha256": "907d5e6353c885dbee7e672b9ae1ac98ddd52c325ea8310e0e69bc2ba86a3b6e",
+  "second_recording_audit": "passed"
 }

@@ -1,0 +1,12 @@
+{
+  "status": "audited_recovery_view_checked",
+  "url": "http://127.0.0.1:8766/?run=online11c01-development-pool1-trained_online_carry&compare=online11r02-development-pool1-trained_frozen&step=3&bin=22&neuron=10527&edge=8022240&pristine=1",
+  "step": 3,
+  "bin": 22,
+  "neuron": "10527",
+  "edge": 8022240,
+  "phase": "Development evaluation: paper-trained connection memory, updated online using this phase\u2019s paper equity feedback. Fresh neural activity at phase start; activity carried between images. Training exposure: 72 observations; 29 positive and 30 negative paper rewards. Simulated fills; this does not establish profitable learning.",
+  "writes": 0,
+  "errors": [],
+  "screenshot_sha256": "1ca7179180c89e2d6589ec12433640219484c4b5607c3ce1b5fc31fe5b7f3a75"
+}

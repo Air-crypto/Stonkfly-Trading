@@ -1,8 +1,8 @@
 # Longer online learning comparison
 
-**Current capture status:** all eight development conditions are captured; six
-have completed full audits and two new baton recordings await their artifact
-audits. Recovery 02 was preempted during condition seven and its schedule was
+**Current capture status:** all eight development conditions are captured and
+independently audited: 188 observations and 9,400 native bins. Recovery 02 was
+preempted during condition seven and its schedule was
 stopped. A separate non-preemptible completion amendment retains six recordings
 and captures ten conditions from fresh starts. The saved development totals fail
 the profit requirement; no held-out result is available. See the
@@ -742,8 +742,8 @@ baton ledgers report $239.196653 for online carry and $237.698909 for rate reset
 The [execution record](../reports/fly-online-completion-execution-11.json) preserves
 both exact receipts and the expected development selection computed from all
 eight saved summaries. The best aggregate, reset, is $972.029004 from $1,000,
-so it fails the registered cash-plus-hosting requirement. Those two full
-recording audits remain pending; the historical table and figure below show the
+so it fails the registered cash-plus-hosting requirement. Both new recordings
+now pass their full audits; the historical table and figure below show the
 six audited recordings retained before completion began.
 
 Six conditions have complete full-bin and plotted-series audits. Each account
@@ -849,3 +849,73 @@ uv run python -m paperlab.debugger serve \
 A successful finalization is labeled `paper_online_completion_audited`, and all
 figures identify the amendment. Synthetic wiring tests remain visibly synthetic
 and cannot pass the subsequent experiment's real-study gate.
+
+## Inspect the completed development comparison
+
+The [development report](../reports/fly-online-development-result-11.json)
+reconciles all eight summaries with their full-bin and plotted-series audits and
+the selection saved in the cloud before the first held-out claim. Each aggregate
+includes the two $250 sleeves and $500 idle cash:
+
+| Condition | ALL | baton | Combined from $1,000 |
+|---|---:|---:|---:|
+| Pristine frozen | $205.28 | $241.46 | $946.73 |
+| Trained frozen | $207.32 | $235.54 | $942.86 |
+| Online carry | $225.26 | $239.20 | $964.45 |
+| Online rate reset | $234.33 | $237.70 | $972.03 |
+
+Simulated execution costs are included; hosting is excluded from equity and
+applied separately by the selection gate. Reset helps ALL relative to carry but
+hurts baton. Its combined advantage does not exceed starting cash, so no
+candidate is selected. Held-out outcomes cannot alter that saved decision.
+
+The [first-divergence analysis](../reports/fly-online-development-divergence-11.json)
+checks all recorded neurons and plastic weights in the first two observations.
+Both first observations match across every array. The second observations share
+the same image, timestamp, equity feedback and pulse within each pool:
+
+| Pool | First weight difference | First sampled voltage difference | First spike-count difference | Second decision: carry / reset |
+|---|---|---|---|---|
+| ALL | 10 ms, 879 weights | 20 ms, cells 10704 and 11402 | 50 ms | HOLD / SELL |
+| baton | 10 ms, five weights | 20 ms, cell 10704 | None in this observation | BUY / BUY |
+
+These are the ends of 10 ms recording bins. They do not resolve within-bin event
+order or identify which connection mediates an action. On baton, the first
+decision difference arrives at the fourth observed image: the
+[reset/carry viewer](http://127.0.0.1:8766/?run=online11c01-development-pool1-trained_online_reset_rates&compare=online11c01-development-pool1-trained_online_carry&step=3&bin=26&neuron=10527&edge=8022240&pristine=1)
+shows one versus zero spikes in selected cell 10527 at the 270 ms bin. The
+[carry/frozen viewer](http://127.0.0.1:8766/?run=online11c01-development-pool1-trained_online_carry&compare=online11r02-development-pool1-trained_frozen&step=3&bin=22&neuron=10527&edge=8022240&pristine=1)
+shows the evolving connection memory against the frozen reference. Both real
+browser checks block model submissions and confirm that the displayed comparison
+covers 23 shared decision timestamps.
+
+![Baton online carry versus frozen](assets/fly-online-baton-carry-pair-11.png)
+
+![Baton reset versus carry](assets/fly-online-baton-reset-pair-11.png)
+
+Reproduce the development summary and array comparison from the existing audited
+recordings, without constructing a model:
+
+```sh
+uv run python scripts/analyze-fly-development.py
+```
+
+## Recover a stalled artifact transfer
+
+The [download recovery record](../reports/fly-online-download-recovery-11.json)
+documents two stalled reads, preservation of 105 already verified files, and
+successful completion with bounded transfers. The downloader uses a 90-second
+deadline per attempt, at most three attempts, and four concurrent files. It
+requires a saved completed receipt, matching returned call result and summary
+hash. Only complete files with matching manifest hashes become final artifacts.
+
+```sh
+uv run --extra cloud python -m paperlab.fly_recording_download \
+  --root runs/online-completion-01 \
+  --chunk development-pool1-trained_online_reset_rates
+```
+
+Run only one downloader for a given recording at a time. A read timeout can
+repeat a file transfer; it never submits a model call, resumes neural state or
+replaces a capture receipt. Mismatching existing artifacts are preserved and
+rejected. Partial files cannot pass the independent recording audit.
