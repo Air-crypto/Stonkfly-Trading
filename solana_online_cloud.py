@@ -50,7 +50,8 @@ def _run(run_id, parent):
 
 @app.function(image=image, volumes={'/state':volume}, cpu=(.125,.125), memory=(512,512),
               timeout=60, max_containers=1, min_containers=0, retries=0, single_use_containers=True,
-              schedule=modal.Cron('*/15 * * * *') if ENABLED else None)
+              # Avoid simultaneous starts with the legacy worker's */5 schedule.
+              schedule=modal.Cron('2,17,32,47 * * * *') if ENABLED else None)
 def coordinator():
     return exclusive('solana-online-coordinator', _coordinate)
 

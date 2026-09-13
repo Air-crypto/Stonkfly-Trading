@@ -45,7 +45,9 @@ FIFO cost basis. Exact swap execution and sellability are still unverified.
 
 ## Background execution and budget
 
-The lightweight coordinator is scheduled in Modal every fifteen minutes. It
+The lightweight coordinator is scheduled in Modal every fifteen minutes, at
+minutes 02, 17, 32 and 47. This offsets dispatch from the legacy worker's five-minute
+schedule; the shared atomic writer lock still prevents overlapping writes. It
 starts a detached, at-most-fifteen-minute training window when due and records
 its immutable run ID and call ID before it can dispatch another. Default cadence
 is twelve hours between window starts, approximately two windows per day.
