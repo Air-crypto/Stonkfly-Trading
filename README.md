@@ -133,12 +133,19 @@ reset is promoted; changing a decision is not evidence of improving a trade.
 The [memory-filter reconstruction](docs/fly-selective-traces.md#why-the-single-resets-move-weights-more)
 now separates stored `u/w` relaxation from new learning drive. On the recorded
 KC-only trajectory, retained earlier DAN history dominates the third-image
-update; current-image activity partly opposes it. This points toward testing
-smaller updates with both traces retained, rather than choosing a single reset.
-The decomposition holds recorded firing fixed and does not establish a better
-trading policy.
+update; current-image activity partly opposes it. The decomposition holds
+recorded firing fixed and does not establish a better trading policy.
 
 ![Stored memory and filtered learning-drive contributions](docs/assets/fly-selective-memory-01.png)
+
+The subsequent [lower-rate experiment](docs/fly-learning-rate.md) is also
+complete: **five conditions and 15 observations audited**. Reducing eta from
+0.001 to 0.0001 with both histories retained reduced later weight movement, but
+changed the recorded-pulse decisions from BUY–HOLD–BUY to BUY–BUY–BUY. A single
+added gate spike explains the second-image decoder change. Smaller updates did
+not make this fixed decoder less active, and no policy was promoted.
+
+![Lower-rate outcomes across all five conditions](docs/assets/fly-learning-scale-01.png)
 
 Open all twelve paired recordings from the included 3.75 MB archive:
 

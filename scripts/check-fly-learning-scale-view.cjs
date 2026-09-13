@@ -35,9 +35,9 @@ const {chromium}=require('playwright');
       &&document.querySelector('#paired-voltage svg'),{name,compare});
     assert(await page.locator('#run').isDisabled());
     assert.equal(await page.locator('#decision').innerText(),audit.arms[name][step].side);
-    if(arm.learning)assert((await page.locator('#phase-note').innerText()).includes(`eta ${arm.eta.toFixed(4)}`));
+    if(arm.learning){const note=await page.locator('#phase-note').innerText();assert.equal(Number(note.match(/eta ([0-9.]+)/)?.[1]),arm.eta,note);}
     assert((await page.locator('#activity-boundary-note').innerText()).includes(step===0?'Fresh dynamics':labels[arm.boundary]));
-    for(const bin of step===2?[0,37,49]:[0,49]){
+    for(const bin of step===2?[0,37,49]:step===1?[0,43,49]:[0,49]){
      await page.locator('#bin').fill(String(bin));await page.locator('#bin').dispatchEvent('input');
      const note=await page.locator('#paired-note').innerText();
      assert(note.includes(`Body ${neuron}: ${v.frames[step].counts[bin][vi]} vs ${other.frames[step].counts[bin][oi]} spikes in this bin`));
@@ -48,6 +48,7 @@ const {chromium}=require('playwright');
      assert.equal(moment.searchParams.get('run'),name);assert.equal(moment.searchParams.get('compare'),compare);
      assert.equal(moment.searchParams.get('step'),String(step));assert.equal(moment.searchParams.get('bin'),String(bin));
      checks.push({name,compare,step,bin,neuron,edge:edge.id,action:audit.arms[name][step].side});
+     if(step===1&&bin===43&&name==='trained_low_eta_recorded_carry')await page.locator('#paired-traces').screenshot({path:path.join(out,'new-gate-pair.png')});
      if(step===2&&bin===37&&name.startsWith('trained_low_eta_'))
       await page.locator('#paired-traces').screenshot({path:path.join(out,arm.pulses+'-pair.png')});
     }

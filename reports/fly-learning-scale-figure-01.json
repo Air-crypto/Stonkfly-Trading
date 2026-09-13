@@ -1,0 +1,10 @@
+{
+  "status": "audited_learning_scale_figure_rendered",
+  "audit_sha256": "259e64f3313c86d667a7301d6027f8fb46cca662fa023c270df70fbbd2f932c1",
+  "source_sha256": "e6d6941123026953169ca565eb17c25a2b28b1a11dd6e726ab8e5e226fa2a885",
+  "figure_sha256": {
+    ".png": "64dc2966bcc1c2bacb4b080ba9424732fdef412b61ae3469392232b8d000e707",
+    ".svg": "ac06f7af1120352d551d7d3975e41d57cc180d8aa2536c89a0a771c69e9fe394"
+  },
+  "model_submissions": 0
+}
