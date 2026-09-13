@@ -1,0 +1,53 @@
+{
+  "status": "read_only_watcher_validated",
+  "recorded_at": 1789259211.146569,
+  "tests": {
+    "command": "python -m pytest -q tests/test_fly_online_watch.py tests/test_fly_online_cloud.py",
+    "passed": 33,
+    "skipped": 0,
+    "junit_sha256": "a6313387c15511aec00b337788e148858e4efd029971242088ca60a419aac8a0"
+  },
+  "source_sha256": {
+    "paperlab/fly_online_watch.py": "2941de92d0ea25e527ae7566179a6922bb84f6e8c081e9d37ff97e1599c4e96b",
+    "tests/test_fly_online_watch.py": "9ab3d470493f7d4ea6166f976f7c868e7dc6c1f4c9b85a902752d53cce07d9e9",
+    "paperlab/fly_online_cloud.py": "a0171e1fd6ff72cfe42d3dba2616e8dc8c535cfe6310f40d29d9d1b927d961d6",
+    "README.md": "73d5fbd16bf4679defc68bce55318e845c6147c4becb178ad4c6eccb21b953cf",
+    "docs/fly-online-comparison.md": "67c6e07dbf2e0d7538c202164d091d2added35a31fd73780580b4f47e6e1802f"
+  },
+  "checks": [
+    "capture of all sixteen chunks before full audit",
+    "same call retained through observation timeout and resume",
+    "exact sealing call retained",
+    "no submission while between calls",
+    "completed owner does not cause rapid polling",
+    "remote failure and unresolved evidence stop observation",
+    "partial or failed audit cannot report completion",
+    "local interruption distinguished from cloud state",
+    "exclusive local watcher lock"
+  ],
+  "live_read_only_observation": {
+    "observed_at": 1789259201.282249,
+    "status": "test_collection",
+    "completed_chunks": 0,
+    "last_wait": {
+      "state": "pending",
+      "call_id": "fc-01M2C2EFDK3CXFCWZFY2HN7ZHN"
+    },
+    "confirmed_collector": {
+      "observed_at": 1789259191.7985952,
+      "owner": {
+        "started": 1789259119.2765656,
+        "call_id": "fc-01M2C2EFDK3CXFCWZFY2HN7ZHN",
+        "input_id": "in-01M2C2EFDXPVTR5QDEN9VQK3TE:1789259103702-0"
+      },
+      "cloud_submissions": 0,
+      "state": "confirmed_pending"
+    }
+  },
+  "pinned_execution_files": 56,
+  "pinned_source_sha256": "5862a6aebfe9db84c39d94564a230eb8f7bf8e5703bbf19ddaf64d246f529dc0",
+  "execution_sources_unchanged": true,
+  "cloud_submissions": 0,
+  "neural_observations_computed": 0,
+  "interpretation": "Read-only orchestration and simulated-transport tests, followed by an actual check of the existing collector call. No study-11 model chunk has completed at this observation. The full independent recording audit is deferred until all sixteen captures; no neural improvement or financial outcome is inferred."
+}

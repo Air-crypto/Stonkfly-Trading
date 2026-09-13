@@ -419,8 +419,32 @@ uv run python -m paperlab.debugger serve \
 Allow approximately 12–15 GB locally for the full recordings, based on the
 native validation fixture; actual size depends on eligible observations. The
 observer reuses verified downloads and links the full neuron recordings into
-each view without duplicating their data. Repeat the audit command as more
-chunks complete. These local inspection commands can exit while cloud
+each view without duplicating their data. Repeating the audit command rechecks
+every available chunk. To wait for all sixteen captures and perform the full
+audit once, use the read-only watcher on macOS or Linux:
+
+```sh
+uv run --extra cloud python -m paperlab.fly_online_watch \
+  --registration reports/fly-market-study-11-preregistration.json \
+  --out runs/online-cloud-11 --fly-data data/fly --timeout 10800
+```
+
+The watcher follows existing call IDs, checks the same source pins and receipts,
+and never submits work, clears a cloud lease or changes deployment. An operating
+system lock prevents concurrent watchers using the same download directory.
+`watch.json` records observation, audit, completion, timeout or failure; a local
+observation timeout does not mean the cloud job failed. The timeout bounds the
+waiting period, while an audit already started can finish. Run the same command
+to resume after the previous watcher exits; completed downloads remain verified.
+Transient connection errors stop the local observer with an explicit error;
+inspect it and resume the same output rather than creating another cloud call.
+This convenience wrapper does not replace the independent audit or its sixteen
+required conditions. The [watcher validation](../reports/fly-online-watch-validation-01.json)
+records 33 passing checks of simulated transport and the existing observer,
+plus a live read-only call observation. These do not create new neural or trading
+evidence.
+
+These local inspection commands can exit while cloud
 collection and scheduled evaluation continue with the laptop closed.
 
 The raw price archive is audited before any neural recording is downloaded.

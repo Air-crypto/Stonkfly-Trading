@@ -221,6 +221,8 @@ execution status. [Cloud arming was verified](reports/fly-online-cloud-arming-11
 at 20:25:47 UTC on September 12, before the 20:35 UTC development start. The
 [read-only observer](docs/fly-online-comparison.md#observe-the-scheduled-experiment)
 reattaches saved calls and audits full recordings into paired debugger views.
+Its optional watcher waits for all sixteen captures before running the full
+audit once; stopping the local watcher leaves cloud work running.
 No result from this follow-up is claimed yet. Synthetic validation is not
 evidence that the intervention earns money.
 The guide includes a [dated registration clarification](docs/fly-online-comparison.md#registration-description-clarification)
