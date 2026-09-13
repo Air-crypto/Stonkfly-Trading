@@ -578,6 +578,17 @@ PAPERLAB_FLY=1 PAPERLAB_UNIVERSE=1 PAPERLAB_PAPER_STUDY=1 \
 This deploys only the separate recovery app. Stop that temporary app after its
 captures are complete. The normal main app remains deployed independently.
 
+The first recovery deployment failed during import because `cloud.py` was not
+packaged at an importable path. No recovery protocol or neural claim was created.
+That app was stopped and its saved call confirmed terminal; the
+[startup record](../reports/fly-online-recovery-startup-11.json) and
+[initial protocol](../reports/fly-online-recovery-protocol-11-initial.json) remain
+available. The corrected entrypoint explicitly packages its dependency and runs
+an import smoke check during image build. A local isolated import test also
+passes using only the declared Python files. The active amendment changes only
+its packaging source pin and creation time; all original study inputs and
+execution sources remain unchanged.
+
 ## Compare the full financial and neural timelines
 
 After the observer has written its fully audited `report.json`, export the

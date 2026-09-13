@@ -9,9 +9,10 @@
   "neural_observations": 0,
   "cloud_submissions": 0,
   "dispatch_tests": {
-    "passed": 13,
-    "junit_sha256": "22a7a7fda3a112efc369483692c25c80d8ca3172070d0021e12ce0ad86bd11a8"
+    "passed": 14,
+    "junit_sha256": "0c3f79456cd373afef2c4064d4cc223f374c63f4f6e40faa79683de658e8e25e"
   },
-  "protocol_file_sha256": "c7f31970a78e05715a4351d430f39c3eb8201c6d966ab60ae5eb312e9e200827",
-  "cloud_status": "not_yet_deployed"
+  "protocol_file_sha256": "f8fa789e84549c184e9a2a3950398b7af930401422dff5d57919ab89bcd2c6fb",
+  "cloud_status": "corrected_packaging_not_yet_deployed",
+  "startup_failure_report_sha256": "3ce54f1c29fac47abd423f7df8738fbaab7c60c51f53014779a8d66d30c3f245"
 }

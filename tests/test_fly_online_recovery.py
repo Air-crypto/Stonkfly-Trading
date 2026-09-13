@@ -123,3 +123,26 @@ def test_fixed_amendment_rejects_changes(field,value):
     p=json.loads(Path('reports/fly-online-recovery-protocol-11.json').read_text())
     recovery.validate_protocol(p);p[field]=value
     with pytest.raises(ValueError):recovery.validate_protocol(p)
+
+
+def test_entrypoint_imports_using_only_explicitly_packaged_modules(tmp_path):
+    import ast
+    import os
+    import subprocess
+    import sys
+    tree=ast.parse(Path('recovery_cloud.py').read_text())
+    # Reconstruct only the explicitly packaged Python modules, not the checkout.
+    for node in ast.walk(tree):
+        if not isinstance(node,ast.Call) or not isinstance(node.func,ast.Attribute) or node.func.attr!='add_local_file':continue
+        local,remote=node.args[:2]
+        if not isinstance(remote,ast.Constant) or not isinstance(remote.value,str):continue
+        target=Path(remote.value)
+        if target.parent!=Path('/opt/paperlab') or target.suffix!='.py':continue
+        assert isinstance(local,ast.BinOp) and isinstance(local.right,ast.Constant)
+        (tmp_path/target.name).write_bytes(Path(local.right.value).read_bytes())
+    result=subprocess.run([sys.executable,'-I','-c',
+        'import sys; sys.path.insert(0,sys.argv[1]); import recovery_cloud; print("import passed")',str(tmp_path)],
+        cwd=tmp_path,env={**os.environ,'PAPERLAB_FLY':'1','PAPERLAB_UNIVERSE':'1',
+            'PAPERLAB_PAPER_STUDY':'1','PAPERLAB_ONLINE_STUDY':'1'},capture_output=True,text=True,timeout=30)
+    assert result.returncode==0,result.stderr
+    assert 'import passed' in result.stdout

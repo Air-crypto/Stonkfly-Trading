@@ -1,0 +1,18 @@
+{
+  "observed_at": 1789266861.160456,
+  "app": "fly-paper-recovery-11",
+  "app_id": "ap-UMEBEYUBEZPN5sIYBa5GBq",
+  "call_id": "fc-01M2C9FC3WEVNWR212V1SFFBYY",
+  "call_state": {
+    "status": "terminal_exception",
+    "error_type": "RemoteError",
+    "error": ""
+  },
+  "recovery_protocol_created": false,
+  "lease": null,
+  "startup_error": "ModuleNotFoundError: No module named cloud",
+  "stopped_app_after_error": true,
+  "original_paper_app_stopped": false,
+  "previous_protocol_sha256": "c7f31970a78e05715a4351d430f39c3eb8201c6d966ab60ae5eb312e9e200827",
+  "startup_log_sha256": "f1612149e1ab1863d774e07cdd03b8b18108f79ec8c711fca342e35457bcaeb4"
+}
