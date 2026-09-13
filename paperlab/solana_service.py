@@ -48,6 +48,8 @@ def service(root, *, dispatch, poll, commit, now=None, mode='paced'):
         control['completed_windows'] += 1
         control['last_result'] = {k:result.get(k) for k in
             ('ended','neural_observations','new_readout_updates','fills','equity_stress_usd','budget')}
+        if result.get('portfolio', {}).get('halted'):
+            control['enabled'] = False; return save('paper_loss_stop_requires_review')
         control['next_at'] = pending['dispatched_at'] + next_delay(control['mode'])
         save('completed')
     if now < control['next_at']: return save('waiting_for_budget_paced_window')

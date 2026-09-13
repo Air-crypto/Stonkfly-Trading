@@ -84,6 +84,31 @@ def choose(candidates, current, burst, visits):
     return min(remaining, key=lambda m: (visits.get(m, 0), m)), 1
 
 
+
+def update_active(active, watched, retired, inactive, portfolio, snapshots, quotes, now):
+    """Park unavailable/dust holdings without releasing cash or acquisition-cost risk."""
+    removed = []; admitted = []
+    for m in list(active):
+        qty = portfolio.position(m)['qty']; t = quotes.get(m)
+        if t: inactive.pop(m, None)
+        else: inactive.setdefault(m, now)
+        idle = m in inactive and now-inactive[m] >= 120
+        dust = qty > 0 and t is not None and float(qty)*t.mid < 1
+        expired_flat = qty == 0 and now-active[m]['timestamp'] >= 1200
+        if idle or dust or expired_flat:
+            active.pop(m); removed.append(m)
+            if qty == 0: retired.add(m); watched.pop(m, None)
+    candidates = []
+    for m, t in quotes.items():
+        if m in active or m in retired: continue
+        qty = portfolio.positions.get(m, {}).get('qty', Decimal(0))
+        if qty and float(qty)*t.mid < 1: continue
+        candidates.append((0 if qty else 1, snapshots[m]['created']['received'], m))
+    for _, _, m in sorted(candidates)[:max(0, MAX_ACTIVE-len(active))]:
+        active[m] = snapshots[m]['created']; watched[m] = active[m]
+        portfolio.position(m); admitted.append(m)
+    return admitted, removed
+
 def run(root, data, parent, *, seconds=900, commit=lambda: None, fly_factory=None,
         feed_factory=Feed, clock=time.time, sleep=time.sleep, fx_fetch=None):
     if not 60 <= seconds <= 900: raise ValueError('Bounded window required')
@@ -95,11 +120,11 @@ def run(root, data, parent, *, seconds=900, commit=lambda: None, fly_factory=Non
     root = Path(root); root.mkdir(parents=True, exist_ok=True)
     if (root/'started.json').exists(): raise ValueError('Immutable window')
     saved = load_parent(parent); portfolio = Portfolio(saved['portfolio'])
-    active = dict(saved['active']); retired = set(saved['retired'])
+    active = dict(saved['active']); watched = dict(saved.get('watched', active)); retired = set(saved['retired'])
     head = Readout(); head.restore(saved['head_checkpoint']); opening_updates = head.updates
     feed = feed_factory(root)
-    for created in active.values(): feed.accept(created)
-    feed.pinned_mints = set(active); feed.start()
+    for created in watched.values(): feed.accept(created)
+    feed.pinned_mints = set(watched); feed.start()
     started = clock(); deadline = started + seconds
     atomic_json(root/'opening.json', saved)
     atomic_json(root/'started.json', dict(at=started, deadline=deadline, paper_only=True,
@@ -136,20 +161,15 @@ def run(root, data, parent, *, seconds=900, commit=lambda: None, fly_factory=Non
             quotes = {}; rejected = {}; admissions = []; removals = []
             connected = health['status'] == 'connected' and 0 <= now-health['last_message'] <= 10
             for m, token in snapshots.items():
-                t, reason = tick_for(token, now, fx, fx_seen, selected=m in active)
+                t, reason = tick_for(token, now, fx, fx_seen, selected=m in watched)
                 if not connected: reason = 'disconnected_feed'
                 if reason is None and t: quotes[m] = t
                 else: rejected[m] = reason or 'missing_quote'
-            # Flat inactive episodes can leave the active queue; their cash flows remain.
-            for m in list(active):
-                if m in quotes: inactive.pop(m, None)
-                else: inactive.setdefault(m, now)
-                if ((m in inactive and now-inactive[m] >= 120) or now-active[m]['timestamp'] >= 1200) and portfolio.position(m)['qty'] == 0:
-                    active.pop(m); contexts.pop(m, None); retired.add(m); removals.append(m)
-            candidates = sorted((snapshots[m]['created']['received'], m) for m in quotes if m not in active and m not in retired)
-            for _, m in candidates[:max(0, MAX_ACTIVE-len(active))]:
-                active[m] = snapshots[m]['created']; portfolio.position(m); admissions.append(m)
-            with feed.lock: feed.pinned_mints = set(active)
+            admissions, removals = update_active(active, watched, retired, inactive,
+                                                  portfolio, snapshots, quotes, now)
+            for m in removals: contexts.pop(m, None)  # Pending orders and credit expire; inventory stays.
+            with feed.lock: feed.pinned_mints = set(watched)
+            if len(watched) > 128: status = 'capacity_stopped'; break
             if len(retired) + len(active) > 10000: status = 'capacity_stopped'; break
             fresh = []; executions = []
             for m in active:
@@ -201,7 +221,7 @@ def run(root, data, parent, *, seconds=900, commit=lambda: None, fly_factory=Non
                     else: c['previous'] = None
                     c['anchor'] = contribution; c['last_ts'] = t.ts
                     visits[m] = rows+1; current = m; burst = next_burst; trained += 1
-                    neural.update(mint=m, switched_token=switched, head_training=learning,
+                    neural.update(mint=m, tick=t.__dict__, contribution_usd=contribution, switched_token=switched, head_training=learning,
                                   readout=prediction, input_features=x.tolist(),
                                   diagnostic_path=str(native_path) if native_path else None)
                     status = 'training'
@@ -210,6 +230,7 @@ def run(root, data, parent, *, seconds=900, commit=lambda: None, fly_factory=Non
                 retired=removals, active_tokens=len(active), tracked_launches=len(snapshots),
                 eligible_tokens=len(quotes), executions=executions, decision=decision, neural=neural,
                 portfolio=portfolio.state(), equity_stress_usd=portfolio.equity(quotes),
+                marks={m:t.__dict__ for m,t in quotes.items() if portfolio.positions.get(m, {}).get('qty', 0)},
                 unavailable_positions=[m for m,p in portfolio.positions.items() if p['qty'] and m not in quotes],
                 feed=health, neural_observations=trained, readout_updates=head.updates,
                 new_readout_updates=head.updates-opening_updates, fills=fills, overruns=overruns,
@@ -226,7 +247,7 @@ def run(root, data, parent, *, seconds=900, commit=lambda: None, fly_factory=Non
     if fly:
         fly.save(root/'fly-final.npz'); head.save(root/'head-final.pt')
     atomic_json(root/'online-state.json', dict(portfolio=portfolio.state(), active=active,
-        retired=sorted(retired), native_checkpoint=str(root/'fly-final.npz') if fly else saved['native_checkpoint'],
+        watched=watched, retired=sorted(retired), native_checkpoint=str(root/'fly-final.npz') if fly else saved['native_checkpoint'],
         head_checkpoint=str(root/'head-final.pt') if fly else saved['head_checkpoint'],
         native_observations_total=saved.get('native_observations_total', 0)+trained,
         readout_updates=head.updates))

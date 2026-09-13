@@ -138,6 +138,11 @@ def test_cloud_entry_logic_rotates_launches_and_restores_account(tmp_path):
         for m,n in qty.items():assert n==Decimal(r['portfolio']['positions'][m]['qty'])
     atomic_json(tmp_path/'run/completed.json',result)
     restored=load_parent(tmp_path/'run');assert restored['portfolio']==result['portfolio']
+    from paperlab.solana_online_audit import audit
+    a=audit(json.loads((tmp_path/'run/opening.json').read_text()),rows)
+    assert a['equity_marks_verified']==len(rows) and a['distinct_tokens_with_native_inference']==3
+    tampered=deepcopy(rows);tampered[-1]['portfolio']['cash']='9999'
+    with pytest.raises(ValueError,match='cash'):audit(json.loads((tmp_path/'run/opening.json').read_text()),tampered)
 
 
 def test_scheduler_single_flight_completion_pacing_and_failure(tmp_path):
@@ -169,3 +174,32 @@ def test_budget_pause_preserves_parent(tmp_path):
     s=service(tmp_path,dispatch=lambda *_:'unexpected',poll=lambda _:dict(status='budget_stopped'),commit=lambda:None,now=1789324000)
     assert s['status']=='budget_paused_until_next_month' and s['parent']==p and s['pending'] is None
     assert s['next_at']>1789324000
+
+
+def test_unavailable_and_dust_holdings_park_without_resetting_losses():
+    from paperlab.solana_online import update_active
+    p=Portfolio(state());p.execute('a',.025,99,tick('a'),{'a':tick('a')})
+    original=p.state();created={'timestamp':900,'received':901}
+    active={'a':created};watched=dict(active);retired=set();inactive={'a':1000}
+    snapshots={'b':{'created':created}}
+    added,removed=update_active(active,watched,retired,inactive,p,snapshots,{'b':tick('b',1121)},1121)
+    assert removed==['a'] and added==['b'] and 'a' in watched and 'a' not in retired
+    assert p.state()['positions']['a']==original['positions']['a'] and p.cash==Decimal(original['cash'])
+    # Fresh recovery is re-admitted with the original inventory, not a new account.
+    snapshots['a']={'created':created}
+    added,_=update_active(active,watched,retired,inactive,p,snapshots,{'a':tick('a',1126),'b':tick('b',1126)},1126)
+    assert 'a' in added and p.state()['positions']['a']==original['positions']['a']
+    # Unsellable sub-dollar dust retains its risk allocation but frees an inference slot.
+    dust=Tick(1130,.0001,.000101,product='a',received_at=1130)
+    _,removed=update_active(active,watched,retired,inactive,p,snapshots,{'a':dust,'b':tick('b',1130)},1130)
+    assert 'a' in removed and 'a' not in active and 'a' in watched
+    assert p.state()['positions']['a']==original['positions']['a']
+
+
+def test_scheduler_pauses_on_paper_loss_stop(tmp_path):
+    c=service(tmp_path,dispatch=lambda *_:'call',poll=lambda _:None,commit=lambda:None,now=1000)
+    atomic_json(tmp_path/'solana-live'/c['pending']['run_id']/'completed.json',
+                dict(status='completed',paper_only=True,portfolio={'halted':True}))
+    c=service(tmp_path,dispatch=lambda *_:'must-not-dispatch',poll=lambda _:dict(status='completed'),
+              commit=lambda:None,now=2000)
+    assert not c['enabled'] and c['status']=='paper_loss_stop_requires_review'

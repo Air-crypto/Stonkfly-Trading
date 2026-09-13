@@ -10,7 +10,7 @@ remain immutable. No wallet, signer, or real order execution is involved.
 
 The collector subscribes to confirmed Pump.fun and PumpSwap logs while a training
 window runs. It checks received markets every five seconds and admits up to eight
-eligible tokens, earliest eligible creation receipt first. Other received launches
+eligible active tokens (plus at most 128 watched active/parked mints), earliest eligible creation receipt first. Other received launches
 remain in the bounded discovery archive. Coverage is not all Solana, not all launchpads,
 and not continuous between training windows. There is no backfill of those gaps.
 
@@ -31,8 +31,10 @@ native plasticity and Q loss, gradient, TD error, exploration, and weight change
 This experimental online Q learner does not have a target network or replay buffer
 and has no claim of convergence or profitable trading.
 
-Held inventory is never evicted or replaced with fresh cash. Flat tokens leave the
-active queue after two minutes of unusable data or twenty minutes of token age;
+Held inventory is never erased or replaced with fresh cash. Unavailable holdings
+after two minutes and sub-dollar dust move to a parked, still-tracked list; they
+retain cash flows and risk allocation and can reenter when usable. Flat tokens leave
+the active queue after two minutes of unusable data or twenty minutes of token age;
 retired tokens are not readmitted. This prevents picking the same apparently
 successful token repeatedly. Acquisition cost, including fees, is capped at $100
 across all holdings, with a $25 order cap and the existing account loss stop.
@@ -48,11 +50,13 @@ starts a detached, at-most-fifteen-minute training window when due and records
 its immutable run ID and call ID before it can dispatch another. Default cadence
 is twelve hours between window starts, approximately two windows per day.
 The worker resumes checkpoints, optimizer/RNG state and all account records.
+The read-only `python -m paperlab.solana_online_audit <downloaded-run-directory>`
+reconstructs recorded fills and available portfolio marks independently.
 Collection pauses between windows; the laptop can be off throughout.
 
 The coordinator confirms the previous Modal call terminated before treating a
 published completion file as resumable. An ambiguous dispatch, crashed worker,
-invalid result, or storage cap disables further dispatch pending review. Busy
+invalid result, paper account loss stop, or storage cap disables further dispatch pending review. Busy
 shared writers are retried at the next scheduled check. There is no blind crash
 retry. Budget exhaustion defers the next attempt until the following UTC month.
 
