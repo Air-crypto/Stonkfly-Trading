@@ -1,0 +1,194 @@
+{
+  "status": "complete_window_quote_coverage_verified",
+  "recorded_at": 1789259891.4869351,
+  "registration_sha256": "078553e736a666d576337f895133409c5ccc18cda8c1edf1cb60d735fc6dfb25",
+  "snapshot": {
+    "started_at": 1789259836.94418,
+    "finished_at": 1789259841.090256,
+    "bytes": 65597440,
+    "sha256": "1d4a63a0b00179da13cf1bdad8914b65f22f9ebffbde99349a214cedd42a38fe"
+  },
+  "snapshot_end": 1789259764.6398015,
+  "assessed_through": 1789259700,
+  "coverage_report_sha256": "5f32fec729c175f0941438ee541416e7d3fef6fed7a475d372d801eeb7c3f70f",
+  "coverage_source_sha256": "6f986a11d6a2869739c3af523d41ce660449be9f40766d28ed0ddb12ede82ca9",
+  "pools": {
+    "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ": {
+      "context_requirement_met": true,
+      "phases": {
+        "development": {
+          "observed": 24,
+          "missing": 0,
+          "pending": 0,
+          "minimum_observations": 18,
+          "maximum_possible_observations": 24,
+          "coverage_gate": "met",
+          "missing_rows": [],
+          "terminal_mark": {
+            "index": 24,
+            "decision_ts": 1789252500,
+            "terminal": true,
+            "quote_ts": 1789252438.7736533,
+            "quote_available": true,
+            "raw_receipt_ts": 1789252438.7736533,
+            "raw_receipt_age_seconds": 61.22634673118591,
+            "raw_rejection": null,
+            "neural_observation_expected": false,
+            "status": "terminal_mark"
+          }
+        },
+        "test": {
+          "observed": 21,
+          "missing": 3,
+          "pending": 0,
+          "minimum_observations": 18,
+          "maximum_possible_observations": 21,
+          "coverage_gate": "met",
+          "missing_rows": [
+            {
+              "index": 10,
+              "decision_ts": 1789255500,
+              "terminal": false,
+              "quote_ts": 1789255417.764548,
+              "quote_available": false,
+              "raw_receipt_ts": 1789255417.764548,
+              "raw_receipt_age_seconds": 82.2354519367218,
+              "raw_rejection": "insufficient_two_sided_activity",
+              "neural_observation_expected": false,
+              "status": "ineligible_quote"
+            },
+            {
+              "index": 14,
+              "decision_ts": 1789256700,
+              "terminal": false,
+              "quote_ts": 1789256618.4070625,
+              "quote_available": false,
+              "raw_receipt_ts": 1789256618.4070625,
+              "raw_receipt_age_seconds": 81.59293746948242,
+              "raw_rejection": "insufficient_two_sided_activity",
+              "neural_observation_expected": false,
+              "status": "ineligible_quote"
+            },
+            {
+              "index": 22,
+              "decision_ts": 1789259100,
+              "terminal": false,
+              "quote_ts": 1789259049.67665,
+              "quote_available": false,
+              "raw_receipt_ts": 1789259049.67665,
+              "raw_receipt_age_seconds": 50.323349952697754,
+              "raw_rejection": "insufficient_two_sided_activity",
+              "neural_observation_expected": false,
+              "status": "ineligible_quote"
+            }
+          ],
+          "terminal_mark": {
+            "index": 24,
+            "decision_ts": 1789259700,
+            "terminal": true,
+            "quote_ts": 1789259650.9892714,
+            "quote_available": true,
+            "raw_receipt_ts": 1789259650.9892714,
+            "raw_receipt_age_seconds": 49.01072859764099,
+            "raw_rejection": null,
+            "neural_observation_expected": false,
+            "status": "terminal_mark"
+          }
+        }
+      }
+    },
+    "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu": {
+      "context_requirement_met": true,
+      "phases": {
+        "development": {
+          "observed": 23,
+          "missing": 1,
+          "pending": 0,
+          "minimum_observations": 18,
+          "maximum_possible_observations": 23,
+          "coverage_gate": "met",
+          "missing_rows": [
+            {
+              "index": 13,
+              "decision_ts": 1789249200,
+              "terminal": false,
+              "quote_ts": 1789249126.6382518,
+              "quote_available": false,
+              "raw_receipt_ts": 1789249126.6382518,
+              "raw_receipt_age_seconds": 73.36174821853638,
+              "raw_rejection": "insufficient_two_sided_activity",
+              "neural_observation_expected": false,
+              "status": "ineligible_quote"
+            }
+          ],
+          "terminal_mark": {
+            "index": 24,
+            "decision_ts": 1789252500,
+            "terminal": true,
+            "quote_ts": 1789252438.7736533,
+            "quote_available": true,
+            "raw_receipt_ts": 1789252438.7736533,
+            "raw_receipt_age_seconds": 61.22634673118591,
+            "raw_rejection": null,
+            "neural_observation_expected": false,
+            "status": "terminal_mark"
+          }
+        },
+        "test": {
+          "observed": 22,
+          "missing": 2,
+          "pending": 0,
+          "minimum_observations": 18,
+          "maximum_possible_observations": 22,
+          "coverage_gate": "met",
+          "missing_rows": [
+            {
+              "index": 10,
+              "decision_ts": 1789255500,
+              "terminal": false,
+              "quote_ts": 1789255417.764548,
+              "quote_available": false,
+              "raw_receipt_ts": 1789255417.764548,
+              "raw_receipt_age_seconds": 82.2354519367218,
+              "raw_rejection": "insufficient_two_sided_activity",
+              "neural_observation_expected": false,
+              "status": "ineligible_quote"
+            },
+            {
+              "index": 19,
+              "decision_ts": 1789258200,
+              "terminal": false,
+              "quote_ts": 1789258128.5243697,
+              "quote_available": false,
+              "raw_receipt_ts": 1789258128.5243697,
+              "raw_receipt_age_seconds": 71.47563028335571,
+              "raw_rejection": "insufficient_two_sided_activity",
+              "neural_observation_expected": false,
+              "status": "ineligible_quote"
+            }
+          ],
+          "terminal_mark": {
+            "index": 24,
+            "decision_ts": 1789259700,
+            "terminal": true,
+            "quote_ts": 1789259650.9892714,
+            "quote_available": true,
+            "raw_receipt_ts": 1789259650.9892714,
+            "raw_receipt_age_seconds": 49.01072859764099,
+            "raw_rejection": null,
+            "neural_observation_expected": false,
+            "status": "terminal_mark"
+          }
+        }
+      }
+    }
+  },
+  "earlier_rows_preserved": {
+    "unchanged_assessed_rows": 98,
+    "previous_snapshot_sha256": "3f52c3093044cf5aa8baf0d2b03f35bed834e819e637897293fe2f0dde02d178"
+  },
+  "execution_sources_match_arming": true,
+  "neural_observations_computed": 0,
+  "cloud_submissions": 0,
+  "interpretation": "The closed collector snapshot covers all four hours, all decision slots and eligible terminal quotes for both fixed pools. ALL has 24 development and 21 test observations; baton has 23 and 22. Six missing decision slots remain missing. This is a quote-coverage check, not the worker sealing receipt, a news audit, a neural result, or a financial selection. All sixteen captures and independent recording audits remain required."
+}

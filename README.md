@@ -228,16 +228,12 @@ evidence that the intervention earns money.
 The guide includes a [dated registration clarification](docs/fly-online-comparison.md#registration-description-clarification)
 and a [provisional quote-coverage check](docs/fly-online-comparison.md#check-coverage-before-the-window-closes).
 The original registration and executed comparison remain unchanged.
-The [September 12, 22:39 UTC coverage snapshot](reports/fly-online-development-coverage-11.json)
-meets the development-data minimum: ALL has 24 usable slots and baton 23 of 24.
-Test collection has begun; neural evaluations and trading results remain pending.
-The [23:34 UTC test-coverage check](reports/fly-online-test-coverage-note-11-01.json)
-records eleven usable decisions, one activity rejection and twelve pending slots
-per pool. The gap is preserved; final coverage and model results remain pending.
-The [7:11 p.m. CDT snapshot on September 12](reports/fly-online-test-coverage-milestone-11-01.json)
-has accumulated the minimum 18 usable test observations for each pool, with two
-preserved gaps and four slots still pending. The full window and all native
-evaluations and audits still need to finish.
+The [complete-window quote check](reports/fly-online-window-coverage-11.json)
+covers the 7:35 p.m. CDT endpoint on September 12. ALL has 24 development and
+21 test observations; baton has 23 and 22. All four combinations meet the
+18-observation minimum, with six missing slots preserved and both final quotes
+eligible. Worker sealing, native evaluations and independent audits remain
+separate requirements; quote coverage is not a trading result.
 
 The [full-window diagnostic figures](docs/fly-online-comparison.md#compare-the-full-financial-and-neural-timelines)
 align decisions, later fills, gate spikes, weight movement and learning history,

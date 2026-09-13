@@ -213,6 +213,19 @@ the final phase coverage gate remains pending. The window still ends at
 their independent audits are still required; no learning or financial result
 is inferred from the observation count.
 
+The [complete-window coverage check](../reports/fly-online-window-coverage-11.json)
+was downloaded at 7:37 p.m. CDT on September 12. Its closed archive extends
+beyond the 7:35 p.m. endpoint. ALL has 24 development and 21 test observations;
+baton has 23 and 22. All four coverage gates are met, the six missing decision
+slots remain missing, and both test terminal quotes are eligible (49.01 seconds
+old at the endpoint). All 98 previously assessed rows are unchanged. The third
+ALL test gap was at 7:25 p.m.: its receipt was 50.32 seconds old, but reported
+five-minute volume was $828.23, below the unchanged $1,000 minimum despite
+13 buys and 25 sells. This quote check does not seal the worker's plan or audit
+news, model activity, fills or returns. The 7:35 worker completed normally and
+waited for the snapshot; the scheduled evaluation still needs its sealing
+receipt and all sixteen independently audited chunks.
+
 ## Complete recordings and audit
 
 There are 16 complete chunks: two pools × four conditions × two phases.
