@@ -20,7 +20,7 @@ def status(run_id):
         except (FileNotFoundError,modal.exception.NotFoundError):return name,None
     async def collect():
         return dict(await asyncio.gather(*(read(n) for n in
-            ('owner.json','started.json','selection.json','latest.json','result.json','completed.json','failed.json'))))
+            ('owner.json','started.json','opening.json','selection.json','latest.json','result.json','completed.json','failed.json','next.json'))))
     files=asyncio.run(collect())
     return {'observed_at':time.time(),'run_id':run_id,'files':{k:v for k,v in files.items() if v is not None},'cloud_submissions':0}
 

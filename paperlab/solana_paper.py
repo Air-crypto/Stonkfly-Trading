@@ -21,8 +21,8 @@ COSTS=Costs(capital=1000,fee_bps=125,slippage_bps=100,max_exposure=.025,
 FEATURES=22
 
 
-def tick_for(token, now, sol_usd, fx_seen):
-    reason=eligible(token,now)
+def tick_for(token, now, sol_usd, fx_seen, *, selected=False):
+    reason=eligible(token,now,selected=selected)
     if not math.isfinite(sol_usd) or sol_usd<=0 or not 0<=now-fx_seen<=90:
         return None,'stale_sol_usd'
     if not token['trades']: return None,reason or 'missing_trade'
@@ -89,9 +89,38 @@ class Readout:
     def save(self,path):
         self.torch.save({'model':self.model.state_dict(),'optimizer':self.optimizer.state_dict(),
                          'updates':self.updates,'rng':self.rng.bit_generator.state},path)
+    def restore(self,path):
+        # Only this experiment's own immutable cloud checkpoint is accepted by the caller.
+        saved=self.torch.load(path,map_location='cpu',weights_only=False)
+        self.model.load_state_dict(saved['model']);self.optimizer.load_state_dict(saved['optimizer'])
+        self.updates=saved['updates'];self.rng.bit_generator.state=saved['rng']
 
 
-def run(root,data,*,seconds=900,commit=lambda:None,fly_factory=None,feed_factory=Feed,clock=time.time):
+def prior_state(root):
+    root=Path(root);completed=json.loads((root/'completed.json').read_text())
+    if completed['status']!='completed' or not completed.get('paper_only'):
+        raise ValueError('Resume only a completed paper window')
+    if (root/'continuation.json').exists():return json.loads((root/'continuation.json').read_text())
+    # Version 13 checkpoint compatibility: reconstruct its one-entry reference
+    # from the original delayed-fill rule; never reset its account to new cash.
+    rows=[json.loads(s) for s in (root/'decisions.jsonl').read_text().splitlines()]
+    holding=Broker(COSTS);issued=None;entered=False
+    for r in rows:
+        t=Tick(**r['tick']) if r['tick'] else None
+        if issued and not entered and t and r['quote_available']:
+            entered=holding.execute(COSTS.max_exposure,issued,t)['status']=='filled'
+        if issued is None and r.get('neural'):issued=r['pending']['issued'] if r['pending'] else None
+    if rows[-1]['tick'] and rows[-1]['quote_available']:
+        mark=holding.equity(Tick(**rows[-1]['tick']))
+    else:mark=float(holding.cash)
+    if abs(mark-rows[-1]['one_entry_hold_equity_usd'])>1e-7:raise ValueError('Prior holding reference did not reconstruct')
+    return {'broker':completed['broker'],'holding':holding.state(),'holding_entered':entered,
+            'created':json.loads((root/'selection.json').read_text())['created'],
+            'selected_mint':completed['selected_mint'],'native_checkpoint':str(root/'fly-final.npz'),
+            'head_checkpoint':str(root/'head-final.pt')}
+
+
+def run(root,data,*,seconds=900,commit=lambda:None,fly_factory=None,feed_factory=Feed,clock=time.time,resume=None):
     if not 60<=seconds<=900: raise ValueError('Pilot is bounded to 60–900 seconds')
     if fly_factory is None:
         import modal
@@ -105,13 +134,26 @@ def run(root,data,*,seconds=900,commit=lambda:None,fly_factory=None,feed_factory
     atomic_json(root/'started.json',dict(at=started,deadline=deadline,paper_only=True,interval_seconds=5,
         native_learning=True,readout_learning=True,capital=1000,costs=asdict(COSTS),max_selected_tokens=1,
         cohort='first causally eligible newly observed Pump.fun Solana launch; no replacement',
-        evaluation='online training pilot, not a held-out profitability test',news_enabled=False))
+        evaluation='online training pilot, not a held-out profitability test',news_enabled=False,
+        resumed_from=str(resume) if resume else None,pending_orders_at_window_boundary='expire without execution'))
     commit()
-    feed=feed_factory(root); feed.start()
+    saved=prior_state(resume) if resume is not None else None
+    feed=feed_factory(root)
+    if saved:
+        feed.accept(saved['created']);feed.pinned=saved['selected_mint']
+    feed.start()
     fly=None; head=None; token_id=None; ticks=[]; previous=None; pending=None
     broker=Broker(COSTS); holding=Broker(COSTS); holding_pending=None; holding_entered=False
+    if saved:
+        broker=Broker(COSTS,state=saved['broker']);holding=Broker(COSTS,state=saved['holding'])
+        holding_entered=saved['holding_entered'];token_id=saved['selected_mint']
+        atomic_json(root/'selection.json',{'at':clock(),'mint':token_id,'created':saved['created'],
+                    'rule':'continue the previously selected token; preserve balances and learned state','parent':str(resume)})
+    atomic_json(root/'opening.json',{'broker':broker.state(),'holding':holding.state(),
+                                   'resumed_from':str(resume) if resume else None})
     sol_usd=0.; fx_seen=0.; next_fx=0.; next_step=clock(); anchor=1000.; last_usable=None
     rows=0; trained=0; skipped=0; overruns=0; last_signature=None; status='collecting'; peak=1000.
+    snapshots={}
     ledger=open(root/'decisions.jsonl','a'); fxlog=open(root/'fx.jsonl','a')
     try:
         while clock()<deadline:
@@ -144,7 +186,7 @@ def run(root,data,*,seconds=900,commit=lambda:None,fly_factory=None,feed_factory
             neural=None; learning=None; fill={'status':'hold'}; reason='waiting_for_eligible_launch'
             t=None; available=False
             if token_id and token_id in snapshots:
-                token=snapshots[token_id]; t,reason=tick_for(token,now,sol_usd,fx_seen)
+                token=snapshots[token_id]; t,reason=tick_for(token,now,sol_usd,fx_seen,selected=True)
                 if now-health['last_message']>10: reason='disconnected_feed'
                 signature=(token['trades'][-1]['signature'],token['trades'][-1]['log_index']) if token['trades'] else None
                 fresh=t is not None and reason is None and signature!=last_signature
@@ -166,7 +208,9 @@ def run(root,data,*,seconds=900,commit=lambda:None,fly_factory=None,feed_factory
                     if len(ticks)>=12 and deadline-clock()>30:
                         if fly is None:
                             from .news import News
-                            news=News(enabled=False);fly=fly_factory(data,learning=True);head=Readout()
+                            news=News(enabled=False)
+                            fly=fly_factory(data,learning=True,**({'checkpoint':saved['native_checkpoint']} if saved and saved.get('native_checkpoint') else {}));head=Readout()
+                            if saved and saved.get('head_checkpoint'):head.restore(saved['head_checkpoint'])
                         # No stale decision following a long initial graph load.
                         if clock()-t.received_at<=10:
                             neural=fly.observe(ticks,len(ticks)-1,news,delta,
@@ -217,6 +261,12 @@ def run(root,data,*,seconds=900,commit=lambda:None,fly_factory=None,feed_factory
         feed.close();ledger.close();fxlog.close()
         if fly is not None:
             fly.save(root/'fly-final.npz');head.save(root/'head-final.pt')
+        if token_id:
+            created=snapshots[token_id]['created'] if token_id in snapshots else saved['created']
+            atomic_json(root/'continuation.json',dict(broker=broker.state(),holding=holding.state(),
+                holding_entered=holding_entered,created=created,selected_mint=token_id,
+                native_checkpoint=str(root/'fly-final.npz') if fly else saved['native_checkpoint'] if saved else None,
+                head_checkpoint=str(root/'head-final.pt') if head else saved['head_checkpoint'] if saved else None))
         result=dict(status=status,started=started,ended=clock(),selected_mint=token_id,
                     steps=rows,neural_observations=trained,readout_updates=head.updates if head else 0,
                     skipped_steps=skipped,overruns=overruns,feed=feed.health(),broker=broker.state(),

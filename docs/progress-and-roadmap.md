@@ -71,10 +71,18 @@ matches the [completed full/portable browser check](../reports/fly-learning-scal
 - [x] Implement a [Solana launch pilot](solana-live.md) with confirmed on-chain
   events, five-second observation targets, native fly plasticity and a trainable
   entry/exit readout. Preserve malformed/rejected/missing data and apply delayed,
-  cost-inclusive paper execution. A live decoder check and 15 targeted tests pass.
-- [ ] Verify actual cloud native training, readout updates, fills and achieved
-  cadence before enabling ongoing cross-window training. The deployed pilot has
-  no recurring schedule; it is bounded to 15 minutes and $25 maximum exposure.
+  cost-inclusive paper execution. Live event checks and 49 combined Solana/account tests pass.
+- [x] Verify an actual cloud training prefix: 22 native-array checks, 15 readout
+  updates, 10 reconstructed paper fills and 5.001-second median step spacing.
+  The [recorded check](../reports/solana-live-13-check.json) is not a completed
+  holdout or proof of profitable learning.
+- [x] Implement canonical PumpSwap migration tracking and completed-checkpoint
+  continuation, preserving both account balances and native/readout state.
+- [x] Verify the current continuation in the cloud: opening balances and the
+  first native weights match its parent exactly, and restored readout predictions
+  reproduce from the parent checkpoint. Up to three 15-minute
+  windows are dispatched, with $25 maximum orders and 2.5% target exposure;
+  inference still follows one selected token rather than every collected launch.
 - [ ] Complete the cost-aware action/readout experiment using the audited first
   SELL–BUY divergence. Include timing and exposure: lower eta's development
   loss worsened mainly through costs, but its test loss worsened through the

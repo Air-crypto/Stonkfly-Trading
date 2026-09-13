@@ -17,11 +17,25 @@ new launches and samples DEX pools. Coverage is bounded; it does not trade every
 Solana token. The latest controlled comparison uses two fixed pools, RAY and STONK.
 
 The new [Solana live pilot](docs/solana-live.md) subscribes directly to confirmed
-Pump.fun launch/trade events and targets five-second observations. It trains the
-native fly plus a small entry/exit readout using $1,000 paper cash and at most $25
-exposure. This is a bounded cloud training pilot, not a completed performance
+Pump.fun launch/trade events and targets five-second observations. It follows canonical PumpSwap migration and trains the
+native fly plus a small entry/exit readout using $1,000 paper cash, a $25 order
+cap and 2.5% target exposure. This is a bounded cloud training pilot, not a completed performance
 comparison or coverage of every Solana token. See the guide for logs, limits and
-status commands.
+status commands and bounded checkpoint continuation.
+
+The [first independently checked live prefix](reports/solana-live-13-check.json)
+contains 22 verified native observations, 15 readout updates and 10 reconstructed
+paper fills. Median published step spacing was 5.001 seconds; median native
+compute was 4.36 seconds. This verifies training mechanics, not profitable learning.
+
+The [completed initial pilot](reports/solana-live-13-completed.json) reached 40
+verified native observations. Its original feed stopped pricing the token at
+curve completion; retained inventory was stress-marked at zero. The next version
+follows the canonical PumpSwap pool and restores the same account and checkpoints.
+The [live continuation check](reports/solana-live-14-continuation.json) verifies
+that opening balances, native weights and readout predictions carried over.
+
+![Solana live paper training diagnostics](docs/assets/solana-live-13.png)
 
 ## Latest completed comparison
 

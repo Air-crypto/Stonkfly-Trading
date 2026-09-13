@@ -1,0 +1,62 @@
+{
+  "status": "migration_continuation_verified",
+  "cloud_call_id": "fc-01M2DVHF2XXJA288H4R6JHK6S7",
+  "opening_cash_inventory_fees_match_parent": true,
+  "first_native_weights_match_parent_last_weights": true,
+  "first_native_brain_ms": 20500.0,
+  "restored_readout_updates": 25,
+  "first_readout_predictions_reproduced_from_parent_checkpoint": true,
+  "account_audit": {
+    "status": "published_prefix_audited",
+    "rows": 36,
+    "fills": 6,
+    "neural_observations": 16,
+    "readout_updates": 14,
+    "native_arrays_verified": 0,
+    "nonzero_native_updates": 16,
+    "end_equity_stress_usd": 976.3256005446785,
+    "fees_usd": 2.0856256533197475,
+    "median_published_step_interval_seconds": 5.000462293624878,
+    "median_native_compute_seconds": 3.174777066499985,
+    "last_at": 1789319158.2542872,
+    "paper_only": true,
+    "profitable_learning_proven": false,
+    "note": "Independent fixed-fill account reconstruction. Native-array checks do not validate reward causality, model superiority or executable prices."
+  },
+  "source_sha256": {
+    "solana_cloud.py": "ecfdb397310754a1f65ce17ce685f8acdd5aa2c6f905da08879dba6a156a34c7",
+    "paperlab/solana_events.py": "1113f7255a0b30f68cba46a1c834cab5d2d2a79a991f5c896fd60a827e253a53",
+    "paperlab/solana_paper.py": "c30eef734fa61c31a403f226dc7c9261a1d36f6761b68527652b7422359d2634",
+    "paperlab/solana_schema/pump_events.json": "9852929e009b9f45a0c617e2a0171319d9f26b896cac69206012725029ee7155",
+    "paperlab/solana_schema/pump_amm_events.json": "dc4dc1ef07a48baaa820191f5dee43af4e5e39daed9b329a021ee2915e2ea498"
+  },
+  "local_sources_match": true,
+  "evidence_sha256": {
+    "opening.json": "49c40a69317e8e541df6b27df0660645307a260efafb1488ab1b6327a6366595",
+    "parent-head.pt": "d876130c862dbec056967ae8ac525875a43c296cb86072f41070e42b5855bc5f",
+    "owner.json": "ff0f5ed60c55e2237392f90bf20541be7e0556e7dc7ea2a349df9b73b0013d0f",
+    "decisions.jsonl": "1023dc30ffd1ac9843b06c5d2563b218e7be4f7d707cd7854f7cccda8866bf99",
+    "started.json": "29441736eb72d4aaf1a9e2ce709b4fc2fdef31a58459671ca85ecb36130c03ee",
+    "selection.json": "46fd2d9678be6188f7c309738e0a23531a252befeb7c65fe94db3912aff55faa",
+    "neural/00000.npz": "bffb94fb9a40b17216c0efee6a83b117608ba87f1e8776948b0c4a5d8e24e709"
+  },
+  "planned_windows": 3,
+  "maximum_compute_reservations_usd": 0.9574632,
+  "paper_only": true,
+  "profitable_learning_proven": false,
+  "archive": {
+    "path": "reports/solana-live-14-evidence.zip",
+    "sha256": "32d28ed3aa3f071f0444fa33d8ff61a80fdbd4679d292740929676f2e31e567f",
+    "members": {
+      "opening.json": "49c40a69317e8e541df6b27df0660645307a260efafb1488ab1b6327a6366595",
+      "owner.json": "ff0f5ed60c55e2237392f90bf20541be7e0556e7dc7ea2a349df9b73b0013d0f",
+      "started.json": "29441736eb72d4aaf1a9e2ce709b4fc2fdef31a58459671ca85ecb36130c03ee",
+      "selection.json": "46fd2d9678be6188f7c309738e0a23531a252befeb7c65fe94db3912aff55faa",
+      "decisions.jsonl": "1023dc30ffd1ac9843b06c5d2563b218e7be4f7d707cd7854f7cccda8866bf99",
+      "neural/00000.npz": "bffb94fb9a40b17216c0efee6a83b117608ba87f1e8776948b0c4a5d8e24e709",
+      "parent-head.pt": "d876130c862dbec056967ae8ac525875a43c296cb86072f41070e42b5855bc5f",
+      "parent-last-native.npz": "08c58ca8cd5dfb3952f85bc6a53562f710b2dc4d9c7e6c7ea8e120fc48f6f06b"
+    }
+  },
+  "scope": "Account audit covers the recorded 36-step prefix. The archive includes first resumed and last parent native arrays plus the parent readout checkpoint, not every resumed native observation."
+}

@@ -112,3 +112,92 @@ def test_readout_gradient_and_directional_update(tmp_path):
 def test_native_constructor_forbidden_on_laptop(tmp_path):
     from paperlab.solana_paper import run
     with pytest.raises(RuntimeError,match='never on the laptop'):run(tmp_path,'unused',seconds=60)
+
+
+def test_independent_ledger_audit_rejects_tampered_cash_and_fill():
+    from dataclasses import asdict
+    from paperlab.solana_audit import audit
+    t,_=tick_for(token(),1000,100,999);b=Broker(COSTS);f=b.execute(.025,990,t)
+    row={'at':1000.,'tick':asdict(t),'quote_available':True,'fill':f,'broker':b.state(),
+         'equity_stress_usd':b.equity(t),'neural':None}
+    assert audit([row])['fills']==1
+    bad=deepcopy(row);bad['broker']['cash']='1000'
+    with pytest.raises(ValueError,match='Account'):audit([bad])
+    bad=deepcopy(row);bad['fill']['decision_ts']=1000
+    with pytest.raises(ValueError,match='Noncausal'):audit([bad])
+
+
+def test_native_array_audit_rejects_false_update(tmp_path):
+    import hashlib
+    from paperlab.solana_audit import audit
+    counts=np.array([1,2],dtype=np.int32);before=np.array([1.,2.],dtype=np.float32)
+    after=before+.1;delta=after-before
+    np.savez(tmp_path/'00000.npz',counts=counts,before=before,after=after,delta=delta)
+    n={'compute_seconds':1.,'spike_sha256':hashlib.sha256(counts.tobytes()).hexdigest(),'total_spikes':3,
+       'learning_diagnostics':{'changed_this_step':2,'weight_delta_l2':float(np.linalg.norm(delta))}}
+    row={'at':1000.,'tick':None,'quote_available':False,'fill':{'status':'hold'},'broker':Broker(COSTS).state(),
+         'equity_stress_usd':1000.,'neural':n}
+    assert audit([row],native_root=tmp_path)['native_arrays_verified']==1
+    row['neural']['learning_diagnostics']['weight_delta_l2']=0
+    with pytest.raises(ValueError,match='Update norm'):audit([row],native_root=tmp_path)
+
+
+def test_canonical_pool_and_migrated_quote(tmp_path):
+    from paperlab.solana_events import canonical_pool
+    payload=json.loads((FIXTURE.parent/'pumpswap-selected-events.json').read_text())
+    mint=payload['created']['mint']
+    assert canonical_pool(mint)=='5jLYKxisLsLxTeCNGd5QvQShfCP1jMqaVokjpNb8BndC'  # Independently matched to official JS SDK.
+    f=Feed(tmp_path);f.accept(payload['created']);f.accept({'kind':'CompleteEvent','mint':mint})
+    for e in payload['events']:f.accept(e)
+    t=f.snapshot()[mint];assert t['migrated']
+    last=t['trades'][-1];raw=payload['events'][-1]
+    assert last['virtual_sol_reserves']==raw['pool_quote_token_reserves']+raw['virtual_quote_reserves']
+    assert last['real_sol_reserves']==raw['pool_quote_token_reserves']
+    assert last['venue']=='pumpswap'
+    bad=deepcopy(raw);bad['pool']=SOL;before=len(t['trades']);f.accept(bad)
+    assert len(f.snapshot()[mint]['trades'])==before
+    assert Reader((-42).to_bytes(16,'little',signed=True)).read('i128')==-42
+
+
+def test_readout_restores_predictions_optimizer_and_rng(tmp_path):
+    h=Readout();x=np.ones(FEATURES,dtype=np.float32)
+    h.update({'x':x,'action':0},x,-1.,5);path=tmp_path/'head.pt';h.save(path)
+    restored=Readout();restored.restore(path)
+    assert restored.updates==h.updates
+    assert np.array_equal(restored.values(x),h.values(x))
+    assert restored.choose(x)==h.choose(x)
+    a=h.update({'x':x,'action':1},x,2.,5);b=restored.update({'x':x,'action':1},x,2.,5)
+    assert a==b
+
+
+def test_opening_balance_is_preserved_in_audit():
+    from paperlab.solana_audit import audit
+    opening={'cash':'985.6','qty':'5','fees':'0.5','halted':False}
+    row={'at':1000.,'tick':None,'quote_available':False,'fill':{'status':'hold'},
+         'broker':opening,'equity_stress_usd':985.6,'neural':None}
+    assert audit([row],opening=opening)['end_equity_stress_usd']==985.6
+    with pytest.raises(ValueError,match='Account'):audit([row])
+
+
+def test_resume_refuses_incomplete_or_failed_window(tmp_path):
+    from paperlab.solana_paper import prior_state
+    (tmp_path/'completed.json').write_text(json.dumps({'status':'failed','paper_only':True}))
+    with pytest.raises(ValueError,match='completed paper'):prior_state(tmp_path)
+
+
+def test_cloud_continuation_is_bounded_and_does_not_retry_failures(monkeypatch):
+    from types import SimpleNamespace
+    import solana_cloud
+    import paperlab.core
+    calls=[];writes=[]
+    monkeypatch.setattr(solana_cloud,'_run',lambda *a:{'status':'completed'})
+    monkeypatch.setattr(solana_cloud,'worker',SimpleNamespace(spawn=lambda *a,**kw:(calls.append((a,kw)) or SimpleNamespace(object_id='fixture-call'))))
+    monkeypatch.setattr(solana_cloud,'volume',SimpleNamespace(commit=lambda:None))
+    monkeypatch.setattr(paperlab.core,'atomic_json',lambda *a:writes.append(a))
+    result=solana_cloud._window('solana-fixture',60,False,None,2)
+    assert result['next_call_id']=='fixture-call' and calls[0][1]['remaining_windows']==1
+    assert calls[0][1]['resume_id']=='solana-fixture'
+    calls.clear();monkeypatch.setattr(solana_cloud,'_run',lambda *a:{'status':'budget_stopped'})
+    solana_cloud._window('solana-fixture',60,False,None,2)
+    assert not calls
+    with pytest.raises(ValueError,match='At most three'):solana_cloud._window('solana-fixture',60,False,None,3)

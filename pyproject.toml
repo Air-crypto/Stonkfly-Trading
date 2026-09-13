@@ -11,7 +11,7 @@ dependencies = ["numpy>=2.2,<3", "torch>=2.6,<3", "requests>=2.32,<3", "feedpars
 
 [project.optional-dependencies]
 dev = ["pytest>=8,<10"]
-cloud = ["modal>=1.5,<2", "websockets==16.0"]
+cloud = ["modal>=1.5,<2", "websockets==16.0", "solders==0.29.0"]
 news = ["transformers>=4.50,<6"]
 plots = ["matplotlib>=3.9,<4"]
 export = ["onnx>=1.17", "onnxscript>=0.3", "onnxruntime>=1.20"]
