@@ -248,6 +248,8 @@ differ, despite identical chart/news images; neither arm trains during replay.
 
 ![Audited trained control at the first differing decision](docs/assets/fly-online-controls-11.png)
 
+![Audited development equity, exposure and decoder decisions](docs/assets/fly-online-controls-equity-11.png)
+
 The [full-window diagnostic figures](docs/fly-online-comparison.md#compare-the-full-financial-and-neural-timelines)
 align decisions, later fills, gate spikes, weight movement and learning history,
 with links back to matched circuit recordings. This preview is explicitly

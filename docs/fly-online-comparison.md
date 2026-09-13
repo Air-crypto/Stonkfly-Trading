@@ -504,6 +504,15 @@ reconstructs all 49 vectors. The raw news archive, price archive and sealed plan
 hashes match. Exact validation exposed nondeterministic reconstruction, not a
 different news archive. Its tolerance has not been widened.
 
+Reproduce the process dependence without a model or cloud call:
+
+```sh
+uv run python scripts/check-news-hash-seeds.py \
+  --plan runs/online-cloud-11/plan.json \
+  --news runs/online-sealed-input-audit-11/news.db \
+  --out runs/news-seed-check-new.json
+```
+
 The first two controls completed and passed independent ledger, input-image,
 full-bin learning/state and plotted-series audits under `PYTHONHASHSEED=0`.
 No model was constructed or propagated during these local audits.
@@ -523,6 +532,16 @@ verified all 48 actions, 192 selected bins, 24 paired timestamps, large-file
 import and mobile layout, with zero model submissions. In the running local
 viewer, [inspect the first different action](http://127.0.0.1:8766/?run=online11-development-pool0-trained_frozen&compare=online11-development-pool0-pristine_frozen&step=11&bin=32&neuron=10527&pristine=1).
 The complete private recordings are required to reproduce these views.
+
+The [control timeline](assets/fly-online-controls-equity-11.svg) aligns paper
+equity, inventory exposure and all decoder decisions. Its
+[data record](../reports/fly-online-controls-figure-11.json) contains the plotted
+values and source hashes. Regenerate it from the audited summaries:
+
+```sh
+uv run --extra plots python scripts/plot-fly-study-controls.py \
+  --chunks runs/online-cloud-11/chunks --out runs/control-figure-new
+```
 
 The [recovery amendment](../reports/fly-online-recovery-protocol-11.json) retains
 the original failed attempt and its two audited controls. A separate temporary
