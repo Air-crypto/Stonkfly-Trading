@@ -588,6 +588,10 @@ an import smoke check during image build. A local isolated import test also
 passes using only the declared Python files. The active amendment changes only
 its packaging source pin and creation time; all original study inputs and
 execution sources remain unchanged.
+The [validation record](../reports/fly-online-recovery-validation-11.json) includes
+14 passing dispatch/import tests and the successful Modal import-check build.
+That check uses a Modal build function because the platform injects its SDK into
+function containers; a plain image-shell command does not have that SDK.
 
 ## Compare the full financial and neural timelines
 

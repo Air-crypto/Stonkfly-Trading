@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "created_at": 1789266886.58455,
+  "created_at": 1789266968.251605,
   "policy": "Amended recovery after the original third chunk failed before neural construction. Preserve all original receipts, sealed inputs and the first two independently audited controls. Use PYTHONHASHSEED=0 and require exact reconstruction of every original news vector. Run the remaining fourteen original conditions once, in their original order, in a separate namespace. Keep all 56 original execution sources, full graph, decoder, reward, learning settings and costs unchanged. Persist original-rule development selection before any test capture. Never retry a claimed or failed chunk. Use the shared worker lease and budget with two CPUs, 8 GiB, 600 seconds, no platform retries, a $25 worker monthly cap and at most $0.80 additional conservative reserved compute. Publish only with separate amendment provenance and independent full-recording audits; no policy promotion.",
   "seed": "0",
   "plan_sha256": "3f0e3cf8e5a1187ff5bf4ed4cc128e8c3457c1a14ae02fd899d3e8548709f045",
@@ -20,7 +20,7 @@
   },
   "code_sha256": {
     "paperlab/fly_online_recovery.py": "296f0792e1b290b5c8645cede5cc4f3343bb7343c70599a3bc6ba63f00337174",
-    "recovery_cloud.py": "1de6a6ad7fc388f905e8c96158cf8dcf83066f2d0cfab599ee62ac1ed844f8e2"
+    "recovery_cloud.py": "f9eac62079b3c427527a12d43a9c65af53ce9dd1d8231f8a4934062e0c811bb7"
   },
   "evidence_sha256": {
     "fly-online-failure-11.json": "7104cfee39959b5d4f5938e32fed2439003c6113e19ecf31144069e7aab1aab5",
