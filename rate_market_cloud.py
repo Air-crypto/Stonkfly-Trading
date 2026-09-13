@@ -4,7 +4,12 @@ import modal
 from cloud import image,volume,discovery_volume,exclusive,FULL_FLY,UNIVERSE
 
 if not (FULL_FLY and UNIVERSE):raise ValueError('Study 12 requires full fly and universe settings')
-ROOT=Path(__file__).parent
+def _project_root(local,entrypoint):
+    # Modal serializes this entrypoint under /root; pinned files live in /opt.
+    return Path(entrypoint).resolve().parent if local else Path('/opt/paperlab')
+
+
+ROOT=_project_root(modal.is_local(),__file__)
 REGISTRATION=ROOT/'reports/fly-rate-market-registration-12.json'
 REFERENCE=ROOT/'runs/rate-market-reference-12'
 if not REGISTRATION.is_file() or not REFERENCE.is_dir():

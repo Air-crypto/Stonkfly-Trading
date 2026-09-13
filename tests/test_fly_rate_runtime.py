@@ -75,6 +75,8 @@ def test_cloud_entrypoint_acquires_shared_lease_and_reloads_before_budgeted_work
     (tmp_path/'reports/fly-rate-market-registration-12.json').write_text('{}')
     spec=importlib.util.spec_from_file_location('rate_cloud_entrypoint_fixture',tmp_path/'rate_market_cloud.py')
     module=importlib.util.module_from_spec(spec);monkeypatch.setitem(sys.modules,spec.name,module);spec.loader.exec_module(module)
+    assert module._project_root(False,'/root/rate_market_cloud.py')==Path('/opt/paperlab')
+    assert module._project_root(True,tmp_path/'rate_market_cloud.py')==tmp_path.resolve()
     events=[]
     class Volume:
         def __init__(self,name):self.name=name
