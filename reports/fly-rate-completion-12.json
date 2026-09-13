@@ -155,5 +155,10 @@
     "passed": 45,
     "command": "PYTHONHASHSEED=0 MPLCONFIGDIR=/tmp/fly-mpl python -m pytest tests/test_fly_rate_report.py tests/test_fly_loss_attribution.py tests/test_fly_trade_trace.py tests/test_market_baselines.py -q",
     "synthetic_unit_tests_are_not_market_results": true
+  },
+  "clean_checkout_reproduction": {
+    "path": "reports/fly-rate-reproduction-12.json",
+    "sha256": "78c5fb6497811617761dd73046ed8a3b02560951c1f176af5cbecb198efd3477",
+    "source_commit": "f66de16932a77d5f55ce28d02832d2d9c8fd85b1"
   }
 }

@@ -1,0 +1,19 @@
+{
+  "source_commit": "f66de16932a77d5f55ce28d02832d2d9c8fd85b1",
+  "import_from_clean_checkout": true,
+  "public_archive_members": 68,
+  "all_member_hashes_verified": true,
+  "diagnostic_json_byte_identical": true,
+  "diagnostic_sha256": "d2a882bff6babc31595ae0d9ad737978ae4a69ff2bf0db6b1ad48f08a062a42d",
+  "plots_rendered": true,
+  "fresh_dependency_install": false,
+  "cloud_submissions": 0,
+  "new_neural_observations": 0,
+  "targeted_tests": {
+    "passed": 45,
+    "failed": 0,
+    "duration_seconds": 2.09,
+    "command": "PYTHONHASHSEED=0 PYTHONPATH=<clean-checkout> MPLCONFIGDIR=/tmp/fly-mpl python -m pytest tests/test_fly_rate_report.py tests/test_fly_loss_attribution.py tests/test_fly_trade_trace.py tests/test_market_baselines.py -q"
+  },
+  "runtime_note": "Used the existing Python environment with source imports forced to the clean archive checkout; no fresh dependency installation."
+}

@@ -132,3 +132,10 @@ unchanged. The temporary study app was stopped at 12:31:50 UTC after all capture
 completed and the worker was verified idle; the separate paper-lab deployment
 was retained. The study's conservative compute ledger accounted for **$0.90664**
 against its $3 allowance. That excludes a claim about the final provider invoice.
+
+The [clean-checkout reproduction proof](../reports/fly-rate-reproduction-12.json)
+records byte-identical diagnostic JSON, verified hashes for all 68 evidence
+archive members, rendered plots, and 45 passing targeted tests at commit
+`f66de16932a77d5f55ce28d02832d2d9c8fd85b1`. This used the existing Python
+environment with source imports forced to the clean checkout; it was not a
+fresh dependency installation.
