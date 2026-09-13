@@ -177,3 +177,15 @@ checkpoint continuation and budget-paced Modal dispatch. Unit and entrypoint-log
 checks cover multi-token accounting, reward isolation, rotation, continuation and
 single-flight scheduling. Deployment and observed learning must be reported
 separately; these tests are not trading-performance evidence.
+
+Deployment verified on September 13, 2026: `fly-paper-solana-online` is active,
+with a fifteen-minute Modal coordinator schedule and twelve-hour training-window
+cadence. Window `solana-online-20260913-183646` resumed the prior account. Its
+84-row published prefix contained 39 native observations across three tokens,
+30 new Q updates and 15 simulated fills. Independent cash/inventory/fee
+reconstruction passed, and the first plastic weights exactly matched the parent
+checkpoint's last recorded weights. These are mechanics and learning-activity
+checks, not evidence of profitable learning. Sixty tests passed. The subsequent
+worker version parks unavailable/dust holdings and records full portfolio marks
+for independent valuation checks; the initial window's older ledger does not
+contain those marks. Continuous discovery between windows remains unimplemented.
