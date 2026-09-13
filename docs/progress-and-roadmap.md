@@ -166,3 +166,14 @@ The repeat loop is: identify a concrete failure, inspect its recording, specify
 one change, register a fresh comparison, audit outcomes, then retain or reject
 the hypothesis. A failed hypothesis remains a result. The project does not
 require labeling an unsuccessful strategy as improved.
+
+### Recurring cross-launch paper RL
+
+The single-token continuation completed 45 minutes with only twenty native
+observations; the last thirty minutes had none as PAPER lost usable liquidity or
+activity. The next implementation is a [recurring cross-launch service](solana-online.md):
+shared account, eight active tokens, preserved inventory, shared fly/Q learning,
+checkpoint continuation and budget-paced Modal dispatch. Unit and entrypoint-logic
+checks cover multi-token accounting, reward isolation, rotation, continuation and
+single-flight scheduling. Deployment and observed learning must be reported
+separately; these tests are not trading-performance evidence.

@@ -277,3 +277,8 @@ PPO retraining after 400 observations. The multi-pool mode has separate collecti
 eligibility, training gates, and ledgers documented above. Full BTC decision, loss,
 gradient and fly-weight diagnostics are described in [observability](docs/observability.md).
 Sustained profitability has not been established for either experiment.
+
+The [recurring Solana paper RL service](docs/solana-online.md) extends the bounded
+single-token pilot to a shared portfolio and new launch admission. It runs
+budget-paced Modal windows with checkpoint continuation; it does not promise
+24/7 all-token inference or profitable returns.

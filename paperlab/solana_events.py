@@ -123,7 +123,7 @@ class Feed:
         self.root = Path(root); self.root.mkdir(parents=True,exist_ok=True)
         self.max_events, self.max_tokens = max_events, max_tokens
         self.stop = threading.Event(); self.lock = threading.Lock()
-        self.tokens = {}; self.pinned = None; self.pools={}
+        self.tokens = {}; self.pinned = None; self.pinned_mints = set(); self.pools={}
         self.stats = dict(notifications=0, events=0, duplicates=0, decode_errors=0,
                           connections=0, overflow=0, untracked_amm_events=0,last_message=0., last_event=0., status='starting')
     def start(self):
@@ -163,7 +163,7 @@ class Feed:
             if kind=='CreateEvent':
                 if mint in self.tokens: return
                 if len(self.tokens)>=self.max_tokens:
-                    candidates = [k for k in self.tokens if k!=self.pinned]
+                    candidates = [k for k in self.tokens if k!=self.pinned and k not in self.pinned_mints]
                     if not candidates: self.stats['overflow']+=1; return
                     removed=min(candidates,key=lambda k:self.tokens[k]['created']['received'])
                     del self.tokens[removed]
