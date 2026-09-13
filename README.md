@@ -130,6 +130,16 @@ reset is promoted; changing a decision is not evidence of improving a trade.
 
 ![Every audited selective-reset condition and its decisions](docs/assets/fly-selective-01-matrix.png)
 
+The [memory-filter reconstruction](docs/fly-selective-traces.md#why-the-single-resets-move-weights-more)
+now separates stored `u/w` relaxation from new learning drive. On the recorded
+KC-only trajectory, retained earlier DAN history dominates the third-image
+update; current-image activity partly opposes it. This points toward testing
+smaller updates with both traces retained, rather than choosing a single reset.
+The decomposition holds recorded firing fixed and does not establish a better
+trading policy.
+
+![Stored memory and filtered learning-drive contributions](docs/assets/fly-selective-memory-01.png)
+
 Open all twelve paired recordings from the included 3.75 MB archive:
 
 ```sh

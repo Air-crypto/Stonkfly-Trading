@@ -47,6 +47,79 @@ no financial ranking of the resets. Study 11's prospective both-reset candidate
 also failed its development criterion. A smaller update is not itself evidence
 of better learning; any next candidate needs a fresh cost-aware comparison.
 
+## Why the single resets move weights more
+
+The [new reconstruction](../reports/fly-selective-memory-01.json) applies the
+declared linear memory filter to all 1,800 saved bins, separating three sources:
+relaxation of stored `u/w`, drive from activity traces retained at the image
+boundary, and drive from activity within the current image. It uses each
+condition's actual recorded firing; it does not propagate an alternative brain.
+
+Earlier traces dominate the large third-image updates in both single-reset
+conditions. Stored memory alone contributes relatively little in the
+recorded-pulse conditions:
+
+| Condition | Stored u/w | Earlier traces | Current-image traces | Observed weight-change L2 |
+| --- | ---: | ---: | ---: | ---: |
+| Carry both | +0.0539 | +7.0767 | +1.3459 | 8.4765 |
+| Reset both | +1.4410 | 0 | +1.9008 | 3.3418 |
+| Reset KC only | +0.4659 | +20.5138 | −1.3054 | 19.6743 |
+| Reset DAN only | +0.0206 | +18.0633 | −0.1200 | 17.9639 |
+
+Each component column is its **signed projection onto the observed update
+direction**, across all 7,835 plastic weights. Positive means aligned with that
+update, not beneficial to trading; negative means opposing it. These projections
+sum to the observed norm, apart from the displayed rounding. Component norms
+themselves do not add. The report preserves an additional endpoint-rounding
+residual, too small to see here.
+
+![Filtered memory contributions for all conditions](assets/fly-selective-memory-01.png)
+
+The rule contains a positive current-KC × DAN-history term and a negative
+current-DAN × KC-history term. A KC reset removes earlier KC history while
+retaining earlier DAN history; a DAN reset does the converse. This accounts
+algebraically for the remaining earlier-image drive. Current-image activity
+partly cancels it in the third image. That cancellation and the changed full
+trajectories explain why judging one bin, one gate spike, or just the magnitude
+of raw drive was insufficient.
+
+The direct convolution reproduces the recorded filtered state `w` with maximum
+absolute error **1.01 × 10⁻¹¹**. Every weight residual stays within the precision
+of its recorded float32 endpoints plus that convolution error. No saturated
+memory is used: clipping would invalidate this linear decomposition. The
+[validation record](../reports/fly-selective-memory-validation-01.json) also
+records 18 passing tests, including a separate Runge–Kutta integration of the
+memory differential equations, opposing drives and frozen-state behavior.
+
+The [published final component vectors](../reports/fly-selective-memory-vectors-01.npz)
+retain all 7,835 edges for all 36 observation endpoints. Each component norm,
+projection and sum was reconciled to the report. Reproduce the chart from the
+report alone:
+
+```sh
+uv run --extra plots python -m paperlab.fly_selective_memory \
+  --report reports/fly-selective-memory-01.json --out runs/selective-memory-figure
+```
+
+To repeat the full decomposition, the original downloaded selective artifacts
+are required. This is a local array calculation with no native construction or
+cloud submission:
+
+```sh
+uv run --extra plots python -m paperlab.fly_selective_memory \
+  --audit reports/fly-selective-audit-01.json \
+  --artifacts runs/selective-trace-01/cloud/artifacts \
+  --out runs/selective-memory-analysis
+uv run --extra dev python -m pytest -q tests/test_fly_selective_memory.py
+```
+
+The next candidate is a lower learning rate with both histories retained. It
+preserves the two terms instead of removing one side of the rule. That candidate
+has **not run or been selected**. Smaller movement alone will not count as an
+improvement: original controls must reproduce, full new trajectories must be
+audited, and profitability needs a separate prospective, cost-aware comparison.
+These three historical images will not become new held-out performance data.
+
 ## Inspect or reproduce the result
 
 The [full audit](../reports/fly-selective-audit-01.json) contains every condition,

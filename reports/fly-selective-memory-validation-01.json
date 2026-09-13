@@ -1,0 +1,16 @@
+{
+  "status": "selective_memory_analysis_verified",
+  "report_sha256": "19eadfbd8d0590a978d701d576d38f85ad433957d310328708e0ab2fda502bbe",
+  "source_sha256": "5e35107e9b1d4109f25d52102e3f40eb3dd883c96651c4da010f0a8547793606",
+  "test_source_sha256": "c5a4f892f8b54abc7ff71d1435dfcc6b38309505f27c237e5da84e9f30a1fa44",
+  "test_log_sha256": "aef4a50312e70d0cea3593c16d87830bca01bfa40426feacc302b23fd4676723",
+  "test_xml_sha256": "f9d0ecd01048219e312eddbe92a42e97cce11a8f7d5bb5453a1b605f88852e63",
+  "tests_passed": 18,
+  "independent_ode_reference": "RK4 integrates du/dt=-u/1800+drive and dw/dt=(u-w)/0.05 with 100 substeps per bin",
+  "final_vectors_sha256": "0786a01d2ca1ea3ec63260af712b4fca6c1f506c2bc4ede86b3fa0ad77f1b8f9",
+  "final_observations_reconciled": 36,
+  "published_figure_reproduction_png_identical": true,
+  "new_neural_observations": 0,
+  "cloud_submissions": 0,
+  "interpretation": "Numerical ODE regression and published-vector reconciliation supplement the complete saved-recording reconstruction. No native model is constructed; reproducing charts does not repeat the full recording audit."
+}
