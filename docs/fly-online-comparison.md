@@ -611,6 +611,13 @@ rules and 56 source pins stay unchanged; only execution initialization and the
 recovery namespace change. The parent owns the same durable cloud lease and
 budget while its child runs. Child failures or timeouts leave a failed claim.
 
+At 02:45:04 UTC on September 13, version 2 passed the exact 49-vector check in
+the cloud and claimed its first online condition. The
+[execution receipt](../reports/fly-online-recovery-execution-11.json) records the
+owning call, unchanged source signature and $0.0536312 worst-case reservation for
+that capture. This receipt proves input validation and dispatch; completed
+recordings and their independent audits are still needed for a result.
+
 ## Compare the full financial and neural timelines
 
 After the observer has written its fully audited `report.json`, export the

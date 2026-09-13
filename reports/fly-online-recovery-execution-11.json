@@ -1,0 +1,43 @@
+{
+  "status": "first_recovery_condition_claimed",
+  "observed_at": 1789267606.7742772,
+  "app": "fly-paper-recovery-11",
+  "url": "https://modal.com/apps/arihanairyadav/main/deployed/fly-paper-recovery-11",
+  "amendment_version": 2,
+  "directory": "registered-paper-11-recovery-02",
+  "protocol_sha256": "e72488706d138dea0f0c4e2b74e497dddd81bfd9606c83bd3b25d628a32fa0b4",
+  "input_check": {
+    "news": {
+      "news_snapshot_sha256": "0d591226bf2740d8d02cfebeed64a06d9603a8e81c23db72dd8439807e1fffa6",
+      "vectors_reconstructed": 49
+    },
+    "seed": "0",
+    "call_id": "fc-01M2CAEPMFKKVA7MTNM361HY24",
+    "input_id": "in-01M2CAEPMVC4ZZ40Y8Q6FVK3FP:1789267499698-0",
+    "checked_at": 1789267504.77457,
+    "original_inputs_changed": false,
+    "interpreter_start": "fresh-subprocess",
+    "verified_hash_probe": 7584921261715552910
+  },
+  "first_claim": {
+    "status": "claimed",
+    "chunk": "development-pool0-trained_online_carry",
+    "call_id": "fc-01M2CAEPMFKKVA7MTNM361HY24",
+    "input_id": "in-01M2CAEPMVC4ZZ40Y8Q6FVK3FP:1789267499698-0",
+    "claimed_at": 1789267505.8640814,
+    "plan_sha256": "3f0e3cf8e5a1187ff5bf4ed4cc128e8c3457c1a14ae02fd899d3e8548709f045",
+    "source_sha256": "5862a6aebfe9db84c39d94564a230eb8f7bf8e5703bbf19ddaf64d246f529dc0",
+    "amendment_sha256": "320545aff0322bf91aac4af7f391df2f515fbd89eff99c85655f32348d1e249d",
+    "remote_path": "/state/registered-paper-11-recovery-02/chunks/development-pool0-trained_online_carry/artifacts",
+    "reserved_usd": 0.0536312,
+    "dispatch": "separate-recovery-worker-shared-lease"
+  },
+  "build_import_check_passed": true,
+  "build_log_sha256": "adb65fe4d97d6c0fcb199b6c6f759a62dfbdf94ca4ecf720040b8c10874c0d8e",
+  "reused_audited_conditions": 2,
+  "remaining_capture_conditions": 14,
+  "original_sources_unchanged": 56,
+  "original_inputs_changed": false,
+  "full_study_complete": false,
+  "provider_bill_verified": false
+}
