@@ -1,6 +1,6 @@
 {
   "status": "held_out_capture_running",
-  "observed_at": 1789270359.787725,
+  "observed_at": 1789272176.9627898,
   "app": {
     "app_id": "ap-53YtObJ53DMnzH3wG3xfH1",
     "description": "fly-paper-completion-11",
@@ -26,7 +26,7 @@
   },
   "call_state": "completed",
   "retained_conditions": 6,
-  "new_completed_conditions": 2,
+  "new_completed_conditions": 8,
   "protocol_sha256": "24e12606eaba9e3112dc820ef0ce9f815ef3b4836046cbf6c6f76be08b4aeb4f",
   "cloud_preflight_sha256": "6bc744799809ac9f390f3928c15336ecd1e46ceb3b580ee532ace5e88e132a33",
   "deploy_log_sha256": "750fae00eca4a55e781e5cbb68da9eae21abcb65123d69ad177cfa3d142d8c24",
@@ -152,14 +152,14 @@
   },
   "active_receipt": {
     "status": "claimed",
-    "chunk": "test-pool0-pristine_frozen",
-    "call_id": "fc-01M2CD4T1B5NMFMJPM42FEC2K4",
-    "input_id": "in-01M2CD4T1KNDP6A1ZM3CXVR9AE:1789270321227-0",
-    "claimed_at": 1789270326.3631783,
+    "chunk": "test-pool1-trained_online_carry",
+    "call_id": "fc-01M2CEVR1PFMFJ67704980SGQJ",
+    "input_id": "in-01M2CEVR1ZMCVZX2W6B1AJE8GA:1789272121433-0",
+    "claimed_at": 1789272126.328576,
     "plan_sha256": "3f0e3cf8e5a1187ff5bf4ed4cc128e8c3457c1a14ae02fd899d3e8548709f045",
     "source_sha256": "5862a6aebfe9db84c39d94564a230eb8f7bf8e5703bbf19ddaf64d246f529dc0",
     "amendment_sha256": "aa569672b4e724355fd601c08aae6e217c866f7b7d2b81d0a1c5315436743e38",
-    "remote_path": "/state/registered-paper-11-completion-01/chunks/test-pool0-pristine_frozen/artifacts",
+    "remote_path": "/state/registered-paper-11-completion-01/chunks/test-pool1-trained_online_carry/artifacts",
     "reserved_usd": 0.1608936,
     "dispatch": "nonpreemptible-completion-worker-shared-lease",
     "nonpreemptible": true,
@@ -226,7 +226,112 @@
   },
   "selection_precedes_first_test_claim": true,
   "completed_conditions": 8,
-  "independently_audited_conditions": 10,
+  "independently_audited_conditions": 14,
   "development_full_audit_sha256": "907d5e6353c885dbee7e672b9ae1ac98ddd52c325ea8310e0e69bc2ba86a3b6e",
-  "second_recording_audit": "passed"
+  "second_recording_audit": "passed",
+  "captured_conditions": 14,
+  "independent_audits": {
+    "development-pool0-pristine_frozen": {
+      "projection_sha256": "7f1ad7c943a46f91a131006a7a9ea6c351b3034a380374aa1c871e463da861e4",
+      "audit_sha256": "8d1e76870fe5ed432ddefc1bf1cf6e6abb81811cddcb8c0ae5f5e2d5297dd2bf",
+      "call_id": "fc-01M2C39V45W38QYAE6GYGE5STM",
+      "observations": 24,
+      "native_bins": 1200
+    },
+    "development-pool0-trained_frozen": {
+      "projection_sha256": "63286011b0da229bd5401879451e86530d132da6fed15d90a9e4e7a086c0c9b6",
+      "audit_sha256": "ac7538d9e3be35a9d9e47f2234a30110d21f6d7c2e90fe36e66ae21f6d9c4e00",
+      "call_id": "fc-01M2C3K020R8KA2RVEECYHXZWY",
+      "observations": 24,
+      "native_bins": 1200
+    },
+    "development-pool0-trained_online_carry": {
+      "projection_sha256": "4a4ae0165bb9aca7887174b5f303ee40a3946946c491c9856f7f12a8b25a5b8f",
+      "audit_sha256": "30d9a11849e4821d0bb100014102e4ecbd0d4c1ee91420b996d3d55f8bfdc801",
+      "call_id": "fc-01M2CAEPMFKKVA7MTNM361HY24",
+      "observations": 24,
+      "native_bins": 1200
+    },
+    "development-pool0-trained_online_reset_rates": {
+      "projection_sha256": "3e160552ac04e95c99ffaf8bc8b891e41d26f326b23beb1d58a38429d790956f",
+      "audit_sha256": "a0b27a28872ac1856739935cca9be4df34226029fa05d5e618b2b1eefb129188",
+      "call_id": "fc-01M2CAJC61TNYQ17Z1MPMA4GX2",
+      "observations": 24,
+      "native_bins": 1200
+    },
+    "development-pool1-pristine_frozen": {
+      "projection_sha256": "0a35a72b5fb5419f80ca25f9f2070d25f77611ca390135b4275405a3db6aa26d",
+      "audit_sha256": "77a9fe1b52039ff24596d20a0f2dc02f3db4051da340c8f8e022b2d27a321caf",
+      "call_id": "fc-01M2CAVHS9WKMXS1KDBA28XYPA",
+      "observations": 23,
+      "native_bins": 1150
+    },
+    "development-pool1-trained_frozen": {
+      "projection_sha256": "77caa836c13bb451f84ec5d20db5db923f403a8f88042645aed5b2bcf479dea2",
+      "audit_sha256": "106996b930acbf5cc94dcca834383ff74c6f3481092e64a9ed5da1a5e139a288",
+      "call_id": "fc-01M2CB4PXNE9YTRYV2T69J9S8F",
+      "observations": 23,
+      "native_bins": 1150
+    },
+    "development-pool1-trained_online_carry": {
+      "projection_sha256": "3eaa222e5e1baa364dbfe908e6bbe5023e71599bde9f7fde0d6e43d2cb0bd985",
+      "audit_sha256": "0a8487fdc2d24193331daa3311e571931c8be8c0fc3949884b48a04ebd7e1291",
+      "call_id": "fc-01M2CCJFZVBYCTRGTGZ6FEXKS3",
+      "observations": 23,
+      "native_bins": 1150
+    },
+    "development-pool1-trained_online_reset_rates": {
+      "projection_sha256": "21af10a65056855be63a9cdc37b31b88a41e00ea36fbd7dd88f6d2076d787797",
+      "audit_sha256": "14ba66da591fe40202b08ab219a7c894b6f3ce784c7f8761b0045d2f66ad008f",
+      "call_id": "fc-01M2CCVMYQEAN47T6NC5PBN794",
+      "observations": 23,
+      "native_bins": 1150
+    },
+    "test-pool0-pristine_frozen": {
+      "projection_sha256": "0e2a3c168d8d3e875d53364f547a83b5422f811fa2cc5f0a5fe8a3ccf9418859",
+      "audit_sha256": "4436c691d8700e9ea9b250a19694dfabfceb3261329f1128ffa49f8ff0e58af3",
+      "call_id": "fc-01M2CD4T1B5NMFMJPM42FEC2K4",
+      "observations": 21,
+      "native_bins": 1050
+    },
+    "test-pool0-trained_frozen": {
+      "projection_sha256": "38b4e96c6c7bcc1ccad23a71941983c9c1a0b9fb25e1babd7c7307917e6030af",
+      "audit_sha256": "36b5fb66a39607ee11edf824bd5e77a5b2161ceadc349784115bfdddcebefeb3",
+      "call_id": "fc-01M2CDDYZ6MMQ2AKZMR2QHSKBB",
+      "observations": 21,
+      "native_bins": 1050
+    },
+    "test-pool0-trained_online_carry": {
+      "projection_sha256": "53ddb53f5d6e0b55799ae5bc6e29337725cff6fb0bc18e44b7b09f529b38ff06",
+      "audit_sha256": "781cb6018ec42083f783a74f71eb91d2912e3bc894cafed09625d9bff35c6dc0",
+      "call_id": "fc-01M2CDQ3YRQDBWVWZB85RDQRS1",
+      "observations": 21,
+      "native_bins": 1050
+    },
+    "test-pool0-trained_online_reset_rates": {
+      "projection_sha256": "c5f36d68eb8cef8d3571bc4e77aeb8bf0fae286018949fa4b03c7cb30d1a3b96",
+      "audit_sha256": "7d04f43d6f9e9a20e3d56ba09fce2e53c2278f44a2f755221c3140d63713d5a8",
+      "call_id": "fc-01M2CE08Q3MD8KCNKF198ZRXPN",
+      "observations": 21,
+      "native_bins": 1050
+    },
+    "test-pool1-pristine_frozen": {
+      "projection_sha256": "6d78752e7d720513e937d53695aa77cd9683058b33f584a9f4ed6b954166629e",
+      "audit_sha256": "9d50daed7a29ec99ab3bc7f22c4555dfef6342324eac5deda65dd64531b656f5",
+      "call_id": "fc-01M2CE9E2BETG2HWXZYVYZ331S",
+      "observations": 22,
+      "native_bins": 1100
+    },
+    "test-pool1-trained_frozen": {
+      "projection_sha256": "6e54fdfad50c36b497f5026bcc44c2cc94edfec781b581c6767a8d07c8ec343b",
+      "audit_sha256": "2cd3695a609d663174e3de6899e750d77c2469f2759ff7726a7a32a66ee759eb",
+      "call_id": "fc-01M2CEJJVFZTKYWGE364BE8GQD",
+      "observations": 22,
+      "native_bins": 1100
+    }
+  },
+  "audited_neural_observations": 316,
+  "audited_native_bins": 15800,
+  "selective_worker": "prepared_not_deployed",
+  "selective_worker_validation_sha256": "5b3c8e5b9b85e100b6c90a4020685fe79cb3e1267274ff736bf33be527691c81"
 }
