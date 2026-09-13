@@ -232,6 +232,10 @@ Test collection has begun; neural evaluations and trading results remain pending
 The [23:34 UTC test-coverage check](reports/fly-online-test-coverage-note-11-01.json)
 records eleven usable decisions, one activity rejection and twelve pending slots
 per pool. The gap is preserved; final coverage and model results remain pending.
+The [7:11 p.m. CDT snapshot on September 12](reports/fly-online-test-coverage-milestone-11-01.json)
+has accumulated the minimum 18 usable test observations for each pool, with two
+preserved gaps and four slots still pending. The full window and all native
+evaluations and audits still need to finish.
 
 The [full-window diagnostic figures](docs/fly-online-comparison.md#compare-the-full-financial-and-neural-timelines)
 align decisions, later fills, gate spikes, weight movement and learning history,

@@ -194,6 +194,25 @@ reach the eighteen-observation minimum with seven of its twelve pending slots,
 but final test coverage, native evaluation and financial results remain pending.
 The cohort, eligibility rules and deployed source remain unchanged.
 
+The [next test-coverage milestone](../reports/fly-online-test-coverage-milestone-11-01.json)
+uses a closed snapshot through **7:11 p.m. CDT on September 12 (00:11 UTC on
+September 13)**. Both fixed pools have accumulated **18 usable test decisions**.
+Each has two retained activity rejections and four pending decision slots; their
+terminal marks also remain pending. All 80 rows assessed in the preceding
+snapshot are unchanged.
+
+ALL's test gaps are at 6:25 and 6:45 p.m. CDT; baton's are at 6:25 and 7:10 p.m.
+The newer gaps come from reported five-minute volumes of $457.28 for ALL and
+$869.18 for baton, below the unchanged $1,000 minimum. Both receipts were fresh
+and had at least three buys and sells. Their next eligible receipts arrived
+27.06 and 28.68 seconds after the respective decisions, so the gaps remain.
+
+This reaches the minimum observation count in the downloaded snapshot, while
+the final phase coverage gate remains pending. The window still ends at
+7:35 p.m. CDT. Sealing, news and price audits, all sixteen native chunks and
+their independent audits are still required; no learning or financial result
+is inferred from the observation count.
+
 ## Complete recordings and audit
 
 There are 16 complete chunks: two pools × four conditions × two phases.

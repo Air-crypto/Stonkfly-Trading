@@ -1,0 +1,227 @@
+{
+  "status": "minimum_test_count_accumulated",
+  "recorded_at": 1789258488.399722,
+  "coverage_report_sha256": "606d4129c3fd4df7f7db50320a60fc96c4d1f0733c78d60a5a42ff02545a6110",
+  "snapshot_download": {
+    "started_at": 1789258322.757461,
+    "finished_at": 1789258325.463263,
+    "bytes": 64520192,
+    "sha256": "cb23b4b1da53e2237b7982169bee17e449ee981f7e7873757af48ac9fb9cd0f3"
+  },
+  "snapshot_end": 1789258266.0811837,
+  "assessed_through": 1789258260,
+  "registration_sha256": "078553e736a666d576337f895133409c5ccc18cda8c1edf1cb60d735fc6dfb25",
+  "arming_evidence_sha256": "e508c087f61c403ff0849c79d9177476358f58c10ddd595b547f9c57c4970217",
+  "coverage_source_sha256": "6f986a11d6a2869739c3af523d41ce660449be9f40766d28ed0ddb12ede82ca9",
+  "execution_sources_sha256": "5862a6aebfe9db84c39d94564a230eb8f7bf8e5703bbf19ddaf64d246f529dc0",
+  "execution_sources_match_arming": true,
+  "previous_coverage_sha256": "43bd2e535f254af5b56a11a306009bb6e92dc397900bd677a4a5bef74f213dd6",
+  "previous_assessed_rows_checked": 80,
+  "previous_assessed_rows_unchanged": true,
+  "pools": {
+    "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ": {
+      "symbol": "ALL",
+      "context_ready": true,
+      "development": {
+        "observed": 24,
+        "missing": 0,
+        "pending": 0,
+        "minimum_observations": 18,
+        "maximum_possible_observations": 24,
+        "coverage_gate": "met"
+      },
+      "test": {
+        "observed": 18,
+        "missing": 2,
+        "pending": 4,
+        "minimum_observations": 18,
+        "maximum_possible_observations": 22,
+        "coverage_gate": "pending"
+      },
+      "retained_missing_test_rows": [
+        {
+          "index": 10,
+          "decision_ts": 1789255500,
+          "terminal": false,
+          "quote_ts": 1789255417.764548,
+          "quote_available": false,
+          "raw_receipt_ts": 1789255417.764548,
+          "raw_receipt_age_seconds": 82.2354519367218,
+          "raw_rejection": "insufficient_two_sided_activity",
+          "neural_observation_expected": false,
+          "status": "ineligible_quote"
+        },
+        {
+          "index": 14,
+          "decision_ts": 1789256700,
+          "terminal": false,
+          "quote_ts": 1789256618.4070625,
+          "quote_available": false,
+          "raw_receipt_ts": 1789256618.4070625,
+          "raw_receipt_age_seconds": 81.59293746948242,
+          "raw_rejection": "insufficient_two_sided_activity",
+          "neural_observation_expected": false,
+          "status": "ineligible_quote"
+        }
+      ]
+    },
+    "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu": {
+      "symbol": "baton",
+      "context_ready": true,
+      "development": {
+        "observed": 23,
+        "missing": 1,
+        "pending": 0,
+        "minimum_observations": 18,
+        "maximum_possible_observations": 23,
+        "coverage_gate": "met"
+      },
+      "test": {
+        "observed": 18,
+        "missing": 2,
+        "pending": 4,
+        "minimum_observations": 18,
+        "maximum_possible_observations": 22,
+        "coverage_gate": "pending"
+      },
+      "retained_missing_test_rows": [
+        {
+          "index": 10,
+          "decision_ts": 1789255500,
+          "terminal": false,
+          "quote_ts": 1789255417.764548,
+          "quote_available": false,
+          "raw_receipt_ts": 1789255417.764548,
+          "raw_receipt_age_seconds": 82.2354519367218,
+          "raw_rejection": "insufficient_two_sided_activity",
+          "neural_observation_expected": false,
+          "status": "ineligible_quote"
+        },
+        {
+          "index": 19,
+          "decision_ts": 1789258200,
+          "terminal": false,
+          "quote_ts": 1789258128.5243697,
+          "quote_available": false,
+          "raw_receipt_ts": 1789258128.5243697,
+          "raw_receipt_age_seconds": 71.47563028335571,
+          "raw_rejection": "insufficient_two_sided_activity",
+          "neural_observation_expected": false,
+          "status": "ineligible_quote"
+        }
+      ]
+    }
+  },
+  "additional_gap_details": [
+    {
+      "pool": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+      "symbol": "ALL",
+      "phase": "test",
+      "row": {
+        "index": 14,
+        "decision_ts": 1789256700,
+        "terminal": false,
+        "quote_ts": 1789256618.4070625,
+        "quote_available": false,
+        "raw_receipt_ts": 1789256618.4070625,
+        "raw_receipt_age_seconds": 81.59293746948242,
+        "raw_rejection": "insufficient_two_sided_activity",
+        "neural_observation_expected": false,
+        "status": "ineligible_quote"
+      },
+      "selected_receipt": {
+        "key": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+        "network": "solana",
+        "address": "uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+        "token": "ASoQZA3Dee2HU34Vwx3b5SAtTaczJtZcyx1T413nDALL",
+        "symbol": "ALL",
+        "price": 0.001008939420712625,
+        "liquidity": 105448.6274,
+        "volume5": 457.2753820579,
+        "buys5": 6,
+        "sells5": 10,
+        "created": 1789155497.0,
+        "observed": 1789256618.4070625,
+        "major": false,
+        "source": "geckoterminal_indicative"
+      },
+      "next_eligible_receipt": {
+        "key": "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+        "network": "solana",
+        "address": "uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ",
+        "token": "ASoQZA3Dee2HU34Vwx3b5SAtTaczJtZcyx1T413nDALL",
+        "symbol": "ALL",
+        "price": 0.0009956614605377135,
+        "liquidity": 105676.7117,
+        "volume5": 2209.9666320987,
+        "buys5": 25,
+        "sells5": 35,
+        "created": 1789155497.0,
+        "observed": 1789256727.0607877,
+        "major": false,
+        "source": "geckoterminal_indicative"
+      },
+      "next_eligible_after_decision_seconds": 27.060787677764893
+    },
+    {
+      "pool": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+      "symbol": "baton",
+      "phase": "test",
+      "row": {
+        "index": 19,
+        "decision_ts": 1789258200,
+        "terminal": false,
+        "quote_ts": 1789258128.5243697,
+        "quote_available": false,
+        "raw_receipt_ts": 1789258128.5243697,
+        "raw_receipt_age_seconds": 71.47563028335571,
+        "raw_rejection": "insufficient_two_sided_activity",
+        "neural_observation_expected": false,
+        "status": "ineligible_quote"
+      },
+      "selected_receipt": {
+        "key": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+        "network": "solana",
+        "address": "Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+        "token": "Hg5Ja55T5wESq4vyFoiVCMeHXtGyVA69X2UHq8hgpump",
+        "symbol": "baton",
+        "price": 0.012123425284505484,
+        "liquidity": 489200.6464,
+        "volume5": 869.1751884892,
+        "buys5": 5,
+        "sells5": 9,
+        "created": 1788985935.0,
+        "observed": 1789258128.5243697,
+        "major": false,
+        "source": "geckoterminal_indicative"
+      },
+      "next_eligible_receipt": {
+        "key": "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+        "network": "solana",
+        "address": "Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu",
+        "token": "Hg5Ja55T5wESq4vyFoiVCMeHXtGyVA69X2UHq8hgpump",
+        "symbol": "baton",
+        "price": 0.012235828765712714,
+        "liquidity": 490694.0242,
+        "volume5": 6397.6741760443,
+        "buys5": 25,
+        "sells5": 39,
+        "created": 1788985935.0,
+        "observed": 1789258228.6783633,
+        "major": false,
+        "source": "geckoterminal_indicative"
+      },
+      "next_eligible_after_decision_seconds": 28.67836332321167
+    }
+  ],
+  "study_observer": {
+    "status": "test_collection",
+    "observed_at": 1789258395.044317,
+    "completed_chunks": 0,
+    "audited_chunks": 0,
+    "total_chunks": 16
+  },
+  "neural_observations_computed": 0,
+  "cloud_submissions": 0,
+  "interpretation": "Both fixed pools have accumulated the eighteen usable test decisions required by the observation minimum in the closed 00:11 UTC snapshot. Each also has two retained activity rejections and four pending decision slots; both terminal marks remain pending. ALL is missing 23:25 and 23:45 UTC; baton is missing 23:25 and 00:10 UTC. The newer ALL and baton gaps are due to reported five-minute volume below $1,000 despite fresh receipts and sufficient counts on both sides; subsequent eligible receipts arrived after the decisions. All eighty previously assessed rows are unchanged. This is a minimum count milestone, not final sealed coverage, a news audit, a neural evaluation, a financial result, a selection or policy promotion. The complete four-hour window and all sixteen independently audited chunks remain required."
+}
