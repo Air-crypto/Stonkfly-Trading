@@ -1,0 +1,17 @@
+{
+  "status": "recovery_exact_input_preflight_passed",
+  "news": {
+    "news_snapshot_sha256": "0d591226bf2740d8d02cfebeed64a06d9603a8e81c23db72dd8439807e1fffa6",
+    "vectors_reconstructed": 49
+  },
+  "sources_checked": 56,
+  "plan_sha256": "3f0e3cf8e5a1187ff5bf4ed4cc128e8c3457c1a14ae02fd899d3e8548709f045",
+  "neural_observations": 0,
+  "cloud_submissions": 0,
+  "dispatch_tests": {
+    "passed": 13,
+    "junit_sha256": "22a7a7fda3a112efc369483692c25c80d8ca3172070d0021e12ce0ad86bd11a8"
+  },
+  "protocol_file_sha256": "c7f31970a78e05715a4351d430f39c3eb8201c6d966ab60ae5eb312e9e200827",
+  "cloud_status": "not_yet_deployed"
+}

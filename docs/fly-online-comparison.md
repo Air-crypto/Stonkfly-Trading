@@ -483,6 +483,81 @@ plot, connection `u/w`, gate spikes and subsequent fills across observations;
 repeat for pool 1 and the separate test phase. The reset clears KC/DAN **firing
 rate traces**, not a learning-rate hyperparameter or stored connection memory.
 Keep the pinned execution sources unchanged until capture and audits finish.
+The original attempt subsequently failed; its explicit recovery amendment below
+retains those sources and uses a separate cloud app and artifact namespace.
+
+## Recover the news-audit failure
+
+The original third condition, `development-pool0-trained_online_carry`, failed
+before creating a native brain at 00:51 UTC on September 13 (September 12 CDT).
+Its exact Modal call returned `ValueError: Sealed news differs from
+timestamp-eligible archived revisions`. The
+[failure record](../reports/fly-online-failure-11.json) preserves the owning call,
+input, original receipt and cross-process reproduction. The original watcher
+stopped; restarting that watcher cannot repair a terminal failed condition.
+
+`News.features` accumulates float32 values by iterating a set of headline tokens.
+Python hash randomization changes token order. For colliding hashed channels,
+addition order changes the last few bits. Four of eight tested hash seeds differ
+from the sealed vectors, by at most `5.960464477539063e-08`. Seed 0 exactly
+reconstructs all 49 vectors. The raw news archive, price archive and sealed plan
+hashes match. Exact validation exposed nondeterministic reconstruction, not a
+different news archive. Its tolerance has not been widened.
+
+The first two controls completed and passed independent ledger, input-image,
+full-bin learning/state and plotted-series audits under `PYTHONHASHSEED=0`.
+No model was constructed or propagated during these local audits.
+
+| ALL development control | Decisions | Native bins | Ending equity from $250 |
+|---|---:|---:|---:|
+| Pristine, frozen | 24 | 1,200 | $205.278327 |
+| Previously trained, frozen | 24 | 1,200 | $207.317808 |
+
+These are partial development results including simulated trading costs,
+excluding hosting. Both lose money; no development selection or test result
+exists from this original attempt. The
+[first](../reports/fly-online-control-first-11.json) and
+[second](../reports/fly-online-control-second-11.json) projection records retain
+the artifact and audit hashes. The [browser check](../reports/fly-online-controls-browser-11.json)
+verified all 48 actions, 192 selected bins, 24 paired timestamps, large-file
+import and mobile layout, with zero model submissions. In the running local
+viewer, [inspect the first different action](http://127.0.0.1:8766/?run=online11-development-pool0-trained_frozen&compare=online11-development-pool0-pristine_frozen&step=11&bin=32&neuron=10527&pristine=1).
+The complete private recordings are required to reproduce these views.
+
+The [recovery amendment](../reports/fly-online-recovery-protocol-11.json) retains
+the original failed attempt and its two audited controls. A separate temporary
+Modal app, `fly-paper-recovery-11`, starts fresh interpreters with
+`PYTHONHASHSEED=0`, verifies all 56 original execution sources and the exact
+sealed news vectors, then captures the remaining fourteen conditions in order.
+It writes only to `registered-paper-11-recovery-01` and the shared budget ledger.
+The main deployed paper-trading app and its original study receipts are unchanged.
+
+Each recovery call uses the existing worker lease, two CPUs, 8 GiB, a 600-second
+timeout, no platform retries, the same $25 monthly worker cap, and a separate
+$0.80 maximum conservative compute reservation for the fourteen captures.
+Its five-minute schedule is offset by two minutes; overlapping calls skip while
+the shared lease is held. A failed or interrupted capture prevents progression.
+Development selection uses the original rule and is saved after eight complete
+development conditions, before any test capture. No account or learned state
+flows from development into test.
+
+This is an explicit recovery amendment, not an unmodified successful original
+experiment. The fixed seed addresses this archive's reconstruction; it is not a
+general replacement for a canonical token-order encoder in future experiments.
+All recovered conditions still need full recording audits and separate
+amendment provenance before a full comparison can be reported. Do not pass the
+incomplete original attempt to the selective-trace study's completion gate.
+
+Deployment from the pinned checkout requires the original private memory exports
+and authenticated Modal access:
+
+```sh
+PAPERLAB_FLY=1 PAPERLAB_UNIVERSE=1 PAPERLAB_PAPER_STUDY=1 \
+  PAPERLAB_ONLINE_STUDY=1 uv run --extra cloud modal deploy recovery_cloud.py
+```
+
+This deploys only the separate recovery app. Stop that temporary app after its
+captures are complete. The normal main app remains deployed independently.
 
 ## Compare the full financial and neural timelines
 

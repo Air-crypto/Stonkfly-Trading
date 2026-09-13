@@ -223,19 +223,30 @@ at 20:25:47 UTC on September 12, before the 20:35 UTC development start. The
 reattaches saved calls and audits full recordings into paired debugger views.
 Its optional watcher waits for all sixteen captures before running the full
 audit once; stopping the local watcher leaves cloud work running.
-No result from this follow-up is claimed yet. Synthetic validation is not
-evidence that the intervention earns money.
+The original attempt stopped at its third condition; see the
+[failure and amended recovery](docs/fly-online-comparison.md#recover-the-news-audit-failure).
+Two completed controls passed their full recording audits. These partial
+development results do not establish an improvement or profitable strategy.
 The guide includes a [dated registration clarification](docs/fly-online-comparison.md#registration-description-clarification)
 and a [provisional quote-coverage check](docs/fly-online-comparison.md#check-coverage-before-the-window-closes).
-The original registration and executed comparison remain unchanged.
+The original registration, execution files and failure receipts are preserved.
 The [complete-window quote check](reports/fly-online-window-coverage-11.json)
 covers the 7:35 p.m. CDT endpoint on September 12. ALL has 24 development and
 21 test observations; baton has 23 and 22. All four combinations meet the
 18-observation minimum, with six missing slots preserved and both final quotes
 eligible. The [worker-sealed inputs](reports/fly-online-sealed-inputs-11.json)
 passed independent reconstruction of all 100 decision/valuation slots and 49
-timestamp-eligible news vectors. Native comparisons and their full-recording
-audits remain pending; input coverage is not a trading result.
+timestamp-eligible news vectors. A later process exposed a hash-order-dependent
+rounding error in news reconstruction. Fixed-seed reconstruction matches the
+sealed vectors exactly; the recovery keeps the original model inputs.
+
+The [two audited development controls](reports/fly-online-failure-11.json) each
+cover 24 decisions and 1,200 native time bins on ALL. From $250, pristine finished
+at **$205.28**, and previously trained, frozen memory at **$207.32**, including
+simulated trading costs and excluding hosting. Both lost money. Five decisions
+differ, despite identical chart/news images; neither arm trains during replay.
+
+![Audited trained control at the first differing decision](docs/assets/fly-online-controls-11.png)
 
 The [full-window diagnostic figures](docs/fly-online-comparison.md#compare-the-full-financial-and-neural-timelines)
 align decisions, later fills, gate spikes, weight movement and learning history,

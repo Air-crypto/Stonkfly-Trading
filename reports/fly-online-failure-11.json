@@ -1,0 +1,119 @@
+{
+  "status": "original_attempt_failed_before_third_capture",
+  "study": "11",
+  "plan_sha256": "3f0e3cf8e5a1187ff5bf4ed4cc128e8c3457c1a14ae02fd899d3e8548709f045",
+  "failure": {
+    "observed_at": 1789260773.979299,
+    "receipt": {
+      "status": "failed",
+      "chunk": "development-pool0-trained_online_carry",
+      "plan_sha256": "3f0e3cf8e5a1187ff5bf4ed4cc128e8c3457c1a14ae02fd899d3e8548709f045",
+      "call_id": "fc-01M2C3W50RKZQ5P1KPE7WXCPM9",
+      "input_id": "in-01M2C3W512S6G6T96HCZE4EQZK:1789260600376-0",
+      "claimed_at": 1789260680.0255668,
+      "source_sha256": "5862a6aebfe9db84c39d94564a230eb8f7bf8e5703bbf19ddaf64d246f529dc0",
+      "dispatch": "scheduled-worker-after-paper-cycle",
+      "remote_path": "/state/registered-paper-11/chunks/development-pool0-trained_online_carry/artifacts",
+      "error_type": "ValueError",
+      "error": "Sealed news differs from timestamp-eligible archived revisions"
+    },
+    "call_state": "failed",
+    "error_type": "ValueError",
+    "error": "Sealed news differs from timestamp-eligible archived revisions"
+  },
+  "completed_controls": [
+    {
+      "chunk": "development-pool0-pristine_frozen",
+      "summary_sha256": "9e4afe8d66af581c5f7eccd3b796ea391a79cd03fe920daef6a58fb9eea15708",
+      "audit_report_sha256": "7f1ad7c943a46f91a131006a7a9ea6c351b3034a380374aa1c871e463da861e4",
+      "equity": 205.27832713867951,
+      "observations": 24,
+      "native_bins": 1200,
+      "learning": false
+    },
+    {
+      "chunk": "development-pool0-trained_frozen",
+      "summary_sha256": "bba74f991d4e03df264377b7a68848023ff58169457ef3a023b2532b6fc68dca",
+      "audit_report_sha256": "63286011b0da229bd5401879451e86530d132da6fed15d90a9e4e7a086c0c9b6",
+      "equity": 207.3178081591549,
+      "observations": 24,
+      "native_bins": 1200,
+      "learning": false
+    }
+  ],
+  "news_reproduction": [
+    {
+      "seed": "0",
+      "vectors": 49,
+      "differing_vectors": 0,
+      "max_abs": 0,
+      "channels": []
+    },
+    {
+      "seed": "1",
+      "vectors": 49,
+      "differing_vectors": 0,
+      "max_abs": 0,
+      "channels": []
+    },
+    {
+      "seed": "2",
+      "vectors": 49,
+      "differing_vectors": 0,
+      "max_abs": 0,
+      "channels": []
+    },
+    {
+      "seed": "3",
+      "vectors": 49,
+      "differing_vectors": 6,
+      "max_abs": 5.960464477539063e-08,
+      "channels": [
+        14
+      ]
+    },
+    {
+      "seed": "4",
+      "vectors": 49,
+      "differing_vectors": 6,
+      "max_abs": 5.960464477539063e-08,
+      "channels": [
+        14
+      ]
+    },
+    {
+      "seed": "5",
+      "vectors": 49,
+      "differing_vectors": 0,
+      "max_abs": 0,
+      "channels": []
+    },
+    {
+      "seed": "6",
+      "vectors": 49,
+      "differing_vectors": 13,
+      "max_abs": 5.960464477539063e-08,
+      "channels": [
+        14,
+        44
+      ]
+    },
+    {
+      "seed": "7",
+      "vectors": 49,
+      "differing_vectors": 8,
+      "max_abs": 2.9802322387695312e-08,
+      "channels": [
+        44
+      ]
+    }
+  ],
+  "root_cause": "Float32 accumulation iterates a token set; process hash randomization changes rounding order for colliding hashed channels.",
+  "strict_reconstruction_seed": "0",
+  "original_sealed_inputs_changed": false,
+  "original_receipts_changed": false,
+  "remaining_conditions": 14,
+  "development_selection": null,
+  "test_capture_started": false,
+  "interpretation": "Two development controls only; both lost money. No complete comparison, improvement claim or policy promotion. Fixed-seed recovery must be recorded as an amendment, not an unmodified successful original run."
+}
