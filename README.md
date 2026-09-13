@@ -232,8 +232,10 @@ The [complete-window quote check](reports/fly-online-window-coverage-11.json)
 covers the 7:35 p.m. CDT endpoint on September 12. ALL has 24 development and
 21 test observations; baton has 23 and 22. All four combinations meet the
 18-observation minimum, with six missing slots preserved and both final quotes
-eligible. Worker sealing, native evaluations and independent audits remain
-separate requirements; quote coverage is not a trading result.
+eligible. The [worker-sealed inputs](reports/fly-online-sealed-inputs-11.json)
+passed independent reconstruction of all 100 decision/valuation slots and 49
+timestamp-eligible news vectors. Native comparisons and their full-recording
+audits remain pending; input coverage is not a trading result.
 
 The [full-window diagnostic figures](docs/fly-online-comparison.md#compare-the-full-financial-and-neural-timelines)
 align decisions, later fills, gate spikes, weight movement and learning history,

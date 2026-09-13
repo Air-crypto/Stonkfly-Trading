@@ -226,6 +226,15 @@ news, model activity, fills or returns. The 7:35 worker completed normally and
 waited for the snapshot; the scheduled evaluation still needs its sealing
 receipt and all sixteen independently audited chunks.
 
+The 7:40 worker then [sealed the inputs](../reports/fly-online-sealed-inputs-11.json)
+and began `development-pool0-pristine_frozen`. The independent input audit at
+7:43 p.m. CDT reconstructed every retained price, all 49 timestamp-eligible news
+vectors, and all 100 decision/terminal slots. Each pool retains 512 context rows;
+three post-endpoint receipts per pool are excluded. All slot availability and
+times match the preceding coverage check. This verifies the sealed inputs;
+the sixteen native captures, their full recording audits and final financial
+comparison remain separate requirements.
+
 ## Complete recordings and audit
 
 There are 16 complete chunks: two pools × four conditions × two phases.

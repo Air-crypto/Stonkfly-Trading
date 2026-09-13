@@ -1,0 +1,59 @@
+{
+  "status": "sealed_inputs_independently_audited",
+  "observed_at": 1789260196.751446,
+  "plan_sha256": "3f0e3cf8e5a1187ff5bf4ed4cc128e8c3457c1a14ae02fd899d3e8548709f045",
+  "price_audit_sha256": "3169fa9c54fd880dbae4c8aab7d5a2e434c2dd39a35fa569400b01d6e22935d9",
+  "news_audit_sha256": "aa93953fa7cd8b0c22181e5dfa0e4f7aef7e6d0b9e6921714e0014dd7e6f9f3d",
+  "news_vectors_reconstructed": 49,
+  "slots_matching_previous_coverage": 100,
+  "prices_reconstructed_from_snapshot": true,
+  "pools": {
+    "solana:uzAK8txfJAvqS9VHtDaYAWfBiYbzwq4BzxdiFJTQEnJ": {
+      "retained_context_rows": 512,
+      "post_endpoint_receipts_excluded": 3,
+      "observations": {
+        "development": 24,
+        "test": 21
+      }
+    },
+    "solana:Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu": {
+      "retained_context_rows": 512,
+      "post_endpoint_receipts_excluded": 3,
+      "observations": {
+        "development": 23,
+        "test": 22
+      }
+    }
+  },
+  "neural_observations_computed": 0,
+  "cloud_submissions": 0,
+  "recorded_at": 1789260241.549103,
+  "sealing_receipt": {
+    "status": "completed",
+    "call_id": "fc-01M2C39V45W38QYAE6GYGE5STM",
+    "input_id": "in-01M2C39V4HM8ED1CS3EQ8CFSNE:1789260000429-0",
+    "claimed_at": 1789260079.5699105,
+    "registration_sha256": "078553e736a666d576337f895133409c5ccc18cda8c1edf1cb60d735fc6dfb25",
+    "plan_sha256": "3f0e3cf8e5a1187ff5bf4ed4cc128e8c3457c1a14ae02fd899d3e8548709f045"
+  },
+  "downloads": {
+    "universe.db": {
+      "started_at": 1789260192.488121,
+      "finished_at": 1789260196.218295,
+      "bytes": 65728512,
+      "sha256": "aa7751a925a22a7d1a6cbfb9b1f62786e86497146832f2c81c48283c7bdf3f7c"
+    },
+    "news.db": {
+      "started_at": 1789260196.245416,
+      "finished_at": 1789260196.572559,
+      "bytes": 40960,
+      "sha256": "0d591226bf2740d8d02cfebeed64a06d9603a8e81c23db72dd8439807e1fffa6"
+    }
+  },
+  "verification_sources": {
+    "paperlab/fly_paper_inputs.py": "514f622194eea7f44f8417b5a028928e4454c80d38ecdbf2757638193cfcfaa9",
+    "paperlab/fly_paper_price_audit.py": "6603b60bcaa6fa7fd91f26764d2361bc351399c5b955b971ed5768ec8b9561ed",
+    "paperlab/news.py": "b35fd73eed9051ff7c92972ec4f245c52c462bee61b986c5b777217d87a04058"
+  },
+  "interpretation": "Independent reconstruction of the worker-sealed market prices and timestamp-eligible news. All one hundred pool/phase decision and terminal slots agree with the earlier coverage audit; post-endpoint quotes remain excluded. This verifies inputs, not a completed neural capture, learning improvement, portfolio return or policy selection. The sixteen native comparison chunks and independent full-recording audits remain required."
+}
