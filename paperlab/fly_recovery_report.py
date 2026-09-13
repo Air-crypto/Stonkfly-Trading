@@ -280,6 +280,17 @@ def build(original, recovery, controls, evidence, price_archive, output, *, comp
                     (base/f'receipts/{name}-completed.json', f'receipts/{name}-completed.json'),
                     (projections[name]/'audit.json', f'audits/{name}.json')):
                 target = staging/relative; target.parent.mkdir(parents=True, exist_ok=True); shutil.copyfile(source, target)
+            view_root = staging/'views'/name; view_root.mkdir(parents=True)
+            shutil.copyfile(projections[name]/'view.json', view_root/'view.json')
+            projection = json.loads(proof['projections'][name])
+            require(digest(view_root/'view.json') == projection['audited_view_sha256'],
+                'Copied debugger view differs from its audit')
+            view = json.loads((view_root/'view.json').read_text())
+            atomic_json(view_root/'report.json', view['report'])
+            atomic_json(view_root/'remote.json', {'remote_path': receipts[name]['remote_path']+'/trace',
+                'call_id': receipts[name]['call_id']})
+            for source in (base/'chunks'/name/'trace').glob('step-*.npz'):
+                (view_root/source.name).hardlink_to(source)
         checked, _, _, fixture = verify_figure(staging)
         require(not fixture and checked == report, 'A fixture cannot finalize the recovery')
         # Create exclusively, including an empty existing destination. No earlier

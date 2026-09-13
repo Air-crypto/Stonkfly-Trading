@@ -1,10 +1,11 @@
 # Longer online learning comparison
 
-**Current capture status:** six conditions are fully recorded and independently
-audited. Recovery 02 was preempted during condition seven and its schedule was
-stopped. A separate non-preemptible completion amendment retains those six
-recordings and captures ten conditions from fresh starts. No complete comparison,
-development selection or held-out result is available. See the
+**Current capture status:** all eight development conditions are captured; six
+have completed full audits and two new baton recordings await their artifact
+audits. Recovery 02 was preempted during condition seven and its schedule was
+stopped. A separate non-preemptible completion amendment retains six recordings
+and captures ten conditions from fresh starts. The saved development totals fail
+the profit requirement; no held-out result is available. See the
 [preemption and completion record](#complete-after-provider-preemption).
 
 The study 11 runner and offline auditor are implemented and tested, and the
@@ -736,6 +737,15 @@ confirmation are preserved in the
 [preemption report](../reports/fly-online-recovery-preemption-11.json).
 The main paper lab remained deployed.
 
+The non-preemptible worker's first two captures completed successfully. Its saved
+baton ledgers report $239.196653 for online carry and $237.698909 for rate reset.
+The [execution record](../reports/fly-online-completion-execution-11.json) preserves
+both exact receipts and the expected development selection computed from all
+eight saved summaries. The best aggregate, reset, is $972.029004 from $1,000,
+so it fails the registered cash-plus-hosting requirement. Those two full
+recording audits remain pending; the historical table and figure below show the
+six audited recordings retained before completion began.
+
 Six conditions have complete full-bin and plotted-series audits. Each account
 started at $250; these are development results, including simulated execution
 costs, before hosting:
@@ -760,7 +770,7 @@ sale or evidence of that price trading. The figure labels it explicitly. To
 rebuild this partial figure from the retained recordings without running a model:
 
 ```sh
-uv run python scripts/plot-fly-partial-development.py \
+uv run --extra plots python scripts/plot-fly-partial-development.py \
   --original runs/online-cloud-11 --recovery runs/online-recovery-02 \
   --out runs/online-six-figure
 ```
@@ -817,7 +827,7 @@ uv run python -m paperlab.fly_recovery_report \
   --evidence reports --price-archive runs/online-sealed-input-audit-11/universe.db \
   --out runs/online-complete-audit-11
 
-uv run python -m paperlab.fly_online_figure \
+uv run --extra plots python -m paperlab.fly_online_figure \
   --root runs/online-complete-audit-11 --out runs/online-complete-figures-11
 ```
 
@@ -826,6 +836,16 @@ must retain exact `original-failed-receipt.json` and
 `previous-recovery-halt.json` bytes from the stopped attempts. Each observed
 namespace uses `receipts/`, `call-results/`, `chunks/`, and `projections/`; each
 projection contains the existing `audit.json`, `view.json` and `report.json`.
+The finalizer also installs the verified views under the output's `views/`
+directory and hardlinks the full neuron arrays, so paired links from the figure
+work without duplicating recordings. Keep source recordings and the final output
+on the same filesystem. Start their viewer with:
+
+```sh
+uv run python -m paperlab.debugger serve \
+  --out runs/online-complete-audit-11/views --port 8767
+```
+
 A successful finalization is labeled `paper_online_completion_audited`, and all
 figures identify the amendment. Synthetic wiring tests remain visibly synthetic
 and cannot pass the subsequent experiment's real-study gate.

@@ -274,7 +274,10 @@ preserved, and that temporary schedule was stopped. The separate
 [non-preemptible completion amendment](reports/fly-online-completion-protocol-11.json)
 retains the six completed recordings and starts ten conditions fresh, with the
 3× CPU/RAM price included in a conservative **$2 additional compute allowance**.
-No development selection or held-out result exists yet. See the
+Both new baton development captures have now returned: online carry **$239.20**,
+rate reset **$237.70**. Their full artifact audits are pending. The saved ledgers
+put reset at **$972.03 combined from $1,000**, the best development total but below
+cash, so the profit requirement fails. Held-out results remain pending. See the
 [completion run steps](docs/fly-online-comparison.md#complete-after-provider-preemption).
 
 ![Six audited development conditions, including the missing baton quote](docs/assets/fly-online-development-six-11.png)

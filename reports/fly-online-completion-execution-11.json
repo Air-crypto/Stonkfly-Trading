@@ -1,6 +1,6 @@
 {
-  "status": "first_completion_capture_running",
-  "observed_at": 1789269773.3359191,
+  "status": "held_out_capture_running",
+  "observed_at": 1789270359.787725,
   "app": {
     "app_id": "ap-53YtObJ53DMnzH3wG3xfH1",
     "description": "fly-paper-completion-11",
@@ -24,9 +24,9 @@
     "nonpreemptible": true,
     "price_multiplier": 3
   },
-  "call_state": "call_pending",
+  "call_state": "completed",
   "retained_conditions": 6,
-  "new_completed_conditions": 0,
+  "new_completed_conditions": 2,
   "protocol_sha256": "24e12606eaba9e3112dc820ef0ce9f815ef3b4836046cbf6c6f76be08b4aeb4f",
   "cloud_preflight_sha256": "6bc744799809ac9f390f3928c15336ecd1e46ceb3b580ee532ace5e88e132a33",
   "deploy_log_sha256": "750fae00eca4a55e781e5cbb68da9eae21abcb65123d69ad177cfa3d142d8c24",
@@ -46,5 +46,185 @@
   },
   "policy_promoted": false,
   "original_attempt": "failed",
-  "parent_recovery": "preempted_incomplete"
+  "parent_recovery": "preempted_incomplete",
+  "first_completed_receipt": {
+    "status": "completed",
+    "chunk": "development-pool1-trained_online_carry",
+    "call_id": "fc-01M2CCJFZVBYCTRGTGZ6FEXKS3",
+    "input_id": "in-01M2CCJG057YF2WKXS4AQXBZZ4:1789269721118-0",
+    "claimed_at": 1789269727.8033571,
+    "plan_sha256": "3f0e3cf8e5a1187ff5bf4ed4cc128e8c3457c1a14ae02fd899d3e8548709f045",
+    "source_sha256": "5862a6aebfe9db84c39d94564a230eb8f7bf8e5703bbf19ddaf64d246f529dc0",
+    "amendment_sha256": "aa569672b4e724355fd601c08aae6e217c866f7b7d2b81d0a1c5315436743e38",
+    "remote_path": "/state/registered-paper-11-completion-01/chunks/development-pool1-trained_online_carry/artifacts",
+    "reserved_usd": 0.1608936,
+    "dispatch": "nonpreemptible-completion-worker-shared-lease",
+    "nonpreemptible": true,
+    "price_multiplier": 3,
+    "completed_at": 1789269896.371194,
+    "summary_sha256": "32036d3d414317d1c72a0b238aa11e33b994fa8819d2130ced859b23d17ff0c8",
+    "budget": {
+      "estimated_compute_usd": 0.04713708696481704,
+      "monthly_reserved_usd": 2.661458668775066,
+      "monthly_limit_usd": 25,
+      "provider_bill": false
+    }
+  },
+  "first_saved_outcome": {
+    "equity": 239.1966532044607,
+    "fees": 1.25,
+    "fills": 4
+  },
+  "first_saved_observations": 23,
+  "expected_development_selection": {
+    "plan_sha256": "3f0e3cf8e5a1187ff5bf4ed4cc128e8c3457c1a14ae02fd899d3e8548709f045",
+    "selected": null,
+    "development_equity": {
+      "pristine_frozen": 946.7343265481888,
+      "trained_frozen": 942.8624152505721,
+      "trained_online_carry": 964.4526097524965,
+      "trained_online_reset_rates": 972.0290043208778
+    },
+    "development_observations": {
+      "pristine_frozen": [
+        24,
+        23
+      ],
+      "trained_frozen": [
+        24,
+        23
+      ],
+      "trained_online_carry": [
+        24,
+        23
+      ],
+      "trained_online_reset_rates": [
+        24,
+        23
+      ]
+    },
+    "cash_equity": 1000,
+    "hosting_allocation_usd": 0.1111111111111111,
+    "development_chunk_sha256": {
+      "development-pool0-pristine_frozen": "aba8c89a7d5fff4cb63827e47a2c5e6c804d7919b06f16dfa567e9ec34d249ae",
+      "development-pool0-trained_frozen": "56685231ce51e6c446426d1b9425d144e64901a735152241374d3de5d1a647ee",
+      "development-pool0-trained_online_carry": "0ae4cbfad25fe7f90d7586c304e7d2b5deb7786e1cf2d5b08947d3d521a6a446",
+      "development-pool0-trained_online_reset_rates": "f78b7608181b663b67bbb828989b2c943700d27e25023315f7abd122cda517b1",
+      "development-pool1-pristine_frozen": "df84c3d1ab5fe58044c9fc359b5713ff95800a4cd518c11a1d43b6d53ec0c7e8",
+      "development-pool1-trained_frozen": "3906384dae0c668a8d228de1a6f6e89b9636ba9e3ae734e70712369ec4f80d11",
+      "development-pool1-trained_online_carry": "b22efc9826be15cb271d1fdea76bd9d09a13418c5fbcd70538f3103461c2b62f",
+      "development-pool1-trained_online_reset_rates": "7c3ad12a58f5763f3ff50ba1d1d968742e8d0e87ab256cc4d03bfa41d2a19cd4"
+    },
+    "test_simulated_before_selection": false
+  },
+  "selection_persisted_in_cloud": true,
+  "report_view_checks": {
+    "passed": 20,
+    "junit_sha256": "3db85286f62121e675f0aae58a8761da93292366f7ccb254161e30f131167e9c"
+  },
+  "second_completed_receipt": {
+    "status": "completed",
+    "chunk": "development-pool1-trained_online_reset_rates",
+    "call_id": "fc-01M2CCVMYQEAN47T6NC5PBN794",
+    "input_id": "in-01M2CCVMYZAQA1XHTZWXRHPDN8:1789270021114-0",
+    "claimed_at": 1789270037.8203106,
+    "plan_sha256": "3f0e3cf8e5a1187ff5bf4ed4cc128e8c3457c1a14ae02fd899d3e8548709f045",
+    "source_sha256": "5862a6aebfe9db84c39d94564a230eb8f7bf8e5703bbf19ddaf64d246f529dc0",
+    "amendment_sha256": "aa569672b4e724355fd601c08aae6e217c866f7b7d2b81d0a1c5315436743e38",
+    "remote_path": "/state/registered-paper-11-completion-01/chunks/development-pool1-trained_online_reset_rates/artifacts",
+    "reserved_usd": 0.1608936,
+    "dispatch": "nonpreemptible-completion-worker-shared-lease",
+    "nonpreemptible": true,
+    "price_multiplier": 3,
+    "completed_at": 1789270202.1320758,
+    "summary_sha256": "7d0717890cd7c9540063cf14e572ed993ae4fd3f05595450a2273e0fd1222231",
+    "budget": {
+      "estimated_compute_usd": 0.04601068172555923,
+      "monthly_reserved_usd": 2.712843998211731,
+      "monthly_limit_usd": 25,
+      "provider_bill": false
+    }
+  },
+  "second_saved_outcome": {
+    "equity": 237.69890870304707,
+    "fees": 1.875,
+    "fills": 6
+  },
+  "active_receipt": {
+    "status": "claimed",
+    "chunk": "test-pool0-pristine_frozen",
+    "call_id": "fc-01M2CD4T1B5NMFMJPM42FEC2K4",
+    "input_id": "in-01M2CD4T1KNDP6A1ZM3CXVR9AE:1789270321227-0",
+    "claimed_at": 1789270326.3631783,
+    "plan_sha256": "3f0e3cf8e5a1187ff5bf4ed4cc128e8c3457c1a14ae02fd899d3e8548709f045",
+    "source_sha256": "5862a6aebfe9db84c39d94564a230eb8f7bf8e5703bbf19ddaf64d246f529dc0",
+    "amendment_sha256": "aa569672b4e724355fd601c08aae6e217c866f7b7d2b81d0a1c5315436743e38",
+    "remote_path": "/state/registered-paper-11-completion-01/chunks/test-pool0-pristine_frozen/artifacts",
+    "reserved_usd": 0.1608936,
+    "dispatch": "nonpreemptible-completion-worker-shared-lease",
+    "nonpreemptible": true,
+    "price_multiplier": 3
+  },
+  "active_call_state": "call_pending",
+  "first_recording_audit": "pending_download",
+  "cloud_selection": {
+    "plan_sha256": "3f0e3cf8e5a1187ff5bf4ed4cc128e8c3457c1a14ae02fd899d3e8548709f045",
+    "selected": null,
+    "development_equity": {
+      "pristine_frozen": 946.7343265481888,
+      "trained_frozen": 942.8624152505721,
+      "trained_online_carry": 964.4526097524965,
+      "trained_online_reset_rates": 972.0290043208778
+    },
+    "development_observations": {
+      "pristine_frozen": [
+        24,
+        23
+      ],
+      "trained_frozen": [
+        24,
+        23
+      ],
+      "trained_online_carry": [
+        24,
+        23
+      ],
+      "trained_online_reset_rates": [
+        24,
+        23
+      ]
+    },
+    "cash_equity": 1000,
+    "hosting_allocation_usd": 0.1111111111111111,
+    "development_chunk_sha256": {
+      "development-pool0-pristine_frozen": "aba8c89a7d5fff4cb63827e47a2c5e6c804d7919b06f16dfa567e9ec34d249ae",
+      "development-pool0-trained_frozen": "56685231ce51e6c446426d1b9425d144e64901a735152241374d3de5d1a647ee",
+      "development-pool0-trained_online_carry": "0ae4cbfad25fe7f90d7586c304e7d2b5deb7786e1cf2d5b08947d3d521a6a446",
+      "development-pool0-trained_online_reset_rates": "f78b7608181b663b67bbb828989b2c943700d27e25023315f7abd122cda517b1",
+      "development-pool1-pristine_frozen": "df84c3d1ab5fe58044c9fc359b5713ff95800a4cd518c11a1d43b6d53ec0c7e8",
+      "development-pool1-trained_frozen": "3906384dae0c668a8d228de1a6f6e89b9636ba9e3ae734e70712369ec4f80d11",
+      "development-pool1-trained_online_carry": "b22efc9826be15cb271d1fdea76bd9d09a13418c5fbcd70538f3103461c2b62f",
+      "development-pool1-trained_online_reset_rates": "7c3ad12a58f5763f3ff50ba1d1d968742e8d0e87ab256cc4d03bfa41d2a19cd4"
+    },
+    "test_simulated_before_selection": false
+  },
+  "cloud_selection_receipt": {
+    "selected_at": 1789270325.3668854,
+    "call_id": "fc-01M2CD4T1B5NMFMJPM42FEC2K4",
+    "input_id": "in-01M2CD4T1KNDP6A1ZM3CXVR9AE:1789270321227-0",
+    "selection_sha256": "9145985b2afb4f1743e580accf067aca50206c30bf1e531c3a91fb7ba623f1ed",
+    "development_chunk_sha256": {
+      "development-pool0-pristine_frozen": "aba8c89a7d5fff4cb63827e47a2c5e6c804d7919b06f16dfa567e9ec34d249ae",
+      "development-pool0-trained_frozen": "56685231ce51e6c446426d1b9425d144e64901a735152241374d3de5d1a647ee",
+      "development-pool0-trained_online_carry": "0ae4cbfad25fe7f90d7586c304e7d2b5deb7786e1cf2d5b08947d3d521a6a446",
+      "development-pool0-trained_online_reset_rates": "f78b7608181b663b67bbb828989b2c943700d27e25023315f7abd122cda517b1",
+      "development-pool1-pristine_frozen": "df84c3d1ab5fe58044c9fc359b5713ff95800a4cd518c11a1d43b6d53ec0c7e8",
+      "development-pool1-trained_frozen": "3906384dae0c668a8d228de1a6f6e89b9636ba9e3ae734e70712369ec4f80d11",
+      "development-pool1-trained_online_carry": "b22efc9826be15cb271d1fdea76bd9d09a13418c5fbcd70538f3103461c2b62f",
+      "development-pool1-trained_online_reset_rates": "7c3ad12a58f5763f3ff50ba1d1d968742e8d0e87ab256cc4d03bfa41d2a19cd4"
+    }
+  },
+  "selection_precedes_first_test_claim": true,
+  "completed_conditions": 8,
+  "independently_audited_conditions": 6
 }
