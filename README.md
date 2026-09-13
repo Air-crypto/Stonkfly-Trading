@@ -147,6 +147,11 @@ not make this fixed decoder less active, and no policy was promoted.
 
 ![Lower-rate outcomes across all five conditions](docs/assets/fly-learning-scale-01.png)
 
+The [fresh market comparison preparation](docs/fly-rate-market.md) checks current
+pool coverage and freezes audited paper checkpoints before registering new
+evaluation windows. The previous two-pool cohort has become sparse; exporting a
+new checkpoint does not establish improved learning or returns.
+
 Open all twelve paired recordings from the included 3.75 MB archive:
 
 ```sh
