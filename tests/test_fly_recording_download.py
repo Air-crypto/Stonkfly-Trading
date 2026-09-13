@@ -55,6 +55,29 @@ def test_exhausted_timeout_never_publishes_a_partial_file(recording):
     assert (root/'trace/step-01.npz.partial').exists()
 
 
+def test_failed_stream_closes_other_active_reads_before_returning(recording):
+    root, data, receipt, summary = recording
+    async def scenario():
+        other_started = asyncio.Event(); closed = []
+        async def read(path):
+            name = path.split('/artifacts/')[1]
+            try:
+                if name.endswith('01.npz'):
+                    await other_started.wait()
+                    raise ConnectionError('First stream failed')
+                other_started.set()
+                yield b'unverified partial bytes'
+                await asyncio.Event().wait()
+            finally:
+                closed.append(name)
+        v = SimpleNamespace(read_file=SimpleNamespace(aio=read))
+        with pytest.raises(ConnectionError, match='First stream failed'):
+            await transfer(v, receipt, summary, root, timeout=1, files_at_once=2)
+        assert set(closed) == set(data)
+        assert all(not (root/name).exists() for name in data)
+    asyncio.run(scenario())
+
+
 @pytest.mark.parametrize('change', ['existing', 'downloaded', 'path', 'symlink', 'claimed', 'namespace'])
 def test_invalid_or_conflicting_data_is_not_published(recording, change):
     root, data, receipt, summary = recording; v = volume(data, corrupt=change=='downloaded')

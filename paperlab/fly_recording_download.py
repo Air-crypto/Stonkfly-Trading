@@ -28,16 +28,32 @@ def safe_target(root, name):
 
 
 async def transfer(volume, receipt, summary, destination, *, timeout=90, attempts=3, files_at_once=4):
-    """Every attempt has a deadline; verified files are reused without fetching."""
-    if not 0 < timeout <= 180 or not 1 <= attempts <= 3 or not 1 <= files_at_once <= 4:
-        raise ValueError('Invalid transfer limits')
-    destination = Path(destination); name = receipt['chunk']; remote = receipt['remote_path']
+    """Authorize a completed study recording before any artifact reads."""
+    name = receipt['chunk']; remote = receipt['remote_path']
     allowed = {f'/state/{ns}/chunks/{name}/artifacts' for ns in NAMESPACES}
     if (name not in NAMES or receipt['status'] != 'completed' or remote not in allowed
             or summary['chunk'] != name or summary['status'] != 'paper_online_chunk_completed'
             or summary['plan_sha256'] != receipt['plan_sha256']):
         raise ValueError('Expected a completed study 11 recording')
-    manifest = summary['artifact_sha256']; semaphore = asyncio.Semaphore(files_at_once)
+    result = await transfer_files(volume, remote, destination, summary['artifact_sha256'],
+        label=name, timeout=timeout, attempts=attempts, files_at_once=files_at_once)
+    return {**result, 'chunk': name, 'call_id': receipt['call_id']}
+
+
+async def transfer_files(volume, remote, destination, manifest, *, label,
+                         timeout=90, attempts=3, files_at_once=4):
+    """Bounded reads of an already-authorized, exact artifact manifest.
+
+    The caller must verify completion and ownership before invoking this helper.
+    It has no model submission API. All outstanding reads are cancelled and
+    closed before a failed transfer returns to its caller.
+    """
+    if not 0 < timeout <= 180 or not 1 <= attempts <= 3 or not 1 <= files_at_once <= 4:
+        raise ValueError('Invalid transfer limits')
+    if (not isinstance(remote, str) or not remote.startswith('/state/')
+            or '..' in Path(remote).parts):
+        raise ValueError('Invalid artifact remote path')
+    destination = Path(destination); semaphore = asyncio.Semaphore(files_at_once)
     for file, sha in manifest.items():
         safe_target(destination, file)
         if not isinstance(sha, str) or len(sha) != 64 or any(c not in '0123456789abcdef' for c in sha):
@@ -63,7 +79,7 @@ async def transfer(volume, receipt, summary, destination, *, timeout=90, attempt
                     break
                 except TimeoutError:
                     retries.append({'file': file, 'attempt': attempt, 'reason': 'read_timeout'})
-                    print(json.dumps({'event': 'artifact_read_timeout', 'chunk': name,
+                    print(json.dumps({'event': 'artifact_read_timeout', 'recording': label,
                         'file': file, 'attempt': attempt, 'retrying': attempt < attempts}), flush=True)
                     if attempt == attempts:
                         raise TimeoutError('Artifact transfer exhausted bounded read attempts: '+file) from None
@@ -72,9 +88,15 @@ async def transfer(volume, receipt, summary, destination, *, timeout=90, attempt
             partial.replace(path)
             return path.stat().st_size
 
-    sizes = await asyncio.gather(*(download(file, sha) for file, sha in manifest.items()))
-    return {'status': 'all_artifacts_downloaded_and_hash_verified', 'chunk': name,
-        'call_id': receipt['call_id'], 'files': len(sizes), 'bytes': sum(sizes),
+    tasks = [asyncio.create_task(download(file, sha)) for file, sha in manifest.items()]
+    try:
+        sizes = await asyncio.gather(*tasks)
+    finally:
+        for task in tasks:
+            if not task.done(): task.cancel()
+        await asyncio.gather(*tasks, return_exceptions=True)
+    return {'status': 'all_artifacts_downloaded_and_hash_verified',
+        'files': len(sizes), 'bytes': sum(sizes),
         'seconds': time.monotonic()-started, 'read_timeout_seconds': timeout,
         'maximum_read_attempts': attempts, 'concurrent_files': files_at_once, 'retries': retries,
         'new_neural_observations': 0, 'cloud_submissions': 0, 'source_sha256': digest(__file__)}

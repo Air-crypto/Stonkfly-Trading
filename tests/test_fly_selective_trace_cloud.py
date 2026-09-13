@@ -62,6 +62,7 @@ def test_request_is_bound_to_protocol_sources_and_safe_identifiers(transport, ch
 class Volume:
     def __init__(self):
         self.files = {}; self.uploads = []; self.reads = []; self.fail_once = None
+        self.read_file = ReadFile(self)
 
     def batch_upload(self): return self
     def __enter__(self): return self
@@ -71,7 +72,7 @@ class Volume:
         self.uploads.append(remote)
         self.files[remote] = Path(local).read_bytes()
 
-    def read_file(self, name):
+    def read(self, name):
         self.reads.append(name)
         if name not in self.files: raise FileNotFoundError(name)
         raw = self.files[name]
@@ -80,6 +81,13 @@ class Volume:
             self.fail_once = None
             raise ConnectionError('Interrupted artifact stream')
         yield raw[len(raw)//2:]
+
+
+class ReadFile:
+    def __init__(self, volume): self.volume = volume
+    def __call__(self, name): return self.volume.read(name)
+    async def aio(self, name):
+        for block in self.volume.read(name): yield block
 
 
 @pytest.fixture
@@ -229,7 +237,7 @@ def test_corrupt_download_never_becomes_an_installed_artifact(transport, cloud, 
     req = json.loads((root/'request.json').read_text()); cloud.result = fixture_result(req, cloud.volume)
     remote = cloud.result['remote_path'].removeprefix('/state')+'/initial-dynamics.npz'
     cloud.volume.files[remote] = b'corrupt'
-    with pytest.raises(ValueError, match='Downloaded artifact differs'): invoke(transport, root)
+    with pytest.raises(ValueError, match='Downloaded artifact hash differs'): invoke(transport, root)
     assert not (root/'artifacts/initial-dynamics.npz').exists() and not (root/'audit.json').exists()
     assert len(cloud.calls) == 1
 

@@ -1,0 +1,29 @@
+{
+  "status": "bounded_selective_download_prepared",
+  "recorded_at": 1789271915.839317,
+  "tests": 39,
+  "failures": 0,
+  "skipped": 0,
+  "junit_sha256": "d7e799ca86bc98240d798a2107be0aff5eb3381a2a5c7fca1a7aa6f2fc448548",
+  "source_sha256": {
+    "paperlab/fly_recording_download.py": "52f4389f3cf050dabff76bf2c21e9800c31d678646356063706645a94887d882",
+    "paperlab/fly_selective_trace.py": "843bc687b59b024b52b07b6eb9b9a96748b488e4a4685627bbb06699f901712b",
+    "paperlab/fly_selective_trace_cloud.py": "ccb4355b0ed6fcb198d86949a4a28c1c7061e6ac39166bed39a26cfe12b6f1aa",
+    "tests/test_fly_recording_download.py": "ca8220e355a55f9a5f1881c283d57e7ae228f9cb13dd25b833120859a450010d",
+    "tests/test_fly_selective_trace_cloud.py": "aeaeecac87ad8d0c254165be2e97ad304303ab687c790c5c5b013f49a3864813"
+  },
+  "current_execution_sources_unchanged": true,
+  "current_execution_sources_sha256": "5862a6aebfe9db84c39d94564a230eb8f7bf8e5703bbf19ddaf64d246f529dc0",
+  "checks": [
+    "Timeout closes stream before retry",
+    "Only verified complete files are installed",
+    "Other active reads are cancelled before failure returns",
+    "Verified files are reused",
+    "Same completed model call is retained across read failures",
+    "Incomplete and synthetic study evidence cannot authorize native capture"
+  ],
+  "cloud_submissions": 0,
+  "new_neural_observations": 0,
+  "selective_native_execution": "pending actual study 11 completion and audit",
+  "interpretation": "Tests use simulated byte streams and labeled synthetic transport fixtures. This verifies transfer and call-ownership behavior, not new selective neural results."
+}

@@ -5,6 +5,7 @@ lease and reserved budget. A saved local call and a persistent cloud claim each
 prevent retrying an uncertain native execution.
 """
 import argparse
+import asyncio
 import hashlib
 import json
 from pathlib import Path
@@ -18,6 +19,7 @@ from .fly_market_study import signature
 from .fly_selective_trace import source_hashes, validate, verify_reference, run as capture
 from .fly_selective_trace_audit import audit
 from .fly_study_evidence_bundle import pack, unpack
+from .fly_recording_download import transfer_files
 
 REFERENCE_RUN = 'assay-credit-d4cef30fe9bc46be8d13da36a12135b9'
 CLAIM = 'selective-trace-01-claim.json'
@@ -130,22 +132,8 @@ def terminal_result(result, request, receipt):
 
 
 def download(volume, base, root, hashes):
-    """Only registered filenames, hash checked on both fresh and resumed downloads."""
-    root = Path(root)
-    for name, expected in hashes.items():
-        target = root/name
-        if target.exists():
-            if digest(target) != expected:
-                raise ValueError('Existing artifact differs: '+name)
-            continue
-        target.parent.mkdir(parents=True, exist_ok=True)
-        partial = target.with_suffix(target.suffix+'.partial')
-        with partial.open('wb') as stream:
-            for block in volume.read_file(base.removeprefix('/state')+'/'+name):
-                stream.write(block)
-        if digest(partial) != expected:
-            raise ValueError('Downloaded artifact differs: '+name)
-        partial.replace(target)
+    """Bounded read retries follow terminal_result's exact ownership check."""
+    return asyncio.run(transfer_files(volume, base, root, hashes, label=Path(base).name))
 
 
 def idle_worker(modal):
@@ -238,7 +226,8 @@ def cloud_run(payload, output, reference, data, *, completed_study):
     atomic_json(root/'cloud-result.json', result)
     base, report, hashes = terminal_result(result, request, receipt)
     volume = modal.Volume.from_name('fly-paper-lab-state', environment_name='main')
-    download(volume, base, root/'artifacts', hashes)
+    transfer = download(volume, base, root/'artifacts', hashes)
+    atomic_json(root/'download.json', transfer)
     if json.loads((root/'artifacts/summary.json').read_text()) != report:
         raise ValueError('Stored and returned native summaries differ')
     with tempfile.TemporaryDirectory(prefix='selective-audit-') as temporary:
@@ -255,7 +244,7 @@ def cloud_run(payload, output, reference, data, *, completed_study):
         atomic_json(folder/'remote.json', {'remote_path': base+'/'+name, 'call_id': receipt['call_id']})
         for file in ('view.json', 'report.json', 'remote.json'):
             local[name+'/'+file] = digest(folder/file)
-    local.update({name: digest(root/name) for name in ('audit.json', 'summary.json')})
+    local.update({name: digest(root/name) for name in ('audit.json', 'summary.json', 'download.json')})
     receipt.update(status='completed', budget=result['budget'], local_artifact_sha256=local)
     atomic_json(receipt_path, receipt)
     return receipt

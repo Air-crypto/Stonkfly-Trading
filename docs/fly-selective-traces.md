@@ -188,6 +188,17 @@ file level and check both existing and newly downloaded bytes. Expanded views
 are installed only after the independent recording audit passes. These checks
 do not replace the audit or prove improved trading performance.
 
+The bridge now uses the study recording downloader's bounded asynchronous reads:
+four files at a time, a 90-second deadline per attempt, and at most three attempts
+for a timed-out read. A failed transfer closes its other active reads before
+returning. Verified files remain reusable; partial or corrupt files cannot become
+installed recordings. `download.json` records transfer timing and read retries,
+and is included in the completed local receipt's hashes. These are artifact-read
+retries on an already completed call; they never submit another model run.
+The [download regression record](../reports/fly-selective-download-validation-01.json)
+covers 39 passing checks, including cancellation, partial-file recovery, retained
+call ownership, and rejection of incomplete study evidence.
+
 The transport tests use a labeled synthetic study fixture, with only its release
 decision mocked while the actual study evidence consistency checks still run.
 Neural capture and transport responses are simulated in bridge tests; separate
