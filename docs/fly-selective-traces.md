@@ -113,7 +113,7 @@ uv run --extra plots python -m paperlab.fly_selective_memory \
 uv run --extra dev python -m pytest -q tests/test_fly_selective_memory.py
 ```
 
-The next candidate is a lower learning rate with both histories retained. It
+The [next candidate](fly-learning-rate.md) is a lower learning rate with both histories retained. It
 preserves the two terms instead of removing one side of the rule. That candidate
 has **not run or been selected**. Smaller movement alone will not count as an
 improvement: original controls must reproduce, full new trajectories must be

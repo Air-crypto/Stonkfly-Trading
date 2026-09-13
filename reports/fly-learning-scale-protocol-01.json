@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "id": "fly-learning-scale-01",
+  "registered_at": 1789274715.823127,
+  "question": "Does reducing eta tenfold while retaining both traces alter the full recorded trajectory and reduce its weight movement?",
+  "selection": "No policy selection. Report every condition; smaller updates or different actions do not establish profitable learning.",
+  "parent_audit_sha256": "1cf91421490195a817aa91dcfa8afc0039e1185a03de23a9d687ed3d6176f5ae",
+  "selective_payload_sha256": "d981baff5f99566ce63fb954c35416666b13c03b9af745baa45967d972d182ae",
+  "selective_audit_sha256": "64b14d17b2e969ebd5988895efa44c831dddcd2a094c0e0ac9e76ae04cb24a83",
+  "memory_analysis_sha256": "19eadfbd8d0590a978d701d576d38f85ad433957d310328708e0ab2fda502bbe",
+  "arms": {
+    "trained_online_recorded_carry": {
+      "reference_arm": "trained_online_recorded",
+      "learning": true,
+      "pulses": "recorded",
+      "boundary": "carry",
+      "eta": 0.001
+    },
+    "trained_online_none_carry": {
+      "reference_arm": "trained_online_none",
+      "learning": true,
+      "pulses": "none",
+      "boundary": "carry",
+      "eta": 0.001
+    },
+    "trained_frozen_recorded_carry": {
+      "reference_arm": "trained_frozen_recorded",
+      "learning": false,
+      "pulses": "recorded",
+      "boundary": "carry",
+      "eta": 0.001
+    },
+    "trained_low_eta_recorded_carry": {
+      "reference_arm": "trained_online_recorded",
+      "learning": true,
+      "pulses": "recorded",
+      "boundary": "carry",
+      "eta": 0.0001
+    },
+    "trained_low_eta_none_carry": {
+      "reference_arm": "trained_online_none",
+      "learning": true,
+      "pulses": "none",
+      "boundary": "carry",
+      "eta": 0.0001
+    }
+  },
+  "control_arms": [
+    "trained_online_recorded_carry",
+    "trained_online_none_carry",
+    "trained_frozen_recorded_carry"
+  ],
+  "execution_order": [
+    "trained_online_recorded_carry",
+    "trained_online_none_carry",
+    "trained_frozen_recorded_carry",
+    "trained_low_eta_recorded_carry",
+    "trained_low_eta_none_carry"
+  ],
+  "limits": {
+    "inner_timeout_seconds": 240,
+    "worker_timeout_seconds": 360,
+    "cpu": 2,
+    "memory_gib": 8,
+    "nonpreemptible": true,
+    "price_multiplier": 3,
+    "maximum_reservation_usd": 0.0975912,
+    "native_observations": 15,
+    "recorded_bins": 750,
+    "cloud_submissions": 1
+  },
+  "unchanged": {
+    "neurons": 166700,
+    "edges": 25582938,
+    "plastic_edges": 7835,
+    "images": 3,
+    "observation_ms": 500,
+    "recorded_pulse_ms": 200,
+    "extra_recipient_current": 0,
+    "both_rate_traces": "carry",
+    "imported_memory": "same historical trained weights and u/w",
+    "accounts": false
+  },
+  "verification": [
+    "All three original carry controls reproduce every full-neuron count/voltage bin and every stored memory value before either new arm starts.",
+    "All arms start from identical imported memory and fresh dynamics; lower eta may change the first image trajectory.",
+    "Independently reconstruct every rate, u/w and float32 weight at the declared eta; check boundary continuity, full weights, input identity and decoder.",
+    "Compare every lower-rate observation against its matching eta=.001 control, including input-matched whole-network differences."
+  ],
+  "interpretation": "One bounded historical mechanism assay. Original feedback pulses remain fixed; no accounts, feedback recomputation, returns, fresh holdout or policy promotion. Native propagation occurs only in the cloud. A subsequent prospective cost-aware comparison is required for trading evidence."
+}
