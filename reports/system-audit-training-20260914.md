@@ -60,3 +60,17 @@ Correct accounting is necessary but insufficient for effective learning:
 - Marked inventory is indicative, not guaranteed executable cash. Forward matched controls, execution calibration, more independent market windows, and uncertainty estimates remain the profitability gate.
 
 No live-wallet trading is authorized or implied by this audit. Cloud deployments and verification status are documented in the main system audit; the monthly cloud limit remains $100.
+
+## First completed corrected cloud episode
+
+The actual native-cloud episode `solana-online-20260914-152719` completed under both new protocols. An independent local reconstruction of its downloaded opening, decision ledger, and completion record verified **180 rows, 46 fills, 126 native observations, and 106 Q updates**, including **10 terminal updates**. The account opened with $1,000 and no inventory. Its final indicative equity was **$880.401439**, with **$18.545049** of paid fees.
+
+The final marked PnL was **−$119.59856141733451**; independently summed raw Q rewards were **−$119.59856141733458**. The remaining difference was approximately **7.1 × 10⁻¹⁴ dollars**, ordinary floating-point rounding. Every mint's terminal contribution reconciled separately. Decimal cash, fees, and quantities reconstructed exactly from the fills; every recorded account mark reconstructed exactly. The terminal row introduced no new observation, order, or fill, and every terminal target had zero bootstrap discount.
+
+The terminal updates captured **+$64.036525 net** of outcomes that had not yet reached the learner, including **−$76.942036** explicitly tagged for missing-quote stress settlement. Thus closing reward credit preserves both late gains and late losses. Missing-quote settlements remain valuation assumptions, not executed sales.
+
+All 106 Q updates reported finite, nonzero parameter changes. Loss ranged from **0.000000384 to 0.809244**, pre-clipping gradient norm from **0.002302 to 5.866084**, and per-update weight-change L2 from **0.000676 to 0.004054**. Eight raw rewards exceeded the $25 clipping threshold. All 126 native observations reported changes on 3,805–3,833 plastic edges. These checks validate emitted step diagnostics; they do not independently rerun each gradient update or the native simulator.
+
+Native feedback summed to **−$136.115458**, differing from Q feedback by **+$16.516897**. That remaining native-credit limitation is visible rather than silently treated as full economic reinforcement. Applied-event cursors were monotone through cursor 37,731, snapshot timestamps preceded row completion, and FX state remained finite. This episode did not exercise a failed FX refresh; that causal-outage behavior is covered by the separate replay tests.
+
+The [live verification JSON](system-audit-live-verification-20260914.json) contains input hashes, per-mint residuals, diagnostic ranges, counts, and limitations. This verifies the repaired training mechanics on a real cloud run. **It is still a loss-making training episode, not held-out evidence of profitable learning.**

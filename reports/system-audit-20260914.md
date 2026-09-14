@@ -59,7 +59,35 @@ Corrected raw reward conservation also does not prove the objective is ideal. Cl
 
 ## Verification and deployment
 
-Verification is in progress. Final test counts, native-cloud smoke results, corrected live terminal reconciliation, retained archive hashes and the new prospective cutoff will be recorded here before this audit is closed.
+Final code revision `2b3fd4e` passed **1,137 tests with 26 explicit skips** (`PYTHONHASHSEED=0`, 268.62 seconds). The separate native checks passed six tests with one skip, and importing the cloud module leaves deployment schedules disabled by default. The skips cover optional older full-graph or archived diagnostic fixtures; none of the current Solana, GSPO or checkpoint-evaluation tests were skipped. Two expected warnings concern mocked local Modal entrypoints.
+
+A clean snapshot of the preceding core-repair commit `4070d7c` passed all 1,135 tests then present, with 203 checkout modules confirmed to load from that snapshot rather than the editable original. [GitHub's Linux/fresh-dependency CI also passed for that commit](https://github.com/Air-crypto/Stonkfly-Trading/actions/runs/34862487865). The two final additional replay regressions are included in the 1,137-test result above; their pushed CI is tracked separately rather than inheriting the earlier green status.
+
+The actual corrected live cloud call `fc-01M2G8FEXV9MR7JRQAGYDQRSZD`, episode `solana-online-20260914-152719`, completed from **15:27:32 to 15:42:36 UTC**:
+
+| Verification | Observed result |
+|---|---:|
+| Native observations / distinct inferred tokens | 126 / 11 |
+| Q updates / nonzero raw-reward updates | 106 / 92 |
+| Terminal Q updates with zero bootstrap | 10 |
+| Paper fills / paid simulated fees | 46 / $18.55 |
+| Final indicative equity / episode PnL | $880.40 / −$119.60 |
+| Summed raw Q reward | −$119.5985614173346 |
+| Account-to-reward residual | $8.53 × 10⁻¹⁴ |
+| Native feedback / Q-minus-native difference | −$136.12 / +$16.52 |
+| Q loss range / gradient norm before clipping | 0.000000384–0.80924 / 0.00230–5.86608 |
+| Q updates with changed weights / native observations with changed weights | 106 / 126 |
+| Estimated compute for this live window | $0.24293 |
+
+The final raw reward equals the episode PnL, and the cloud audit verified every recorded fill, mark and per-mint terminal contribution. This is a successful **correctness verification with a losing paper episode**, not a successful trading-performance result. Native feedback still differs from the Q objective as documented. See the [independent live verification](system-audit-live-verification-20260914.json).
+
+The original continuous account's completion record remains byte-for-byte unchanged: SHA-256 `0fb219de0457702c67e85ec1f5da80c023efda3771c055d283f3013453fa1b95`. New opening cash, empty inventory and deployed trainer-source hashes were checked.
+
+The final unscheduled synthetic native smoke, `fc-01M2G9CABDKHKX89ZRQG3QTHE4`, restored both pristine and newly corrected checkpoints, completed six native decisions per policy without exclusions, and verified exact frozen weights and account reconstruction. Both policies remained flat in this synthetic fixture; it is a restoration/mechanics check, not market performance. An earlier smoke also exercised five trained-policy fills. The final smoke's estimated compute was $0.01834.
+
+Both cloud services are enabled. The trainer has no pending call after its verified completion; the next hourly eligibility is **16:27:19 UTC**, with the next configured coordinator tick at **16:32 UTC (11:32 a.m. Chicago)**. The evaluator sealed **`evaluation-1789400743` at 15:45:43 UTC** with 13 retained checkpoints, including the corrected one, plus untrained, cash and always-long controls: **16 policies**. All 159 final source hashes match the checkout. It is waiting for a complete market window that starts after that cutoff; no prospective comparison result exists yet. The two superseded unused plans remain archived. The hourly monitoring task now checks v2 reward conservation and replay metadata as well as operational status.
+
+The [cloud verification record](system-audit-cloud-verification-20260914.json) preserves call IDs, source hashes, final controls, synthetic-test scope and budget estimates. The two tracked monthly compute ledgers totaled **$11.72** at the final snapshot; this is a conservative estimate, not the provider invoice. Full runtime ledgers remain in the cloud and ignored local audit directory; public evidence files record their hashes.
 
 The services use bounded non-retrying calls, shared writer leases, retained checkpoints and conservative budget reservations. The 8 GiB admission guard covers `/solana-live` archives, not the entire shared volume or evaluation artifacts; one admitted window can add data beyond that threshold. Worker allocation is $85, with $15 reserved for collector/overhead and another 25% admission margin. Non-preemptible compute costs three times the listed CPU/RAM rate; the ledger also applies a twofold safety factor. The ledger is an estimate, not the provider invoice, and not all build/coordinator/storage charges are individually attributed. The $30 Starter credit is not permission to exceed the user's $100 limit. [Modal pricing](https://modal.com/pricing)
 
@@ -72,7 +100,7 @@ An observed roughly $0.24 estimated training window extrapolates to about $173 f
 - [x] Repair Q credit across gaps and episode termination; independently verify reward/account conservation.
 - [x] Separate observation, entry and exit semantics; audit fill intent and capacity sensitivity.
 - [x] Repair causal replay, FX failures, checkpoint reuse, source sealing and opportunity coverage.
-- [ ] Finish native-cloud mechanics and one complete corrected live episode; resume the audited schedules.
+- [x] Finish native-cloud mechanics and one complete corrected live episode; resume the audited schedules.
 - [ ] Complete the first prospective v2 checkpoint comparison, explicitly labelled as a small pilot.
 - [ ] Add multiple nonoverlapping future windows and a later untouched confirmation set; report paired differences against cash and always-long, drawdown, turnover, fees, availability and concentration with uncertainty across windows.
 - [ ] Add market-only, Q-only and native/head cross-combination controls before attributing value to the fly circuit.

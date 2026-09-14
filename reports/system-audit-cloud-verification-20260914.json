@@ -1,0 +1,970 @@
+{
+  "verified_at": "2026-09-14T15:46:50.238720+00:00",
+  "code_revision": "2b3fd4e",
+  "paper_only": true,
+  "profitable_learning_proven": false,
+  "tests": {
+    "final_suite_passed": 1137,
+    "final_suite_skipped": 26,
+    "clean_snapshot_revision": "4070d7c",
+    "clean_snapshot_passed": 1135,
+    "clean_snapshot_skipped": 26,
+    "native_checks_passed": 6,
+    "native_checks_skipped": 1
+  },
+  "passed_core_ci": "https://github.com/Air-crypto/Stonkfly-Trading/actions/runs/34862487865",
+  "live_episode": {
+    "id": "solana-online-20260914-152719",
+    "call_id": "fc-01M2G8FEXV9MR7JRQAGYDQRSZD",
+    "independent_evidence": "system-audit-live-verification-20260914.json",
+    "owner": {
+      "call_id": "fc-01M2G8FEXV9MR7JRQAGYDQRSZD",
+      "parent": "solana-online-20260914-141714",
+      "account_mode": "fresh_training_episode",
+      "run_id": "solana-online-20260914-152719",
+      "at": 1789399648.270744,
+      "reservation": {
+        "month": "2026-09",
+        "reserve": 0.3191496,
+        "rate": 0.00026376,
+        "limit": 85,
+        "started": 1789399647.903349,
+        "startup_seconds": 10
+      },
+      "paper_only": true,
+      "source_sha256": {
+        "solana_online_cloud.py": "671a7ec998e921bc38c67b47f51a8b52b57d45549a5fdffa932198d50936237f",
+        "paperlab/solana_online.py": "8b0d6c69bf8ebdb30db8fa7e1f15dbb94c0ea78dc0266393a937215d97dbad13",
+        "paperlab/solana_events.py": "3ff0cd21fa57dba441d637da49696e3f1aad5ab784c5aa9cc8f2d2c39b81e2e3",
+        "paperlab/solana_service.py": "610cd8ecbaa13202a79f1cf4e0747d77e7362e0cfced3fa72392f38311d32cc2",
+        "paperlab/solana_paper.py": "04ff64f086628a9af0ab1dc7063564b1f8747eb2895e2ada83be6bb2c7c07648",
+        "paperlab/solana_online_audit.py": "e0cffe0829075de0de63c86813d9bdcc84c37717fe0080ef542855be2ecf6845",
+        "paperlab/solana_quotes.py": "910b10c9115599b8e44989381d6eefdfe244f8e7e46388d0d786fcd7bc5cc617",
+        "paperlab/solana_execution_audit.py": "727b699391a46717c6be47c4896b8c01d76eeb53533e21bddceaf72893b4536e",
+        "paperlab/budget.py": "ed5892ac45dae1dd694cda29fb9a0972c81395147c4aa51f1c36fceb4f65c87f"
+      }
+    }
+  },
+  "final_synthetic_smoke": {
+    "call_id": "fc-01M2G9CABDKHKX89ZRQG3QTHE4",
+    "status": "completed",
+    "synthetic": true,
+    "results": [
+      {
+        "status": "completed",
+        "policy": "untrained",
+        "tape": "synthetic-native-smoke",
+        "pnl_usd": 0.0,
+        "fees_usd": 0.0,
+        "max_drawdown_usd": 0,
+        "native_observations": 6,
+        "account_audit": {
+          "rows": 18,
+          "paper_fills": 0,
+          "native_observations": 0,
+          "distinct_tokens_with_native_inference": 0,
+          "new_head_updates": 0,
+          "cash_usd": 1000.0,
+          "cumulative_fees_usd": 0.0,
+          "equity_marks_verified": 18,
+          "nonzero_reward_updates": 0,
+          "reward_protocol": null,
+          "raw_q_reward_usd": 0.0,
+          "terminal_readout_updates": 0,
+          "reward_reconciliation_residual_usd": null,
+          "reward_reconciliation_verified": false,
+          "native_reward_usd": 0.0,
+          "native_uncredited_difference_usd": 0.0,
+          "paper_only": true,
+          "profitable_learning_proven": false,
+          "note": "Recorded-fill accounting only; this does not establish executable prices or policy superiority."
+        },
+        "weights_unchanged": true,
+        "scope": "Synthetic native mechanics smoke only; no performance or future-market claim.",
+        "feature_scope": null,
+        "protocol": "frozen_common_opportunities_v2",
+        "quote_protocol": "solana_observed_entry_exit_v2",
+        "coverage": {
+          "recorded_neural_opportunities": 6,
+          "recorded_issued_opportunities": 6,
+          "policy_decisions": 6,
+          "skipped_no_source_decision": 0,
+          "skipped_unavailable_quote": 0,
+          "skipped_insufficient_history": 0,
+          "skipped_pending_order": 0,
+          "expired_pending_orders": 0
+        },
+        "capacity_stress_equity_usd": 1000.0,
+        "capacity_stress_pnl_usd": 0.0,
+        "pending_orders_at_end": 1,
+        "portfolio": {
+          "cash": "1000",
+          "fees": "0",
+          "halted": false,
+          "quarantined": [],
+          "positions": {
+            "CeSFzoAqSMXMgodeLzrTMe3V5MdV5Nhinehedxohpump": {
+              "qty": "0",
+              "basis": "0",
+              "cash_flow": "0"
+            }
+          },
+          "risk_policy": "fresh_training_full_cash_v1"
+        },
+        "paper_only": true,
+        "profitable_learning_proven": false
+      },
+      {
+        "status": "completed",
+        "policy": "solana-online-20260914-152719",
+        "tape": "synthetic-native-smoke",
+        "pnl_usd": 0.0,
+        "fees_usd": 0.0,
+        "max_drawdown_usd": 0,
+        "native_observations": 6,
+        "account_audit": {
+          "rows": 18,
+          "paper_fills": 0,
+          "native_observations": 0,
+          "distinct_tokens_with_native_inference": 0,
+          "new_head_updates": 0,
+          "cash_usd": 1000.0,
+          "cumulative_fees_usd": 0.0,
+          "equity_marks_verified": 18,
+          "nonzero_reward_updates": 0,
+          "reward_protocol": null,
+          "raw_q_reward_usd": 0.0,
+          "terminal_readout_updates": 0,
+          "reward_reconciliation_residual_usd": null,
+          "reward_reconciliation_verified": false,
+          "native_reward_usd": 0.0,
+          "native_uncredited_difference_usd": 0.0,
+          "paper_only": true,
+          "profitable_learning_proven": false,
+          "note": "Recorded-fill accounting only; this does not establish executable prices or policy superiority."
+        },
+        "weights_unchanged": true,
+        "scope": "Synthetic native mechanics smoke only; no performance or future-market claim.",
+        "feature_scope": null,
+        "protocol": "frozen_common_opportunities_v2",
+        "quote_protocol": "solana_observed_entry_exit_v2",
+        "coverage": {
+          "recorded_neural_opportunities": 6,
+          "recorded_issued_opportunities": 6,
+          "policy_decisions": 6,
+          "skipped_no_source_decision": 0,
+          "skipped_unavailable_quote": 0,
+          "skipped_insufficient_history": 0,
+          "skipped_pending_order": 0,
+          "expired_pending_orders": 0
+        },
+        "capacity_stress_equity_usd": 1000.0,
+        "capacity_stress_pnl_usd": 0.0,
+        "pending_orders_at_end": 1,
+        "portfolio": {
+          "cash": "1000",
+          "fees": "0",
+          "halted": false,
+          "quarantined": [],
+          "positions": {
+            "CeSFzoAqSMXMgodeLzrTMe3V5MdV5Nhinehedxohpump": {
+              "qty": "0",
+              "basis": "0",
+              "cash_flow": "0"
+            }
+          },
+          "risk_policy": "fresh_training_full_cash_v1"
+        },
+        "paper_only": true,
+        "profitable_learning_proven": false
+      }
+    ],
+    "budget": {
+      "estimated_compute_usd": 0.018339809073200226,
+      "monthly_reserved_usd": 11.078921564867333,
+      "monthly_limit_usd": 85,
+      "provider_bill": false
+    }
+  },
+  "earlier_synthetic_smoke": {
+    "call_id": "fc-01M2G89XNK6B5XZRHRD8TTWD0C",
+    "status": "completed",
+    "synthetic": true,
+    "results": [
+      {
+        "status": "completed",
+        "policy": "untrained",
+        "tape": "synthetic-native-smoke",
+        "pnl_usd": 0.0,
+        "fees_usd": 0.0,
+        "max_drawdown_usd": 0,
+        "native_observations": 6,
+        "account_audit": {
+          "rows": 18,
+          "paper_fills": 0,
+          "native_observations": 0,
+          "distinct_tokens_with_native_inference": 0,
+          "new_head_updates": 0,
+          "cash_usd": 1000.0,
+          "cumulative_fees_usd": 0.0,
+          "equity_marks_verified": 18,
+          "nonzero_reward_updates": 0,
+          "reward_protocol": null,
+          "raw_q_reward_usd": 0.0,
+          "terminal_readout_updates": 0,
+          "reward_reconciliation_residual_usd": null,
+          "reward_reconciliation_verified": false,
+          "native_reward_usd": 0.0,
+          "native_uncredited_difference_usd": 0.0,
+          "paper_only": true,
+          "profitable_learning_proven": false,
+          "note": "Recorded-fill accounting only; this does not establish executable prices or policy superiority."
+        },
+        "weights_unchanged": true,
+        "scope": "Synthetic native mechanics smoke only; no performance or future-market claim.",
+        "feature_scope": null,
+        "protocol": "frozen_common_opportunities_v2",
+        "quote_protocol": "solana_observed_entry_exit_v2",
+        "coverage": {
+          "recorded_neural_opportunities": 6,
+          "recorded_issued_opportunities": 6,
+          "policy_decisions": 6,
+          "skipped_no_source_decision": 0,
+          "skipped_unavailable_quote": 0,
+          "skipped_insufficient_history": 0,
+          "skipped_pending_order": 0,
+          "expired_pending_orders": 0
+        },
+        "capacity_stress_equity_usd": 1000.0,
+        "capacity_stress_pnl_usd": 0.0,
+        "pending_orders_at_end": 1,
+        "portfolio": {
+          "cash": "1000",
+          "fees": "0",
+          "halted": false,
+          "quarantined": [],
+          "positions": {
+            "CeSFzoAqSMXMgodeLzrTMe3V5MdV5Nhinehedxohpump": {
+              "qty": "0",
+              "basis": "0",
+              "cash_flow": "0"
+            }
+          },
+          "risk_policy": "fresh_training_full_cash_v1"
+        },
+        "paper_only": true,
+        "profitable_learning_proven": false
+      },
+      {
+        "status": "completed",
+        "policy": "solana-online-20260914-141714",
+        "tape": "synthetic-native-smoke",
+        "pnl_usd": -7.891047287411084,
+        "fees_usd": 1.875,
+        "max_drawdown_usd": 7.891047287411084,
+        "native_observations": 6,
+        "account_audit": {
+          "rows": 18,
+          "paper_fills": 5,
+          "native_observations": 0,
+          "distinct_tokens_with_native_inference": 0,
+          "new_head_updates": 0,
+          "cash_usd": 848.125,
+          "cumulative_fees_usd": 1.875,
+          "equity_marks_verified": 18,
+          "nonzero_reward_updates": 0,
+          "reward_protocol": null,
+          "raw_q_reward_usd": 0.0,
+          "terminal_readout_updates": 0,
+          "reward_reconciliation_residual_usd": null,
+          "reward_reconciliation_verified": false,
+          "native_reward_usd": 0.0,
+          "native_uncredited_difference_usd": 0.0,
+          "paper_only": true,
+          "profitable_learning_proven": false,
+          "note": "Recorded-fill accounting only; this does not establish executable prices or policy superiority."
+        },
+        "weights_unchanged": true,
+        "scope": "Synthetic native mechanics smoke only; no performance or future-market claim.",
+        "feature_scope": null,
+        "protocol": "frozen_common_opportunities_v2",
+        "quote_protocol": "solana_observed_entry_exit_v2",
+        "coverage": {
+          "recorded_neural_opportunities": 6,
+          "recorded_issued_opportunities": 6,
+          "policy_decisions": 6,
+          "skipped_no_source_decision": 0,
+          "skipped_unavailable_quote": 0,
+          "skipped_insufficient_history": 0,
+          "skipped_pending_order": 0,
+          "expired_pending_orders": 0
+        },
+        "capacity_stress_equity_usd": 877.75,
+        "capacity_stress_pnl_usd": -122.25,
+        "pending_orders_at_end": 1,
+        "portfolio": {
+          "cash": "848.1250000000000000000000000",
+          "fees": "1.875000000000000000000000000",
+          "halted": false,
+          "quarantined": [],
+          "positions": {
+            "CeSFzoAqSMXMgodeLzrTMe3V5MdV5Nhinehedxohpump": {
+              "qty": "12162647887687.16210958646040",
+              "basis": "151.8750000000000000000000000",
+              "cash_flow": "-151.8750000000000000000000000"
+            }
+          },
+          "risk_policy": "fresh_training_full_cash_v1"
+        },
+        "paper_only": true,
+        "profitable_learning_proven": false
+      }
+    ],
+    "budget": {
+      "estimated_compute_usd": 0.01687550453613281,
+      "monthly_reserved_usd": 10.817654342824257,
+      "monthly_limit_usd": 85,
+      "provider_bill": false
+    }
+  },
+  "final_evaluation_plan": {
+    "id": "evaluation-1789400743",
+    "created": 1789400743.909455,
+    "cutoff": 1789400743.909455,
+    "checkpoints": [
+      {
+        "id": "solana-online-20260914-021337",
+        "ended": 1789352930.315056,
+        "updates": 559,
+        "files": {
+          "fly-final.npz": {
+            "path": "/state/solana-live/solana-online-20260914-021337/fly-final.npz",
+            "sha256": "09046d057a00cb8b8bb68be17982a50289149bd40e34788cc856cfdf7ff04889"
+          },
+          "head-final.pt": {
+            "path": "/state/solana-live/solana-online-20260914-021337/head-final.pt",
+            "sha256": "42addd599cb37a21cc4848ae02f45722fdc3558641eb384ad959300f0bdcb879"
+          },
+          "completed.json": {
+            "path": "/state/solana-live/solana-online-20260914-021337/completed.json",
+            "sha256": "c407a0b9d967d000c5d362dfd0d371084edebdd1b5613deba1e47098a5b01a07"
+          }
+        },
+        "retain": true,
+        "paper_only": true
+      },
+      {
+        "id": "solana-online-20260914-031716",
+        "ended": 1789356752.3430932,
+        "updates": 663,
+        "files": {
+          "fly-final.npz": {
+            "path": "/state/solana-live/solana-online-20260914-031716/fly-final.npz",
+            "sha256": "f4fd0f87ba31bd8a1b46f0e95ef1ab97220cad0a10a224aa12898dedb96c087c"
+          },
+          "head-final.pt": {
+            "path": "/state/solana-live/solana-online-20260914-031716/head-final.pt",
+            "sha256": "c7fd82db27c2076a3556295c130ddb0f49659bc36551ca123e51665b5e38e235"
+          },
+          "completed.json": {
+            "path": "/state/solana-live/solana-online-20260914-031716/completed.json",
+            "sha256": "a75b68a88d59be2d0d6ae2a2b28363164712933122a7bdda2156a7cfa56734e9"
+          }
+        },
+        "retain": true,
+        "paper_only": true
+      },
+      {
+        "id": "solana-online-20260914-041721",
+        "ended": 1789360357.569316,
+        "updates": 775,
+        "files": {
+          "fly-final.npz": {
+            "path": "/state/solana-live/solana-online-20260914-041721/fly-final.npz",
+            "sha256": "69b98ec216958c652d5de5fc49e5bacf7424b1c76c5f641df95ef1b695359c4a"
+          },
+          "head-final.pt": {
+            "path": "/state/solana-live/solana-online-20260914-041721/head-final.pt",
+            "sha256": "7adc1998181bbb7d6623201c646228024a0f21061e33a23e199023679073fd4f"
+          },
+          "completed.json": {
+            "path": "/state/solana-live/solana-online-20260914-041721/completed.json",
+            "sha256": "4f7136556d576145d89f2bccd318eacded2fcd87bd34a7980b3fe4616580db0a"
+          }
+        },
+        "retain": true,
+        "paper_only": true
+      },
+      {
+        "id": "solana-online-20260914-053214",
+        "ended": 1789364849.8307185,
+        "updates": 884,
+        "files": {
+          "fly-final.npz": {
+            "path": "/state/solana-live/solana-online-20260914-053214/fly-final.npz",
+            "sha256": "1931a3e2331c6da9623c27885cc8ed7560ef7cc21befebe27c4d53a1a4684861"
+          },
+          "head-final.pt": {
+            "path": "/state/solana-live/solana-online-20260914-053214/head-final.pt",
+            "sha256": "cfb530371090dd3d2d65696ba0bed2757343ba14fa687c50b1b203db562aa533"
+          },
+          "completed.json": {
+            "path": "/state/solana-live/solana-online-20260914-053214/completed.json",
+            "sha256": "e505b97a81db7b428cd148fa42ec858dd133004722de9ef53df743a7d0ba2ed7"
+          }
+        },
+        "retain": true,
+        "paper_only": true
+      },
+      {
+        "id": "solana-online-20260914-064712",
+        "ended": 1789369346.0876124,
+        "updates": 938,
+        "files": {
+          "fly-final.npz": {
+            "path": "/state/solana-live/solana-online-20260914-064712/fly-final.npz",
+            "sha256": "f8e77c6a7d254650c472a4d5cf30aa3359340866543b4f477dbbee95c9edad98"
+          },
+          "head-final.pt": {
+            "path": "/state/solana-live/solana-online-20260914-064712/head-final.pt",
+            "sha256": "bc815f5c91b8b1f99086a97b478a1d953b8080d49b5a58d00951c821c6a884ff"
+          },
+          "completed.json": {
+            "path": "/state/solana-live/solana-online-20260914-064712/completed.json",
+            "sha256": "449d774dedf62de8c170672b2e5cdea2c39f8ba7b2c136c733b500f59ab46440"
+          }
+        },
+        "retain": true,
+        "paper_only": true
+      },
+      {
+        "id": "solana-online-20260914-074716",
+        "ended": 1789372960.0240457,
+        "updates": 1011,
+        "files": {
+          "fly-final.npz": {
+            "path": "/state/solana-live/solana-online-20260914-074716/fly-final.npz",
+            "sha256": "261ab054858fcfe0ea95db9dae2393915d4f13f1563fe4af85b6f1269969310c"
+          },
+          "head-final.pt": {
+            "path": "/state/solana-live/solana-online-20260914-074716/head-final.pt",
+            "sha256": "d7211608eb0eb1437117ac568ad6b3e1db93232ac3f1088046b0fa6e9022ac42"
+          },
+          "completed.json": {
+            "path": "/state/solana-live/solana-online-20260914-074716/completed.json",
+            "sha256": "4a64d3c2658a03310a6622b843667e30b6aa2d6809bb1c4548ecb3e15a043ad9"
+          }
+        },
+        "retain": true,
+        "paper_only": true
+      },
+      {
+        "id": "solana-online-20260914-084716",
+        "ended": 1789376551.113181,
+        "updates": 1124,
+        "files": {
+          "fly-final.npz": {
+            "path": "/state/solana-live/solana-online-20260914-084716/fly-final.npz",
+            "sha256": "0d68655ce08389c5c2776bdeccb40cd375966ee1206352d48c077f26b0fe1841"
+          },
+          "head-final.pt": {
+            "path": "/state/solana-live/solana-online-20260914-084716/head-final.pt",
+            "sha256": "faf520686bb67a486ee466653787452a94d14e9f2d8c2a683de4f853b8c8900e"
+          },
+          "completed.json": {
+            "path": "/state/solana-live/solana-online-20260914-084716/completed.json",
+            "sha256": "fee1aac1d41a2bfa494e5a8219139241315f5d6a7b2b9222ce6245b31cded42a"
+          }
+        },
+        "retain": true,
+        "paper_only": true
+      },
+      {
+        "id": "solana-online-20260914-100213",
+        "ended": 1789381048.5127447,
+        "updates": 1196,
+        "files": {
+          "fly-final.npz": {
+            "path": "/state/solana-live/solana-online-20260914-100213/fly-final.npz",
+            "sha256": "ca121b7c68124dc85277c7d2b29de7841e5b032d6ca9b1e70fd662e7a55fbc69"
+          },
+          "head-final.pt": {
+            "path": "/state/solana-live/solana-online-20260914-100213/head-final.pt",
+            "sha256": "ce1d588b51f20478caf0aae3eefafa8fe381620648b28f5ce7a92fa66c70ecb5"
+          },
+          "completed.json": {
+            "path": "/state/solana-live/solana-online-20260914-100213/completed.json",
+            "sha256": "2907e2d736354fe6727cc8cb42c0bd5785886bc9067dc88aa7dd857a16b682c5"
+          }
+        },
+        "retain": true,
+        "paper_only": true
+      },
+      {
+        "id": "solana-online-20260914-110216",
+        "ended": 1789384651.4676406,
+        "updates": 1286,
+        "files": {
+          "fly-final.npz": {
+            "path": "/state/solana-live/solana-online-20260914-110216/fly-final.npz",
+            "sha256": "57439fb5e7144756e88e44bbb7657009eb74b16c8efc28991854db004c22060d"
+          },
+          "head-final.pt": {
+            "path": "/state/solana-live/solana-online-20260914-110216/head-final.pt",
+            "sha256": "090fd10b830ef43a0e1d068e8570aa66fa03d04ff5673d9be017dd4eda16a7ee"
+          },
+          "completed.json": {
+            "path": "/state/solana-live/solana-online-20260914-110216/completed.json",
+            "sha256": "6c015a94f75efa7c9ed87db793759a7cd55fd7c853aa400522a09aed844c7a6a"
+          }
+        },
+        "retain": true,
+        "paper_only": true
+      },
+      {
+        "id": "solana-online-20260914-120216",
+        "ended": 1789388251.9143043,
+        "updates": 1396,
+        "files": {
+          "fly-final.npz": {
+            "path": "/state/solana-live/solana-online-20260914-120216/fly-final.npz",
+            "sha256": "8daa63a0a0959f822f47ec1356fd69f14dd72f8a3342514f57531e45a5db54a6"
+          },
+          "head-final.pt": {
+            "path": "/state/solana-live/solana-online-20260914-120216/head-final.pt",
+            "sha256": "60ef8fd4aa7233e22ccbd07cad1908f6a7db78b3be64f84378ebd673b8f35f85"
+          },
+          "completed.json": {
+            "path": "/state/solana-live/solana-online-20260914-120216/completed.json",
+            "sha256": "7107a99c8b0438f022d0f0935a2d515299443d27e7ed79a32583210c2aa10b88"
+          }
+        },
+        "retain": true,
+        "paper_only": true
+      },
+      {
+        "id": "solana-online-20260914-130216",
+        "ended": 1789391852.9551156,
+        "updates": 1492,
+        "files": {
+          "fly-final.npz": {
+            "path": "/state/solana-live/solana-online-20260914-130216/fly-final.npz",
+            "sha256": "4dcbf935085df9ed1dd25d1ba6af680f9e6d870b99a7df011e544929931703e0"
+          },
+          "head-final.pt": {
+            "path": "/state/solana-live/solana-online-20260914-130216/head-final.pt",
+            "sha256": "0d8831cfbd75e3110ab96f03982f04a8194533dbfa4df1ad6b11fb64e186169b"
+          },
+          "completed.json": {
+            "path": "/state/solana-live/solana-online-20260914-130216/completed.json",
+            "sha256": "47a400bfd4f8d23f8eb85c6c664d483a027dd338579398f73d63fc67686a1aa7"
+          }
+        },
+        "retain": true,
+        "paper_only": true
+      },
+      {
+        "id": "solana-online-20260914-141714",
+        "ended": 1789396352.4153013,
+        "updates": 1581,
+        "files": {
+          "fly-final.npz": {
+            "path": "/state/solana-live/solana-online-20260914-141714/fly-final.npz",
+            "sha256": "5525ffeca195be35ceee2ec9ac4a63f51881a120f1c3076d8083baab4b315ceb"
+          },
+          "head-final.pt": {
+            "path": "/state/solana-live/solana-online-20260914-141714/head-final.pt",
+            "sha256": "e2dbcb2ac84de9805616115281953cbe311c180a509ab441d978094832291530"
+          },
+          "completed.json": {
+            "path": "/state/solana-live/solana-online-20260914-141714/completed.json",
+            "sha256": "596be9d3572509762d88e842b08ca55a1682f12d045683f76f783b8df1990419"
+          }
+        },
+        "retain": true,
+        "paper_only": true
+      },
+      {
+        "id": "solana-online-20260914-152719",
+        "ended": 1789400556.1686075,
+        "updates": 1687,
+        "files": {
+          "fly-final.npz": {
+            "path": "/state/solana-live/solana-online-20260914-152719/fly-final.npz",
+            "sha256": "b20b5c022c426a7a379ac480f5f020f2c5c2b87dadc0fe1680819aa2d868a787"
+          },
+          "head-final.pt": {
+            "path": "/state/solana-live/solana-online-20260914-152719/head-final.pt",
+            "sha256": "c7c04bfc24a04bf846a9a4667bcec8bbe7a6169669dd4ec96d8d3628792cf251"
+          },
+          "completed.json": {
+            "path": "/state/solana-live/solana-online-20260914-152719/completed.json",
+            "sha256": "1354fce4b379a55697dcf1cb4853b29fbd6a95b854889c49234d721f20596383"
+          }
+        },
+        "checkpoint_reused": false,
+        "retain": true,
+        "paper_only": true
+      }
+    ],
+    "policies": [
+      "untrained",
+      "cash",
+      "always_long",
+      "solana-online-20260914-021337",
+      "solana-online-20260914-031716",
+      "solana-online-20260914-041721",
+      "solana-online-20260914-053214",
+      "solana-online-20260914-064712",
+      "solana-online-20260914-074716",
+      "solana-online-20260914-084716",
+      "solana-online-20260914-100213",
+      "solana-online-20260914-110216",
+      "solana-online-20260914-120216",
+      "solana-online-20260914-130216",
+      "solana-online-20260914-141714",
+      "solana-online-20260914-152719"
+    ],
+    "protocol": "frozen_common_opportunities_v2",
+    "quote_protocol": "solana_observed_entry_exit_v2",
+    "tape": null,
+    "scope": "Conditional buy/sell evaluation at identical recorded attention opportunities; not universe-selection evaluation.",
+    "feature_scope": "Frozen deployment mode: native weight-change features are zero, unlike online training. No claim of identical training feature distribution.",
+    "timing": "Inputs stop at the recorded applied-event cursor and observation_at; orders use the recorded later issuance time, preserving common inference latency.",
+    "initial_cash": 1000,
+    "epsilon": 0,
+    "learning": false,
+    "paper_only": true,
+    "source_hashes": {
+      "checkpoint_eval_cloud.py": "711e37b3730b5587e51f6d3ae682728141246f45068c2049e2e740da22d4d5bc",
+      "cloud.py": "eee4683216d811b21b72948cc0a48b6731e66a747f984dc77cf1ffd2420265bb",
+      "paperlab/__init__.py": "d78877a6d3ff0de73e028f102d8ff4b21f6acb98f33305edabcfa70892efc073",
+      "paperlab/budget.py": "ed5892ac45dae1dd694cda29fb9a0972c81395147c4aa51f1c36fceb4f65c87f",
+      "paperlab/checkpoint_eval.py": "fcaa3402c2db81bf2f4486117aa548a20e077dc547d1c854a0f7306ad24c0725",
+      "paperlab/cli.py": "8e82f6e7401d62a8594340bb09dc66385824a083dd5d0486150c4e9b15d5d7a9",
+      "paperlab/cloud_debug.py": "8a6408076c909b29b78ad4739449d9b074d22c168d6d63dc702925cfafd8601a",
+      "paperlab/compact.py": "7bbb6c29fb7b49d160707c74c6e366a2a65c185eb139b41c7068502a6e98a7a3",
+      "paperlab/core.py": "184cfb91ffa93931a54d676419c81695c4c102180d1064b96c965a9379750abd",
+      "paperlab/data.py": "63d96dd9ff1c81d8dce680067aa43a977935ab7f2946100cb8b31d7110129b2b",
+      "paperlab/debugger.py": "f0e1cfb64a5bdb0fec03dc5af88cab19283780ce106cd855bad5d5144e0ca949",
+      "paperlab/debugger_cloud.py": "f22d6f480a0bd61cadfac42b383ac51553a00ce8eaf8ee87f2a88c1e2c3ff877",
+      "paperlab/diagnostics.py": "fda107439787786e07b7cc5a2aa5886f9278091666bc94f41a474c6163bba4ca",
+      "paperlab/export.py": "5a1c8fd7f50341a28fbc212b8c55e1644b2a479b14fc25988b8429cd1eda18da",
+      "paperlab/fly.py": "4935f43219ab63d19fa2cc04b36a5612307a4cf44a016b0af2c8f0d69e4a5fea",
+      "paperlab/fly_activation_protocol.py": "47150d63c39d2a12aabbe04ff0d7c5a3f77f2f6f05905656ba11970e669d8ccd",
+      "paperlab/fly_activity_figure.py": "9a42bc398db8888ce9a75bcf154d5244e52874ce8be93e46c2d9c853d3cad7fe",
+      "paperlab/fly_credit_audit.py": "5a9260b232fb827e7e266278933753899b3b26887fe9826f48017769b08a5f73",
+      "paperlab/fly_credit_divergence.py": "6430768bd2f74746bd14f8e7cb096df0a6f5871b660dc166e6dd7e4af51b201b",
+      "paperlab/fly_credit_reset.py": "078a277f95d9a6ee8deaa9768e461d9a8b6d3864f4248d3e0ba2c0221881ec17",
+      "paperlab/fly_credit_reset_audit.py": "39a06c9502501150d19e779ea12081b622504638477714fa74277beb67f40501",
+      "paperlab/fly_credit_reset_cloud.py": "b3d2e0667ba4e884a125a611804b59b2cf58017f8f18aa2f107bf757ab04502d",
+      "paperlab/fly_credit_reset_figure.py": "4072924dfd7a22e2055e8aa055eb7ad085521edffa11afd5d9d67f3adc2d250d",
+      "paperlab/fly_credit_selection.py": "fd4ab3b2640a424289189354c201d4387cb4f4304d5d31719ebf96df371f067c",
+      "paperlab/fly_decoder_audit.py": "aa295e115a3cb6ba629cdc9f4cf2b93fa918a58adcbc67eb2d4749bb2f22c958",
+      "paperlab/fly_first_drive.py": "26c2a84e588584524ccd03a6abd5b773d61fea4fa5be1fea2500cdf79e9d8016",
+      "paperlab/fly_learning_scale.py": "3f7399c99bbfc37bf7c45a3d0bd2a9caed14d8af4cfcae529e96984eeb24bfcc",
+      "paperlab/fly_learning_scale_audit.py": "76704d1b18398d13db20f239396efcf9373fb51761f4ba95c388394e2c63065b",
+      "paperlab/fly_learning_scale_cloud.py": "d922108801420dc0656c873083aa3adf798832457de86378b1bce2f6893af445",
+      "paperlab/fly_learning_scale_credit.py": "dc901a2439ec7dd76d29bb8d5e3a971b2491af5b9972461ddf7bbcf6118af2b0",
+      "paperlab/fly_learning_scale_figure.py": "e6d6941123026953169ca565eb17c25a2b28b1a11dd6e726ab8e5e226fa2a885",
+      "paperlab/fly_loss_attribution.py": "0b33fe4377b4bebccca5e29453a5e12635881b90bd64e7158d3a3c565fbbd55b",
+      "paperlab/fly_market_activity.py": "d805504fcae6f303dc8b96d2b3321c4db6638d8163c035af07f8f537d6930e3f",
+      "paperlab/fly_market_activity_audit.py": "46042fad9113bafea192937dcca0a01f2f6901ea11b430793b4f1e17e3391ff2",
+      "paperlab/fly_market_cloud.py": "dc66e45d6796c5b765d22be70fef75fd53bac6504229dc83eff10d21621c855e",
+      "paperlab/fly_market_figure.py": "e6470010c78fbd1aba26c6df5c4038152c3e30b5e76d9dcbba609df33381b46d",
+      "paperlab/fly_market_input.py": "d9dbb86ffdb08242b5e18612480c0a78238ecb226fbd1dba9f6b6c79f29c1525",
+      "paperlab/fly_market_memory_audit.py": "3d11d00bc6643d6f7a5efa0fe9db009a8c13526d4aa30e222179cf628be8ad3b",
+      "paperlab/fly_market_pulse.py": "070824d264ed8b615bd7535ad0613c31e6ec5c5cc91ee4a2ad7d8d66c4cb53b4",
+      "paperlab/fly_market_restoration.py": "8351610e09fdba46251cb44c61510509e1c46e1ade58dfbd880848e85878d1a2",
+      "paperlab/fly_market_restoration_audit.py": "d0fcced0bcad0ccd8835c4b70d4e3e2aa37b8a067b14bd1da324891417c27afe",
+      "paperlab/fly_market_schedule.py": "e957f1fb328da671c4e7ec67a8c03f0133dd3903cc412c720d40f5e2237974ef",
+      "paperlab/fly_market_study.py": "3432a2db341f99d5ced2d03db5f4812d39067022ea8f2f28be99227bf1f70bb9",
+      "paperlab/fly_online_audit.py": "26c6fdf96e3d7d18f35f9891d017fc6c0250df7ee12d0809bc43391e563f7c6a",
+      "paperlab/fly_online_cloud.py": "a0171e1fd6ff72cfe42d3dba2616e8dc8c535cfe6310f40d29d9d1b927d961d6",
+      "paperlab/fly_online_completion.py": "f5db21925214fd2cdff1cc99d455d3aafa56a5945480f12ab9520dacbf357252",
+      "paperlab/fly_online_coverage.py": "6f986a11d6a2869739c3af523d41ce660449be9f40766d28ed0ddb12ede82ca9",
+      "paperlab/fly_online_figure.py": "16775732bcd463ecc2aaa48a2c73005a4c2eaf57f21f94bad9048b692d2b655e",
+      "paperlab/fly_online_projection.py": "010e998c795681876c8017e1368de7233d9886718001a6b27fe523b07024e49e",
+      "paperlab/fly_online_protocol.py": "2f01ef48bb69ac1149d9ea4f1529410a5e3e869a5ace02d8fa2b6e516e258d65",
+      "paperlab/fly_online_recovery.py": "c18070f70aa17771d1addf10b8ac59778169599f2d8666f27b8f9d7d11d03586",
+      "paperlab/fly_online_schedule.py": "5f1c2d4d3fb71d2b4ea8d0ba8bdcee7b04776eeaa1e12fc8bebebfbca2c8e62e",
+      "paperlab/fly_online_study.py": "368f3078dd5d96dede1b8dd56d4bd5574f42dcb4420720a0040e959d1d0a3ea5",
+      "paperlab/fly_online_watch.py": "2941de92d0ea25e527ae7566179a6922bb84f6e8c081e9d37ff97e1599c4e96b",
+      "paperlab/fly_paper_activation.py": "c4193bf456b25b01497c94adc5ba2e102bf878e4994dc6cf314554515470c4cf",
+      "paperlab/fly_paper_audit.py": "3cb98eeaf2e4d68ef569a8e2f5dc50bf214882d5dcd699648dd12de5de55d41b",
+      "paperlab/fly_paper_cloud.py": "90eeba0ee24010f77ac2ce33b08a5f8cf744ff09dc61264837f42c7f84da8f03",
+      "paperlab/fly_paper_decisions.py": "e24f7824c96f73dd7b296fb2f2de94824607813891b4bfb6a068bdc8a637d599",
+      "paperlab/fly_paper_figure.py": "04c9cff12cfd8777941a03f099228db44fbde740fd0e85759e594b4deedff0ec",
+      "paperlab/fly_paper_inputs.py": "514f622194eea7f44f8417b5a028928e4454c80d38ecdbf2757638193cfcfaa9",
+      "paperlab/fly_paper_memory.py": "f644c93acf1804b914a67d0cabe3bec3be1c65951b4fdb201b17962caad929ba",
+      "paperlab/fly_paper_memory_map.py": "f587aa7c402ccdcae5a64ac45c30e06afd19ec7d35199c1e3b0f055361dddd53",
+      "paperlab/fly_paper_price_audit.py": "6603b60bcaa6fa7fd91f26764d2361bc351399c5b955b971ed5768ec8b9561ed",
+      "paperlab/fly_paper_protocol.py": "3c9a341a9c117cf68f298cce4346c19d05b7d0aeade719cf2d064a338ece105f",
+      "paperlab/fly_paper_schedule.py": "93f9cfbd8a7d8ba55b3063a7056a4a36004768c2a222ebb064ec58c51b284c6f",
+      "paperlab/fly_paper_selection.py": "358fd002e8d5cbde5cacf9b642cd69cce17dd8d9378069462fe46c3954673a16",
+      "paperlab/fly_paper_stimulation.py": "85072fc69a321b5d378fcde43d8485e4b8b09735e7ea5257eb05f79ec7ebd4b7",
+      "paperlab/fly_paper_stimulation_audit.py": "3e98dd74eae27014c1078b8609ba68d32a1d39c5a9c8366e97c0c3d89a9e7652",
+      "paperlab/fly_paper_stimulation_cloud.py": "ec58e6ef81d0f19eae5a79f3caaca96a7f1ffa5502b88e4304e65bc99622caf6",
+      "paperlab/fly_paper_study.py": "e58f3abbad26c1c27eccb134580d95e7fac139b27180f11ea14e69f9f885190e",
+      "paperlab/fly_pulse_audit.py": "6faf881214452313d5492fa554594ed15afd6fb726ee9501e4f76686ff165656",
+      "paperlab/fly_rate_audit.py": "ccbabc0d4ce81aaa7d9a454387b129b1bbe4faac3e3e0695f8001a016f8ef5ca",
+      "paperlab/fly_rate_checkpoint.py": "d6eb7b9e044f174b2dede5d513a697e66da0b67988ed9880bba876d5e849c5fd",
+      "paperlab/fly_rate_checkpoint_audit.py": "e1160dff2ae14ee4d6ddff4e67d31e1ea474c7bf109e95a17c24b447c3958625",
+      "paperlab/fly_rate_checkpoint_cloud.py": "c2a717b31e2e228da72db0c2211ddf5025ab471d5a1705145b812ea111129baf",
+      "paperlab/fly_rate_cloud.py": "c02c4b7aacfe59719f80e156f3ef21571662ed60430be0d4fd28f30e90c4d6e5",
+      "paperlab/fly_rate_inputs.py": "3059c3665886c629264a7544cea9e5c362bed211c988da011695966de5847876",
+      "paperlab/fly_rate_metrics.py": "36252ad88c571444e9ba8df8400d9607e7603d1cf57e353298b2149de2fabbe9",
+      "paperlab/fly_rate_price_audit.py": "5a2f36b2c6ae147d64bd047b059cb717795798f9e6eb0fa70cd81a50b545c105",
+      "paperlab/fly_rate_projection.py": "9c5987168753336f58be5d9d9d3d2c30a6a2ed24ca618cd81c81076bf4ab4738",
+      "paperlab/fly_rate_protocol.py": "57cfe6b9728c28270d548f1fe871390f5d5c29e4ef706380bef3820f097e3f22",
+      "paperlab/fly_rate_report.py": "cc99056653f1df2f8beb6d172c314ea1f13ccfb9331c05b9d2f8d17afedb0894",
+      "paperlab/fly_rate_results.py": "a59f6d413224a71dea65693dd333196109706db19b4926028b21f02f6e2bdfea",
+      "paperlab/fly_rate_runtime.py": "f521073cd01e75e63ef1701f3a9a239174591b2e9318215cb557b7782746c3ab",
+      "paperlab/fly_rate_schedule.py": "0f1d35e575f3c4a8d9f74e26bd41aea6e9600053413d07cc74da7fd5b6e8770a",
+      "paperlab/fly_rate_study.py": "24b170b0c277b784e2ebffe9e9f564e0461f64e85f31d9f73f65aabef308402b",
+      "paperlab/fly_rate_watch.py": "3440a26f5d7debaa735355ee2b363aac3e653a09be77a13707a255031d15e419",
+      "paperlab/fly_recipient_isolation.py": "179a1efd97e8e0d930f8e6143db3711a13dcc740b3b2f343e0b844a6c71eca1d",
+      "paperlab/fly_recipient_isolation_audit.py": "9c5718bacb0891d5137e22548ed57c693cf39d164466ea7b4f7ee31727a53c98",
+      "paperlab/fly_recipient_isolation_cloud.py": "6b439a9ae664f0df4cab179acbfd5a87f880375e7e2a93acaaa20b04eeaac69a",
+      "paperlab/fly_recipient_isolation_figure.py": "cf611424d018aff649eb5227b205430ba476c5b17cce65b104a3b873aef7816b",
+      "paperlab/fly_recording_download.py": "52f4389f3cf050dabff76bf2c21e9800c31d678646356063706645a94887d882",
+      "paperlab/fly_recovery_report.py": "436510c92d5db5c74ec55632844c11122d63ee6da3bdbeaaf4443b9758bc38d1",
+      "paperlab/fly_restore_study.py": "bfc7c2fc1d5e4d3a90633fe541856b19ff44fd1541a951fd4adc2f240de4ba30",
+      "paperlab/fly_retention_study.py": "1ea70b7806a67e82ba95e18441d172402f88ddb9772fc371ca4bdf7daec324ff",
+      "paperlab/fly_selective_memory.py": "5e35107e9b1d4109f25d52102e3f40eb3dd883c96651c4da010f0a8547793606",
+      "paperlab/fly_selective_trace.py": "4855fe56e4ded6df49e7c4e2a04570fefa85a01587ade98111bd8d1c26a7d67d",
+      "paperlab/fly_selective_trace_audit.py": "57a74aad03a036aea517835b166ebf392431312f2574e9f784d9324013541323",
+      "paperlab/fly_selective_trace_cloud.py": "2a73854fc94c8dd44e00ff30140c7acf64f09666ce4655f99c6c4a0b644b4cbc",
+      "paperlab/fly_selective_trace_figure.py": "77ad3fad5c77d58388977e27e855d2c427eabd40d4ac388a60fdd19a6672d686",
+      "paperlab/fly_stimulation_figure.py": "ef500e2ca3e360b765a5c52d8b97b194f2063e204ac6137967ef6727c6c1dfe1",
+      "paperlab/fly_stimulation_timing.py": "69d2c9277b85967616b7ded97c963899cf3dde83f6cc4db52cd4f84dcaf87962",
+      "paperlab/fly_study_evidence_bundle.py": "8b6595858a305968d0b774da3dff9834f40535e1a80e73de5ee99e5f17cbd2f1",
+      "paperlab/fly_trace.py": "1b3a299d8423835a5abf1a2e3fd9a985f51a6280d2e2cd707aa47dd16e1575b1",
+      "paperlab/fly_trace_memory.py": "263b0c9181a8b6d3651c6481a48c076d387680e8c08f17631fb1dcdc8dd5178f",
+      "paperlab/fly_trade_trace.py": "6c8d02c417ea998b840af9e1a13ee731919b1e1a6f029694e274875386e6e023",
+      "paperlab/fly_view_projection.py": "d574cc802b98481b066b59fc6375a1042ee056aa4022a00038366fada55cf1ec",
+      "paperlab/fly_visual.py": "8d543c2ac60011e1bc80d676e488772ff331d3b0410ff9217b3ce440e497904b",
+      "paperlab/fly_visual_study.py": "0c29d0f38d13de11cd1a362573a11e9c6ffbd9a3aafe180d8effc2ab638f8e53",
+      "paperlab/group_replay.py": "18ae0aacae7beaba90eac8b2d01a2a974368e3a6b3c9bbf51fd4d0de7a43e567",
+      "paperlab/group_replay_audit.py": "1050484ea95d7af7f359b6abd2e9497779f1ec3f10efc15a245c83d0d1609602",
+      "paperlab/market_baselines.py": "b58b9da0075f228ee4a99f8e3be7344d785a6c451464196d196f19999fe62465",
+      "paperlab/multi.py": "5ea7ad4f7522475707f4a15eefe094750007a2814f72caad9bea0a9c8076d475",
+      "paperlab/news.py": "b35fd73eed9051ff7c92972ec4f245c52c462bee61b986c5b777217d87a04058",
+      "paperlab/runtime.py": "8be5df3b2105cc51f3e6d0ea11f2c1f7fa29f5ceea93743db7dc7aa910542208",
+      "paperlab/solana_audit.py": "0f2e5264f5f9625d7d48551e6257efdc3bde93bac037b897ba47a43332b0d436",
+      "paperlab/solana_events.py": "3ff0cd21fa57dba441d637da49696e3f1aad5ab784c5aa9cc8f2d2c39b81e2e3",
+      "paperlab/solana_execution_audit.py": "727b699391a46717c6be47c4896b8c01d76eeb53533e21bddceaf72893b4536e",
+      "paperlab/solana_online.py": "8b0d6c69bf8ebdb30db8fa7e1f15dbb94c0ea78dc0266393a937215d97dbad13",
+      "paperlab/solana_online_audit.py": "e0cffe0829075de0de63c86813d9bdcc84c37717fe0080ef542855be2ecf6845",
+      "paperlab/solana_paper.py": "04ff64f086628a9af0ab1dc7063564b1f8747eb2895e2ada83be6bb2c7c07648",
+      "paperlab/solana_quotes.py": "910b10c9115599b8e44989381d6eefdfe244f8e7e46388d0d786fcd7bc5cc617",
+      "paperlab/solana_schema/pump_amm_events.json": "dc4dc1ef07a48baaa820191f5dee43af4e5e39daed9b329a021ee2915e2ea498",
+      "paperlab/solana_schema/pump_events.json": "9852929e009b9f45a0c617e2a0171319d9f26b896cac69206012725029ee7155",
+      "paperlab/solana_service.py": "610cd8ecbaa13202a79f1cf4e0747d77e7362e0cfced3fa72392f38311d32cc2",
+      "paperlab/solana_watch.py": "380e62fb0738d658eb1771c0da2d1f62646df26daf8011fdc72cd5bf87b341d3",
+      "paperlab/telemetry.py": "29a2232d583aaefd509649d98f61217800cb18d8a531e4f6ce1a6e18bd9df13b",
+      "paperlab/universe.py": "d495650516e7ef03376c1c83d965b659f76c809c8931b34e160b2c265b426d0d",
+      "paperlab/universe_probe.py": "b0dd4fe55b05d12d45baf472105247e8b5513a235e728d694e69d660f97eba37",
+      "solana_cloud.py": "ecfdb397310754a1f65ce17ce685f8acdd5aa2c6f905da08879dba6a156a34c7",
+      "vendor/stonkfly/stonkfly/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "vendor/stonkfly/stonkfly/__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+      "vendor/stonkfly/stonkfly/actions.py": "f46e192aec5597178cb6de7e8f32a9f61fd60be58ea57ba40cde259a41063697",
+      "vendor/stonkfly/stonkfly/broker.py": "d9fb0ae801b8572fd7709a65e6e25aaf9c7a54922a372b182db3ba16c15edca4",
+      "vendor/stonkfly/stonkfly/cli.py": "f9b01f958681369bc6f4a34cb96ec613aadfa93469edbb831f839892fd77dffb",
+      "vendor/stonkfly/stonkfly/config.py": "7fc52aca6cba7356f8bfc76bd9a6dbc5d6fdc08611a48b53c56df23796584b4e",
+      "vendor/stonkfly/stonkfly/data.py": "d52d695d0d416900745fbcaafca74810b000e02ddcbff7434f5891923e172504",
+      "vendor/stonkfly/stonkfly/display.py": "58507e7404d79ffc84a81010515268a969c636916ef2fd0c73f0aa55f6d959df",
+      "vendor/stonkfly/stonkfly/ledger.py": "96df6dc502e7ca5c94b9b31cbf8622416528333233ef7f22467279f57f05cbce",
+      "vendor/stonkfly/stonkfly/market.py": "3ec3d67cb9e8bbc5b660350fa61ff9578b0b7e161e87931ba0d5021cea4f1413",
+      "vendor/stonkfly/stonkfly/neural/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "vendor/stonkfly/stonkfly/neural/arrays.lock.json": "39de6a2e46be552b734b822c8452e07ed05b5e8af906c5f79db7d63c2d68515e",
+      "vendor/stonkfly/stonkfly/neural/brain.py": "895d0bcab7e03e859547e516905edc39fd2af4bb7ff7a7bf67d819bc15ac8c4d",
+      "vendor/stonkfly/stonkfly/neural/circuit.py": "e9ed5d237c7c01fbaf80f75cec75f5f9f2e33965461e3480813ade78597f6c45",
+      "vendor/stonkfly/stonkfly/neural/common.py": "e7986a92827c79e9da59c8ce7f7e8df262d188a5a93a173e37b1cd1c011aadfe",
+      "vendor/stonkfly/stonkfly/neural/connectome.py": "cd9ceb396ca9b408eb7beafe8abd0894d5c5e13aa63c9ec23ffbc55526f11d18",
+      "vendor/stonkfly/stonkfly/neural/controller.py": "8783a2812408af28c909803763850c69e162a780531d1983dd7a3e83eb72aede",
+      "vendor/stonkfly/stonkfly/neural/datasets.json": "4532ef8b2f08d819cb31dee3a40f21685112971a05697cf0fa7fa634cf9035b8",
+      "vendor/stonkfly/stonkfly/neural/kernel.cpp": "e2d4d584f4633613277bb1bf6ea7ba20855c01a332ae2e9344ed7782604c8509",
+      "vendor/stonkfly/stonkfly/neural/neurons.lock.json": "89ab067db991c674f1fbe4fcaf2d8d5dabab9337e8cb6a24270ad8e8b5c582c7",
+      "vendor/stonkfly/stonkfly/neural/prepare.py": "38a2821a8ee26fed74d88146931f77331038d6c2a69c4be8f885705630d130f3",
+      "vendor/stonkfly/stonkfly/neural/rule.py": "3c80680450c3b73042e332bd7ce8289d7d74d8695c60e7ac19eefd9759d95c44",
+      "vendor/stonkfly/stonkfly/neural/sensory.py": "46ba99fd966e251a3422f77fdd27a78fe45aa45f9fd14e498e3c5e578566f7ac",
+      "vendor/stonkfly/stonkfly/neural/sources.lock.json": "a518a766aa46b14b7b9230a108a63b902acc1e3386f123f45d5c52311342efd8",
+      "vendor/stonkfly/stonkfly/neural/state.py": "de3dac9f37f7c12546124383410e1ac0e720459e2f8e636d3fa155dce6a7d220",
+      "vendor/stonkfly/stonkfly/neural/transmitters.py": "b1c1b080da44bdeaf498cdce3504134c1cf070b875f84a4007f16002b2956f93",
+      "vendor/stonkfly/stonkfly/neural/visual.py": "65c9639ab7fb6c5d77f83f297c4d82cf8b7a068957bd78e1da957b3f9aeae952",
+      "vendor/stonkfly/stonkfly/reinforcement.py": "b883bd2fd70a2f7aeb8b0cacb0f42f649e28a7cbfd7b81dd99a0b95a4a3db4ad",
+      "vendor/stonkfly/stonkfly/risk.py": "902467f4f1e269fa0cfef856795f3b5adbfccf056bde03df797ba45492197aaa"
+    }
+  },
+  "training_control": {
+    "enabled": true,
+    "mode": "hourly",
+    "parent": "solana-online-20260914-152719",
+    "pending": null,
+    "next_at": 1789403239.6623247,
+    "completed_windows": 18,
+    "paper_only": true,
+    "scheduler_monthly_compute_upper_bound_usd": 0.99,
+    "archive_bytes": 2361386789,
+    "status": "waiting_for_budget_paced_window",
+    "checked_at": 1789400640.3812034,
+    "last_result": {
+      "ended": 1789400556.1686075,
+      "neural_observations": 126,
+      "new_readout_updates": 106,
+      "nonzero_reward_updates": 92,
+      "fills": 46,
+      "equity_stress_usd": 880.4014385826655,
+      "entry_budget_usd": "176.0020196320318454761167588",
+      "training_health": "learning_from_paper_execution",
+      "account_audit": {
+        "rows": 180,
+        "paper_fills": 46,
+        "native_observations": 126,
+        "distinct_tokens_with_native_inference": 11,
+        "new_head_updates": 106,
+        "cash_usd": 176.00201963203185,
+        "cumulative_fees_usd": 18.545049498814944,
+        "equity_marks_verified": 180,
+        "nonzero_reward_updates": 92,
+        "reward_protocol": "mint_credit_terminal_v2",
+        "raw_q_reward_usd": -119.5985614173346,
+        "terminal_readout_updates": 10,
+        "reward_reconciliation_residual_usd": 8.526512829121202e-14,
+        "reward_reconciliation_verified": true,
+        "native_reward_usd": -136.11545808704312,
+        "native_uncredited_difference_usd": 16.51689666970853,
+        "paper_only": true,
+        "profitable_learning_proven": false,
+        "note": "Recorded-fill accounting only; this does not establish executable prices or policy superiority."
+      },
+      "budget": {
+        "estimated_compute_usd": 0.24292741296987533,
+        "monthly_reserved_usd": 11.060581755794132,
+        "monthly_limit_usd": 85,
+        "provider_bill": false
+      },
+      "account_mode": "fresh_training_episode",
+      "episode_pnl_usd": -119.59856141733451
+    },
+    "cadence_changes": [
+      {
+        "at": 1789331934.0734954,
+        "previous_mode": "paced",
+        "mode": "six_hour",
+        "previous_next_at": 1789367806.992384,
+        "next_at": 1789331934.0734954,
+        "start_now": true,
+        "pending_preserved": false
+      },
+      {
+        "at": 1789333865.056933,
+        "previous_mode": "six_hour",
+        "mode": "hourly",
+        "previous_next_at": 1789353536.1924152,
+        "next_at": 1789335536.1924152,
+        "start_now": false,
+        "pending_preserved": false
+      },
+      {
+        "at": 1789342036.476422,
+        "previous_mode": "hourly",
+        "mode": "hourly",
+        "previous_next_at": 1789344179.4064631,
+        "next_at": 1789342036.476422,
+        "start_now": true,
+        "pending_preserved": false
+      }
+    ],
+    "account_mode": "fresh_training_episode",
+    "continuous_account_archive": {
+      "run_id": "solana-online-20260914-003217",
+      "completed_sha256": "0fb219de0457702c67e85ec1f5da80c023efda3771c055d283f3013453fa1b95",
+      "control_archive": "/state/solana-online/pre-episodes-solana-online-20260914-003217.json"
+    },
+    "episode_totals": {
+      "episodes": 13,
+      "sum_episode_pnl_usd": -3020.541774778201,
+      "sum_episode_fees_usd": 343.82425771899347,
+      "scope": "Independent training episodes; not continuous portfolio performance"
+    },
+    "account_mode_changes": [
+      {
+        "at": 1789351810.075604,
+        "from_mode": "continuous",
+        "to_mode": "fresh_training_episode",
+        "parent": "solana-online-20260914-003217",
+        "initial_cash_per_episode_usd": 1000.0,
+        "authorization": "User requested resetting paper capital per training run; learned weights continue"
+      }
+    ],
+    "audit_maintenance_history": [
+      {
+        "at": 1789398887.800202,
+        "reason": "System audit: correct incomplete reward credit and quote/entry conflation before further training.",
+        "previous_status": "waiting_for_budget_paced_window",
+        "previous_enabled": true,
+        "resumed_at": 1789399600.796832
+      }
+    ]
+  },
+  "evaluation_control": {
+    "enabled": true,
+    "next_batch_at": 1789430400,
+    "batch": "evaluation-1789400743",
+    "pending": null,
+    "retained_checkpoints": 13,
+    "status": "waiting_for_unseen_market_window",
+    "checked_at": 1789400743.909455,
+    "superseded_batches": [
+      {
+        "batch": "evaluation-1789398507",
+        "reason": "Preserve unexecuted v1 plan; audit found missing causal snapshot cursors, FX failure state, incomplete source seals and entry/mark conflation. Start prospective v2 only.",
+        "at": 1789399506.4445586
+      },
+      {
+        "batch": "evaluation-1789399622",
+        "reason": "Preserve unused v2 plan; final replay audit corrected unchanged-receipt cancellation and active-order shared-cash allocation. Reseal final source and checkpoint cohort after corrected training completes.",
+        "at": 1789400219.6765106
+      }
+    ],
+    "audit_maintenance_history": [
+      {
+        "at": 1789398912.157335,
+        "reason": "System audit: correct quote semantics, causal replay coverage and incomplete source fingerprint before scoring.",
+        "previous_status": "waiting_for_unseen_market_window",
+        "previous_enabled": true,
+        "resumed_at": 1789399576.6039689
+      },
+      {
+        "at": 1789399942.045863,
+        "reason": "Final audit found replay cancels pending orders on unchanged receipts while live waits for a new signature; fix and supersede unused v2 plan before scoring.",
+        "previous_status": "waiting_for_unseen_market_window",
+        "previous_enabled": true,
+        "resumed_at": 1789400698.0842474
+      }
+    ]
+  },
+  "continuous_account": {
+    "path": "solana-live/solana-online-20260914-003217/completed.json",
+    "sha256": "0fb219de0457702c67e85ec1f5da80c023efda3771c055d283f3013453fa1b95",
+    "unchanged": true
+  },
+  "budget_ledgers": {
+    "workers": {
+      "first_month": "2026-09",
+      "months": {
+        "2026-09": 11.081792968686512
+      }
+    },
+    "collector": {
+      "first_month": "2026-09",
+      "months": {
+        "2026-09": 0.6410387946859971
+      }
+    }
+  },
+  "tracked_monthly_compute_estimate_usd": 11.72283176337251,
+  "budget_note": "Conservative tracked estimates, not the provider invoice. Monthly user authorization remains $100; admission retains additional margin."
+}

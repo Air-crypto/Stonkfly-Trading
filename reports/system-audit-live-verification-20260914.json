@@ -1,0 +1,231 @@
+{
+  "run_id": "solana-online-20260914-152719",
+  "call_id": "fc-01M2G8FEXV9MR7JRQAGYDQRSZD",
+  "source_sha256": {
+    "completed.json": "1354fce4b379a55697dcf1cb4853b29fbd6a95b854889c49234d721f20596383",
+    "opening.json": "bd2878dd41b9d7504f6db9eb9f3a005378e8a861183b05ab4293878fab515c08",
+    "decisions.jsonl": "41a94180711341036897d88f3378fe06384d69007a5a7351b4d8607fd8763340"
+  },
+  "verification": "Independent local arithmetic over immutable cloud output; no new inference or trades.",
+  "reward_protocol": "mint_credit_terminal_v2",
+  "quote_protocol": "solana_observed_entry_exit_v2",
+  "fresh_opening_verified": true,
+  "rows": 180,
+  "fills": 46,
+  "final_cash_usd": 176.00201963203185,
+  "paid_fees_usd": 18.545049498814944,
+  "final_marked_equity_usd": 880.4014385826655,
+  "episode_marked_pnl_usd": -119.59856141733451,
+  "raw_q_reward_usd": -119.59856141733458,
+  "reward_residual_usd": 7.105427357601002e-14,
+  "q_updates": 106,
+  "nonzero_reward_updates": 92,
+  "q_updates_with_weight_change": 106,
+  "terminal_updates": 10,
+  "terminal_raw_reward_usd": 64.03652465959559,
+  "terminal_missing_quote_updates": 5,
+  "terminal_missing_quote_raw_reward_usd": -76.94203620206481,
+  "terminal_targets_zero_bootstrap_verified": true,
+  "q_ranges": {
+    "loss": {
+      "min": 3.841141165139561e-07,
+      "max": 0.8092436790466309
+    },
+    "gradient_l2_before_clip": {
+      "min": 0.0023021516390144825,
+      "max": 5.86608362197876
+    },
+    "weight_delta_l2": {
+      "min": 0.000676083960570395,
+      "max": 0.004053506534546614
+    },
+    "reward_usd": {
+      "min": -39.013800819400394,
+      "max": 71.35613448430254
+    }
+  },
+  "reward_clipped_updates": 8,
+  "native_observations": 126,
+  "native_observations_with_weight_change": 126,
+  "native_changed_edges_per_observation": {
+    "min": 3805,
+    "max": 3833
+  },
+  "native_ranges": {
+    "weight_delta_l2": {
+      "min": 0.05583912879228592,
+      "max": 8.453908920288086
+    },
+    "equity_reward_usd": {
+      "min": -33.01624910396316,
+      "max": 18.946698894653423
+    }
+  },
+  "native_raw_feedback_usd": -136.11545808704318,
+  "q_minus_native_feedback_usd": 16.5168966697086,
+  "native_context_resets": 57,
+  "snapshot_metadata": {
+    "monotone_event_cursors_verified": true,
+    "last_applied_event_cursor": 37731,
+    "fx_state_verified_finite": true,
+    "unavailable_fx_rows": 0,
+    "observation_before_row_end_verified": true,
+    "terminal_did_not_advance_market_verified": true
+  },
+  "max_reconstruction_error": {
+    "cash_usd": 0.0,
+    "fees_usd": 0.0,
+    "quantity_base_units": 0.0,
+    "equity_usd": 0.0,
+    "credit_anchor_usd": 0.0
+  },
+  "per_mint": [
+    {
+      "mint": "AkzH9YLPnd7MtD5dMagJ6qYyhoK4P2hGyzyoqHeipump",
+      "cash_flow_usd": 0.0,
+      "final_indicative_value_usd": 0.0,
+      "contribution_usd": 0.0,
+      "raw_q_reward_usd": 0.0,
+      "residual_usd": 0.0,
+      "has_terminal_quote": false,
+      "has_retained_inventory": false
+    },
+    {
+      "mint": "7V4qSFDsA62LfYeJF3J2ccEJhmZGbcn7gioUWtZRpump",
+      "cash_flow_usd": 0.0,
+      "final_indicative_value_usd": 0.0,
+      "contribution_usd": 0.0,
+      "raw_q_reward_usd": 0.0,
+      "residual_usd": 0.0,
+      "has_terminal_quote": false,
+      "has_retained_inventory": false
+    },
+    {
+      "mint": "74HtzcpksoLCe9cDREpbXgrKJ7kj82iSP2cfCDRVTaUP",
+      "cash_flow_usd": -72.43340704583414,
+      "final_indicative_value_usd": 0.0,
+      "contribution_usd": -72.43340704583414,
+      "raw_q_reward_usd": -72.43340704583414,
+      "residual_usd": 0.0,
+      "has_terminal_quote": false,
+      "has_retained_inventory": true
+    },
+    {
+      "mint": "Dq89AGGKcW4ivSuBWrtkNPx6nKtg2wK5o4cAfa85pump",
+      "cash_flow_usd": 0.0,
+      "final_indicative_value_usd": 0.0,
+      "contribution_usd": 0.0,
+      "raw_q_reward_usd": 0.0,
+      "residual_usd": 0.0,
+      "has_terminal_quote": false,
+      "has_retained_inventory": false
+    },
+    {
+      "mint": "BGgBVgyRsJ2Uhwm3JnXj8DSMtXANMiXE4eSxC4hjpump",
+      "cash_flow_usd": 0.0,
+      "final_indicative_value_usd": 0.0,
+      "contribution_usd": 0.0,
+      "raw_q_reward_usd": 0.0,
+      "residual_usd": 0.0,
+      "has_terminal_quote": false,
+      "has_retained_inventory": false
+    },
+    {
+      "mint": "5yyt7WJA7yeYWCbBnWXpQqoPYsjGuSc22ZnbJDGCpump",
+      "cash_flow_usd": -82.20488252348319,
+      "final_indicative_value_usd": 0.0,
+      "contribution_usd": -82.20488252348319,
+      "raw_q_reward_usd": -82.20488252348319,
+      "residual_usd": 0.0,
+      "has_terminal_quote": false,
+      "has_retained_inventory": true
+    },
+    {
+      "mint": "cMw1s5QMvCDQFwwL3LgwfW2FSM7sScUExnJmswqpump",
+      "cash_flow_usd": -55.70417262632308,
+      "final_indicative_value_usd": 0.0,
+      "contribution_usd": -55.70417262632308,
+      "raw_q_reward_usd": -55.70417262632308,
+      "residual_usd": 0.0,
+      "has_terminal_quote": false,
+      "has_retained_inventory": true
+    },
+    {
+      "mint": "F7hVqdS1UxxgjxBzKCg5uiRk4NHG2Eh4W9CipggJpump",
+      "cash_flow_usd": -252.40599895094905,
+      "final_indicative_value_usd": 292.6895717126196,
+      "contribution_usd": 40.28357276167057,
+      "raw_q_reward_usd": 40.28357276167057,
+      "residual_usd": 0.0,
+      "has_terminal_quote": true,
+      "has_retained_inventory": true
+    },
+    {
+      "mint": "616XcfiK7YYSWTZYgLymRTWqAFmG1gwh8L2xfTVXpump",
+      "cash_flow_usd": -1.135709363291299,
+      "final_indicative_value_usd": 0.0,
+      "contribution_usd": -1.135709363291299,
+      "raw_q_reward_usd": -1.135709363291299,
+      "residual_usd": 0.0,
+      "has_terminal_quote": false,
+      "has_retained_inventory": false
+    },
+    {
+      "mint": "9C6akAkHCJfyubLzMVDvhHPzLyvXZ5GKFr1u5Bmcpump",
+      "cash_flow_usd": 0.0,
+      "final_indicative_value_usd": 0.0,
+      "contribution_usd": 0.0,
+      "raw_q_reward_usd": 0.0,
+      "residual_usd": 0.0,
+      "has_terminal_quote": false,
+      "has_retained_inventory": false
+    },
+    {
+      "mint": "3v9UtfTWx4bdZZzDywWb5b2Z5jtNcHTNK3k3Lugtpump",
+      "cash_flow_usd": -244.35560572526634,
+      "final_indicative_value_usd": 284.75167805375105,
+      "contribution_usd": 40.396072328484706,
+      "raw_q_reward_usd": 40.396072328484706,
+      "residual_usd": 0.0,
+      "has_terminal_quote": true,
+      "has_retained_inventory": true
+    },
+    {
+      "mint": "D9cc5S2gUjA9dPoD535bW5NMayPvYEt9LhLNgNvpump",
+      "cash_flow_usd": -115.75820413282105,
+      "final_indicative_value_usd": 126.95816918426291,
+      "contribution_usd": 11.199965051441865,
+      "raw_q_reward_usd": 11.199965051441865,
+      "residual_usd": 0.0,
+      "has_terminal_quote": true,
+      "has_retained_inventory": true
+    },
+    {
+      "mint": "6X58mp9MLMyMRBoeizbUuT63jFSWNeiRkcya7Vbapump",
+      "cash_flow_usd": 0.0,
+      "final_indicative_value_usd": 0.0,
+      "contribution_usd": 0.0,
+      "raw_q_reward_usd": 0.0,
+      "residual_usd": 0.0,
+      "has_terminal_quote": false,
+      "has_retained_inventory": false
+    },
+    {
+      "mint": "EYbuAmd7Z7URdWVLS3nLi5Ctao4QrazgSfo5myQopump",
+      "cash_flow_usd": 0.0,
+      "final_indicative_value_usd": 0.0,
+      "contribution_usd": 0.0,
+      "raw_q_reward_usd": 0.0,
+      "residual_usd": 0.0,
+      "has_terminal_quote": false,
+      "has_retained_inventory": false
+    }
+  ],
+  "limitations": [
+    "Weights changed according to emitted step diagnostics; this check does not independently replay native propagation or every optimizer step.",
+    "Native reinforcement does not receive all delayed and terminal Q feedback.",
+    "Prices and full inventory marks remain indicative. This is one training episode, not held-out evidence of profitable learning."
+  ],
+  "terminal_missing_quote_nonzero_reward_updates": 3,
+  "retained_inventory_without_final_quote": 3
+}
