@@ -1,0 +1,49 @@
+{
+  "enabled": true,
+  "next_batch_at": 1789430400,
+  "batch": "evaluation-1789402218",
+  "pending": null,
+  "retained_checkpoints": 13,
+  "status": "waiting_for_unseen_market_window",
+  "checked_at": 1789402218.8484972,
+  "superseded_batches": [
+    {
+      "batch": "evaluation-1789398507",
+      "reason": "Preserve unexecuted v1 plan; audit found missing causal snapshot cursors, FX failure state, incomplete source seals and entry/mark conflation. Start prospective v2 only.",
+      "at": 1789399506.4445586
+    },
+    {
+      "batch": "evaluation-1789399622",
+      "reason": "Preserve unused v2 plan; final replay audit corrected unchanged-receipt cancellation and active-order shared-cash allocation. Reseal final source and checkpoint cohort after corrected training completes.",
+      "at": 1789400219.6765106
+    },
+    {
+      "batch": "evaluation-1789400743",
+      "reason": "Preserve unexecuted narrow-universe plan; seal prospective all-observed Pump/PumpSwap v3 quote experiment after deployment.",
+      "at": 1789402024.7742436
+    }
+  ],
+  "audit_maintenance_history": [
+    {
+      "at": 1789398912.157335,
+      "reason": "System audit: correct quote semantics, causal replay coverage and incomplete source fingerprint before scoring.",
+      "previous_status": "waiting_for_unseen_market_window",
+      "previous_enabled": true,
+      "resumed_at": 1789399576.6039689
+    },
+    {
+      "at": 1789399942.045863,
+      "reason": "Final audit found replay cancels pending orders on unchanged receipts while live waits for a new signature; fix and supersede unused v2 plan before scoring.",
+      "previous_status": "waiting_for_unseen_market_window",
+      "previous_enabled": true,
+      "resumed_at": 1789400698.0842474
+    },
+    {
+      "at": 1789401419.403941,
+      "reason": "User requested broader universe and quote semantics; preserve and supersede the unexecuted old-universe plan, then seal a new prospective comparison.",
+      "previous_status": "waiting_for_unseen_market_window",
+      "previous_enabled": true,
+      "resumed_at": 1789402195.3566942
+    }
+  ]
+}

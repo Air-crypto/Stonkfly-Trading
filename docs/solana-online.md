@@ -31,10 +31,15 @@ replay pilot remains a completed, unpromoted experiment.
 ## Learning and coverage
 
 The collector subscribes to confirmed Pump.fun and PumpSwap logs while a training
-window runs. It checks received markets every five seconds and admits up to eight
-eligible active tokens (plus at most 128 watched active/parked mints), earliest eligible creation receipt first. Other received launches
-remain in the bounded discovery archive. Coverage is not all Solana, not all launchpads,
-and not continuous between training windows. There is no backfill of those gaps.
+window runs. With `PAPERLAB_ALL_PUMP=1`, it checks received markets every five
+seconds and queues every observable token, including existing curves and arbitrary
+PumpSwap pools. The former eight-active, 128-watched and 512-discovered limits,
+age limits, two-sided-flow and mayhem exclusions are disabled. Unknown pool events
+are archived while verified account metadata is fetched; they are not retroactively
+injected into decisions. Prices use fresh SOL/USD, measured USDC/USD, or fresh
+observed conversion paths. Unknown quote assets remain visibly unpriced.
+Coverage is not all Solana, not all launchpads, and not continuous between training
+windows. There is no backfill of gaps. See the [coverage report](../reports/all-pump-universe-20260914.md).
 
 The shared full fly processes one token per five-second target, rotating in
 three-observation bursts. Each token first needs twelve distinct sampled prices.
@@ -62,9 +67,9 @@ and has no claim of convergence or profitable trading.
 Within each episode, held inventory is never erased or replaced with fresh cash. Unavailable holdings
 after two minutes and sub-dollar dust move to a parked, still-tracked list; they
 retain cash flows and quantities and can reenter when usable. Flat tokens leave
-the active queue after two minutes of unusable data or twenty minutes of token age;
-retired tokens are not readmitted. This prevents picking the same apparently
-successful token repeatedly.
+the active queue after two minutes of unusable data. In all-observed mode they can
+return when fresh quotes recover; there is no permanent age-based retirement.
+The legacy bounded mode additionally retires flat tokens at twenty minutes.
 
 The archived continuous mode's September 13 allocation repair (`quarantined_inventory_cash_floor_v1`) replaced
 the blanket $100 open-cost reservation that blocked trading behind unquotable holdings.

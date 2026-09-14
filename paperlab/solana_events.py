@@ -122,7 +122,7 @@ class Feed:
     def __init__(self, root, max_events=200000, max_tokens=512):
         self.root = Path(root); self.root.mkdir(parents=True,exist_ok=True)
         self.max_events, self.max_tokens = max_events, max_tokens
-        self.stop = threading.Event(); self.lock = threading.Lock()
+        self.stop = threading.Event(); self.lock = threading.RLock()
         self.tokens = {}; self.pinned = None; self.pinned_mints = set(); self.pools={}
         self.stats = dict(notifications=0, events=0, duplicates=0, decode_errors=0,
                           connections=0, overflow=0, untracked_amm_events=0,last_message=0., last_event=0.,
@@ -174,7 +174,7 @@ class Feed:
             else:mint=event['mint']
             if kind=='CreateEvent':
                 if mint in self.tokens: return
-                if len(self.tokens)>=self.max_tokens:
+                if self.max_tokens is not None and len(self.tokens)>=self.max_tokens:
                     candidates = [k for k in self.tokens if k!=self.pinned and k not in self.pinned_mints]
                     if not candidates: self.stats['overflow']+=1; return
                     removed=min(candidates,key=lambda k:self.tokens[k]['created']['received'])
@@ -195,7 +195,7 @@ class Feed:
         try:
             while not self.stop.is_set():
                 try:
-                    async with websockets.connect(ENDPOINT,open_timeout=10,close_timeout=2,
+                    async with websockets.connect(getattr(self,'endpoint',ENDPOINT),open_timeout=10,close_timeout=2,
                             max_size=4*1024*1024,max_queue=32,ping_interval=15,ping_timeout=15) as ws:
                         await ws.send(json.dumps({'jsonrpc':'2.0','id':1,'method':'logsSubscribe',
                             'params':[{'mentions':[PROGRAM]},{'commitment':'confirmed'}]}))
@@ -219,8 +219,9 @@ class Feed:
                             with self.lock:
                                 self.stats['notifications']+=1; self.stats['last_message']=now
                                 self.stats['decode_errors']+=errors
+                            if hasattr(self,'prepare_events'):events=await self.prepare_events(events,now)
                             for event in events:
-                                if event['kind'] in ('BuyEvent','SellEvent'):
+                                if event['kind'] in ('BuyEvent','SellEvent') and not getattr(self,'all_observed',False):
                                     with self.lock:tracked=event['pool'] in self.pools
                                     if not tracked:
                                         with self.lock:self.stats['untracked_amm_events']+=1
@@ -233,7 +234,8 @@ class Feed:
                                 else:
                                     with self.lock: self.stats['duplicates']+=1
                             db.commit()
-                            if self.stats['events']>=self.max_events:
+                            if ((self.max_events is not None and self.stats['events']>=self.max_events)
+                                    or (hasattr(self,'resource_exhausted') and self.resource_exhausted())):
                                 with self.lock: self.stats['status']='capacity_stopped'
                                 self.stop.set()
                 except Exception as exc:
@@ -244,6 +246,7 @@ class Feed:
                         await asyncio.sleep(1)
                     retry=min(30,retry*2)
         finally:
+            if hasattr(self,'finish_metadata'):await self.finish_metadata()
             db.execute('PRAGMA wal_checkpoint(TRUNCATE)'); db.close()
 
 

@@ -7,9 +7,11 @@ from solana_cloud import image as base_image
 
 ROOT = Path(__file__).resolve().parent if modal.is_local() else Path('/opt/paperlab')
 app = modal.App('fly-paper-solana-online')
-image = base_image.add_local_file(ROOT/'solana_online_cloud.py', '/opt/paperlab/solana_online_cloud.py', copy=True)
+image = base_image.add_local_file(ROOT/'solana_online_cloud.py', '/opt/paperlab/solana_online_cloud.py', copy=True).env(
+    {'PAPERLAB_ALL_PUMP':os.environ.get('PAPERLAB_ALL_PUMP','0')})
 MODE = os.environ.get('PAPERLAB_ONLINE_MODE', 'paced')
 ENABLED = os.environ.get('PAPERLAB_ONLINE_SCHEDULE') == '1'
+ALL_OBSERVED = os.environ.get('PAPERLAB_ALL_PUMP') == '1'
 
 
 @app.function(image=image, volumes={'/state':volume}, cpu=(2,2), memory=(8192,8192),
@@ -41,11 +43,12 @@ def _run(run_id, parent, account_mode='continuous'):
             n:digest('/opt/paperlab/'+n) for n in ('solana_online_cloud.py','paperlab/solana_online.py',
                                                 'paperlab/solana_events.py','paperlab/solana_service.py',
                                                 'paperlab/solana_paper.py','paperlab/solana_online_audit.py','paperlab/solana_quotes.py',
-                                                'paperlab/solana_execution_audit.py','paperlab/budget.py')}))
+                                                'paperlab/solana_execution_audit.py','paperlab/solana_universe.py',
+                                                'paperlab/solana_schema/pump_pool_account.json','paperlab/budget.py')}))
     volume.commit()
     try:
         result=run(root,'/state/fly-data',state/'solana-live'/parent,seconds=900,commit=volume.commit,
-                   account_mode=account_mode)
+                   account_mode=account_mode,all_observed=ALL_OBSERVED)
         from paperlab.solana_online_audit import audit
         result['account_audit']=audit(json.loads((root/'opening.json').read_text()),
             [json.loads(line) for line in (root/'decisions.jsonl').read_text().splitlines()])

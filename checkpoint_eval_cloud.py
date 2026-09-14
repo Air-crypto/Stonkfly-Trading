@@ -1,11 +1,14 @@
 """Budgeted frozen-checkpoint evaluation, independent of the live trainer."""
 from pathlib import Path
+import os
 import modal
 from cloud import exclusive,volume
 from solana_cloud import image as base_image
 ROOT=Path(__file__).resolve().parent if modal.is_local() else Path('/opt/paperlab')
-image=base_image.add_local_file(ROOT/'checkpoint_eval_cloud.py','/opt/paperlab/checkpoint_eval_cloud.py',copy=True)
+image=base_image.add_local_file(ROOT/'checkpoint_eval_cloud.py','/opt/paperlab/checkpoint_eval_cloud.py',copy=True).env(
+    {'PAPERLAB_ALL_PUMP':os.environ.get('PAPERLAB_ALL_PUMP','0')})
 app=modal.App('fly-paper-checkpoint-eval')
+ALL_OBSERVED=os.environ.get('PAPERLAB_ALL_PUMP')=='1'
 
 @app.function(image=image,volumes={'/state':volume},cpu=(2,2),memory=(8192,8192),timeout=1200,
               max_containers=1,min_containers=0,retries=0,single_use_containers=True,nonpreemptible=True)
@@ -65,7 +68,7 @@ def _coordinate():
     if c['batch'] is None:
         if now<c['next_batch_at']:return save('waiting_for_daily_cutoff')
         if not checkpoints:return save('waiting_for_checkpoints')
-        plan=seal_plan(state,checkpoints,now)
+        plan=seal_plan(state,checkpoints,now,all_observed=ALL_OBSERVED)
         plan['source_hashes']=source_fingerprint('/opt/paperlab')
         base=root/plan['id'];base.mkdir();atomic_json(base/'plan.json',plan);c['batch']=plan['id']
         c['next_batch_at']=(int(now)//86400+1)*86400

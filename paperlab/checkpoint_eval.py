@@ -50,13 +50,14 @@ def verify_checkpoint(checkpoint):
         if digest(entry['path'])!=entry['sha256']:raise ValueError('Retained checkpoint changed')
 
 
-def seal_plan(state,checkpoints,now):
+def seal_plan(state,checkpoints,now,*,all_observed=False):
     from .solana_quotes import QUOTE_PROTOCOL
+    if all_observed:from .solana_universe import QUOTE_PROTOCOL
     eligible=[c for c in checkpoints if c['ended']<now]
     if not eligible:raise ValueError('No completed checkpoints')
     return dict(id='evaluation-'+str(int(now)),created=now,cutoff=now,
                 checkpoints=eligible,policies=['untrained','cash','always_long']+[c['id'] for c in eligible],
-                protocol=PROTOCOL,quote_protocol=QUOTE_PROTOCOL,tape=None,
+                protocol=PROTOCOL,quote_protocol=QUOTE_PROTOCOL,all_observed=all_observed,tape=None,
                 scope='Conditional buy/sell evaluation at identical recorded attention opportunities; not universe-selection evaluation.',
                 feature_scope='Frozen deployment mode: native weight-change features are zero, unlike online training. No claim of identical training feature distribution.',
                 timing='Inputs stop at the recorded applied-event cursor and observation_at; orders use the recorded later issuance time, preserving common inference latency.',
@@ -74,14 +75,15 @@ def seal_tape(state,plan):
     _,root=min(candidates)
     if plan.get('protocol')==PROTOCOL:
         rows=[json.loads(line) for line in (root/'decisions.jsonl').read_text().splitlines()]
-        validate_observation_rows(rows)
+        validate_observation_rows(rows,quote_protocol=plan['quote_protocol'])
     return dict(id=root.name,started=read(root/'completed.json')['started'],
                 files={n:dict(path=str(root/n),sha256=digest(root/n)) for n in ['events.db','fx.jsonl','decisions.jsonl','completed.json']})
 
 
-def validate_observation_rows(rows):
+def validate_observation_rows(rows,*,quote_protocol=None):
     import math
     from .solana_quotes import QUOTE_PROTOCOL
+    quote_protocol=quote_protocol or QUOTE_PROTOCOL
     if not rows:raise ValueError('Evaluation tape has no observations')
     previous_at=previous_observed=-float('inf');previous_cursor=0
     for index,row in enumerate(rows):
@@ -95,7 +97,7 @@ def validate_observation_rows(rows):
                     for k in ('sol_usd','seen_at')) or not 0<=fx_state['sol_usd']<1e7
                 or not 0<=fx_state['seen_at']<=observed):
             raise ValueError('Evaluation requires recorded FX availability')
-        if row.get('quote_protocol')!=QUOTE_PROTOCOL:
+        if row.get('quote_protocol')!=quote_protocol:
             raise ValueError('Evaluation requires the sealed observation/entry/exit quote protocol')
         terminal=row.get('terminal',False)
         if terminal and (index!=len(rows)-1 or index==0 or observed!=previous_observed or cursor!=previous_cursor
@@ -123,11 +125,14 @@ def evaluate(plan,policy,output,data,commit=lambda:None,fly_factory=None):
     from .news import News
     if not plan['tape'] or plan['tape']['started']<=plan['cutoff']:raise ValueError('Not a future evaluation tape')
     if plan.get('protocol')!=PROTOCOL:raise ValueError('Reseal evaluation under the current protocol; never rewrite an old plan')
+    all_observed=plan.get('all_observed',False)
+    if all_observed:
+        from .solana_universe import AllObservedFeed as Feed,prepare_snapshots,QUOTE_PROTOCOL
     if plan.get('quote_protocol')!=QUOTE_PROTOCOL:raise ValueError('Unsealed quote protocol')
     if policy not in plan['policies']:raise ValueError('Unsealed policy')
     tape=plan['tape'];verify_checkpoint(tape)
     source_rows=[json.loads(x) for x in Path(tape['files']['decisions.jsonl']['path']).read_text().splitlines()]
-    validate_observation_rows(source_rows)
+    validate_observation_rows(source_rows,quote_protocol=QUOTE_PROTOCOL)
     fx=[json.loads(x) for x in Path(tape['files']['fx.jsonl']['path']).read_text().splitlines()]
     fxt=[x['at'] for x in fx]
     if (any(not math.isfinite(x['at']) or not math.isfinite(x['sol_usd']) or x['sol_usd']<=0 for x in fx)
@@ -187,9 +192,17 @@ def evaluate(plan,policy,output,data,commit=lambda:None,fly_factory=None):
         live_fx=source['fx_state']
         if live_fx['sol_usd'] and (i<0 or fx[i]['at']!=live_fx['seen_at'] or fx[i]['sol_usd']!=live_fx['sol_usd']):
             raise ValueError('Recorded FX state does not match contemporaneous receipts')
+        if all_observed:
+            quote_usd=live_fx.get('quote_usd',{})
+            if any(not isinstance(v,(float,int)) or not math.isfinite(v) or v<0 for v in quote_usd.values()):
+                raise ValueError('Invalid quote-currency conversion')
+            if live_fx['sol_usd'] and quote_usd!=fx[i].get('quote_usd',{}):
+                raise ValueError('Quote FX state differs from contemporaneous receipt')
+            snap=prepare_snapshots(snap,now,live_fx['sol_usd'],live_fx['seen_at'],quote_usd)
         if i>=0 and live_fx['sol_usd'] and connected:
             for m,t in snap.items():
-                view=quote_for(t,now,fx[i]['sol_usd'],fx[i]['at'],selected=m in active or m in pending)
+                view=quote_for(t,now,fx[i]['sol_usd'],fx[i]['at'],selected=m in active or m in pending,
+                               **({'unrestricted':True} if all_observed else {}))
                 quote_views[m]=view
                 if view.observed_tick:quotes[m]=view.observed_tick
         for m in active:

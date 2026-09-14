@@ -1,0 +1,119 @@
+{
+  "enabled": true,
+  "mode": "hourly",
+  "parent": "solana-online-20260914-152719",
+  "pending": null,
+  "next_at": 1789403239.6623247,
+  "completed_windows": 18,
+  "paper_only": true,
+  "scheduler_monthly_compute_upper_bound_usd": 0.99,
+  "archive_bytes": 2361386789,
+  "status": "waiting_for_budget_paced_window",
+  "checked_at": 1789402242.503736,
+  "last_result": {
+    "ended": 1789400556.1686075,
+    "neural_observations": 126,
+    "new_readout_updates": 106,
+    "nonzero_reward_updates": 92,
+    "fills": 46,
+    "equity_stress_usd": 880.4014385826655,
+    "entry_budget_usd": "176.0020196320318454761167588",
+    "training_health": "learning_from_paper_execution",
+    "account_audit": {
+      "rows": 180,
+      "paper_fills": 46,
+      "native_observations": 126,
+      "distinct_tokens_with_native_inference": 11,
+      "new_head_updates": 106,
+      "cash_usd": 176.00201963203185,
+      "cumulative_fees_usd": 18.545049498814944,
+      "equity_marks_verified": 180,
+      "nonzero_reward_updates": 92,
+      "reward_protocol": "mint_credit_terminal_v2",
+      "raw_q_reward_usd": -119.5985614173346,
+      "terminal_readout_updates": 10,
+      "reward_reconciliation_residual_usd": 8.526512829121202e-14,
+      "reward_reconciliation_verified": true,
+      "native_reward_usd": -136.11545808704312,
+      "native_uncredited_difference_usd": 16.51689666970853,
+      "paper_only": true,
+      "profitable_learning_proven": false,
+      "note": "Recorded-fill accounting only; this does not establish executable prices or policy superiority."
+    },
+    "budget": {
+      "estimated_compute_usd": 0.24292741296987533,
+      "monthly_reserved_usd": 11.060581755794132,
+      "monthly_limit_usd": 85,
+      "provider_bill": false
+    },
+    "account_mode": "fresh_training_episode",
+    "episode_pnl_usd": -119.59856141733451
+  },
+  "cadence_changes": [
+    {
+      "at": 1789331934.0734954,
+      "previous_mode": "paced",
+      "mode": "six_hour",
+      "previous_next_at": 1789367806.992384,
+      "next_at": 1789331934.0734954,
+      "start_now": true,
+      "pending_preserved": false
+    },
+    {
+      "at": 1789333865.056933,
+      "previous_mode": "six_hour",
+      "mode": "hourly",
+      "previous_next_at": 1789353536.1924152,
+      "next_at": 1789335536.1924152,
+      "start_now": false,
+      "pending_preserved": false
+    },
+    {
+      "at": 1789342036.476422,
+      "previous_mode": "hourly",
+      "mode": "hourly",
+      "previous_next_at": 1789344179.4064631,
+      "next_at": 1789342036.476422,
+      "start_now": true,
+      "pending_preserved": false
+    }
+  ],
+  "account_mode": "fresh_training_episode",
+  "continuous_account_archive": {
+    "run_id": "solana-online-20260914-003217",
+    "completed_sha256": "0fb219de0457702c67e85ec1f5da80c023efda3771c055d283f3013453fa1b95",
+    "control_archive": "/state/solana-online/pre-episodes-solana-online-20260914-003217.json"
+  },
+  "episode_totals": {
+    "episodes": 13,
+    "sum_episode_pnl_usd": -3020.541774778201,
+    "sum_episode_fees_usd": 343.82425771899347,
+    "scope": "Independent training episodes; not continuous portfolio performance"
+  },
+  "account_mode_changes": [
+    {
+      "at": 1789351810.075604,
+      "from_mode": "continuous",
+      "to_mode": "fresh_training_episode",
+      "parent": "solana-online-20260914-003217",
+      "initial_cash_per_episode_usd": 1000.0,
+      "authorization": "User requested resetting paper capital per training run; learned weights continue"
+    }
+  ],
+  "audit_maintenance_history": [
+    {
+      "at": 1789398887.800202,
+      "reason": "System audit: correct incomplete reward credit and quote/entry conflation before further training.",
+      "previous_status": "waiting_for_budget_paced_window",
+      "previous_enabled": true,
+      "resumed_at": 1789399600.796832
+    },
+    {
+      "at": 1789401376.4817326,
+      "reason": "User requested all Pump/PumpSwap token admission; deploy and verify versioned broader discovery and quote policy before next hourly episode.",
+      "previous_status": "waiting_for_budget_paced_window",
+      "previous_enabled": true,
+      "resumed_at": 1789402155.9870086
+    }
+  ]
+}

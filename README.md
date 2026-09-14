@@ -29,6 +29,13 @@ token and one percent of observed liquidity per fill. Old account losses remain
 archived and every episode's outcome is retained; reset balances are not a
 continuous portfolio return. The $100 monthly cloud authorization remains in force.
 
+The [expanded Pump/PumpSwap universe](reports/all-pump-universe-20260914.md)
+admits all observed markets without age, popularity, flow-direction, mayhem or
+token-count filters. Existing pools are resolved from verified on-chain metadata.
+Missing prices and liquidity still prevent simulated fills. Public-feed gaps,
+hourly collection windows and shared-fly throughput prevent a claim of complete
+coverage or simultaneous trading of every token.
+
 The earlier [single-token Solana live pilot](docs/solana-live.md) subscribes directly to confirmed
 Pump.fun launch/trade events and targets five-second observations. It follows canonical PumpSwap migration and trains the
 native fly plus a small entry/exit readout using $1,000 paper cash, a $25 order

@@ -76,7 +76,7 @@ class QuoteSnapshot:
                     quote_protocol=self.protocol)
 
 
-def quote_for(token, now, sol_usd, fx_seen, *, selected=False, connected=True):
+def quote_for(token, now, sol_usd, fx_seen, *, selected=False, connected=True, unrestricted=False):
     """Separate observing a price, admitting risk, and allowing a smaller exit.
 
     Entries retain the launch/flow guards. Both entry and exit order sizes are
@@ -84,7 +84,9 @@ def quote_for(token, now, sol_usd, fx_seen, *, selected=False, connected=True):
     the legacy fixed $25 order as a prerequisite for observing any price at all.
     """
     def unavailable(reason):
-        return QuoteSnapshot(None, None, None, reason, reason, reason, 0.)
+        return QuoteSnapshot(None, None, None, reason, reason, reason, 0.,protocol)
+
+    protocol='solana_all_observed_quotes_v3' if unrestricted else QUOTE_PROTOCOL
 
     if not connected:
         return unavailable('disconnected_feed')
@@ -95,7 +97,7 @@ def quote_for(token, now, sol_usd, fx_seen, *, selected=False, connected=True):
         return unavailable('unsupported_quote')
     if created['token_program'] not in (TOKEN, TOKEN22):
         return unavailable('unsupported_token_program')
-    if created['is_mayhem_mode']:
+    if created['is_mayhem_mode'] and not unrestricted:
         return unavailable('mayhem_mode')
     if token['complete'] and not token.get('migrated'):
         return unavailable('curve_completed')
@@ -108,7 +110,7 @@ def quote_for(token, now, sol_usd, fx_seen, *, selected=False, connected=True):
         return unavailable('stale_trade')
     if last.get('quote_mint') not in (SOL, ZERO):
         return unavailable('unsupported_trade_quote')
-    if last['mayhem_mode']:
+    if last['mayhem_mode'] and not unrestricted:
         return unavailable('mayhem_mode')
     if min(last['virtual_sol_reserves'], last['virtual_token_reserves']) <= 0 or last['real_sol_reserves'] < 0:
         return unavailable('invalid_reserves')
@@ -118,7 +120,7 @@ def quote_for(token, now, sol_usd, fx_seen, *, selected=False, connected=True):
                 received_at=last['received'], available=True)
     liquidity = last['real_sol_reserves']/1e9*sol_usd*LIQUIDITY_FRACTION
     exit_reason = None if liquidity >= 1. else 'insufficient_observed_liquidity'
-    entry_reason = eligible(token, now, selected=selected) or exit_reason
+    entry_reason = exit_reason if unrestricted else eligible(token, now, selected=selected) or exit_reason
     return QuoteSnapshot(tick, tick if entry_reason is None else None,
                          tick if exit_reason is None else None, None,
-                         entry_reason, exit_reason, liquidity)
+                         entry_reason, exit_reason, liquidity,protocol)

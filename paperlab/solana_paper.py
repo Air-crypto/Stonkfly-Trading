@@ -43,7 +43,8 @@ def inputs(ticks, token, broker, event, now):
     returns=[np.clip(math.log(p[-1]/p[max(0,len(p)-1-lag)])*10,-5,5) for lag in (1,3,6,12)]
     flow=(sum(t['sol_amount']*(1 if t['is_buy'] else -1) for t in recent)/
           max(1,sum(t['sol_amount'] for t in recent)))
-    market=returns+[min(1,(now-token['created']['timestamp'])/3600),flow,
+    age=min(1,(now-token['created']['timestamp'])/3600) if token['created'].get('creation_time_known',True) else -1.
+    market=returns+[age,flow,
         math.log1p(len(recent))/5,math.log1p(last['real_sol_reserves']/1e9)/10,
         min(1,float(broker.qty)*ticks[-1].mid/25),float(broker.cash)/1000,
         (broker.equity(ticks[-1])-1000)/25, min(1,(now-last['received'])/10)]

@@ -155,8 +155,8 @@ class FakeFly:
     def save(self,path):Path(path).write_bytes(b'fake test checkpoint')
 
 
-@pytest.mark.parametrize('locked,reject_all,episodic',[(False,False,False),(True,False,False),(True,True,False),(True,False,True)])
-def test_cloud_entry_logic_rotates_launches_and_restores_account(tmp_path,monkeypatch,locked,reject_all,episodic):
+@pytest.mark.parametrize('locked,reject_all,episodic,all_observed',[(False,False,False,False),(True,False,False,False),(True,True,False,False),(True,False,True,False),(True,False,True,True)])
+def test_cloud_entry_logic_rotates_launches_and_restores_account(tmp_path,monkeypatch,locked,reject_all,episodic,all_observed):
     clock=Clock();parent=make_parent(tmp_path)
     if locked:
         saved=json.loads((parent/'online-state.json').read_text());saved['portfolio']=locked_state()
@@ -192,7 +192,7 @@ def test_cloud_entry_logic_rotates_launches_and_restores_account(tmp_path,monkey
                 out[m]=dict(created=created,trades=trades,complete=False)
             return out
     result=run(tmp_path/'run','unused',parent,seconds=300,fly_factory=FakeFly,feed_factory=FakeFeed,
-        clock=clock,sleep=clock.sleep,fx_fetch=lambda:100,
+        clock=clock,sleep=clock.sleep,fx_fetch=lambda:100,all_observed=all_observed,quote_fx_fetch=lambda:.99,
         account_mode='fresh_training_episode' if episodic else 'continuous')
     rows=[json.loads(x) for x in (tmp_path/'run/decisions.jsonl').read_text().splitlines()]
     assert result['status']=='completed' and result['active_tokens']==3

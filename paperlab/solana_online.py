@@ -197,7 +197,8 @@ def update_active(active, watched, retired, inactive, portfolio, snapshots, quot
     return admitted, removed
 
 def run(root, data, parent, *, seconds=900, commit=lambda: None, fly_factory=None,
-        feed_factory=Feed, clock=time.time, sleep=time.sleep, fx_fetch=None, account_mode='continuous'):
+        feed_factory=Feed, clock=time.time, sleep=time.sleep, fx_fetch=None, account_mode='continuous',
+        all_observed=False,quote_fx_fetch=None):
     if not 60 <= seconds <= 900: raise ValueError('Bounded window required')
     if fly_factory is None:
         import modal
@@ -210,16 +211,23 @@ def run(root, data, parent, *, seconds=900, commit=lambda: None, fly_factory=Non
     risk_policy=EPISODE_POLICY if portfolio.episodic else 'quarantined_inventory_cash_floor_v1'
     active = dict(saved['active']); watched = dict(saved.get('watched', active)); retired = set(saved['retired'])
     head = Readout(); head.restore(saved['head_checkpoint']); opening_updates = head.updates
+    quote_protocol=QUOTE_PROTOCOL
+    if all_observed:
+        if account_mode!='fresh_training_episode':raise ValueError('Broad universe requires versioned fresh episodes')
+        from .solana_universe import AllObservedFeed,prepare_snapshots,update_all_active,USDC
+        from .solana_universe import QUOTE_PROTOCOL as quote_protocol
+        if feed_factory is Feed:feed_factory=AllObservedFeed
     feed = feed_factory(root)
     for created in watched.values(): feed.accept(created)
     feed.pinned_mints = set(watched); feed.start()
     started = clock(); deadline = started + seconds
     atomic_json(root/'opening.json', saved)
     atomic_json(root/'started.json', dict(at=started, deadline=deadline, paper_only=True,
-        reward_protocol=REWARD_PROTOCOL,quote_protocol=QUOTE_PROTOCOL if portfolio.episodic else 'legacy_tick_for',
-        max_active_tokens=MAX_ACTIVE, shared_capital=1000, interval_seconds=5, parent=str(parent),
+        reward_protocol=REWARD_PROTOCOL,quote_protocol=quote_protocol if portfolio.episodic else 'legacy_tick_for',
+        all_observed=all_observed,max_active_tokens=None if all_observed else MAX_ACTIVE, shared_capital=1000, interval_seconds=5, parent=str(parent),
         account_mode=account_mode, episode=saved.get('episode'),
-        coverage='Pump launches received during this window; bounded admission, not every token',
+        coverage=('All observed Pump/PumpSwap markets; no token admission cap, public RPC gaps and unresolved/unpriced markets remain visible'
+                  if all_observed else 'Pump launches received during this window; bounded admission, not every token'),
         risk_policy=risk_policy, max_tradable_acquisition_cost_usd=None if portfolio.episodic else 100,
         max_new_position_debit_usd=float(EPISODE_TOKEN_CAP_USD) if portfolio.episodic else 2.5,
         minimum_cash_after_buy_usd=0 if portfolio.episodic else 902, news_enabled=False))
@@ -227,12 +235,16 @@ def run(root, data, parent, *, seconds=900, commit=lambda: None, fly_factory=Non
     fly = None; current = None; burst = 0; visits = {}; contexts = {}; inactive = {}
     rows = trained = fills = overruns = nonzero_rewards = rejected_credit = rejected_orders = 0
     status = 'collecting'; next_step = started; next_fx = 0.
-    fx = fx_seen = 0.; reasons = Counter(); snapshots = {}; quotes = {}; quote_states = {}
+    fx = fx_seen = 0.; quote_usd={}; reasons = Counter(); snapshots = {}; quotes = {}; quote_states = {}
     reward_total = 0.; native_reward_total = 0.; terminal_settlements = []
     def fetch_fx():
         r = requests.get('https://api.coinbase.com/v2/prices/SOL-USD/spot', timeout=4)
         r.raise_for_status(); return float(r.json()['data']['amount'])
     fx_fetch = fx_fetch or fetch_fx
+    def fetch_quote_fx():
+        r=requests.get('https://api.coinbase.com/v2/prices/USDC-USD/spot',timeout=4)
+        r.raise_for_status();return float(r.json()['data']['amount'])
+    quote_fx_fetch=quote_fx_fetch or fetch_quote_fx
     def context(m):
         return contexts.setdefault(m, dict(ticks=[], signature=None, previous=None, pending=None,
                                           anchor=None, last_ts=None, credit_anchor=0. if portfolio.episodic else None,
@@ -272,18 +284,25 @@ def run(root, data, parent, *, seconds=900, commit=lambda: None, fly_factory=Non
                 try:
                     fx = fx_fetch(); fx_seen = clock()
                     if not 0 < fx < 1e7: raise ValueError('Invalid FX')
-                    fxlog.write(json.dumps(dict(at=fx_seen, sol_usd=fx))+'\n'); fxlog.flush()
+                    if all_observed:
+                        try:
+                            usdc=quote_fx_fetch()
+                            if not 0<usdc<1e7:raise ValueError('Invalid quote FX')
+                        except Exception:usdc=0.
+                        quote_usd={USDC:usdc};fx_seen=clock()
+                    fxlog.write(json.dumps(dict(at=fx_seen, sol_usd=fx,quote_usd=quote_usd))+'\n'); fxlog.flush()
                 except Exception as exc:
                     fx = 0.; print(json.dumps(dict(event='fx_error', error=type(exc).__name__)), flush=True)
             if hasattr(feed,'snapshot_at'):snapshots,now,health=feed.snapshot_at(clock)
             else:snapshots=feed.snapshot();now=clock();health=feed.health()
             observation_at=now
             if health['status'] in ('failed', 'capacity_stopped'): status = health['status']; break
+            if all_observed:snapshots=prepare_snapshots(snapshots,now,fx,fx_seen,quote_usd)
             quotes = {}; rejected = {}; admissions = []; removals = [];entry_quotes={};quote_states={}
             connected = health['status'] == 'connected' and 0 <= now-health['last_message'] <= 10
             for m, token in snapshots.items():
                 if portfolio.episodic:
-                    q=quote_for(token,now,fx,fx_seen,selected=m in watched,connected=connected)
+                    q=quote_for(token,now,fx,fx_seen,selected=m in watched,connected=connected,unrestricted=all_observed)
                     quote_states[m]=q;t=q.observed_tick;reason=q.observation_reason
                     if q.entry_tick:entry_quotes[m]=q.entry_tick
                 else:
@@ -291,15 +310,15 @@ def run(root, data, parent, *, seconds=900, commit=lambda: None, fly_factory=Non
                     if not connected: reason = 'disconnected_feed'
                 if reason is None and t: quotes[m] = t
                 else: rejected[m] = reason or 'missing_quote'
-            admissions, removals = update_active(active, watched, retired, inactive,
+            admissions, removals = (update_all_active if all_observed else update_active)(active, watched, retired, inactive,
                 portfolio,snapshots,quotes,now,connected=connected,
                 entry_quotes=entry_quotes if portfolio.episodic else None)
             for m in removals:
                 # Park the execution intent, but retain credit for inventory already bought.
                 c=context(m);c['pending']=None;c['quote_gap']=True
             with feed.lock: feed.pinned_mints = set(watched)
-            if len(watched) > 128: status = 'capacity_stopped'; break
-            if len(retired) + len(active) > 10000: status = 'capacity_stopped'; break
+            if not all_observed and len(watched) > 128: status = 'capacity_stopped'; break
+            if not all_observed and len(retired) + len(active) > 10000: status = 'capacity_stopped'; break
             fresh = []; executions = []
             for m in active:
                 c = context(m); t = quotes.get(m)
@@ -373,16 +392,20 @@ def run(root, data, parent, *, seconds=900, commit=lambda: None, fly_factory=Non
             row = dict(at=clock(), step=rows, paper_only=True, status=status, admissions=admissions,
                 observation_at=observation_at,reward_protocol=REWARD_PROTOCOL,
                 event_cursor=health.get('event_cursor'),
-                fx_state=dict(sol_usd=fx,seen_at=fx_seen),
-                quote_protocol=QUOTE_PROTOCOL if portfolio.episodic else 'legacy_tick_for',
+                fx_state=dict(sol_usd=fx,seen_at=fx_seen,quote_usd=quote_usd),
+                all_observed=all_observed,quote_protocol=quote_protocol if portfolio.episodic else 'legacy_tick_for',
                 account_mode=account_mode, episode_id=root.name if account_mode=='fresh_training_episode' else None,
                 retired=removals, active_tokens=len(active), tracked_launches=len(snapshots),
                 eligible_tokens=len(quotes), executions=executions, decision=decision, neural=neural,
+                coverage=dict(observed_tokens=len(snapshots),observable_tokens=len(quotes),
+                    unpriced_or_unavailable=dict(Counter(rejected.values())),
+                    ready_for_native=len(fresh),never_served_active=sum(m not in visits for m in active),
+                    all_tokens_guaranteed=False),
                 portfolio=portfolio.state(), equity_stress_usd=portfolio.equity(quotes),
                 marks={m:t.__dict__ for m,t in quotes.items() if portfolio.positions.get(m, {}).get('qty', 0)},
                 quote_diagnostics={m:dict(observation_reason=q.observation_reason,entry_reason=q.entry_reason,
                     exit_reason=q.exit_reason,**q.position_values(portfolio.position(m)['qty']))
-                    for m,q in quote_states.items() if m in active or portfolio.positions.get(m,{}).get('qty',0)},
+                    for m,q in quote_states.items() if (m==current if all_observed else m in active) or portfolio.positions.get(m,{}).get('qty',0)},
                 unavailable_positions=[m for m,p in portfolio.positions.items() if p['qty'] and m not in quotes],
                 feed=health, neural_observations=trained, readout_updates=head.updates,
                 new_readout_updates=head.updates-opening_updates, fills=fills, overruns=overruns,
@@ -416,6 +439,10 @@ def run(root, data, parent, *, seconds=900, commit=lambda: None, fly_factory=Non
                 atomic_json(root/'latest.json',terminal_row);rows+=1
     finally:
         feed.close(); ledger.close(); fxlog.close()
+    if all_observed:
+        atomic_json(root/'observed-universe.json',dict(complete_global_inventory=False,
+            tokens={m:dict(created=t['created'],last_trade=t['trades'][-1] if t['trades'] else None)
+                    for m,t in snapshots.items()},coverage=feed.health()))
     if fly:
         fly.save(root/'fly-final.npz'); head.save(root/'head-final.pt')
     atomic_json(root/'online-state.json', dict(portfolio=portfolio.state(), active=active,
@@ -425,7 +452,7 @@ def run(root, data, parent, *, seconds=900, commit=lambda: None, fly_factory=Non
         native_observations_total=saved.get('native_observations_total', 0)+trained,
         readout_updates=head.updates))
     result = dict(status=status, started=started, ended=clock(), steps=rows, paper_only=True,
-        reward_protocol=REWARD_PROTOCOL,quote_protocol=QUOTE_PROTOCOL if portfolio.episodic else 'legacy_tick_for',
+        all_observed=all_observed,reward_protocol=REWARD_PROTOCOL,quote_protocol=quote_protocol if portfolio.episodic else 'legacy_tick_for',
         equity_semantics='Indicative full-inventory liquidation mark, not a guaranteed executable sale; unavailable marks are zero.',
         raw_q_reward_usd=reward_total,native_reward_usd=native_reward_total,
         terminal_reward_settlements=terminal_settlements,
