@@ -1,7 +1,9 @@
 # Stonkfly Trading
 
-A paper-only research lab comparing the full **166,700-neuron Stonkfly network**
-with a **247,780-parameter PPO policy**, using market data and timestamped news.
+A paper-only research lab using the full **166,700-neuron Stonkfly network**.
+The current Solana learner combines the fly with an **802-parameter Q head**;
+news is disabled in that path. Earlier experiments compared the fly with a
+**247,780-parameter PPO policy**, using market data and timestamped news.
 There is no real-order endpoint, wallet, or exchange credential in this lab.
 
 See the [goal checklist and roadmap](docs/progress-and-roadmap.md) for completed
@@ -14,7 +16,11 @@ A separately pinned FinBERT transformer can encode headline sentiment; those
 features enter the compact policy numerically and the fly through a visual adapter.
 The [dynamic memecoin experiment](docs/memecoin-universe.md) discovers current and
 new launches and samples DEX pools. Coverage is bounded; it does not trade every
-Solana token. The latest controlled comparison uses two fixed pools, RAY and STONK.
+Solana token. An earlier controlled comparison used two fixed pools, RAY and STONK.
+
+The [September 14 system audit](reports/system-audit-20260914.md) found and repaired
+incomplete reward credit and quote/entry-filter conflation. Historical results are
+preserved; neither weight changes nor previous paper returns establish learning.
 
 The current [hourly training service](docs/solana-online.md) starts each independent
 training episode with $1,000 paper cash while preserving learned fly/Q weights.
@@ -23,7 +29,7 @@ token and one percent of observed liquidity per fill. Old account losses remain
 archived and every episode's outcome is retained; reset balances are not a
 continuous portfolio return. The $100 monthly cloud authorization remains in force.
 
-The new [Solana live pilot](docs/solana-live.md) subscribes directly to confirmed
+The earlier [single-token Solana live pilot](docs/solana-live.md) subscribes directly to confirmed
 Pump.fun launch/trade events and targets five-second observations. It follows canonical PumpSwap migration and trains the
 native fly plus a small entry/exit readout using $1,000 paper cash, a $25 order
 cap and 2.5% target exposure. This is a bounded cloud training pilot, not a completed performance
@@ -288,7 +294,7 @@ Train the actual retained fly graph (about 1.1 GB of public source downloads; pl
 
 The fly uses Stonkfly's candidate dopamine-modulated plasticity, not PPO. Its retained graph and fixed spike decoder are unchanged. Changing synaptic weights does not establish profitable learning. See [architecture and evaluation](docs/architecture.md), [cloud operation and budgets](docs/cloud.md), and [verification results](reports/verification.md).
 
-Default paper capital is $1,000, with a 50% maximum target allocation and $100 maximum paper order. Costs are assumptions, not a verified exchange fee tier: 60 bps per side plus 10 bps slippage. Reports value open inventory at bid less estimated exit costs. Current headlines are never retroactively inserted into old price history.
+The original BTC/PPO mode defaults to $1,000 paper capital, a 50% maximum target allocation and a $100 maximum paper order. Its assumed costs are 60 bps per side plus 10 bps slippage, not a verified exchange fee tier. The current Solana service has the separate limits and costs documented above. Reports value open inventory at bid less estimated exit costs. Current headlines are never retroactively inserted into old price history.
 
 `vendor/stonkfly` preserves [nftechie/stonkfly](https://github.com/nftechie/stonkfly) at commit `78ef3e05ab0fa086032098558d893667068944a0`, including its MIT license and third-party notices. This lab imports only its neural/data/display modules; its live trading implementation is not wired into the lab.
 

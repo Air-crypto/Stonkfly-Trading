@@ -14,14 +14,14 @@ def worker(batch,policy):
 
 def _evaluate(batch,policy):
     import time,re
-    from paperlab.checkpoint_eval import read,evaluate
+    from paperlab.checkpoint_eval import read,evaluate,source_fingerprint
     from paperlab.core import atomic_json,digest
     from paperlab.budget import reserve,settle
     if not re.fullmatch(r'evaluation-[0-9]+',batch):raise ValueError('Invalid batch')
     volume.reload();state=Path('/state');base=state/'checkpoint-eval'/batch;plan=read(base/'plan.json')
     if policy not in plan['policies']:raise ValueError('Unsealed policy')
-    for name,sha in plan['source_hashes'].items():
-        if digest('/opt/paperlab/'+name)!=sha:raise ValueError('Evaluation source changed after seal')
+    if source_fingerprint('/opt/paperlab')!=plan['source_hashes']:
+        raise ValueError('Evaluation source changed after seal')
     output=base/policy
     if output.exists():raise ValueError('Never overwrite evaluation attempt')
     reservation=reserve(state/'budget.json',True,seconds=3600,startup_seconds=30,memory_gib=8,limit_override=85,authorized_monthly_limit=100)
@@ -43,7 +43,7 @@ def coordinator():
 
 def _coordinate():
     import time
-    from paperlab.checkpoint_eval import read,register,seal_plan,seal_tape
+    from paperlab.checkpoint_eval import read,register,seal_plan,seal_tape,source_fingerprint
     from paperlab.core import atomic_json,digest
     volume.reload();state=Path('/state');root=state/'checkpoint-eval';root.mkdir(exist_ok=True)
     control_path=root/'control.json';c=read(control_path) if control_path.exists() else dict(enabled=True,next_batch_at=0,batch=None,pending=None)
@@ -66,7 +66,7 @@ def _coordinate():
         if now<c['next_batch_at']:return save('waiting_for_daily_cutoff')
         if not checkpoints:return save('waiting_for_checkpoints')
         plan=seal_plan(state,checkpoints,now)
-        plan['source_hashes']={n:digest('/opt/paperlab/'+n) for n in ['paperlab/checkpoint_eval.py','paperlab/fly.py','paperlab/solana_paper.py','paperlab/solana_online.py','paperlab/solana_events.py','paperlab/core.py','paperlab/solana_online_audit.py']}
+        plan['source_hashes']=source_fingerprint('/opt/paperlab')
         base=root/plan['id'];base.mkdir();atomic_json(base/'plan.json',plan);c['batch']=plan['id']
         c['next_batch_at']=(int(now)//86400+1)*86400
         save('waiting_for_unseen_market_window')

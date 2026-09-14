@@ -58,7 +58,7 @@ def main():
     totals = {key: sum(e[key] for e in episodes) for key in
               ('pnl_usd', 'realized_usd', 'unrealized_usd', 'paid_fees_usd')}
     result = dict(episodes=episodes, totals=totals,
-                  scope='Three independent fresh $1,000 paper accounts; not compounded.',
+                  scope=f'{len(episodes)} independent fresh $1,000 paper accounts; not compounded.',
                   valuation='Recorded bid less 1% slippage and 1.25% exit fee; missing quote values inventory at zero.',
                   realized_method='Average acquisition cost including entry fees; net simulated sale proceeds.',
                   checks='Per-mint fill cash flows, cash, fees and summed marked PnL reconcile.',

@@ -125,7 +125,8 @@ class Feed:
         self.stop = threading.Event(); self.lock = threading.Lock()
         self.tokens = {}; self.pinned = None; self.pinned_mints = set(); self.pools={}
         self.stats = dict(notifications=0, events=0, duplicates=0, decode_errors=0,
-                          connections=0, overflow=0, untracked_amm_events=0,last_message=0., last_event=0., status='starting')
+                          connections=0, overflow=0, untracked_amm_events=0,last_message=0., last_event=0.,
+                          event_cursor=0,status='starting')
     def start(self):
         self.thread = threading.Thread(target=self._thread,daemon=True); self.thread.start()
     def close(self):
@@ -140,9 +141,20 @@ class Feed:
     def snapshot(self):
         with self.lock:
             return {k:{**v,'trades':list(v['trades'])} for k,v in self.tokens.items()}
-    def accept(self, event):
+    def snapshot_at(self, clock=time.time):
+        """Bound the feature snapshot before inference while holding the reader lock."""
+        with self.lock:
+            snapshot={k:{**v,'trades':list(v['trades'])} for k,v in self.tokens.items()}
+            return snapshot,clock(),dict(self.stats)
+    def accept(self, event, *, event_cursor=None):
         kind = event['kind']
         with self.lock:
+            # Receipt time precedes parsing/storage. This applied DB cursor lets
+            # replays exclude received-but-not-yet-observed events precisely.
+            if event_cursor is not None:
+                if type(event_cursor) is not int or event_cursor<=self.stats['event_cursor']:
+                    raise ValueError('Nonmonotone observed event cursor')
+                self.stats['event_cursor']=event_cursor
             if kind in ('BuyEvent','SellEvent'):
                 mint=self.pools.get(event['pool'])
                 if mint not in self.tokens:return
@@ -216,7 +228,7 @@ class Feed:
                                 cursor=db.execute('INSERT OR IGNORE INTO events VALUES (?,?,?,?,?,?)',
                                     (event['signature'],event['log_index'],now,event['kind'],event.get('mint',event.get('base_mint',event.get('pool',''))),json.dumps(event)))
                                 if cursor.rowcount:
-                                    self.accept(event)
+                                    self.accept(event,event_cursor=cursor.lastrowid)
                                     with self.lock: self.stats['events']+=1; self.stats['last_event']=now
                                 else:
                                     with self.lock: self.stats['duplicates']+=1

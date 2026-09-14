@@ -1,0 +1,441 @@
+{
+  "episodes": [
+    {
+      "run_id": "solana-online-20260914-021337",
+      "ended": 1789352923.8787773,
+      "fills_with_intent_verified": 45,
+      "historical_pnl_usd": 30.84158497279782,
+      "unavailable_positions": [
+        {
+          "mint": "dRQvsszWkyBbgzWyjVmj8xX9fWew5aBJA5i9T4Wpump",
+          "basis_usd": 5.46378418347174,
+          "historical_reason": "one_sided",
+          "last_trade_age_seconds": 0.5279686450958252,
+          "v2_observation_reason": null,
+          "v2_entry_reason": "one_sided",
+          "v2_exit_reason": null,
+          "diagnostic_v2_values": {
+            "indicative_liquidation_value_usd": 5.179977462154332,
+            "next_fill_proceeds_usd": 5.179977462154332,
+            "capacity_stress_value_usd": 5.179977462154332,
+            "indicative_value_beyond_next_fill_usd": 0.0,
+            "full_exit_within_next_fill": true,
+            "quote_protocol": "solana_observed_entry_exit_v2"
+          }
+        }
+      ],
+      "source_sha256": {
+        "events.db": "ab588abbf3af864987a59fe322920840ffbcd6ea3e63c7e8aa777b9cf45b1ce7",
+        "fx.jsonl": "7110557d56f342c5aa1a3e2a134a5ff93aed6f849a0bc39672ce209f83cf08b2",
+        "decisions.jsonl": "57f786f3cc281e3f612f7f104a9d40f74c1d027c44c345eb058294a5f8a1ff6c"
+      }
+    },
+    {
+      "run_id": "solana-online-20260914-031716",
+      "ended": 1789356746.3628707,
+      "fills_with_intent_verified": 27,
+      "historical_pnl_usd": -112.75778216910726,
+      "unavailable_positions": [],
+      "source_sha256": {
+        "events.db": "cb8b1381e8044ecc8960b08999c6373bb5d2800292c0ea90339921cc2efe3124",
+        "fx.jsonl": "9b8cfa9ef7c163fd37a95b11b01571f392ab92eca4609a28d3b439f0f50742d4",
+        "decisions.jsonl": "1dc8d6201efd8d8eeb38d519b6ef308d5ef5c104969eba43f67cf0f14d1b4b3a"
+      }
+    },
+    {
+      "run_id": "solana-online-20260914-041721",
+      "ended": 1789360351.7908483,
+      "fills_with_intent_verified": 75,
+      "historical_pnl_usd": 165.0035061243634,
+      "unavailable_positions": [
+        {
+          "mint": "42faVxmVo85HFzsuMEJg2spDZV8Qk6haDWM7pCnLpump",
+          "basis_usd": 249.99998955560037,
+          "historical_reason": "thin_real_reserves",
+          "last_trade_age_seconds": 0.37677788734436035,
+          "v2_observation_reason": null,
+          "v2_entry_reason": "thin_real_reserves",
+          "v2_exit_reason": null,
+          "diagnostic_v2_values": {
+            "indicative_liquidation_value_usd": 13.650631450523694,
+            "next_fill_proceeds_usd": 3.5844153054494,
+            "capacity_stress_value_usd": 3.5844153054494,
+            "indicative_value_beyond_next_fill_usd": 10.066216145074293,
+            "full_exit_within_next_fill": false,
+            "quote_protocol": "solana_observed_entry_exit_v2"
+          }
+        }
+      ],
+      "source_sha256": {
+        "events.db": "7f26eb1999f053e33215b9ba13f4f9011ac9d201d3be8ddfd1ad47dca92ad5c9",
+        "fx.jsonl": "b5f813c95cc1040dc43bc71f1af7fa1dc4d5c04d0f272efaee78bdae3135e6c6",
+        "decisions.jsonl": "ef24b0e636067786ac1d7a72f8461bac37b0b8fefeda5d8839b599680745c108"
+      }
+    },
+    {
+      "run_id": "solana-online-20260914-053214",
+      "ended": 1789364841.1768842,
+      "fills_with_intent_verified": 33,
+      "historical_pnl_usd": -649.1690457215338,
+      "unavailable_positions": [
+        {
+          "mint": "GyzLRPBP6NAwQyyP3wCqfPTEURCsptmpavskAKwnpump",
+          "basis_usd": 242.62809372154885,
+          "historical_reason": "stale_trade",
+          "last_trade_age_seconds": 111.9938805103302,
+          "v2_observation_reason": "stale_trade",
+          "v2_entry_reason": "stale_trade",
+          "v2_exit_reason": "stale_trade",
+          "diagnostic_v2_values": {
+            "indicative_liquidation_value_usd": 0.0,
+            "next_fill_proceeds_usd": 0.0,
+            "capacity_stress_value_usd": 0.0,
+            "indicative_value_beyond_next_fill_usd": 0.0,
+            "full_exit_within_next_fill": false,
+            "quote_protocol": "solana_observed_entry_exit_v2"
+          }
+        },
+        {
+          "mint": "9rxTbRkDkenxyLns4UMNTKGxbY7Kf5uxYcF1AuJepump",
+          "basis_usd": 249.99987083882803,
+          "historical_reason": "one_sided",
+          "last_trade_age_seconds": 6.830678701400757,
+          "v2_observation_reason": null,
+          "v2_entry_reason": "one_sided",
+          "v2_exit_reason": "insufficient_observed_liquidity",
+          "diagnostic_v2_values": {
+            "indicative_liquidation_value_usd": 0.11356181917083752,
+            "next_fill_proceeds_usd": 0.0,
+            "capacity_stress_value_usd": 0.0,
+            "indicative_value_beyond_next_fill_usd": 0.11356181917083752,
+            "full_exit_within_next_fill": false,
+            "quote_protocol": "solana_observed_entry_exit_v2"
+          }
+        }
+      ],
+      "source_sha256": {
+        "events.db": "ef8df966fd19ac54a6147324657a415a76e6ce395b35891312c65a48ab482953",
+        "fx.jsonl": "eb977e41d0a1bcbdbef1d2e4c661fa64f15f61e70e056e83d8f053613d617bce",
+        "decisions.jsonl": "df39b49a0bcf891f1d79d24f916bca4d2af7b82b82e31ffc075e5411e429668e"
+      }
+    },
+    {
+      "run_id": "solana-online-20260914-064712",
+      "ended": 1789369340.0408492,
+      "fills_with_intent_verified": 20,
+      "historical_pnl_usd": -361.8606133652313,
+      "unavailable_positions": [
+        {
+          "mint": "E7Xb9pZ42V9DNJNetmUs9jrsR8VggvzkK1EHFm3Lpump",
+          "basis_usd": 249.999975571961,
+          "historical_reason": "stale_trade",
+          "last_trade_age_seconds": 57.79083585739136,
+          "v2_observation_reason": "stale_trade",
+          "v2_entry_reason": "stale_trade",
+          "v2_exit_reason": "stale_trade",
+          "diagnostic_v2_values": {
+            "indicative_liquidation_value_usd": 0.0,
+            "next_fill_proceeds_usd": 0.0,
+            "capacity_stress_value_usd": 0.0,
+            "indicative_value_beyond_next_fill_usd": 0.0,
+            "full_exit_within_next_fill": false,
+            "quote_protocol": "solana_observed_entry_exit_v2"
+          }
+        }
+      ],
+      "source_sha256": {
+        "events.db": "7ae84814eb2cf16687e67c643795fcc49cf3d25aa384047b750fa466f1b01928",
+        "fx.jsonl": "4776fa98a47be65a122fe10a741bf9ec51e740ae9a157bec1543525f964e25f6",
+        "decisions.jsonl": "1c6e3bcec7e9d29dc22df12998dfcbc3ed0e4c6e52b1b02daa93eb40611aa4bb"
+      }
+    },
+    {
+      "run_id": "solana-online-20260914-074716",
+      "ended": 1789372953.4086456,
+      "fills_with_intent_verified": 56,
+      "historical_pnl_usd": -321.51074096466414,
+      "unavailable_positions": [
+        {
+          "mint": "8LnLSMDNRzBp1LSeDH15QSzFQFnuA1XJJJnUyA3Wpump",
+          "basis_usd": 249.99997506798888,
+          "historical_reason": "stale_trade",
+          "last_trade_age_seconds": 33.10845160484314,
+          "v2_observation_reason": "stale_trade",
+          "v2_entry_reason": "stale_trade",
+          "v2_exit_reason": "stale_trade",
+          "diagnostic_v2_values": {
+            "indicative_liquidation_value_usd": 0.0,
+            "next_fill_proceeds_usd": 0.0,
+            "capacity_stress_value_usd": 0.0,
+            "indicative_value_beyond_next_fill_usd": 0.0,
+            "full_exit_within_next_fill": false,
+            "quote_protocol": "solana_observed_entry_exit_v2"
+          }
+        },
+        {
+          "mint": "ALQoKjuk2mKMxkeGZqnPJUx1yPzo1mtdLTzYowAVpump",
+          "basis_usd": 27.183712013927753,
+          "historical_reason": "stale_trade",
+          "last_trade_age_seconds": 35.98178434371948,
+          "v2_observation_reason": "stale_trade",
+          "v2_entry_reason": "stale_trade",
+          "v2_exit_reason": "stale_trade",
+          "diagnostic_v2_values": {
+            "indicative_liquidation_value_usd": 0.0,
+            "next_fill_proceeds_usd": 0.0,
+            "capacity_stress_value_usd": 0.0,
+            "indicative_value_beyond_next_fill_usd": 0.0,
+            "full_exit_within_next_fill": false,
+            "quote_protocol": "solana_observed_entry_exit_v2"
+          }
+        }
+      ],
+      "source_sha256": {
+        "events.db": "3da284752ad1a804f2e65af4336634b4aadb679450219c83342027ef0311951e",
+        "fx.jsonl": "289028dd5cf983417b8bc05473d665a717eb300ef159aa3974f0f0061626a84c",
+        "decisions.jsonl": "122390135fb7cf20fd0a187943be71b5e061fd407c23ac6f919ac4fc99d606d3"
+      }
+    },
+    {
+      "run_id": "solana-online-20260914-084716",
+      "ended": 1789376546.405873,
+      "fills_with_intent_verified": 38,
+      "historical_pnl_usd": -535.2365971489556,
+      "unavailable_positions": [
+        {
+          "mint": "Bsssjph4u33XfDU8cUVXcSKVYz5DqL8hLebyGHMNpump",
+          "basis_usd": 243.1839779117519,
+          "historical_reason": "one_sided",
+          "last_trade_age_seconds": 0.6175105571746826,
+          "v2_observation_reason": null,
+          "v2_entry_reason": "one_sided",
+          "v2_exit_reason": null,
+          "diagnostic_v2_values": {
+            "indicative_liquidation_value_usd": 231.96286440492852,
+            "next_fill_proceeds_usd": 231.96286440492852,
+            "capacity_stress_value_usd": 231.96286440492852,
+            "indicative_value_beyond_next_fill_usd": 0.0,
+            "full_exit_within_next_fill": true,
+            "quote_protocol": "solana_observed_entry_exit_v2"
+          }
+        },
+        {
+          "mint": "46jQT5tsrRckRtgE6K26JsmHhkvVz5eppFER2Ytbpump",
+          "basis_usd": 197.15823952989152,
+          "historical_reason": "stale_trade",
+          "last_trade_age_seconds": 53.32565784454346,
+          "v2_observation_reason": "stale_trade",
+          "v2_entry_reason": "stale_trade",
+          "v2_exit_reason": "stale_trade",
+          "diagnostic_v2_values": {
+            "indicative_liquidation_value_usd": 0.0,
+            "next_fill_proceeds_usd": 0.0,
+            "capacity_stress_value_usd": 0.0,
+            "indicative_value_beyond_next_fill_usd": 0.0,
+            "full_exit_within_next_fill": false,
+            "quote_protocol": "solana_observed_entry_exit_v2"
+          }
+        }
+      ],
+      "source_sha256": {
+        "events.db": "741895422c0361c3396919c0bc6d46534c9f8c70e8a043ba836c5f0537b5d47c",
+        "fx.jsonl": "caf0fe2e9fa4c6fb9eb186f57bd29d08f83461d2de28adb313cac25bc969e98a",
+        "decisions.jsonl": "4cf517650bdb1896d5593cd3bd7f2274f18ca142b19e27ae29a17db91153379f"
+      }
+    },
+    {
+      "run_id": "solana-online-20260914-100213",
+      "ended": 1789381042.392446,
+      "fills_with_intent_verified": 57,
+      "historical_pnl_usd": -603.3162338293074,
+      "unavailable_positions": [
+        {
+          "mint": "8PRAHzHBtpRhMd7VQGkLk12jNuVHbRj2Q6pxeftgpump",
+          "basis_usd": 246.85166563837035,
+          "historical_reason": "stale_trade",
+          "last_trade_age_seconds": 184.48289155960083,
+          "v2_observation_reason": "stale_trade",
+          "v2_entry_reason": "stale_trade",
+          "v2_exit_reason": "stale_trade",
+          "diagnostic_v2_values": {
+            "indicative_liquidation_value_usd": 0.0,
+            "next_fill_proceeds_usd": 0.0,
+            "capacity_stress_value_usd": 0.0,
+            "indicative_value_beyond_next_fill_usd": 0.0,
+            "full_exit_within_next_fill": false,
+            "quote_protocol": "solana_observed_entry_exit_v2"
+          }
+        },
+        {
+          "mint": "7wRst1jynNrhs8xpBCzJxDVpyqDUuKvh9UYex5wWpump",
+          "basis_usd": 249.99999840135237,
+          "historical_reason": "order_exceeds_one_percent_real_sol_reserves",
+          "last_trade_age_seconds": 0.2058422565460205,
+          "v2_observation_reason": null,
+          "v2_entry_reason": null,
+          "v2_exit_reason": null,
+          "diagnostic_v2_values": {
+            "indicative_liquidation_value_usd": 74.99251505272909,
+            "next_fill_proceeds_usd": 7.201702410609783,
+            "capacity_stress_value_usd": 7.201702410609783,
+            "indicative_value_beyond_next_fill_usd": 67.7908126421193,
+            "full_exit_within_next_fill": false,
+            "quote_protocol": "solana_observed_entry_exit_v2"
+          }
+        },
+        {
+          "mint": "27M8boMKeTH5sVSC8ihbrEQ419A7JiJrZ7zQQnL5pump",
+          "basis_usd": 246.1904874014973,
+          "historical_reason": "order_exceeds_one_percent_real_sol_reserves",
+          "last_trade_age_seconds": 0.19776535034179688,
+          "v2_observation_reason": null,
+          "v2_entry_reason": null,
+          "v2_exit_reason": null,
+          "diagnostic_v2_values": {
+            "indicative_liquidation_value_usd": 101.95804399942077,
+            "next_fill_proceeds_usd": 24.48876099272144,
+            "capacity_stress_value_usd": 24.48876099272144,
+            "indicative_value_beyond_next_fill_usd": 77.46928300669933,
+            "full_exit_within_next_fill": false,
+            "quote_protocol": "solana_observed_entry_exit_v2"
+          }
+        }
+      ],
+      "source_sha256": {
+        "events.db": "f46d4d6e0dd2a64831f29516110f0c9577520ce5de968ec2138074b8649ecea8",
+        "fx.jsonl": "210af8bd74ff64f2825fe3fa1e87811eb3e189bad4f70cf00d7024de99102314",
+        "decisions.jsonl": "8e5597d03a4d3c2cf4befbae6a05b25fbf485e21b276597f99b4d960cc634abb"
+      }
+    },
+    {
+      "run_id": "solana-online-20260914-110216",
+      "ended": 1789384647.061923,
+      "fills_with_intent_verified": 80,
+      "historical_pnl_usd": -209.22929699810788,
+      "unavailable_positions": [
+        {
+          "mint": "2MDaPDSgQEJZ6Y1RjddShdZAi7hLnVtnKRs9k5SWpump",
+          "basis_usd": 139.23373675374862,
+          "historical_reason": "stale_trade",
+          "last_trade_age_seconds": 83.55438947677612,
+          "v2_observation_reason": "stale_trade",
+          "v2_entry_reason": "stale_trade",
+          "v2_exit_reason": "stale_trade",
+          "diagnostic_v2_values": {
+            "indicative_liquidation_value_usd": 0.0,
+            "next_fill_proceeds_usd": 0.0,
+            "capacity_stress_value_usd": 0.0,
+            "indicative_value_beyond_next_fill_usd": 0.0,
+            "full_exit_within_next_fill": false,
+            "quote_protocol": "solana_observed_entry_exit_v2"
+          }
+        },
+        {
+          "mint": "5Sx2Ku4FJVfaQi5MXFhDR2XeAvXv1oS8mUVw34G4pump",
+          "basis_usd": 74.02025143670154,
+          "historical_reason": "stale_trade",
+          "last_trade_age_seconds": 248.5290563106537,
+          "v2_observation_reason": "stale_trade",
+          "v2_entry_reason": "stale_trade",
+          "v2_exit_reason": "stale_trade",
+          "diagnostic_v2_values": {
+            "indicative_liquidation_value_usd": 0.0,
+            "next_fill_proceeds_usd": 0.0,
+            "capacity_stress_value_usd": 0.0,
+            "indicative_value_beyond_next_fill_usd": 0.0,
+            "full_exit_within_next_fill": false,
+            "quote_protocol": "solana_observed_entry_exit_v2"
+          }
+        }
+      ],
+      "source_sha256": {
+        "events.db": "ebd09b00ae89c8119495f875e96017499075a7843fad3a90ad6b55bded289922",
+        "fx.jsonl": "4db6a0a4ff628b72b88d9a67c1798f021f20cfbb0a17e530470a837575c3903f",
+        "decisions.jsonl": "95219467a3efc33720f5cda27da611c781f8f7e656e8560b485d99c86d4e716b"
+      }
+    },
+    {
+      "run_id": "solana-online-20260914-120216",
+      "ended": 1789388243.3522165,
+      "fills_with_intent_verified": 47,
+      "historical_pnl_usd": -187.07422819261205,
+      "unavailable_positions": [
+        {
+          "mint": "CFP9LfRTFX39JcfVLyyxTt7QEwxT3QVxD9qRejTnpump",
+          "basis_usd": 125.63379870008715,
+          "historical_reason": "one_sided",
+          "last_trade_age_seconds": 1.019533634185791,
+          "v2_observation_reason": null,
+          "v2_entry_reason": "one_sided",
+          "v2_exit_reason": null,
+          "diagnostic_v2_values": {
+            "indicative_liquidation_value_usd": 35.32033901460391,
+            "next_fill_proceeds_usd": 7.685906300015745,
+            "capacity_stress_value_usd": 7.685906300015745,
+            "indicative_value_beyond_next_fill_usd": 27.634432714588165,
+            "full_exit_within_next_fill": false,
+            "quote_protocol": "solana_observed_entry_exit_v2"
+          }
+        }
+      ],
+      "source_sha256": {
+        "events.db": "36eade79ce9a87bb9969738e922ee23b4504be12b9575588b8bd59ca41d37f10",
+        "fx.jsonl": "a2e881c217f32fd0992956c27f0c1605864690490c2562243876b69b916286d1",
+        "decisions.jsonl": "a1cd1ffa3d81c6e84ecc1e9d386d4057055f4a0845019cf146fb95c9592e5d00"
+      }
+    },
+    {
+      "run_id": "solana-online-20260914-130216",
+      "ended": 1789391845.453376,
+      "fills_with_intent_verified": 87,
+      "historical_pnl_usd": -44.02015205547184,
+      "unavailable_positions": [
+        {
+          "mint": "84MFLrKwHnyDqQ8AVApFjyBNxbQbbDq3xjgsh28vpump",
+          "basis_usd": 249.9999597400863,
+          "historical_reason": "stale_trade",
+          "last_trade_age_seconds": 21.7544367313385,
+          "v2_observation_reason": "stale_trade",
+          "v2_entry_reason": "stale_trade",
+          "v2_exit_reason": "stale_trade",
+          "diagnostic_v2_values": {
+            "indicative_liquidation_value_usd": 0.0,
+            "next_fill_proceeds_usd": 0.0,
+            "capacity_stress_value_usd": 0.0,
+            "indicative_value_beyond_next_fill_usd": 0.0,
+            "full_exit_within_next_fill": false,
+            "quote_protocol": "solana_observed_entry_exit_v2"
+          }
+        }
+      ],
+      "source_sha256": {
+        "events.db": "2ae216b5723c9dcb577f057f681a1288fc3fb07b3c1a0f14a299cd5660a1f8d1",
+        "fx.jsonl": "e52ab3a4e0667e973da1b29cf16fe8a70d5a58302fc4de38f23446bc21c9b86e",
+        "decisions.jsonl": "01ade6e1ead5b07cdfe024e7a354931819bc9882c65e02f34a877d4357b817a9"
+      }
+    }
+  ],
+  "episode_count": 11,
+  "fills_with_intent_verified": 565,
+  "historical_total_pnl_usd": -2828.32959934783,
+  "unavailable_positions_by_reason": {
+    "one_sided": 4,
+    "thin_real_reserves": 1,
+    "stale_trade": 9,
+    "order_exceeds_one_percent_real_sol_reserves": 2
+  },
+  "unavailable_basis_by_reason_usd": {
+    "one_sided": 624.2814316341388,
+    "thin_real_reserves": 249.99998955560037,
+    "stale_trade": 1677.0756094742248,
+    "order_exceeds_one_percent_real_sol_reserves": 496.1904858028497
+  },
+  "prospective_quote_protocol": "solana_observed_entry_exit_v2",
+  "method": "Read-only archive replay through final recorded receipt time; historical entry/quote rejection classified separately from v2 observation and exit eligibility. Fill intents and accounting independently checked.",
+  "limitations": [
+    "V2 values are diagnostic sensitivities, not rewritten historical returns or executed policy counterfactuals.",
+    "Raw indicative mark assumes all inventory at that price; next-fill capacity is separately bounded.",
+    "Public confirmed Pump stream has gaps and no completeness guarantee.",
+    "Sample consists of eleven independently reset episodes on one date; not evidence of learning."
+  ]
+}

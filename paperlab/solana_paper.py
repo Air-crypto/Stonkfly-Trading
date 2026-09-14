@@ -73,11 +73,15 @@ class Readout:
         q=self.values(x); explore=bool(self.rng.random()<.10)
         action=int(self.rng.choice(allowed_actions)) if explore else max(allowed_actions,key=lambda a:q[a])
         return action,{'q_values':q.tolist(),'exploration':explore,'epsilon':.10,'allowed_actions':list(allowed_actions)}
-    def update(self,previous,x,reward,elapsed,allowed_actions=(0,1)):
+    def update(self,previous,x,reward,elapsed,allowed_actions=(0,1),*,terminal=False):
         if not allowed_actions or any(a not in (0,1) for a in allowed_actions): raise ValueError('Invalid action mask')
+        if not math.isfinite(reward) or not math.isfinite(elapsed) or elapsed < 0:
+            raise ValueError('Invalid reward transition')
         torch=self.torch; before=torch.cat([p.detach().flatten() for p in self.model.parameters()]).clone()
-        clipped=float(np.clip(reward/25,-1,1)); discount=.95**(elapsed/5)
-        with torch.no_grad(): target=clipped+discount*self.model(torch.tensor(x))[list(allowed_actions)].max()
+        clipped=float(np.clip(reward/25,-1,1)); discount=0. if terminal else .95**(elapsed/5)
+        with torch.no_grad():
+            target=(torch.tensor(clipped,dtype=torch.float32) if terminal else
+                    clipped+discount*self.model(torch.tensor(x))[list(allowed_actions)].max())
         estimate=self.model(torch.tensor(previous['x']))[previous['action']]
         loss=torch.nn.functional.smooth_l1_loss(estimate,target)
         self.optimizer.zero_grad(); loss.backward()
@@ -87,7 +91,7 @@ class Readout:
         return dict(algorithm='online_one_step_Q_learning',updates=self.updates,loss=float(loss.detach()),
                     gradient_l2_before_clip=float(norm),weight_delta_l2=float(torch.linalg.vector_norm(after-before)),
                     reward_usd=reward,reward_scaled=clipped,discount=discount,target=float(target),
-                    td_error=float(target-estimate.detach()),transition_seconds=elapsed)
+                    td_error=float(target-estimate.detach()),transition_seconds=elapsed,terminal=terminal)
     def save(self,path):
         self.torch.save({'model':self.model.state_dict(),'optimizer':self.optimizer.state_dict(),
                          'updates':self.updates,'rng':self.rng.bit_generator.state},path)

@@ -40,15 +40,21 @@ The shared full fly processes one token per five-second target, rotating in
 three-observation bursts. Each token first needs twelve distinct sampled prices.
 Per-token sampling and fills can proceed while another token gets inference;
 one token's cash flows cannot create another token's reward. The Q head learns
-from that token's net cash flows plus changes in its liquidation value. Invalid
-quotes break learning credit; there is no fabricated fill or invented rug-loss label.
-Learning from sustained loss of liquidity remains an evaluation limitation.
+from that token's net cash flows plus changes in its indicative liquidation value.
+The September 14 audit found that the previous protocol dropped quote-gap and terminal
+losses. In `mint_credit_terminal_v2`, outstanding Q credit survives gaps and parked
+inventory. Every episode ends with non-bootstrapped terminal settlements; raw rewards
+must reconcile to account PnL, or the account audit fails. A missing terminal observation
+uses the explicitly tagged conservative zero mark, not an invented sale or confirmed rug.
+Historical checkpoints and outcomes remain unchanged and are labeled as using the
+previous incomplete-credit protocol.
 
 On token switches, transient neural activity and eligibility traces reset while
 plastic weights and native memory remain. The native reward is suppressed on the
 switch; subsequent contiguous observations can supply equity reinforcement.
-The shared Q head can learn a mint-specific transition across other tokens, up
-to a 60-second gap, with elapsed-time discounting. Training logs report both
+The shared Q head preserves mint-specific credit across other tokens and quote gaps,
+with elapsed-time discounting. Only uninterrupted same-mint feedback reaches native
+plasticity; the difference from fully settled Q rewards is explicitly reported. Training logs report both
 native plasticity and Q loss, gradient, TD error, exploration, and weight changes.
 This experimental online Q learner does not have a target network or replay buffer
 and has no claim of convergence or profitable trading.
@@ -77,10 +83,30 @@ while quarantined. Aggregate historical open basis can therefore exceed $100.
 Existing holdings can still be sold in $25-notional chunks, and LONG holds an
 existing lot. No buy can replenish or evade the preserved account loss budget.
 Infeasible flat-to-long actions are masked from sampling and bootstrap targets;
-rejected/expired orders do not earn Q-learning credit as executed experiences.
+rejections are recorded as no-fill outcomes. Zero-reward rejected actions without
+inventory can be skipped, while prior inventory credit is preserved.
 The inherited position's initial risk reserve is
 conservatively approximated by legacy net cash spent; it is not a reconstructed
 FIFO cost basis. Exact swap execution and sellability are still unverified.
+
+## Quote and evaluation correctness after the September 14 audit
+
+`solana_observed_entry_exit_v2` separates a fresh observed reserve-derived price from
+entry eligibility and exit capacity. A one-sided market or an entry-risk filter no
+longer implies that a held asset is worth zero. Fill direction determines the guard,
+including LONG targets that rebalance by selling. Simulated exits remain limited to
+1% of actual SOL reserves. Reports show both full indicative inventory value and
+capacity-limited next-fill proceeds; neither proves exchange executability.
+
+The checkpoint evaluator compares retained frozen fly/Q pairs, an untrained pair,
+cash and always-long controls at identical recorded attention opportunities and
+latency. Cutoffs precede evaluation tapes; hashes cover checkpoints, tapes, schemas,
+source and native code. This evaluates conditional buy/sell behavior, not independent
+universe selection. It also tests a deployment-mode distribution with native learning
+disabled; plasticity-derived input features differ from online training.
+
+See [the system audit](../reports/system-audit-20260914.md) and
+[the evaluation protocol](../reports/checkpoint-evaluation-protocol.md).
 
 ## Background execution and budget
 

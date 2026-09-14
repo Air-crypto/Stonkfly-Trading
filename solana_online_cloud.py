@@ -40,7 +40,8 @@ def _run(run_id, parent, account_mode='continuous'):
         run_id=run_id,at=time.time(),reservation=reservation,paper_only=True,source_sha256={
             n:digest('/opt/paperlab/'+n) for n in ('solana_online_cloud.py','paperlab/solana_online.py',
                                                 'paperlab/solana_events.py','paperlab/solana_service.py',
-                                                'paperlab/solana_paper.py','paperlab/solana_online_audit.py','paperlab/budget.py')}))
+                                                'paperlab/solana_paper.py','paperlab/solana_online_audit.py','paperlab/solana_quotes.py',
+                                                'paperlab/solana_execution_audit.py','paperlab/budget.py')}))
     volume.commit()
     try:
         result=run(root,'/state/fly-data',state/'solana-live'/parent,seconds=900,commit=volume.commit,

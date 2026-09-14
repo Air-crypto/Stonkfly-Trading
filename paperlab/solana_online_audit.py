@@ -3,6 +3,7 @@ from decimal import Decimal
 import json
 from pathlib import Path
 from .solana_paper import COSTS
+from .solana_execution_audit import verify_fill_intent
 
 
 def audit(opening, rows):
@@ -15,17 +16,23 @@ def audit(opening, rows):
     flow={m:Decimal(p['cash_flow']) for m,p in s['positions'].items()}
     basis={m:Decimal(p['basis']) for m,p in s['positions'].items()}
     issued={};filled=set();fills=0;native=0;head=0;marks=0;nonzero=0;mints=set();last=0.
+    raw_reward=0.;reward_by_mint={};credit_end={};terminal_updates=0;native_reward=0.
+    reward_v2=bool(rows and rows[0].get('reward_protocol')=='mint_credit_terminal_v2')
     for r in rows:
         if episodic and (r.get('account_mode')!='fresh_training_episode'
                          or r.get('risk_policy')!='fresh_training_full_cash_v1'):
             raise ValueError('Training account mode changed within episode')
         if not r['paper_only'] or r['at']<=last:raise ValueError('Invalid paper chronology')
         last=r['at']
+        if reward_v2 and r.get('reward_protocol')!='mint_credit_terminal_v2':
+            raise ValueError('Reward protocol changed within window')
         for e in r['executions']:
             f=e['fill'];m=e['mint'];t=e['tick']
             if f['status']!='filled':continue
             key=(m,f['decision_ts'])
             if key not in issued or key in filled:raise ValueError('Unissued or reused decision')
+            verify_fill_intent(issued[key],f,t,cash_before=cash,qty_before=qty.get(m,Decimal(0)),
+                max_exposure=1. if episodic else COSTS.max_exposure)
             if not f['simulation'] or not t['available'] or not 0<f['fill_ts']-f['decision_ts']<=15:
                 raise ValueError('Unavailable or noncausal fill')
             if t['ts']!=f['fill_ts']:raise ValueError('Fill timestamp differs from receipt')
@@ -72,20 +79,57 @@ def audit(opening, rows):
             if abs(equity-r['equity_stress_usd'])>1e-7:raise ValueError('Equity mark differs')
             marks+=1
         n=r.get('neural')
+        metrics=list(r.get('reward_settlements',[]))
         if n:
-            native+=1;mints.add(n['mint']);head+=n.get('head_training') is not None
+            native+=1;mints.add(n['mint'])
+            native_reward+=n.get('learning_diagnostics',{}).get('equity_reward_usd',0.)
             if n.get('head_training'):
-                import math
-                h=n['head_training']
-                if not all(math.isfinite(h[k]) for k in ('loss','gradient_l2_before_clip','weight_delta_l2','reward_usd')):
-                    raise ValueError('Nonfinite learning diagnostics')
-                nonzero+=abs(h['reward_usd'])>1e-12
+                metrics.append(n['head_training'])
+        for h in metrics:
+            import math
+            head+=1
+            if not all(math.isfinite(h[k]) for k in ('loss','gradient_l2_before_clip','weight_delta_l2','reward_usd')):
+                raise ValueError('Nonfinite learning diagnostics')
+            nonzero+=abs(h['reward_usd'])>1e-12;raw_reward+=h['reward_usd']
+            if reward_v2:
+                m=h['mint'];a=h['credit_start_contribution_usd'];b=h['credit_end_contribution_usd']
+                if not all(math.isfinite(v) for v in (a,b)) or abs((b-a)-h['reward_usd'])>1e-7:
+                    raise ValueError('Reward credit does not equal contribution change')
+                if m in credit_end and abs(a-credit_end[m])>1e-7:
+                    raise ValueError('Reward credit anchor skipped or repeated')
+                if episodic and m not in credit_end and abs(a)>1e-7:
+                    raise ValueError('Training episode omitted opening reward credit')
+                credit_end[m]=b;reward_by_mint[m]=reward_by_mint.get(m,0.)+h['reward_usd']
+                if h.get('terminal'):
+                    terminal_updates+=1
+                    if h['discount']!=0 or abs(h['target']-max(-1.,min(1.,h['reward_usd']/25)))>1e-7:
+                        raise ValueError('Terminal reward bootstrapped another episode')
+                if bool(r.get('terminal'))!=bool(h.get('terminal')):
+                    raise ValueError('Terminal credit recorded at wrong boundary')
+        if reward_v2 and abs(raw_reward-r['raw_q_reward_usd'])>1e-7:
+            raise ValueError('Reported cumulative reward differs from updates')
         if r.get('decision'):
             d=r['decision'];issued[(d['mint'],d['issued'])]=d
+    residual=rows[-1]['equity_stress_usd']-1000-raw_reward if episodic else None
+    if reward_v2 and rows[-1].get('terminal'):
+        if rows[-1]['new_readout_updates']!=head:
+            raise ValueError('Readout update count differs from recorded gradients')
+        if episodic:
+            if abs(residual)>1e-6:raise ValueError('Episode PnL is not fully assigned to reward credit')
+            for m,p in rows[-1]['portfolio']['positions'].items():
+                t=rows[-1]['marks'].get(m)
+                value=float(Decimal(p['qty']))*t['bid']*.99*.9875 if t else 0.
+                if abs(float(Decimal(p['cash_flow']))+value-reward_by_mint.get(m,0.))>1e-6:
+                    raise ValueError('Per-mint reward does not reconcile to final contribution')
     return dict(rows=len(rows),paper_fills=fills,native_observations=native,
         distinct_tokens_with_native_inference=len(mints),new_head_updates=head,
         cash_usd=float(cash),cumulative_fees_usd=float(fees),equity_marks_verified=marks,
         nonzero_reward_updates=nonzero,
+        reward_protocol=rows[0].get('reward_protocol') if rows else None,
+        raw_q_reward_usd=raw_reward,terminal_readout_updates=terminal_updates,
+        reward_reconciliation_residual_usd=residual if reward_v2 else None,
+        reward_reconciliation_verified=bool(reward_v2 and episodic and rows[-1].get('terminal')),
+        native_reward_usd=native_reward,native_uncredited_difference_usd=raw_reward-native_reward,
         paper_only=True,profitable_learning_proven=False,
         note='Recorded-fill accounting only; this does not establish executable prices or policy superiority.')
 

@@ -81,6 +81,15 @@ def test_masked_head_cannot_choose_or_bootstrap_blocked_buy():
     assert u['target']==pytest.approx(.95*q[0],abs=1e-7)
 
 
+def test_terminal_head_uses_only_final_reward_not_next_account_value():
+    h=Readout();x=np.zeros(FEATURES,dtype=np.float32)
+    # The next state deliberately has no finite value: terminal targets must not inspect it.
+    u=h.update(dict(x=x,action=1),np.full(FEATURES,np.nan,dtype=np.float32),-10,5,terminal=True)
+    assert u['target']==pytest.approx(-.4) and u['discount']==0 and u['terminal']
+    for reward,elapsed in [(float('nan'),5),(1,-1),(1,float('inf'))]:
+        with pytest.raises(ValueError,match='transition'):h.update(dict(x=x,action=0),x,reward,elapsed)
+
+
 def test_later_fill_and_fee_accounting_independent_of_broker():
     p=Portfolio(state());t=tick()
     assert p.execute('a',.025,100,t,{'a':t})['reason']=='not_after_decision'
@@ -96,6 +105,19 @@ def test_multi_pin_eviction():
     for m in ('a','b','c'):f.accept(dict(kind='CreateEvent',mint=m,received=ord(m)))
     f.pinned_mints={'a','b'};f.accept(dict(kind='CreateEvent',mint='d',received=104))
     assert set(f.snapshot())=={'a','b','d'}
+
+
+def test_snapshot_records_applied_cursor_not_merely_receipt_time(tmp_path):
+    f=Feed(tmp_path)
+    f.accept(dict(kind='CreateEvent',mint='a',received=999),event_cursor=1)
+    before,at,health=f.snapshot_at(lambda:1000.)
+    # Both events were received before the snapshot, but the second was still being decoded.
+    f.accept(dict(kind='CreateEvent',mint='b',received=999),event_cursor=2)
+    assert set(before)=={'a'} and at==1000 and health['event_cursor']==1
+    after,_,health2=f.snapshot_at(lambda:1000.)
+    assert set(after)=={'a','b'} and health2['event_cursor']==2
+    with pytest.raises(ValueError,match='cursor'):
+        f.accept(dict(kind='CreateEvent',mint='c',received=999),event_cursor=2)
 
 
 def test_burst_rotation_is_fair():
@@ -209,6 +231,67 @@ def test_cloud_entry_logic_rotates_launches_and_restores_account(tmp_path,monkey
     assert a['equity_marks_verified']==len(rows) and a['distinct_tokens_with_native_inference']==3
     tampered=deepcopy(rows);tampered[-1]['portfolio']['cash']='9999'
     with pytest.raises(ValueError,match='cash'):audit(json.loads((tmp_path/'run/opening.json').read_text()),tampered)
+
+
+@pytest.mark.parametrize('condition',['permanent_gap','recovered_gap','last_fill','one_sided_exit'])
+def test_reward_credit_reconciles_gaps_terminal_fills_and_separate_exit_quotes(tmp_path,monkeypatch,condition):
+    clock=Clock();parent=make_parent(tmp_path)
+    saved=json.loads((parent/'online-state.json').read_text())
+    (parent/'native.npz').write_bytes(b'fake immutable native weights')
+    saved['native_checkpoint']=str(parent/'native.npz');atomic_json(parent/'online-state.json',saved)
+    def choose_action(self,x,allowed_actions=(0,1)):
+        if condition=='last_fill':action=int(clock()>=1265)
+        elif condition=='one_sided_exit':action=int(clock()<1200)
+        else:action=1
+        return action if action in allowed_actions else 0,dict(test_policy=True)
+    monkeypatch.setattr(Readout,'choose',choose_action)
+    class Market:
+        def __init__(self,root):self.lock=threading.Lock();self.pinned_mints=set()
+        def accept(self,created):pass
+        def start(self):pass
+        def close(self):pass
+        def health(self):return dict(status='connected',last_message=clock(),events=20)
+        def snapshot(self):
+            now=clock()
+            gap=now>=1140 and (condition=='permanent_gap' or (condition=='recovered_gap' and now<1180))
+            stamp=1139. if gap else now
+            one_sided=condition=='one_sided_exit' and now>=1200
+            created=dict(kind='CreateEvent',mint='a',timestamp=970,received=971,quote_mint=SOL,
+                token_program=TOKEN,is_mayhem_mode=False)
+            trades=[dict(received=stamp-6+i,timestamp=stamp-6+i,is_buy=False if one_sided else bool(i%2),
+                mint='a',quote_mint=SOL,mayhem_mode=False,signature=str(stamp)+str(i),log_index=i,
+                virtual_sol_reserves=100_000_000_000,virtual_token_reserves=1_000_000_000_000,
+                real_sol_reserves=50_000_000_000,sol_amount=1000000) for i in range(6)]
+            return {'a':dict(created=created,trades=trades,complete=False)}
+    root=tmp_path/'run'
+    result=run(root,'unused',parent,seconds=300,fly_factory=FakeFly,feed_factory=Market,
+        clock=clock,sleep=clock.sleep,fx_fetch=lambda:100,account_mode='fresh_training_episode')
+    rows=[json.loads(x) for x in (root/'decisions.jsonl').read_text().splitlines()]
+    metrics=[r['neural']['head_training'] for r in rows if r.get('neural') and r['neural'].get('head_training')]
+    metrics+=rows[-1]['reward_settlements']
+    assert rows[-1]['terminal'] and all(h['terminal'] for h in rows[-1]['reward_settlements'])
+    assert result['reward_reconciliation']['residual_usd']==pytest.approx(0,abs=1e-7)
+    assert sum(h['reward_usd'] for h in metrics)==pytest.approx(result['episode_pnl_usd'],abs=1e-7)
+    assert all(h['reward_usd']<1e-6 for h in metrics)  # A constant market cannot produce gap/recovery profits.
+    if condition=='permanent_gap':
+        assert result['episode_pnl_usd']<-200
+        assert rows[-1]['reward_settlements'][0]['valuation']=='terminal_missing_quote_stress'
+        assert rows[-1]['reward_settlements'][0]['reward_usd']<-200
+    elif condition=='recovered_gap':
+        assert any(h['quote_gap'] and not h['terminal'] for h in metrics)
+        assert result['episode_pnl_usd']>-30
+    elif condition=='last_fill':
+        assert result['fills']==1 and rows[-1]['reward_settlements'][0]['reward_usd']<0
+        assert next(e['fill']['fill_ts'] for r in rows for e in r['executions'] if e['fill']['status']=='filled')>1265
+    else:
+        assert any(e['fill'].get('side')=='SELL' for r in rows if r['observation_at']>=1200 for e in r['executions'])
+        assert rows[-2]['quote_diagnostics']['a']['observation_reason'] is None
+        assert rows[-2]['quote_diagnostics']['a']['entry_reason']=='one_sided'
+    from paperlab.solana_online_audit import audit
+    opening=json.loads((root/'opening.json').read_text());a=audit(opening,rows)
+    assert a['reward_reconciliation_verified'] and a['new_head_updates']==result['new_readout_updates']
+    bad=deepcopy(rows);bad[-1]['reward_settlements'][0]['reward_usd']+=1
+    with pytest.raises(ValueError,match='Reward credit'):audit(opening,bad)
 
 
 def test_scheduler_single_flight_completion_pacing_and_failure(tmp_path):
