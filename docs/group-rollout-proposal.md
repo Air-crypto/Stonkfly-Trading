@@ -1,4 +1,46 @@
-# Proposed group rollout experiment (not deployed)
+# Group rollout experiment
+
+The bounded pilot is implemented in `paperlab/group_replay.py` and
+`group_replay_cloud.py`. It is an unscheduled, separate paper experiment. The live
+Q learner and native plasticity continue under their existing coordinator.
+
+The first pilot preregisters up to four first-eligible launches from
+`solana-online-20260913-230259` for training and up to four later launches from
+`solana-online-20260913-232717` for testing, excluding every mint in the earlier
+archive. Each episode has a fixed 60-second horizon at five-second intervals;
+unavailable quotes and losing episodes remain in the data. These are retrospective
+pilot windows, not a new sealed future holdout. No settings are tuned on test PnL.
+
+The full pristine fly encodes causal market frames with zero reward and frozen
+synapses, resetting between mints. A 900-parameter stochastic actor receives these
+features plus branch-specific account state and remaining time. Twelve trajectories
+form each group; eight passes use two Adam updates per group. The objective uses
+length-normalized sequence probability ratios, group-normalized rewards, clipping,
+entropy regularization and a KL guard. Zero-variance groups skip training.
+
+Each branch starts with $1,000 simulated cash and at most 0.25% target exposure.
+Actions are HOLD, EXIT, 0.15% target and 0.25% target. Orders are capped at $2.50
+notional, with a 1.25% fee per side, 1% slippage per side and the indicative
+one-percent bid/ask spread. The original stricter $25-based liquidity admission
+guard is retained. Execution requires a later usable receipt within fifteen seconds.
+Terminal inventory is conservatively marked with exit costs, not automatically sold;
+an unavailable terminal quote values that inventory at zero.
+
+Reward is liquidation PnL minus 25% of maximum dollar drawdown and 0.1% of mean
+marked dollar exposure. Outputs include the pre-training manifest, causal feature
+cache, initial/trained actor checkpoints, all training and evaluation trajectories,
+losses, per-layer gradient norms, weight deltas, sequence ratios, entropy and KL.
+Matched evaluations compare initial and trained actors, cash and buy-and-hold.
+The current Q-head comparison is deferred because its reward-conditioned encoder,
+account inputs and action/risk settings differ; it would not be a matched comparison.
+
+The cloud job acquires the existing shared worker lease, reserves its full timeout
+within the $85 worker allocation of the $100 monthly authorization, has no automatic
+retries, and cannot overwrite a run. A timeout/failure retains the reservation. Native
+encoding is blocked outside Modal. There is no automatic promotion or recurring
+GSPO training; the pilot measures mechanics and indicative outcomes, not profitability.
+
+## Design rationale
 
 The user proposed twelve alternative action sequences for the same new-token market
 segment. This is a reasonable replay experiment after the live paper accounting and
