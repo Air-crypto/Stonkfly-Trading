@@ -16,6 +16,13 @@ The [dynamic memecoin experiment](docs/memecoin-universe.md) discovers current a
 new launches and samples DEX pools. Coverage is bounded; it does not trade every
 Solana token. The latest controlled comparison uses two fixed pools, RAY and STONK.
 
+The current [hourly training service](docs/solana-online.md) starts each independent
+training episode with $1,000 paper cash while preserving learned fly/Q weights.
+The full balance is available across tokens, capped at $250 acquisition cost per
+token and one percent of observed liquidity per fill. Old account losses remain
+archived and every episode's outcome is retained; reset balances are not a
+continuous portfolio return. The $100 monthly cloud authorization remains in force.
+
 The new [Solana live pilot](docs/solana-live.md) subscribes directly to confirmed
 Pump.fun launch/trade events and targets five-second observations. It follows canonical PumpSwap migration and trains the
 native fly plus a small entry/exit readout using $1,000 paper cash, a $25 order

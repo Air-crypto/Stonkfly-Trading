@@ -16,11 +16,15 @@ MAX_RISK_USD = Decimal('100')
 MAX_ENTRY_DEBIT_USD = Decimal('2.50')
 CASH_FLOOR_USD = Decimal('902')  # Original $900 loss stop plus a $2 execution buffer.
 MIN_ENTRY_DEBIT_USD = Decimal('1.05')
+ACCOUNT_MODES = ('continuous', 'fresh_training_episode')
+EPISODE_TOKEN_CAP_USD = Decimal('250')
+EPISODE_POLICY = 'fresh_training_full_cash_v1'
 
 
 class Portfolio:
     """One cash balance, per-mint inventory and cash flows; no free capital on admission."""
     def __init__(self, state):
+        self.episodic = state.get('risk_policy') == EPISODE_POLICY
         self.cash = Decimal(state['cash'])
         self.fees = Decimal(state['fees'])
         self.halted = bool(state.get('halted', False))
@@ -34,11 +38,14 @@ class Portfolio:
         return self.positions.setdefault(mint, dict(qty=Decimal(0), basis=Decimal(0), cash_flow=Decimal(0)))
 
     def state(self):
-        return dict(cash=str(self.cash), fees=str(self.fees), halted=self.halted, quarantined=sorted(self.quarantined),
+        result = dict(cash=str(self.cash), fees=str(self.fees), halted=self.halted, quarantined=sorted(self.quarantined),
                     positions={m: {k: str(v) for k, v in p.items()} for m, p in self.positions.items()})
+        if self.episodic: result['risk_policy'] = EPISODE_POLICY
+        return result
 
     def view(self, mint):
-        return Broker(COSTS, state=dict(cash=str(self.cash), qty=str(self.position(mint)['qty']),
+        costs=replace(COSTS,max_exposure=1.,max_order=1000.,loss_stop=1.) if self.episodic else COSTS
+        return Broker(costs, state=dict(cash=str(self.cash), qty=str(self.position(mint)['qty']),
                                        fees=str(self.fees), halted=self.halted))
 
     def value(self, mint, tick):
@@ -53,6 +60,10 @@ class Portfolio:
 
     def entry_budget(self, mint=None):
         """Quarantine changes allocation only; it never restores cash, basis, or equity."""
+        if self.episodic:
+            room=self.cash
+            if mint is not None:room=min(room,EPISODE_TOKEN_CAP_USD-self.position(mint)['basis'])
+            return max(Decimal(0),room) if not self.halted else Decimal(0)
         active_basis = sum(p['basis'] for m,p in self.positions.items() if m not in self.quarantined)
         room = min(MAX_RISK_USD-active_basis, self.cash-CASH_FLOOR_USD)
         if mint is not None: room = min(room, MAX_ENTRY_DEBIT_USD-self.position(mint)['basis'])
@@ -63,22 +74,29 @@ class Portfolio:
 
     def target(self, mint, action, tick):
         if action == 0: return 0.
+        if self.episodic and self.entry_budget(mint)>=MIN_ENTRY_DEBIT_USD:
+            return 1.
         # LONG holds an existing lot; it does not repeatedly request more blocked exposure.
         if self.position(mint)['qty']:
-            return min(COSTS.max_exposure, float(self.position(mint)['qty'])*tick.mid/self.view(mint).equity(tick))
-        return COSTS.max_exposure
+            return min(1. if self.episodic else COSTS.max_exposure, float(self.position(mint)['qty'])*tick.mid/self.view(mint).equity(tick))
+        return 1. if self.episodic else COSTS.max_exposure
 
-    def execute(self, mint, target, issued, tick, quotes):
-        if self.equity(quotes) <= 900: self.halted = True
+    def execute(self, mint, target, issued, tick, quotes, *, liquidity_notional_usd=None):
+        if self.equity(quotes) <= (0 if self.episodic else 900): self.halted = True
         b = self.view(mint); before = b.cash; before_qty = b.qty
         requested = Decimal(str(b.equity(tick)*target/tick.mid))-b.qty
         buying = requested*Decimal(str(tick.mid)) >= 1
         budget = self.entry_budget(mint)
+        if self.episodic:
+            import math
+            if liquidity_notional_usd is None or not math.isfinite(liquidity_notional_usd) or liquidity_notional_usd<1:
+                return dict(status='rejected',reason='insufficient_observed_liquidity')
+            b.c=replace(b.c,max_order=min(1000.,liquidity_notional_usd))
         if buying and not self.halted:
             if budget < MIN_ENTRY_DEBIT_USD:
                 return dict(status='rejected', reason='entry_risk_budget', entry_budget_usd=str(budget))
             # Re-size on the actual later receipt, with fees inside the debit allowance.
-            b.c = replace(COSTS, max_order=float(budget/Decimal('1.0125'))*.999999)
+            b.c = replace(b.c, max_order=min(b.c.max_order,float(budget/Decimal('1.0125'))*.999999))
         fill = b.execute(target, issued, tick)
         if fill['status'] != 'filled': return fill
         p = self.position(mint); debit = before - b.cash
@@ -105,6 +123,32 @@ def load_parent(path):
         active={mint: saved['created']}, retired=[], native_checkpoint=saved['native_checkpoint'],
         head_checkpoint=saved['head_checkpoint'], native_observations_total=0,
         migration='Legacy acquisition-cost risk reserve uses net cash spent; old ledger remains immutable.')
+
+
+def opening_state(parent, account_mode, episode_id):
+    """Carry learning across independent episodes without rewriting the parent account."""
+    from .core import digest
+    if account_mode not in ACCOUNT_MODES:
+        raise ValueError('Unknown account mode')
+    saved = load_parent(parent)
+    if account_mode == 'continuous':
+        if saved.get('account_mode')=='fresh_training_episode':
+            raise ValueError('Do not relabel training episodes as a continuous account')
+        return saved
+    parent = Path(parent)
+    completed = json.loads((parent/'completed.json').read_text())
+    reset = dict(account_mode=account_mode, episode_id=episode_id, training_only=True,
+        risk_policy=EPISODE_POLICY,max_token_acquisition_usd=float(EPISODE_TOKEN_CAP_USD),
+        cash_floor_usd=0.,liquidity_fraction=.01,
+        initial_cash_usd=1000., parent_archive=str(parent),
+        parent_state_sha256=digest(parent/'online-state.json'),
+        parent_completed_sha256=digest(parent/'completed.json'),
+        parent_portfolio=saved['portfolio'], parent_end_equity_usd=completed.get('equity_stress_usd'),
+        native_checkpoint_sha256=digest(saved['native_checkpoint']),
+        head_checkpoint_sha256=digest(saved['head_checkpoint']),
+        semantics='Independent training episode; no account deposit or continuous portfolio return')
+    return {**saved, 'portfolio':dict(cash='1000',fees='0',halted=False,positions={},quarantined=[],risk_policy=EPISODE_POLICY),
+            'active':{},'watched':{},'retired':[], 'account_mode':account_mode,'episode':reset}
 
 
 def choose(candidates, current, burst, visits):
@@ -150,7 +194,7 @@ def update_active(active, watched, retired, inactive, portfolio, snapshots, quot
     return admitted, removed
 
 def run(root, data, parent, *, seconds=900, commit=lambda: None, fly_factory=None,
-        feed_factory=Feed, clock=time.time, sleep=time.sleep, fx_fetch=None):
+        feed_factory=Feed, clock=time.time, sleep=time.sleep, fx_fetch=None, account_mode='continuous'):
     if not 60 <= seconds <= 900: raise ValueError('Bounded window required')
     if fly_factory is None:
         import modal
@@ -159,7 +203,8 @@ def run(root, data, parent, *, seconds=900, commit=lambda: None, fly_factory=Non
         fly_factory = Fly
     root = Path(root); root.mkdir(parents=True, exist_ok=True)
     if (root/'started.json').exists(): raise ValueError('Immutable window')
-    saved = load_parent(parent); portfolio = Portfolio(saved['portfolio'])
+    saved = opening_state(parent, account_mode, root.name); portfolio = Portfolio(saved['portfolio'])
+    risk_policy=EPISODE_POLICY if portfolio.episodic else 'quarantined_inventory_cash_floor_v1'
     active = dict(saved['active']); watched = dict(saved.get('watched', active)); retired = set(saved['retired'])
     head = Readout(); head.restore(saved['head_checkpoint']); opening_updates = head.updates
     feed = feed_factory(root)
@@ -169,9 +214,11 @@ def run(root, data, parent, *, seconds=900, commit=lambda: None, fly_factory=Non
     atomic_json(root/'opening.json', saved)
     atomic_json(root/'started.json', dict(at=started, deadline=deadline, paper_only=True,
         max_active_tokens=MAX_ACTIVE, shared_capital=1000, interval_seconds=5, parent=str(parent),
+        account_mode=account_mode, episode=saved.get('episode'),
         coverage='Pump launches received during this window; bounded admission, not every token',
-        risk_policy='quarantined_inventory_cash_floor_v1', max_tradable_acquisition_cost_usd=100,
-        max_new_position_debit_usd=2.5, minimum_cash_after_buy_usd=902, news_enabled=False))
+        risk_policy=risk_policy, max_tradable_acquisition_cost_usd=None if portfolio.episodic else 100,
+        max_new_position_debit_usd=float(EPISODE_TOKEN_CAP_USD) if portfolio.episodic else 2.5,
+        minimum_cash_after_buy_usd=0 if portfolio.episodic else 902, news_enabled=False))
     commit()
     fly = None; current = None; burst = 0; visits = {}; contexts = {}; inactive = {}
     rows = trained = fills = overruns = nonzero_rewards = rejected_credit = 0
@@ -225,8 +272,11 @@ def run(root, data, parent, *, seconds=900, commit=lambda: None, fly_factory=Non
                 if sig == c['signature']: continue
                 c['signature'] = sig
                 if c['pending']:
-                    fill = portfolio.execute(m, c['pending']['target'], c['pending']['issued'], t, quotes)
-                    executions.append(dict(mint=m, tick=t.__dict__, fill=fill))
+                    liquidity=last['real_sol_reserves']/1e9*fx*.01
+                    kwargs={'liquidity_notional_usd':liquidity} if portfolio.episodic else {}
+                    fill = portfolio.execute(m, c['pending']['target'], c['pending']['issued'], t, quotes, **kwargs)
+                    executions.append(dict(mint=m, tick=t.__dict__, fill=fill,
+                        liquidity_notional_usd=liquidity,real_sol_reserves=last['real_sol_reserves'],sol_usd=fx))
                     fills += fill['status'] == 'filled'
                     if fill['status']=='rejected' and fill.get('reason')!='not_after_decision':
                         c['previous']=None; rejected_credit+=1
@@ -273,6 +323,7 @@ def run(root, data, parent, *, seconds=900, commit=lambda: None, fly_factory=Non
                     status = 'training'
             elapsed = clock()-step_start; overruns += elapsed > 5
             row = dict(at=clock(), step=rows, paper_only=True, status=status, admissions=admissions,
+                account_mode=account_mode, episode_id=root.name if account_mode=='fresh_training_episode' else None,
                 retired=removals, active_tokens=len(active), tracked_launches=len(snapshots),
                 eligible_tokens=len(quotes), executions=executions, decision=decision, neural=neural,
                 portfolio=portfolio.state(), equity_stress_usd=portfolio.equity(quotes),
@@ -280,7 +331,7 @@ def run(root, data, parent, *, seconds=900, commit=lambda: None, fly_factory=Non
                 unavailable_positions=[m for m,p in portfolio.positions.items() if p['qty'] and m not in quotes],
                 feed=health, neural_observations=trained, readout_updates=head.updates,
                 new_readout_updates=head.updates-opening_updates, fills=fills, overruns=overruns,
-                risk_policy='quarantined_inventory_cash_floor_v1', entry_budget_usd=str(portfolio.entry_budget()),
+                risk_policy=risk_policy, entry_budget_usd=str(portfolio.entry_budget()),
                 nonzero_reward_updates=nonzero_rewards, rejected_order_credit_dropped=rejected_credit,
                 step_seconds=elapsed, skip_reasons=dict(reasons))
             ledger.write(json.dumps(row, allow_nan=False)+'\n'); ledger.flush()
@@ -295,14 +346,17 @@ def run(root, data, parent, *, seconds=900, commit=lambda: None, fly_factory=Non
     if fly:
         fly.save(root/'fly-final.npz'); head.save(root/'head-final.pt')
     atomic_json(root/'online-state.json', dict(portfolio=portfolio.state(), active=active,
+        account_mode=account_mode, episode=saved.get('episode'),
         watched=watched, retired=sorted(retired), native_checkpoint=str(root/'fly-final.npz') if fly else saved['native_checkpoint'],
         head_checkpoint=str(root/'head-final.pt') if fly else saved['head_checkpoint'],
         native_observations_total=saved.get('native_observations_total', 0)+trained,
         readout_updates=head.updates))
     result = dict(status=status, started=started, ended=clock(), steps=rows, paper_only=True,
+        account_mode=account_mode, episode=saved.get('episode'),
+        episode_pnl_usd=portfolio.equity(quotes)-1000 if account_mode=='fresh_training_episode' else None,
         neural_observations=trained, readout_updates=head.updates, new_readout_updates=head.updates-opening_updates,
         fills=fills, active_tokens=len(active), portfolio=portfolio.state(),
-        risk_policy='quarantined_inventory_cash_floor_v1', entry_budget_usd=str(portfolio.entry_budget()),
+        risk_policy=risk_policy, entry_budget_usd=str(portfolio.entry_budget()),
         nonzero_reward_updates=nonzero_rewards, rejected_order_credit_dropped=rejected_credit,
         tradable_positions=[m for m,p in portfolio.positions.items() if p['qty'] and portfolio.value(m,quotes.get(m))>=1],
         unavailable_positions=[m for m,p in portfolio.positions.items() if p['qty'] and m not in quotes],

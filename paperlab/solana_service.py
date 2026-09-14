@@ -44,6 +44,48 @@ def configure_cadence(root, mode, *, commit, now=None, start_now=False):
     return control
 
 
+def enable_training_episodes(root, expected_parent, *, commit, now=None):
+    """Explicit operator-authorized conversion of an exhausted paper account.
+
+    The caller holds the coordinator lease. Budget, storage, pending calls and
+    operational failures remain blocking; only account-risk exhaustion is reclassified.
+    """
+    from .core import atomic_json, digest
+    now=time.time() if now is None else now
+    root=Path(root);path=root/'solana-online/control.json'
+    control=json.loads(path.read_text())
+    if control.get('pending') or control['parent']!=expected_parent:
+        raise ValueError('Parent changed or call pending; reconcile first')
+    if control.get('account_mode')=='fresh_training_episode':
+        raise ValueError('Training episodes already configured')
+    if control.get('budget_paused_until',0)>now or control.get('status')=='budget_paused_until_next_month':
+        raise ValueError('Cannot bypass a budget pause')
+    used=sum(p.stat().st_size for p in (root/'solana-live').rglob('*') if p.is_file())
+    if used>8*1024**3:
+        raise ValueError('Cannot bypass storage cap')
+    parent=root/'solana-live'/expected_parent
+    result=json.loads((parent/'completed.json').read_text())
+    if (result.get('status')!='completed' or not result.get('paper_only')
+            or result.get('training_health')!='risk_capacity_exhausted'
+            or control.get('last_result',{}).get('training_health')!='risk_capacity_exhausted'
+            or control.get('status') not in ('disabled','training_risk_capacity_requires_review')):
+        raise ValueError('Only the reviewed account-risk pause can enable fresh episodes')
+    archive=root/'solana-online'/f'pre-episodes-{expected_parent}.json'
+    if archive.exists():
+        raise ValueError('Preserve original account-mode transition')
+    atomic_json(archive,control)
+    control.update(account_mode='fresh_training_episode',enabled=True,next_at=now,
+        status='waiting_for_budget_paced_window',
+        continuous_account_archive=dict(run_id=expected_parent,completed_sha256=digest(parent/'completed.json'),
+                                        control_archive=str(archive)),
+        episode_totals=dict(episodes=0,sum_episode_pnl_usd=0.,sum_episode_fees_usd=0.,
+                            scope='Independent training episodes; not continuous portfolio performance'))
+    control.setdefault('account_mode_changes',[]).append(dict(at=now,from_mode='continuous',
+        to_mode='fresh_training_episode',parent=expected_parent,initial_cash_per_episode_usd=1000.,
+        authorization='User requested resetting paper capital per training run; learned weights continue'))
+    atomic_json(path,control);commit();return control
+
+
 def service(root, *, dispatch, poll, commit, now=None, mode='paced'):
     from .core import atomic_json
     now = time.time() if now is None else now
@@ -78,14 +120,34 @@ def service(root, *, dispatch, poll, commit, now=None, mode='paced'):
         result = json.loads(completed.read_text())
         if result['status'] != 'completed' or not result.get('paper_only'):
             control['enabled'] = False; return save('invalid_completion')
+        episodic=pending.get('account_mode','continuous')=='fresh_training_episode'
+        if episodic:
+            episode=result.get('episode') or {}
+            pnl=result.get('episode_pnl_usd')
+            import math
+            if (result.get('account_mode')!='fresh_training_episode' or not episode.get('training_only')
+                    or episode.get('episode_id')!=pending['run_id'] or episode.get('initial_cash_usd')!=1000
+                    or not isinstance(pnl,(int,float)) or not math.isfinite(pnl)
+                    or abs(pnl-(result['equity_stress_usd']-1000))>1e-7):
+                control['enabled']=False;return save('invalid_episode_completion')
+            summary=dict(run_id=pending['run_id'],initial_cash_usd=1000.,episode_pnl_usd=pnl,
+                ended=result['ended'],end_equity_stress_usd=result['equity_stress_usd'],
+                end_portfolio=result['portfolio'],training_only=True,
+                training_health=result.get('training_health'),account_audit=result.get('account_audit'))
+            atomic_json(root/'solana-online/episode-results'/f"{pending['run_id']}.json",summary)
+            totals=control['episode_totals'];totals['episodes']+=1
+            totals['sum_episode_pnl_usd']+=pnl
+            totals['sum_episode_fees_usd']+=float(result['portfolio']['fees'])
         control['parent'] = pending['run_id']; control['pending'] = None
         control['completed_windows'] += 1
         control['last_result'] = {k:result.get(k) for k in
             ('ended','neural_observations','new_readout_updates','nonzero_reward_updates','fills',
              'equity_stress_usd','entry_budget_usd','training_health','account_audit','budget')}
-        if result.get('portfolio', {}).get('halted'):
+        control['last_result'].update(account_mode=result.get('account_mode','continuous'),
+                                      episode_pnl_usd=result.get('episode_pnl_usd'))
+        if result.get('portfolio', {}).get('halted') and not episodic:
             control['enabled'] = False; return save('paper_loss_stop_requires_review')
-        if result.get('training_health')=='risk_capacity_exhausted':
+        if result.get('training_health')=='risk_capacity_exhausted' and not episodic:
             control['enabled']=False; return save('training_risk_capacity_requires_review')
         control['next_at'] = pending['dispatched_at'] + next_delay(control['mode'])
         save('completed')
@@ -96,8 +158,12 @@ def service(root, *, dispatch, poll, commit, now=None, mode='paced'):
     if used > 8*1024**3:
         control['enabled'] = False; return save('storage_cap_requires_review')
     run_id = 'solana-online-' + datetime.fromtimestamp(now, timezone.utc).strftime('%Y%m%d-%H%M%S')
-    control['pending'] = dict(run_id=run_id, call_id=None, dispatched_at=now)
+    account_mode=control.get('account_mode','continuous')
+    if account_mode not in ('continuous','fresh_training_episode'):
+        control['enabled']=False;return save('invalid_account_mode')
+    control['pending'] = dict(run_id=run_id, call_id=None, dispatched_at=now,account_mode=account_mode)
     save('dispatch_intent')  # A crash here cannot silently cause a duplicate submission.
-    call_id = dispatch(run_id, control['parent'])
+    call_id = (dispatch(run_id, control['parent'], account_mode) if account_mode=='fresh_training_episode'
+               else dispatch(run_id, control['parent']))
     control['pending']['call_id'] = call_id
     return save('dispatched')

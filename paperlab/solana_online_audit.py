@@ -7,11 +7,18 @@ from .solana_paper import COSTS
 
 def audit(opening, rows):
     s=opening['portfolio'];cash=Decimal(s['cash']);fees=Decimal(s['fees'])
+    episodic=opening.get('account_mode')=='fresh_training_episode'
+    if episodic and (cash!=1000 or fees!=0 or s['positions'] or s['halted']
+                    or s.get('risk_policy')!='fresh_training_full_cash_v1'):
+        raise ValueError('Training episode must start with fresh paper capital and empty inventory')
     qty={m:Decimal(p['qty']) for m,p in s['positions'].items()}
     flow={m:Decimal(p['cash_flow']) for m,p in s['positions'].items()}
     basis={m:Decimal(p['basis']) for m,p in s['positions'].items()}
     issued={};filled=set();fills=0;native=0;head=0;marks=0;nonzero=0;mints=set();last=0.
     for r in rows:
+        if episodic and (r.get('account_mode')!='fresh_training_episode'
+                         or r.get('risk_policy')!='fresh_training_full_cash_v1'):
+            raise ValueError('Training account mode changed within episode')
         if not r['paper_only'] or r['at']<=last:raise ValueError('Invalid paper chronology')
         last=r['at']
         for e in r['executions']:
@@ -25,9 +32,17 @@ def audit(opening, rows):
             n=Decimal(f['quantity']);price=Decimal(f['price']);fee=Decimal(f['fee']);buy=f['side']=='BUY'
             expected=t['ask']*1.01 if buy else t['bid']*.99
             if abs(float(price)/expected-1)>1e-12:raise ValueError('Fill price differs')
-            if n<=0 or n*price>Decimal('25.000000001'):raise ValueError('Order cap differs')
+            cap=Decimal('1000.000000001') if episodic else Decimal('25.000000001')
+            if n<=0 or n*price>cap:raise ValueError('Order cap differs')
+            if episodic:
+                liquidity=Decimal(str(e['real_sol_reserves']))/Decimal('1e9')*Decimal(str(e['sol_usd']))*Decimal('.01')
+                if liquidity<=0 or n*price>liquidity+Decimal('1e-7'):
+                    raise ValueError('Observed liquidity allowance exceeded')
             if abs(fee-n*price*Decimal('.0125'))>Decimal('1e-9'):raise ValueError('Fee differs')
             delta=-n*price-fee if buy else n*price-fee
+            if buy and episodic:
+                allowance=max(Decimal(0),min(Decimal(str(opening['episode']['max_token_acquisition_usd']))-basis.get(m,0),cash))
+                if -delta>allowance+Decimal('1e-8'):raise ValueError('Training cash or token allowance exceeded')
             if buy and r.get('risk_policy')=='quarantined_inventory_cash_floor_v1':
                 quarantined=set(r['portfolio'].get('quarantined', []))
                 active_basis=sum(b for k,b in basis.items() if k not in quarantined)

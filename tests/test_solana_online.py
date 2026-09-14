@@ -133,12 +133,17 @@ class FakeFly:
     def save(self,path):Path(path).write_bytes(b'fake test checkpoint')
 
 
-@pytest.mark.parametrize('locked,reject_all',[(False,False),(True,False),(True,True)])
-def test_cloud_entry_logic_rotates_launches_and_restores_account(tmp_path,monkeypatch,locked,reject_all):
+@pytest.mark.parametrize('locked,reject_all,episodic',[(False,False,False),(True,False,False),(True,True,False),(True,False,True)])
+def test_cloud_entry_logic_rotates_launches_and_restores_account(tmp_path,monkeypatch,locked,reject_all,episodic):
     clock=Clock();parent=make_parent(tmp_path)
     if locked:
         saved=json.loads((parent/'online-state.json').read_text());saved['portfolio']=locked_state()
         saved['active']={'old':dict(mint='old',timestamp=900,received=901)}
+        atomic_json(parent/'online-state.json',saved)
+    if episodic:
+        saved=json.loads((parent/'online-state.json').read_text())
+        (parent/'native.npz').write_bytes(b'fake immutable native weights')
+        saved['native_checkpoint']=str(parent/'native.npz')
         atomic_json(parent/'online-state.json',saved)
     calls=[0]
     def choose_actions(self,x,allowed_actions=(0,1)):
@@ -165,7 +170,8 @@ def test_cloud_entry_logic_rotates_launches_and_restores_account(tmp_path,monkey
                 out[m]=dict(created=created,trades=trades,complete=False)
             return out
     result=run(tmp_path/'run','unused',parent,seconds=300,fly_factory=FakeFly,feed_factory=FakeFeed,
-        clock=clock,sleep=clock.sleep,fx_fetch=lambda:100)
+        clock=clock,sleep=clock.sleep,fx_fetch=lambda:100,
+        account_mode='fresh_training_episode' if episodic else 'continuous')
     rows=[json.loads(x) for x in (tmp_path/'run/decisions.jsonl').read_text().splitlines()]
     assert result['status']=='completed' and result['active_tokens']==3
     assert {r['neural']['mint'] for r in rows if r['neural']}=={'a','b','c'}
@@ -175,9 +181,13 @@ def test_cloud_entry_logic_rotates_launches_and_restores_account(tmp_path,monkey
     else:
         assert result['new_readout_updates']>0 and result['nonzero_reward_updates']>0 and result['fills']>0
         assert {e['fill']['side'] for r in rows for e in r['executions'] if e['fill']['status']=='filled'}=={'BUY','SELL'}
-    if locked:
+    if locked and not episodic:
         assert result['portfolio']['positions']['old']==locked_state()['positions']['old']
         assert 'old' in result['portfolio']['quarantined']
+    if episodic:
+        assert result['account_mode']=='fresh_training_episode' and 'old' not in result['portfolio']['positions']
+        assert result['episode']['parent_portfolio']==locked_state()
+        assert result['episode_pnl_usd']==pytest.approx(result['equity_stress_usd']-1000)
     assert all(r['neural']['learning_diagnostics']['equity_reward_usd']==0 for r in rows if r['neural'] and r['neural']['switched_token'])
     # Reconstruct all shared-account fills using Decimal rather than calling Portfolio/Broker.
     opening=json.loads((tmp_path/'run/opening.json').read_text())['portfolio']
@@ -326,3 +336,107 @@ def test_scheduler_does_not_burn_compute_when_no_risk_capacity_remains(tmp_path)
     c=service(tmp_path,dispatch=lambda *_:pytest.fail('Risk stop bypassed'),poll=lambda _:dict(status='completed'),
               commit=lambda:None,now=2000)
     assert not c['enabled'] and c['status']=='training_risk_capacity_requires_review'
+
+
+def test_fresh_episode_preserves_models_and_parent_but_resets_account(tmp_path):
+    from paperlab.solana_online import opening_state,EPISODE_POLICY
+    from paperlab.core import digest
+    parent=make_parent(tmp_path)
+    s=load_parent(parent);s['portfolio']=locked_state();s['portfolio']['halted']=True
+    (parent/'native.npz').write_bytes(b'original weights');s['native_checkpoint']=str(parent/'native.npz')
+    atomic_json(parent/'online-state.json',s)
+    before={p.name:p.read_bytes() for p in parent.iterdir()}
+    fresh=opening_state(parent,'fresh_training_episode','episode-1')
+    assert fresh['portfolio']==dict(cash='1000',fees='0',halted=False,positions={},quarantined=[],risk_policy=EPISODE_POLICY)
+    assert fresh['active']==fresh['watched']=={} and fresh['retired']==[]
+    assert fresh['episode']['parent_portfolio']==s['portfolio']
+    assert fresh['episode']['native_checkpoint_sha256']==digest(s['native_checkpoint'])
+    assert fresh['head_checkpoint']==s['head_checkpoint']
+    head=Readout();head.restore(fresh['head_checkpoint']);assert head.updates==42
+    assert all(p.read_bytes()==before[p.name] for p in parent.iterdir())
+    assert opening_state(parent,'continuous','x')==s
+    with pytest.raises(ValueError,match='Unknown'):opening_state(parent,'typo','x')
+
+
+def test_training_can_allocate_entire_balance_with_fee_and_liquidity_caps():
+    from paperlab.solana_online import EPISODE_POLICY
+    p=Portfolio({**state(),'risk_policy':EPISODE_POLICY})
+    for mint in ('a','b','c','d'):
+        t=tick(mint);before=p.cash
+        fill=p.execute(mint,p.target(mint,1,t),99,t,{mint:t},liquidity_notional_usd=1000.)
+        assert fill['status']=='filled' and before-p.cash<=250 and p.cash>=0
+    assert p.cash<1 and not p.halted  # No inherited $902 floor or $100 allocation cap.
+    q=Portfolio({**state(),'risk_policy':EPISODE_POLICY})
+    t=tick()
+    assert q.execute('a',1.,99,t,{'a':t})['reason']=='insufficient_observed_liquidity'
+    f=q.execute('a',1.,99,t,{'a':t},liquidity_notional_usd=10.)
+    assert Decimal(f['quantity'])*Decimal(f['price'])<=Decimal('10.000000001')
+    assert Portfolio(q.state()).entry_budget()==q.cash
+
+
+def paused_control(tmp_path):
+    run='solana-online-20260914-003217'
+    result=dict(status='completed',paper_only=True,training_health='risk_capacity_exhausted',
+                portfolio=dict(halted=False),equity_stress_usd=902.60)
+    atomic_json(tmp_path/'solana-live'/run/'completed.json',result)
+    control=dict(enabled=False,mode='hourly',parent=run,pending=None,next_at=0,completed_windows=5,
+                 status='disabled',last_result=result)
+    atomic_json(tmp_path/'solana-online/control.json',control)
+    return run,control
+
+
+def test_operator_conversion_archives_account_and_preserves_budget(tmp_path):
+    from paperlab.solana_service import enable_training_episodes
+    run,control=paused_control(tmp_path)
+    atomic_json(tmp_path/'budget.json',dict(months={'2026-09':7.57}))
+    before=(tmp_path/'budget.json').read_bytes()
+    changed=enable_training_episodes(tmp_path,run,commit=lambda:None,now=1000)
+    assert changed['enabled'] and changed['account_mode']=='fresh_training_episode'
+    assert changed['completed_windows']==5 and changed['episode_totals']['episodes']==0
+    assert json.loads(Path(changed['continuous_account_archive']['control_archive']).read_text())==control
+    assert (tmp_path/'budget.json').read_bytes()==before
+    with pytest.raises(ValueError,match='already'):enable_training_episodes(tmp_path,run,commit=lambda:None)
+
+
+@pytest.mark.parametrize('block',['pending','parent','budget','failed'])
+def test_episode_conversion_does_not_bypass_other_guards(tmp_path,block):
+    from paperlab.solana_service import enable_training_episodes
+    run,c=paused_control(tmp_path)
+    if block=='pending':c['pending']={'call_id':'running'}
+    elif block=='parent':c['parent']='different'
+    elif block=='budget':c['budget_paused_until']=2000
+    elif block=='failed':c['status']='failed_requires_review'
+    path=tmp_path/'solana-online/control.json';atomic_json(path,c);before=path.read_bytes()
+    with pytest.raises(ValueError):enable_training_episodes(tmp_path,run,commit=lambda:None,now=1000)
+    assert path.read_bytes()==before
+
+
+def test_episode_losses_survive_reset_and_next_window_keeps_cadence(tmp_path):
+    from paperlab.solana_service import enable_training_episodes
+    parent,_=paused_control(tmp_path);enable_training_episodes(tmp_path,parent,commit=lambda:None,now=1000)
+    calls=[]
+    def dispatch(*args):calls.append(args);return 'call'
+    c=service(tmp_path,dispatch=dispatch,poll=lambda _:None,commit=lambda:None,now=1000)
+    assert calls[0][2]=='fresh_training_episode'
+    run=c['pending']['run_id']
+    result=dict(status='completed',paper_only=True,account_mode='fresh_training_episode',
+        episode=dict(episode_id=run,training_only=True,initial_cash_usd=1000),episode_pnl_usd=-1000.,
+        ended=1900,equity_stress_usd=0.,portfolio=dict(cash='0',fees='10',halted=True),
+        training_health='risk_capacity_exhausted')
+    atomic_json(tmp_path/'solana-live'/run/'completed.json',result)
+    c=service(tmp_path,dispatch=dispatch,poll=lambda _:dict(status='completed'),commit=lambda:None,now=2000)
+    assert c['enabled'] and c['next_at']==4600
+    assert c['episode_totals']['sum_episode_pnl_usd']==-1000
+    assert c['episode_totals']['sum_episode_fees_usd']==10
+    assert (tmp_path/'solana-online/episode-results'/f'{run}.json').exists()
+    c=service(tmp_path,dispatch=dispatch,poll=lambda _:None,commit=lambda:None,now=4600)
+    assert c['pending'] and calls[-1][1]==run and c['episode_totals']['episodes']==1
+
+
+def test_episode_dispatch_requires_matching_completion_mode(tmp_path):
+    from paperlab.solana_service import enable_training_episodes
+    parent,_=paused_control(tmp_path);enable_training_episodes(tmp_path,parent,commit=lambda:None,now=1000)
+    c=service(tmp_path,dispatch=lambda *_:'call',poll=lambda _:None,commit=lambda:None,now=1000)
+    atomic_json(tmp_path/'solana-live'/c['pending']['run_id']/'completed.json',dict(status='completed',paper_only=True))
+    c=service(tmp_path,dispatch=lambda *_:'no',poll=lambda _:dict(status='completed'),commit=lambda:None,now=2000)
+    assert not c['enabled'] and c['status']=='invalid_episode_completion'

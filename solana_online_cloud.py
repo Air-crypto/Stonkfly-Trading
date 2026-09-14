@@ -15,15 +15,16 @@ ENABLED = os.environ.get('PAPERLAB_ONLINE_SCHEDULE') == '1'
 @app.function(image=image, volumes={'/state':volume}, cpu=(2,2), memory=(8192,8192),
               timeout=1200, max_containers=1, min_containers=0, retries=0,
               single_use_containers=True, nonpreemptible=True)
-def worker(run_id: str, parent: str):
-    return exclusive('worker', _run, run_id, parent)
+def worker(run_id: str, parent: str, account_mode: str='continuous'):
+    return exclusive('worker', _run, run_id, parent, account_mode)
 
 
-def _run(run_id, parent):
+def _run(run_id, parent, account_mode='continuous'):
     import json, re, time
     from paperlab.core import atomic_json, digest
     from paperlab.budget import reserve, settle
-    from paperlab.solana_online import run
+    from paperlab.solana_online import run, ACCOUNT_MODES
+    if account_mode not in ACCOUNT_MODES:raise ValueError('Unknown account mode')
     if not re.fullmatch(r'solana-online-[0-9-]+',run_id) or not re.fullmatch(r'solana-[a-z0-9-]{1,60}',parent):
         raise ValueError('Invalid immutable run or parent id')
     volume.reload(); state=Path('/state'); root=state/'solana-live'/run_id
@@ -35,13 +36,15 @@ def _run(run_id, parent):
     reservation['rate']*=3;reservation['startup_seconds']=10
     root.mkdir(parents=True)
     atomic_json(root/'owner.json',dict(call_id=modal.current_function_call_id(),parent=parent,
+        account_mode=account_mode,
         run_id=run_id,at=time.time(),reservation=reservation,paper_only=True,source_sha256={
             n:digest('/opt/paperlab/'+n) for n in ('solana_online_cloud.py','paperlab/solana_online.py',
                                                 'paperlab/solana_events.py','paperlab/solana_service.py',
                                                 'paperlab/solana_paper.py','paperlab/solana_online_audit.py','paperlab/budget.py')}))
     volume.commit()
     try:
-        result=run(root,'/state/fly-data',state/'solana-live'/parent,seconds=900,commit=volume.commit)
+        result=run(root,'/state/fly-data',state/'solana-live'/parent,seconds=900,commit=volume.commit,
+                   account_mode=account_mode)
         from paperlab.solana_online_audit import audit
         result['account_audit']=audit(json.loads((root/'opening.json').read_text()),
             [json.loads(line) for line in (root/'decisions.jsonl').read_text().splitlines()])
@@ -73,7 +76,7 @@ def _coordinate():
         try:return modal.FunctionCall.from_id(call_id).get(timeout=0)
         except TimeoutError:return None
         except Exception as exc:return dict(status='failed',error_type=type(exc).__name__)
-    result=service('/state',dispatch=lambda run_id,parent:worker.spawn(run_id,parent).object_id,
+    result=service('/state',dispatch=lambda run_id,parent,account_mode='continuous':worker.spawn(run_id,parent,account_mode).object_id,
                    poll=poll,commit=volume.commit,mode=MODE)
     print(json.dumps(result),flush=True);return result
 
@@ -89,4 +92,18 @@ def _set_cadence(mode, start_now):
     from paperlab.solana_service import configure_cadence
     volume.reload()
     configure_cadence('/state', mode, commit=volume.commit, start_now=start_now)
+    return _coordinate()
+
+
+@app.function(image=image, volumes={'/state':volume}, cpu=(.125,.125), memory=(512,512),
+              timeout=60, max_containers=1, min_containers=0, retries=0, single_use_containers=True)
+def enable_episodes(expected_parent: str):
+    """Explicit authorized account-mode transition; leaves old ledgers/checkpoints intact."""
+    return exclusive('solana-online-coordinator', _enable_episodes, expected_parent)
+
+
+def _enable_episodes(expected_parent):
+    from paperlab.solana_service import enable_training_episodes
+    volume.reload()
+    enable_training_episodes('/state', expected_parent, commit=volume.commit)
     return _coordinate()

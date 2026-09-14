@@ -62,7 +62,7 @@ class Costs:
             raise ValueError("Invalid risk limits")
         if not 0 <= self.fee_bps < 10000 or not 0 <= self.slippage_bps < 10000:
             raise ValueError("Invalid costs")
-        if not 0 < self.loss_stop < 1 or self.max_delay <= 0 or self.max_spread_bps <= 0:
+        if not 0 < self.loss_stop <= 1 or self.max_delay <= 0 or self.max_spread_bps <= 0:
             raise ValueError("Invalid guard")
 
 
