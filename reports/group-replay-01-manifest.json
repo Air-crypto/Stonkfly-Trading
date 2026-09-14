@@ -1,0 +1,100 @@
+{
+  "algorithm": "GSPO-inspired sequence actor",
+  "group_size": 12,
+  "horizon_seconds": 60,
+  "interval_seconds": 5,
+  "passes": 8,
+  "gradient_epochs_per_group": 2,
+  "actor_seed": 71,
+  "optimizer": "Adam lr=0.001",
+  "costs": {
+    "capital": 1000,
+    "fee_bps": 125,
+    "slippage_bps": 100,
+    "max_exposure": 0.0025,
+    "max_order": 2.5,
+    "max_spread_bps": 110,
+    "max_delay": 15,
+    "loss_stop": 0.1
+  },
+  "actions": {
+    "hold": null,
+    "exit": 0.0,
+    "target_0.15_percent": 0.0015,
+    "target_0.25_percent": 0.0025
+  },
+  "reward": "net liquidation PnL USD - 0.25*max drawdown USD - 0.001*mean marked exposure USD",
+  "selection": "first four eligible mints per source by receipt grid then lexical mint; fixed horizon",
+  "exclusions": "test excludes every mint appearing in training archive",
+  "sources": {
+    "train": {
+      "run_id": "solana-online-20260913-230259",
+      "hashes": {
+        "events.db": "d05a1ebc5ab13fa4e61041e6438807b8ac88ea8d3a5743110934b9cf5a02954a",
+        "fx.jsonl": "39d7c538223653efdf3dbfba62d37bb162334ba05e2a90ff27ab3fe86ef27c55",
+        "completed.json": "03de45581c643ff4625fc331148028e28726dfaa795d5e062d54f60e3175a314"
+      }
+    },
+    "test": {
+      "run_id": "solana-online-20260913-232717",
+      "hashes": {
+        "events.db": "082e868d8b09571ab2e48d605f6e4b30a423292aeda1fd8e66aaf8a67ad0ecbd",
+        "fx.jsonl": "4e6b4e6f18c2366677c41b53f3f1628f943d91a3d506c761637a069cd1a5be0f",
+        "completed.json": "e19c5a7d7817714b3e6a92d2e02d07e692fd725b6f7b79830b26a95ff4bf4b09"
+      }
+    }
+  },
+  "cohorts": {
+    "train": [
+      {
+        "mint": "gKWYJZKVfsa73RpdUHGSXAhGCP5hXQ91VQrSdbspump",
+        "start": 1789340755,
+        "end": 1789340815
+      },
+      {
+        "mint": "7b8Z4c21ohWpJYrQ6Via2EnLbqEUWRL3xPPfUUWDpump",
+        "start": 1789340800,
+        "end": 1789340860
+      },
+      {
+        "mint": "Rv6PpVdxFFhmStfVxshudChAMfcBoATnenArQUypump",
+        "start": 1789340835,
+        "end": 1789340895
+      },
+      {
+        "mint": "HqAGzRUZxg4XmAm5JPKF6DUGz2igbbvHzYh7BKT9g7Sd",
+        "start": 1789340840,
+        "end": 1789340900
+      }
+    ],
+    "test": [
+      {
+        "mint": "EJ8AWCtknM7GVwMMh6oPbzsao9Z65CEYErL5KhgApump",
+        "start": 1789342255,
+        "end": 1789342315
+      },
+      {
+        "mint": "HUn5wrzGT7hi4HPz7fn2ZN9MKo7hFVGHq6owovFApump",
+        "start": 1789342260,
+        "end": 1789342320
+      },
+      {
+        "mint": "CYSx8M2ZRKoRcfswcJnDjHYz139erQwwCpHRd7Zbpump",
+        "start": 1789342270,
+        "end": 1789342330
+      },
+      {
+        "mint": "3bMUWELYxzK2j33veX7kLvj6P71eGxWWwR8fgsdipump",
+        "start": 1789342345,
+        "end": 1789342405
+      }
+    ]
+  },
+  "limitations": [
+    "indicative reserves, not executable exchange quotes",
+    "correlated branches do not add independent market data",
+    "short same-day pilot; no evidence of generalization or profitability",
+    "no native synapse updates, news, live promotion or current Q-head comparison",
+    "each token is an isolated $1000 account, not a combined live portfolio"
+  ]
+}

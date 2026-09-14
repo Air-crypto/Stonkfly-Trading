@@ -1,0 +1,26 @@
+{
+  "verified": true,
+  "paper_only": true,
+  "trajectories": 592,
+  "rows": 7696,
+  "fills": 1624,
+  "training_groups": 32,
+  "gradient_updates": 48,
+  "held_out_mints": 4,
+  "artifact_hashes": {
+    "cache-progress.json": "76a91166f6a4aef245d864db84292fd66604578c6e6e0317f2c1a8c61aadaae4",
+    "encoder.json": "ff9e23206c3ac4f65e0abb9a789826e5c98ded335d3208bcc217b1af1f40d8e7",
+    "features.json": "dc800c3c47564ccc303adb1adbdd9a9a2c3d6ea5ec13cfdfd8717d7b24ed60fb",
+    "result.json": "ba89a940c4c17cdbb85d5ba9f7e7f6b6be770f282bba427804b0c2a87a31a474",
+    "owner.json": "a50f5d9ac9a1c9d83eb343168b08254a50ee38d0101bd17d80d983286606197b",
+    "updates.json": "4e2c705356e6180305f4a39d329d61cbb634aa4b064a71394b5f0a7c5e888df3",
+    "evaluation-trajectories.jsonl": "ba8176e6fe92488ff8cd3a2074b77dbf42b3cf8864132ee1d8bf24fa8e01753b",
+    "dispatch.json": "7df3dbd04db400e3b802050eadcee5fa3e8a42dbca533fe31e15b415f9553f8b",
+    "actor-initial.pt": "30878e27c598a7bbffbd29ef47c3f618839389f05f74d83ae0fa2d310054567e",
+    "training-trajectories.jsonl": "bcf043c88181b86a2834135c41028fb9d2457b662d858f001e717b3c37c8d261",
+    "completed.json": "6f339398ad9a9881be69472f845a0cb64bfa185d85b14cd31382f9282e6b5a0a",
+    "actor-trained.pt": "ed71b8c7b66719d566415352552298f4d46022e9b61bf910ec6beb60a16fe2a4",
+    "manifest.json": "5c1a662063d994b334727565448c952460a0809e83074f2ac53a03e3c5cb72ed"
+  },
+  "note": "Verifies recorded accounting and diagnostics, not executable prices or profitable learning."
+}

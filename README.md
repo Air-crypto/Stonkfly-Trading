@@ -39,6 +39,19 @@ that opening balances, native weights and readout predictions carried over.
 
 ## Latest completed comparison
 
+The separate [GSPO-inspired replay pilot](reports/group-replay-01.md) completed
+384 training trajectories and 48 actor updates using frozen full-fly features.
+On four later, unseen mints, mean 60-second paper PnL improved from -$0.494 to
+-$0.392 per isolated $1,000 episode. Cash returned $0 and beat both actors.
+The [independent audit](reports/group-replay-01-audit.json) verified 592 training
+and evaluation trajectories, 7,696 account rows and 1,624 fills. This is a small
+retrospective mechanics pilot, not evidence of profitable trading. No policy was
+promoted and no recurring GSPO job was added.
+
+![Group replay losses, gradients and outcomes](reports/group-replay-01.png)
+
+## Previous full-network comparison
+
 [Study 12](docs/fly-rate-result-12.md) completed **16 independently audited
 conditions, 372 neural observations and 18,600 recorded bins**. Reducing the
 online learning rate from 0.001 to 0.0001 produced smaller updates but did not

@@ -4,6 +4,14 @@ The bounded pilot is implemented in `paperlab/group_replay.py` and
 `group_replay_cloud.py`. It is an unscheduled, separate paper experiment. The live
 Q learner and native plasticity continue under their existing coordinator.
 
+The [completed pilot and all twelve sample alternatives](../reports/group-replay-01.md)
+include measured losses, gradients, weights, fills and held-out comparisons.
+Average held-out loss was lower after training, but cash still performed better;
+the policy was not promoted. Reproduce the local accounting audit with
+`python -m paperlab.group_replay_audit runs/group-replay-20260914-01` after downloading
+that immutable run directory from the Modal `fly-paper-lab-state` volume under
+`/group-replay/group-replay-20260914-01`.
+
 The first pilot preregisters up to four first-eligible launches from
 `solana-online-20260913-230259` for training and up to four later launches from
 `solana-online-20260913-232717` for testing, excluding every mint in the earlier

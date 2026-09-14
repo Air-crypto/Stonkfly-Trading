@@ -1,0 +1,144 @@
+{
+  "status": "completed",
+  "paper_only": true,
+  "manifest_sha256": "5c1a662063d994b334727565448c952460a0809e83074f2ac53a03e3c5cb72ed",
+  "groups": 32,
+  "training_trajectories": 384,
+  "gradient_updates": 48,
+  "skipped_updates": 8,
+  "actor_parameters": 900,
+  "actor_weight_delta_l2": 0.6628501415252686,
+  "loss_first": -0.0008783629164099693,
+  "loss_last": -0.0005467460141517222,
+  "gradient_norm_mean": 0.19753975995505849,
+  "encoder": {
+    "native_observations": 81,
+    "neural_seconds": 217.02257598899988,
+    "native_weights_before": "40a2e78d7299197d24ba03a24c94a8e1cd0eb45a653d69f001fc3acee2fdc779",
+    "native_weights_after": "40a2e78d7299197d24ba03a24c94a8e1cd0eb45a653d69f001fc3acee2fdc779",
+    "native_weight_delta_l2": 0.0,
+    "native_gradients": null,
+    "encoder": "pristine frozen full fly; zero reward; reset per mint; no news"
+  },
+  "evaluation": [
+    {
+      "split": "train",
+      "policy": "trained",
+      "trajectories": 48,
+      "independent_mints": 4,
+      "mean_pnl_usd": -0.4867636067466871,
+      "mean_reward": -0.6773025449589275,
+      "mean_fees_usd": 0.04057075506580618,
+      "mean_fills": 1.7708333333333333,
+      "worst_pnl_usd": -2.718384609867144
+    },
+    {
+      "split": "train",
+      "policy": "initial",
+      "trajectories": 48,
+      "independent_mints": 4,
+      "mean_pnl_usd": -0.736026880196197,
+      "mean_reward": -0.998306246657143,
+      "mean_fees_usd": 0.08108579926647218,
+      "mean_fills": 3.2916666666666665,
+      "worst_pnl_usd": -3.1549124999410196
+    },
+    {
+      "split": "train",
+      "policy": "cash",
+      "trajectories": 4,
+      "independent_mints": 4,
+      "mean_pnl_usd": 0.0,
+      "mean_reward": 0.0,
+      "mean_fees_usd": 0.0,
+      "mean_fills": 0.0,
+      "worst_pnl_usd": 0.0
+    },
+    {
+      "split": "train",
+      "policy": "buy_hold",
+      "trajectories": 4,
+      "independent_mints": 4,
+      "mean_pnl_usd": -0.6900044855159138,
+      "mean_reward": -1.016404678533467,
+      "mean_fees_usd": 0.0234375,
+      "mean_fills": 0.75,
+      "worst_pnl_usd": -2.53125
+    },
+    {
+      "split": "test",
+      "policy": "trained",
+      "trajectories": 48,
+      "independent_mints": 4,
+      "mean_pnl_usd": -0.3922944869025666,
+      "mean_reward": -0.5852949396603278,
+      "mean_fees_usd": 0.07670194157082966,
+      "mean_fills": 3.4166666666666665,
+      "worst_pnl_usd": -1.3868227465130758
+    },
+    {
+      "split": "test",
+      "policy": "initial",
+      "trajectories": 48,
+      "independent_mints": 4,
+      "mean_pnl_usd": -0.4937090885763122,
+      "mean_reward": -0.6780905213294982,
+      "mean_fees_usd": 0.15482801825298362,
+      "mean_fills": 6.25,
+      "worst_pnl_usd": -1.47803647106889
+    },
+    {
+      "split": "test",
+      "policy": "cash",
+      "trajectories": 4,
+      "independent_mints": 4,
+      "mean_pnl_usd": 0.0,
+      "mean_reward": 0.0,
+      "mean_fees_usd": 0.0,
+      "mean_fills": 0.0,
+      "worst_pnl_usd": 0.0
+    },
+    {
+      "split": "test",
+      "policy": "buy_hold",
+      "trajectories": 4,
+      "independent_mints": 4,
+      "mean_pnl_usd": -0.39798161490190864,
+      "mean_reward": -0.6525519512503741,
+      "mean_fees_usd": 0.03125,
+      "mean_fills": 1.0,
+      "worst_pnl_usd": -1.0744960779868507
+    }
+  ],
+  "paired_test_mints": [
+    {
+      "mint": "EJ8AWCtknM7GVwMMh6oPbzsao9Z65CEYErL5KhgApump",
+      "trained_minus_initial_usd": 0.21206037737416258,
+      "trained_minus_cash_usd": -0.2023413790236551
+    },
+    {
+      "mint": "HUn5wrzGT7hi4HPz7fn2ZN9MKo7hFVGHq6owovFApump",
+      "trained_minus_initial_usd": -0.05723420295496828,
+      "trained_minus_cash_usd": -0.8888485963440284
+    },
+    {
+      "mint": "CYSx8M2ZRKoRcfswcJnDjHYz139erQwwCpHRd7Zbpump",
+      "trained_minus_initial_usd": 0.13648650896075765,
+      "trained_minus_cash_usd": -0.21395902680566792
+    },
+    {
+      "mint": "3bMUWELYxzK2j33veX7kLvj6P71eGxWWwR8fgsdipump",
+      "trained_minus_initial_usd": 0.11434572331503051,
+      "trained_minus_cash_usd": -0.26402894543691485
+    }
+  ],
+  "wall_seconds": 243.143328674,
+  "promotion": "blocked: mechanics pilot only; more independent dates/mints and execution validation required",
+  "uncertainty": "No confidence interval: at most four test mints from one day; branches are correlated.",
+  "budget": {
+    "estimated_compute_usd": 0.06724203088428497,
+    "monthly_reserved_usd": 7.3127942353167565,
+    "monthly_limit_usd": 85,
+    "provider_bill": false
+  }
+}
