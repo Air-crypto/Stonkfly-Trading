@@ -22,6 +22,11 @@ The [September 14 system audit](reports/system-audit-20260914.md) found and repa
 incomplete reward credit and quote/entry-filter conflation. Historical results are
 preserved; neither weight changes nor previous paper returns establish learning.
 
+The [checkpoint dispatcher](reports/checkpoint-dispatch-20260914.md) checks every
+minute and prioritizes the newest checkpoint eligible for the sealed test. It
+calls the unchanged frozen evaluator between training windows, preserving source
+hashes, test data, budget guards and all comparison controls.
+
 The current [hourly training service](docs/solana-online.md) starts each independent
 training episode with $1,000 paper cash while preserving learned fly/Q weights.
 The full balance is available across tokens, capped at $250 acquisition cost per

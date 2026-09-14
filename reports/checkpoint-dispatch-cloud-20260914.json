@@ -1,0 +1,54 @@
+{
+  "checked_at": "2026-09-14T18:38:48.130211+00:00",
+  "training": {
+    "status": "dispatched",
+    "enabled": true,
+    "pending": {
+      "run_id": "solana-online-20260914-183754",
+      "call_id": "fc-01M2GKCC7B3RT7H81DY9BVZMMA",
+      "dispatched_at": 1789411074.5514984,
+      "account_mode": "fresh_training_episode"
+    },
+    "next_at": 1789410737.3956232
+  },
+  "evaluation": {
+    "status": "waiting_for_training_gap",
+    "enabled": true,
+    "pending": null,
+    "batch": "evaluation-1789402218",
+    "dispatcher": "priority_frozen_dispatch_v1",
+    "checked_at": 1789411104.330186
+  },
+  "priority_manifest": {
+    "protocol": "priority_frozen_dispatch_v1",
+    "plan_sha256": "1a61a851204f7739e0eddff993c5d1ce1a08c00128794b19895c737071c3b1cd",
+    "policies": [
+      "solana-online-20260914-152719",
+      "untrained",
+      "cash",
+      "always_long",
+      "solana-online-20260914-141714",
+      "solana-online-20260914-130216",
+      "solana-online-20260914-120216",
+      "solana-online-20260914-110216",
+      "solana-online-20260914-100213",
+      "solana-online-20260914-084716",
+      "solana-online-20260914-074716",
+      "solana-online-20260914-064712",
+      "solana-online-20260914-053214",
+      "solana-online-20260914-041721",
+      "solana-online-20260914-031716",
+      "solana-online-20260914-021337"
+    ],
+    "selection": "Newest sealed pre-cutoff checkpoint first; never rank by returns"
+  },
+  "sealed_sources_unchanged": true,
+  "dispatch_budget": {
+    "months": {
+      "2026-09": 0.0005043625346243381
+    },
+    "monthly_limit_usd": 5.0,
+    "allocation": "Within existing $15 overhead",
+    "provider_bill": false
+  }
+}
