@@ -1,0 +1,197 @@
+{
+  "episodes": [
+    {
+      "run_id": "solana-online-20260914-021337",
+      "rows": 179,
+      "pnl_usd": 30.84158497279782,
+      "cash_usd": 5.463789646877991e-06,
+      "realized_usd": 4.1936693648807335,
+      "unrealized_usd": 26.64791560791713,
+      "paid_fees_usd": 30.320802310225098,
+      "tokens": [
+        {
+          "mint": "dRQvsszWkyBbgzWyjVmj8xX9fWew5aBJA5i9T4Wpump",
+          "realized_usd": -8.64665184417639,
+          "unrealized_usd": -5.46378418347174,
+          "pnl_usd": -14.11043602764813,
+          "marked_inventory_usd": 0.0,
+          "paid_fees_usd": 6.208973300690104,
+          "fills": 5,
+          "quote_available": false,
+          "remaining_basis_usd": 5.46378418347174
+        },
+        {
+          "mint": "Dr3DFyK6Rtf5xRU7urCurizUiwUtHmBaQUE4SZmepump",
+          "realized_usd": -6.037280116800616,
+          "unrealized_usd": -8.930674923961845,
+          "pnl_usd": -14.967955040762462,
+          "marked_inventory_usd": 174.4464558852235,
+          "paid_fees_usd": 8.438464392008875,
+          "fills": 3,
+          "quote_available": true,
+          "remaining_basis_usd": 183.37713080918533
+        },
+        {
+          "mint": "EQmerCcSBwZWgLaSjYtXChAPhK7FUAaJHhJZ6XFEN57w",
+          "realized_usd": -5.181091276142695,
+          "unrealized_usd": -83.0485640246349,
+          "pnl_usd": -88.2296553007776,
+          "marked_inventory_usd": 117.24385893292607,
+          "paid_fees_usd": 3.9186502934232865,
+          "fills": 9,
+          "quote_available": true,
+          "remaining_basis_usd": 200.29242295756097
+        },
+        {
+          "mint": "7BT8UMuQVyyWbVQTTqy4BhvWbsaLwdQtDZhKQX7fpump",
+          "realized_usd": 10.996372991161962,
+          "unrealized_usd": 69.3959252227506,
+          "pnl_usd": 80.39229821391257,
+          "marked_inventory_usd": 230.4344273965341,
+          "paid_fees_usd": 4.788918710034269,
+          "fills": 9,
+          "quote_available": true,
+          "remaining_basis_usd": 161.03850217378348
+        },
+        {
+          "mint": "CKW3YQfhHSGgHtUWLCCMJRoFGryaTXamiWDg6iMipump",
+          "realized_usd": 4.062333295397593,
+          "unrealized_usd": 3.3081588605598995,
+          "pnl_usd": 7.370492155957493,
+          "marked_inventory_usd": 249.5234334594377,
+          "paid_fees_usd": 3.3821423862979407,
+          "fills": 6,
+          "quote_available": true,
+          "remaining_basis_usd": 246.2152745988778
+        },
+        {
+          "mint": "DcpM6LhnhaBzkbGnpAcJkTWsJxvMtu4Km7AL6Mdvpump",
+          "realized_usd": 8.999986315440879,
+          "unrealized_usd": 7.552384370389689,
+          "pnl_usd": 16.552370685830567,
+          "marked_inventory_usd": 94.87885958123098,
+          "paid_fees_usd": 2.0962449071858025,
+          "fills": 8,
+          "quote_available": true,
+          "remaining_basis_usd": 87.3264752108413
+        },
+        {
+          "mint": "FBdyt3VaiCKhrKRFMFi5fpgRZfs3vsBpL9RoKbadpump",
+          "realized_usd": 0.0,
+          "unrealized_usd": 43.83447028628542,
+          "pnl_usd": 43.83447028628542,
+          "marked_inventory_usd": 164.31454425365587,
+          "paid_fees_usd": 1.4874083205848203,
+          "fills": 5,
+          "quote_available": true,
+          "remaining_basis_usd": 120.48007396737044
+        }
+      ],
+      "source": "runs/episode-continuation-verification/first-decisions.jsonl",
+      "ended": 1789352923.8787773
+    },
+    {
+      "run_id": "solana-online-20260914-031716",
+      "rows": 180,
+      "pnl_usd": -112.75778216910726,
+      "cash_usd": 524.7476179936629,
+      "realized_usd": -41.8752081473088,
+      "unrealized_usd": -70.88257402179846,
+      "paid_fees_usd": 24.006935155248392,
+      "tokens": [
+        {
+          "mint": "53kAgpLUnNmkNaovFoemJXT982o1ix9XUZk27xaXpump",
+          "realized_usd": -29.019924567526346,
+          "unrealized_usd": -60.52136440721358,
+          "pnl_usd": -89.54128897473993,
+          "marked_inventory_usd": 122.8560594518147,
+          "paid_fees_usd": 14.832273133051547,
+          "fills": 24,
+          "quote_available": true,
+          "remaining_basis_usd": 183.37742385902828
+        },
+        {
+          "mint": "m2z5h2EG5BExG6yDa8QWzZX6az31yLDGuAA56A5pump",
+          "realized_usd": -12.855283579782451,
+          "unrealized_usd": -10.36120961458488,
+          "pnl_usd": -23.21649319436733,
+          "marked_inventory_usd": 239.63854038541513,
+          "paid_fees_usd": 9.174662022196847,
+          "fills": 3,
+          "quote_available": true,
+          "remaining_basis_usd": 249.99975
+        }
+      ],
+      "source": "runs/episode-continuation-verification/solana-online-20260914-031716/decisions.jsonl",
+      "ended": 1789356746.3628707
+    },
+    {
+      "run_id": "solana-online-20260914-041721",
+      "rows": 180,
+      "pnl_usd": 165.0035061243634,
+      "cash_usd": 73.29356501823887,
+      "realized_usd": 73.29329780152307,
+      "unrealized_usd": 91.71020832284037,
+      "paid_fees_usd": 28.4047477906624,
+      "tokens": [
+        {
+          "mint": "CeSFzoAqSMXMgodeLzrTMe3V5MdV5Nhinehedxohpump",
+          "realized_usd": 84.41211212659158,
+          "unrealized_usd": 350.19488433709284,
+          "pnl_usd": 434.6069964636844,
+          "marked_inventory_usd": 600.1948821381627,
+          "paid_fees_usd": 14.675454960654067,
+          "fills": 48,
+          "quote_available": true,
+          "remaining_basis_usd": 249.99999780106987
+        },
+        {
+          "mint": "2F8mwasxTfsoHd5aCtwhDvrWSBLEnqVGoungC9KBpump",
+          "realized_usd": 0.0,
+          "unrealized_usd": -10.456028174296222,
+          "pnl_usd": -10.456028174296222,
+          "marked_inventory_usd": 239.54372182570378,
+          "paid_fees_usd": 3.0864166666666666,
+          "fills": 1,
+          "quote_available": true,
+          "remaining_basis_usd": 249.99975
+        },
+        {
+          "mint": "3nkVw4JwdDLGM23Wzqpy2ptAPV5YgMnokEBgijDBpump",
+          "realized_usd": -5.710139651703884,
+          "unrealized_usd": 1.9713417156441153,
+          "pnl_usd": -3.7387979360597683,
+          "marked_inventory_usd": 251.97133714225808,
+          "paid_fees_usd": 5.277403398014088,
+          "fills": 14,
+          "quote_available": true,
+          "remaining_basis_usd": 249.99999542661396
+        },
+        {
+          "mint": "42faVxmVo85HFzsuMEJg2spDZV8Qk6haDWM7pCnLpump",
+          "realized_usd": -5.408674673364629,
+          "unrealized_usd": -249.99998955560037,
+          "pnl_usd": -255.408664228965,
+          "marked_inventory_usd": 0.0,
+          "paid_fees_usd": 5.365472765327581,
+          "fills": 12,
+          "quote_available": false,
+          "remaining_basis_usd": 249.99998955560037
+        }
+      ],
+      "source": "runs/episode-continuation-verification/third-decisions.jsonl",
+      "ended": 1789360351.7908483
+    }
+  ],
+  "totals": {
+    "pnl_usd": 83.08730892805397,
+    "realized_usd": 35.611759019095004,
+    "unrealized_usd": 47.47554990895904,
+    "paid_fees_usd": 82.73248525613589
+  },
+  "scope": "Three independent fresh $1,000 paper accounts; not compounded.",
+  "valuation": "Recorded bid less 1% slippage and 1.25% exit fee; missing quote values inventory at zero.",
+  "realized_method": "Average acquisition cost including entry fees; net simulated sale proceeds.",
+  "checks": "Per-mint fill cash flows, cash, fees and summed marked PnL reconcile.",
+  "profitable_learning_proven": false
+}
