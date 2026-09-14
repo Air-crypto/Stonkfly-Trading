@@ -154,6 +154,9 @@ def test_experiment_writes_complete_auditable_outputs_without_native(tmp_path, m
     assert len((out/'training-trajectories.jsonl').read_text().splitlines())==12
     assert len((out/'evaluation-trajectories.jsonl').read_text().splitlines())==52
     assert (out/'manifest.json').exists() and (out/'actor-trained.pt').exists()
+    (out/'completed.json').write_text(json.dumps(result))
+    from paperlab.group_replay_audit import audit
+    assert audit(out)['verified']
 
 
 @pytest.mark.parametrize('failure',[False,True])
@@ -186,3 +189,20 @@ def test_real_cloud_entrypoint_reserves_budget_and_preserves_failures(tmp_path, 
         budget=json.loads((tmp_path/'budget.json').read_text())
         assert next(iter(budget['months'].values()))==pytest.approx(.3191496)
     with pytest.raises(ValueError,match='Preserve'):cloud._run('group-replay-test')
+
+
+@pytest.mark.parametrize('corruption',[None,'fee','receipt','cash','feature','reward'])
+def test_independent_ledger_audit_rejects_corruption(corruption):
+    from paperlab.group_replay_audit import verify_trajectory
+    e=episode()
+    trajectory=rollout(Actor(),e,1,'buy_hold')
+    if corruption=='fee':trajectory['rows'][1]['fill']['fee']='0'
+    elif corruption=='receipt':trajectory['rows'][1]['fill']['decision_ts']=105
+    elif corruption=='cash':trajectory['rows'][2]['state']['cash']='1000'
+    elif corruption=='feature':trajectory['rows'][1]['x'][8]=0
+    elif corruption=='reward':trajectory['reward']+=1
+    if corruption:
+        with pytest.raises(ValueError):verify_trajectory(trajectory,e,asdict(COSTS))
+    else:
+        result=verify_trajectory(trajectory,e,asdict(COSTS))
+        assert result==dict(rows=4,fills=1)
