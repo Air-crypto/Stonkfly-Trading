@@ -1,0 +1,45 @@
+{
+  "verification": {
+    "fresh_cash": true,
+    "empty_holdings": true,
+    "native_checkpoint_sha256": true,
+    "head_checkpoint_sha256": true,
+    "parent_completion_unchanged": true,
+    "episode_total_matches": true
+  },
+  "account_audit": {
+    "rows": 180,
+    "paper_fills": 27,
+    "native_observations": 120,
+    "distinct_tokens_with_native_inference": 5,
+    "new_head_updates": 104,
+    "cash_usd": 524.7476179936629,
+    "cumulative_fees_usd": 24.006935155248392,
+    "equity_marks_verified": 180,
+    "nonzero_reward_updates": 31,
+    "paper_only": true,
+    "profitable_learning_proven": false,
+    "note": "Recorded-fill accounting only; this does not establish executable prices or policy superiority."
+  },
+  "episodes": [
+    {
+      "run_id": "solana-online-20260914-021337",
+      "pnl_usd": 30.84158497279782,
+      "fills": 45
+    },
+    {
+      "run_id": "solana-online-20260914-031716",
+      "pnl_usd": -112.75778216910726,
+      "fills": 27
+    }
+  ],
+  "episode_totals": {
+    "episodes": 2,
+    "sum_episode_pnl_usd": -81.91619719630944,
+    "sum_episode_fees_usd": 54.32773746547349,
+    "scope": "Independent training episodes; not continuous portfolio performance"
+  },
+  "status": "waiting_for_budget_paced_window",
+  "next_due_utc_timestamp": 1789359436.3236222,
+  "note": "Independent training episodes; indicative marked PnL, not realized continuous portfolio returns or evidence of profitable learning."
+}
