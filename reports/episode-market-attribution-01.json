@@ -1,0 +1,878 @@
+{
+  "episodes": [
+    {
+      "run": "solana-online-20260914-021337",
+      "pnl": 30.84158497279782,
+      "realized": 4.1936693648807335,
+      "unrealized": 26.64791560791713,
+      "fees": 30.320802310225098,
+      "missing_basis": 5.46378418347174,
+      "missing_positions": [
+        {
+          "mint": "dRQvsszWkyBbgzWyjVmj8xX9fWew5aBJA5i9T4Wpump",
+          "basis": 5.46378418347174,
+          "last_observed_value": 5.175462149155728,
+          "quote_age": 15.308801174163818
+        }
+      ],
+      "last_quote_pnl_diagnostic": 36.017047121953546,
+      "eligible_launches": 12,
+      "observed_60s": 11,
+      "missing_60s": 1,
+      "median_60s_return": 0.22779310089058158,
+      "mean_60s_return": 0.18131259796589047,
+      "stress_60s_mean": 0.08286988146873293,
+      "sol_return": 0.00502887870942037,
+      "market_tokens": [
+        {
+          "mint": "dRQvsszWkyBbgzWyjVmj8xX9fWew5aBJA5i9T4Wpump",
+          "symbol": "FAIR",
+          "start": 1789352093.6291583,
+          "return_60s": 0.004905402668908598
+        },
+        {
+          "mint": "Dr3DFyK6Rtf5xRU7urCurizUiwUtHmBaQUE4SZmepump",
+          "symbol": "\u5976\u9f99",
+          "start": 1789352179.3455613,
+          "return_60s": 0.007235522922723003
+        },
+        {
+          "mint": "7TgHW8roxkd9GesnPSAjeFUZW72KFFFsQ8gnagy9pump",
+          "symbol": "orangie",
+          "start": 1789352339.352238,
+          "return_60s": 0.22779310089058158
+        },
+        {
+          "mint": "EQmerCcSBwZWgLaSjYtXChAPhK7FUAaJHhJZ6XFEN57w",
+          "symbol": "DOPPLER",
+          "start": 1789352379.2346494,
+          "return_60s": 0.6263255094007545
+        },
+        {
+          "mint": "7BT8UMuQVyyWbVQTTqy4BhvWbsaLwdQtDZhKQX7fpump",
+          "symbol": "AURAFLY",
+          "start": 1789352387.0238595,
+          "return_60s": 0.34920740142798823
+        },
+        {
+          "mint": "CKW3YQfhHSGgHtUWLCCMJRoFGryaTXamiWDg6iMipump",
+          "symbol": "wiftwine",
+          "start": 1789352396.3686256,
+          "return_60s": -0.12163036212160383
+        },
+        {
+          "mint": "DcpM6LhnhaBzkbGnpAcJkTWsJxvMtu4Km7AL6Mdvpump",
+          "symbol": "EMMASTONKS",
+          "start": 1789352473.8668802,
+          "return_60s": 0.23591403131526034
+        },
+        {
+          "mint": "FBdyt3VaiCKhrKRFMFi5fpgRZfs3vsBpL9RoKbadpump",
+          "symbol": "ted",
+          "start": 1789352531.4997573,
+          "return_60s": 0.3794495067983874
+        },
+        {
+          "mint": "BK8DxeXbf3Faq7e2c2FKrYAh8hVmM8CHxNtq4wyQpump",
+          "symbol": "Antsem",
+          "start": 1789352623.727447,
+          "return_60s": null
+        },
+        {
+          "mint": "AFxz2rRSi4AKvuwfPjR9qXM13iyM9sArtR3iUXwLpump",
+          "symbol": "Benz",
+          "start": 1789352740.7685413,
+          "return_60s": 0.02262915050803782
+        },
+        {
+          "mint": "AbrmawZPm4oyCFcPXEMmW1VkHvJnAbyS6tBUPdcXpump",
+          "symbol": "BEAST",
+          "start": 1789352744.06422,
+          "return_60s": 0.010073746909756931
+        },
+        {
+          "mint": "HenuZWyuePCEVSepYhg7MXT19k4t8dutYJf5E6Mgpump",
+          "symbol": "STUNKBRAIN",
+          "start": 1789352843.083876,
+          "return_60s": 0.2525355669040006
+        }
+      ]
+    },
+    {
+      "run": "solana-online-20260914-031716",
+      "pnl": -112.75778216910726,
+      "realized": -41.8752081473088,
+      "unrealized": -70.88257402179846,
+      "fees": 24.006935155248392,
+      "missing_basis": 0,
+      "missing_positions": [],
+      "last_quote_pnl_diagnostic": -112.75778216910726,
+      "eligible_launches": 7,
+      "observed_60s": 4,
+      "missing_60s": 3,
+      "median_60s_return": 0.17000144328479505,
+      "mean_60s_return": 0.2453174587886897,
+      "stress_60s_mean": -0.28839002354932014,
+      "sol_return": -0.001285728414597953,
+      "market_tokens": [
+        {
+          "mint": "6iPRGcMvEfhvjdMepqbLCSR2uekZhd1V5LLFPX4upump",
+          "symbol": "nothing",
+          "start": 1789355980.2117786,
+          "return_60s": null
+        },
+        {
+          "mint": "53kAgpLUnNmkNaovFoemJXT982o1ix9XUZk27xaXpump",
+          "symbol": "TESSERACT",
+          "start": 1789356030.7198029,
+          "return_60s": 1.3557183743586134
+        },
+        {
+          "mint": "m2z5h2EG5BExG6yDa8QWzZX6az31yLDGuAA56A5pump",
+          "symbol": "Rolex",
+          "start": 1789356090.2353628,
+          "return_60s": 0.028159136639592575
+        },
+        {
+          "mint": "Gyt8ifzVc1DnWKGpanfuvNnNyyxsWAFXJ8y38A79pump",
+          "symbol": "STRAWDOG",
+          "start": 1789356182.0408216,
+          "return_60s": 0.3118437499299975
+        },
+        {
+          "mint": "CkirvtmTK9eQ4Jd25dg8MxcQkX8QUgG5TadKFiEXpump",
+          "symbol": "NVDA",
+          "start": 1789356396.7342765,
+          "return_60s": null
+        },
+        {
+          "mint": "C3nHjiMvbGzy1vY3vBQF3w2pYYNPKgn13qeDJLtzpump",
+          "symbol": "OGANT",
+          "start": 1789356439.5499427,
+          "return_60s": null
+        },
+        {
+          "mint": "B5atHijPLbprWqoB3UKeSNAmhfYjGfr3kSnEy4VTpump",
+          "symbol": "Bulljak",
+          "start": 1789356512.934839,
+          "return_60s": -0.7144514257734447
+        }
+      ]
+    },
+    {
+      "run": "solana-online-20260914-041721",
+      "pnl": 165.0035061243634,
+      "realized": 73.29329780152307,
+      "unrealized": 91.71020832284037,
+      "fees": 28.4047477906624,
+      "missing_basis": 249.99998955560037,
+      "missing_positions": [
+        {
+          "mint": "42faVxmVo85HFzsuMEJg2spDZV8Qk6haDWM7pCnLpump",
+          "basis": 249.99998955560037,
+          "last_observed_value": 169.0444691970479,
+          "quote_age": 5.866305589675903
+        }
+      ],
+      "last_quote_pnl_diagnostic": 334.0479753214113,
+      "eligible_launches": 6,
+      "observed_60s": 4,
+      "missing_60s": 2,
+      "median_60s_return": -0.008921764981305369,
+      "mean_60s_return": 0.29030255267515936,
+      "stress_60s_mean": -0.1397982982165604,
+      "sol_return": 0.0003467921724051859,
+      "market_tokens": [
+        {
+          "mint": "CeSFzoAqSMXMgodeLzrTMe3V5MdV5Nhinehedxohpump",
+          "symbol": "Humanity",
+          "start": 1789359542.1186492,
+          "return_60s": 1.2671608558617566
+        },
+        {
+          "mint": "2F8mwasxTfsoHd5aCtwhDvrWSBLEnqVGoungC9KBpump",
+          "symbol": "$RENT",
+          "start": 1789359639.8734167,
+          "return_60s": 0.006974766586358427
+        },
+        {
+          "mint": "3nkVw4JwdDLGM23Wzqpy2ptAPV5YgMnokEBgijDBpump",
+          "symbol": "bikecate",
+          "start": 1789359839.0419323,
+          "return_60s": -0.08810711519850833
+        },
+        {
+          "mint": "42faVxmVo85HFzsuMEJg2spDZV8Qk6haDWM7pCnLpump",
+          "symbol": "WHITETWINE",
+          "start": 1789359939.1495876,
+          "return_60s": -0.024818296548969165
+        },
+        {
+          "mint": "Ayruv6FftWUwAo663CvJ6QtEfUWt9w6gEBRX34Vfpump",
+          "symbol": "Humanity",
+          "start": 1789359984.7384474,
+          "return_60s": null
+        },
+        {
+          "mint": "35tJPYsaEK8dbVJxwTpAuMyCVkjb47n2uvhB4RWspump",
+          "symbol": "Gemini AI",
+          "start": 1789360253.055057,
+          "return_60s": null
+        }
+      ]
+    },
+    {
+      "run": "solana-online-20260914-053214",
+      "pnl": -649.1690457215338,
+      "realized": -148.34838557782862,
+      "unrealized": -500.82066014370525,
+      "fees": 22.240123803416857,
+      "missing_basis": 492.6279645603769,
+      "missing_positions": [
+        {
+          "mint": "GyzLRPBP6NAwQyyP3wCqfPTEURCsptmpavskAKwnpump",
+          "basis": 242.62809372154885,
+          "last_observed_value": 326.1661189091899,
+          "quote_age": 397.1223249435425
+        },
+        {
+          "mint": "9rxTbRkDkenxyLns4UMNTKGxbY7Kf5uxYcF1AuJepump",
+          "basis": 249.99987083882803,
+          "last_observed_value": 0.6612434872058973,
+          "quote_age": 49.29654121398926
+        }
+      ],
+      "last_quote_pnl_diagnostic": -322.34168332513804,
+      "eligible_launches": 8,
+      "observed_60s": 5,
+      "missing_60s": 3,
+      "median_60s_return": 0.008164055119482594,
+      "mean_60s_return": 0.0736847297668756,
+      "stress_60s_mean": -0.32894704389570273,
+      "sol_return": 0.0004950495049504955,
+      "market_tokens": [
+        {
+          "mint": "GyzLRPBP6NAwQyyP3wCqfPTEURCsptmpavskAKwnpump",
+          "symbol": "FakeTaxi",
+          "start": 1789364038.062089,
+          "return_60s": 0.3991442204935123
+        },
+        {
+          "mint": "E4HmP2bbu3ngsyHUyPkGUjgPeEbpLN8gTLXbtr9zpump",
+          "symbol": "NVDA",
+          "start": 1789364087.388571,
+          "return_60s": null
+        },
+        {
+          "mint": "tjgq94k8o5JvdaNRqvN73LvyXoz8MQMhVXb4ZzTpump",
+          "symbol": "WOFI",
+          "start": 1789364138.4733243,
+          "return_60s": 0.008164055119482594
+        },
+        {
+          "mint": "CqHNRG3ZShKkBevCSyWc5BdsxAjSR2fymiE79uxpump",
+          "symbol": "Claude",
+          "start": 1789364170.1926854,
+          "return_60s": 0.004358987328775932
+        },
+        {
+          "mint": "9rxTbRkDkenxyLns4UMNTKGxbY7Kf5uxYcF1AuJepump",
+          "symbol": "GTA 6 Coin",
+          "start": 1789364326.1502085,
+          "return_60s": 0.010747172858939225
+        },
+        {
+          "mint": "AHLWMkAmKedQEo9vpt3fdmPngfWkWEMDECoees8Gpump",
+          "symbol": "OpenAI",
+          "start": 1789364583.2722366,
+          "return_60s": null
+        },
+        {
+          "mint": "HEFhhy7qzmfv2rtUfG8VLL4ioXfqePApzzzspzzDpump",
+          "symbol": "FakeTaxi",
+          "start": 1789364611.0347629,
+          "return_60s": -0.05399078696633208
+        },
+        {
+          "mint": "wGsttVwt1NxEzcQyA4RhZ95JdKLd5XXdM6Txg2mpump",
+          "symbol": "Anthropic",
+          "start": 1789364724.8804748,
+          "return_60s": null
+        }
+      ]
+    },
+    {
+      "run": "solana-online-20260914-064712",
+      "pnl": -361.8606133652313,
+      "realized": -71.45309507021568,
+      "unrealized": -290.4075182950156,
+      "fees": 10.50440776230257,
+      "missing_basis": 249.999975571961,
+      "missing_positions": [
+        {
+          "mint": "E7Xb9pZ42V9DNJNetmUs9jrsR8VggvzkK1EHFm3Lpump",
+          "basis": 249.999975571961,
+          "last_observed_value": 184.03650358068595,
+          "quote_age": 125.74560379981995
+        }
+      ],
+      "last_quote_pnl_diagnostic": -177.82410978454536,
+      "eligible_launches": 7,
+      "observed_60s": 5,
+      "missing_60s": 2,
+      "median_60s_return": 0.007447091412629003,
+      "mean_60s_return": 0.06725246719756725,
+      "stress_60s_mean": -0.23767680914459482,
+      "sol_return": -0.0009845426799250934,
+      "market_tokens": [
+        {
+          "mint": "E7Xb9pZ42V9DNJNetmUs9jrsR8VggvzkK1EHFm3Lpump",
+          "symbol": "GORPCAT",
+          "start": 1789368875.2177224,
+          "return_60s": -0.024194875081795075
+        },
+        {
+          "mint": "DcsaffcdPpA8EhtGFXDQpn1i3cyUgWcfC5pMx5mdpump",
+          "symbol": "baton",
+          "start": 1789368893.5806313,
+          "return_60s": 0.005036293293642968
+        },
+        {
+          "mint": "nztPLVtcXkK4fKTDRRVzQMN7SzvAzQoFSdvWG6Hpump",
+          "symbol": "Samsung",
+          "start": 1789368922.0763462,
+          "return_60s": 0.022372046702543447
+        },
+        {
+          "mint": "2evpHHyiKS2bdTjjaJbEqdJxpUnjvJdW5jfrFcLfpump",
+          "symbol": "NVDA",
+          "start": 1789368960.8206172,
+          "return_60s": null
+        },
+        {
+          "mint": "6xMGBwVuw2ggWKLYXPUF1h5dCT7PEEPxte77i7Gmpump",
+          "symbol": "RICH",
+          "start": 1789369019.8587651,
+          "return_60s": null
+        },
+        {
+          "mint": "BP6JJTWRtFjUD1sMst7ThaXRHvaY58Cp13oEr6SSpump",
+          "symbol": "fomo",
+          "start": 1789369067.704988,
+          "return_60s": 0.007447091412629003
+        },
+        {
+          "mint": "GFyxbyei1iswNgiCgdydpiNbjoe1sVs78wDJCqkwpump",
+          "symbol": "chillbike",
+          "start": 1789369180.1640952,
+          "return_60s": 0.32560177966081594
+        }
+      ]
+    },
+    {
+      "run": "solana-online-20260914-074716",
+      "pnl": -321.51074096466414,
+      "realized": 1.1605039477200876,
+      "unrealized": -322.67124491238417,
+      "fees": 38.47693151702778,
+      "missing_basis": 277.1836870819166,
+      "missing_positions": [
+        {
+          "mint": "8LnLSMDNRzBp1LSeDH15QSzFQFnuA1XJJJnUyA3Wpump",
+          "basis": 249.99997506798888,
+          "last_observed_value": 39.37576970429802,
+          "quote_age": 285.2600281238556
+        },
+        {
+          "mint": "ALQoKjuk2mKMxkeGZqnPJUx1yPzo1mtdLTzYowAVpump",
+          "basis": 27.183712013927753,
+          "last_observed_value": 25.728926885268603,
+          "quote_age": 190.23170614242554
+        }
+      ],
+      "last_quote_pnl_diagnostic": -256.4060443750975,
+      "eligible_launches": 6,
+      "observed_60s": 4,
+      "missing_60s": 2,
+      "median_60s_return": 0.12854811147057954,
+      "mean_60s_return": 0.12033109175313977,
+      "stress_60s_mean": -0.2531126054979068,
+      "sol_return": 0.00024637823987383456,
+      "market_tokens": [
+        {
+          "mint": "8LnLSMDNRzBp1LSeDH15QSzFQFnuA1XJJJnUyA3Wpump",
+          "symbol": "ORBIT",
+          "start": 1789372249.3066123,
+          "return_60s": 0.19479140040204657
+        },
+        {
+          "mint": "ALarbVGBFqGpmdHVMfGSn8dCCURJLda7AEtWaZjZpump",
+          "symbol": "Spurdo",
+          "start": 1789372406.0560174,
+          "return_60s": null
+        },
+        {
+          "mint": "GSqWK3ETVZzd2rs5XcdwPQnxKKRpvC9A3MV8zi9pump",
+          "symbol": "OTC",
+          "start": 1789372649.8880343,
+          "return_60s": null
+        },
+        {
+          "mint": "ALQoKjuk2mKMxkeGZqnPJUx1yPzo1mtdLTzYowAVpump",
+          "symbol": "TST",
+          "start": 1789372673.818575,
+          "return_60s": 0.062304822539112514
+        },
+        {
+          "mint": "otsy54Ji8vPqkBEQudeEeTApm69juBvgVctNjBXpump",
+          "symbol": "World Wate",
+          "start": 1789372854.5253522,
+          "return_60s": 0.0037370665750871
+        },
+        {
+          "mint": "4p6CokBGvC9wyftotmNavw5VJxoakMnkCsZAyu1spump",
+          "symbol": "RHAWK",
+          "start": 1789372860.2498024,
+          "return_60s": 0.22049107749631291
+        }
+      ]
+    },
+    {
+      "run": "solana-online-20260914-084716",
+      "pnl": -535.2365971489556,
+      "realized": -12.156651938920117,
+      "unrealized": -523.0799452100355,
+      "fees": 22.584389505259978,
+      "missing_basis": 440.3422174416434,
+      "missing_positions": [
+        {
+          "mint": "Bsssjph4u33XfDU8cUVXcSKVYz5DqL8hLebyGHMNpump",
+          "basis": 243.1839779117519,
+          "last_observed_value": 231.9547280031514,
+          "quote_age": 5.712469816207886
+        },
+        {
+          "mint": "46jQT5tsrRckRtgE6K26JsmHhkvVz5eppFER2Ytbpump",
+          "basis": 197.15823952989152,
+          "last_observed_value": 216.88559459462908,
+          "quote_age": 254.5713188648224
+        }
+      ],
+      "last_quote_pnl_diagnostic": -86.39627455117517,
+      "eligible_launches": 11,
+      "observed_60s": 10,
+      "missing_60s": 1,
+      "median_60s_return": 0.008589920441013699,
+      "mean_60s_return": 0.12613313706614193,
+      "stress_60s_mean": 0.02375739733285629,
+      "sol_return": 0.0009369760331392474,
+      "market_tokens": [
+        {
+          "mint": "H1KTt1AaHYHNQs2RnJryuG2Bsj8g4EedqF5xFerrpump",
+          "symbol": "OpenAI",
+          "start": 1789375794.2114475,
+          "return_60s": 0.007802511588336669
+        },
+        {
+          "mint": "FVFp4S5y5JyTyLBoyYnCLUeA9zcYcSPdXEPmUZgXpump",
+          "symbol": "Gemini AI",
+          "start": 1789375883.4697797,
+          "return_60s": null
+        },
+        {
+          "mint": "63PWoK35QND7StfSsBhmLuVTL7b4jKg2cmsEcstRpump",
+          "symbol": "meep",
+          "start": 1789375941.5341256,
+          "return_60s": 0.514934899660779
+        },
+        {
+          "mint": "Bsssjph4u33XfDU8cUVXcSKVYz5DqL8hLebyGHMNpump",
+          "symbol": "WOFI",
+          "start": 1789375948.9040897,
+          "return_60s": 0.0029752086503149755
+        },
+        {
+          "mint": "mQbHabXVsUzhAsEtqYGKLZ5DVak5PfY1gkkaCkApump",
+          "symbol": "NTDA",
+          "start": 1789375974.3076873,
+          "return_60s": 0.007335503994220227
+        },
+        {
+          "mint": "46jQT5tsrRckRtgE6K26JsmHhkvVz5eppFER2Ytbpump",
+          "symbol": "vindiesel",
+          "start": 1789376073.0988288,
+          "return_60s": 0.5949105895454208
+        },
+        {
+          "mint": "vTkNWQUhFdjmjFPcBs9b1vnCFjqZRX8SvQhwCfjpump",
+          "symbol": "GAGACARD",
+          "start": 1789376102.278315,
+          "return_60s": -0.058439906378966455
+        },
+        {
+          "mint": "DfFsUA5HBM8KfmNp2CXiMJAYgD1NRB6Gs5qAHBptpump",
+          "symbol": "\u5976\u9f99",
+          "start": 1789376132.0534089,
+          "return_60s": 0.009377329293690728
+        },
+        {
+          "mint": "7Dy34M9UCd6w8BS1vJxttiqi3MAWeufdhjbCFJCxpump",
+          "symbol": "TWINE",
+          "start": 1789376311.560544,
+          "return_60s": 0.017684548650025222
+        },
+        {
+          "mint": "77uY6Xh2RT4RvqiyK7PELambMsk214uqN34VEUu7pump",
+          "symbol": "ZSHIT",
+          "start": 1789376377.007795,
+          "return_60s": 0.3004026539191951
+        },
+        {
+          "mint": "AAJodE6Wbc4FGY1hRoepynLGyp5gFC5NpMs4QgwCpump",
+          "symbol": "POKECOIN",
+          "start": 1789376388.1791115,
+          "return_60s": -0.13565196826159698
+        }
+      ]
+    },
+    {
+      "run": "solana-online-20260914-100213",
+      "pnl": -603.3162338293074,
+      "realized": 42.98697660595478,
+      "unrealized": -646.3032104352621,
+      "fees": 23.67387909955293,
+      "missing_basis": 743.0421514412201,
+      "missing_positions": [
+        {
+          "mint": "8PRAHzHBtpRhMd7VQGkLk12jNuVHbRj2Q6pxeftgpump",
+          "basis": 246.85166563837035,
+          "last_observed_value": 139.08175190789905,
+          "quote_age": 303.41493010520935
+        },
+        {
+          "mint": "7wRst1jynNrhs8xpBCzJxDVpyqDUuKvh9UYex5wWpump",
+          "basis": 249.99999840135237,
+          "last_observed_value": 162.70778962621407,
+          "quote_age": 69.07598304748535
+        },
+        {
+          "mint": "27M8boMKeTH5sVSC8ihbrEQ419A7JiJrZ7zQQnL5pump",
+          "basis": 246.1904874014973,
+          "last_observed_value": 108.87614953474986,
+          "quote_age": 20.402037143707275
+        }
+      ],
+      "last_quote_pnl_diagnostic": -192.6505427604444,
+      "eligible_launches": 7,
+      "observed_60s": 4,
+      "missing_60s": 3,
+      "median_60s_return": 0.20545178047077117,
+      "mean_60s_return": 0.2119181521656019,
+      "stress_60s_mean": -0.30747534161965606,
+      "sol_return": -0.0005402485143166658,
+      "market_tokens": [
+        {
+          "mint": "8PRAHzHBtpRhMd7VQGkLk12jNuVHbRj2Q6pxeftgpump",
+          "symbol": "CARDS",
+          "start": 1789380424.6622152,
+          "return_60s": 0.368609823056127
+        },
+        {
+          "mint": "7wRst1jynNrhs8xpBCzJxDVpyqDUuKvh9UYex5wWpump",
+          "symbol": "GUR",
+          "start": 1789380440.444145,
+          "return_60s": -0.0018104775319436328
+        },
+        {
+          "mint": "AnS4CN6pKHkHiuE66o6czS4fVasZqabqQ26bufgDpump",
+          "symbol": "GS",
+          "start": 1789380443.198136,
+          "return_60s": null
+        },
+        {
+          "mint": "27M8boMKeTH5sVSC8ihbrEQ419A7JiJrZ7zQQnL5pump",
+          "symbol": "Shift",
+          "start": 1789380540.5872753,
+          "return_60s": 0.43857952525280886
+        },
+        {
+          "mint": "EM9sDrkghyW1Zkv89PRBhTKzC8RSXfJ948kAEUuWpump",
+          "symbol": "BIKETRUMP",
+          "start": 1789380577.2847638,
+          "return_60s": 0.04229373788541535
+        },
+        {
+          "mint": "HUiToHqdyvpQcnkweq4Ktghtwy4jihdibyLBLvUBpump",
+          "symbol": "RISE",
+          "start": 1789380652.909267,
+          "return_60s": null
+        },
+        {
+          "mint": "Cisd3Ecg5T6L5GxKMTZ6f3fsJQ6xsc4nhREkd2dTpump",
+          "symbol": "MONTY",
+          "start": 1789380930.6372664,
+          "return_60s": null
+        }
+      ]
+    },
+    {
+      "run": "solana-online-20260914-110216",
+      "pnl": -209.22929699810788,
+      "realized": -77.6387228595762,
+      "unrealized": -131.59057413853174,
+      "fees": 26.593487376131247,
+      "missing_basis": 213.25398819045017,
+      "missing_positions": [
+        {
+          "mint": "2MDaPDSgQEJZ6Y1RjddShdZAi7hLnVtnKRs9k5SWpump",
+          "basis": 139.23373675374862,
+          "last_observed_value": 98.89310029333116,
+          "quote_age": 532.4916977882385
+        },
+        {
+          "mint": "5Sx2Ku4FJVfaQi5MXFhDR2XeAvXv1oS8mUVw34G4pump",
+          "basis": 74.02025143670154,
+          "last_observed_value": 70.38299271218844,
+          "quote_age": 427.4423677921295
+        }
+      ],
+      "last_quote_pnl_diagnostic": -39.95320399258827,
+      "eligible_launches": 6,
+      "observed_60s": 4,
+      "missing_60s": 2,
+      "median_60s_return": 0.03772772992791773,
+      "mean_60s_return": 0.01117529593727079,
+      "stress_60s_mean": -0.32588313604181945,
+      "sol_return": -0.0014743463731078377,
+      "market_tokens": [
+        {
+          "mint": "HQ3JpiLTMuiie77LDGQxMARjK2y3UJFjD36DzDovpump",
+          "symbol": "Jabal",
+          "start": 1789383807.3176768,
+          "return_60s": null
+        },
+        {
+          "mint": "2MDaPDSgQEJZ6Y1RjddShdZAi7hLnVtnKRs9k5SWpump",
+          "symbol": "\u062c\u064e\u0628\u064e\u0644",
+          "start": 1789383973.2860136,
+          "return_60s": 0.7625805101862548
+        },
+        {
+          "mint": "9dQunXVZoNZAiZCK2rA6yq1WLH6n7nBSPLjsLLW7pump",
+          "symbol": "ElonMusket",
+          "start": 1789384077.1933172,
+          "return_60s": 0.003421642273349068
+        },
+        {
+          "mint": "5Sx2Ku4FJVfaQi5MXFhDR2XeAvXv1oS8mUVw34G4pump",
+          "symbol": "INU",
+          "start": 1789384143.2669072,
+          "return_60s": 0.07203381758248639
+        },
+        {
+          "mint": "6sCm3dU7jRSvtXAfAWLvU3njoJqQ57PW9rB7iKTCpump",
+          "symbol": "PEPEPONS",
+          "start": 1789384416.121566,
+          "return_60s": -0.7933347862930071
+        },
+        {
+          "mint": "3F8vi4HGTwCXLYXuVoVuUdd1QmeMANMhifhSCscJpump",
+          "symbol": "fomo",
+          "start": 1789384428.865757,
+          "return_60s": null
+        }
+      ]
+    },
+    {
+      "run": "solana-online-20260914-120216",
+      "pnl": -187.07422819261205,
+      "realized": -219.34974258462293,
+      "unrealized": 32.27551439201095,
+      "fees": 43.57378827897152,
+      "missing_basis": 125.63379870008715,
+      "missing_positions": [
+        {
+          "mint": "CFP9LfRTFX39JcfVLyyxTt7QEwxT3QVxD9qRejTnpump",
+          "basis": 125.63379870008715,
+          "last_observed_value": 85.18911811397612,
+          "quote_age": 156.36072182655334
+        }
+      ],
+      "last_quote_pnl_diagnostic": -101.88511007863593,
+      "eligible_launches": 10,
+      "observed_60s": 6,
+      "missing_60s": 4,
+      "median_60s_return": 0.009742399190943773,
+      "mean_60s_return": 0.03336176991788797,
+      "stress_60s_mean": -0.3799829380492672,
+      "sol_return": 0.0021705885254796886,
+      "market_tokens": [
+        {
+          "mint": "XUUvj9TQpmwXLQBDWGUfaqW2a1zrkPLTbKH7KiBpump",
+          "symbol": "POKEMON",
+          "start": 1789387510.7065287,
+          "return_60s": 0.025305401027056806
+        },
+        {
+          "mint": "7NuUYpjnRatGSn5ZS1u1S3cu74xH5ehKTQpmHxuEpump",
+          "symbol": "BBC",
+          "start": 1789387748.319217,
+          "return_60s": 0.015912813293949002
+        },
+        {
+          "mint": "CFP9LfRTFX39JcfVLyyxTt7QEwxT3QVxD9qRejTnpump",
+          "symbol": "Pumpers",
+          "start": 1789387774.1592376,
+          "return_60s": null
+        },
+        {
+          "mint": "RSV8RMhRznvbiPYNFdDZr8oKzWXkdvKSVy4csuzpump",
+          "symbol": "HOOD",
+          "start": 1789387839.3955867,
+          "return_60s": null
+        },
+        {
+          "mint": "5j9RjvaduXTo3qZB6QWyn8SFWwoES7pUL1rZFdnbpump",
+          "symbol": "Koshimizu",
+          "start": 1789387845.9401264,
+          "return_60s": null
+        },
+        {
+          "mint": "C1eV8rXre6PX59WUe8r1VdKCSYE8FLBHugo7QRK7pump",
+          "symbol": "WHS",
+          "start": 1789387850.0914502,
+          "return_60s": -0.1182770105102895
+        },
+        {
+          "mint": "HDwkFAi56SiH14Npsvzfj3wuR597krDzBqFs9j8Apump",
+          "symbol": "Google",
+          "start": 1789387881.0466583,
+          "return_60s": null
+        },
+        {
+          "mint": "GPo9DooAysL2YgQ5uyVNn8vX2QPuwmXjqYrHqJSBpump",
+          "symbol": "Evader",
+          "start": 1789388001.071689,
+          "return_60s": -0.008220518391922171
+        },
+        {
+          "mint": "2rr27u63Vt1K1d7di4jXeCtKF2P7kVRqiMdKdjS5pump",
+          "symbol": "Moonhouse",
+          "start": 1789388026.0749955,
+          "return_60s": 0.28187794900059515
+        },
+        {
+          "mint": "EVmpr5f4L3DevjVGe31kBd4W3CW2rtEHnerdUuJcpump",
+          "symbol": "WOFI",
+          "start": 1789388078.6676757,
+          "return_60s": 0.003571985087938545
+        }
+      ]
+    },
+    {
+      "run": "solana-online-20260914-130216",
+      "pnl": -44.02015205547184,
+      "realized": 86.04108052211866,
+      "unrealized": -130.06123257759043,
+      "fees": 28.852723444880723,
+      "missing_basis": 249.9999597400863,
+      "missing_positions": [
+        {
+          "mint": "84MFLrKwHnyDqQ8AVApFjyBNxbQbbDq3xjgsh28vpump",
+          "basis": 249.9999597400863,
+          "last_observed_value": 284.32505601726433,
+          "quote_age": 72.93040609359741
+        }
+      ],
+      "last_quote_pnl_diagnostic": 240.3049039617925,
+      "eligible_launches": 11,
+      "observed_60s": 7,
+      "missing_60s": 4,
+      "median_60s_return": 0.07877096698906771,
+      "mean_60s_return": -0.0051204057065908125,
+      "stress_60s_mean": -0.36689480363146687,
+      "sol_return": 0.0013345855370472393,
+      "market_tokens": [
+        {
+          "mint": "3xwBnwh8PCdZNQoFuqe6fTNPQc8HR2UGzwDivKo4pump",
+          "symbol": "TRADY",
+          "start": 1789391040.8127198,
+          "return_60s": 0.08123720492026787
+        },
+        {
+          "mint": "9vYxsXtuRJacE2Ywriun873soefeuBLyMTuc93xipump",
+          "symbol": "twinedpepe",
+          "start": 1789391152.0821621,
+          "return_60s": -0.27958352359884664
+        },
+        {
+          "mint": "54AFqUSdyunAXceD2vLgYkYhpQR7nWdKVobA9JDapump",
+          "symbol": "DICARPIO",
+          "start": 1789391324.6171038,
+          "return_60s": -0.002474679242487232
+        },
+        {
+          "mint": "GXjruPKC4hkjXzr6YUVZAYuKDDMau94RzKHLRFwLpump",
+          "symbol": "Gemini AI",
+          "start": 1789391338.389083,
+          "return_60s": null
+        },
+        {
+          "mint": "7PjBxJhPSDiYwkVMxBYqNwgG6taJawgbZxR1n8LWpump",
+          "symbol": "ROO",
+          "start": 1789391433.918839,
+          "return_60s": null
+        },
+        {
+          "mint": "84MFLrKwHnyDqQ8AVApFjyBNxbQbbDq3xjgsh28vpump",
+          "symbol": "cmg",
+          "start": 1789391436.2629833,
+          "return_60s": 0.30600887253167475
+        },
+        {
+          "mint": "NCmjsahwxnpDgDua3t5MdDmjQTAeeHz6TU1Ueqvpump",
+          "symbol": "corner",
+          "start": 1789391521.58598,
+          "return_60s": 0.07877096698906771
+        },
+        {
+          "mint": "2YrEhbVAKGojhZn2SYjQc7EYLixrBLHmqFjME69Gpump",
+          "symbol": "GRADY",
+          "start": 1789391624.118716,
+          "return_60s": -0.3506853853128946
+        },
+        {
+          "mint": "5m6PyzNopSfCn9v7mLdk4ewuqHTVRnSkWAjz7gTkwHaT",
+          "symbol": "openads",
+          "start": 1789391658.4584317,
+          "return_60s": null
+        },
+        {
+          "mint": "GrEjhaQoHe4ft74hkfdoWPQbVENrXYma2DUbaenepump",
+          "symbol": "stankmemes",
+          "start": 1789391661.2117727,
+          "return_60s": 0.13088370376708247
+        },
+        {
+          "mint": "rB5ZvUy11vxFpoxKwxwJHJ2ML2cpxT4RB8Va26Vpump",
+          "symbol": "OpenAI",
+          "start": 1789391697.9134026,
+          "return_60s": null
+        }
+      ]
+    }
+  ],
+  "method": "All observed launches reaching tick_for eligibility, independent of trader admission. First eligible quote to first eligible quote at 60-70 seconds; no future endpoint filtering of cohort. Raw indicative USD mid returns, not an executable trading strategy. Missing endpoint also reported as a -100% stress scenario. End-of-episode unavailable holdings separately retain original zero marks.",
+  "limitations": [
+    "One day; small number of episodes.",
+    "Cohort entry lacks simulated execution delay, fees, or portfolio allocation: descriptive market metric only.",
+    "Eligible endpoint conditioning biases survivor-only returns; stress returns conflate illiquidity, missing data and loss.",
+    "Frozen policy replay on identical markets not performed; no causal learning estimate.",
+    "Last quote valuation is stale diagnostic only; never changes stored accounts."
+  ],
+  "correlations": {
+    "missing_basis": -0.7623947294389232,
+    "stress_60s_mean": 0.17731451906639137,
+    "mean_60s_return": 0.22976907515610165
+  }
+}
