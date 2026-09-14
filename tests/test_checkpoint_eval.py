@@ -160,3 +160,101 @@ def test_rejects_missing_or_noncausal_observation_cutoff(change):
           dict(at=111,observation_at=110,event_cursor=1,fx_state=dict(sol_usd=0,seen_at=0),quote_protocol=QUOTE_PROTOCOL,decision=None,neural=dict(mint='mint'))]
     change(rows)
     with pytest.raises(ValueError):validate_observation_rows(rows)
+
+
+def test_unchanged_receipt_keeps_pending_order_when_flow_guard_ages(tmp_path):
+    """Aging entry eligibility alone must not cancel an unprocessed live intent."""
+    import sqlite3
+    from paperlab.checkpoint_eval import evaluate
+    from paperlab.core import digest
+    from paperlab.solana_events import SOL,TOKEN
+    mint='CeSFzoAqSMXMgodeLzrTMe3V5MdV5Nhinehedxohpump'
+    events=[dict(kind='CreateEvent',mint=mint,quote_mint=SOL,token_program=TOKEN,is_mayhem_mode=False,
+                 received=10,timestamp=10,slot=1,signature='create',log_index=0)]
+    receipts=[(35,True),(36,False),(37,True),(38,False),(39,True),(44,True),
+              (49,False),(54,True),(59,False),(64,True),(69,False),(71,True),
+              (72,False),(73,False),(74,True),(79,True),(84,True),(89,True),
+              (94,True),(99,True),(108,False),(109,False)]
+    for index,(at,buy) in enumerate(receipts):
+        events.append(dict(kind='TradeEvent',mint=mint,received=at,timestamp=at,slot=index+2,
+            signature='trade-'+str(index),log_index=index+1,is_buy=buy,sol_amount=1_000_000_000,
+            quote_mint=SOL,mayhem_mode=False,virtual_sol_reserves=60_000_000_000,
+            virtual_token_reserves=500_000_000_000_000,real_sol_reserves=30_000_000_000))
+    db=sqlite3.connect(tmp_path/'events.db');db.execute('create table events(body text)')
+    db.executemany('insert into events values(?)',[(json.dumps(e),) for e in events]);db.commit();db.close()
+    rows=[]
+    for at in range(45,111,5):
+        prefix=[e for e in events if e['received']<=at]
+        opportunity=at==100
+        rows.append(dict(at=at+.5,observation_at=at,event_cursor=len(prefix),
+            quote_protocol=QUOTE_PROTOCOL,fx_state=dict(sol_usd=100,seen_at=40),
+            admissions=[mint] if at==45 else [],retired=[],
+            feed=dict(status='connected',last_message=prefix[-1]['received']),
+            neural=dict(mint=mint,tick=dict(received_at=99)) if opportunity else None,
+            decision=dict(mint=mint,issued=100.25) if opportunity else None))
+    (tmp_path/'fx.jsonl').write_text(json.dumps(dict(at=40,sol_usd=100))+'\n')
+    (tmp_path/'decisions.jsonl').write_text(''.join(json.dumps(r)+'\n' for r in rows))
+    plan=dict(protocol=PROTOCOL,quote_protocol=QUOTE_PROTOCOL,cutoff=1,policies=['always_long'],
+        checkpoints=[],scope='Receipt processing regression',tape=dict(id='receipt-fixture',started=5,
+        files={n:dict(path=str(tmp_path/n),sha256=digest(tmp_path/n))
+               for n in ('events.db','fx.jsonl','decisions.jsonl')}))
+    result=evaluate(plan,'always_long',tmp_path/'result','unused')
+    ledger=[json.loads(line) for line in (tmp_path/'result/decisions.jsonl').read_text().splitlines()]
+    assert ledger[-2]['observation_at']==105 and ledger[-2]['executions']==[]
+    assert len(ledger[-1]['executions'])==1
+    fill=ledger[-1]['executions'][0]['fill']
+    assert fill['status']=='filled' and fill['fill_ts']==109 and fill['decision_ts']==100.25
+    assert result['account_audit']['paper_fills']==1
+
+
+def test_simultaneous_pending_fills_share_cash_in_active_admission_order(tmp_path):
+    import sqlite3
+    from solders.pubkey import Pubkey
+    from paperlab.checkpoint_eval import evaluate
+    from paperlab.core import digest
+    from paperlab.solana_events import SOL,TOKEN
+    mints={label:str(Pubkey(bytes([index+1])*32)) for index,label in enumerate('ABCDEF')}
+    events=[]
+    for label,mint in mints.items():
+        events.append(dict(kind='CreateEvent',mint=mint,quote_mint=SOL,token_program=TOKEN,is_mayhem_mode=False,
+                           received=950,timestamp=950,slot=1,signature='create-'+label,log_index=0))
+        times=[990,991,992,993,994]+[999.9+step*5 for step in range(19)
+                   if not (label=='B' and step in (16,17)) and not (label=='A' and step==17)]
+        for index,received in enumerate(times):
+            # Prior C/D/E entries nearly exhaust their $250 caps, F consumes
+            # $202.50; the remaining ~$47.50 cannot fund both A and B fully.
+            reserves=30 if label in 'AB' else 200 if label=='F' else 1000
+            events.append(dict(kind='TradeEvent',mint=mint,received=received,timestamp=int(received),
+                slot=int(received),signature=label+'-'+str(index),log_index=index+1,
+                is_buy=index%2==0,sol_amount=1_000_000_000,quote_mint=SOL,mayhem_mode=False,
+                virtual_sol_reserves=1_500_000_000_000,virtual_token_reserves=500_000_000_000_000,
+                real_sol_reserves=reserves*1_000_000_000))
+    events.sort(key=lambda event:(event['received'],event['signature']))
+    db=sqlite3.connect(tmp_path/'events.db');db.execute('create table events(body text)')
+    db.executemany('insert into events values(?)',[(json.dumps(event),) for event in events]);db.commit();db.close()
+    offers={11:'C',12:'D',13:'E',14:'F',15:'B',16:'A'}
+    rows=[]
+    for step in range(19):
+        at=1000+step*5;prefix=[event for event in events if event['received']<=at]
+        mint=mints[offers[step]] if step in offers else None
+        rows.append(dict(at=at+.5,observation_at=at,event_cursor=len(prefix),quote_protocol=QUOTE_PROTOCOL,
+            fx_state=dict(sol_usd=100,seen_at=999),admissions=list(mints.values()) if step==0 else [],retired=[],
+            feed=dict(status='connected',last_message=prefix[-1]['received']),
+            neural=dict(mint=mint,tick=dict(received_at=at-.1)) if mint else None,
+            decision=dict(mint=mint,issued=at+.25) if mint else None))
+    # Keep the final FX observation fresh without changing the conversion.
+    for row in rows:
+        if row['observation_at']>=1080:row['fx_state']['seen_at']=1080
+    (tmp_path/'fx.jsonl').write_text(''.join(json.dumps(dict(at=at,sol_usd=100))+'\n' for at in (999,1080)))
+    (tmp_path/'decisions.jsonl').write_text(''.join(json.dumps(row)+'\n' for row in rows))
+    plan=dict(protocol=PROTOCOL,quote_protocol=QUOTE_PROTOCOL,cutoff=900,policies=['always_long'],
+        checkpoints=[],scope='Shared-cash execution order regression',tape=dict(id='order-fixture',started=901,
+        files={name:dict(path=str(tmp_path/name),sha256=digest(tmp_path/name))
+               for name in ('events.db','fx.jsonl','decisions.jsonl')}))
+    result=evaluate(plan,'always_long',tmp_path/'result','unused')
+    ledger=[json.loads(line) for line in (tmp_path/'result/decisions.jsonl').read_text().splitlines()]
+    final_fills=[entry for entry in ledger[-1]['executions'] if entry['fill']['status']=='filled']
+    assert [entry['mint'] for entry in final_fills]==[mints['A'],mints['B']]
+    assert float(result['portfolio']['positions'][mints['A']]['basis'])==pytest.approx(30.375)
+    assert float(result['portfolio']['positions'][mints['B']]['basis'])==pytest.approx(17.125732874,abs=1e-7)
+    assert result['account_audit']['paper_fills']==6

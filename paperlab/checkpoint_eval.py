@@ -157,7 +157,7 @@ def evaluate(plan,policy,output,data,commit=lambda:None,fly_factory=None):
     if policy=='untrained':
         head.save(output/'head-untrained.pt');fly.save(output/'fly-untrained.npz')
     opening=dict(portfolio=dict(cash='1000',fees='0',halted=False,positions={},quarantined=[],risk_policy=EPISODE_POLICY))
-    portfolio=Portfolio(opening['portfolio']);pending={};ticks={};seen={};current=None;ledger=[];anchors={};active=set()
+    portfolio=Portfolio(opening['portfolio']);pending={};ticks={};seen={};current=None;ledger=[];anchors={};active={}
     coverage=dict(recorded_neural_opportunities=0,recorded_issued_opportunities=0,policy_decisions=0,
                   skipped_no_source_decision=0,skipped_unavailable_quote=0,skipped_insufficient_history=0,
                   skipped_pending_order=0,expired_pending_orders=0)
@@ -180,9 +180,9 @@ def evaluate(plan,policy,output,data,commit=lambda:None,fly_factory=None):
             feed.accept(body);event=next(iterator,None)
         i=bisect.bisect_right(fxt,now)-1;quotes={};quote_views={};snap=feed.snapshot()
         for m in source.get('retired',[]):
-            active.discard(m)
+            active.pop(m,None)
             pending.pop(m,None)
-        active.update(source.get('admissions',[]))
+        for m in source.get('admissions',[]):active.setdefault(m,None)
         health=source['feed'];connected=health['status']=='connected' and 0<=now-health['last_message']<=10
         live_fx=source['fx_state']
         if live_fx['sol_usd'] and (i<0 or fx[i]['at']!=live_fx['seen_at'] or fx[i]['sol_usd']!=live_fx['sol_usd']):
@@ -195,11 +195,22 @@ def evaluate(plan,policy,output,data,commit=lambda:None,fly_factory=None):
         for m in active:
             if m not in quotes:anchors.pop(m,None)
         executions=[]
-        for m,order in list(pending.items()):
+        # Shared cash makes order material: live executes in active admission
+        # order, which can differ from the order in which intents were issued.
+        for m in active:
+            order=pending.get(m)
+            if order is None:continue
             q=quotes.get(m)
             if not q:
                 if now-order['issued']>15:
                     del pending[m];coverage['expired_pending_orders']+=1
+                continue
+            trade=snap[m]['trades'][-1]
+            signature=(trade.get('signature'),trade.get('log_index'),trade['received'])
+            if signature==seen.get(m):
+                # Live processing waits for a new receipt before either executing
+                # or rejecting an intent. Time-dependent entry filters can change
+                # while this same observed receipt remains fresh.
                 continue
             view=quote_views[m]
             execution_tick,execution_reason=view.for_target(order['target'],portfolio.cash,portfolio.position(m)['qty'])
@@ -208,7 +219,7 @@ def evaluate(plan,policy,output,data,commit=lambda:None,fly_factory=None):
                 executions.append(dict(mint=m,tick=q.__dict__,fill=fill))
                 del pending[m]
                 continue
-            trade=snap[m]['trades'][-1];liquidity=trade['real_sol_reserves']/1e9*fx[i]['sol_usd']*.01
+            liquidity=trade['real_sol_reserves']/1e9*fx[i]['sol_usd']*.01
             fill=portfolio.execute(m,order['target'],order['issued'],execution_tick,quotes,liquidity_notional_usd=liquidity)
             executions.append(dict(mint=m,tick=execution_tick.__dict__,fill=fill,liquidity_notional_usd=liquidity,real_sol_reserves=trade['real_sol_reserves'],sol_usd=fx[i]['sol_usd']))
             if fill.get('reason')!='not_after_decision':del pending[m]
@@ -258,7 +269,7 @@ def evaluate(plan,policy,output,data,commit=lambda:None,fly_factory=None):
                            quote_protocol=QUOTE_PROTOCOL,position_values=valuations,capacity_stress_equity_usd=capacity_equity,
                            portfolio=portfolio.state(),equity_stress_usd=equity,marks={m:q.__dict__ for m,q in quotes.items() if portfolio.positions.get(m,{}).get('qty')},retired=[]))
         last_quotes=quotes
-        feed.pinned_mints=active|{m for m,p in source.get('portfolio',{}).get('positions',{}).items() if float(p['qty'])>0}
+        feed.pinned_mints=set(active)|{m for m,p in source.get('portfolio',{}).get('positions',{}).items() if float(p['qty'])>0}
         if len(ledger)%30==0:atomic_json(output/'progress.json',dict(rows=len(ledger),total=len(source_rows),policy=policy));commit()
     db.close()
     if head.updates!=initial_updates or any(not head.torch.equal(v,initial_head[k]) for k,v in head.model.state_dict().items()):raise ValueError('Frozen Q changed')

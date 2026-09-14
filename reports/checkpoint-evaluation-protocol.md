@@ -17,6 +17,8 @@ Each policy is one bounded, non-retrying, maximum-20-minute worker call. It uses
 - Fresh $1,000 paper portfolio for each policy; $250 remaining acquisition-cost limit per token and 1% observed SOL reserve per-fill limit.
 - Identical archived market events, contemporaneous FX, quote guards, starting cash, fees, spread, slippage, missing-quote zero marks, and delayed-fill rules.
 - The v2 tape records the exact applied-event cursor, observation cutoff and FX availability. Replay excludes events received but not yet applied at the snapshot, respects failed FX fetches, and preserves the recorded later decision issuance time for common inference latency.
+- Pending intents are processed only on new trade receipts, matching the live signature gate. An entry filter aging out while a receipt is unchanged does not cancel the waiting order.
+- Simultaneous ready intents execute in recorded active-token admission order, matching the live allocation of shared cash rather than reordering by intent issuance.
 - `solana_observed_entry_exit_v2` separates observable marks, new-entry guards and risk-reducing exit guards. Full indicative marks and next-fill capacity sensitivity are reported separately; neither proves exchange executability.
 - Identical recorded token-attention opportunities. This isolates conditional buy/sell behavior; it **does not measure token selection quality** or a completely independent end-to-end trader.
 - Each earlier checkpoint's full fly and Q weights are frozen. Neural transient state is standardized without deleting learned weights. Q evaluation is greedy (epsilon zero) for every checkpoint; the original live learner used exploration.
@@ -29,4 +31,4 @@ Each policy records step-by-step decisions, inputs/Q values, fills and account m
 
 ## Verification performed
 
-The initial v1 implementation passed 33 focused tests and an archived cash/always-long mechanics smoke. Those checks did not cover the defects found in the full-system audit and do not validate prospective trading performance. The v2 evaluator/quote focused suite passed 22 tests at implementation, including 9 evaluator cases; the native cloud smoke and corrected prospective deployment require their separate observed verification. See [the evaluation audit](system-audit-evaluation-20260914.md) for corrections and remaining interpretation limits.
+The initial v1 implementation passed 33 focused tests and an archived cash/always-long mechanics smoke. Those checks did not cover the defects found in the full-system audit and do not validate prospective trading performance. The v2 evaluator/quote focused suite passed 24 tests at implementation, including 11 evaluator cases; the native cloud smoke and corrected prospective deployment require their separate observed verification. See [the evaluation audit](system-audit-evaluation-20260914.md) for corrections and remaining interpretation limits.

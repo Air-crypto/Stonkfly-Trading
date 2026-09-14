@@ -43,6 +43,8 @@ The earlier replay used the ledger row's end time, after inference, instead of t
 
 V2 records an atomic applied-event cursor, pre-inference observation time and actual FX availability. Replay uses those exact inputs and the later recorded issuance time. It follows the same active-token history, reports skipped opportunities, checks native and head weights remain unchanged, and seals the complete relevant Python/native/schema source set. Healthy no-inference windows may retain their parent's checkpoint, with explicit immutable provenance, rather than crashing registration.
 
+Final side-by-side review also reproduced two execution mismatches: replay could cancel an order on an unchanged receipt when a time-dependent flow filter aged out, and simultaneous orders could consume shared cash in issuance order rather than the live active-token order. Both are corrected with explicit counterexample regressions. Neither unused plan was scored; both supersession records are retained before the final source is sealed again.
+
 The original never-executed v1 batch is archived with a supersession record. A new v2 cutoff must precede its future tape. No old tape is backfilled with invented timing metadata.
 
 See [evaluation audit](system-audit-evaluation-20260914.md) and [versioned protocol](checkpoint-evaluation-protocol.md).
@@ -61,6 +63,8 @@ Verification is in progress. Final test counts, native-cloud smoke results, corr
 
 The services use bounded non-retrying calls, shared writer leases, retained checkpoints and conservative budget reservations. The 8 GiB admission guard covers `/solana-live` archives, not the entire shared volume or evaluation artifacts; one admitted window can add data beyond that threshold. Worker allocation is $85, with $15 reserved for collector/overhead and another 25% admission margin. Non-preemptible compute costs three times the listed CPU/RAM rate; the ledger also applies a twofold safety factor. The ledger is an estimate, not the provider invoice, and not all build/coordinator/storage charges are individually attributed. The $30 Starter credit is not permission to exceed the user's $100 limit. [Modal pricing](https://modal.com/pricing)
 
+An observed roughly $0.24 estimated training window extrapolates to about $173 for 720 hourly windows, before other services. The $100 authorization therefore cannot fund this configuration nonstop for a full month; budget or storage admission will pause it. On $1,000 capital, $20–40 monthly hosting alone requires 2–4% monthly gross return just to pay hosting, before execution costs. The training budget and eventual inference economics should be measured separately. Efficient deployment is a later gate, not something established by a small parameter count in the Q head.
+
 ## Checklist and roadmap
 
 - [x] Inspect deployed control/call state, source, historical ledgers, reward paths, checkpoint registry, replay and costs.
@@ -72,6 +76,7 @@ The services use bounded non-retrying calls, shared writer leases, retained chec
 - [ ] Complete the first prospective v2 checkpoint comparison, explicitly labelled as a small pilot.
 - [ ] Add multiple nonoverlapping future windows and a later untouched confirmation set; report paired differences against cash and always-long, drawdown, turnover, fees, availability and concentration with uncertainty across windows.
 - [ ] Add market-only, Q-only and native/head cross-combination controls before attributing value to the fly circuit.
+- [ ] Compare a pristine restart trained under the corrected protocol with the continued historical weights, without deleting either branch. The current continuation retains weights previously trained on incomplete rewards.
 - [ ] Version and test scale-aware features, episode time remaining, reward formulation and Q stabilization; preserve the current version as a control.
 - [ ] Evaluate independent token selection and budgeted continuous collection/backfill. Collecting every launch is a separate coverage/cost target, not a property of the current hourly worker.
 - [ ] Calibrate executable routing, impact, priority fees, failed transactions, token restrictions and exit capacity against actual read-only quotes.
