@@ -51,6 +51,35 @@ def paused(control, now):
             or any(s in control.get('status', '') for s in ('paused', 'stopped', 'requires_review')))
 
 
+def recover_result(root, expected_call_id, *, poll, commit, clock=time.time):
+    """Reconcile only the verified result of a missing-file pause, under lease."""
+    root=Path(root);path=root/'checkpoint-eval/control.json';c=read(path)
+    pending=c.get('pending') or {}
+    if (c.get('enabled') or c.get('status')!='evaluation_failed'
+            or c.get('error')!='MissingDurableEvaluationResult' or c.get('audit_pause')
+            or c.get('budget_paused_until',0)>clock() or pending.get('call_id')!=expected_call_id):
+        raise ValueError('Not the expected missing-result pause')
+    result=poll(expected_call_id)  # Caller refreshes the mounted volume after completion.
+    if read(path)!=c:raise ValueError('Evaluation control changed during verification')
+    base=root/'checkpoint-eval'/c['batch'];policy=pending['policy']
+    plan=read(base/'plan.json');output=base/policy
+    if (not result or result.get('status')!='completed' or result.get('policy')!=policy
+            or policy not in plan['policies'] or result.get('tape')!=plan['tape']['id']
+            or result.get('weights_unchanged') is not True
+            or read(output/'owner.json').get('call_id')!=expected_call_id
+            or read(output/'completed.json')!=result):
+        raise ValueError('Completed call and durable result must match exactly')
+    record=base/'reconciliation-recovery'/f'{expected_call_id}.json'
+    if record.exists():raise ValueError('Recovery already recorded; inspect current state')
+    record.parent.mkdir(parents=True,exist_ok=True)
+    atomic_json(record,dict(at=clock(),before=c,result_sha256=digest(output/'completed.json'),
+        action='Resume after exact completed call and persisted result match'))
+    c.update(enabled=True,pending=None,status='verified_result_reconciled',checked_at=clock())
+    c.pop('error')
+    atomic_json(path,c);commit()
+    return dict(status=c['status'],batch=c['batch'],policy=policy)
+
+
 def dispatch(root, *, poll, spawn, commit, refresh_training, worker_busy, clock=time.time):
     """Caller holds the same coordinator lease as the original coordinator.
 

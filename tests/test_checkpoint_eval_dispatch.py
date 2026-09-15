@@ -151,3 +151,72 @@ def test_dispatch_budget_is_separate_and_fails_closed(setup):
     p=base.parent/'dispatch-budget.json';state=read(p);state['months'][r['month']]=3.75;atomic_json(p,state)
     assert reserve_dispatch(root,1003) is None
     assert (root/'budget.json').read_bytes()==before
+
+
+def test_cloud_poll_refreshes_completed_result_before_dispatch_validation(setup,monkeypatch):
+    from types import SimpleNamespace
+    import checkpoint_eval_dispatch_cloud as cloud
+    root,base,calls,run=setup
+    run();events=[];result=dict(status='completed',policy='new')
+    def get(**kwargs):events.append('completed');return result
+    def reload():
+        events.append('reload');(base/'new').mkdir()
+        atomic_json(base/'new/completed.json',result)
+    monkeypatch.setattr(cloud.modal.FunctionCall,'from_id',lambda _:SimpleNamespace(get=get))
+    monkeypatch.setattr(cloud,'volume',SimpleNamespace(reload=reload))
+    calls['poll']=cloud.poll_completed
+    assert run()['pending']['policy']=='untrained'
+    assert events==['completed','reload']
+
+
+def test_cloud_poll_does_not_treat_pending_as_completed(monkeypatch):
+    from types import SimpleNamespace
+    import checkpoint_eval_dispatch_cloud as cloud
+    get=Mock(side_effect=TimeoutError);reload=Mock()
+    monkeypatch.setattr(cloud.modal.FunctionCall,'from_id',lambda _:SimpleNamespace(get=get))
+    monkeypatch.setattr(cloud,'volume',SimpleNamespace(reload=reload))
+    assert cloud.poll_completed('fc-live') is None
+    reload.assert_not_called()
+
+
+@pytest.fixture
+def missing_result(setup):
+    root,base,calls,run=setup;run()
+    result=dict(status='completed',policy='new',tape='future',weights_unchanged=True,pnl_usd=-1.)
+    calls['poll'].return_value=result
+    assert run()['error']=='MissingDurableEvaluationResult'
+    (base/'new').mkdir()
+    atomic_json(base/'new/completed.json',result)
+    atomic_json(base/'new/owner.json',dict(call_id='fc-test'))
+    return root,base,calls,result
+
+
+def test_missing_result_recovery_requires_exact_persisted_result_and_keeps_scores(missing_result):
+    from checkpoint_eval_dispatch import recover_result
+    root,base,calls,result=missing_result
+    before=read(base.parent/'control.json');raw=(base/'new/completed.json').read_bytes()
+    r=recover_result(root,'fc-test',poll=calls['poll'],commit=calls['commit'],clock=lambda:1001)
+    assert r['status']=='verified_result_reconciled'
+    c=read(base.parent/'control.json');assert c['enabled'] and c['pending'] is None and 'error' not in c
+    assert (base/'new/completed.json').read_bytes()==raw
+    assert read(base/'reconciliation-recovery/fc-test.json')['before']==before
+    with pytest.raises(ValueError):recover_result(root,'fc-test',poll=calls['poll'],commit=calls['commit'])
+
+
+@pytest.mark.parametrize('problem',['pending','mismatch','owner','missing','audit','wrong_call'])
+def test_missing_result_recovery_rejects_uncertain_or_unrelated_state(missing_result,problem):
+    from checkpoint_eval_dispatch import recover_result
+    root,base,calls,result=missing_result
+    expected='fc-test'
+    if problem=='pending':calls['poll'].return_value=None
+    if problem=='mismatch':atomic_json(base/'new/completed.json',{**result,'pnl_usd':999})
+    if problem=='owner':atomic_json(base/'new/owner.json',dict(call_id='fc-other'))
+    if problem=='missing':(base/'new/completed.json').unlink()
+    if problem=='audit':
+        p=base.parent/'control.json';c=read(p);c['audit_pause']=True;atomic_json(p,c)
+    if problem=='wrong_call':expected='fc-other'
+    before=(base.parent/'control.json').read_bytes()
+    with pytest.raises((ValueError,FileNotFoundError)):
+        recover_result(root,expected,poll=calls['poll'],commit=calls['commit'])
+    assert (base.parent/'control.json').read_bytes()==before
+    assert not (base/'reconciliation-recovery').exists()

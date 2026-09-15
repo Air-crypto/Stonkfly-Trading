@@ -1,0 +1,464 @@
+{
+  "captured_at": "2026-09-15T22:54:53.836045+00:00",
+  "training": {
+    "enabled": true,
+    "status": "dispatched",
+    "parent": "solana-online-20260915-214718",
+    "pending": {
+      "run_id": "solana-online-20260915-225431",
+      "call_id": "fc-01M2KMF2PXQNBZJSW4XC1WBV6N",
+      "dispatched_at": 1789512871.8454678,
+      "account_mode": "fresh_training_episode"
+    },
+    "next_at": 1789512438.6738067,
+    "completed_windows": 44,
+    "last_result": {
+      "ended": 1789509759.387912,
+      "neural_observations": 124,
+      "new_readout_updates": 96,
+      "nonzero_reward_updates": 7,
+      "fills": 7,
+      "equity_stress_usd": 996.2599794016182,
+      "entry_budget_usd": "878.9453106001043221316128677",
+      "training_health": "learning_from_paper_execution",
+      "account_audit": {
+        "rows": 163,
+        "paper_fills": 7,
+        "native_observations": 124,
+        "distinct_tokens_with_native_inference": 71,
+        "new_head_updates": 96,
+        "cash_usd": 878.9453106001043,
+        "cumulative_fees_usd": 2.0346600148315064,
+        "equity_marks_verified": 163,
+        "nonzero_reward_updates": 7,
+        "reward_protocol": "mint_credit_terminal_v2",
+        "raw_q_reward_usd": -3.740020598381764,
+        "terminal_readout_updates": 58,
+        "reward_reconciliation_residual_usd": 2.6645352591003757e-15,
+        "reward_reconciliation_verified": true,
+        "native_reward_usd": -0.9274069664156912,
+        "native_uncredited_difference_usd": -2.812613631966073,
+        "paper_only": true,
+        "profitable_learning_proven": false,
+        "note": "Recorded-fill accounting only; this does not establish executable prices or policy superiority."
+      },
+      "budget": {
+        "estimated_compute_usd": 0.24477070441457746,
+        "monthly_reserved_usd": 21.529833748858696,
+        "monthly_limit_usd": 85,
+        "provider_bill": false
+      },
+      "account_mode": "fresh_training_episode",
+      "episode_pnl_usd": -3.7400205983817614
+    }
+  },
+  "totals": {
+    "native_observations_total": 5717,
+    "readout_updates": 4486
+  },
+  "evaluation": {
+    "enabled": true,
+    "status": "waiting_for_training_gap",
+    "error": null,
+    "batch": "evaluation-1789504902",
+    "pending": null
+  },
+  "primary_policy": "solana-online-20260915-194714",
+  "policy_count": 40,
+  "results": [
+    {
+      "policy": "untrained",
+      "pnl_usd": -358.3414495647162,
+      "fees_usd": 12.76085379588029,
+      "native_observations": 123,
+      "weights_unchanged": true,
+      "coverage": {
+        "recorded_neural_opportunities": 123,
+        "recorded_issued_opportunities": 123,
+        "policy_decisions": 123,
+        "skipped_no_source_decision": 0,
+        "skipped_unavailable_quote": 0,
+        "skipped_insufficient_history": 0,
+        "skipped_pending_order": 0,
+        "expired_pending_orders": 18
+      },
+      "account_audit": {
+        "rows": 157,
+        "paper_fills": 12,
+        "native_observations": 0,
+        "distinct_tokens_with_native_inference": 0,
+        "new_head_updates": 0,
+        "cash_usd": 0.00019538453201351955,
+        "cumulative_fees_usd": 12.76085379588029,
+        "equity_marks_verified": 157,
+        "nonzero_reward_updates": 0,
+        "reward_protocol": null,
+        "raw_q_reward_usd": 0.0,
+        "terminal_readout_updates": 0,
+        "reward_reconciliation_residual_usd": null,
+        "reward_reconciliation_verified": false,
+        "native_reward_usd": 0.0,
+        "native_uncredited_difference_usd": 0.0,
+        "paper_only": true,
+        "profitable_learning_proven": false,
+        "note": "Recorded-fill accounting only; this does not establish executable prices or policy superiority."
+      }
+    },
+    {
+      "policy": "cash",
+      "pnl_usd": 0.0,
+      "fees_usd": 0.0,
+      "native_observations": 0,
+      "weights_unchanged": true,
+      "coverage": {
+        "recorded_neural_opportunities": 123,
+        "recorded_issued_opportunities": 123,
+        "policy_decisions": 123,
+        "skipped_no_source_decision": 0,
+        "skipped_unavailable_quote": 0,
+        "skipped_insufficient_history": 0,
+        "skipped_pending_order": 0,
+        "expired_pending_orders": 18
+      },
+      "account_audit": {
+        "rows": 157,
+        "paper_fills": 0,
+        "native_observations": 0,
+        "distinct_tokens_with_native_inference": 0,
+        "new_head_updates": 0,
+        "cash_usd": 1000.0,
+        "cumulative_fees_usd": 0.0,
+        "equity_marks_verified": 157,
+        "nonzero_reward_updates": 0,
+        "reward_protocol": null,
+        "raw_q_reward_usd": 0.0,
+        "terminal_readout_updates": 0,
+        "reward_reconciliation_residual_usd": null,
+        "reward_reconciliation_verified": false,
+        "native_reward_usd": 0.0,
+        "native_uncredited_difference_usd": 0.0,
+        "paper_only": true,
+        "profitable_learning_proven": false,
+        "note": "Recorded-fill accounting only; this does not establish executable prices or policy superiority."
+      }
+    },
+    {
+      "policy": "solana-online-20260915-194714",
+      "pnl_usd": 0.0,
+      "fees_usd": 0.0,
+      "native_observations": 123,
+      "weights_unchanged": true,
+      "coverage": {
+        "recorded_neural_opportunities": 123,
+        "recorded_issued_opportunities": 123,
+        "policy_decisions": 123,
+        "skipped_no_source_decision": 0,
+        "skipped_unavailable_quote": 0,
+        "skipped_insufficient_history": 0,
+        "skipped_pending_order": 0,
+        "expired_pending_orders": 18
+      },
+      "account_audit": {
+        "rows": 157,
+        "paper_fills": 0,
+        "native_observations": 0,
+        "distinct_tokens_with_native_inference": 0,
+        "new_head_updates": 0,
+        "cash_usd": 1000.0,
+        "cumulative_fees_usd": 0.0,
+        "equity_marks_verified": 157,
+        "nonzero_reward_updates": 0,
+        "reward_protocol": null,
+        "raw_q_reward_usd": 0.0,
+        "terminal_readout_updates": 0,
+        "reward_reconciliation_residual_usd": null,
+        "reward_reconciliation_verified": false,
+        "native_reward_usd": 0.0,
+        "native_uncredited_difference_usd": 0.0,
+        "paper_only": true,
+        "profitable_learning_proven": false,
+        "note": "Recorded-fill accounting only; this does not establish executable prices or policy superiority."
+      }
+    }
+  ],
+  "budget": {
+    "first_month": "2026-09",
+    "months": {
+      "2026-09": 21.848983348858695
+    }
+  },
+  "worker": {
+    "started": 1789512881.2504308,
+    "call_id": "fc-01M2KMF2PXQNBZJSW4XC1WBV6N",
+    "input_id": "in-01M2KMF2Q4J04X4VD9G3QKWPCT:1789512878844-0"
+  },
+  "recovery": {
+    "at": 1789512839.3930197,
+    "before": {
+      "enabled": false,
+      "next_batch_at": 1789516800,
+      "batch": "evaluation-1789504902",
+      "pending": {
+        "policy": "cash",
+        "call_id": "fc-01M2KEYV6K39EEMFD0KWF1ZJJD"
+      },
+      "retained_checkpoints": 38,
+      "status": "evaluation_failed",
+      "checked_at": 1789507155.968996,
+      "superseded_batches": [
+        {
+          "batch": "evaluation-1789398507",
+          "reason": "Preserve unexecuted v1 plan; audit found missing causal snapshot cursors, FX failure state, incomplete source seals and entry/mark conflation. Start prospective v2 only.",
+          "at": 1789399506.4445586
+        },
+        {
+          "batch": "evaluation-1789399622",
+          "reason": "Preserve unused v2 plan; final replay audit corrected unchanged-receipt cancellation and active-order shared-cash allocation. Reseal final source and checkpoint cohort after corrected training completes.",
+          "at": 1789400219.6765106
+        },
+        {
+          "batch": "evaluation-1789400743",
+          "reason": "Preserve unexecuted narrow-universe plan; seal prospective all-observed Pump/PumpSwap v3 quote experiment after deployment.",
+          "at": 1789402024.7742436
+        }
+      ],
+      "audit_maintenance_history": [
+        {
+          "at": 1789398912.157335,
+          "reason": "System audit: correct quote semantics, causal replay coverage and incomplete source fingerprint before scoring.",
+          "previous_status": "waiting_for_unseen_market_window",
+          "previous_enabled": true,
+          "resumed_at": 1789399576.6039689
+        },
+        {
+          "at": 1789399942.045863,
+          "reason": "Final audit found replay cancels pending orders on unchanged receipts while live waits for a new signature; fix and supersede unused v2 plan before scoring.",
+          "previous_status": "waiting_for_unseen_market_window",
+          "previous_enabled": true,
+          "resumed_at": 1789400698.0842474
+        },
+        {
+          "at": 1789401419.403941,
+          "reason": "User requested broader universe and quote semantics; preserve and supersede the unexecuted old-universe plan, then seal a new prospective comparison.",
+          "previous_status": "waiting_for_unseen_market_window",
+          "previous_enabled": true,
+          "resumed_at": 1789402195.3566942
+        }
+      ],
+      "dispatcher": "priority_frozen_dispatch_v1",
+      "priority_dispatches": [
+        {
+          "at": 1789412083.9680693,
+          "policy": "solana-online-20260914-152719",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789412364.533179,
+          "policy": "always_long",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789412482.4120452,
+          "policy": "solana-online-20260914-141714",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789412781.7054381,
+          "policy": "solana-online-20260914-130216",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789413031.2304256,
+          "policy": "solana-online-20260914-120216",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789413324.828422,
+          "policy": "solana-online-20260914-110216",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789415684.1488261,
+          "policy": "solana-online-20260914-100213",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789415955.6120863,
+          "policy": "solana-online-20260914-084716",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789416205.3959467,
+          "policy": "solana-online-20260914-074716",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789416561.0758226,
+          "policy": "solana-online-20260914-064712",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789416737.631164,
+          "policy": "solana-online-20260914-053214",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789416986.958755,
+          "policy": "solana-online-20260914-041721",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789419357.6191623,
+          "policy": "solana-online-20260914-031716",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789419646.3428767,
+          "policy": "solana-online-20260914-021337",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789453402.3521087,
+          "policy": "solana-online-20260914-230211",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789453760.6192834,
+          "policy": "untrained",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789455170.5467749,
+          "policy": "cash",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789455257.9868948,
+          "policy": "always_long",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789455330.5922465,
+          "policy": "solana-online-20260914-214720",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789455703.4203775,
+          "policy": "solana-online-20260914-203935",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789456043.2997558,
+          "policy": "solana-online-20260914-193831",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789456405.9409277,
+          "policy": "solana-online-20260914-183754",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789458818.9116352,
+          "policy": "solana-online-20260914-173217",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789459237.4889636,
+          "policy": "solana-online-20260914-163216",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789459580.8121617,
+          "policy": "solana-online-20260914-152719",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789459938.4618201,
+          "policy": "solana-online-20260914-141714",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789460184.3849041,
+          "policy": "solana-online-20260914-130216",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789462475.7633905,
+          "policy": "solana-online-20260914-120216",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789462944.0853214,
+          "policy": "solana-online-20260914-110216",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789463356.931596,
+          "policy": "solana-online-20260914-100213",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789463731.4994147,
+          "policy": "solana-online-20260914-084716",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789466213.4112844,
+          "policy": "solana-online-20260914-074716",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789466602.7030249,
+          "policy": "solana-online-20260914-064712",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789466960.336899,
+          "policy": "solana-online-20260914-053214",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789467379.2703836,
+          "policy": "solana-online-20260914-041721",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789469802.1142457,
+          "policy": "solana-online-20260914-031716",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789470141.4725225,
+          "policy": "solana-online-20260914-021337",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789506521.3135931,
+          "policy": "solana-online-20260915-194714",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789506802.4053297,
+          "policy": "untrained",
+          "protocol": "priority_frozen_dispatch_v1"
+        },
+        {
+          "at": 1789507102.1147625,
+          "policy": "cash",
+          "protocol": "priority_frozen_dispatch_v1"
+        }
+      ],
+      "last_completed_batch": "evaluation-1789430835",
+      "preparation_protocol": "budgeted_preparation_v2",
+      "prospective_request": {
+        "after_batch": "evaluation-1789430835",
+        "requested_at": 1789504900.548443,
+        "previous_next_batch_at": 1789516800,
+        "selection": "Latest completed checkpoint before cutoff; never select by returns"
+      },
+      "error": "MissingDurableEvaluationResult"
+    },
+    "result_sha256": "f0b8da10d86de96bfc0797723b05f3ee46c85a7b90740f78426518f61e87fc65",
+    "action": "Resume after exact completed call and persisted result match"
+  }
+}
