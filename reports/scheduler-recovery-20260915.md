@@ -6,6 +6,7 @@ The evaluation coordinator call `fc-01M2HBBMX9AVEX53YKFYS64YYH` independently hi
 
 ## Repair
 
+- A shared-worker busy check prevents the due trainer from launching a predictably skipped job while a frozen evaluation already owns the native worker. The atomic worker lease remains the final protection against races.
 - Versioned scheduling module `training_service_v2.py` preserves the original learning runtime and the sealed evaluator source hashes. It retains the original pause reason and timestamp on later disabled ticks.
 - Raise the bounded Solana training archive allowance from 8 to **64 GiB**. Retain all original checkpoints, event archives, decisions, losses and sealed plans. No evidence was deleted. At the published $0.09/GiB-month rate, the full 64 GiB training allowance would be $5.76/month before any included allowance; this is a storage estimate, not the complete provider bill. See [Modal pricing](https://modal.com/pricing). Existing compute guards and the $100 total authorization remain unchanged.
 - Recover only the verified idle storage pause, preserving the exact parent and original control in an immutable recovery record. Other error, budget, pending-call and audit pauses remain blocking. Reserve a bounded recovery gap for evaluation preparation, then return to hourly training.
@@ -14,7 +15,7 @@ The evaluation coordinator call `fc-01M2HBBMX9AVEX53YKFYS64YYH` independently hi
 
 ## Validation
 
-The targeted scheduler, account-continuation, dispatcher and recovery suite passed **78 tests**. This includes the real cloud coordinator entrypoint with mocked storage, preserved accounting/parent continuity, persistent storage-pause reasons, rejection of unrelated pauses, fail-closed preparation, exact lease behavior, and unchanged sealed source fingerprints. Full-suite and cloud completion evidence will be recorded below after execution.
+The targeted scheduler, account-continuation, dispatcher and recovery suite passed **79 tests**, including the busy-worker guard. The initial recovery implementation passed **1,201 full-suite tests, 26 skipped**, and its 78 targeted tests also passed from a clean Git archive. This includes the real cloud coordinator entrypoint with mocked storage, preserved accounting/parent continuity, persistent storage-pause reasons, rejection of unrelated pauses, fail-closed preparation, exact lease behavior, and unchanged sealed source fingerprints. The repaired preparation completed in **5.74 seconds** (estimated compute **$0.00413**) and sealed `solana-online-20260915-011717` as the unseen tape. The newest eligible trained policy, `solana-online-20260914-230211`, completed **160 native observations**, passed frozen-weight/accounting checks, and returned **−$9.2594** before hosting. The preserved 23-policy comparison continues; this single score is not proof of profitable learning. Final restart evidence is recorded after verifying live training.
 
 ## Current deployment entrypoints
 

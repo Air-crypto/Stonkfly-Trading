@@ -123,3 +123,15 @@ def test_repaired_schedulers_leave_sealed_evaluator_sources_unchanged():
     from paperlab.checkpoint_eval import source_fingerprint
     plan=json.loads(Path('reports/all-pump-evaluation-plan-20260914.json').read_text())
     assert source_fingerprint('.')==plan['source_hashes']
+
+
+def test_due_training_waits_for_shared_worker_without_dispatch_intent(tmp_path):
+    dispatch=Mock(return_value='fc-next')
+    c=training.service(tmp_path,dispatch=dispatch,poll=Mock(),commit=lambda:None,now=1000,
+        mode='hourly',worker_busy=lambda:True)
+    assert c['enabled'] and c['pending'] is None and c['status']=='waiting_for_shared_worker'
+    dispatch.assert_not_called()
+    c=training.service(tmp_path,dispatch=dispatch,poll=Mock(),commit=lambda:None,now=1060,
+        mode='hourly',worker_busy=lambda:False)
+    assert c['pending']['call_id']=='fc-next' and c['status']=='dispatched'
+    dispatch.assert_called_once()

@@ -89,7 +89,7 @@ def enable_training_episodes(root, expected_parent, *, commit, now=None):
     atomic_json(path,control);commit();return control
 
 
-def service(root, *, dispatch, poll, commit, now=None, mode='paced'):
+def service(root, *, dispatch, poll, commit, now=None, mode='paced', worker_busy=lambda:False):
     from paperlab.core import atomic_json
     now = time.time() if now is None else now
     next_delay(mode)
@@ -162,6 +162,7 @@ def service(root, *, dispatch, poll, commit, now=None, mode='paced'):
         control['next_at'] = pending['dispatched_at'] + next_delay(control['mode'])
         save('completed')
     if now < control['next_at']: return save('waiting_for_budget_paced_window')
+    if worker_busy(): return save('waiting_for_shared_worker')
     # Retain all evidence, stop rather than silently delete trajectories or grow indefinitely.
     used = sum(p.stat().st_size for p in (root/'solana-live').rglob('*') if p.is_file())
     control['archive_bytes'] = used

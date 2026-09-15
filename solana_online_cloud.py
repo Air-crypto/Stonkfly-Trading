@@ -2,7 +2,7 @@
 import os
 from pathlib import Path
 import modal
-from cloud import exclusive, volume
+from cloud import exclusive, volume, writers
 from solana_cloud import image as base_image
 
 ROOT = Path(__file__).resolve().parent if modal.is_local() else Path('/opt/paperlab')
@@ -81,7 +81,7 @@ def _coordinate():
         except TimeoutError:return None
         except Exception as exc:return dict(status='failed',error_type=type(exc).__name__)
     result=service('/state',dispatch=lambda run_id,parent,account_mode='continuous':worker.spawn(run_id,parent,account_mode).object_id,
-                   poll=poll,commit=volume.commit,mode=MODE)
+                   poll=poll,commit=volume.commit,mode=MODE,worker_busy=lambda:bool(writers.get('worker')))
     print(json.dumps(result),flush=True);return result
 
 
