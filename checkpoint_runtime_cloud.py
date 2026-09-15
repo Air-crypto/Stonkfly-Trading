@@ -23,6 +23,16 @@ def _prepare():
     volume.reload()
     return prepare('/state','/opt/paperlab',commit=volume.commit)
 
+@app.function(image=image,volumes={'/state':volume},cpu=(2,2),memory=(8192,8192),timeout=600,
+              max_containers=1,min_containers=0,retries=0,single_use_containers=True,nonpreemptible=True)
+def request_prospective(expected_last_batch):
+    return exclusive('checkpoint-eval-coordinator',lambda:exclusive('worker',_request_prospective,expected_last_batch))
+
+def _request_prospective(expected_last_batch):
+    from checkpoint_preparation import request_prospective as request
+    volume.reload()
+    return request('/state','/opt/paperlab',expected_last_batch=expected_last_batch,commit=volume.commit)
+
 @app.function(image=image,volumes={'/state':volume},cpu=(.125,.125),memory=(512,512),timeout=60,
               max_containers=1,min_containers=0,retries=0,single_use_containers=True)
 def recover_coordinator(expected_call_id):

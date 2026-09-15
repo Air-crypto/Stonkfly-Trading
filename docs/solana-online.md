@@ -203,6 +203,35 @@ environment change alone cannot overwrite a running service's stored policy.
 
 ## Remaining evaluation
 
+Frozen checkpoint evaluation runs prospectively on Modal. Each daily cohort
+retains all completed pre-cutoff checkpoints and designates the newest one as
+the primary comparison before seeing results. The first completed market
+episode that **starts after** that cutoff becomes its immutable test tape;
+an episode overlapping the cutoff cannot qualify. Checkpoints trained on that
+tape cannot join its cohort. Cash, untrained-fly and always-long controls share
+the recorded attention opportunities, execution timing and cost model, each
+starting with $1,000. Both the native weights and readout remain frozen during
+scoring. New daily cohorts wait for the previous one to finish, and evaluation
+uses training gaps and the existing shared budget rather than raising the cap.
+
+An operator may advance one daily cutoff with the runtime's `request_prospective`
+function, passing the verified `last_completed_batch` from evaluation control.
+The request is serialized with preparation and the native worker, refuses
+paused/error/budget states, preserves active cohorts and records the previous
+schedule. Repeating it cannot replace a sealed cohort. Deployment:
+
+```sh
+PAPERLAB_ALL_PUMP=1 uv run --extra cloud modal deploy checkpoint_runtime_cloud.py
+```
+
+Plans, test-tape hashes, per-policy results and `comparison.json` are retained
+under `/state/checkpoint-eval/<batch>/`. Smaller losses on one window do not
+establish profitability. Check the preselected latest policy against cash and
+untrained controls over several later dates, including fees, drawdowns and
+liquidity-stress marks. Do not select the best historical checkpoint by test P&L
+and then report that same test as independent validation. These comparisons
+remain conditional on recorded opportunities, not full-universe execution tests.
+
 This changes the training universe and mechanics. It does not validate returns.
 The next evidence gate is multiple tokens/dates with cost-aware portfolio audit,
 then matched market-only, frozen-fly and compact controls plus a chronological

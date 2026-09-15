@@ -6,6 +6,28 @@ from paperlab.checkpoint_eval import read, register, seal_plan, seal_tape, sourc
 from paperlab.budget import reserve, settle
 
 
+def request_prospective(root, source_root, *, expected_last_batch, commit, clock=time.time):
+    """Advance one daily cutoff under both coordinator and worker leases."""
+    root=Path(root);path=root/'checkpoint-eval/control.json';c=read(path);now=clock()
+    live=read(root/'solana-online/control.json')
+    for control in (c,live):
+        if (not control.get('enabled') or control.get('error') or control.get('audit_pause')
+                or control.get('budget_paused_until',0)>now
+                or any(s in control.get('status','') for s in ('paused','stopped','requires_review'))):
+            raise ValueError('Prospective request cannot override a pause')
+    if c.get('last_completed_batch')!=expected_last_batch:
+        raise ValueError('Completed evaluation changed; inspect before requesting')
+    if c.get('batch') or c.get('pending'):
+        return dict(status='existing_evaluation_preserved',batch=c.get('batch'))
+    request=c.get('prospective_request')
+    if not request or request.get('after_batch')!=expected_last_batch:
+        c['prospective_request']=dict(after_batch=expected_last_batch,requested_at=now,
+            previous_next_batch_at=c['next_batch_at'],selection='Latest completed checkpoint before cutoff; never select by returns')
+        c['next_batch_at']=min(c['next_batch_at'],now)
+        atomic_json(path,c);commit()
+    return prepare(root,source_root,commit=commit,clock=clock)
+
+
 def prepare(root, source_root, *, commit, all_observed=True, clock=time.time):
     root=Path(root);base=root/'checkpoint-eval';path=base/'control.json';c=read(path);now=clock()
     def save(status):
@@ -38,6 +60,10 @@ def prepare(root, source_root, *, commit, all_observed=True, clock=time.time):
         if plan is None:
             if not checkpoints:return save('waiting_for_checkpoints')
             plan=seal_plan(root,checkpoints,now,all_observed=all_observed)
+            primary=max(plan['checkpoints'],key=lambda cp:(cp['ended'],cp['id']))
+            plan.update(primary_policy=primary['id'],
+                primary_selection='Latest completed checkpoint before cutoff; never select by returns',
+                tape_selection='First completed training episode that starts strictly after cutoff')
             plan['source_hashes']=source_fingerprint(source_root)
             target=base/plan['id']
             if target.exists():raise ValueError('Never overwrite a sealed batch')

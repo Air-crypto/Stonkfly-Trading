@@ -135,3 +135,77 @@ def test_due_training_waits_for_shared_worker_without_dispatch_intent(tmp_path):
         mode='hourly',worker_busy=lambda:False)
     assert c['pending']['call_id']=='fc-next' and c['status']=='dispatched'
     dispatch.assert_called_once()
+
+
+def test_prospective_request_freezes_latest_then_waits_for_future_data(prep,monkeypatch):
+    from paperlab.checkpoint_eval import register,seal_tape
+    from paperlab.solana_universe import QUOTE_PROTOCOL
+    root,old_base,_=prep
+    old_plan=(old_base/'plan.json').read_bytes()
+    control=old_base.parent/'control.json'
+    atomic_json(control,dict(enabled=True,batch=None,pending=None,next_batch_at=9999,
+                            last_completed_batch=old_base.name))
+    monkeypatch.setattr(preparation,'register',register)
+    monkeypatch.setattr(preparation,'seal_tape',seal_tape)
+    def checkpoint(name,start,end):
+        p=root/'solana-live'/name;p.mkdir(parents=True)
+        atomic_json(p/'completed.json',dict(status='completed',account_mode='fresh_training_episode',
+            started=start,ended=end,readout_updates=10))
+        for n in ('fly-final.npz','head-final.pt','events.db','fx.jsonl'):(p/n).write_bytes(b'fixture')
+        row=dict(at=end,observation_at=start,event_cursor=0,fx_state=dict(sol_usd=0,seen_at=0),
+                 quote_protocol=QUOTE_PROTOCOL,decision=None,neural=None)
+        (p/'decisions.jsonl').write_text(json.dumps(row)+'\n')
+        return p.name
+    earlier=checkpoint('solana-online-earlier',100,200)
+    latest=checkpoint('solana-online-latest',300,400)
+    c=preparation.request_prospective(root,'.',expected_last_batch=old_base.name,commit=lambda:None,clock=lambda:1000)
+    plan_path=old_base.parent/c['batch']/'plan.json';plan=json.loads(plan_path.read_text())
+    assert c['status']=='waiting_for_unseen_market_window'
+    assert plan['cutoff']==1000 and plan['primary_policy']==latest and plan['tape'] is None
+    assert plan['policies']==['untrained','cash','always_long',earlier,latest]
+    assert not plan['learning'] and plan['initial_cash']==1000
+    assert c['next_batch_at']==86400 and c['prospective_request']['previous_next_batch_at']==9999
+    assert (old_base/'plan.json').read_bytes()==old_plan
+    # A duplicate request must not move the sealed cutoff or add policies.
+    assert preparation.request_prospective(root,'.',expected_last_batch=old_base.name,
+        commit=lambda:None,clock=lambda:1001)['status']=='existing_evaluation_preserved'
+    assert json.loads(plan_path.read_text())==plan
+    checkpoint('solana-online-overlap',999,1100)
+    preparation.prepare(root,'.',commit=lambda:None,clock=lambda:1101)
+    assert json.loads(plan_path.read_text())['tape'] is None
+    future=checkpoint('solana-online-future',1102,1200)
+    preparation.prepare(root,'.',commit=lambda:None,clock=lambda:1201)
+    sealed=json.loads(plan_path.read_text())
+    assert sealed['tape']['id']==future and sealed['policies']==plan['policies']
+    assert sealed['tape']['started']>sealed['cutoff']>max(cp['ended'] for cp in sealed['checkpoints'])
+
+
+@pytest.mark.parametrize('patch',[dict(enabled=False),dict(error='failed'),dict(audit_pause=True),
+    dict(budget_paused_until=5000),dict(status='preparation_budget_stopped')])
+@pytest.mark.parametrize('target',['checkpoint-eval','solana-online'])
+def test_prospective_request_preserves_pauses(prep,patch,target):
+    root,base,_=prep;p=root/target/'control.json';c=json.loads(p.read_text());c.update(patch);atomic_json(p,c)
+    before=p.read_bytes()
+    with pytest.raises(ValueError,match='pause'):
+        preparation.request_prospective(root,'.',expected_last_batch='old',commit=lambda:None,clock=lambda:1000)
+    assert p.read_bytes()==before
+    preparation.reserve.assert_not_called()
+
+
+def test_prospective_request_rejects_stale_completed_batch(prep):
+    root,base,_=prep;before=(base.parent/'control.json').read_bytes()
+    with pytest.raises(ValueError,match='Completed evaluation changed'):
+        preparation.request_prospective(root,'.',expected_last_batch='wrong',commit=lambda:None,clock=lambda:1000)
+    assert (base.parent/'control.json').read_bytes()==before
+
+
+def test_cloud_prospective_entrypoint_uses_both_leases(monkeypatch):
+    import checkpoint_runtime_cloud as cloud
+    calls=[]
+    monkeypatch.setattr(cloud,'exclusive',lambda name,fn,*a:(calls.append(name),fn(*a))[1])
+    monkeypatch.setattr(cloud,'volume',SimpleNamespace(reload=lambda:calls.append('reload'),commit=lambda:None))
+    def request(*a,**kw):
+        calls.append(kw['expected_last_batch']);return {'status':'waiting_for_unseen_market_window'}
+    monkeypatch.setattr(preparation,'request_prospective',request)
+    assert cloud.request_prospective.local('old')['status']=='waiting_for_unseen_market_window'
+    assert calls==['checkpoint-eval-coordinator','worker','reload','old']
