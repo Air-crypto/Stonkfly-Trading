@@ -15,7 +15,7 @@ The evaluation coordinator call `fc-01M2HBBMX9AVEX53YKFYS64YYH` independently hi
 
 ## Validation
 
-The targeted scheduler, account-continuation, dispatcher and recovery suite passed **79 tests**, including the busy-worker guard. The initial recovery implementation passed **1,201 full-suite tests, 26 skipped**, and its 78 targeted tests also passed from a clean Git archive. This includes the real cloud coordinator entrypoint with mocked storage, preserved accounting/parent continuity, persistent storage-pause reasons, rejection of unrelated pauses, fail-closed preparation, exact lease behavior, and unchanged sealed source fingerprints. The repaired preparation completed in **5.74 seconds** (estimated compute **$0.00413**) and sealed `solana-online-20260915-011717` as the unseen tape. The newest eligible trained policy, `solana-online-20260914-230211`, completed **160 native observations**, passed frozen-weight/accounting checks, and returned **−$9.2594** before hosting. The preserved 23-policy comparison continues; this single score is not proof of profitable learning. Final restart evidence is recorded after verifying live training.
+The targeted scheduler, account-continuation, dispatcher and recovery suite passed **79 tests**, including the busy-worker guard. The initial recovery implementation passed **1,201 full-suite tests, 26 skipped**, and its 78 targeted tests also passed from a clean Git archive. This includes the real cloud coordinator entrypoint with mocked storage, preserved accounting/parent continuity, persistent storage-pause reasons, rejection of unrelated pauses, fail-closed preparation, exact lease behavior, and unchanged sealed source fingerprints. The repaired preparation completed in **5.74 seconds** (estimated compute **$0.00413**) and sealed `solana-online-20260915-011717` as the unseen tape. The newest eligible trained policy, `solana-online-20260914-230211`, completed **160 native observations**, passed frozen-weight/accounting checks, and returned **−$9.2594** before hosting. The preserved 23-policy comparison continues; this single score is not proof of profitable learning. Both the trained and untrained policies completed. The final implementation passed **1,202 tests, 26 skipped**. Live restart evidence is recorded below.
 
 ## Current deployment entrypoints
 
@@ -26,3 +26,16 @@ modal deploy checkpoint_eval_dispatch_cloud.py
 ```
 
 Keep `checkpoint_eval_cloud.py` unchanged: it is retained as the sealed scoring implementation, not the current preparation deployment entrypoint. The accelerated 2.5-second/replay candidate remains an isolated experiment; this repair does not promote it or establish profitable learning.
+
+## Verified restored state
+
+Snapshot: **2026-09-15T06:39:14.424391+00:00**. New run **`solana-online-20260915-063634`**, call `fc-01M2HWGCBFP0S252KWEQA1HYRT`, is actively training from `solana-online-20260915-033214`. It restored the prior **2,869 Q updates** and retained fly weights, while resetting only the paper account. At capture it had **17 native observations and 11 new backprop updates**. The saved head loss and gradient norm are finite and its parameter-change norm is nonzero. Feed status is `connected`, with 41,104 decoded events, 0 decode errors and 0 buffer overflows. This active 15-minute episode had not completed when sampled.
+
+| Completed frozen policy | Native observations | Ending paper equity | P&L before hosting | Weights unchanged |
+|---|---:|---:|---:|---|
+| `solana-online-20260914-230211` | 160 | $990.74 | $-9.26 | True |
+| `untrained` | 160 | $537.49 | $-462.51 | True |
+
+Both policies used the same sealed tape and recorded attention opportunities. These are two completed policies from a 23-policy cohort; the remaining evaluations continue between training windows. The trained policy lost less on this window, but still lost money and this is not a profitability claim.
+
+The worker ledger was **$16.19**, including the active run's reservation. This remains an internal estimate; the $100 authorization was not increased. See [the full recovery evidence](scheduler-recovery-20260915.json) for archived controls, lease proof, source hashes, evaluation results, checkpoint continuity and live gradient diagnostics. The capture reads only complete newline-terminated records from the active JSONL log and records the size of any in-progress trailing row.
