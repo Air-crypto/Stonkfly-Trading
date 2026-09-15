@@ -9,7 +9,7 @@ for name in ('replay_readout.py','accelerated_online.py','acceleration_study.py'
     image=image.add_local_file(ROOT/name,'/opt/paperlab/'+name,copy=True)
 app=modal.App('fly-paper-acceleration-study')
 
-@app.function(image=image,volumes={'/state':volume},cpu=(2,2),memory=(8192,8192),timeout=650,
+@app.function(image=image,volumes={'/state':volume},cpu=(2,2),memory=(8192,8192),timeout=540,
               max_containers=1,min_containers=0,retries=0,single_use_containers=True,nonpreemptible=True)
 def worker(run_id: str):
     return exclusive('worker',_study,run_id)
@@ -25,8 +25,8 @@ def _study(run_id):
     live=read(state/'solana-online/control.json')
     if not live['enabled'] or live.get('audit_pause') or live.get('error') or live.get('budget_paused_until',0)>time.time():
         return dict(status='respecting_training_pause')
-    if live.get('pending') or live['next_at']-time.time()<700:return dict(status='waiting_for_training_gap')
-    reservation=reserve(state/'budget.json',True,seconds=1950,startup_seconds=30,memory_gib=8,limit_override=85,authorized_monthly_limit=100)
+    if live.get('pending') or live['next_at']-time.time()<590:return dict(status='waiting_for_training_gap')
+    reservation=reserve(state/'budget.json',True,seconds=1620,startup_seconds=30,memory_gib=8,limit_override=85,authorized_monthly_limit=100)
     if reservation is None:return dict(status='budget_stopped')
     reservation['rate']*=3;reservation['startup_seconds']=10;out.mkdir(parents=True)
     atomic_json(out/'owner.json',dict(call_id=modal.current_function_call_id(),reservation=reservation));volume.commit()
@@ -40,7 +40,7 @@ def _study(run_id):
                     native_checkpoint=dict(path=str(state/'solana-live'/parent/'fly-final.npz'),sha256=digest(state/'solana-live'/parent/'fly-final.npz')),
                     source_hashes={n:digest('/opt/paperlab/'+n) for n in ('replay_readout.py','accelerated_online.py','acceleration_study.py','acceleration_study_cloud.py')},
                     ratios=[1,4],capacity=10000,batch_size=32,target_every=100,learning_rate=.0003,
-                    synthetic_cadence_arms=[[1,5],[4,5],[4,2.5]],native_arm_seconds=150,
+                    synthetic_cadence_arms=[[1,5],[4,5],[4,2.5]],native_arm_seconds=120,
                     scope='Controlled training and synthetic throughput diagnostics; no promotion or profitability claim')
         atomic_json(out/'plan.json',plan);volume.commit()
         replay=replay_comparison(state,out,plan,volume.commit);atomic_json(out/'replay-results.json',replay);volume.commit()
