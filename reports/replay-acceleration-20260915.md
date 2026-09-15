@@ -19,7 +19,32 @@ The first pilot retained successful replay results but failed at the synthetic-f
 
 ## Validation
 
-Full suite before the feed-interface fix: **1,179 passed, 26 skipped**. Focused tests after the fix and the explicit cloud-only guard: **13 passed**. Tests cover exact optimizer counts, reward conservation, frozen/masked targets, deterministic checkpoint continuation, bounded replay, test-tape exclusion, unchanged sealed source fingerprints, and the actual synthetic-feed runner interface. A clean archive of implementation commit `a1e6281` passed **1,182 tests, 26 skipped**. The timestamp correction also passed the 13 focused tests. Native throughput results are recorded separately after the cloud benchmark completes.
+Full suite before the feed-interface fix: **1,179 passed, 26 skipped**. Focused tests after the fix and the explicit cloud-only guard: **13 passed**. Tests cover exact optimizer counts, reward conservation, frozen/masked targets, deterministic checkpoint continuation, bounded replay, test-tape exclusion, unchanged sealed source fingerprints, and the actual synthetic-feed runner interface. A clean archive of implementation commit `a1e6281` passed **1,182 tests, 26 skipped**. The timestamp correction also passed the 13 focused tests. The final runtime commit `72ff5cd` also passed **1,182 tests, 26 skipped** from a clean Git archive. All four deployed study source hashes match the committed files. The cloud benchmark completed successfully, with finite loss/gradient metrics, nonzero recorded native weight changes on every observation, and exact reward reconciliation in all three arms.
+
+## Measured results
+
+Successful run: `acceleration-20260915-05`, Modal call `fc-01M2H8S3J8V7782WT949E38DKJ`. Full values, source/input hashes, gradients and weight deltas are in [the evidence JSON](replay-acceleration-20260915.json).
+
+| Replay arm | Training transitions | New optimizer steps | Training time | Later-development TD loss |
+|---|---:|---:|---:|---:|
+| 1× | 499 | 499 | 0.553s | 0.00978862 |
+| 4× | 499 | 1,996 | 1.771s | 0.01026118 |
+
+The 4× arm's final training minibatch loss was 0.003576, versus 0.011994 for 1×; these are different sampled minibatches. Its error on the 108 development transitions was **4.83% higher** against the common frozen target. This single small development split does not support promoting 4× as a better policy. Both arms replayed the same historical rewards; replay counts are not new independent data, and losses are not dollar returns. These experimental optimizer counts do not advance the recurring baseline checkpoint.
+
+| Native arm (120s requested) | Fly observations | Distinct tokens inferred | Credited transitions | Optimizer steps | Fills | Ending synthetic equity |
+|---|---:|---:|---:|---:|---:|---:|
+| 1× / 5s | 7 | 3 | 7 | 7 | 0 | $1000.00 |
+| 4× / 5s | 7 | 3 | 7 | 28 | 0 | $1000.00 |
+| 4× / 2.5s | 24 | 19 | 24 | 96 | 10 | $983.74 |
+
+All native arms used the full fly on Modal. Median observed spacing was 5.001s, 5.000s and **2.501s**; median native compute took 1.920s, 1.892s and 1.257s, respectively. The faster arm had one step overrun. Maximum pre-clipping head gradient norms were 0.2725, 0.1990 and 0.4206, all finite. Mean optimizer losses were 0.004819, 0.003595 and 0.008968; the faster arm generated a different transition sequence, so these are not matched learning-quality scores.
+
+First native observation occurred about 56s into the five-second arms and 29s into the faster arm. The 24-versus-7 count therefore combines a faster cadence with earlier warmup; median spacing supports roughly twice the observation frequency, not a 3.4× steady-state hardware improvement. Final account settlement adds Q updates after inference stops. In the faster arm, 19 of 24 credits occurred at terminal settlement; higher token turnover can reduce the uninterrupted same-token feedback available to native plasticity. The Q head still receives all audited economic credit. In this faster arm it received −$16.2557 while native feedback received −$4.8767; this remaining credit gap is another reason not to equate more native weight changes with better economic learning.
+
+Synthetic reserves were constant. The faster arm made ten fills and ended $16.26 below cash from simulated trading frictions; the five-second arms did not trade. This verifies accounting under changed cadence, not a profitable market strategy. Neither candidate was promoted into the recurring hourly trainer. A separate pre-registered, later-market policy comparison remains necessary before making that choice.
+
+The completed run's conservative compute estimate was **$0.109**; retained failed/cancelled pilot reservations add **$0.520**, for **$0.629** across these studies. The shared worker ledger was **$14.85** after completion. This is an internal estimate, not the provider bill; other services remain separately budgeted. The user's $100 monthly authorization and existing pause thresholds are unchanged. At export, recurring training remained enabled and hourly, with its next window scheduled for 01:02:18 UTC.
 
 ## Reproduction
 

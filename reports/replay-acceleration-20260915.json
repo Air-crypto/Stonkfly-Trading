@@ -1,0 +1,418 @@
+{
+  "run": "acceleration-20260915-05",
+  "call_id": "fc-01M2H8S3J8V7782WT949E38DKJ",
+  "result": {
+    "status": "completed",
+    "replay": [
+      {
+        "ratio": 1,
+        "training_transitions": 499,
+        "development_transitions": 108,
+        "optimizer_steps": 499,
+        "target_syncs": 5,
+        "replay_size": 499,
+        "training_seconds": 0.553446902000001,
+        "development_td_loss": 0.009788621217012405,
+        "final_training_loss": 0.011994220316410065,
+        "training_reward_usd": -1404.3908705846102,
+        "checkpoint_sha256": "5acb3fbbc8dd455d8543abc84c98ca57745e77a553cdd25b8e6b842a9109367f",
+        "development_updates": 0,
+        "scope": "Chronological logged-transition TD diagnostic against a common frozen initial target; not a policy PnL or profitability test"
+      },
+      {
+        "ratio": 4,
+        "training_transitions": 499,
+        "development_transitions": 108,
+        "optimizer_steps": 1996,
+        "target_syncs": 20,
+        "replay_size": 499,
+        "training_seconds": 1.771401578999999,
+        "development_td_loss": 0.010261178016662598,
+        "final_training_loss": 0.0035760668106377125,
+        "training_reward_usd": -1404.3908705846102,
+        "checkpoint_sha256": "4e27f27e4a0a27cf89b690e3f54b7f2d3e0d81f9b9ab45b82c71908191cf19e0",
+        "development_updates": 0,
+        "scope": "Chronological logged-transition TD diagnostic against a common frozen initial target; not a policy PnL or profitability test"
+      }
+    ],
+    "native": [
+      {
+        "ratio": 1,
+        "interval_seconds": 5,
+        "native_observations": 7,
+        "distinct_inferred_tokens": 3,
+        "transitions": 7,
+        "optimizer_steps": 7,
+        "fills": 0,
+        "elapsed": 121.87423729896545,
+        "initialization_seconds": 4.356613660000001,
+        "median_native_seconds": 1.9198886460000466,
+        "reward_reconciliation_verified": true,
+        "paper_equity": 1000.0,
+        "synthetic": true,
+        "profitable_learning_proven": false
+      },
+      {
+        "ratio": 4,
+        "interval_seconds": 5,
+        "native_observations": 7,
+        "distinct_inferred_tokens": 3,
+        "transitions": 7,
+        "optimizer_steps": 28,
+        "fills": 0,
+        "elapsed": 123.55331492424011,
+        "initialization_seconds": 3.328036097000023,
+        "median_native_seconds": 1.8921239640000067,
+        "reward_reconciliation_verified": true,
+        "paper_equity": 1000.0,
+        "synthetic": true,
+        "profitable_learning_proven": false
+      },
+      {
+        "ratio": 4,
+        "interval_seconds": 2.5,
+        "native_observations": 24,
+        "distinct_inferred_tokens": 19,
+        "transitions": 24,
+        "optimizer_steps": 96,
+        "fills": 10,
+        "elapsed": 122.32133054733276,
+        "initialization_seconds": 3.345632801000022,
+        "median_native_seconds": 1.2567067714999212,
+        "reward_reconciliation_verified": true,
+        "paper_equity": 983.7442736810995,
+        "synthetic": true,
+        "profitable_learning_proven": false
+      }
+    ],
+    "baseline_unchanged": true,
+    "paper_only": true,
+    "budget": {
+      "estimated_compute_usd": 0.10889419228128433,
+      "monthly_reserved_usd": 14.846852139505554,
+      "monthly_limit_usd": 85,
+      "provider_bill": false
+    }
+  },
+  "plan": {
+    "cutoff": 1789430835.0560248,
+    "protected_tapes": [
+      "solana-online-20260914-163216"
+    ],
+    "training": [
+      {
+        "id": "solana-online-20260914-173217",
+        "started": 1789407151.959949,
+        "ended": 1789408056.1925335,
+        "files": {
+          "opening.json": {
+            "path": "/state/solana-live/solana-online-20260914-173217/opening.json",
+            "sha256": "d0501735fb7aad5825f46035c4051b2b6f32854e856c27ac80d93e9c562f9fb1"
+          },
+          "decisions.jsonl": {
+            "path": "/state/solana-live/solana-online-20260914-173217/decisions.jsonl",
+            "sha256": "5eb241417bec85b8176a037d86d9ac20e7d1b22ac8339c5da2153079652ce207"
+          },
+          "completed.json": {
+            "path": "/state/solana-live/solana-online-20260914-173217/completed.json",
+            "sha256": "f9c0e0aeceea6b7bfd49b662c2709082b10b2997c4eb92df7a8533220631c7ad"
+          }
+        }
+      },
+      {
+        "id": "solana-online-20260914-183754",
+        "started": 1789411103.7003064,
+        "ended": 1789412007.5712066,
+        "files": {
+          "opening.json": {
+            "path": "/state/solana-live/solana-online-20260914-183754/opening.json",
+            "sha256": "77b23873013e16fa83702f1c9bcd787f65680b5fb630da1600a1681f9c7df9f0"
+          },
+          "decisions.jsonl": {
+            "path": "/state/solana-live/solana-online-20260914-183754/decisions.jsonl",
+            "sha256": "7e2ded0c6e01a16a4a7ed60d81d59500835fbd639ef85bee6a447306f882bc1a"
+          },
+          "completed.json": {
+            "path": "/state/solana-live/solana-online-20260914-183754/completed.json",
+            "sha256": "6bbea71e49c0da495008ae92f3a3aceb731f02b5d80c092d7fa636b91a3d5bc8"
+          }
+        }
+      },
+      {
+        "id": "solana-online-20260914-193831",
+        "started": 1789414725.8413296,
+        "ended": 1789415630.276982,
+        "files": {
+          "opening.json": {
+            "path": "/state/solana-live/solana-online-20260914-193831/opening.json",
+            "sha256": "1a9a086a5082efac0a75495301468eb95418d6bd3c6e4e2d72f749aa19e459dc"
+          },
+          "decisions.jsonl": {
+            "path": "/state/solana-live/solana-online-20260914-193831/decisions.jsonl",
+            "sha256": "1ffd32ebaac555096870c8d14248fa1f6960721a3380d06c38ab7f513a96e9de"
+          },
+          "completed.json": {
+            "path": "/state/solana-live/solana-online-20260914-193831/completed.json",
+            "sha256": "d3fa316482f1c64c4eb00902ce4acf2dc617858baba5829ec80f71e10da5726a"
+          }
+        }
+      },
+      {
+        "id": "solana-online-20260914-203935",
+        "started": 1789418389.69097,
+        "ended": 1789419293.8506906,
+        "files": {
+          "opening.json": {
+            "path": "/state/solana-live/solana-online-20260914-203935/opening.json",
+            "sha256": "69c0d474758b1b49587abee20fba896b3fd06dd350332e00743d426f5eccde26"
+          },
+          "decisions.jsonl": {
+            "path": "/state/solana-live/solana-online-20260914-203935/decisions.jsonl",
+            "sha256": "2dddc9a69ced84d3d86bc115ce1c301f212aabac0c11948dcb63d372f3db3e6f"
+          },
+          "completed.json": {
+            "path": "/state/solana-live/solana-online-20260914-203935/completed.json",
+            "sha256": "21d5c0dc9437e000a0937544c26a979fb2f393c49a76ec924f9037c5f7e9a2b7"
+          }
+        }
+      },
+      {
+        "id": "solana-online-20260914-214720",
+        "started": 1789422457.5719693,
+        "ended": 1789423361.279834,
+        "files": {
+          "opening.json": {
+            "path": "/state/solana-live/solana-online-20260914-214720/opening.json",
+            "sha256": "a3378a81a9fb7e23979fe154baad77e1111729b84fdb016a36dc4bac74e9dd5c"
+          },
+          "decisions.jsonl": {
+            "path": "/state/solana-live/solana-online-20260914-214720/decisions.jsonl",
+            "sha256": "66a6521c79cf7d8d4fce5aa99be708b59b1e4c97b1c82ece13be8be5e668f5f1"
+          },
+          "completed.json": {
+            "path": "/state/solana-live/solana-online-20260914-214720/completed.json",
+            "sha256": "6d07b7810295733a2f4901fb834c7e9456a056731c44e98c2c495f06b5663163"
+          }
+        }
+      }
+    ],
+    "development": {
+      "id": "solana-online-20260914-230211",
+      "started": 1789426944.920592,
+      "ended": 1789427848.9954278,
+      "files": {
+        "opening.json": {
+          "path": "/state/solana-live/solana-online-20260914-230211/opening.json",
+          "sha256": "0258da2a689be7f615b7ec9da9dce5856d1b76815095f9500bafed119ce61d58"
+        },
+        "decisions.jsonl": {
+          "path": "/state/solana-live/solana-online-20260914-230211/decisions.jsonl",
+          "sha256": "ce6391a947b9ab82852bb8e028b95369a14f0c186a90ff9f4d74306968333efd"
+        },
+        "completed.json": {
+          "path": "/state/solana-live/solana-online-20260914-230211/completed.json",
+          "sha256": "025aa7aa173ea5fae1b8e3b3ea4be581f889c5ece5c2d03dbb274d2f0c963858"
+        }
+      }
+    },
+    "parent": "solana-online-20260914-152719",
+    "head_checkpoint": {
+      "path": "/state/solana-live/solana-online-20260914-152719/head-final.pt",
+      "sha256": "c7c04bfc24a04bf846a9a4667bcec8bbe7a6169669dd4ec96d8d3628792cf251"
+    },
+    "native_checkpoint": {
+      "path": "/state/solana-live/solana-online-20260914-152719/fly-final.npz",
+      "sha256": "b20b5c022c426a7a379ac480f5f020f2c5c2b87dadc0fe1680819aa2d868a787"
+    },
+    "source_hashes": {
+      "replay_readout.py": "9818bcbcd8d12f9f4fa6a2daafcd0fa6aa7c0abfc9be27130787ca3a0bca18a4",
+      "accelerated_online.py": "281e1d8361095c2fda45079b6695e8dc455ecd1913fec3d8b9c60c906227065d",
+      "acceleration_study.py": "2830fda92cc81f4698c173297e10700125c79d20d9d535098e475707799d572d",
+      "acceleration_study_cloud.py": "2b13bfed7a6250666a8579b583fde48665071aee1c23e30e9bf810a387b15822"
+    },
+    "ratios": [
+      1,
+      4
+    ],
+    "capacity": 10000,
+    "batch_size": 32,
+    "target_every": 100,
+    "learning_rate": 0.0003,
+    "synthetic_cadence_arms": [
+      [
+        1,
+        5
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        4,
+        2.5
+      ]
+    ],
+    "native_arm_seconds": 120,
+    "scope": "Controlled training and synthetic throughput diagnostics; no promotion or profitability claim"
+  },
+  "diagnostics": {
+    "native-1x-5s": {
+      "decisions_sha256": "0402ee202208759045ec38c39763a834608cbd715c92714ba3de42f4081b6e10",
+      "observations": 7,
+      "credited_transitions": 7,
+      "optimizer_steps": 7,
+      "first_observation_offset_s": 56.13627815246582,
+      "last_observation_offset_s": 86.16150689125061,
+      "median_observation_spacing_s": 5.001063227653503,
+      "median_native_compute_s": 1.9198886460000466,
+      "maximum_gradient_l2_before_clip": 0.2724715769290924,
+      "mean_optimizer_loss": 0.004819076121618439,
+      "finite_optimizer_metrics": true,
+      "native_weight_delta_l2": [
+        1.1544495820999146,
+        0.41505974531173706,
+        0.4627489745616913,
+        1.5248394012451172,
+        1.956827163696289,
+        3.233114004135132,
+        2.3508965969085693
+      ],
+      "head_weight_delta_l2": [
+        0.00254021561704576,
+        0.0023306836374104023,
+        0.002167683793231845,
+        0.0020163964945822954,
+        0.0020514042116701603,
+        0.0022858059965074062,
+        0.0027051179204136133
+      ],
+      "cumulative_overruns": 0,
+      "terminal_credited_transitions": 3,
+      "raw_q_reward_usd": 0.0,
+      "native_reward_usd": 0.0
+    },
+    "native-4x-5s": {
+      "decisions_sha256": "eae29ffe1de5e2747f3c0761b9a6a0a6d61c7e03eb4c912206d1db15060f1758",
+      "observations": 7,
+      "credited_transitions": 7,
+      "optimizer_steps": 28,
+      "first_observation_offset_s": 56.064910888671875,
+      "last_observation_offset_s": 86.0674045085907,
+      "median_observation_spacing_s": 5.000450849533081,
+      "median_native_compute_s": 1.8921239640000067,
+      "maximum_gradient_l2_before_clip": 0.19900815188884735,
+      "mean_optimizer_loss": 0.0035951211211795453,
+      "finite_optimizer_metrics": true,
+      "native_weight_delta_l2": [
+        1.1544495820999146,
+        0.41505974531173706,
+        0.4627489745616913,
+        1.5248394012451172,
+        1.956827163696289,
+        3.233114004135132,
+        2.3508965969085693
+      ],
+      "head_weight_delta_l2": [
+        0.008983852341771126,
+        0.006862050388008356,
+        0.005839822348207235,
+        0.005247477442026138,
+        0.007410952355712652,
+        0.011076620779931545,
+        0.014398181810975075
+      ],
+      "cumulative_overruns": 0,
+      "terminal_credited_transitions": 3,
+      "raw_q_reward_usd": 0.0,
+      "native_reward_usd": 0.0
+    },
+    "native-4x-2.5s": {
+      "decisions_sha256": "010074aadc643c7a9d7dec19fd48166b51653f6aa870d82270c613aed6dea9d6",
+      "observations": 24,
+      "credited_transitions": 24,
+      "optimizer_steps": 96,
+      "first_observation_offset_s": 29.2831027507782,
+      "last_observation_offset_s": 88.84117197990417,
+      "median_observation_spacing_s": 2.500697612762451,
+      "median_native_compute_s": 1.2567067714999212,
+      "maximum_gradient_l2_before_clip": 0.4206218123435974,
+      "mean_optimizer_loss": 0.008967627162443629,
+      "finite_optimizer_metrics": true,
+      "native_weight_delta_l2": [
+        1.1544495820999146,
+        1.1239209175109863,
+        1.8671116828918457,
+        0.901597261428833,
+        0.9385219812393188,
+        1.4191291332244873,
+        0.0671151876449585,
+        0.9622801542282104,
+        0.7781137824058533,
+        0.06714130938053131,
+        0.06712206453084946,
+        0.8818984031677246,
+        0.8161296844482422,
+        2.3298187255859375,
+        2.2133562564849854,
+        0.4875648319721222,
+        1.4508343935012817,
+        0.7495508193969727,
+        0.7710049152374268,
+        0.11604733020067215,
+        0.1164969950914383,
+        1.1938053369522095,
+        0.7771403193473816,
+        0.48758259415626526
+      ],
+      "head_weight_delta_l2": [
+        0.009959551505744457,
+        0.013176684267818928,
+        0.01585422456264496,
+        0.016167890280485153,
+        0.015550533309578896,
+        0.01405334658920765,
+        0.013135549612343311,
+        0.01125672273337841,
+        0.010328798554837704,
+        0.009806172922253609,
+        0.010074957273900509,
+        0.009946934878826141,
+        0.009489854797720909,
+        0.008627443574368954,
+        0.00774777214974165,
+        0.006822648923844099,
+        0.006056200712919235,
+        0.006140633951872587,
+        0.006472861859947443,
+        0.006547784898430109,
+        0.006494315341114998,
+        0.006660284008830786,
+        0.007212493102997541,
+        0.007775233592838049
+      ],
+      "cumulative_overruns": 1,
+      "terminal_credited_transitions": 19,
+      "raw_q_reward_usd": -16.255726318900514,
+      "native_reward_usd": -4.876717895670154
+    }
+  },
+  "baseline": {
+    "enabled": true,
+    "mode": "hourly",
+    "parent": "solana-online-20260915-000218",
+    "pending": null,
+    "next_at": 1789434138.9355016,
+    "status": "waiting_for_budget_paced_window",
+    "completed_windows": 26
+  },
+  "ledger": {
+    "first_month": "2026-09",
+    "months": {
+      "2026-09": 14.846852139505554
+    }
+  },
+  "retained_pilot_reservations": {
+    "acceleration-20260915-01": 0.3191496,
+    "acceleration-20260915-03": 0.20045759999999999
+  }
+}
