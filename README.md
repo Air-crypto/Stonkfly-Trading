@@ -32,6 +32,10 @@ adds a checkpointed replay buffer and target Q network, comparing 1× versus 4×
 optimizer updates and five-second versus 2.5-second observations. It runs as an
 isolated cloud study; the recurring trainer and sealed evaluation stay unchanged.
 
+The [September 15 scheduler repair](reports/scheduler-recovery-20260915.md)
+raises the retained training archive allowance to 64 GiB, preserves pause reasons,
+and separates budgeted evaluation preparation from unchanged sealed policy scoring.
+
 The current [hourly training service](docs/solana-online.md) starts each independent
 training episode with $1,000 paper cash while preserving learned fly/Q weights.
 The full balance is available across tokens, capped at $250 acquisition cost per

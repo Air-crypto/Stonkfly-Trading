@@ -7,7 +7,7 @@ from solana_cloud import image as base_image
 
 ROOT = Path(__file__).resolve().parent if modal.is_local() else Path('/opt/paperlab')
 app = modal.App('fly-paper-solana-online')
-image = base_image.add_local_file(ROOT/'solana_online_cloud.py', '/opt/paperlab/solana_online_cloud.py', copy=True).env(
+image = base_image.add_local_file(ROOT/'training_service_v2.py','/opt/paperlab/training_service_v2.py',copy=True).add_local_file(ROOT/'solana_online_cloud.py', '/opt/paperlab/solana_online_cloud.py', copy=True).env(
     {'PAPERLAB_ALL_PUMP':os.environ.get('PAPERLAB_ALL_PUMP','0')})
 MODE = os.environ.get('PAPERLAB_ONLINE_MODE', 'paced')
 ENABLED = os.environ.get('PAPERLAB_ONLINE_SCHEDULE') == '1'
@@ -74,7 +74,7 @@ def coordinator():
 
 def _coordinate():
     import json
-    from paperlab.solana_service import service
+    from training_service_v2 import service
     volume.reload()
     def poll(call_id):
         try:return modal.FunctionCall.from_id(call_id).get(timeout=0)
@@ -93,7 +93,7 @@ def set_cadence(mode: str, start_now: bool=False):
 
 
 def _set_cadence(mode, start_now):
-    from paperlab.solana_service import configure_cadence
+    from training_service_v2 import configure_cadence
     volume.reload()
     configure_cadence('/state', mode, commit=volume.commit, start_now=start_now)
     return _coordinate()
@@ -111,3 +111,15 @@ def _enable_episodes(expected_parent):
     volume.reload()
     enable_training_episodes('/state', expected_parent, commit=volume.commit)
     return _coordinate()
+
+
+@app.function(image=image,volumes={'/state':volume},cpu=(.125,.125),memory=(512,512),timeout=120,
+              max_containers=1,min_containers=0,retries=0,single_use_containers=True)
+def recover_archive(expected_parent: str):
+    return exclusive('solana-online-coordinator',lambda:exclusive('worker',_recover_archive,expected_parent))
+
+
+def _recover_archive(expected_parent):
+    from training_service_v2 import recover_storage
+    volume.reload()
+    return recover_storage('/state',expected_parent,commit=volume.commit)

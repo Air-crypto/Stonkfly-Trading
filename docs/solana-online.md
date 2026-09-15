@@ -168,7 +168,9 @@ provider budget settings are unchanged; neither free credits nor future profits
 are assumed to fund more compute.
 
 The service stops admitting windows once its preserved Solana archives exceed
-8 GiB; a window can add more before the next check. Full native arrays are sampled
+64 GiB; a window can add more before the next check. This bounded allowance
+replaced the original 8 GiB cap after its September 15 stop. Pause reasons remain
+visible across subsequent scheduler checks. Full native arrays are sampled
 every twelve neural observations, while all scalar learning diagnostics, decisions,
 executions and final checkpoints are retained. Archiving/retention management is
 required before this storage limit can be reached indefinitely.
@@ -179,9 +181,9 @@ Resource estimates use [Modal pricing](https://modal.com/pricing).
 ## Operation
 
 ```sh
-# Default cadence is budget paced; deployment updates do not erase control state.
+# Current all-observed hourly deployment; updates do not erase control state.
 PAPERLAB_FLY=1 PAPERLAB_UNIVERSE=1 PAPERLAB_SCHEDULE=0 \
-  PAPERLAB_ONLINE_SCHEDULE=1 PAPERLAB_ONLINE_MODE=paced \
+  PAPERLAB_ALL_PUMP=1 PAPERLAB_ONLINE_SCHEDULE=1 PAPERLAB_ONLINE_MODE=hourly \
   uv run --extra cloud modal deploy solana_online_cloud.py
 
 # Read-only status: /state/solana-online/control.json identifies the current run.
