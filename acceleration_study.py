@@ -109,7 +109,7 @@ class SyntheticFeed:
                    virtual_sol_reserves=60_000_000_000,real_sol_reserves=30_000_000_000,
                    virtual_token_reserves=500_000_000_000_000,sol_amount=10_000_000,is_buy=step%2==0)
             snapshots[mint]=dict(created=created,trades=[t],complete=False)
-        return snapshots,now,self.health()
+        return snapshots,now,dict(status='connected',event_cursor=int((now-self.base)*100),synthetic=True,last_message=now)
 
 
 def native_benchmark(state,out,plan,commit):
@@ -123,7 +123,7 @@ def native_benchmark(state,out,plan,commit):
         start=time.perf_counter();fly=Fly('/state/fly-data',learning=True,checkpoint=plan['native_checkpoint']['path'])
         init_seconds=time.perf_counter()-start
         arm=out/f'native-{ratio}x-{interval}s'
-        result=run(arm,'/state/fly-data',state/'solana-live'/plan['parent'],seconds=180,commit=commit,
+        result=run(arm,'/state/fly-data',state/'solana-live'/plan['parent'],seconds=plan['native_arm_seconds'],commit=commit,
                    fly_factory=lambda *a,**kw:fly,feed_factory=SyntheticFeed,fx_fetch=lambda:100.,quote_fx_fetch=lambda:1.,
                    account_mode='fresh_training_episode',all_observed=True,interval_seconds=interval,
                    head_factory=lambda:ReplayReadout(ratio=ratio))
@@ -132,6 +132,7 @@ def native_benchmark(state,out,plan,commit):
         native=[r['neural'] for r in rows if r.get('neural')]
         metrics=[n['head_training'] for n in native if n.get('head_training')]+result['terminal_reward_settlements']
         if result['new_optimizer_steps']!=ratio*len(metrics):raise ValueError('Replay optimizer count differs')
+        if not native or not metrics:raise ValueError('Native benchmark did not produce observations and optimizer steps')
         if result['status']!='completed' or not verified['reward_reconciliation_verified']:raise ValueError('Native benchmark audit failed')
         record=dict(ratio=ratio,interval_seconds=interval,native_observations=len(native),
                     distinct_inferred_tokens=verified['distinct_tokens_with_native_inference'],

@@ -122,6 +122,7 @@ def test_synthetic_native_benchmark_feed_accepts_runner_clock(tmp_path):
     feed=SyntheticFeed(tmp_path)
     snapshots,now,health=feed.snapshot_at(lambda:feed.base+7.5)
     assert now==feed.base+7.5 and health['synthetic']
+    assert health['last_message']==now
     assert len(snapshots)==24
     assert all(s['trades'][0]['received']==now for s in snapshots.values())
 
