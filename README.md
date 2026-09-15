@@ -27,6 +27,11 @@ minute and prioritizes the newest checkpoint eligible for the sealed test. It
 calls the unchanged frozen evaluator between training windows, preserving source
 hashes, test data, budget guards and all comparison controls.
 
+The [replay and cadence experiment](reports/replay-acceleration-20260915.md)
+adds a checkpointed replay buffer and target Q network, comparing 1× versus 4×
+optimizer updates and five-second versus 2.5-second observations. It runs as an
+isolated cloud study; the recurring trainer and sealed evaluation stay unchanged.
+
 The current [hourly training service](docs/solana-online.md) starts each independent
 training episode with $1,000 paper cash while preserving learned fly/Q weights.
 The full balance is available across tokens, capped at $250 acquisition cost per
