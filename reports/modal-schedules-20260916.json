@@ -1,0 +1,261 @@
+{
+  "captured_at": "2026-09-16T05:50:46.130771+00:00",
+  "source": "Modal AppGetLayout and FunctionGet, main environment",
+  "scope": "Read-only inventory; no schedules changed",
+  "apps": [
+    {
+      "app": "fly-paper-lab",
+      "functions": [
+        {
+          "name": "universe_collector",
+          "function_id": "fu-YHPQvap1XMlen9sd9GxFId",
+          "schedule": {
+            "cron": {
+              "cron_string": "*/5 * * * *",
+              "timezone": "UTC"
+            }
+          },
+          "timeout_seconds": 360,
+          "autoscaling": {
+            "min_containers": 0,
+            "max_containers": 1,
+            "scaledown_window": 2
+          }
+        },
+        {
+          "name": "worker",
+          "function_id": "fu-73Qa2iF8Jamlta43US6pff",
+          "schedule": {
+            "cron": {
+              "cron_string": "*/5 * * * *",
+              "timezone": "UTC"
+            }
+          },
+          "timeout_seconds": 600,
+          "autoscaling": {
+            "min_containers": 0,
+            "max_containers": 1,
+            "scaledown_window": 2
+          }
+        }
+      ]
+    },
+    {
+      "app": "fly-paper-solana-5s",
+      "functions": [
+        {
+          "name": "worker",
+          "function_id": "fu-wIepqPYWXPyJl40HqDtnsB",
+          "schedule": {},
+          "timeout_seconds": 1200,
+          "autoscaling": {
+            "min_containers": 0,
+            "max_containers": 1,
+            "scaledown_window": 2
+          }
+        }
+      ]
+    },
+    {
+      "app": "fly-paper-solana-online",
+      "functions": [
+        {
+          "name": "enable_episodes",
+          "function_id": "fu-uqJq2JjOtg4cwQEVMfFf4d",
+          "schedule": {},
+          "timeout_seconds": 60,
+          "autoscaling": {
+            "min_containers": 0,
+            "max_containers": 1
+          }
+        },
+        {
+          "name": "coordinator",
+          "function_id": "fu-TXPXmd94x8JcrTMbTiGU7s",
+          "schedule": {
+            "cron": {
+              "cron_string": "2,17,32,47 * * * *",
+              "timezone": "UTC"
+            }
+          },
+          "timeout_seconds": 60,
+          "autoscaling": {
+            "min_containers": 0,
+            "max_containers": 1
+          }
+        },
+        {
+          "name": "set_cadence",
+          "function_id": "fu-cOliqlBHCX6fCxScSJ06lk",
+          "schedule": {},
+          "timeout_seconds": 60,
+          "autoscaling": {
+            "min_containers": 0,
+            "max_containers": 1
+          }
+        },
+        {
+          "name": "worker",
+          "function_id": "fu-m9ohgIcYQWF9ZDmRHTlVdh",
+          "schedule": {},
+          "timeout_seconds": 1200,
+          "autoscaling": {
+            "min_containers": 0,
+            "max_containers": 1
+          }
+        },
+        {
+          "name": "recover_archive",
+          "function_id": "fu-4VGzCuaWScX1SmF32uKMnd",
+          "schedule": {},
+          "timeout_seconds": 120,
+          "autoscaling": {
+            "min_containers": 0,
+            "max_containers": 1
+          }
+        }
+      ]
+    },
+    {
+      "app": "fly-paper-group-replay",
+      "functions": [
+        {
+          "name": "worker",
+          "function_id": "fu-fIPm2ACGX8jqpeDrFKz29F",
+          "schedule": {},
+          "timeout_seconds": 1200,
+          "autoscaling": {
+            "min_containers": 0,
+            "max_containers": 1,
+            "scaledown_window": 2
+          }
+        }
+      ]
+    },
+    {
+      "app": "fly-paper-checkpoint-eval",
+      "functions": [
+        {
+          "name": "coordinator",
+          "function_id": "fu-kx2sQgp8VKLboggIStylpn",
+          "schedule": {
+            "cron": {
+              "cron_string": "7,22,37,52 * * * *",
+              "timezone": "UTC"
+            }
+          },
+          "timeout_seconds": 600,
+          "autoscaling": {
+            "min_containers": 0,
+            "max_containers": 1
+          }
+        },
+        {
+          "name": "request_prospective",
+          "function_id": "fu-fK3ZNi12WslN6hJz1e3eZB",
+          "schedule": {},
+          "timeout_seconds": 600,
+          "autoscaling": {
+            "min_containers": 0,
+            "max_containers": 1
+          }
+        },
+        {
+          "name": "recover_coordinator",
+          "function_id": "fu-se2X7bumsPk0KJmswehd81",
+          "schedule": {},
+          "timeout_seconds": 60,
+          "autoscaling": {
+            "min_containers": 0,
+            "max_containers": 1
+          }
+        },
+        {
+          "name": "worker",
+          "function_id": "fu-wj9hiiN3Fkyezncnw2aaiH",
+          "schedule": {},
+          "timeout_seconds": 1200,
+          "autoscaling": {
+            "min_containers": 0,
+            "max_containers": 1
+          }
+        }
+      ]
+    },
+    {
+      "app": "fly-paper-checkpoint-smoke",
+      "functions": [
+        {
+          "name": "worker",
+          "function_id": "fu-e0BrqQvQH3QNoGB3bQdD6g",
+          "schedule": {},
+          "timeout_seconds": 600,
+          "autoscaling": {
+            "min_containers": 0,
+            "max_containers": 1
+          }
+        }
+      ]
+    },
+    {
+      "app": "fly-paper-universe-probe",
+      "functions": [
+        {
+          "name": "worker",
+          "function_id": "fu-akvGvq03RMTgrMfHJ5nGMW",
+          "schedule": {},
+          "timeout_seconds": 180,
+          "autoscaling": {
+            "min_containers": 0,
+            "max_containers": 1
+          }
+        }
+      ]
+    },
+    {
+      "app": "fly-paper-checkpoint-dispatch",
+      "functions": [
+        {
+          "name": "recover_result",
+          "function_id": "fu-NF1GTaoXV8hwy76jLHDr0z",
+          "schedule": {},
+          "timeout_seconds": 60,
+          "autoscaling": {
+            "min_containers": 0,
+            "max_containers": 1
+          }
+        },
+        {
+          "name": "coordinator",
+          "function_id": "fu-kNyAvDPMDDWnrKuS5LaMgM",
+          "schedule": {
+            "cron": {
+              "cron_string": "* * * * *",
+              "timezone": "UTC"
+            }
+          },
+          "timeout_seconds": 60,
+          "autoscaling": {
+            "min_containers": 0,
+            "max_containers": 1
+          }
+        }
+      ]
+    },
+    {
+      "app": "fly-paper-acceleration-study",
+      "functions": [
+        {
+          "name": "worker",
+          "function_id": "fu-K55VeMSdPkKH5cCc1u3yoO",
+          "schedule": {},
+          "timeout_seconds": 540,
+          "autoscaling": {
+            "min_containers": 0,
+            "max_containers": 1
+          }
+        }
+      ]
+    }
+  ]
+}

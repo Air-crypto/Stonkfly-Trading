@@ -43,6 +43,15 @@ token and one percent of observed liquidity per fill. Old account losses remain
 archived and every episode's outcome is retained; reset balances are not a
 continuous portfolio return. The $100 monthly cloud authorization remains in force.
 
+See the [verified Modal schedule](docs/modal-schedule.md) for recurring jobs,
+training/evaluation priority, collection gaps and older deployed tools. The
+[training performance chart](reports/training-performance-20260916.md) separates
+the first five continuous-account windows from subsequent reset episodes.
+The [prospective evaluation follow-up](reports/prospective-evaluation-20260915.md)
+freezes newer checkpoints before collecting their test window; the
+[result reconciliation repair](reports/evaluation-reconciliation-20260915.md)
+refreshes shared storage before checking completed worker results.
+
 The [expanded Pump/PumpSwap universe](reports/all-pump-universe-20260914.md)
 admits all observed markets without age, popularity, flow-direction, mayhem or
 token-count filters. Existing pools are resolved from verified on-chain metadata.

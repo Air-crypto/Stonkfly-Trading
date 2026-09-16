@@ -122,7 +122,10 @@ starts a detached, at-most-fifteen-minute training window when due and records
 its immutable run ID and call ID before it can dispatch another. Default cadence
 is twelve hours between window starts, approximately two windows per day.
 The current operator-selected `hourly` mode targets twenty-four windows daily,
-with the next due start handled by the fifteen-minute coordinator check.
+with due starts handled by the fifteen-minute coordinator checks or a training
+refresh from the every-minute evaluation dispatcher. Startup, worker contention
+and budget guards can delay starts. See the [verified Modal schedule](modal-schedule.md)
+for the active recurring jobs and legacy wakeups.
 The worker resumes checkpoints and optimizer/RNG state. Account records carry
 only in continuous mode; fresh training episodes archive their parent and start
 a separate paper account. Opening records hash both parent checkpoints and the
@@ -146,8 +149,7 @@ basis, fees, available valuation marks, and entry risk allowances. It records
 audit result alongside loss/gradient diagnostics. `learning_from_paper_execution`
 means there were fills and nonzero reward updates, not that performance improved.
 Zero-reward updates are labeled explicitly. The coordinator propagates these
-diagnostics into its durable control record; Codex also has an hourly follow-up
-to check for stalls or failures when the local app is available.
+diagnostics into its durable control record.
 
 The user authorized a $100 total monthly ceiling on September 13, 2026 and chose
 to pause at the budget limit. The online worker now has an $85 allocation in the
