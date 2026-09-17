@@ -5,6 +5,12 @@ This describes the observed configuration, not an assurance that every future
 scheduled invocation succeeds. The [deployment snapshot](../reports/modal-schedules-20260916.json)
 records schedules returned by Modal's app-layout and function lookup APIs.
 
+September 17 update: the obsolete `fly-paper-lab` app was stopped to free schedule
+capacity. The new [frozen forward test](frozen-forward.md) runs independently with
+a prepaid budget and continuous paper accounts. Its coordinator checks each minute;
+a three-minute verification session precedes rolling 15-minute sessions for up to
+72 hours. Training/evaluation keep their existing schedules and budget guards.
+
 ## Active training and evaluation
 
 | Job | Repeating cadence | Work |
@@ -39,8 +45,8 @@ is based on the actual dispatch time, not a fixed wall-clock hour.
 
 | App/function | Observed schedule and behavior |
 | --- | --- |
-| `fly-paper-lab.worker` | Still scheduled every five minutes. Recent logs showed shared-worker skips or `budget_stopped` under its older budget allowance. It is not a second productive training loop. |
-| `fly-paper-lab.universe_collector` | Still scheduled every five minutes. Recent logs showed collector-ownership skips, and its saved snapshot remained dated September 13. This does not provide continuous fresh coverage. |
+| `fly-paper-lab.worker` | Stopped September 17; obsolete five-minute schedule removed. |
+| `fly-paper-lab.universe_collector` | Stopped September 17 along with the legacy app; it had not been providing fresh continuous coverage. |
 | `fly-paper-solana-5s.worker` | Manual bounded pilot, no repeating schedule. |
 | `fly-paper-group-replay.worker` | Manual 12-branch group replay experiment, no repeating schedule. |
 | `fly-paper-acceleration-study.worker` | Manual replay/cadence study, no repeating schedule. |
@@ -49,8 +55,7 @@ is based on the actual dispatch time, not a fixed wall-clock hour.
 
 Recovery, cadence-change and prospective-request operator functions have no cron.
 All inventoried functions have zero minimum containers. A deployed app can be
-available without a running worker. The legacy five-minute wakeups remain a
-cleanup item; creating this inventory did not change them or release their locks.
+available without a running worker. The legacy app was stopped September 17; its old locks and data were preserved.
 
 The compact PPO trader, news ingestion and 12-branch replay are not part of the
 current recurring Solana training loop. New tokens between collection windows

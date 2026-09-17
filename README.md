@@ -43,6 +43,11 @@ token and one percent of observed liquidity per fill. Old account losses remain
 archived and every episode's outcome is retained; reset balances are not a
 continuous portfolio return. The $100 monthly cloud authorization remains in force.
 
+The [three-day frozen forward test](docs/frozen-forward.md) runs the selected
+older checkpoint in a separate continuous $1,000 paper account, with fixed weights
+and matched always-long/cash controls. Its prepaid allowance takes priority over
+further training within the same $100 cloud authorization.
+
 See the [verified Modal schedule](docs/modal-schedule.md) for recurring jobs,
 training/evaluation priority, collection gaps and older deployed tools. The
 [training performance chart](reports/training-performance-20260916.md) separates
