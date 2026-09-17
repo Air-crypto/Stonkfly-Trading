@@ -1,0 +1,256 @@
+{
+  "checked_at": 1789679016.708459,
+  "deployment": "https://modal.com/apps/arihanairyadav/main/deployed/fly-paper-frozen-forward",
+  "implementation_commit": "70b6bacba8795b08e5bf037017b650ed3604982d",
+  "manifest": {
+    "protocol": "frozen_continuous_forward_v1",
+    "checkpoint": "solana-online-20260916-005626",
+    "started": 1789678707.6101284,
+    "ends_at": 1789937907.6101284,
+    "days": 3,
+    "paper_only": true,
+    "initial_cash_usd": 1000,
+    "allowance_usd": 17.5,
+    "frozen": true,
+    "native_learning": false,
+    "readout_learning": false,
+    "epsilon": 0,
+    "max_token_acquisition_usd": 250,
+    "liquidity_fraction": 0.01,
+    "news_enabled": false,
+    "worker_cpu": 1,
+    "worker_memory_gib": 8,
+    "nonpreemptible": false,
+    "selection": "Selected after an earlier marked-return comparison; this new forward period is unseen",
+    "controls": [
+      "always_long",
+      "cash"
+    ],
+    "coverage": "All received Pump/PumpSwap events, no guarantee of all tokens or gap-free data",
+    "native": {
+      "path": "/forward/model/fly.npz",
+      "sha256": "1a93ac042e6dd40a0f3727ca7440fd0f959c9c659a769772db91864602e94a9b"
+    },
+    "head": {
+      "path": "/forward/model/head.pt",
+      "sha256": "e98ba386086af83d444333134f3c6fc3653c6ab570f9278bb2521f9cac0d6786"
+    }
+  },
+  "control": {
+    "enabled": true,
+    "status": "running",
+    "pending": {
+      "session": "session-00002",
+      "call_id": "fc-01M2RJTN5FVFQVYX9RVC7A98TR",
+      "reserved_at": 1789678927.8999808
+    },
+    "sequence": 2,
+    "completed_sessions": 1,
+    "spent_usd": 0.09527122904141426,
+    "allowance_usd": 17.5,
+    "ends_at": 1789937907.6101284,
+    "checkpoint": "solana-online-20260916-005626",
+    "checked_at": 1789678983.9614007,
+    "paper_only": true,
+    "archive_limit_bytes": 68719476736,
+    "archive_bytes": 30740847,
+    "last_result": {
+      "status": "completed",
+      "started": 1789678727.078482,
+      "ended": 1789678909.8613603,
+      "checkpoint": "solana-online-20260916-005626",
+      "protocol": "frozen_continuous_forward_v1",
+      "paper_only": true,
+      "weights_unchanged": true,
+      "new_backprop_updates": 0,
+      "inherited_backprop_updates": 4853,
+      "observations": 14,
+      "cumulative_observations": 14,
+      "fills": {
+        "trained": 0,
+        "always_long": 4
+      },
+      "metrics": {
+        "trained": {
+          "cash_usd": 1000.0,
+          "marked_equity_usd": 1000.0,
+          "marked_pnl_usd": 0.0,
+          "realized_pnl_usd": 0.0,
+          "unrealized_pnl_usd": 0.0,
+          "fees_usd": 0.0,
+          "capacity_stress_equity_usd": 1000.0,
+          "capacity_stress_pnl_usd": 0.0,
+          "open_positions": 0,
+          "unavailable_positions": []
+        },
+        "always_long": {
+          "cash_usd": 0.0010000000000135,
+          "marked_equity_usd": 248.9212576120811,
+          "marked_pnl_usd": -751.078742387919,
+          "realized_pnl_usd": 0.0,
+          "unrealized_pnl_usd": -751.078742387919,
+          "fees_usd": 12.345666666666666,
+          "capacity_stress_equity_usd": 248.92125761208112,
+          "capacity_stress_pnl_usd": -751.0787423879189,
+          "open_positions": 4,
+          "unavailable_positions": [
+            "3wts3HD5u97cCdr6DjiFeX5SXJ9pBHBXDjVb7vknpump",
+            "1RJEoCPGAkSMrhQVsvENhE6bzBuMDvYGdDYmeyhpump"
+          ]
+        }
+      },
+      "account_audits": {
+        "trained": {
+          "fills": 0,
+          "rows": 33,
+          "cash_flows_verified": true,
+          "paper_only": true
+        },
+        "always_long": {
+          "fills": 4,
+          "rows": 33,
+          "cash_flows_verified": true,
+          "paper_only": true
+        }
+      },
+      "pending_orders_expired_at_boundary": 0,
+      "continuation_sha256": "fc3cb5cfae72d5f3a88ed70826ecc1cb65267f266a708daa744674a721596dfe",
+      "profitable_learning_proven": false
+    }
+  },
+  "first_session": {
+    "status": "completed",
+    "started": 1789678727.078482,
+    "ended": 1789678909.8613603,
+    "checkpoint": "solana-online-20260916-005626",
+    "protocol": "frozen_continuous_forward_v1",
+    "paper_only": true,
+    "weights_unchanged": true,
+    "new_backprop_updates": 0,
+    "inherited_backprop_updates": 4853,
+    "observations": 14,
+    "cumulative_observations": 14,
+    "fills": {
+      "trained": 0,
+      "always_long": 4
+    },
+    "metrics": {
+      "trained": {
+        "cash_usd": 1000.0,
+        "marked_equity_usd": 1000.0,
+        "marked_pnl_usd": 0.0,
+        "realized_pnl_usd": 0.0,
+        "unrealized_pnl_usd": 0.0,
+        "fees_usd": 0.0,
+        "capacity_stress_equity_usd": 1000.0,
+        "capacity_stress_pnl_usd": 0.0,
+        "open_positions": 0,
+        "unavailable_positions": []
+      },
+      "always_long": {
+        "cash_usd": 0.0010000000000135,
+        "marked_equity_usd": 248.9212576120811,
+        "marked_pnl_usd": -751.078742387919,
+        "realized_pnl_usd": 0.0,
+        "unrealized_pnl_usd": -751.078742387919,
+        "fees_usd": 12.345666666666666,
+        "capacity_stress_equity_usd": 248.92125761208112,
+        "capacity_stress_pnl_usd": -751.0787423879189,
+        "open_positions": 4,
+        "unavailable_positions": [
+          "3wts3HD5u97cCdr6DjiFeX5SXJ9pBHBXDjVb7vknpump",
+          "1RJEoCPGAkSMrhQVsvENhE6bzBuMDvYGdDYmeyhpump"
+        ]
+      }
+    },
+    "account_audits": {
+      "trained": {
+        "fills": 0,
+        "rows": 33,
+        "cash_flows_verified": true,
+        "paper_only": true
+      },
+      "always_long": {
+        "fills": 4,
+        "rows": 33,
+        "cash_flows_verified": true,
+        "paper_only": true
+      }
+    },
+    "pending_orders_expired_at_boundary": 0,
+    "continuation_sha256": "fc3cb5cfae72d5f3a88ed70826ecc1cb65267f266a708daa744674a721596dfe",
+    "profitable_learning_proven": false
+  },
+  "tests": {
+    "relevant_tests_passed": 93,
+    "new_forward_tests_passed": 14
+  },
+  "legacy_app_stopped": "fly-paper-lab",
+  "paper_only": true,
+  "account_continuity_verified": true,
+  "second_session_started": {
+    "at": 1789678938.14021,
+    "deadline": 1789679838.14021,
+    "protocol": "frozen_continuous_forward_v1",
+    "checkpoint": "solana-online-20260916-005626",
+    "paper_only": true,
+    "native_learning": false,
+    "readout_learning": false,
+    "epsilon": 0,
+    "interval_seconds": 5,
+    "reset_cash": false,
+    "news_enabled": false,
+    "previous_observation_at": 1789678903.708169,
+    "gap_seconds": 34.43204092979431,
+    "transient_neural_state": "reset at session boundary; learned weights preserved",
+    "pending_orders": "expire at session boundary; never filled retrospectively"
+  },
+  "second_latest": {
+    "at": 1789679011.3911178,
+    "observations": 23,
+    "fills": {
+      "trained": 0,
+      "always_long": 4
+    },
+    "metrics": {
+      "trained": {
+        "cash_usd": 1000.0,
+        "marked_equity_usd": 1000.0,
+        "marked_pnl_usd": 0.0,
+        "realized_pnl_usd": 0.0,
+        "unrealized_pnl_usd": 0.0,
+        "fees_usd": 0.0,
+        "capacity_stress_equity_usd": 1000.0,
+        "capacity_stress_pnl_usd": 0.0,
+        "open_positions": 0,
+        "unavailable_positions": []
+      },
+      "always_long": {
+        "cash_usd": 0.0010000000000135,
+        "marked_equity_usd": 660.0066417901708,
+        "marked_pnl_usd": -339.99335820982924,
+        "realized_pnl_usd": 0.0,
+        "unrealized_pnl_usd": -339.99335820982924,
+        "fees_usd": 12.345666666666666,
+        "capacity_stress_equity_usd": 660.0066417901706,
+        "capacity_stress_pnl_usd": -339.99335820982935,
+        "open_positions": 4,
+        "unavailable_positions": [
+          "4CPmJoRpDLfQ7Fa469opfVLrAnaVZNQMcMYiehrtCayX"
+        ]
+      }
+    },
+    "coverage": {
+      "observed_tokens": 644,
+      "observable_tokens": 130,
+      "active_tokens": 520,
+      "ready_for_native": 57,
+      "all_tokens_guaranteed": false,
+      "unavailable_reasons": {
+        "missing_trade": 325,
+        "stale_trade": 169,
+        "unsupported_quote": 20
+      }
+    }
+  }
+}

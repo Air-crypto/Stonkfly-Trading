@@ -60,29 +60,38 @@ def coordinate(root, dispatch, poll, *, now=None, commit=lambda:None):
     c=json.loads(path.read_text())
     if not c['enabled']:return c
     c['checked_at']=now
+    if c['spent_usd']+60*COORDINATOR_RATE>c['allowance_usd']:
+        c.update(enabled=False,status='budget_stopped');atomic_json(path,c);commit();return c
     # Reserve the full 60-second small coordinator timeout before other work.
     c['spent_usd'] += 60*COORDINATOR_RATE
     atomic_json(path,c);commit()
     pending=c.get('pending')
     if pending:
         result=poll(pending['call_id'])
-        if result is None:return c
+        if result is None:
+            if now-pending['reserved_at']>1500:
+                c.update(enabled=False,status='paused_worker_deadline',error='Call exceeded dispatch and execution allowance')
+                atomic_json(path,c);commit()
+            return c
         commit_path=root/'sessions'/pending['session']/'completed.json'
         if result.get('status')!='completed' or not commit_path.exists():
             c.update(enabled=False,status='paused_worker_failure',error=result,pending=pending)
         else:
-            durable=json.loads(commit_path.read_text())
-            if durable!=result:raise ValueError('Cloud result differs from durable session')
-            if not result.get('weights_unchanged') or result.get('new_backprop_updates')!=0 or result.get('checkpoint')!=CHECKPOINT:
-                raise ValueError('Result does not belong to the frozen experiment')
-            state_path=commit_path.parent/'continuation.json'
-            if digest(state_path)!=result['continuation_sha256']:raise ValueError('Account continuation hash differs')
-            next_state=json.loads(state_path.read_text());validate_state(next_state)
-            atomic_json(root/'state.json',next_state)
-            # Startup is inside the prepaid envelope; crashes retain the full reservation.
-            actual=min(WORKER_RESERVATION,(max(0,result['ended']-pending['reserved_at'])+60)*WORKER_RATE)
-            c['spent_usd'] += actual-WORKER_RESERVATION
-            c.update(pending=None,completed_sessions=c['completed_sessions']+1,last_result=result,status='ready')
+            try:
+                durable=json.loads(commit_path.read_text())
+                if durable!=result:raise ValueError('Cloud result differs from durable session')
+                if not result.get('weights_unchanged') or result.get('new_backprop_updates')!=0 or result.get('checkpoint')!=CHECKPOINT:
+                    raise ValueError('Result does not belong to the frozen experiment')
+                state_path=commit_path.parent/'continuation.json'
+                if digest(state_path)!=result['continuation_sha256']:raise ValueError('Account continuation hash differs')
+                next_state=json.loads(state_path.read_text());validate_state(next_state)
+                atomic_json(root/'state.json',next_state)
+                # Startup is inside the prepaid envelope; crashes retain the full reservation.
+                actual=min(WORKER_RESERVATION,(max(0,result['ended']-pending['reserved_at'])+60)*WORKER_RATE)
+                c['spent_usd'] += actual-WORKER_RESERVATION
+                c.update(pending=None,completed_sessions=c['completed_sessions']+1,last_result=result,status='ready')
+            except (ValueError,KeyError,OSError) as exc:
+                c.update(enabled=False,status='paused_result_validation',error=str(exc)[:300])
     if c['enabled'] and not c['pending']:
         if now+60>=c['ends_at']:c.update(enabled=False,status='completed_three_day_test')
         elif c['spent_usd']+WORKER_RESERVATION+22*60*COORDINATOR_RATE>c['allowance_usd']:

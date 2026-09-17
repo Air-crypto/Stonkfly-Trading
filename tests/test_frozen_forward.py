@@ -165,3 +165,51 @@ def test_stops_before_budget_and_unknown_dispatch_not_retried(tmp_path):
     with pytest.raises(RuntimeError):coordinate(tmp_path,spawn,lambda _:None,now=1000)
     assert json.loads((tmp_path/'control.json').read_text())['status']=='paused_dispatch_uncertain'
     coordinate(tmp_path,spawn,lambda _:None,now=1100);assert spawn.call_count==1
+
+
+def test_funding_refuses_to_exceed_shared_guard(tmp_path):
+    shared=tmp_path/'shared';shared.mkdir()
+    atomic_json(shared/'budget.json',dict(months={'1970-01':47.}))
+    with pytest.raises(ValueError,match='guard'):
+        fund(shared,tmp_path/'forward',now=1000)
+    assert json.loads((shared/'budget.json').read_text())['months']['1970-01']==47.
+    assert not (tmp_path/'forward/manifest.json').exists()
+
+
+def test_readout_weight_change_is_detected():
+    h=Readout();initial={k:v.clone() for k,v in h.model.state_dict().items()}
+    with h.torch.no_grad():next(h.model.parameters()).add_(.1)
+    with pytest.raises(ValueError,match='readout'):
+        verify_frozen(None,None,h,initial,0)
+
+
+def test_portfolio_tampering_is_detected(fixture,monkeypatch):
+    root,clock,manifest,execute=fixture
+    monkeypatch.setattr(Readout,'values',lambda *a:np.array([0.,1.]))
+    execute('one',initial_state())
+    rows=[json.loads(x) for x in (root/'one/decisions.jsonl').read_text().splitlines()]
+    rows[-1]['portfolios']['trained']['cash']='1000'
+    with pytest.raises(ValueError,match='reconstruction'):
+        audit_fills(initial_state(),rows,'trained')
+
+
+def test_pending_deadline_and_budget_are_bounded(tmp_path):
+    control(tmp_path,pending=dict(call_id='fc1',session='session-00001',reserved_at=1000))
+    spawn=Mock()
+    c=coordinate(tmp_path,spawn,lambda _:None,now=2600)
+    assert not c['enabled'] and c['status']=='paused_worker_deadline'
+    control(tmp_path,spent_usd=17.5,pending=dict(call_id='fc1',session='session-00001',reserved_at=1000))
+    c=coordinate(tmp_path,spawn,lambda _:None,now=1100)
+    assert not c['enabled'] and c['status']=='budget_stopped'
+    spawn.assert_not_called()
+
+
+def test_result_mismatch_pauses_without_changing_account(tmp_path):
+    control(tmp_path,pending=dict(call_id='fc1',session='session-00001',reserved_at=1000))
+    original=initial_state();atomic_json(tmp_path/'state.json',original)
+    root=tmp_path/'sessions/session-00001';root.mkdir(parents=True)
+    atomic_json(root/'completed.json',dict(status='completed',wrong=True))
+    spawn=Mock();c=coordinate(tmp_path,spawn,lambda _:dict(status='completed'),now=1100)
+    assert c['status']=='paused_result_validation' and not c['enabled']
+    assert json.loads((tmp_path/'state.json').read_text())==original
+    spawn.assert_not_called()
