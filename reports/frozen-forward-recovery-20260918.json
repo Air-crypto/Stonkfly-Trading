@@ -1,0 +1,531 @@
+{
+  "checked_at": 1789711812.764076,
+  "implementation_commit": "bc9f464",
+  "operator_receipt": {
+    "session": "session-00004",
+    "call_id": "fc-01M2RMN6JGEQCG4F845QE7V61E",
+    "ledger_sha256": "58d201b5d39494b07ed9cca33ff6a9cc2b31a74875f185790211da3a476fef4e",
+    "recovered_at": 1789711471.7371788,
+    "continuation_sha256": "8fc0764c398763a6782ce08fc66543a34fd0d9dcd9ebec072e3184dc17190735",
+    "paper_only": true,
+    "overhead_reserved_usd": 0.2646675568040753,
+    "deadline_unchanged": 1789937907.6101284,
+    "allowance_unchanged": 17.5,
+    "retained_fills": {
+      "trained": 14,
+      "always_long": 4
+    },
+    "retained_cash": {
+      "trained": "89.63749925593687761625000000",
+      "always_long": "0.0010000000000135000000000"
+    }
+  },
+  "recovered_segment": {
+    "status": "interrupted_recovered",
+    "partial_session": true,
+    "paper_only": true,
+    "checkpoint": "solana-online-20260916-005626",
+    "protocol": "frozen_continuous_forward_v1",
+    "started": 1789680865.814321,
+    "ended": 1789681594.5243464,
+    "recovered_at": 1789711471.7371788,
+    "observations": 105,
+    "cumulative_observations": 395,
+    "fills": {
+      "trained": 14,
+      "always_long": 4
+    },
+    "metrics": {
+      "trained": {
+        "cash_usd": 89.63749925593687,
+        "marked_equity_usd": 100.23801017366179,
+        "marked_pnl_usd": -899.7619898263382,
+        "realized_pnl_usd": 0.0,
+        "unrealized_pnl_usd": -899.7619898263382,
+        "fees_usd": 11.239043219062507,
+        "capacity_stress_equity_usd": 100.23801017366179,
+        "capacity_stress_pnl_usd": -899.7619898263382,
+        "open_positions": 11,
+        "unavailable_positions": [
+          "865LGv1NLLSaRefZbbynQ4fMTioUfkRS6AvB2ZPxpump",
+          "8GBncVPbv3ZmsbaWHDZeyTQn4pX4wsL31RLHoTtapump",
+          "4R2vepDVY7Gdcm2VKuAy6EbBfWsYSEsDJou1QGKuMfnf",
+          "421Jmi4rg2frhranFFSazCWDwMBZtFcTACSRe2JCpump",
+          "CrrcQsPD5zNW2hEKhBy5ARP1haGBKAmoqsgD8dqPpump",
+          "DRkHcCZzVPWDgVn197D9DbWNfKV2AtewrbZ6u8jFpump",
+          "BdUuYL6FvtaCfEmbHrVpsL1zHxBWQLhAMzoyHArjpump",
+          "9GtdvbrdzVr97szR9F1RvNJFnQfj9FcsYzTymyQApump",
+          "AipUHRXYGtncgY2Cjy2Mwd9ANi6z4oBptkrjQB7JLCqm",
+          "DvdmEnztCmXwBnAbedD48XVGZJSxq31zNvnyftXdpump"
+        ]
+      },
+      "always_long": {
+        "cash_usd": 0.0010000000000135,
+        "marked_equity_usd": 310.76047901083024,
+        "marked_pnl_usd": -689.2395209891697,
+        "realized_pnl_usd": 0.0,
+        "unrealized_pnl_usd": -689.2395209891698,
+        "fees_usd": 12.345666666666666,
+        "capacity_stress_equity_usd": 310.76047901083024,
+        "capacity_stress_pnl_usd": -689.2395209891697,
+        "open_positions": 4,
+        "unavailable_positions": [
+          "3wts3HD5u97cCdr6DjiFeX5SXJ9pBHBXDjVb7vknpump",
+          "4CPmJoRpDLfQ7Fa469opfVLrAnaVZNQMcMYiehrtCayX"
+        ]
+      }
+    },
+    "account_audits": {
+      "trained": {
+        "fills": 5,
+        "rows": 121,
+        "cash_flows_verified": true,
+        "paper_only": true
+      },
+      "always_long": {
+        "fills": 0,
+        "rows": 121,
+        "cash_flows_verified": true,
+        "paper_only": true
+      }
+    },
+    "checkpoint_hashes_verified": true,
+    "observed_native_deltas_zero": true,
+    "weights_unchanged": null,
+    "weight_verification": "Checkpoint files and observed diagnostics verified; interrupted process has no final in-memory weight comparison",
+    "new_backprop_updates": 0,
+    "inherited_backprop_updates": 4853,
+    "raw_events_used": 99589,
+    "event_cursor": 99589,
+    "incomplete_trailing_bytes": 0,
+    "continuation_sha256": "8fc0764c398763a6782ce08fc66543a34fd0d9dcd9ebec072e3184dc17190735",
+    "source_hashes": {
+      "started.json": "cd5d0be2e09052c2ea20b2ff550100e692b9e0127021014dd4747c6d732456ef",
+      "opening.json": "75831cd328de644e693c96bd6928bcee0d30eb4fbae51af4fc7a95f4c2489a28",
+      "decisions.jsonl": "58d201b5d39494b07ed9cca33ff6a9cc2b31a74875f185790211da3a476fef4e",
+      "latest.json": "a7ac059d25c156cc0d00a9aaeefd587e2bdcd3e1c59e0bf38f04b199e92970e1",
+      "events.db": "b26585b66a8684a8fb58eab13b3fa47e8e78a61c8aa6f254a4619701d9a02fee"
+    },
+    "profitable_learning_proven": false
+  },
+  "source_archives_unchanged": true,
+  "control": {
+    "enabled": true,
+    "status": "running",
+    "pending": {
+      "session": "session-00005",
+      "call_id": "fc-01M2SHYS233F7Y21QTKG5AS26H",
+      "reserved_at": 1789711570.7767844
+    },
+    "sequence": 5,
+    "completed_sessions": 3,
+    "spent_usd": 0.5727366388498398,
+    "allowance_usd": 17.5,
+    "ends_at": 1789937907.6101284,
+    "checkpoint": "solana-online-20260916-005626",
+    "checked_at": 1789711570.7767844,
+    "paper_only": true,
+    "archive_limit_bytes": 68719476736,
+    "archive_bytes": 426290306,
+    "last_result": {
+      "status": "interrupted_recovered",
+      "partial_session": true,
+      "paper_only": true,
+      "checkpoint": "solana-online-20260916-005626",
+      "protocol": "frozen_continuous_forward_v1",
+      "started": 1789680865.814321,
+      "ended": 1789681594.5243464,
+      "recovered_at": 1789711471.7371788,
+      "observations": 105,
+      "cumulative_observations": 395,
+      "fills": {
+        "trained": 14,
+        "always_long": 4
+      },
+      "metrics": {
+        "trained": {
+          "cash_usd": 89.63749925593687,
+          "marked_equity_usd": 100.23801017366179,
+          "marked_pnl_usd": -899.7619898263382,
+          "realized_pnl_usd": 0.0,
+          "unrealized_pnl_usd": -899.7619898263382,
+          "fees_usd": 11.239043219062507,
+          "capacity_stress_equity_usd": 100.23801017366179,
+          "capacity_stress_pnl_usd": -899.7619898263382,
+          "open_positions": 11,
+          "unavailable_positions": [
+            "865LGv1NLLSaRefZbbynQ4fMTioUfkRS6AvB2ZPxpump",
+            "8GBncVPbv3ZmsbaWHDZeyTQn4pX4wsL31RLHoTtapump",
+            "4R2vepDVY7Gdcm2VKuAy6EbBfWsYSEsDJou1QGKuMfnf",
+            "421Jmi4rg2frhranFFSazCWDwMBZtFcTACSRe2JCpump",
+            "CrrcQsPD5zNW2hEKhBy5ARP1haGBKAmoqsgD8dqPpump",
+            "DRkHcCZzVPWDgVn197D9DbWNfKV2AtewrbZ6u8jFpump",
+            "BdUuYL6FvtaCfEmbHrVpsL1zHxBWQLhAMzoyHArjpump",
+            "9GtdvbrdzVr97szR9F1RvNJFnQfj9FcsYzTymyQApump",
+            "AipUHRXYGtncgY2Cjy2Mwd9ANi6z4oBptkrjQB7JLCqm",
+            "DvdmEnztCmXwBnAbedD48XVGZJSxq31zNvnyftXdpump"
+          ]
+        },
+        "always_long": {
+          "cash_usd": 0.0010000000000135,
+          "marked_equity_usd": 310.76047901083024,
+          "marked_pnl_usd": -689.2395209891697,
+          "realized_pnl_usd": 0.0,
+          "unrealized_pnl_usd": -689.2395209891698,
+          "fees_usd": 12.345666666666666,
+          "capacity_stress_equity_usd": 310.76047901083024,
+          "capacity_stress_pnl_usd": -689.2395209891697,
+          "open_positions": 4,
+          "unavailable_positions": [
+            "3wts3HD5u97cCdr6DjiFeX5SXJ9pBHBXDjVb7vknpump",
+            "4CPmJoRpDLfQ7Fa469opfVLrAnaVZNQMcMYiehrtCayX"
+          ]
+        }
+      },
+      "account_audits": {
+        "trained": {
+          "fills": 5,
+          "rows": 121,
+          "cash_flows_verified": true,
+          "paper_only": true
+        },
+        "always_long": {
+          "fills": 0,
+          "rows": 121,
+          "cash_flows_verified": true,
+          "paper_only": true
+        }
+      },
+      "checkpoint_hashes_verified": true,
+      "observed_native_deltas_zero": true,
+      "weights_unchanged": null,
+      "weight_verification": "Checkpoint files and observed diagnostics verified; interrupted process has no final in-memory weight comparison",
+      "new_backprop_updates": 0,
+      "inherited_backprop_updates": 4853,
+      "raw_events_used": 99589,
+      "event_cursor": 99589,
+      "incomplete_trailing_bytes": 0,
+      "continuation_sha256": "8fc0764c398763a6782ce08fc66543a34fd0d9dcd9ebec072e3184dc17190735",
+      "source_hashes": {
+        "started.json": "cd5d0be2e09052c2ea20b2ff550100e692b9e0127021014dd4747c6d732456ef",
+        "opening.json": "75831cd328de644e693c96bd6928bcee0d30eb4fbae51af4fc7a95f4c2489a28",
+        "decisions.jsonl": "58d201b5d39494b07ed9cca33ff6a9cc2b31a74875f185790211da3a476fef4e",
+        "latest.json": "a7ac059d25c156cc0d00a9aaeefd587e2bdcd3e1c59e0bf38f04b199e92970e1",
+        "events.db": "b26585b66a8684a8fb58eab13b3fa47e8e78a61c8aa6f254a4619701d9a02fee"
+      },
+      "profitable_learning_proven": false
+    },
+    "interrupted_sessions": 1,
+    "recoveries": [
+      {
+        "session": "session-00004",
+        "call_id": "fc-01M2RMN6JGEQCG4F845QE7V61E",
+        "ledger_sha256": "58d201b5d39494b07ed9cca33ff6a9cc2b31a74875f185790211da3a476fef4e",
+        "recovered_at": 1789711471.7371788,
+        "continuation_sha256": "8fc0764c398763a6782ce08fc66543a34fd0d9dcd9ebec072e3184dc17190735",
+        "paper_only": true,
+        "overhead_reserved_usd": 0.2646675568040753,
+        "deadline_unchanged": 1789937907.6101284,
+        "allowance_unchanged": 17.5,
+        "retained_fills": {
+          "trained": 14,
+          "always_long": 4
+        },
+        "retained_cash": {
+          "trained": "89.63749925593687761625000000",
+          "always_long": "0.0010000000000135000000000"
+        }
+      }
+    ]
+  },
+  "tests_passed": 104,
+  "shutdown_probe": {
+    "call_id": "fc-01M2SHRJ4GP7G1T0J2CW0CBE87",
+    "app_id": "ap-fvyn9XOu0LqyBkM01L05W5",
+    "verified_state": "APP_STATE_STOPPED"
+  },
+  "resumed_opening_matches_recovery": true,
+  "resumed_started": {
+    "at": 1789711581.1122088,
+    "deadline": 1789711761.1122088,
+    "protocol": "frozen_continuous_forward_v1",
+    "checkpoint": "solana-online-20260916-005626",
+    "paper_only": true,
+    "native_learning": false,
+    "readout_learning": false,
+    "epsilon": 0,
+    "interval_seconds": 5,
+    "reset_cash": false,
+    "news_enabled": false,
+    "previous_observation_at": 1789681594.5243464,
+    "gap_seconds": 29986.587862491608,
+    "transient_neural_state": "reset at session boundary; learned weights preserved",
+    "pending_orders": "expire at session boundary; never filled retrospectively"
+  },
+  "latest": {
+    "at": 1789711598.5582705,
+    "observations": 395,
+    "fills": {
+      "trained": 14,
+      "always_long": 4
+    },
+    "metrics": {
+      "trained": {
+        "cash_usd": 89.63749925593687,
+        "marked_equity_usd": 324.2212175228097,
+        "marked_pnl_usd": -675.7787824771904,
+        "realized_pnl_usd": 0.0,
+        "unrealized_pnl_usd": -675.7787824771904,
+        "fees_usd": 11.239043219062507,
+        "capacity_stress_equity_usd": 324.2212175228097,
+        "capacity_stress_pnl_usd": -675.7787824771904,
+        "open_positions": 11,
+        "unavailable_positions": [
+          "865LGv1NLLSaRefZbbynQ4fMTioUfkRS6AvB2ZPxpump",
+          "8GBncVPbv3ZmsbaWHDZeyTQn4pX4wsL31RLHoTtapump",
+          "421Jmi4rg2frhranFFSazCWDwMBZtFcTACSRe2JCpump",
+          "CrrcQsPD5zNW2hEKhBy5ARP1haGBKAmoqsgD8dqPpump",
+          "DRkHcCZzVPWDgVn197D9DbWNfKV2AtewrbZ6u8jFpump",
+          "BdUuYL6FvtaCfEmbHrVpsL1zHxBWQLhAMzoyHArjpump",
+          "9GtdvbrdzVr97szR9F1RvNJFnQfj9FcsYzTymyQApump",
+          "AipUHRXYGtncgY2Cjy2Mwd9ANi6z4oBptkrjQB7JLCqm",
+          "DvdmEnztCmXwBnAbedD48XVGZJSxq31zNvnyftXdpump",
+          "BVmAbqjeq7pFCmv3JgPwvCuJYaTyuJaSpEH5i9VPpump"
+        ]
+      },
+      "always_long": {
+        "cash_usd": 0.0010000000000135,
+        "marked_equity_usd": 354.1772380583762,
+        "marked_pnl_usd": -645.8227619416239,
+        "realized_pnl_usd": 0.0,
+        "unrealized_pnl_usd": -645.8227619416239,
+        "fees_usd": 12.345666666666666,
+        "capacity_stress_equity_usd": 354.17723805837625,
+        "capacity_stress_pnl_usd": -645.8227619416238,
+        "open_positions": 4,
+        "unavailable_positions": [
+          "3wts3HD5u97cCdr6DjiFeX5SXJ9pBHBXDjVb7vknpump",
+          "4CPmJoRpDLfQ7Fa469opfVLrAnaVZNQMcMYiehrtCayX",
+          "4pfNCQo4TbJ89DeqcEQFBqVYXE8y5mM4HfmyVGKrpump"
+        ]
+      }
+    },
+    "coverage": {
+      "observed_tokens": 2217,
+      "observable_tokens": 175,
+      "active_tokens": 2192,
+      "ready_for_native": 0,
+      "all_tokens_guaranteed": false,
+      "unavailable_reasons": {
+        "missing_trade": 1854,
+        "stale_trade": 7,
+        "unsupported_quote": 181
+      }
+    }
+  },
+  "resumed_session_result": {
+    "status": "completed",
+    "started": 1789711581.1122088,
+    "ended": 1789711763.961453,
+    "checkpoint": "solana-online-20260916-005626",
+    "protocol": "frozen_continuous_forward_v1",
+    "paper_only": true,
+    "weights_unchanged": true,
+    "new_backprop_updates": 0,
+    "inherited_backprop_updates": 4853,
+    "observations": 14,
+    "cumulative_observations": 409,
+    "fills": {
+      "trained": 15,
+      "always_long": 6
+    },
+    "metrics": {
+      "trained": {
+        "cash_usd": 8.963749924949124e-05,
+        "marked_equity_usd": 464.272168845061,
+        "marked_pnl_usd": -535.7278311549389,
+        "realized_pnl_usd": 0.0,
+        "unrealized_pnl_usd": -535.7278311549389,
+        "fees_usd": 12.345677905709886,
+        "capacity_stress_equity_usd": 448.7746167359214,
+        "capacity_stress_pnl_usd": -551.2253832640786,
+        "open_positions": 12,
+        "unavailable_positions": [
+          "865LGv1NLLSaRefZbbynQ4fMTioUfkRS6AvB2ZPxpump",
+          "421Jmi4rg2frhranFFSazCWDwMBZtFcTACSRe2JCpump",
+          "DRkHcCZzVPWDgVn197D9DbWNfKV2AtewrbZ6u8jFpump",
+          "BdUuYL6FvtaCfEmbHrVpsL1zHxBWQLhAMzoyHArjpump",
+          "9GtdvbrdzVr97szR9F1RvNJFnQfj9FcsYzTymyQApump",
+          "AipUHRXYGtncgY2Cjy2Mwd9ANi6z4oBptkrjQB7JLCqm",
+          "DvdmEnztCmXwBnAbedD48XVGZJSxq31zNvnyftXdpump",
+          "BVmAbqjeq7pFCmv3JgPwvCuJYaTyuJaSpEH5i9VPpump"
+        ]
+      },
+      "always_long": {
+        "cash_usd": 9.650084991234088e-06,
+        "marked_equity_usd": 354.269447742514,
+        "marked_pnl_usd": -645.730552257486,
+        "realized_pnl_usd": 2.833997594656239,
+        "unrealized_pnl_usd": -648.5645498521424,
+        "fees_usd": 12.586943715612408,
+        "capacity_stress_equity_usd": 354.269447742514,
+        "capacity_stress_pnl_usd": -645.730552257486,
+        "open_positions": 5,
+        "unavailable_positions": [
+          "3wts3HD5u97cCdr6DjiFeX5SXJ9pBHBXDjVb7vknpump",
+          "4CPmJoRpDLfQ7Fa469opfVLrAnaVZNQMcMYiehrtCayX",
+          "4pfNCQo4TbJ89DeqcEQFBqVYXE8y5mM4HfmyVGKrpump"
+        ]
+      }
+    },
+    "account_audits": {
+      "trained": {
+        "fills": 1,
+        "rows": 31,
+        "cash_flows_verified": true,
+        "paper_only": true
+      },
+      "always_long": {
+        "fills": 2,
+        "rows": 31,
+        "cash_flows_verified": true,
+        "paper_only": true
+      }
+    },
+    "pending_orders_expired_at_boundary": 0,
+    "continuation_sha256": "564ed9f3b774a5dd8faee4bf8858575a8a2a6b8e1a44160f1c29f03d3016f8df",
+    "profitable_learning_proven": false
+  },
+  "latest_control": {
+    "enabled": true,
+    "status": "running",
+    "pending": {
+      "session": "session-00006",
+      "call_id": "fc-01M2SJ57Y81YKEQY6DZ69F40PG",
+      "reserved_at": 1789711781.703595
+    },
+    "sequence": 6,
+    "completed_sessions": 4,
+    "spent_usd": 0.5896819965921876,
+    "allowance_usd": 17.5,
+    "ends_at": 1789937907.6101284,
+    "checkpoint": "solana-online-20260916-005626",
+    "checked_at": 1789711781.703595,
+    "paper_only": true,
+    "archive_limit_bytes": 68719476736,
+    "archive_bytes": 448988766,
+    "last_result": {
+      "status": "completed",
+      "started": 1789711581.1122088,
+      "ended": 1789711763.961453,
+      "checkpoint": "solana-online-20260916-005626",
+      "protocol": "frozen_continuous_forward_v1",
+      "paper_only": true,
+      "weights_unchanged": true,
+      "new_backprop_updates": 0,
+      "inherited_backprop_updates": 4853,
+      "observations": 14,
+      "cumulative_observations": 409,
+      "fills": {
+        "trained": 15,
+        "always_long": 6
+      },
+      "metrics": {
+        "trained": {
+          "cash_usd": 8.963749924949124e-05,
+          "marked_equity_usd": 464.272168845061,
+          "marked_pnl_usd": -535.7278311549389,
+          "realized_pnl_usd": 0.0,
+          "unrealized_pnl_usd": -535.7278311549389,
+          "fees_usd": 12.345677905709886,
+          "capacity_stress_equity_usd": 448.7746167359214,
+          "capacity_stress_pnl_usd": -551.2253832640786,
+          "open_positions": 12,
+          "unavailable_positions": [
+            "865LGv1NLLSaRefZbbynQ4fMTioUfkRS6AvB2ZPxpump",
+            "421Jmi4rg2frhranFFSazCWDwMBZtFcTACSRe2JCpump",
+            "DRkHcCZzVPWDgVn197D9DbWNfKV2AtewrbZ6u8jFpump",
+            "BdUuYL6FvtaCfEmbHrVpsL1zHxBWQLhAMzoyHArjpump",
+            "9GtdvbrdzVr97szR9F1RvNJFnQfj9FcsYzTymyQApump",
+            "AipUHRXYGtncgY2Cjy2Mwd9ANi6z4oBptkrjQB7JLCqm",
+            "DvdmEnztCmXwBnAbedD48XVGZJSxq31zNvnyftXdpump",
+            "BVmAbqjeq7pFCmv3JgPwvCuJYaTyuJaSpEH5i9VPpump"
+          ]
+        },
+        "always_long": {
+          "cash_usd": 9.650084991234088e-06,
+          "marked_equity_usd": 354.269447742514,
+          "marked_pnl_usd": -645.730552257486,
+          "realized_pnl_usd": 2.833997594656239,
+          "unrealized_pnl_usd": -648.5645498521424,
+          "fees_usd": 12.586943715612408,
+          "capacity_stress_equity_usd": 354.269447742514,
+          "capacity_stress_pnl_usd": -645.730552257486,
+          "open_positions": 5,
+          "unavailable_positions": [
+            "3wts3HD5u97cCdr6DjiFeX5SXJ9pBHBXDjVb7vknpump",
+            "4CPmJoRpDLfQ7Fa469opfVLrAnaVZNQMcMYiehrtCayX",
+            "4pfNCQo4TbJ89DeqcEQFBqVYXE8y5mM4HfmyVGKrpump"
+          ]
+        }
+      },
+      "account_audits": {
+        "trained": {
+          "fills": 1,
+          "rows": 31,
+          "cash_flows_verified": true,
+          "paper_only": true
+        },
+        "always_long": {
+          "fills": 2,
+          "rows": 31,
+          "cash_flows_verified": true,
+          "paper_only": true
+        }
+      },
+      "pending_orders_expired_at_boundary": 0,
+      "continuation_sha256": "564ed9f3b774a5dd8faee4bf8858575a8a2a6b8e1a44160f1c29f03d3016f8df",
+      "profitable_learning_proven": false
+    },
+    "interrupted_sessions": 1,
+    "recoveries": [
+      {
+        "session": "session-00004",
+        "call_id": "fc-01M2RMN6JGEQCG4F845QE7V61E",
+        "ledger_sha256": "58d201b5d39494b07ed9cca33ff6a9cc2b31a74875f185790211da3a476fef4e",
+        "recovered_at": 1789711471.7371788,
+        "continuation_sha256": "8fc0764c398763a6782ce08fc66543a34fd0d9dcd9ebec072e3184dc17190735",
+        "paper_only": true,
+        "overhead_reserved_usd": 0.2646675568040753,
+        "deadline_unchanged": 1789937907.6101284,
+        "allowance_unchanged": 17.5,
+        "retained_fills": {
+          "trained": 14,
+          "always_long": 4
+        },
+        "retained_cash": {
+          "trained": "89.63749925593687761625000000",
+          "always_long": "0.0010000000000135000000000"
+        }
+      }
+    ]
+  },
+  "automatic_handoff_verified": true,
+  "next_session_started": {
+    "at": 1789711791.3620331,
+    "deadline": 1789712691.3620331,
+    "protocol": "frozen_continuous_forward_v1",
+    "checkpoint": "solana-online-20260916-005626",
+    "paper_only": true,
+    "native_learning": false,
+    "readout_learning": false,
+    "epsilon": 0,
+    "interval_seconds": 5,
+    "reset_cash": false,
+    "news_enabled": false,
+    "previous_observation_at": 1789711758.6961825,
+    "gap_seconds": 32.66585063934326,
+    "transient_neural_state": "reset at session boundary; learned weights preserved",
+    "pending_orders": "expire at session boundary; never filled retrospectively"
+  }
+}
