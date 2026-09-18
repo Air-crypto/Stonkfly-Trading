@@ -36,9 +36,13 @@ recorded, so this is not uninterrupted or complete coverage of every token.
 
 The worker uses one CPU core and 8 GiB memory with standard preemptible execution.
 It targets observations every five seconds, subject to native computation and
-fresh data. A worker error or preemption pauses the experiment rather than
-resetting the account or silently dropping a session's trades. The coordinator
-stops this app on completion, budget exhaustion, or a failure requiring review.
+fresh data. A repeated input after interruption audits the retained ledger and closes that
+partial segment without replaying its trades. The coordinator then continues in a
+new session. Other worker errors or unverifiable state pause for review. Recovery
+retains cash, holdings, fees and fills; price history warms up again after the gap. The coordinator
+stops this app on completion, budget exhaustion, or a failure requiring review,
+using the synchronized `modal.experimental.stop_app` interface. Its actual cloud
+shutdown path was verified during the September 18 recovery.
 
 ## Budget
 
@@ -73,9 +77,18 @@ The dedicated `fly-paper-frozen-forward` Modal volume contains:
 - `sessions/session-*/completed.json`: frozen-weight and reconstructed-fill checks.
 - `sessions/session-*/continuation.json`: carried balances and feature history.
 - `sessions/session-*/events.db.gz`: lossless raw event archive after completion.
+- `sessions/session-*/recovery.json` and `recovered-state.json`: audited partial
+  segment evidence and continuation, separate from normal completion.
+- `operator-recovery-session-*.json`: explicit recovery identity, retained balances,
+  original deadline and budget, and conservative overhead reconciliation.
 
 Report marked P&L, realized P&L, unrealized P&L, fees, cash, open positions and
 unavailable quotes separately. The capacity-stress scenario permits one constrained
 exit fill per position and values the remainder at zero. It is not an actual
 realized loss. Report cloud costs separately from trading P&L. Changes in marked
 inventory alone do not establish an executable, profitable trading edge.
+
+The [September 18 recovery](../reports/frozen-forward-recovery-20260918.md)
+retains session four's 14 cumulative buys and original endpoint. Interrupted
+segments have no final in-memory weight comparison; checkpoint-file hashes and
+recorded frozen diagnostics are verified and this limitation is reported.

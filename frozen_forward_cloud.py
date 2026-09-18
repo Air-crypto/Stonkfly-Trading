@@ -9,7 +9,7 @@ ROOT=Path(__file__).resolve().parent if modal.is_local() else Path('/opt/paperla
 app=modal.App('fly-paper-frozen-forward')
 forward_volume=modal.Volume.from_name('fly-paper-frozen-forward',create_if_missing=True)
 image=base_image
-for filename in ('frozen_forward.py','forward_service.py','frozen_forward_cloud.py'):
+for filename in ('frozen_forward.py','forward_service.py','forward_recovery.py','frozen_forward_cloud.py'):
     image=image.add_local_file(ROOT/filename,'/opt/paperlab/'+filename,copy=True)
 image=image.env({'OMP_NUM_THREADS':'1','MKL_NUM_THREADS':'1'})
 ENABLED=os.environ.get('PAPERLAB_FORWARD_SCHEDULE')=='1'
@@ -35,6 +35,9 @@ def _run(session,seconds):
         raise ValueError('Forward time or budget envelope ended')
     out=root/'sessions'/session
     try:
+        retained=_retained_result(out,manifest)
+        if retained is not None:
+            forward_volume.commit();return retained
         result=run(out,'/state/fly-data',manifest,saved,seconds=seconds,commit=forward_volume.commit)
         # Raw SQLite is closed by the runner. Compress it losslessly to bound storage.
         import gzip,shutil
@@ -45,8 +48,9 @@ def _run(session,seconds):
             raw.unlink()
         atomic_json(out/'completed.json',result);forward_volume.commit();return result
     except BaseException as exc:
-        atomic_json(out/'failed.json',dict(at=time.time(),error_type=type(exc).__name__,message=str(exc)[:400],
-                                         reservation_retained=True,paper_only=True))
+        if not (out/'failed.json').exists():
+            atomic_json(out/'failed.json',dict(at=time.time(),error_type=type(exc).__name__,message=str(exc)[:400],
+                                             reservation_retained=True,paper_only=True))
         forward_volume.commit();raise
 
 
@@ -92,15 +96,58 @@ def _start():
 
 
 def _stop_app():
-    """Stop this experiment's schedule after its durable terminal result is saved."""
-    import asyncio
-    from modal.client import _Client
-    from modal_proto import api_pb2
-    async def stop():
-        client=await _Client.from_env()
-        found=await client.stub.AppGetByDeploymentName(api_pb2.AppGetByDeploymentNameRequest(
-            name='fly-paper-frozen-forward',environment_name='main'))
-        if found.app_id:
-            await client.stub.AppStop(api_pb2.AppStopRequest(app_id=found.app_id,
-                source=api_pb2.APP_STOP_SOURCE_PYTHON_CLIENT))
-    asyncio.run(stop())
+    """Use Modal's synchronized client instead of creating a second event loop."""
+    from modal.experimental import stop_app
+    stop_app('fly-paper-frozen-forward',environment_name='main')
+
+
+def _retained_result(out, manifest):
+    import json
+    from forward_recovery import recover_segment
+    if (out/'completed.json').exists():
+        return json.loads((out/'completed.json').read_text())
+    if not (out/'started.json').exists():return None
+    if (out/'failed.json').exists():
+        failed=json.loads((out/'failed.json').read_text())
+        if failed['error_type'] not in ('CancelledError','InputCancellation','InputCancellationError','KeyboardInterrupt'):
+            raise ValueError('Existing failed session requires explicit audited recovery')
+    # A repeated input may close an interrupted segment, but never rerun its trades.
+    return recover_segment(out,manifest)
+
+
+@app.function(image=image,volumes={'/forward':forward_volume},cpu=(1,1),memory=(2048,2048),
+              timeout=180,max_containers=1,min_containers=0,single_use_containers=True,retries=0)
+def recover(expected_session: str, expected_call_id: str, expected_ledger_sha: str):
+    return exclusive('frozen-forward-coordinator',lambda:exclusive('frozen-forward-worker',
+        _recover,expected_session,expected_call_id,expected_ledger_sha))
+
+
+def _recover(expected_session,expected_call_id,expected_ledger_sha):
+    import re
+    from forward_recovery import resume_control
+    if not re.fullmatch(r'session-[0-9]{5}',expected_session) or not re.fullmatch(r'[0-9a-f]{64}',expected_ledger_sha):
+        raise ValueError('Invalid expected recovery identity')
+    try:
+        modal.FunctionCall.from_id(expected_call_id).get(timeout=0)
+    except TimeoutError:
+        raise ValueError('Do not recover a cloud call that is still running')
+    except ValueError as exc:
+        if str(exc)!='Never repeat a forward session':raise
+    else:
+        raise ValueError('The call does not have the expected interrupted-session failure')
+    forward_volume.reload()
+    return resume_control('/forward',expected_session,expected_call_id,expected_ledger_sha,commit=forward_volume.commit)
+
+
+@app.function(image=image,volumes={'/forward':forward_volume},cpu=(.125,.125),memory=(512,512),
+              timeout=30,max_containers=1,min_containers=0,single_use_containers=True,retries=0)
+def shutdown_probe():
+    """Verify the real shutdown path only while this experiment is already paused."""
+    import json,time
+    from cloud import writers
+    from paperlab.core import atomic_json
+    forward_volume.reload();root=Path('/forward');c=json.loads((root/'control.json').read_text())
+    if c['enabled'] or writers.get('frozen-forward-worker'):
+        raise ValueError('Shutdown probe requires a paused experiment without a worker')
+    atomic_json(root/'shutdown-probe.json',dict(at=time.time(),interface='modal.experimental.stop_app',phase='requested'))
+    forward_volume.commit();_stop_app()

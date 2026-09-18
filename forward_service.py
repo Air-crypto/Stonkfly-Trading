@@ -58,7 +58,9 @@ def coordinate(root, dispatch, poll, *, now=None, commit=lambda:None):
     now=time.time() if now is None else now;root=Path(root);path=root/'control.json'
     if not path.exists():return dict(status='not_started')
     c=json.loads(path.read_text())
-    if not c['enabled']:return c
+    if not c['enabled']:
+        c['spent_usd']+=60*COORDINATOR_RATE;c['last_disabled_check_at']=now
+        atomic_json(path,c);commit();return c
     c['checked_at']=now
     if c['spent_usd']+60*COORDINATOR_RATE>c['allowance_usd']:
         c.update(enabled=False,status='budget_stopped');atomic_json(path,c);commit();return c
@@ -73,23 +75,27 @@ def coordinate(root, dispatch, poll, *, now=None, commit=lambda:None):
                 c.update(enabled=False,status='paused_worker_deadline',error='Call exceeded dispatch and execution allowance')
                 atomic_json(path,c);commit()
             return c
-        commit_path=root/'sessions'/pending['session']/'completed.json'
-        if result.get('status')!='completed' or not commit_path.exists():
+        interrupted=result.get('status')=='interrupted_recovered'
+        commit_path=root/'sessions'/pending['session']/('recovery.json' if interrupted else 'completed.json')
+        if result.get('status') not in ('completed','interrupted_recovered') or not commit_path.exists():
             c.update(enabled=False,status='paused_worker_failure',error=result,pending=pending)
         else:
             try:
                 durable=json.loads(commit_path.read_text())
                 if durable!=result:raise ValueError('Cloud result differs from durable session')
-                if not result.get('weights_unchanged') or result.get('new_backprop_updates')!=0 or result.get('checkpoint')!=CHECKPOINT:
+                verified=(result.get('checkpoint_hashes_verified') and result.get('observed_native_deltas_zero')
+                          if interrupted else result.get('weights_unchanged'))
+                if not verified or result.get('new_backprop_updates')!=0 or result.get('checkpoint')!=CHECKPOINT:
                     raise ValueError('Result does not belong to the frozen experiment')
-                state_path=commit_path.parent/'continuation.json'
+                state_path=commit_path.parent/('recovered-state.json' if interrupted else 'continuation.json')
                 if digest(state_path)!=result['continuation_sha256']:raise ValueError('Account continuation hash differs')
                 next_state=json.loads(state_path.read_text());validate_state(next_state)
                 atomic_json(root/'state.json',next_state)
                 # Startup is inside the prepaid envelope; crashes retain the full reservation.
                 actual=min(WORKER_RESERVATION,(max(0,result['ended']-pending['reserved_at'])+60)*WORKER_RATE)
-                c['spent_usd'] += actual-WORKER_RESERVATION
-                c.update(pending=None,completed_sessions=c['completed_sessions']+1,last_result=result,status='ready')
+                if not interrupted:c['spent_usd'] += actual-WORKER_RESERVATION
+                c.update(pending=None,completed_sessions=c['completed_sessions']+(not interrupted),last_result=result,status='ready')
+                if interrupted:c['interrupted_sessions']=c.get('interrupted_sessions',0)+1
             except (ValueError,KeyError,OSError) as exc:
                 c.update(enabled=False,status='paused_result_validation',error=str(exc)[:300])
     if c['enabled'] and not c['pending']:
@@ -106,7 +112,7 @@ def coordinate(root, dispatch, poll, *, now=None, commit=lambda:None):
                 c['pending']=dict(session=session,call_id=None,reserved_at=now)
                 c['status']='dispatching';atomic_json(path,c);commit()
                 try:
-                    c['pending']['call_id']=dispatch(session,min(180 if c['completed_sessions']==0 else 900,int(c['ends_at']-now)))
+                    c['pending']['call_id']=dispatch(session,min(c.pop('next_session_seconds',180 if c['completed_sessions']==0 else 900),int(c['ends_at']-now)))
                     c['status']='running'
                 except BaseException:
                     c.update(enabled=False,status='paused_dispatch_uncertain')

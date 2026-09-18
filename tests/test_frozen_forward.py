@@ -213,3 +213,118 @@ def test_result_mismatch_pauses_without_changing_account(tmp_path):
     assert c['status']=='paused_result_validation' and not c['enabled']
     assert json.loads((tmp_path/'state.json').read_text())==original
     spawn.assert_not_called()
+
+
+def recovery_fixture(fixture,monkeypatch):
+    import sqlite3
+    root,clock,manifest,execute=fixture
+    monkeypatch.setattr(Readout,'values',lambda *a:np.array([0.,1.]))
+    execute('partial',initial_state())
+    segment=root/'partial';(segment/'continuation.json').unlink();(segment/'result.json').unlink()
+    rows=[json.loads(x) for x in (segment/'decisions.jsonl').read_text().splitlines()]
+    monkeypatch.setattr('paperlab.solana_events.canonical_pool',lambda mint:'pool-'+mint)
+    db=sqlite3.connect(segment/'events.db');db.execute('create table events(body TEXT)')
+    for m in ('a','b'):
+        db.execute('insert into events(body) values(?)',(json.dumps(dict(kind='CreateEvent',mint=m,quote_mint=SOL,
+            received=970,timestamp=970,token_program=TOKEN,is_mayhem_mode=False)),))
+    db.execute('insert into events(rowid,body) values(?,?)',(rows[-1]['event_cursor'],json.dumps(dict(kind='Unknown',received=rows[-1]['observation_at']))))
+    db.commit();db.close();return root,segment,manifest,rows
+
+
+def test_recovery_preserves_partial_buys_cash_fees_and_is_idempotent(fixture,monkeypatch):
+    from forward_recovery import recover_segment
+    root,segment,m,rows=recovery_fixture(fixture,monkeypatch)
+    before={p.name:p.read_bytes() for p in segment.iterdir() if p.is_file()}
+    report=recover_segment(segment,m,expected_sha=digest(segment/'decisions.jsonl'),now=3000)
+    state=json.loads((segment/'recovered-state.json').read_text())
+    assert report['status']=='interrupted_recovered' and report['weights_unchanged'] is None
+    assert state['portfolios']==rows[-1]['portfolios']
+    assert float(state['portfolios']['trained']['cash'])<1000
+    assert state['fills']==rows[-1]['fills'] and report['account_audits']['trained']['fills']>0
+    assert state['contexts']=={} and state['last_at']==rows[-1]['at']
+    assert all(p.read_bytes()==before[p.name] for p in segment.iterdir() if p.name in before)
+    assert recover_segment(segment,m,now=4000)==report
+    with pytest.raises(ValueError,match='reviewed'):recover_segment(segment,m,expected_sha='0'*64)
+
+
+def test_recovery_refuses_future_metadata_or_short_tape(fixture,monkeypatch):
+    import sqlite3
+    from forward_recovery import recover_segment
+    root,segment,m,rows=recovery_fixture(fixture,monkeypatch)
+    db=sqlite3.connect(segment/'events.db')
+    db.execute('update events set body=? where rowid=?',(json.dumps(dict(kind='Unknown',received=9000)),rows[-1]['event_cursor']))
+    db.commit()
+    with pytest.raises(ValueError,match='Future'):recover_segment(segment,m)
+    db.execute('delete from events where rowid=?',(rows[-1]['event_cursor'],));db.commit();db.close()
+    with pytest.raises(ValueError,match='shorter'):recover_segment(segment,m)
+
+
+def test_partial_tail_is_explicit_and_latest_cannot_be_ahead(fixture,monkeypatch):
+    from forward_recovery import recover_segment
+    root,segment,m,rows=recovery_fixture(fixture,monkeypatch)
+    with (segment/'decisions.jsonl').open('ab') as out:out.write(b'{"partial":')
+    latest=rows[-1].copy();latest['at']+=1;atomic_json(segment/'latest.json',latest)
+    with pytest.raises(ValueError,match='Latest'):recover_segment(segment,m)
+    atomic_json(segment/'latest.json',rows[-1])
+    assert recover_segment(segment,m)['incomplete_trailing_bytes']==11
+
+
+def test_operator_resume_retains_allowance_deadline_and_never_resets_twice(fixture,monkeypatch):
+    from forward_recovery import resume_control
+    root,segment,m,rows=recovery_fixture(fixture,monkeypatch)
+    dest=root/'service';target=dest/'sessions/session-00004';target.parent.mkdir(parents=True);segment.rename(target)
+    m.update(allowance_usd=17.5);atomic_json(dest/'manifest.json',m);atomic_json(dest/'state.json',initial_state())
+    original=control(dest,enabled=False,status='paused_worker_failure',sequence=4,checked_at=1200,ends_at=m['ends_at'],
+        pending=dict(session='session-00004',call_id='fc4',reserved_at=1000),spent_usd=.23)
+    sha=digest(target/'decisions.jsonl');receipt=resume_control(dest,'session-00004','fc4',sha,now=3000)
+    c=json.loads((dest/'control.json').read_text());state=json.loads((dest/'state.json').read_text())
+    assert state['portfolios']==rows[-1]['portfolios'] and c['enabled'] and c['pending'] is None
+    assert c['completed_sessions']==0 and c['interrupted_sessions']==1 and c['sequence']==4
+    assert c['ends_at']==original['ends_at'] and c['allowance_usd']==original['allowance_usd']
+    assert c['spent_usd']>.23 and c['next_session_seconds']==180
+    after=(dest/'control.json').read_bytes()
+    assert resume_control(dest,'session-00004','fc4',sha,now=3100)==receipt
+    assert (dest/'control.json').read_bytes()==after
+
+
+def test_repeated_cloud_input_returns_audited_segment_without_running_again(fixture,monkeypatch):
+    from frozen_forward_cloud import _retained_result
+    root,segment,m,rows=recovery_fixture(fixture,monkeypatch)
+    assert _retained_result(segment,m)['status']=='interrupted_recovered'
+    atomic_json(segment/'failed.json',dict(error_type='ValueError',message='audit failed'))
+    with pytest.raises(ValueError,match='explicit audited recovery'):_retained_result(segment,m)
+
+
+def test_coordinator_promotes_partial_without_calling_it_completed(fixture,monkeypatch):
+    from forward_recovery import recover_segment
+    root,segment,m,rows=recovery_fixture(fixture,monkeypatch)
+    dest=root/'service';target=dest/'sessions/session-00001';target.parent.mkdir(parents=True);segment.rename(target)
+    report=recover_segment(target,m,now=1300)
+    control(dest,pending=dict(session='session-00001',call_id='fc1',reserved_at=1000),spent_usd=.2,ends_at=1350)
+    c=coordinate(dest,Mock(),lambda _:report,now=1310)
+    assert c['completed_sessions']==0 and c['interrupted_sessions']==1 and not c['enabled']
+    assert c['spent_usd']>=.2  # Retain the whole reservation after interruption.
+    assert json.loads((dest/'state.json').read_text())['portfolios']==rows[-1]['portfolios']
+
+
+def test_shutdown_uses_synchronized_modal_interface(monkeypatch):
+    import modal.experimental
+    from frozen_forward_cloud import _stop_app
+    stop=Mock();monkeypatch.setattr(modal.experimental,'stop_app',stop)
+    _stop_app();stop.assert_called_once_with('fly-paper-frozen-forward',environment_name='main')
+
+
+def test_cancelled_input_recovers_without_repeating_trades(fixture,monkeypatch):
+    from frozen_forward_cloud import _retained_result
+    root,segment,m,rows=recovery_fixture(fixture,monkeypatch)
+    atomic_json(segment/'failed.json',dict(error_type='KeyboardInterrupt',message='preempted'))
+    assert _retained_result(segment,m)['fills']==rows[-1]['fills']
+
+
+@pytest.mark.parametrize('failure',[TimeoutError(),RuntimeError('transport unavailable'),ValueError('unexpected failure')])
+def test_operator_recovery_requires_confirmed_expected_cloud_failure(monkeypatch,failure):
+    import frozen_forward_cloud as cloud
+    handle=Mock();handle.get.side_effect=failure
+    monkeypatch.setattr(cloud.modal.FunctionCall,'from_id',Mock(return_value=handle))
+    with pytest.raises((ValueError,RuntimeError)):
+        cloud._recover('session-00004','fc4','0'*64)
