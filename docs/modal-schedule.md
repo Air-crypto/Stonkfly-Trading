@@ -1,5 +1,7 @@
 # Modal repeating schedule
 
+> User pause, September 19, 2026: the entire experiment is paused until the user explicitly requests resumption. All eight remaining deployed Modal apps in the only environment (`main`) were stopped; verification found zero active apps and zero workers. The frozen forward app was already stopped. The local training monitor is also paused. Saved volumes, checkpoints, account ledgers and unresolved session 43 evidence are preserved. Do not redeploy, repair-and-resume, or restart on a budget reset without a new user instruction. The schedule below is historical configuration, not an active schedule.
+
 Deployment inventory verified September 16, 2026, around 00:50 Chicago time.
 This describes the observed configuration, not an assurance that every future
 scheduled invocation succeeds. The [deployment snapshot](../reports/modal-schedules-20260916.json)
